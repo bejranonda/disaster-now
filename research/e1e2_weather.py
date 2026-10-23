@@ -293,6 +293,14 @@ def main():
         L.w(f"post-hoc fit 2025 A lead {lead}: blend HI ≈ {bb[0]:+.2f} + {bb[1]:.3f}·fc + {bb[2]:.3f}·persist (n={len(g)}); "
             f"persist + β·Δfc with β={post[f'delta_{lead}']['beta']} (n={len(g2)})")
     coefs["posthoc"] = post
+    # residual spread of the linear-corrected forecast on the fitting rows (for dressing the ENS)
+    for lead in (1, 2):
+        g = fit[fit.lead == lead]
+        r = g.himax - (coefs[lead]["a"] + coefs[lead]["b"] * g.hi_fc)
+        coefs[lead]["resid_sd"] = float(r.std())
+        coefs[lead]["resid_q"] = {q: float(r.quantile(q)) for q in (0.1, 0.5, 0.9)}
+        L.w(f"lead {lead}: residual SD of the linear-corrected HRES on 2025 A = {r.std():.2f} °C, "
+            f"10/50/90 % {r.quantile(.1):+.2f}/{r.quantile(.5):+.2f}/{r.quantile(.9):+.2f}")
     res["heat_linear_fit_2025_A"] = coefs
 
     def heat_preds(df):
@@ -326,14 +334,36 @@ def main():
             "2026 B (later, held-out stations)": (heat.year == 2026) & (heat["sample"] == "B"),
             "2026 A+B hot season Mar–May": (heat.year == 2026) & heat.month.between(3, 5),
             "2025 B (same period, held-out)": (heat.year == 2025) & (heat["sample"] == "B")}
+    def pooled_ci(g, en, eo, block=7, nb=2000, seed=3):
+        """mean(|en|-|eo|) with a 90 % moving-block bootstrap interval (blocks within station)."""
+        d = np.abs(en) - np.abs(eo)
+        ok = ~np.isnan(d)
+        d, sid = d[ok], g.station.values[ok]
+        blocks = []
+        for s_ in np.unique(sid):
+            v = d[sid == s_]
+            blocks += [v[i:i + block] for i in range(0, len(v), block)]
+        bm = np.array([b.sum() for b in blocks]); bn = np.array([len(b) for b in blocks])
+        rng = np.random.default_rng(seed)
+        bs = [bm[ii].sum() / bn[ii].sum() for ii in rng.integers(0, len(blocks), (nb, len(blocks)))]
+        return float(d.mean()), float(np.quantile(bs, 0.05)), float(np.quantile(bs, 0.95))
+
     for name, m in sets.items():
         for lead in (1, 2):
-            g = heat[m & (heat.lead == lead)].dropna(subset=["himax", "hi_fc"])
+            # all methods on the same rows: the observation, the forecast, the issue day's observation
+            # and the model's forecast for the issue day must exist (climatology where it exists)
+            g = heat[m & (heat.lead == lead)].dropna(subset=["himax", "hi_fc", "pers0", "hi_fc_today"]).sort_values(["station", "date"])
             if not len(g):
                 continue
-            L.w(f"\n## {name}, lead day {lead} ({'30–33' if lead == 1 else '54–57'} h), obs = daily max HI")
+            L.w(f"\n## {name}, lead day {lead} ({'30–33' if lead == 1 else '54–57'} h), obs = daily max HI, same {len(g)} rows for all")
             pr = heat_preds(g)
             res["heat"][f"{name}|lead{lead}"] = {}
+            if "2026" in name:
+                for new, old_ in (("linear national", "raw"), ("blend+persist (post-hoc)", "persist(issue day)"),
+                                  ("linear national", "persist(issue day)")):
+                    mu, lo, hi = pooled_ci(g, pr[new] - g.himax.values, pr[old_] - g.himax.values)
+                    res["heat"][f"{name}|lead{lead}"][f"delta_mae {new} − {old_}"] = [mu, lo, hi]
+                    L.w(f"  ΔMAE {new} − {old_}: {mu:+.2f} °C [90 % {lo:+.2f}, {hi:+.2f}]")
             for k, p in pr.items():
                 if k == "linear per station" and "B" in name and "A+B" not in name:
                     continue
@@ -469,9 +499,16 @@ def main():
                     mm = (agg[pc] >= a) & (agg[pc] < b)
                     if mm.sum():
                         rel.append(dict(bin=[a, b], n=int(mm.sum()), mean_p=float(agg[pc][mm].mean()), obs_freq=float(o[mm].mean())))
+                base = float(o.mean())
+                bref = base * (1 - base)
+                hits = int(((agg[pc] >= 0.1) & (o == 1)).sum())
                 rec[f"ge{thr}"] = dict(events=int(o.sum()), brier=bs, brier_clim=bc,
-                                       bss=(1 - bs / bc) if bc else None, reliability=rel)
-                L.w(f"  {yr} lead {lead} ≥{thr}: n={n} events={int(o.sum())} Brier ENS {bs:.4f} clim {bc:.4f} BSS {(1 - bs / bc) if bc else float('nan'):+.3f}")
+                                       bss=(1 - bs / bc) if bc else None, brier_sample_base_rate=bref,
+                                       bss_vs_base_rate=(1 - bs / bref) if bref else None, reliability=rel,
+                                       p_ge_0_1=cat(o == 1, agg[pc] >= 0.1), p_ge_0_3=cat(o == 1, agg[pc] >= 0.3))
+                L.w(f"  {yr} lead {lead} ≥{thr}: n={n} events={int(o.sum())} Brier ENS {bs:.4f} clim {bc:.4f} BSS {(1 - bs / bc) if bc else float('nan'):+.3f}"
+                    f" | vs base rate BSS {(1 - bs / bref) if bref else float('nan'):+.3f} | as a warning at P≥10 %: "
+                    f"POD {f2(rec[f'ge{thr}']['p_ge_0_1']['POD'])} FAR {f2(rec[f'ge{thr}']['p_ge_0_1']['FAR'])}")
                 for rr in rel:
                     L.w(f"      P in [{rr['bin'][0]:.3f},{rr['bin'][1]:.2f}): n={rr['n']:4d} mean P={rr['mean_p']:.3f} observed {rr['obs_freq']:.3f}")
             L.w(f"  {yr} lead {lead}: ENS median MAE {rec['median']['mae']:.2f} mm, 10–90 % range held {100 * rec['cover_10_90']:.1f} % (n={rec['n']})")
@@ -490,9 +527,29 @@ def main():
         # the national linear correction fitted on HRES 2025 sample A (lead 1), applied to every member
         p["hi_cal"] = coefs[1]["a"] + coefs[1]["b"] * p["hi"]
         L.w(f"ENS heat: correction applied per member = HRES 2025 national lead-1 fit ({coefs[1]['a']:+.2f} + {coefs[1]['b']:.3f}·HI)")
-        for col, label in (("hi", "raw"), ("hi_cal", "corrected")):
-            agg = p.groupby(["run", "station"])[col].agg(med="median", p42=lambda v: np.mean(v >= 42), p33=lambda v: np.mean(v >= 33),
-                                                         q10=lambda v: np.quantile(v, 0.1), q90=lambda v: np.quantile(v, 0.9)).reset_index()
+        from math import erf, sqrt
+        sd = coefs[1]["resid_sd"]
+        def dressed(v, thr):  # members dressed with the corrected forecast's tested error (normal, SD from 2025)
+            return float(np.mean([0.5 * (1 - erf((thr - x) / (sd * sqrt(2)))) for x in v]))
+        def dq(v, q):         # quantile of the dressed mixture, by bisection
+            lo, hi = float(np.min(v)) - 5 * sd, float(np.max(v)) + 5 * sd
+            for _ in range(40):
+                mid = (lo + hi) / 2
+                if 1 - dressed(v, mid) < q:
+                    lo = mid
+                else:
+                    hi = mid
+            return (lo + hi) / 2
+        L.w(f"  dressing (post-hoc design, SD from 2025 HRES residuals): {sd:.2f} °C")
+        p["hi_cal2"] = p["hi_cal"]
+        for col, label in (("hi", "raw"), ("hi_cal", "corrected"), ("hi_cal2", "corrected+dressed")):
+            if label == "corrected+dressed":
+                agg = p.groupby(["run", "station"])[col].agg(med="median", p42=lambda v: dressed(v.values, 42.0),
+                                                             p33=lambda v: dressed(v.values, 33.0),
+                                                             q10=lambda v: dq(v.values, 0.1), q90=lambda v: dq(v.values, 0.9)).reset_index()
+            else:
+                agg = p.groupby(["run", "station"])[col].agg(med="median", p42=lambda v: np.mean(v >= 42), p33=lambda v: np.mean(v >= 33),
+                                                             q10=lambda v: np.quantile(v, 0.1), q90=lambda v: np.quantile(v, 0.9)).reset_index()
             agg["date"] = (pd.to_datetime(agg.run) + pd.Timedelta(days=1)).dt.date
             agg = agg.join(ob[["himax", "month"]], on=["station", "date"]).dropna(subset=["himax"])
             agg = agg.merge(clim[["station", "month", "p_hi42"]], on=["station", "month"], how="left")
@@ -511,10 +568,13 @@ def main():
                         mm = (g[pc] >= a) & (g[pc] < b)
                         if mm.sum():
                             rel.append(dict(bin=[a, b], n=int(mm.sum()), mean_p=float(g[pc][mm].mean()), obs_freq=float(o[mm].mean())))
-                    rec[f"ge{thr}"] = dict(events=int(o.sum()), brier=bs, brier_clim=bc,
-                                           bss=(1 - bs / bc) if bc else None, reliability=rel)
+                    base = float(o.mean())
+                    bref = base * (1 - base)
+                    rec[f"ge{thr}"] = dict(events=int(o.sum()), brier=bs, brier_clim=bc, bss=(1 - bs / bc) if bc else None,
+                                           brier_sample_base_rate=bref, bss_vs_base_rate=(1 - bs / bref) if bref else None, reliability=rel)
                     L.w(f"    P(HI≥{thr}): events {int(o.sum())} of {n}; Brier {bs:.4f}"
-                        + (f", climatology (2024 station-month frequency) {bc:.4f}, BSS {1 - bs / bc:+.3f}" if bc else ""))
+                        + (f", climatology (2024 station-month frequency) {bc:.4f}, BSS {1 - bs / bc:+.3f}" if bc else "")
+                        + (f"; vs the test sample's own base rate {bref:.4f}, BSS {1 - bs / bref:+.3f}" if bref else ""))
                     for rr in rel:
                         L.w(f"      P in [{rr['bin'][0]:.3f},{rr['bin'][1]:.2f}): n={rr['n']:4d} mean P={rr['mean_p']:.3f} observed {rr['obs_freq']:.3f}")
                 L.w(f"    median: {fmt_cont(rec['median'], HI_THR)}; 10–90 % range held {100 * rec['cover_10_90']:.1f} %")
