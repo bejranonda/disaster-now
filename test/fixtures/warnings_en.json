@@ -1,0 +1,49 @@
+{
+ "source": "Thai Meteorological Department CAP feed (public domain)",
+ "url": "https://www.tmd.go.th/api/xml/CAP",
+ "items": [
+  {
+   "id": "TMD20261023164718_2",
+   "sent": "2026-10-23T16:43:00+07:00",
+   "status": "Actual",
+   "msgType": "Alert",
+   "event": "Heavy Rain",
+   "headline": "พื้นที่เสี่ยงภัยฝนตกหนักบริเวณประเทศไทย",
+   "description": "ภาคใต้มีฝนตกหนักบางแห่ง ส่วนประเทศไทยตอนบนมีฝนฟ้าคะนองบางพื้นที่ \r\n\r\nทั้งนี้เนื่องจากบริเวณความกดอากาศสูงหรือมวลอากาศเย็นที่ปกคลุมภาคเหนือตอนบน ภาคตะวันออกเฉียงเหนือตอนบน และทะเลจีนใต้มีกำลังอ่อนลง ในขณะที่ยังคงมีลมฝ่ายตะวันออกพัดปกคลุมประเทศไทยตอนบน ภาคใต้ตอนบน และอ่าวไทยตอนบน ประกอบกับมีร่องมรสุมพาดผ่านภาคใต้ตอนกลาง\r\n\r\nสำหรับทะเลอันดามันและอ่าวไทย บริเวณที่มีฝนฟ้าคะนองจะมีคลื่นสูงมากกว่า 2 เมตร",
+   "instruction": "ขอให้ประชาชนในบริเวณดังกล่าวระวังอันตรายจากฝนฟ้าคะนอง ฝนตกหนักและฝนที่ตกสะสม ซึ่งอาจทำให้เกิดน้ำท่วมฉับพลันและน้ำป่าไหลหลากในพื้นที่ลาดเชิงเขาและพื้นที่ลุ่ม \r\n\r\nชาวเรือควรเดินเรือด้วยความระมัดระวัง รวมทั้งหลีกเลี่ยงการเดินเรือในบริเวณที่มีฝนฟ้าคะนองไว้ด้วย",
+   "severity": "Severe",
+   "urgency": "Immediate",
+   "certainty": "Likely",
+   "effective": "2026-10-23T18:00:00+07:00",
+   "expires": "2026-10-24T08:00:00+07:00",
+   "areaDesc": "นครศรีธรรมราช กระบี่ ภูเก็ต สุราษฎร์ธานี สงขลา สตูล ตรัง พัทลุง ปัตตานี ยะลา นราธิวาส",
+   "web": "https://www.tmd.go.th/en/forecast/daily",
+   "provinces": [
+    80,
+    81,
+    83,
+    84,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96
+   ],
+   "link": "https://www.tmd.go.th/uploads/CAP/CAPTMD20261023164718_2.xml",
+   "en": {
+    "headline": "Areas at risk of heavy rain in Thailand",
+    "description": "The South will have heavy rain in some places, while upper Thailand will have thunderstorms in some areas.\n\nThis is because the high-pressure area or cold air mass covering the upper North, upper Northeast, and the South China Sea is weakening, while easterly winds still prevail over upper Thailand, the upper South, and the upper Gulf of Thailand, together with a monsoon trough lying across the central South.\n\nFor the Andaman Sea and the Gulf of Thailand, areas with thunderstorms will have waves higher than 2 meters.",
+    "instruction": "People in the affected areas should beware of the dangers from thunderstorms, heavy rain, and accumulated rain, which may cause flash floods and runoff in hillside areas and low-lying areas.\n\nBoaters should proceed with caution and avoid sailing in areas with thunderstorms.",
+    "model": "glm-5.3-flash",
+    "at": "2026-10-23T21:48:51.675Z",
+    "key": "6a195c90914b210d",
+    "checked": true
+   }
+  }
+ ],
+ "failed": [],
+ "fetched": "2026-10-23T21:49:02.687Z",
+ "_note": "collector output of 23 Oct 2026 21:49 UTC with GLM glm-5.3-flash English (checked by tools/translate.mjs); for the smoke walk and tests"
+}

@@ -58,7 +58,9 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **Fixed tile order** (`assess.ORDER`): people learn where their tile is.
 - **Before a change is done:** `npm test` (unit tests on saved live responses) and `CHROME_PATH=/opt/pw-browsers/chromium npm run smoke` (the visitor walk on fixtures, the clock pinned to 23 Oct 2026 19:50 UTC); for source or wording changes also `npm run smoke -- --live` and read its output as a visitor would.
 - **A new source gets:** a fixture saved from a live call, a parser with a unit test (including its missing-value codes and its time rule), a row in [SOURCES.md](SOURCES.md), and its credit line.
-- **Bump `?v=`** on `css/app.css` and `js/main.js` in `index.html` and in `sw.js`'s `SHELL`, `VERSION` in `main.js` and `sw.js`, and `package.json` with every release.
+- **Bump `?v=`** on `css/app.css` and `js/main.js` in `index.html` and in `sw.js`'s `SHELL`, `VERSION` in `main.js` and `sw.js`, and `package.json` (and `package-lock.json`) with every release.
+- **The first screen of a 360 × 640 phone inside LINE shows the verdict** (smoke check, KI-F23), and no level shows before the forecast, air quality and warnings have answered or 5 s have passed (KI-F24).
+- **A page string that describes data must match what the cells show** (KI-F26: the rain row said "mm" for a year of chance words).
 - **Every module the page imports is in `sw.js`'s `SHELL`** (one missing file kills the page offline: the visitor audit's V3); `test/audit.test.mjs` walks the imports and fails otherwise.
 - **Each audit finding that is fixed gets a test** named after its ID (`test/audit.test.mjs`: "M5/V2: …").
 
@@ -69,12 +71,31 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **A model value is never shown as a measurement,** and a model's correction is shown as such ("ปรับตามค่าวัด").
 - **No interpolated water surface over land** (FloodWatch D-019); elevation is context only ("ไม่ได้บอกว่าน้ำท่วมหรือไม่").
 
-## 8. The server
+## 8. The server and Cloudflare
 
-The rules in [SERVER.md §5](SERVER.md#5-rules-that-apply-on-the-server): publish files and keep nothing about a person (no visitor logs, positions, cookies or accounts); the app binds to localhost and public traffic comes through a tunnel or proxy; containers run read-only as a non-root user; keys only in `.env`; the collector never loops faster than every 600 s; the page must keep working when the server is down.
+- The rules in [SERVER.md §5](SERVER.md#5-rules-that-apply-on-the-server): publish files and keep nothing about a person
+  (no visitor logs, positions, cookies or accounts); the app binds to localhost; containers run read-only as a non-root
+  user; the collector never loops faster than every 600 s; the page must keep working when the server is down.
+- **On Cloudflare** ([CLOUDFLARE.md §5](CLOUDFLARE.md#5-rules-on-cloudflare)): only `/data/live/*` runs Worker code;
+  `observability` stays off and the Worker logs nothing; its headers equal `_headers` (a test compares them).
+- **Keys:** only in `.env` (git-ignored, mode 600), one scoped token per job, passed by docker-compose.yml to the one
+  service that needs it, sent in headers, never printed (`tools/env-check.mjs` shows states, not values). **Never copy
+  another project's `.env`**, and never run another site's tunnel token here.
+- **FloodWatch shares this server and its IP:** don't run live walks or cross-checks in a loop from it (ThaiWater
+  rate-limits the IP FloodWatch's collector needs, KI-029).
 
 ## 9. Git
 
 - Branch from `main` (or the branch you were given); push only there. Commit messages start with `feat:`, `fix:`, `docs:`, `test:`, `content:` or `chore:` and end with the attribution lines the harness gives.
 - Stage files by name; never commit `public/data/live/` (the collector's output), `.env`, keys or big downloads.
 - Several sessions may work here: `git pull --ff-only` and read `git log` before editing.
+
+## 10. AI (GLM)
+
+The full reasoning is in [AI.md](AI.md). In short:
+1. **Off the visitor's path:** only the collector and dev tools call GLM; the page never waits for it and is complete without it (`AI_ENABLED=0`).
+2. **Rules write facts; GLM only translates or reviews.** Never a level, number, time, province, advice or verdict.
+3. **Checked or not shown:** every AI text on the page passes a deterministic check (`tools/translate.mjs`), is labelled as machine output, and keeps the original one tap away.
+4. **Public text only:** GLM never sees a position, a typed search or anything about a visitor.
+5. **Bounded:** one call per new text, `AI_DAILY_CALLS`, `reasoning_effort: "low"`, a timeout, the key in a header only.
+6. **A new use is measured on live text first** and written into AI.md with its acceptance rate; a dev tool's suggestions (`tools/ai-review-copy.mjs`) are prompts for a person, never applied unread.

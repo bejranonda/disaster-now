@@ -30,9 +30,12 @@ const MOCKS = [
 let failures = 0;
 const ok = (cond, msg) => { console.log(`${cond ? "ok  " : "FAIL"} ${msg}`); if (!cond) failures++; };
 
-async function newPage(browser, { width = 390, height = 844, fail = false } = {}) {
+// LINE's in-app browser on a mid-range Android, the audience's usual window (visitor audit V5)
+const LINE_UA = "Mozilla/5.0 (Linux; Android 14; SM-A156E) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/129.0 Mobile Safari/537.36 Line/14.16.0";
+
+async function newPage(browser, { width = 390, height = 844, fail = false, ua, live = null, liveDelayMs = 0 } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 2, locale: "th-TH",
-    timezoneId: "Asia/Bangkok", geolocation: BKK, permissions: ["geolocation"], isMobile: true, hasTouch: true });
+    timezoneId: "Asia/Bangkok", geolocation: BKK, permissions: ["geolocation"], isMobile: true, hasTouch: true, ...(ua ? { userAgent: ua } : {}) });
   const page = await ctx.newPage();
   if (!LIVE) await page.clock.setFixedTime(NOW);
   const errors = [];
@@ -40,7 +43,12 @@ async function newPage(browser, { width = 390, height = 844, fail = false } = {}
   page.on("console", (m) => { if (m.type() === "error" && !/Failed to load resource/.test(m.text())) errors.push(m.text()); });
   if (!LIVE) {
     // the collector's files are this site's own: absent in the fixture run (they'd be today's, not the fixtures' day)
-    await ctx.route(/\/data\/live\//, (route) => route.fulfill({ status: 404, body: "" }));
+    // (`live` gives some of them as {file: body}; `liveDelayMs` holds every answer back, like a slow link)
+    await ctx.route(/\/data\/live\//, async (route) => {
+      if (liveDelayMs) await new Promise((r) => setTimeout(r, liveDelayMs));
+      const f = route.request().url().split("/").pop();
+      return live?.[f] ? route.fulfill({ status: 200, contentType: "application/json", body: live[f] }) : route.fulfill({ status: 404, body: "" });
+    });
     await ctx.route(/^https?:\/\/(?!127\.0\.0\.1)/, (route) => {
       const url = route.request().url();
       if (fail) return route.abort();
@@ -93,7 +101,7 @@ async function main() {
       ok(fl.includes("131 ซม."), "flood card leads with cm below the bank for C.12 (1.31 m in ThaiWater's fixture)");
       ok((await text(page, "#outlook")).includes("พรุ่งนี้"), "3-day table has tomorrow");
       const heat = await text(page, "#card-heat");
-      ok(/4[0-9] °C/.test(heat) && heat.includes("ปรับแก้"), `heat card shows the corrected value (ECMWF + 5 °C, MODELS §1): ${heat.split("\n").slice(0, 5).join(" | ")}`);
+      ok(/4[0-9]\s°C/.test(heat) && heat.includes("ปรับแก้"), `heat card shows the corrected value (ECMWF + 5 °C, MODELS §1): ${heat.split("\n").slice(0, 5).join(" | ")}`);
     }
     ok((await overflow(page)) <= 0, "no horizontal scroll at 390 px");
     const small = await tapTargets(page);
@@ -114,7 +122,9 @@ async function main() {
     ok(thaiLeft.length === 0, `no Thai left in English headings (${JSON.stringify(thaiLeft)})`);
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/03-report-en-390.png`, fullPage: true });
     await page.click("#lang");
-    // 3. local search, then a saved place survives a reload
+    // 3. local search, then a saved place survives a reload (with a place open the finder is one "ดูที่อื่น" row)
+    ok(!(await page.locator("#q").isVisible()) && (await page.locator("#change").isVisible()), "with a place open, the finder folds to one row");
+    await page.click("#change");
     await page.fill("#q", "เชียงใหม่");
     await page.waitForSelector("#results:not([hidden]) .hit");
     const hits = await page.locator("#results .hit").allInnerTexts();
@@ -126,11 +136,12 @@ async function main() {
     ok(true, "choosing a hit opens that place");
     page.once("dialog", (d) => d.accept("บ้านแม่"));
     await page.click("#save");
-    await page.waitForSelector("#saved .chip");
+    await page.waitForSelector("#saved .chip", { state: "attached" }); // in the folded finder; the ★ on Save is the feedback
     await page.goto(base);
     await page.waitForSelector("#report:not([hidden])");
     ok((await text(page, "#place-name")).includes("บ้านแม่"), "reopening the app shows the saved place first");
     // 4. OSM search on Enter (soi variants)
+    await page.click("#change");
     await page.fill("#q", "ซ. ลาดพร้าว 71");
     await page.press("#q", "Enter");
     await page.waitForSelector("[data-o]", { timeout: 10000 });
@@ -149,6 +160,39 @@ async function main() {
     ok((await overflow(small320.page)) <= 0, "no horizontal scroll at 320 px with larger text");
     if (SHOTS) await small320.page.screenshot({ path: `${SHOTS}/05-report-320-bigger.png`, fullPage: true });
     await small320.ctx.close();
+
+    // 5b. the verdict is on the first screen of a small phone inside LINE (KI-022, visitor audit V5)
+    const line360 = await newPage(browser, { width: 360, height: 640, ua: LINE_UA });
+    await line360.page.goto(`${base}#t=100101`);
+    await line360.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 });
+    const vBottom = await line360.page.$eval("#verdict", (e) => Math.round(e.getBoundingClientRect().bottom + scrollY));
+    ok(vBottom <= 640, `verdict ends at ${vBottom} px on a 360 × 640 LINE screen (KI-022: ≤ 640)`);
+    await line360.ctx.close();
+
+    if (!LIVE) {
+      // 5c. no interim verdict while the warnings are still on their way (KI-026, visitor audit V21)
+      const slow = await newPage(browser, { liveDelayMs: 2500 });
+      await slow.page.goto(`${base}#t=100101`);
+      await slow.page.waitForSelector("#report:not([hidden])");
+      await slow.page.waitForTimeout(1200);
+      const early = await text(slow.page, "#verdict");
+      ok(/กำลังดึงข้อมูล/.test(early) && !(await slow.page.locator("#verdict .vname").count()), `no level while warnings are unanswered: "${early.trim()}"`);
+      await slow.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 8000 });
+      ok(true, "the verdict comes once they answer");
+      await slow.ctx.close();
+
+      // 5d. English page, Hat Yai under TMD's heavy-rain warning: the collector's checked English, labelled (docs/AI.md)
+      const warn = readFileSync(new URL("../test/fixtures/warnings_en.json", import.meta.url), "utf8");
+      const en = await newPage(browser, { live: { "index.json": JSON.stringify({ files: { "warnings.json": "2026-10-23T19:45:00Z" }, failed: {} }), "warnings.json": warn } });
+      await en.page.goto(`${base}?lang=en#p=7.01,100.47`);
+      await en.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 });
+      const w = await text(en.page, "#warnings");
+      ok(/Areas at risk of heavy rain/.test(w) && /Machine translation \(GLM\)/.test(w) && !/\(in Thai\)/.test(w), "English page shows TMD's warning in checked English, labelled as a machine translation");
+      const head = await text(en.page, "#verdict .vhead");
+      ok(/TMD warning/.test(head) && !/chance/i.test(head), `verdict leads with the warning, no model chance beside it (KI-028): "${head.trim()}"`);
+      if (SHOTS) await en.page.screenshot({ path: `${SHOTS}/06-warning-en-390.png` });
+      await en.ctx.close();
+    }
 
     // 6. every source down: the page still answers
     if (!LIVE) {

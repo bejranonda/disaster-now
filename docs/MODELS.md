@@ -159,3 +159,11 @@ Tracked as ROADMAP v0.6:
 4. Gusts against any station records that carry them.
 5. The reliability of the ensemble chances behind the chance rule.
 6. The quake words after the next felt event.
+7. **The heat correction by region and season** (added 0.3.0): one national fit (HI = 10.4 + 0.86·HI_raw) turned
+   Chiang Mai's late-October raw 35.4 °C into "เตือนภัย 41 °C". It was validated on held-out stations, but not per
+   region or for the northern cool season. Score the fit's residuals by region and month before trusting "เตือนภัย"
+   in the north from November.
+8. **Province warning vs point chance** (added 0.3.0): on 24 Oct the ensemble said "low" in all 11 provinces under
+   TMD's Severe heavy-rain notice ([research/crosscheck-live](research/crosscheck-live-2026-10-23.md)). Archive the
+   notices with the app's chance for each warned province (SERVER §6.6), then score both against the next day's gauges:
+   which one should the 3-day table trust where the other is silent?

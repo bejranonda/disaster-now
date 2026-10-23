@@ -2,6 +2,50 @@
 
 ## Unreleased
 
+## 0.3.0 (23 Oct 2026, not deployed): Cloudflare-ready at risk.autobahn.bot, GLM English for TMD's warnings, the live cross-check's fixes
+
+**Cloudflare** ([docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)), prepared and tested locally:
+- The page as Workers static assets at the edge (`wrangler.jsonc`: `risk.autobahn.bot`, `run_worker_first: ["/data/live/*"]`, no logs).
+- `worker/index.mjs` serves `/data/live/*` from KV with `_headers`' headers, ETag/304, 404, 405 and a 60 s edge cache.
+- The collector uploads its files to KV in one bulk PUT per run (`tools/publish-live.mjs`).
+- `npm run cf:setup` (KV namespace), `npm run cf:deploy` (pinned wrangler 4.148.0, falls back to Docker on Node 20).
+- Checked with a dry run, `wrangler dev` on the real files and unit tests. **Not deployed:** the token can't write KV (OWNER_ACTIONS A9).
+
+**GLM** ([docs/AI.md](docs/AI.md)), researched (models, prices, data terms, the family's measurements) and used in two places:
+- The collector translates TMD's Thai-only warnings for the English page (`tools/translate.mjs`).
+  - It is checked for numbers, Buddhist-era years, leftover Thai, added reassurance, TMD's region words and length.
+  - One call per text, a daily cap, labelled as machine translation, with the Thai original one tap away.
+  - Measured: 6 of 6 accepted, median 3.4 s.
+- `npm run ai:review-copy` gives a first reading of the Thai copy for the native reviewer.
+  - 95 of 207 strings flagged; three suggestions were harmful; none applied.
+
+**The live cross-check** ([docs/research/crosscheck-live-2026-10-23.md](docs/research/crosscheck-live-2026-10-23.md), `research/crosscheck_live.mjs`):
+- Under TMD's Severe heavy-rain notice, the ensemble said "low" in all 11 warned provinces, and the page said
+  "TMD warning · Heavy rain: low chance". Now the notice takes the tile's value ("until 08:00 today") and the 3-day
+  table's cells ("📢 เตือนภัย"), and the card says the model is milder and to follow TMD (KI-F25).
+- TMD's and EMSC's quakes agree where both report (M4.2 Laos, 0 km).
+- GISTDA's estimate is ×1.27 the PCD's stations (second snapshot).
+- ThaiWater rate-limits the server FloodWatch shares (KI-029).
+
+**Visitor fixes:**
+- The verdict on the first screen of a 360 × 640 LINE phone (504 px, was 642): the finder folds to "🔎 ดูที่อื่น" while a place is open (KI-F23).
+- No verdict level until the forecast, air quality and warnings answer, or 5 s ("กำลังดึงข้อมูล (n จาก 10 เรื่อง)", KI-F24).
+- The 3-day table moved above the cards. Its rain row is now "โอกาสฝนหนัก" with one word per cell, instead of
+  "ฝน มม." with the word doubled, and its note is corrected (KI-F26).
+- Link previews: Open Graph tags and a 1200 × 630 card (`public/og.png`); PNG icons for Android and iPhone (`tools/make-images.mjs`).
+
+**Server and secrets:**
+- `.env.example` rewritten for this project: public host, Cloudflare, KV, GLM, optional keys.
+- `.env` is git-ignored with every copy (`.env.*`), plus `.wrangler/` and `.dev.vars`.
+- `tools/env-check.mjs` (states, never values; `--probe` tests the keys) and `tools/env.mjs`.
+- docker-compose.yml passes the collector only its own variables.
+- The collector's User-Agent names `risk.autobahn.bot` and an optional contact.
+- Ran on the owner's server: 5 of 5 files, **Air4Thai 173 stations** (A6 done).
+
+**Checks:** 59 unit tests (13 new in `test/cloud.test.mjs`, plus the warning-lift test widened); the visitor walk now
+has 29 checks (new: the folded finder, the verdict at 360 × 640 in LINE, no interim verdict, the English warning, no
+model chance beside the warning).
+
 ## 0.2.0 (23 Oct 2026, not deployed): validated forecasts, the audits' fixes, server-ready
 
 **Forecasts, as the validation found them** ([docs/MODELS.md](docs/MODELS.md)):

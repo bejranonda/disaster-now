@@ -10,7 +10,7 @@ import { scale } from "./levels.js";
 import { dayName } from "./assess.js";
 import { IPE } from "./ipe.js";
 
-export const VERSION = "0.2.0";
+export const VERSION = "0.3.0";
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LV = (l) => (l == null || l < 0 ? "none" : scale(l).key);
@@ -115,6 +115,7 @@ async function load() {
   lastLoad = Date.now();
   const p = current;
   bundle = { now: Date.now(), point: p, errors: {} };
+  setTimeout(() => { if (seq === loadSeq) { bundle.waitOver = true; schedule(); } }, 5000);
   const u0 = urls(p.lat, p.lon);
   const jobs = [
     ["ens", u0.ens], ["aq", u0.aq], ["gistda", u0.gistda], ["hiiFf", u0.hiiFf, "text"], ["emsc", u0.emsc], ["usgs", u0.usgs],
@@ -148,6 +149,7 @@ async function load() {
   p.place = nearestTambon(tambon, p.lat, p.lon);
   $("#welcome").hidden = true;
   $("#report").hidden = false;
+  $(".finder").classList.add("has-place");
   renderPlace();
   render(true);
   const u = urls(p.lat, p.lon, { pv: p.place?.pv, tambon: p.place?.code });
@@ -198,7 +200,7 @@ function renderPlace() {
   $("#place-sub").innerHTML = esc([p.source === "gps" ? `📍 ${t("gpsLabel")}${acc}` : "", named ? `${t("nearT")} ${label}` : "",
     p.source === "gps" ? "" : `${r2.lat}, ${r2.lon}`].filter(Boolean).join(" · "))
     + (p.source === "gps" ? ` · <button type="button" class="linkbtn" id="notthis">${esc(t("notThis"))}</button>` : "");
-  $("#notthis")?.addEventListener("click", () => { $("#q").focus(); say(t("pickYourself")); });
+  $("#notthis")?.addEventListener("click", () => { openFinder(); say(t("pickYourself")); });
   const saved = loadPlaces().some((x) => Math.abs(x.lat - p.lat) < 0.001 && Math.abs(x.lon - p.lon) < 0.001);
   $("#save").innerHTML = `${saved ? "★" : "☆"} <span>${esc(saved ? t("saved") : t("save"))}</span>`;
   renderSaved();
@@ -210,11 +212,17 @@ function render(first) {
   // verdict: the level by what to do, the worst hazard in the agency's word, its one sourced action
   const v = r.verdict;
   const vEl = $("#verdict");
-  vEl.className = `verdict lv-${first && v.level < 0 ? "none" : LV(v.level)}`;
+  // No level until the forecast, the air quality and the warnings have answered (or failed), or 5 s have passed: an
+  // early verdict from the first few sources was milder or about another hazard (KI-026, visitor audit V21)
+  const settled = bundle.waitOver || (["ens", "aq"].every((k) => bundle[k] || bundle.errors[k]) && bundle.liveDone);
+  if (!settled) {
+    vEl.className = "verdict lv-none";
+    vEl.innerHTML = `<div class="vtitle">${esc(t("loadingN", { n: r.cards.filter((c) => c.level >= 0).length, m: r.cards.length }))}</div>`;
+  } else vEl.className = `verdict lv-${first && v.level < 0 ? "none" : LV(v.level)}`;
   const chip = (i) => `<a class="vchip lv-${LV(i.level)}" href="#card-${i.id}">${i.icon} ${esc(i.short)}: <b>${esc(i.word)}</b></a>`;
   const head = v.worst ? `${v.worst.icon} ${esc(v.worst.short)}: ${esc(v.worst.word)}${v.worst.value ? ` · ${esc(v.worst.value)}` : ""}`
-    : v.warning ? `📢 ${esc(v.warning.headline || v.warning.event)}` : v.level === 0 ? esc(t(v.complete ? "allQuiet" : "quietSoFar")) : "";
-  vEl.innerHTML = first && v.level < 0 ? `<div class="vtitle">${esc(t("loading"))}</div>`
+    : v.warning ? `📢 ${esc(lang === "en" ? (v.warning.en?.checked ? v.warning.en.headline : v.warning.event) : v.warning.headline || v.warning.event)}` : v.level === 0 ? esc(t(v.complete ? "allQuiet" : "quietSoFar")) : "";
+  if (settled) vEl.innerHTML = first && v.level < 0 ? `<div class="vtitle">${esc(t("loading"))}</div>`
     : `<div class="vtop"><span class="meter" aria-hidden="true">${meter(v.level)}</span><span class="vname">${esc(v.name)}</span></div>`
       + (head ? `<div class="vhead">${head}</div>` : "")
       + (v.action ? `<div class="vact">👉 ${esc(v.action.text)} <span class="muted small">(${esc(v.action.src.map((x) => x.kind === "official" ? t("official") : t("news")).filter((x, i, a) => a.indexOf(x) === i).join(", "))})</span></div>` : "")
@@ -230,17 +238,22 @@ function render(first) {
       <span class="meter" aria-label="${esc(c.level < 0 ? t("noData") : scale(c.level)[lang])}">${meter(c.level)}</span></a>`).join("");
   // official warnings
   const when = (iso) => (iso && !Number.isNaN(Date.parse(iso)) ? timeText(localOf(Date.parse(iso)), bundle.now, lang) : "");
-  $("#warnings").innerHTML = r.warnings.map((w) => `<div class="warn lv-${LV(w.level)}"><b>${esc(t("officialNow"))}</b><br>`
-    + `${esc(lang === "en" ? `${w.event || ""} (in Thai)` : w.headline || w.event)}`
-    + `<br><span class="small">${w.sent ? `${esc(t("issued"))} ${esc(when(w.sent))}` : ""}${w.expires ? ` · ${esc(t("until"))} ${esc(when(w.expires))}` : ""}</span>`
-    + `${w.instruction ? `<p>${esc(w.instruction)}</p>` : ""}`
-    + `${w.description ? `<details><summary>${esc(t("readNotice"))}</summary><p class="small">${esc(w.description)}</p></details>` : ""}`
-    + `${w.link || w.web ? `<a class="how" href="${esc(w.link || w.web)}" target="_blank" rel="noopener">${esc(t("fullNotice"))} →</a>` : ""}</div>`).join("")
+  $("#warnings").innerHTML = r.warnings.map((w) => {
+    // English page: the collector's checked machine translation when there is one (docs/AI.md §2), else TMD's Thai
+    const en = lang === "en" && w.en?.checked ? w.en : null;
+    return `<div class="warn lv-${LV(w.level)}"><b>${esc(t("officialNow"))}</b><br>`
+      + `${esc(en ? en.headline || w.event : lang === "en" ? `${w.event || ""} (in Thai)` : w.headline || w.event)}`
+      + `<br><span class="small">${w.sent ? `${esc(t("issued"))} ${esc(when(w.sent))}` : ""}${w.expires ? ` · ${esc(t("until"))} ${esc(when(w.expires))}` : ""}</span>`
+      + `${(en ? en.instruction : w.instruction) ? `<p>${esc(en ? en.instruction : w.instruction)}</p>` : ""}`
+      + `${(en ? en.description : w.description) ? `<details><summary>${esc(t(en ? "readNoticeEn" : "readNotice"))}</summary><p class="small">${esc(en ? en.description : w.description)}</p></details>` : ""}`
+      + (en ? `<p class="small muted mt">🤖 ${esc(t("machineTr"))}</p><details lang="th"><summary>${esc(t("thaiOriginal"))}</summary><p class="small">${esc([w.headline, w.instruction, w.description].filter(Boolean).join("\n\n"))}</p></details>` : "")
+      + `${w.link || w.web ? `<a class="how" href="${esc(w.link || w.web)}" target="_blank" rel="noopener">${esc(t("fullNotice"))} →</a>` : ""}</div>`;
+  }).join("")
     + (bundle.warnings || !bundle.liveDone ? "" : `<div class="warn lv-none">${esc(t("warnUnknown"))}</div>`);
   // pre-warnings
   const pre = r.pre.filter((x) => PRE_WHAT[x.hazard]?.[x.level]);
   $("#pre-wrap").hidden = !bundle.ens && !pre.length;
-  const official = r.warnings.map((w) => `<li class="lv-${LV(w.level)}">📢 ${esc(lang === "en" ? `TMD: ${w.event || ""}` : `กรมอุตุฯ: ${w.headline || w.event}`)}${w.expires ? ` · ${esc(t("until"))} ${esc(when(w.expires))}` : ""}</li>`).join("");
+  const official = r.warnings.map((w) => `<li class="lv-${LV(w.level)}">📢 ${esc(lang === "en" ? `TMD: ${w.en?.checked ? w.en.headline : w.event || ""}` : `กรมอุตุฯ: ${w.headline || w.event}`)}${w.expires ? ` · ${esc(t("until"))} ${esc(when(w.expires))}` : ""}</li>`).join("");
   $("#pre").innerHTML = official + (pre.length ? pre.map((x) => {
     const what = PRE_WHAT[x.hazard][x.level][lang];
     const date = x.date || r.outlook[x.day]?.date;
@@ -296,10 +309,11 @@ function errWord(e) {
 }
 
 function outlookHtml(rows) {
-  const cell = (x, sub) => (x ? `<td class="lv-${LV(x.level)}">${esc(x.text)}${sub && x.sub ? `<small>${esc(t("heavyChance"))} ${esc(x.sub)}</small>` : ""}</td>` : "<td class='lv-none'>–</td>");
+  // the row's name says what a rain cell is ("โอกาสฝนหนัก"); the cell had "ฝนหนัก" twice under its word before 0.3.0
+  const cell = (x) => (x ? `<td class="lv-${LV(x.level)}">${esc(x.text)}</td>` : "<td class='lv-none'>–</td>");
   return `<table class="outlook"><thead><tr><th></th>${rows.map((r) => `<th>${esc(r.name)}</th>`).join("")}</tr></thead><tbody>
     <tr><th>${esc(t("rowHeat"))}</th>${rows.map((r) => cell(r.heat)).join("")}</tr>
-    <tr><th>${esc(t("rowRain"))}</th>${rows.map((r) => cell(r.rain, true)).join("")}</tr>
+    <tr><th>${esc(t("rowRain"))}</th>${rows.map((r) => cell(r.rain)).join("")}</tr>
     <tr><th>${esc(t("rowPm"))}</th>${rows.map((r) => cell(r.pm25)).join("")}</tr>
     <tr><th>${esc(t("rowUv"))}</th>${rows.map((r) => cell(r.uv)).join("")}</tr>
     <tr><th>${esc(t("rowGust"))}</th>${rows.map((r) => cell(r.gust)).join("")}</tr>
@@ -352,6 +366,12 @@ async function osm(q) {
 
 // ---------- events ----------
 $("#gps").addEventListener("click", locate);
+/** Unfold the finder (it folds to "🔎 ดูที่อื่น" while a place is open, KI-022) and put the cursor in search. */
+function openFinder() {
+  $(".finder").classList.remove("has-place");
+  $("#q").focus();
+}
+$("#change").addEventListener("click", openFinder);
 $("#q").addEventListener("input", onInput);
 $("#q").addEventListener("focus", loadTambon, { once: true });
 $("#search").addEventListener("submit", async (e) => {

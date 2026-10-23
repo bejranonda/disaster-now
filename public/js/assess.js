@@ -75,11 +75,11 @@ export function assess(b, lang = "th", ipe = null) {
       c.level = Math.min(MODEL_MAX, Math.max(bd.level, lv.level));
       c.word = word(band("heat", w.p50));
       const pm = new Date(now + 7 * 3.6e6).getUTCHours() < 16;
-      c.value = L(`${pm ? "บ่ายนี้" : "บ่ายพรุ่งนี้"} ${Math.floor(w.p50)} °C`, `${pm ? "This afternoon" : "Tomorrow afternoon"} ${Math.floor(w.p50)} °C`);
+      c.value = L(`${pm ? "บ่ายนี้" : "บ่ายพรุ่งนี้"} ${Math.floor(w.p50)}\u00a0°C`, `${pm ? "This afternoon" : "Tomorrow afternoon"} ${Math.floor(w.p50)}\u00a0°C`);
       c.action = actionFor("heat", w.p50, lang);
       c.lines = [
-        L(`สูงสุดใน 24 ชม. ข้างหน้า ราว ${fmt(w.p10)}–${fmt(w.p90)} °C (ดัชนีความร้อน = ร้อนที่ร่างกายรู้สึก)`,
-          `Peak in the next 24 h about ${fmt(w.p10)}–${fmt(w.p90)} °C (heat index: how hot it feels)`),
+        L(`สูงสุดใน 24 ชม. ข้างหน้า ราว ${fmt(w.p10)}–${fmt(w.p90)}\u00a0°C (ดัชนีความร้อน = ร้อนที่ร่างกายรู้สึก)`,
+          `Peak in the next 24 h about ${fmt(w.p10)}–${fmt(w.p90)}\u00a0°C (heat index: how hot it feels)`),
         // the raw model reads ~5 °C low in Thailand: only corrected numbers are shown (MODELS.md §2)
         L("ปรับแก้ตามสถานีวัดของกรมอุตุฯ แล้ว: แบบจำลองดิบต่ำกว่าค่าวัดจริงราว 5 °C (ทดสอบ 2025–2026, 18 สถานี)",
           "Corrected to TMD's stations: the raw model reads about 5 °C low (tested 2025–2026, 18 stations)"),
@@ -102,7 +102,7 @@ export function assess(b, lang = "th", ipe = null) {
       const p = air.pm25;
       c.level = p.band.level;
       c.word = word(p.band);
-      c.value = `${fmt(p.mean24, 1)} µg/m³`;
+      c.value = `${fmt(p.mean24, 1)}\u00a0µg/m³`;
       c.action = actionFor("pm25", p.mean24, lang);
       c.lines = [];
       if (p.kind === "station") {
@@ -455,12 +455,20 @@ export function assess(b, lang = "th", ipe = null) {
   for (const w of warnings) {
     const c = cards.find((x) => x.id === capHazard(w));
     if (!c) continue;
+    const until = w.expires ? timeText(localOf(Date.parse(w.expires)), now, lang) : "";
+    // The model's milder value beside TMD's word read as a contradiction ("Rain: TMD warning · Heavy rain: low chance",
+    // Phuket, 24 Oct 04:50): the tile and the verdict show the notice's end; the model's numbers stay in the card,
+    // under a line that says which one to follow (KI-028).
+    const milder = c.level >= 0 && c.level < w.level;
     if (w.level >= c.level) {
       c.level = w.level;
       c.word = L("กรมอุตุฯ เตือนภัย", "TMD warning");
+      c.value = until ? L(`ถึง ${until}`, `until ${until}`) : "";
     }
-    c.lines.unshift(L(`ประกาศกรมอุตุฯ: ${w.headline || w.event}${w.expires ? ` (ถึง ${timeText(localOf(Date.parse(w.expires)), now, lang)})` : ""}`,
-      `TMD notice: ${w.event || w.headline}${w.expires ? ` (until ${timeText(localOf(Date.parse(w.expires)), now, lang)})` : ""}`));
+    if (milder) c.lines.unshift(L("ตัวเลขจากแบบจำลองด้านล่างเบากว่าประกาศ ให้ยึดประกาศของกรมอุตุฯ",
+      "The model's numbers below are milder than the notice: follow TMD's notice"));
+    c.lines.unshift(L(`ประกาศกรมอุตุฯ: ${w.headline || w.event}${until ? ` (ถึง ${until})` : ""}`,
+      `TMD notice: ${(w.en?.checked && w.en.headline) || w.event || w.headline}${until ? ` (until ${until})` : ""}`));
     c.official = true;
   }
   for (const c of cards) if (c.level >= 0 && !c.word) c.word = word(scale(c.level));
@@ -493,6 +501,18 @@ export function assess(b, lang = "th", ipe = null) {
     pm25: air.outlook[i] ? { level: air.outlook[i].band.level, text: i === 0 ? fmt(air.outlook[i].mean) : word(air.outlook[i].band) } : null,
     uv: air.uv[i] ? { level: air.uv[i].band.level, text: fmt(air.uv[i].max) } : null,
   })) : [];
+  // A TMD warning in force on a day takes that day's cell: the table said "ต่ำ ฝนหนัก" under a Severe heavy-rain
+  // warning in all 11 warned provinces on 24 Oct 2026 (the ensemble gave < 10 %; research/logs/crosscheck-live-2026-10-23.log)
+  const COL = { rain: "rain", wind: "gust", heat: "heat" };
+  for (const w of warnings) {
+    const col = COL[capHazard(w)];
+    if (!col) continue;
+    outlook.forEach((row, i) => {
+      const start = i === 0 ? now : Date.parse(`${row.date}T00:00:00+07:00`);
+      if (w.expires && start >= Date.parse(w.expires)) return;
+      row[col] = { level: Math.max(row[col]?.level ?? -1, w.level), text: L("📢 เตือนภัย", "📢 TMD warning"), official: true };
+    });
+  }
 
   // ---------- the place itself (long-term) ----------
   const profile = [];

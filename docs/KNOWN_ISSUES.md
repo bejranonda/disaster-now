@@ -12,12 +12,15 @@ The audits of 23 Oct 2026 use their own IDs: M1–M5 and H1–H4 from the [outpu
 ## Open
 
 ### KI-001 Not deployed, not tried on real phones (high)
-Built and checked only in headless Chromium in a cloud session (23 Oct 2026).
+Checked only in headless Chromium (23 Oct 2026).
 - GPS inside LINE's in-app browser is undocumented by LINE.
 - iPhone Safari is untested.
-- The Docker stack ran in that session ([SERVER.md](SERVER.md)), not on the owner's server.
+- Since 0.3.0 the Docker stack has run on the owner's FloodWatch server (healthy, 5 of 5 collector files, GLM English
+  for the live warning), and the Cloudflare Worker has run under `wrangler dev` with the real files. Neither is public:
+  the Worker isn't deployed, because the token can't write Workers KV ([CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)).
+  The test stack was stopped afterwards.
 
-**Next:** [OWNER_ACTIONS A1, A4](OWNER_ACTIONS.md#a-to-go-live).
+**Next:** [OWNER_ACTIONS A9, A10, A4](OWNER_ACTIONS.md#a-to-go-live).
 
 ### KI-002 Air4Thai's server sends a broken certificate chain, and answered 503 (high)
 - **The chain:** Let's Encrypt's YR1 intermediate is missing (Hazard-huntz docs/09 §3). curl, Node and Python refuse it.
@@ -25,7 +28,11 @@ Built and checked only in headless Chromium in a cloud session (23 Oct 2026).
 - **Browsers:** headless Chromium read the CORS mirror `air4thai.com` on 23 Oct in the builder's walks and the live walk at 21:1x UTC, but refused the same mirror's chain in the visitor audit (V27: `ERR_CERT_AUTHORITY_INVALID`). Phones that don't fetch missing intermediates, possibly LINE's Android WebView **[unverified]**, will fall back to GISTDA's estimate in every province (KI-009).
 - Since 0.2.0 the card says "ดึงข้อมูลสถานีวัดของ คพ. ไม่ได้ตอนนี้" instead of "no station here" (M1).
 
-**Next:** run the collector from the owner's server in Thailand (SERVER §6.1, OWNER_ACTIONS A6). **The fix belongs to the PCD** (OWNER_ACTIONS C5).
+- **Since 0.3.0:** from the owner's FloodWatch server (Germany), the collector read **173 stations** at 21:43 and 22:04
+  UTC on 23 Oct. That meets A6's "170 or more", so the 503s belonged to the build session's cloud host. With the
+  collector running, the page reads Air4Thai from `data/live/` and doesn't depend on the browser accepting the chain.
+
+**Next:** run the collector (A10). **The chain's fix belongs to the PCD** (OWNER_ACTIONS C5).
 
 ### KI-003 Without the collector, four feeds are missing (medium)
 TMD's warnings, TMD's quake list, TMD's storm tracks and NASA FIRMS hotspots need the collector. Since 0.2.0, the page without it:
@@ -139,34 +146,23 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
 
 **Next:** OWNER_ACTIONS A5.
 
-### KI-022 The verdict is below the fold on small phones (medium; V5)
-- At 320 × 568 the verdict runs from 383 to 657 px; at 360 × 640 it ends at 642.
-- The GPS button, search and four buttons sit above it.
-
-**Fix:** when a place is open, collapse the finder to one "🔎 ดูที่อื่น" row and put the buttons under the verdict.
-
 ### KI-024 English and codes in Thai mode, Thai in English mode (medium; V12, V14, V38)
 - **English in Thai mode:** EMSC and USGS region names ("MYANMAR-CHINA BORDER REGION", "191 km ENE of Nagqu, China"), storm names, "µg/m³" (the UX scout asks for "มคก./ลบ.ม.").
-- **Thai in English mode:** station names, and TMD's warning text (now labelled "(in Thai)").
+- **Thai in English mode:** station names. TMD's warning text has had GLM's checked English since 0.3.0 when the
+  collector runs with `AI_ENABLED=1` ([AI.md §2.1](AI.md#21-english-for-tmds-warnings-collector-toolstranslatemjs)); without it, the text is labelled "(in Thai)".
 - **Fixed in 0.2.0:** fetch errors are now Thai words.
 
 **Fix:** map regions to Thai country names, as TMD's rows have them.
 
-### KI-025 The 3-day table is far down and colour only (medium; V13)
-- At 390 px it starts about 9 swipes down, below the ten cards.
-- Its cells have no meter and no word.
-- "วันนี้" means the rest of today.
+### KI-025 The 3-day table's cells are colour only (medium; V13)
+- **Fixed in 0.3.0:** it sits above the cards (Phuket at 390 px: from 6,574 to 2,267 px down). Its rain row is named
+  "โอกาสฝนหนัก", and the note no longer calls the cell the day's total. A day under a TMD warning reads "📢 เตือนภัย".
+- **Open:** heat, PM2.5, UV and gust cells have no meter and no word; "วันนี้" means the rest of today.
 
 **Fix:**
-- Move it above the cards.
 - Add dots and band words.
 - Name the first column by the time of day ("คืนนี้" after 15:00).
 - Put the quake footnote under it.
-
-### KI-026 An interim, milder verdict while sources arrive (medium; V21)
-- In Bangkok: "ติดตามไว้ · ฝุ่น PM2.5" at 0.9 s, then "เตรียมตัว · ความร้อน" at 1.2 s. On a slow link the milder one lasts seconds.
-
-**Fix:** show "กำลังดึงข้อมูล (6 จาก 10)" until the ensemble, air quality and warnings have answered, or 5 s have passed.
 
 ### KI-027 Polish from the visitor audit (low; V18, V28, V29, V31, V32, V34, V35, V37–V40)
 - **V18:** "other pollution" with model values reads as no data.
@@ -179,8 +175,61 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
 - **V38:** "hotspot(s)"-style plurals are fixed; names in capitals remain.
 - **V39:** the welcome screen is empty; it could show the in-force TMD notices.
 - **V40:** there is no automatic retry after a timeout.
+- **0.3.0 visitor walk:** at 320 px with ก+ the brand wraps ("ภัยรอบบ้าน ตอน/นี้") in the header; gust, PM2.5 and
+  dust-word cells in the 3-day table break inside a word ("ดี/มาก"). Fixed in 0.3.0: a number and its unit no longer
+  wrap apart (°C, µg/m³ joined by a no-break space), and the chips' "Heat:Warning" has its space back.
+
+### KI-029 ThaiWater rate-limits this server's IP, which FloodWatch shares (medium)
+- On 23 Oct 2026 (22:06 UTC) ThaiWater answered **HTTP 429** to the owner's server, after this session's live walks and
+  cross-checks. FloodWatch's collector reads ThaiWater from the same IP every 10 minutes.
+- The page in a visitor's browser calls ThaiWater from the phone's own address, so production is unaffected unless a
+  carrier puts many phones behind one address (as KI-011).
+
+**Next:**
+- Don't run live walks or cross-checks repeatedly from FloodWatch's server.
+- Have FloodWatch publish the ThaiWater snapshot it already fetches, and let this app read it (INTEGRATION §3.5).
+
+### KI-030 A rain cell can be yellow while its word says "ต่ำ" (low)
+- The rain tile and the 3-day table take their **level** from the likely amount (GUIDELINES rule 6: "watch" when
+  moderate rain is likely), but their **word** from the chance of heavy rain. Phuket's table on 24 Oct showed a
+  yellow "ต่ำ" for tomorrow.
+- Both are true, but a visitor reads a contradiction. It's the owner's D2 (the app's own rain grouping).
+
+**Fix:** either grade the cell by the heavy-rain chance word (low → ยังไม่น่าห่วง), or add the amount word
+("ฝนปานกลาง") beside it. Decide with D2.
+
+### KI-031 The warning translation's check sees numbers, regions and tone, not every meaning (medium)
+- `tools/translate.mjs` rejects dropped or added numbers, Thai left over, added reassurance, a wrong TMD region word
+  and odd lengths. It can't see a changed verb or a dropped clause that has no number.
+- On 23 Oct: 6 of 6 accepted after the region rule; before it, 1 of 3 said "lower South" for ภาคใต้ตอนกลาง.
+
+**Mitigation in place:** the label ("Machine translation … The Thai notice is the official one"), the Thai original
+one tap away, the level and times set by rules only. **Next:** a bilingual reader checks the first ten live
+translations (OWNER_ACTIONS A5), and a phrase table for TMD's fixed instructions.
 
 ## Fixed
+
+### KI-F23 The verdict was below the fold on small phones (0.3.0; was KI-022, V5)
+With a place open, the finder folds to one "🔎 ดูที่อื่น" row and the four buttons sit under the verdict. At 360 × 640
+with a LINE user agent the verdict ends at **504 px** (was 642). Smoke check "verdict ends at … on a 360 × 640 LINE screen".
+
+### KI-F24 An interim verdict about another hazard while sources arrived (0.3.0; was KI-026, V21)
+No level until the ensemble, air quality and the collector's files have answered (or failed), or 5 s have passed;
+meanwhile "กำลังดึงข้อมูล (n จาก 10 เรื่อง)". Live, Phuket: "Loading (5 of 10)" at 0.6 s, the warning's verdict at 0.9 s
+(before: a heat headline first). Smoke check "no level while warnings are unanswered".
+
+### KI-F25 TMD's warning and the model's "low chance" in one line (0.3.0; KI-028)
+- **The defect:** Phuket under a Severe heavy-rain warning showed "🌧️ Rain: TMD warning · Heavy rain: low chance".
+  The 3-day table showed "ต่ำ" for the same day. The ensemble said "low" in all 11 warned provinces
+  ([research/crosscheck-live-2026-10-23.md](research/crosscheck-live-2026-10-23.md)).
+- **The fix:** a lifted tile shows the notice's end ("until 08:00 today"), the card says the model's numbers are
+  milder than the notice and to follow TMD, and table cells under a warning read "📢 เตือนภัย".
+- Tests: "M5/V2", smoke "verdict leads with the warning".
+
+### KI-F26 The 3-day table's rain row said "mm" and doubled its word (0.3.0)
+Since 0.2.0 the cells held chance words, but the row still said "ฝน มม." and the note "ฝนคือรวมทั้งวัน". Each cell
+also printed "ฝนหนัก" twice ("low heavy heavy" in English). The row is now "โอกาสฝนหนัก" with one word per cell.
+
 
 ### KI-F01 Gauge statuses disagreed with FloodWatch on 15 gauges (23 Oct 2026)
 ThaiWater's `ground_level: 0` was read as a river bed at 0 m MSL. It is now treated as missing, as FloodWatch does: 691 of 693 agree (`research/logs/crosscheck-floodwatch-2026-10-23.log`).

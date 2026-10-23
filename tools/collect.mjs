@@ -9,11 +9,21 @@
 // Files: warnings.json (TMD CAP by province code), tmd_quakes.json (TMD's earthquake RSS), storms.json (TMD's storm
 // tracks), hotspots.json (NASA FIRMS
 // VIIRS, Thailand's box), air4thai.json (PCD stations), index.json (what was written, when, what failed).
+// Optional, from the environment (.env locally, docker-compose.yml on the server; nothing is needed):
+// - AI_ENABLED=1 + GLM_API_KEY: TMD's Thai warnings get a checked English translation (`en`, tools/translate.mjs),
+//   once per warning text, at most AI_DAILY_CALLS GLM calls a UTC day (docs/AI.md).
+// - CLOUDFLARE_ACCOUNT_ID + CF_KV_NAMESPACE_ID + CF_KV_TOKEN: the files are also uploaded to Workers KV for the
+//   Cloudflare Worker (tools/publish-live.mjs, docs/CLOUDFLARE.md).
 import { mkdirSync, readFileSync, writeFileSync, renameSync } from "node:fs";
 import https from "node:https";
 import tls from "node:tls";
+import { glmConfig } from "./glm.mjs";
+import { translateWarnings } from "./translate.mjs";
+import { kvConfig, publishKV } from "./publish-live.mjs";
 
-const UA = "disaster-now-collector/0.2 (+https://github.com/bejranonda/disaster-now)";
+/** The honest User-Agent: the site's address and, when set, a contact (read at call time: .env loads after import). */
+export const ua = (env = process.env) => `disaster-now-collector/0.3 (+https://${env.PUBLIC_HOST || "github.com/bejranonda/disaster-now"}`
+  + `${env.CONTACT_EMAIL ? `; contact: ${env.CONTACT_EMAIL}` : ""})`;
 const args = process.argv.slice(2);
 const OUT = args.includes("--out") ? args[args.indexOf("--out") + 1]
   : process.env.LIVE_DIR || new URL("../public/data/live/", import.meta.url).pathname;
@@ -26,7 +36,7 @@ const EXTRA_CA = process.env.NODE_EXTRA_CA_CERTS ? [readFileSync(process.env.NOD
 /** GET as text, gzip allowed, an honest User-Agent; `ca` adds trusted certificates for one host (Air4Thai). */
 export function fetchText(url, { ca } = {}) {
   return new Promise((resolve, reject) => {
-    const req = https.get(url, { headers: { "user-agent": UA, "accept-encoding": "identity" }, timeout: TIMEOUT,
+    const req = https.get(url, { headers: { "user-agent": ua(), "accept-encoding": "identity" }, timeout: TIMEOUT,
       ...(ca ? { ca: [...tls.rootCertificates, ...EXTRA_CA, ...ca] } : {}) }, (res) => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
         res.resume();
@@ -172,18 +182,36 @@ function write(name, obj) {
   renameSync(tmp, `${OUT}/${name}`); // readers never see half a file
 }
 
+const readJson = (name) => { try { return JSON.parse(readFileSync(`${OUT}/${name}`, "utf8")); } catch { return null; } };
+
+/** English for the warnings (GLM, checked), within the day's call budget kept in index.json → ai. */
+async function addEnglish(data, index) {
+  const day = new Date().toISOString().slice(0, 10);
+  if (index.ai?.day !== day) index.ai = { day, calls: 0 };
+  const budget = { left: Math.max(0, Number(process.env.AI_DAILY_CALLS || 200) - index.ai.calls) };
+  const prev = readJson("warnings.json")?.items || [];
+  const r = await translateWarnings(data.items, prev, { budget, log: (m) => console.error(m) });
+  index.ai.calls += r.calls;
+  const n = r.items.filter((w) => w.en).length;
+  if (data.items.length) console.log(`warnings.json: English for ${n} of ${data.items.length} (${r.calls} GLM calls this run)`);
+  return { ...data, items: r.items };
+}
+
 async function main() {
   mkdirSync(OUT, { recursive: true });
   let index = { files: {}, failed: {} };
   try { index = JSON.parse(readFileSync(`${OUT}/index.json`, "utf8")); index.failed = {}; } catch { /* first run */ }
   const jobs = { "warnings.json": warnings, "tmd_quakes.json": tmdQuakes, "storms.json": tmdStorms, "hotspots.json": hotspots,
     "air4thai.json": air4thai };
+  const written = [];
   for (const [file, job] of Object.entries(jobs)) {
     try {
-      const data = await job();
+      let data = await job();
+      if (file === "warnings.json" && glmConfig()) data = await addEnglish(data, index);
       const fetched = new Date().toISOString();
       write(file, { ...data, fetched });
       index.files[file] = fetched;
+      written.push(file);
       console.log(`${file}: ${Array.isArray(data.items) ? data.items.length : data.items} items`);
     } catch (e) {
       index.failed[file] = String(e.message || e); // the old file stays; the page shows its age
@@ -191,7 +219,20 @@ async function main() {
     }
   }
   index.generated = new Date().toISOString();
+  // Workers KV for the Cloudflare Worker: this run's files first, then the index that names them (KV's free writes:
+  // 1,000 a day; this is at most 6 a run)
+  const kv = kvConfig();
+  if (kv) {
+    const files = written.map((name) => ({ name, text: readFileSync(`${OUT}/${name}`, "utf8"), fetched: index.files[name] }));
+    const r = files.length ? await publishKV(kv, files) : { ok: true, n: 0 };
+    index.kv = { at: new Date().toISOString(), ok: r.ok, ...(r.ok ? {} : { error: r.error }) };
+    console[r.ok ? "log" : "error"](`kv: ${r.ok ? `${r.n} files uploaded` : `FAILED ${r.error}`}`);
+  }
   write("index.json", index);
+  if (kv) {
+    const r = await publishKV(kv, [{ name: "index.json", text: JSON.stringify(index), fetched: index.generated }]);
+    if (!r.ok) console.error(`kv: index.json FAILED ${r.error}`);
+  }
 }
 
 /** --every N: run, wait N seconds, run again; one failed run never stops the loop. SIGTERM ends it between runs. */
@@ -211,6 +252,8 @@ async function loop(everyS) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
+  // local runs read .env (docker compose passes the variables itself; a set variable always wins over the file)
+  (await import("./env.mjs")).loadEnv();
   const every = args.includes("--every") ? Number(args[args.indexOf("--every") + 1]) : 0;
   if (every) {
     if (!(every >= MIN_EVERY_S)) { console.error(`--every must be at least ${MIN_EVERY_S} seconds`); process.exit(2); }

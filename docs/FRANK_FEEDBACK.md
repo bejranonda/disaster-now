@@ -62,3 +62,66 @@ The independent audits found real faults in what I built. They are fixed in 0.2.
 The lesson is the one FloodWatch and บ้านรอดไหม keep learning: **the builder's own tests pass what the builder thought of.** Keep an independent visitor audit and an output audit in every release that changes what the page says. Their 41 + 16 findings cost two agent runs, and they caught what 35 unit tests and a 23-check walk missed.
 
 **On "commit and merge":** the repository had no `main` yet, only the work branch. I read "merge" as creating `main` from it. Making `main` the default branch, deleting the work branch and tagging `v0.2.0` are left to you (OWNER_ACTIONS A8). If you meant a pull request, say so next time and I'll open one.
+
+## 5. The second session (23 Oct 2026, 0.3.0): Cloudflare, GLM, risk.autobahn.bot
+
+### What I'd blame you for, honestly
+
+1. **You copied FloodWatch's whole `.env` into this repo, and that's the biggest risk of the day.** It carried 41
+   variables, 27 of them FloodWatch-only: the database password, the impact-page password and session secret, the
+   Gemini key, the Google service-account path. It also carried **FloodWatch's own Cloudflare tunnel token, identical
+   to the live one (checked by hash, never printed)**. With this repo's `docker compose --profile public up -d`, a second
+   connector would have joined FloodWatch's tunnel, and Cloudflare would have sent a share of FloodWatch's visitors to
+   this page. The `CLOUDFLARE_ZONE_ID` was bejranonda.com's, not autobahn.bot's. I rewrote `.env` to this project's
+   variables only and kept the original as `.env.floodwatch-original` (git-ignored, mode 600). **Delete that file when
+   you've looked at it.** Next time, give a new project new, scoped keys: one token per job.
+2. **The production server is the dev box.** This repo lives on the machine that runs FloodWatch (its database, VPN,
+   tunnel and app). Here that cost something real: ThaiWater answered HTTP 429 to this IP after the session's live
+   checks, and FloodWatch's collector uses the same IP (KI-029). A separate dev host, or at least no live walks from
+   this one, would keep FloodWatch's quota safe.
+3. **"Deep research how to apply GLM usefully" collided with the project's own rule,** written by the first session:
+   "Not planned: an AI summary; the agencies' words are the product". I didn't treat the request as permission to put
+   GLM in front of visitors. I found the one place where it adds real value without touching a safety word
+   (English for TMD's Thai-only warnings) and built that with a checker. If you want GLM in the verdict or a chat,
+   say so explicitly and expect me to argue: FloodWatch's own test had free AI answers say "ได้ครับ" to "can I take
+   my child to school tomorrow?".
+4. **"Prepare to integrate with Cloudflare" plus "continue all to finish" doesn't say whether I may publish.** A new
+   public hostname on your zone is outward-facing and hard to take back in people's chats once shared. I built and
+   tested everything up to the deploy and stopped there. The token also can't write KV, so the deploy needed you
+   anyway ([CLOUDFLARE §4](CLOUDFLARE.md#4-what-the-owner-does)).
+
+### On the instructions
+
+- **The "Validate the outcome, also the consistency…" line appears three times again, word for word,** with "as
+  visitors" twice. It reads as emphasis, not as criteria. What helped instead was what you wrote once: "cross-validate
+  for the correction of output and forecasting results". That produced the session's most useful finding: TMD warned
+  of heavy rain in 11 provinces while the model said "low" in all 11, and the page put both in one line.
+- **"Pull this repo again"** had no `main` to pull, and the second time a local `.env.example` blocked the pull. A short
+  "the remote has new commits on main; my local `.env.example` can be overwritten" would have saved a round.
+- **The domain choice was clear,** thank you ("risk.autobahn.bot, you can suggest"). My suggestion: keep it. It is
+  short and readable, and the name people see in LINE is the preview card's title (now set), not the domain.
+  `now.autobahn.bot` could redirect to it later.
+
+### A better prompt for the next session
+
+```
+# disaster-now: go live at risk.autobahn.bot
+Done when: the page answers at https://risk.autobahn.bot from Cloudflare's edge; /data/live/index.json is under
+15 min old; the link preview shows in a LINE chat; the 12 UX-scout tasks pass on one Android and one iPhone in LINE.
+Already decided: Workers static assets + KV (docs/CLOUDFLARE.md); GLM only for warning translation; no push.
+You may: create the KV namespace, deploy the Worker, add the custom domain (token with KV + Workers + DNS in .env).
+You may not: touch FloodWatch's containers or tunnel; run live walks more than twice from this server.
+Then: the native Thai review's changes (A5), KI-025's table words, KI-012's landmark list (GLM drafts, I review).
+```
+
+### Frank about this session's own work
+
+- **I first wrote a translation check that only compared numbers** and would have shipped "lower South" for
+  ภาคใต้ตอนกลาง. Reading the three live outputs myself caught it. The region glossary and its test came after. A
+  checker is only as good as the failure you have already seen.
+- **I added a test that was wrong twice** (a path the URL parser normalises; a day the warning doesn't cover). Each
+  time the code was right and the test's assumption wasn't. I fixed the test, not the code, after checking.
+- **The copy reviewer's 95 suggestions are not applied.** Some are good, and three are harmful (a privacy
+  contradiction, a guessed placeholder, an added hotline). Applying them is A5's job.
+- **Not done, though "finish" was asked:** no deploy, no real-phone test, no gauge cross-check (ThaiWater 429), and
+  the 3-day table's dots and words (KI-025) are only half done (the table moved up and is honest now).

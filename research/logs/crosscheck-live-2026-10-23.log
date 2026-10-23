@@ -1,0 +1,41 @@
+cross-check at 2026-10-23T22:06:28.041Z
+
+A. gauges: not run (HTTP 429 https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_load)
+
+B. 1 TMD warning(s) in force
+   Heavy Rain (Severe), 11 provinces, until 2026-10-24T08:00:00+07:00
+     Nakhon Si Thammarat heavy-rain chance 2 % (low), median 24-h rain 13.8 mm
+     Krabi          heavy-rain chance 2 % (low), median 24-h rain 12.3 mm
+     Phuket         heavy-rain chance 0 % (low), median 24-h rain 15.3 mm
+     Surat Thani    heavy-rain chance 0 % (low), median 24-h rain 10.8 mm
+     Songkhla       heavy-rain chance 2 % (low), median 24-h rain 15.9 mm
+     Satun          heavy-rain chance 6 % (low), median 24-h rain 15.9 mm
+     Trang          heavy-rain chance 6 % (low), median 24-h rain 13.8 mm
+     Phatthalung    heavy-rain chance 8 % (low), median 24-h rain 13.5 mm
+     Pattani        heavy-rain chance 4 % (low), median 24-h rain 15.6 mm
+     Yala           heavy-rain chance 2 % (low), median 24-h rain 15.9 mm
+     Narathiwat     heavy-rain chance 6 % (low), median 24-h rain 16.8 mm
+     → the ensemble says "low" (< 10 %) in 11 of 11 warned provinces
+
+C. TMD quakes 10, EMSC events in the box (8 days) 77
+   2026-10-24T02:31:21+07:00 M4.2 ประเทศลาว → EMSC M4.2 LAOS (0 km apart)
+   2026-10-24T01:46:06+07:00 M2.5 ประเทศเมียนมา → no EMSC match
+   2026-10-23T22:30:46+07:00 M1.8 ต.ปากน้ำ อ.สวรรคโลก จ.สุโขทัย → no EMSC match
+   2026-10-23T22:20:09+07:00 M2.4 ต.ปากน้ำ อ.สวรรคโลก จ.สุโขทัย → no EMSC match
+   2026-10-23T18:01:49+07:00 M1.9 ประเทศลาว → no EMSC match
+   2026-10-23T17:43:29+07:00 M1.6 ประเทศลาว → no EMSC match
+   2026-10-23T16:39:24+07:00 M1.9 ต.เมืองนะ อ.เชียงดาว จ.เชียงให → no EMSC match
+   2026-10-23T12:31:05+07:00 M2.4 ประเทศเมียนมา → no EMSC match
+   2026-10-23T11:49:23+07:00 M2.5 ประเทศเมียนมา → no EMSC match
+   2026-10-23T09:45:18+07:00 M2.9 ประเทศเมียนมา → no EMSC match
+   → 1 of 10 matched; TMD − EMSC magnitude: median 0.00, range 0.0…0.0
+
+D. GISTDA 24-h estimate at 30 fresh PCD stations: median ×1.27 (10–90 %: ×0.96…×1.88); over ×1.5 at 9
+   119t    PCD 9.2  GISTDA 17.5  ×1.90
+   53t     PCD 34.3  GISTDA 41.8  ×1.22
+   bkp101t PCD 27.8  GISTDA 40.0  ×1.44
+   bkp114t PCD 23.1  GISTDA 44.6  ×1.93
+   bkp119t PCD 28.1  GISTDA 43.4  ×1.54
+   bkp124t PCD 32.8  GISTDA 46.0  ×1.40
+   bkp129t PCD 22.3  GISTDA 37.6  ×1.69
+   bkp57t  PCD 27.1  GISTDA 42.5  ×1.57

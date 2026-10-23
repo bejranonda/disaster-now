@@ -1,0 +1,27 @@
+// Cloudflare Workers config for Disaster Now (docs/CLOUDFLARE.md). Deploy: `npm run cf:deploy` (wrangler reads
+// CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID from the environment; never put them here).
+{
+  "name": "disaster-now",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    // the page: every file in public/ except what public/.assetsignore lists (the collector's local data/live/)
+    "directory": "./public",
+    "binding": "ASSETS",
+    // only the live files run the Worker; every other request is a free static-asset hit with public/_headers applied
+    "run_worker_first": ["/data/live/*"],
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "kv_namespaces": [
+    // the collector's files, uploaded by tools/collect.mjs → tools/publish-live.mjs. The id is not a secret;
+    // `npm run cf:setup` creates the namespace and writes its id here and into .env (CF_KV_NAMESPACE_ID)
+    { "binding": "LIVE", "id": "00000000000000000000000000000000" }
+  ],
+  // the public address (owner, 23 Oct 2026); a custom domain makes its own DNS record and certificate on deploy
+  "routes": [{ "pattern": "risk.autobahn.bot", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
+  // no request logs anywhere (GUIDELINES §2: a server publishes files and keeps nothing about a person)
+  "observability": { "enabled": false }
+}

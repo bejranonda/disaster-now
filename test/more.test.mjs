@@ -120,7 +120,7 @@ test("assess on live fixtures: page values equal the sources (cross-check)", () 
     assert.deepEqual(r.cards.map((c) => c.id), ORDER);
     const pm = r.cards.find((c) => c.id === "pm25");
     // the nearest PCD station to this point, by hand from a4t.json: bkp92t สำนักงานเขตพระนคร, PM2.5 31.9 at 03:00
-    assert.equal(pm.value, "31.9 µg/m³");
+    assert.equal(pm.value, "31.9\u00a0µg/m³"); // a no-break space: the unit never wraps away from its number (V31)
     assert.equal(pm.level, 1);
     // FloodWatch's /api/point was asked for 13.75, 100.5: the same gauge and amount here (fw_point.json)
     const r2 = assess({ ...b, point: { lat: 13.75, lon: 100.5, place: nearestTambon(TAMBON, 13.75, 100.5) } }, lang);

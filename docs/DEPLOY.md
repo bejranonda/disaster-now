@@ -1,6 +1,6 @@
 # Deploying Disaster Now
 
-> **On a server, use [SERVER.md](SERVER.md)** (0.2.0): one Docker image, the page and the collector in a compose stack, FloodWatch's pattern. This page covers the static-host options and the collector on its own.
+> **Going live: use [CLOUDFLARE.md](CLOUDFLARE.md)** (0.3.0). The page goes on Cloudflare's edge at `risk.autobahn.bot` as Workers static assets, and the collector on FloodWatch's server ([SERVER.md](SERVER.md)) uploads its files to Workers KV. This page keeps the other static-host options and the older notes.
 
 The page is static files (`public/`). It works on any HTTPS static host without the collector; the collector adds the feeds a browser can't read (TMD's warnings, quakes and storm tracks, NASA FIRMS hotspots, Air4Thai with its certificate fixed). **Nothing is deployed yet** (23 Oct 2026): the agent session that built it had no deploy access (the Cloudflare connector wasn't authorised). The owner's choices are in [OWNER_ACTIONS.md](OWNER_ACTIONS.md).
 
@@ -8,7 +8,7 @@ The page is static files (`public/`). It works on any HTTPS static host without 
 
 | Option | How | Notes |
 |---|---|---|
-| **Cloudflare Pages (recommended)** | the owner's `autobahn.bot` zone already hosts FloodWatch and baanrodmai; `npx wrangler@latest pages deploy public --project-name=disaster-now` with the owner's token, then a custom domain such as `now.autobahn.bot` [suggested name] | `public/_headers` sets `Permissions-Policy: geolocation=(self)` (GPS needs it and HTTPS). Keep **Bot Fight Mode off** on the zone: FloodWatch found it blocked LINE's and Facebook's link previews (Hazard-huntz docs/08 §3) |
+| Cloudflare Pages (superseded by [CLOUDFLARE.md](CLOUDFLARE.md)'s Workers static assets) | the owner's `autobahn.bot` zone already hosts FloodWatch and baanrodmai; `npx wrangler@latest pages deploy public --project-name=disaster-now` with the owner's token, then a custom domain such as `now.autobahn.bot` [suggested name] | `public/_headers` sets `Permissions-Policy: geolocation=(self)` (GPS needs it and HTTPS). Keep **Bot Fight Mode off** on the zone: FloodWatch found it blocked LINE's and Facebook's link previews (Hazard-huntz docs/08 §3) |
 | GitHub Pages | Settings → Pages → deploy `public/` | needs a public repository or a paid plan for a private one; `_headers` is ignored there (GitHub sends its own headers; geolocation isn't blocked) |
 | Any web server | copy `public/` | serve `.webmanifest` as `application/manifest+json`, `.json` with `Cache-Control` as in `_headers` |
 

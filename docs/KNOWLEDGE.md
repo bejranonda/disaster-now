@@ -69,6 +69,7 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 ## 5. PM2.5: measured, estimated, modelled
 
 - **GISTDA's estimate runs high against the PCD's stations.** At 02:00–03:00 Bangkok on 24 Oct 2026, GISTDA's province 24-h means were a median **1.31×** the median of PCD stations in the same province (interquartile range 0.98–1.56) across 60 provinces; the same app level in 44 of 60. Bangkok: GISTDA 43.2 vs PCD median 30.6 (55 stations). At the old town, GISTDA's point said 46.4 while five PCD stations within 2.3 km read 27.0–33.3. One snapshot, not a validation: the page uses PCD's station within 15 km first and doesn't show GISTDA's number beside it.
+- **A second snapshot agrees (24 Oct 05:06 Bangkok):** GISTDA's 24-h mean at the positions of 30 fresh PCD stations was a median **×1.27** of the station (10–90 % ×0.96…×1.88; over ×1.5 at 9 of 30). [research/crosscheck-live-2026-10-23.md §D](research/crosscheck-live-2026-10-23.md#d-gistdas-estimate-vs-the-pcds-stations-still-about-13-high).
 - **CAMS** (Open-Meteo air quality) read 14.6 µg/m³ at the same hour; its mean over the previous 24 h was close to the station's (ratio 1.03 for bkp92t), so the correction changed little that night. Its measured skill and the corrections tested are in [MODELS.md](MODELS.md).
 - **Stations:** 173 Air4Thai stations; O₃ measured at 27 (sources scout); many Bangkok stations measure PM2.5 only, so "other pollution" uses the nearest station that measures another gas.
 
@@ -117,3 +118,24 @@ With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the 
 - Typhoon จำปี / CHAMPI (TMD, JMA, GDACS Red) near 24.8 N 122.5 E, about 2,590 km from Bangkok; In-fa (JMA, TS) far east.
 - EMSC/TMD: M4.2 in Laos (19.081 N, 101.974 E) at 02:31 Bangkok, about 130 km from Nan.
 - Bangkok old town: PCD bkp92t 31.9 µg/m³ (24-h); heat index median 38 °C for the coming afternoon; rain 4.5 mm in 24 h at ปากคลองตลาด; HII's flash-flood list empty; 303 FIRMS hotspots in Thailand's box, none within 25 km.
+
+## 12. 0.3.0: the live cross-check, Cloudflare and GLM (23 Oct 2026, 21:40–22:10 UTC)
+
+- **TMD's warning vs the ensemble:** under the Severe heavy-rain notice for 11 southern provinces, the app's 24-h
+  heavy-rain chance at each province's centre was **0–8 % ("low") in all 11**, the median 24-h rain 10.8–16.8 mm. A
+  province warning ("บางแห่ง") and a point chance are different quantities; the page now lets the notice lead the tile,
+  the verdict and the 3-day table (KI-F25). [research/crosscheck-live-2026-10-23.md §B](research/crosscheck-live-2026-10-23.md#b-tmds-warning-vs-the-ensemble-they-disagree-everywhere-the-warning-applies).
+- **TMD's quake list vs EMSC:** the one event in both, Laos 02:31, M4.2 in both, 0 km apart; 9 of TMD's 10 were
+  M1.6–2.9 local events EMSC doesn't list.
+- **Air4Thai from FloodWatch's server (Germany):** 173 stations at 21:43 and 22:04 UTC. **ThaiWater:** HTTP 429 to the
+  same server at 22:06 (KI-029).
+- **The collector on that server:** 5 of 5 files in 10–13 s (warnings 1, TMD quakes 10, storms 1, hotspots 311–327,
+  Air4Thai 173).
+- **GLM (glm-5.3-flash at open.bigmodel.cn, effort low):** warning translation 6 of 6 accepted after the region rule,
+  median 3.4 s, max 3.9 s; a one-word probe 6.6 s; the copy review (glm-5.3) 12–20 s per 30 strings. Prices and limits:
+  [AI.md §1](AI.md#1-what-glm-is-as-of-october-2026-researched-in-this-session).
+- **Cloudflare (documented limits):** Workers Free 100,000 requests a day, 10 ms CPU per invocation, 5 cron triggers;
+  static-asset requests outside `run_worker_first` are not Worker calls; KV Free 100,000 reads and 1,000 writes a day
+  (the collector writes at most 6 keys a run, 576 a day at 15 min). [CLOUDFLARE.md §1](CLOUDFLARE.md#1-the-recommendation-frankly).
+- **Small-phone layout:** at 360 × 640 with a LINE user agent the verdict ends at 504 px (was 642). The 3-day table
+  starts 1,529–2,267 px down at 390 px (was 5,865–6,574).

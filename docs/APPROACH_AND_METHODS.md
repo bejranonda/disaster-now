@@ -81,3 +81,23 @@ How Disaster Now was researched, built and checked, and how each hazard is compu
 ## 7. On a server (0.2.0)
 
 The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_headers` applied and no request logs; `tools/collect.mjs --every 900` refreshes `data/live/` in a shared volume; `tools/health.mjs` checks both; `docker-compose.yml` binds the page to 127.0.0.1 and leaves public traffic to a Cloudflare tunnel or the host's proxy, as FloodWatch does. What a server should add next, in order (Air4Thai from Thailand, district forecast files, a GDACS digest, national files by code, an as-issued archive), is in [SERVER.md §6](SERVER.md#6-what-to-build-on-the-server-next).
+
+## 8. Cloudflare, GLM and the live cross-check (0.3.0)
+
+- **Cloudflare** ([CLOUDFLARE.md](CLOUDFLARE.md)): the page as Workers static assets at the edge; one small Worker
+  serves `/data/live/*` from KV; the collector stays on FloodWatch's server and uploads its files in one bulk PUT per
+  run. Chosen over a tunnel (every view would cross to Germany; FloodWatch's token was in the copied `.env`), Pages
+  (a second product for the same job) and a Worker cron (10 ms CPU on Free). Verified with a wrangler dry run and
+  `wrangler dev` on the real files, plus unit tests that compare the Worker's headers with `_headers`.
+- **GLM** ([AI.md](AI.md)): found by asking where an AI adds value without writing a safety word. The answer was
+  English for TMD's Thai-only warnings. Method: rules decide everything; GLM translates three fields; a deterministic
+  check rejects lost or added numbers, leftover Thai, added comfort, wrong region words and odd lengths; one retry with
+  the reason; cache by text hash; a daily cap; a label and the Thai original on the page. The check was grown from a
+  failure seen on live text ("lower South" for ภาคใต้ตอนกลาง), then measured (6 of 6).
+- **Cross-validation** (`research/crosscheck_live.mjs`, [research/crosscheck-live-2026-10-23.md](research/crosscheck-live-2026-10-23.md)):
+  the app's own functions on one moment's data against independent sources — FloodWatch's gauges, TMD's warnings
+  vs the ensemble, TMD vs EMSC quakes, GISTDA vs PCD. The warning comparison found the session's most important
+  defect (KI-F25), which no unit test had looked for.
+- **Visitor walks** on the running stack (360 × 640 in LINE, 390 × 844 on an iPhone, Thai and English; Bangkok,
+  Phuket, Chiang Mai), recording every verdict state over time. That's how the interim heat headline before the
+  warnings arrived (KI-F24) and the "mm" label over chance words (KI-F26) were seen.

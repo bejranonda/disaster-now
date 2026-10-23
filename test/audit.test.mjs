@@ -65,6 +65,12 @@ test("M5/V2: a TMD warning lifts its tile, leads the verdict and shows in the pr
     assert.ok(rain.lines[0].startsWith(lang === "en" ? "TMD notice" : "ประกาศกรมอุตุฯ"), rain.lines[0]);
     assert.equal(r.verdict.worst.id, "rain", "the official warning ranks above a model-only tile of the same level");
     assert.ok(!r.verdict.missing.some((m) => /warning|ประกาศ/.test(m)));
+    // KI-028: the 3-day table's rain cells under the warning say so, never "low" (the clock is 02:50 on 24 Oct in
+    // Bangkok and the warning ends 08:00 that day: today is covered, tomorrow isn't)
+    assert.ok(r.outlook[0].rain.official && !r.outlook[1].rain.official, JSON.stringify(r.outlook.map((o) => o.rain)));
+    // KI-028: the tile shows the notice's end, never the model's milder chance beside TMD's word
+    assert.ok(!/chance|โอกาส/.test(rain.value || ""), `tile value "${rain.value}"`);
+    assert.ok(/milder|เบากว่า/.test(rain.lines[1]), rain.lines[1]);
   }
   // the same warning outside its provinces does nothing
   const bkk = assess(full(at(13.7563, 100.5018), { warnings: { items: [w] } }), "th");

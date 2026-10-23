@@ -127,3 +127,48 @@ Three independent agents returned between 20:56 and 21:04 UTC. Their reports are
 | Docker Hub for `node:22-alpine` | HTTP 429 (anonymous limit); `public.ecr.aws/docker/library/node:22-alpine` worked |
 | nginx in the sandbox | "Data limit exceeded" on start; the Node static server is used instead (and applies `_headers` itself) |
 | The collector through the session's proxy | every TLS call "self-signed certificate in certificate chain" until the proxy's CA was mounted (sandbox only) |
+
+## 6. The second session (23 Oct 2026, 21:36–22:30 UTC, 0.3.0): Cloudflare, GLM, risk.autobahn.bot
+
+Run on the owner's FloodWatch server (Germany), with the owner's `.env` and a running FloodWatch beside it.
+
+### Timeline
+
+| UTC | What happened | Evidence |
+|---|---|---|
+| 21:36 | Pulled 0.2.0 (`main` now exists on the remote, equal to the work branch). The owner's local `.env.example` (FloodWatch's template) blocked the pull; it was moved aside | `git log` |
+| 21:38 | Baseline: 46 of 46 unit tests; the walk's 23 checks on fixtures and live. Live: ThaiWater 429 on the flood tile | smoke logs |
+| 21:43 | **The collector from this server: 5 of 5 files, Air4Thai 173 stations** (A6 done) | `index.json` |
+| 21:44 | `.env` found to be FloodWatch's (41 names, 27 FloodWatch-only, **its live tunnel token**, bejranonda.com's zone id); rewritten to this project's names, the original kept aside (git-ignored, mode 600). Probes: token valid, zone visible, `risk.autobahn.bot` free, Workers readable, **KV 401**; GLM answers | `tools/env-check.mjs --probe` |
+| 21:45–21:50 | GLM research (Z.ai docs, pricing, data terms; FloodWatch's own measurements). The translation built; the first live run found "lower South" for ภาคใต้ตอนกลาง (1 of 3) → the region rule → 6 of 6 | [AI.md](../AI.md) |
+| 21:50–21:57 | Worker, `wrangler.jsonc`, KV upload, setup and deploy scripts; dry run (Node 22 in Docker), `wrangler dev` (Debian image) on the real files | [CLOUDFLARE.md](../CLOUDFLARE.md) |
+| 21:57 | **Phuket in English through the Worker:** the translated warning showed, but the verdict read "Rain: TMD warning · Heavy rain: low chance" → KI-F25 | screenshot |
+| 21:58–22:02 | The verdict on the first screen (KI-F23), no interim verdict (KI-F24), three new smoke checks, version 0.3.0, Open Graph tags and PNG icons | smoke |
+| 22:02–22:04 | The copy first-reader: 95 of 207 flagged, three harmful suggestions, none applied | [copy review](copy-review-glm-2026-10-23.md) |
+| 22:04 | **Docker stack on this server:** both healthy, 5 of 5, GLM English in 1 call (0 on re-run) | `docker compose logs` |
+| 22:06 | **Live cross-check:** the ensemble "low" in all 11 provinces TMD warned; quakes agree; GISTDA ×1.27; ThaiWater 429 | [crosscheck-live](crosscheck-live-2026-10-23.md) |
+| 22:08–22:12 | The 3-day table under a warning, moved above the cards, its "mm" label and doubled word fixed (KI-F26); live walks in Bangkok (360 × 640 LINE), Phuket (EN, iPhone) and Chiang Mai | `research/logs/` |
+| 22:12– | Docs, the stack stopped, commit | this file |
+
+### Decisions
+
+| ID | Decision | Why | Where |
+|---|---|---|---|
+| D-030 | **Public at `risk.autobahn.bot`** (the owner's pick, kept: short, readable; the LINE card carries the Thai name) | the owner: "Our project might be risk.autobahn.bot you can suggest and improve" | OWNER_ACTIONS A1 |
+| D-031 | **Cloudflare Workers static assets + KV, collector on FloodWatch's server; no tunnel** | the edge is near the visitor; the page survives the server; no inbound path; FloodWatch's token stays FloodWatch's | [CLOUDFLARE.md §1](../CLOUDFLARE.md#1-the-recommendation-frankly) |
+| D-032 | **`.env` holds this project's variables only; each service gets only its own** | the copied file carried FloodWatch's secrets and live tunnel token | `.env.example`, `docker-compose.yml` |
+| D-033 | **GLM translates TMD's warnings for the English page, checked; nothing else on a visitor's path** | TMD's CAP is Thai only, and the warned provinces are full of visitors; the agencies' words stay the product | [AI.md §2.1](../AI.md#21-english-for-tmds-warnings-collector-toolstranslatemjs) |
+| D-034 | **The translation check includes TMD's region words** | "lower South" for ภาคใต้ตอนกลาง passed a numbers-only check | `tools/translate.mjs` `REGIONS` |
+| D-035 | **The copy reviewer's suggestions are prompts, never applied unread** | 3 of its 95 were harmful (privacy, placeholder, hotline) | GUIDELINES §10 |
+| D-036 | **A TMD warning takes the tile's value and the table's cells; the model's milder numbers stay in the card under a "follow TMD" line** | the ensemble said "low" in all 11 warned provinces, and the page said both in one line | KI-F25 |
+| D-037 | **No verdict level before the forecast, air quality and warnings answer, or 5 s** | a heat headline showed for a second before the warning's | KI-F24 |
+| D-038 | **The finder folds while a place is open; the buttons go under the verdict** | the verdict ended at 642 px on a 360 × 640 screen | KI-F23 |
+| D-039 | **No deploy without the owner** | a new public hostname is outward-facing; the token can't write KV anyway | OWNER_ACTIONS A9, A10 |
+
+### Dead ends
+
+| Tried | Result |
+|---|---|
+| `npx wrangler@4.148.0` on the host | needs Node ≥ 22 (the host has 20) → `node:22` in Docker |
+| `wrangler dev` in `node:22-alpine` | workerd `ENOENT` (it needs glibc) → `node:22-bookworm-slim` |
+| A gauge cross-check from this server | ThaiWater HTTP 429 (KI-029); not retried, to spare FloodWatch's quota |

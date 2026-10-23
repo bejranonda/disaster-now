@@ -1,5 +1,6 @@
 # Disaster Now on a server (docs/SERVER.md). The same pattern as FloodWatch's compose: the app listens on localhost
-# only, and public traffic comes through a Cloudflare tunnel (profile "public") or the host's existing reverse proxy.
+# only. Public traffic: the Cloudflare Worker serves the page from the edge and the collector uploads its files to KV
+# (docs/CLOUDFLARE.md, recommended), or a tunnel made for this site (profile "public"), or the host's reverse proxy.
 #   docker compose up -d --build                     web on http://127.0.0.1:8090/ + the collector every 15 min
 #   docker compose --profile public up -d            also the tunnel (needs CLOUDFLARE_TUNNEL_TOKEN in .env)
 #   docker compose run --rm collector node tools/collect.mjs        one collector run now
@@ -31,6 +32,20 @@ services:
     command: ["node", "tools/collect.mjs", "--every", "${COLLECT_EVERY:-900}"]
     environment:
       LIVE_DIR: /app/public/data/live
+      PUBLIC_HOST: ${PUBLIC_HOST:-risk.autobahn.bot}     # the User-Agent names the site (GUIDELINES §5)
+      CONTACT_EMAIL: ${CONTACT_EMAIL:-}
+      # GLM: English for TMD's warnings, off unless AI_ENABLED=1 (docs/AI.md)
+      AI_ENABLED: ${AI_ENABLED:-0}
+      AI_PROVIDER: ${AI_PROVIDER:-glm}
+      GLM_API_KEY: ${GLM_API_KEY:-}
+      GLM_MODEL: ${GLM_MODEL:-glm-5.3-flash}
+      GLM_ENDPOINT: ${GLM_ENDPOINT:-https://open.bigmodel.cn/api/paas/v4/chat/completions}
+      AI_DAILY_CALLS: ${AI_DAILY_CALLS:-200}
+      # Workers KV: the live files for the Cloudflare Worker, only when all three are set (docs/CLOUDFLARE.md).
+      # Only the KV token is passed: give it "Workers KV Storage: Edit" and nothing else.
+      CLOUDFLARE_ACCOUNT_ID: ${CLOUDFLARE_ACCOUNT_ID:-}
+      CF_KV_NAMESPACE_ID: ${CF_KV_NAMESPACE_ID:-}
+      CF_KV_TOKEN: ${CF_KV_TOKEN:-}
     volumes:
       - live:/app/public/data/live
     read_only: true

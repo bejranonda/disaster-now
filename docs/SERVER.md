@@ -8,7 +8,14 @@ Everything needed to put the page and its collector on a server, run them there,
 - The collector's first run wrote 4 of its 5 files in 8 s: warnings 1, TMD quakes 10, storms 1, hotspots 306. Air4Thai answered HTTP 503, as it had all evening (KI-002).
 - `docker compose stop collector` returned at once, with exit code 0.
 
-**Not tested:** the Cloudflare tunnel (no token in that session), and the setup on the owner's real server.
+**Tested on the owner's server, 23 Oct 2026 (0.3.0):** the same stack on FloodWatch's machine (Docker 29), port 8090
+beside FloodWatch's 3000. Both containers were healthy, and the collector wrote **5 of 5 files in 13 s, Air4Thai with 173
+stations**. With `AI_ENABLED=1`, GLM gave the live warning its English in 1 call, and 0 on the next run. Both health
+checks returned ok. The stack was stopped afterwards (`docker compose down`; the `live` volume stays). Going public
+is now through Cloudflare's edge, not a tunnel: [CLOUDFLARE.md](CLOUDFLARE.md).
+
+**Not tested:** the tunnel. If it's ever used, make a new tunnel: **never use FloodWatch's token**, which was in the
+copied `.env` (FRANK_FEEDBACK §5).
 
 ## 1. What runs
 
@@ -30,7 +37,7 @@ Everything needed to put the page and its collector on a server, run them there,
 | Collector | `tools/collect.mjs --every 900` | the feeds a phone can't read (no CORS, or Air4Thai's broken chain); writes `data/live/*.json` atomically, plus `index.json` (what was written, when, what failed); a failed source keeps its old file; refuses to loop faster than every 600 s; stops cleanly on SIGTERM |
 | Health | `tools/health.mjs` | `--web URL` (the page answers with its title, the live index answers, the Permissions-Policy header) and/or `--live DIR --max-age S` (the collector wrote `index.json` recently); one JSON line; exit 0 or 1 |
 | Stack | `docker-compose.yml` | `web` (127.0.0.1:${WEB_PORT:-8090}), `collector`, `cloudflared` (profile `public`); both app containers read-only with a tmpfs `/tmp` |
-| Settings | `.env.example` → `.env` (git-ignored) | `WEB_PORT`, `COLLECT_EVERY`, `NODE_IMAGE`, `CLOUDFLARE_TUNNEL_TOKEN`; nothing else, and nothing secret is needed to run |
+| Settings | `.env.example` → `.env` (git-ignored, mode 600) | `WEB_PORT`, `COLLECT_EVERY`, `CONTACT_EMAIL`, `PUBLIC_HOST`; optional GLM (`AI_ENABLED`, `GLM_*`, `AI_DAILY_CALLS`) and Workers KV (`CLOUDFLARE_ACCOUNT_ID`, `CF_KV_NAMESPACE_ID`, `CF_KV_TOKEN`), each passed only to the collector; nothing is needed to run. `node tools/env-check.mjs` shows which are set without printing values |
 
 The page itself still has **no server logic**:
 - The phone calls most sources directly. The server only serves files and refreshes five of them.
@@ -56,9 +63,10 @@ docker compose logs -f collector                          # one line per file ea
 
 ## 3. Going public
 
-Pick one.
+**Recommended since 0.3.0: Cloudflare's edge serves the page, and the collector here uploads to Workers KV.** No
+tunnel and no inbound path to this server: [CLOUDFLARE.md](CLOUDFLARE.md). The options below remain as fallbacks.
 
-**a) A tunnel of its own** (what the compose file is ready for):
+**a) A tunnel of its own** (what the compose file is ready for; a tunnel made for this site, never FloodWatch's token):
 1. In Cloudflare Zero Trust → Networks → Tunnels, create a tunnel.
 2. Give it a public hostname (e.g. `now.autobahn.bot`, a suggested name: OWNER_ACTIONS A1) pointing to `http://web:8080`.
 3. Put its token in `.env` as `CLOUDFLARE_TUNNEL_TOKEN`.
@@ -139,7 +147,8 @@ To roll back, run `git checkout <previous tag or commit> && docker compose up -d
 
 In order of value. Each item comes from a known issue or an audit finding.
 
-1. **Relay Air4Thai from Thailand.** The collector already prefers its file over the browser's call.
+1. ✅ **Air4Thai from the owner's server works** (0.3.0: 173 stations from Germany; the earlier 503s were the cloud
+   host's). The collector already prefers its file over the browser's call. Kept for the record:
    - The PCD's server answered HTTP 503 to this cloud host all evening on 23 Oct, while browsers read its mirror.
    - LINE's Android WebView may refuse the mirror's broken chain (visitor audit V27, KI-002).
    - **Done when** `index.json` shows `air4thai.json` with 170 or more stations from the owner's server.
@@ -172,3 +181,6 @@ In order of value. Each item comes from a known issue or an audit finding.
 | The page works but the GPS button doesn't | the proxy in front strips or overrides `Permissions-Policy`; it must allow `geolocation=(self)`, and the page must be on HTTPS |
 | `curl` shows `set-cookie` | Cloudflare's bot detection (Hazard-huntz KNOWN_ISSUES #93): turn it off for this hostname |
 | Port 8090 in use | set `WEB_PORT` in `.env` (FloodWatch uses 3000) |
+| `kv: FAILED 10000 Authentication error` | the token lacks *Workers KV Storage: Edit* (OWNER_ACTIONS A9); the files stay local and the page on the edge shows their age |
+| `translation of … rejected: …` | GLM's English failed the check (KI-031): the warning shows in Thai on the English page, as before; nothing else changes |
+| ThaiWater answers `HTTP 429` to `curl` or a live walk here | the IP is rate-limited, and FloodWatch's collector shares it (KI-029): stop testing from this host |

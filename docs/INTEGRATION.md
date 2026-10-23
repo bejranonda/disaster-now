@@ -29,8 +29,18 @@ The owner has three apps that touch the same people on the same bad day. Built s
 
 1. **CORS on `/api/point` for this site's origin.** Then the flood tile shows FloodWatch's own answer, which includes BMA's canal gauges (this app sees only ThaiWater's 8 Bangkok gauges; FloodWatch had 33 near the old town). `/api/point` is already a private-query path (not logged). Turn it on in `public/config.json` with `"floodwatchPoint": true` once FloodWatch allows it.
 2. **CORS on `/api/geocode`.** Nominatim's 1-request-a-second limit is for a whole application's users together; FloodWatch already throttles and caches to it and never logs queries (its D-032). Then set `"geocoder": "floodwatch"` in `public/config.json`.
-3. **Run this app on FloodWatch's server** ([SERVER.md](SERVER.md): `docker compose up -d --build` puts the page on 127.0.0.1:8090 beside FloodWatch's 3000, with the collector every 15 minutes), and give it a public hostname on FloodWatch's tunnel. FloodWatch already fetches HII every 10 minutes; Hazard-huntz docs/09 recommended exactly this.
+3. **Run this app's collector on FloodWatch's server** ([SERVER.md](SERVER.md): `docker compose up -d --build`, tested
+   there on 23 Oct 2026: 5 of 5 files, Air4Thai 173 stations). Serve the page from Cloudflare's edge at
+   `risk.autobahn.bot` ([CLOUDFLARE.md](CLOUDFLARE.md)), **not** through FloodWatch's tunnel: no shared failure, no shared token.
 4. **A frank one about FloodWatch itself:** its bank rule counts "% of the height from the river bed to the bank". On a deep river that reads "ใกล้ล้นตลิ่ง" while the water is far below the bank: C.12 (Chao Phraya at Samsen) was "warning" at 92 % with **1.31 m** of freeboard on 24 Oct 02:00. FloodWatch marks the rule heuristic (its `classify_status` docstring). A freeboard rule for rivers (e.g. watch under 1.0 m, warning under 0.5 m, as FloodWatch's own `scenarios.py` uses for the impact strip) would read better to citizens. This app copies FloodWatch's rule for consistency; change both together.
+
+5. **Publish the ThaiWater snapshot FloodWatch already fetches** (every 10 min) as a file this app can read, e.g.
+   `/api/stations` with CORS, or a KV key on the same Cloudflare account. On 23 Oct ThaiWater answered HTTP 429 to the
+   server both apps share (KI-029). One fetch for the family is kinder to HII and safer for FloodWatch's own quota.
+6. **One AI pattern for the family.** FloodWatch's `ai.run` (budget, breaker, `reasoning_effort: "low"`, content-only
+   answers, checks before showing) is the right shape. This app's `tools/glm.mjs` and `tools/translate.mjs` follow it
+   in Node. If the two apps grow more AI uses, share the checker ideas (numbers, places, verdict words, region words),
+   not the code. FloodWatch's KI-373…375 are the lessons.
 
 ## 4. Small changes in บ้านรอดไหม
 
@@ -39,6 +49,10 @@ The owner has three apps that touch the same people on the same bad day. Built s
 3. Its `content/kit.json` already answers with CORS `*`: this app could read the advice lines from it at build time instead of keeping a copy; for now `npm run check:advice` catches drift.
 
 ## 5. One family, one look
+
+- **Link previews:** since 0.3.0 this page has Open Graph tags and a 1200 × 630 card (`public/og.png`, from
+  `tools/make-images.mjs`). In LINE the preview is what a family sees before anyone taps. Give FloodWatch and บ้านรอดไหม
+  cards in the same layout (icon, Thai name, one line, the four level chips) and the family looks like one service.
 
 - **The same four-level scale** in all three apps would help most: FloodWatch's blue/yellow/orange/red for normal/watch/warning/critical already matches this app's colours (#2F6FB0 / #E46C0A are FloodWatch's); บ้านรอดไหม uses agency colours per tool.
 - **One name family** (e.g. "บ้านรอดไหม · ตอนนี้"), so a relative who trusts one trusts the others. The owner's call.

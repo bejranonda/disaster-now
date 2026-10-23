@@ -8,7 +8,20 @@
 <meta name="theme-color" content="#0f3d5e">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/app.css?v=0.2.0">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<!-- the link preview in LINE, Facebook and X (absolute URLs: previews don't resolve relative ones; tools/make-images.mjs) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ภัยรอบบ้าน ตอนนี้">
+<meta property="og:title" content="ภัยรอบบ้าน ตอนนี้ · ทุกความเสี่ยงที่จุดเดียว">
+<meta property="og:description" content="ร้อน ฝุ่น PM2.5 ฝน ลม น้ำท่วม ดินถล่ม แผ่นดินไหว ไฟป่า ที่จุดของคุณ ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงาน พร้อมแหล่งที่มาทุกตัวเลข">
+<meta property="og:url" content="https://risk.autobahn.bot/">
+<meta property="og:image" content="https://risk.autobahn.bot/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ภัยรอบบ้าน ตอนนี้: ทุกความเสี่ยงที่จุดเดียว ตอนนี้และ 3 วันข้างหน้า">
+<meta property="og:locale" content="th_TH">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="css/app.css?v=0.3.0">
 </head>
 <body>
 <header class="top">
@@ -22,6 +35,7 @@
 <main id="main">
   <section class="finder" aria-labelledby="finder-h">
     <h1 id="finder-h" class="sr-only" data-t="finderH">เลือกจุดที่จะดู</h1>
+    <button type="button" id="change" class="btn change"><span aria-hidden="true">🔎</span> <span data-t="change">ดูที่อื่น</span></button>
     <button type="button" id="gps" class="btn primary big"><span aria-hidden="true">📍</span> <span data-t="gps">ใช้ตำแหน่งของฉันตอนนี้</span></button>
     <form id="search" class="search" role="search" autocomplete="off">
       <label for="q" class="sr-only" data-t="searchLabel">ค้นหาพื้นที่</label>
@@ -44,15 +58,15 @@
         <div id="place-name" class="place-name"></div>
         <div id="place-sub" class="place-sub muted"></div>
       </div>
-      <div class="place-act">
-        <button type="button" id="save" class="btn small">⭐ <span data-t="save">บันทึก</span></button>
-        <button type="button" id="line" class="btn small line" data-t="line">ส่งใน LINE</button>
-        <button type="button" id="share" class="btn small">↗ <span data-t="share">แชร์</span></button>
-        <button type="button" id="refresh" class="btn small" data-t-title="refresh" title="อัปเดต">↻</button>
-      </div>
     </div>
 
     <div id="verdict" class="verdict lv-none" role="status" aria-live="polite"></div>
+    <div class="place-act">
+      <button type="button" id="save" class="btn small">⭐ <span data-t="save">บันทึก</span></button>
+      <button type="button" id="line" class="btn small line" data-t="line">ส่งใน LINE</button>
+      <button type="button" id="share" class="btn small">↗ <span data-t="share">แชร์</span></button>
+      <button type="button" id="refresh" class="btn small" data-t-title="refresh" title="อัปเดต">↻</button>
+    </div>
     <div id="warnings"></div>
     <h2 class="sr-only" data-t="tilesH">ทุกเรื่องที่จุดนี้</h2>
     <nav id="tiles" class="tiles"></nav>
@@ -60,12 +74,12 @@
       <h2 data-t="preH">⏰ เตือนล่วงหน้า 3 วัน</h2>
       <ul id="pre" class="pre"></ul>
     </section>
-    <div id="cards" class="cards"></div>
     <section class="block">
       <h2 data-t="outlookH">3 วันข้างหน้า</h2>
       <div id="outlook" class="outlook-wrap"></div>
-      <p class="muted small" data-t="outlookNote">ตัวเลขกลางของแบบจำลอง 51 ชุด สีบอกระดับ ฝนคือรวมทั้งวัน ฝุ่นคือค่าเฉลี่ยทั้งวัน</p>
+      <p class="muted small" data-t="outlookNote">ตัวเลขกลางของแบบจำลอง 51 ชุด สีบอกระดับ ฝนคือโอกาสฝนหนัก (เกิน 35 มม.) ในวันนั้น ฝุ่นคือค่าเฉลี่ยทั้งวัน 📢 คือวันที่มีประกาศเตือนภัยของกรมอุตุฯ</p>
     </section>
+    <div id="cards" class="cards"></div>
     <section class="block" id="profile-wrap" hidden>
       <h2 data-t="profileH">ข้อมูลพื้นที่ (ระยะยาว)</h2>
       <ul id="profile" class="profile"></ul>
@@ -95,6 +109,6 @@
   <p class="muted small"><span data-t="footer">ภัยรอบบ้าน ตอนนี้ · โครงการทดลอง ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ</span> · <span id="ver"></span></p>
 </footer>
 
-<script type="module" src="js/main.js?v=0.2.0"></script>
+<script type="module" src="js/main.js?v=0.3.0"></script>
 </body>
 </html>

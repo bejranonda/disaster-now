@@ -62,13 +62,17 @@ main { max-width: 720px; margin: 0 auto; padding: 12px 12px 24px; }
 .place { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; margin: 4px 0 10px; }
 .place-name { font-size: 1.25rem; font-weight: 700; line-height: 1.35; }
 .place-sub { font-size: .85rem; }
-.place-act { display: flex; gap: 6px; }
+.place-act { display: flex; gap: 6px; flex-wrap: wrap; margin: -4px 0 12px; }
+/* a place is open: the finder folds to one row, so the verdict is on the first screen of a small phone (KI-022) */
+.finder .change { display: none; width: 100%; justify-content: flex-start; gap: 8px; }
+.finder.has-place .change { display: flex; }
+.finder.has-place #gps, .finder.has-place #search, .finder.has-place #saved, .finder.has-place #results { display: none; }
 
 .verdict { border-radius: var(--r); padding: 14px 16px; margin-bottom: 12px; border-left: 8px solid; }
 .vtitle { font-size: 1.3rem; font-weight: 800; }
 .vchips, .vcare { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
 .vcare > span:first-child { font-size: .9rem; color: var(--muted); }
-.vchip { display: inline-flex; align-items: center; min-height: 44px; padding: 3px 12px; border-radius: 999px; font-size: .9rem;
+.vchip { display: inline-flex; align-items: center; gap: .3em; min-height: 44px; padding: 3px 12px; border-radius: 999px; font-size: .9rem;
   border: 1px solid; text-decoration: none; color: var(--ink); }
 .vchip.care { background: var(--card); border-color: var(--line); }
 
@@ -127,6 +131,8 @@ main { max-width: 720px; margin: 0 auto; padding: 12px 12px 24px; }
 @media (prefers-color-scheme: dark) { .old { color: #fff27a; background: #343000; } } /* the audit's V23: was 1.4:1 */
 .act.baby, .vact.baby { font-weight: 400; }
 .warn details { margin-top: 4px; }
+.warn p { white-space: pre-line; }
+.warn .mt { margin-top: 8px; }
 .linkbtn { background: none; border: 0; padding: 0; min-height: 44px; color: var(--link); font: inherit; text-decoration: underline; cursor: pointer; }
 .btn.line { background: #06C755; border-color: #06C755; color: #fff; font-weight: 700; }
 
