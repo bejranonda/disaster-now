@@ -114,6 +114,7 @@ export function buildOutlook(ens, nowMs = Date.now()) {
     const v = series.map((s) => s[i]).filter((x) => x != null).sort((a, b) => a - b);
     return quantile(v, 0.5);
   };
+  const share = (vals, thr) => (vals.length ? vals.filter((v) => v > thr).length / vals.length : null);
   const win = (a, b) => ({
     heat: summarize("heat", perMember(heat, a, b, "max")),
     rain24: summarize("rain24", perMember(rain, a, b, "sum")),
@@ -124,7 +125,8 @@ export function buildOutlook(ens, nowMs = Date.now()) {
   return {
     issued: h.time[i0], members: heat.length,
     now: { time: h.time[i0], heat: at(heat, i0), temp: at(temp, i0) },
-    next24: { i0, i1: Math.min(i0 + 24, h.time.length), ...win(i0, Math.min(i0 + 24, h.time.length)) },
+    next24: { i0, i1: Math.min(i0 + 24, h.time.length), ...win(i0, Math.min(i0 + 24, h.time.length)),
+      over100: share(perMember(rain, i0, Math.min(i0 + 24, h.time.length), "sum"), 100) }, // DMR's landslide trigger
     days,
     hourly: { time: h.time.slice(i0, i0 + 72), heat: h.time.slice(i0, i0 + 72).map((_, k) => at(heat, i0 + k)),
       rain: h.time.slice(i0, i0 + 72).map((_, k) => at(rain, i0 + k)) },

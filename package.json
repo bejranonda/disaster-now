@@ -9,7 +9,9 @@
     "serve": "node tools/serve.mjs",
     "collect": "node tools/collect.mjs",
     "smoke": "node tools/smoke.mjs",
-    "build:tambon": "python3 tools/build_tambon.py"
+    "build:tambon": "python3 tools/build_tambon.py",
+    "check:advice": "node tools/check-advice.mjs",
+    "check:docs": "node tools/check-docs.mjs"
   },
   "engines": {
     "node": ">=20"

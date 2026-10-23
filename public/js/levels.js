@@ -17,7 +17,7 @@ export const UNKNOWN = { level: -1, key: "none", th: "ไม่มีข้อ�
 // PCD's edges are 25.0 / 25.1, WHO's UV index is a whole number). `th`/`en` are the source's own words.
 export const HAZARDS = {
   heat: { // heat index, °C, hourly; the day's peak is what counts
-    unit: "°C", step: 0.1, src: ["tmd-heatindex"],
+    unit: "°C", step: 0.1, src: ["doh-heatlevels-2569", "bma-heat-posttoday-2569", "tmd-heatindex-posttoday-2567"],
     bands: [
       { min: -Infinity, level: 0, th: "ปกติ", en: "Normal" },
       { min: 27.0, level: 1, th: "เฝ้าระวัง", en: "Caution" },
@@ -46,46 +46,59 @@ export const HAZARDS = {
       { min: 201, level: 3, th: "มีผลกระทบต่อสุขภาพ", en: "Affects health" },
     ],
   },
-  uv: { // UV index, the day's peak (WHO Global Solar UV Index categories)
+  uv: { // UV index, a whole number (WHO Global Solar UV Index). Grouped by WHO's three advice tiers (3–7 one message);
+    // the grouping is the app's choice (docs/research/thresholds-2026-10-23.md "Recommended level scheme")
     unit: "", step: 1, src: ["who-uvi"],
     bands: [
       { min: -Infinity, level: 0, th: "ต่ำ", en: "Low" },
-      { min: 3, level: 0, th: "ปานกลาง", en: "Moderate" },
+      { min: 3, level: 1, th: "ปานกลาง", en: "Moderate" },
       { min: 6, level: 1, th: "สูง", en: "High" },
       { min: 8, level: 2, th: "สูงมาก", en: "Very high" },
       { min: 11, level: 3, th: "สูงที่สุด", en: "Extreme" },
     ],
   },
-  rain24: { // rain in 24 hours, mm (TMD's words for a day's rain)
-    unit: "mm", step: 0.1, src: ["tmd-rain-words"],
+
+  rain24: { // rain in 24 hours, mm: TMD's words ("เกณฑ์อากาศ", read 23 Oct 2026); one app level below each TMD class
+    // is the app's choice (thresholds §4.1)
+    unit: "mm", step: 0.1, src: ["tmd-criteria"],
     bands: [
       { min: -Infinity, level: 0, th: "ไม่มีฝน", en: "No rain" },
       { min: 0.1, level: 0, th: "ฝนเล็กน้อย", en: "Light rain" },
-      { min: 10.1, level: 0, th: "ฝนปานกลาง", en: "Moderate rain" },
+      { min: 10.1, level: 1, th: "ฝนปานกลาง", en: "Moderate rain" },
       { min: 35.1, level: 2, th: "ฝนหนัก", en: "Heavy rain" },
       { min: 90.1, level: 3, th: "ฝนหนักมาก", en: "Very heavy rain" },
     ],
   },
-  gust: { // strongest gust, km/h (Beaufort scale; using it for gusts is the app's own, cautious choice)
-    unit: "km/h", step: 1, src: ["wmo-beaufort"],
+
+  gust: { // strongest gust, km/h, in TMD's Beaufort words (เกณฑ์อากาศ page 2). Beaufort is for the 10-min mean wind:
+    // using it for gusts, and the grouping, are the app's choices; the card says "ลมกระโชก". TMD's "ลมแรง" is only
+    // Beaufort 5 (29–38 km/h), never a gale.
+    unit: "km/h", step: 1, src: ["tmd-criteria", "wmo-beaufort"],
     bands: [
-      { min: -Infinity, level: 0, th: "ลมปกติ", en: "Normal wind" },
-      { min: 39, level: 1, th: "ลมแรง", en: "Strong wind" },
-      { min: 62, level: 2, th: "ลมแรงมาก", en: "Gale" },
-      { min: 89, level: 3, th: "ลมพายุ", en: "Storm-force wind" },
-      { min: 118, level: 3, th: "ลมพายุรุนแรง", en: "Hurricane-force wind" },
+      { min: -Infinity, level: 0, th: "ลมสงบถึงลมโชย", en: "Calm to gentle breeze" },
+      { min: 20, level: 0, th: "ลมปานกลาง", en: "Moderate breeze" },
+      { min: 29, level: 0, th: "ลมแรง", en: "Fresh breeze" },
+      { min: 39, level: 1, th: "ลมจัด", en: "Strong breeze" },
+      { min: 50, level: 1, th: "พายุเกลอ่อน", en: "Near gale" },
+      { min: 62, level: 2, th: "พายุเกล", en: "Gale" },
+      { min: 75, level: 2, th: "พายุเกลแรง", en: "Strong gale" },
+      { min: 89, level: 3, th: "พายุ", en: "Storm" },
+      { min: 103, level: 3, th: "พายุใหญ่", en: "Violent storm" },
+      { min: 118, level: 3, th: "ระดับไต้ฝุ่น", en: "Typhoon force" },
     ],
   },
-  mmi: { // shaking intensity at the point (Modified Mercalli, estimated from magnitude and distance)
-    unit: "", step: 0.1, src: ["usgs-mmi"],
+
+  mmi: { // shaking at the point (Modified Mercalli), estimated by Allen, Wald & Worden 2012 (ipe.js); ShakeMap's words,
+    // the cut points are the app's choice (thresholds §8). No site term: soft ground (Bangkok) can shake more.
+    unit: "", step: 0.1, src: ["usgs-mmi", "aww2012"],
     bands: [
       { min: -Infinity, level: 0, th: "ไม่น่ารู้สึก", en: "Probably not felt" },
-      { min: 2.5, level: 1, th: "อาจรู้สึกได้เบา ๆ", en: "May be felt weakly" },
-      { min: 4.5, level: 2, th: "รู้สึกได้ชัด", en: "Felt clearly" },
-      { min: 5.5, level: 3, th: "สั่นแรง ของอาจตก", en: "Strong shaking" },
-      { min: 6.5, level: 3, th: "สั่นรุนแรง อาจเสียหาย", en: "Very strong shaking" },
+      { min: 3.0, level: 1, th: "อาจรู้สึกได้เบา ๆ", en: "Weak to light shaking" },
+      { min: 5.0, level: 2, th: "สั่นปานกลาง ของอาจตก", en: "Moderate shaking" },
+      { min: 6.0, level: 3, th: "สั่นแรง อาจเสียหาย", en: "Strong shaking, damage possible" },
     ],
   },
+
 };
 
 export function roundTo(v, step = 0.1) {

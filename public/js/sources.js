@@ -36,6 +36,8 @@ export const SOURCES = {
     credit: { th: "กรมควบคุมมลพิษ (Air4Thai)", en: "Pollution Control Department (Air4Thai)" } },
   jma: { url: "https://www.jma.go.jp/bosai/typhoon/data/targetTc.json", base: "https://www.jma.go.jp/bosai/typhoon/data/", ttl: 30,
     credit: { th: "ศูนย์พายุ JMA โตเกียว (JMA Public Data License)", en: "JMA RSMC Tokyo (JMA Public Data License)" } },
+  fw: { url: "https://flood.autobahn.bot/api/point", ttl: 10,
+    credit: { th: "FloodWatch (โครงการพี่น้องของเว็บนี้)", en: "FloodWatch (this site's sister project)" } },
   live: { url: "data/live/", ttl: 10,
     credit: { th: "ตัวเก็บข้อมูลของเว็บนี้", en: "this site's collector" } },
 };

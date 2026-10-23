@@ -1,4 +1,5 @@
 {
-  "_readme": "Runtime settings, read by the page without a code change. geocoder: photon (then nominatim if photon fails) | nominatim | floodwatch | off. See docs/GUIDELINES.md rule 9.",
-  "geocoder": "photon"
+  "_readme": "Runtime settings, read by the page without a code change. geocoder: photon (then nominatim if photon fails) | nominatim | floodwatch | off. floodwatchPoint: true once FloodWatch sends CORS for this site on /api/point (docs/INTEGRATION.md §3). See docs/GUIDELINES.md rule 9.",
+  "geocoder": "photon",
+  "floodwatchPoint": false
 }

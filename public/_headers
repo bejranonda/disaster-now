@@ -1,0 +1,12 @@
+# Cloudflare Pages headers. Geolocation must stay allowed for this origin (Hazard-huntz sends geolocation=(), which
+# would break the GPS button: don't copy its file). No Set-Cookie anywhere.
+/*
+  Permissions-Policy: geolocation=(self), camera=(), microphone=(), payment=()
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+/data/live/*
+  Cache-Control: public, max-age=300, stale-while-revalidate=600
+  Access-Control-Allow-Origin: *
+/data/tambon.json
+  Cache-Control: public, max-age=86400

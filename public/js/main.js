@@ -121,6 +121,14 @@ async function load() {
     ["hiiFf", u.hiiFf, "text"], ["emsc", u.emsc], ["usgs", u.usgs], ["gdacs", u.gdacs], ["dmrSlide", u.dmrSlide],
     ["dmrFault", u.dmrFault], ["elev", u.elev],
   ].filter((j) => j[1]);
+  // FloodWatch's own point check, once FloodWatch sends CORS for this site (config.json → floodwatchPoint)
+  config().then((cfg) => {
+    if (!cfg.floodwatchPoint) return;
+    const r = rounded(p.lat, p.lon);
+    get("fw", `https://flood.autobahn.bot/api/point?lat=${r.lat}&lon=${r.lon}`).then((x) => {
+      if (seq === loadSeq && x.ok) { bundle.floodwatch = x.data; done(); }
+    });
+  });
   const live = liveFiles(u);
   const jma = jmaStorms().then((list) => { if (seq === loadSeq) bundle.jma = list; });
   let pending = jobs.length;

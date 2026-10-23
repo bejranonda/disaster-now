@@ -159,15 +159,19 @@ export function assess(b, lang = "th", ipe = null) {
   {
     const c = { id: "uv", icon: "☀️", title: L("รังสี UV", "UV"), short: "UV", level: -1, src: [] };
     if (air.uv.length) {
+      // the level comes from the UV now, not from the day's peak: on 24 Oct 2026 every one of TMD's 77 stations had a
+      // clear-sky peak of 8 or more (thresholds §3.2), so a peak-based tile would be orange every day
       const hour = Number(localOf(now).slice(11, 13));
-      const pick = hour >= 16 && air.uv[1] ? 1 : 0; // after 16:00 today's sun is done: show tomorrow's
-      const u = air.uv[pick];
+      const day = hour >= 6 && hour < 18;
+      const cur = air.uvNow;
+      const u = day ? { max: cur, band: band("uv", cur) } : { max: 0, band: band("uv", 0) };
+      const peak = hour >= 16 && air.uv[1] ? { ...air.uv[1], when: L("พรุ่งนี้", "tomorrow") } : { ...air.uv[0], when: L("วันนี้", "today") };
       c.level = u.band.level;
-      c.word = word(u.band);
-      c.value = `UV ${fmt(u.max)}`;
-      c.lines = [L(`ค่าสูงสุด${pick ? "พรุ่งนี้" : "วันนี้"} (ช่วงเที่ยง) เมื่อฟ้าโปร่ง ค่าจริงต่ำลงถ้ามีเมฆ`,
-        `${pick ? "Tomorrow's" : "Today's"} peak (around noon); clouds lower it`)];
-      if (u.max >= 6) c.lines.push(L("เลี่ยงแดดช่วง 10–15 น. ทาครีมกันแดด สวมหมวก", "Avoid the sun 10:00–15:00, use sunscreen and a hat"));
+      c.word = day ? word(u.band) : L("กลางคืน", "Night");
+      c.value = day ? `UV ${fmt(cur)}` : L(`พรุ่งนี้สูงสุด ${fmt(air.uv[1]?.max)}`, `Tomorrow up to ${fmt(air.uv[1]?.max)}`);
+      c.lines = [L(`สูงสุด${peak.when}ราว ${fmt(peak.max)} (${word(peak.band)}) ช่วงเที่ยง เมฆมากจะต่ำกว่านี้`,
+        `${peak.when === "today" ? "Today's" : "Tomorrow's"} peak about ${fmt(peak.max)} (${word(peak.band)}) around noon; lower under cloud`)];
+      if (peak.max >= 6) c.lines.push(L("ช่วงสาย–บ่ายเลี่ยงแดดจัด สวมหมวก ทาครีมกันแดด (คำแนะนำ WHO)", "Late morning to afternoon: seek shade, wear a hat, use sunscreen (WHO)"));
       c.days = air.uv.map((d, i) => ({ name: dayName(i, d.date, lang), level: d.band.level, text: fmt(d.max) }));
       c.src.push({ name: "CAMS", model: true });
     } else c.error = b.errors?.aq;
@@ -265,11 +269,15 @@ export function assess(b, lang = "th", ipe = null) {
       link: { href: `${GUIDE}/flood`, text: L("ก่อนน้ำมา ทำอย่างไร", "Before the water comes") },
       more: { href: `${FLOODWATCH}/#p=${lat.toFixed(4)},${lon.toFixed(4)}`, text: L("ดูระดับน้ำละเอียดที่ FloodWatch", "River detail on FloodWatch") } };
     const fresh = gauges.filter((g) => !g.stale);
+    if (fw && (fw.area || fw.river)) {
+      // FloodWatch's own area category for the point (BMA's canals included), its nearest river as a line
+      c.level = fw.area ? FW_LEVEL[fw.area] ?? -1 : FW_LEVEL[fw.river.status] ?? -1;
+      if (fw.area) c.lines.push(L(`ภาพรวมทางน้ำรอบจุดนี้ (FloodWatch): ${word(RIVER_WORDS[Math.max(0, c.level)])}`, `Waterways around this point (FloodWatch): ${word(RIVER_WORDS[Math.max(0, c.level)])}`));
+    }
     if (fw && fw.river) {
-      c.level = FW_LEVEL[fw.river.status] ?? -1;
       c.lines.push(L(`${fw.river.name} (ห่าง ${fmt(fw.river.km, 1)} กม.): ${fw.river.freeboard >= 0 ? `ต่ำกว่าตลิ่ง ${fmt(fw.river.freeboard * 100)} ซม.` : `สูงกว่าตลิ่ง ${fmt(-fw.river.freeboard * 100)} ซม.`}`,
         `${fw.river.name} (${fmt(fw.river.km, 1)} km): ${fw.river.freeboard >= 0 ? `${fmt(fw.river.freeboard * 100)} cm below the bank` : `${fmt(-fw.river.freeboard * 100)} cm over the bank`}`));
-      c.src.push({ name: "FloodWatch" });
+      c.src.push({ name: "FloodWatch", time: timeText(localOf(Date.parse(fw.river.time)), now, lang) });
       if (c.level >= 0) c.word = word(RIVER_WORDS[c.level]);
     } else if (fresh.length) {
       // the point's level is FloodWatch's area category (water.areaIndex), not the nearest gauge's own status
@@ -335,9 +343,13 @@ export function assess(b, lang = "th", ipe = null) {
       const rain = ens ? ens.next24.rain24 : null;
       const obs = rainNear[0]?.rain24 ?? null;
       if (n > 0) {
-        // in a mapped risk area: the level follows the rain (DMR's warning rule, levels.js LANDSLIDE_RAIN)
-        const p = rain ? rain.chance[3] : 0; // ≥ 90 mm in 24 h
-        c.level = obs != null && obs >= LANDSLIDE_RAIN_MM ? 2 : p >= 0.5 ? 2 : p >= 0.2 || (rain && rain.chance[2] >= 0.5) ? 1 : 0;
+        // in a mapped risk area the level follows the rain: DMR's own trigger is more than 100 mm in 24 h (thresholds §6);
+        // 35.1–100 mm (TMD's heavy rain) is "watch" (the app's choice)
+        const p100 = ens ? ens.next24.over100 : 0;
+        const heavy = rain ? rain.chance[2] : 0;
+        c.level = (obs != null && obs > LANDSLIDE_RAIN_MM) || p100 >= 0.5 ? 2
+          : (obs != null && obs >= 35.1) || p100 >= 0.2 || heavy >= 0.5 ? 1 : 0;
+        if (p100 >= 0.1) c.lines.push(L(`โอกาสฝนเกิน 100 มม. ใน 24 ชม. (เกณฑ์เตือนของ ทธ.) ${chanceText(p100, lang)}`, `Chance of over 100 mm in 24 h (DMR's trigger): ${chanceText(p100, lang)}`));
         c.word = c.level ? word(scale(c.level)) : L("พื้นที่เสี่ยง ฝนยังไม่มาก", "Risk area, little rain");
         c.lines.push(L(`มีหมู่บ้านเสี่ยงดินถล่ม ${n} แห่งในรัศมี 3 กม. (กรมทรัพยากรธรณี)`, `${n} landslide-risk village(s) within 3 km (DMR)`));
         c.lines.push(L("ฝนตกหนักต่อเนื่อง สังเกตน้ำในลำห้วยขุ่นข้น ดินร้าว ต้นไม้เอียง", "In long heavy rain watch for muddy streams, cracks in the ground, leaning trees"));
@@ -368,13 +380,15 @@ export function assess(b, lang = "th", ipe = null) {
           `M${fmt(q.mag, 1)} ${q.place || ""}, ${fmt(q.km)} km ${compass(q.dir, "en")} · ${when}${felt}`));
       }
       if (!list.length) c.lines.push(L("ไม่มีแผ่นดินไหวในรัศมี 300 กม. ใน 7 วัน ที่น่าจะรู้สึกได้", "No quake within 300 km in 7 days that was likely felt"));
-      c.note = L("แผ่นดินไหวพยากรณ์ล่วงหน้าไม่ได้ ค่าความรู้สึกเป็นการประมาณ", "Earthquakes can't be forecast; felt levels are estimates");
+      c.note = L("แผ่นดินไหวพยากรณ์ล่วงหน้าไม่ได้ ความแรงที่จุดนี้เป็นค่าประมาณจากขนาดและระยะทาง ดินอ่อน (เช่น กรุงเทพฯ) และตึกสูงอาจสั่นแรงกว่านี้",
+        "Earthquakes can't be forecast. Shaking here is estimated from size and distance; soft ground (e.g. Bangkok) and tall buildings can shake more");
       c.src.push({ name: [b.emsc && "EMSC", b.usgs && "USGS", b.tmdQuakes && L("กรมอุตุฯ", "TMD")].filter(Boolean).join(" · ") });
       const ts = place ? tsunamiWatch(quakes, place.pv, now) : null;
       if (ts) {
-        c.level = Math.max(c.level, 2);
-        c.lines.unshift(L(`แผ่นดินไหวใหญ่ขนาด ${fmt(ts.mag, 1)} ในทะเลอันดามันหรือมหาสมุทรอินเดีย ติดตามประกาศสึนามิของ ปภ. ทันที อย่าลงไปดูทะเล`,
-          `Large M${fmt(ts.mag, 1)} quake in the Andaman Sea / Indian Ocean: follow DDPM's tsunami notices now; don't go to look at the sea`));
+        // "watch" only: a tsunami warning is the agencies' (TMD/DDPM towers, Cell Broadcast); the app never says all clear
+        c.level = Math.max(c.level, 1);
+        c.lines.unshift(L(`แผ่นดินไหวขนาด ${fmt(ts.mag, 1)} ในทะเลอันดามันหรือมหาสมุทรอินเดีย ติดตามประกาศสึนามิของกรมอุตุฯ และ ปภ. ถ้าอยู่ชายฝั่งแล้วรู้สึกสั่นแรง ให้ออกจากชายฝั่งทันทีโดยไม่ต้องรอประกาศ`,
+          `M${fmt(ts.mag, 1)} quake in the Andaman Sea / Indian Ocean: follow TMD's and DDPM's tsunami notices. If you felt strong shaking at the coast, leave the coast now without waiting`));
       }
     } else c.error = b.errors?.emsc || b.errors?.usgs;
     cards.push(c);
@@ -386,8 +400,8 @@ export function assess(b, lang = "th", ipe = null) {
       link: { href: `${GUIDE}/pm25`, text: L("ควันไฟ ฝุ่น ทำอย่างไร", "What to do about smoke") } };
     if (b.hotspots && b.hotspots.items) {
       const h = hotspotsNear(b.hotspots, lat, lon, 25);
-      // a count, not a graded hazard: at most "keep an eye on it"; smoke reaches the level through the PM2.5 tile
-      c.level = Math.min(1, hotspotLevel(h.count));
+      // the app's own rule (no Thai agency grades hotspots): one within 10 km → watch, within 2 km → get ready
+      c.level = !h.nearest ? 0 : h.nearest.km <= 2 ? 2 : h.nearest.km <= 10 ? 1 : 0;
       c.word = h.count ? L(`${h.count} จุด`, `${h.count} hotspot(s)`) : L("ไม่พบ", "None");
       c.value = L(`${h.count} จุด`, `${h.count}`);
       c.lines.push(L(`จุดความร้อนจากดาวเทียมในรัศมี 25 กม. ใน 24 ชม.${h.nearest ? ` ใกล้สุดห่าง ${fmt(h.nearest.km, 1)} กม.` : ""}`,
@@ -425,7 +439,7 @@ export function assess(b, lang = "th", ipe = null) {
   const outlook = ens ? ens.days.map((d, i) => ({
     name: dayName(i, d.date, lang), date: d.date,
     heat: { level: band("heat", d.heat.p50).level, text: `${fmt(d.heat.p50)}°` },
-    rain: { level: windowLevel(d.rain24).level, text: L(`${fmt(d.rain24.p50)} มม.`, `${fmt(d.rain24.p50)} mm`), sub: chanceText(d.rain24.chance[2], lang) },
+    rain: { level: windowLevel(d.rain24).level, text: fmt(d.rain24.p50), sub: d.rain24.chance[2] >= 0.1 ? chanceText(d.rain24.chance[2], lang) : "" },
     gust: { level: windowLevel(d.gust).level, text: fmt(d.gust.p50) },
     pm25: air.outlook[i] ? { level: air.outlook[i].band.level, text: fmt(air.outlook[i].mean) } : null,
     uv: air.uv[i] ? { level: air.uv[i].band.level, text: fmt(air.uv[i].max) } : null,

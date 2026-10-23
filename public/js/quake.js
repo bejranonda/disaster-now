@@ -49,14 +49,14 @@ export function mmiAt(q, lat, lon, ipe) {
   return ipe.mmi(q.mag, rhypo(q, lat, lon), q.depth || 10);
 }
 
-/** Quakes worth a line for this point: within `days`, and either estimated to be felt or within 300 km.
+/** Quakes worth a line for this point: within `days`, and either estimated to be felt (MMI ≥ 3) or within 300 km.
  *  Sorted by the shaking they may have caused, then by time. */
 export function quakesForPoint(quakes, lat, lon, nowMs, ipe, { days = 7 } = {}) {
   return quakes.filter((q) => nowMs - q.t <= days * 864e5 && q.t <= nowMs + 6e5).map((q) => {
     const d = km(lat, lon, q.lat, q.lon);
     const mmi = mmiAt(q, lat, lon, ipe);
     return { ...q, km: d, dir: bearing(lat, lon, q.lat, q.lon), mmi, band: band("mmi", mmi) };
-  }).filter((q) => (q.mmi != null && q.mmi >= 2.5) || q.km <= 300)
+  }).filter((q) => (q.mmi != null && q.mmi >= 3.0) || q.km <= 300)
     .sort((a, b) => (b.mmi ?? 0) - (a.mmi ?? 0) || b.t - a.t);
 }
 

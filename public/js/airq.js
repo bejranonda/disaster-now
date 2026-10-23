@@ -123,6 +123,7 @@ export function buildAir(aq, gistda, nowMs = Date.now(), station = null) {
     out.outlook = dailyMeans(aq, "pm2_5", nowMs, r ? r.ratio : 1).map((d) => ({ ...d, band: band("pm25", d.mean), corrected: !!r }));
     out.uv = dailyMax(aq, "uv_index", nowMs).map((d) => ({ ...d, band: band("uv", d.max) }));
     const i = nowIndex(aq.hourly.time, aq.utc_offset_seconds || 0, nowMs);
+    out.uvNow = i >= 0 ? aq.hourly.uv_index?.[i] ?? null : null;
     if (i >= 0) {
       const pick = (k) => aq.hourly[k]?.[i] ?? null;
       out.pollutants = {

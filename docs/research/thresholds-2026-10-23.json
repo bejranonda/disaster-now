@@ -1,0 +1,429 @@
+{
+  "_meta": {
+    "title": "Hazard thresholds for disaster-now",
+    "researched": "2026-10-23T19:50Z/2026-10-23T20:20Z",
+    "companion": "thresholds-2026-10-23.md",
+    "levels": {
+      "normal": {"th": "ปกติ", "en": "normal"},
+      "watch": {"th": "เฝ้าระวัง", "en": "watch"},
+      "warning": {"th": "เตือนภัย", "en": "warning"},
+      "danger": {"th": "อันตราย", "en": "danger"}
+    },
+    "how_to_read": "Each hazard lists the agency's (or standard's) own bands. 'level' is the app level each band maps to (see the md, 'Recommended level scheme'); 'mapping' says whether that mapping is the agency's own wording ('agency') or the app's choice ('app-choice'). th/en are the agency's band names. min and max are the published edges, inclusive, after rounding to the stated precision; null = open end. 'min_exclusive': true marks bands published as '>x'. A band whose level is null has no app level.",
+    "status_values": "verified = read today in the agency's own text, the standard's own text or the implementing code; partial = read through a news report quoting the agency, an agency page that conflicts, or an inference; unverified = not read in a primary text; carried-over = from Hazard-huntz or FloodWatch without re-opening"
+  },
+  "heat_index": {
+    "unit": "°C",
+    "period": "the day's maximum heat index (TMD forecasts the daily maximum)",
+    "precision": 1,
+    "mapping": "agency (names 1:1); merging danger and extreme danger into 'danger' is the app's choice",
+    "status": "partial",
+    "levels": [
+      {"level": "normal", "th": null, "en": "below the scheme", "min": null, "max": 26.9},
+      {"level": "watch", "th": "เฝ้าระวัง", "en": "watch", "colour": "green", "min": 27.0, "max": 32.9},
+      {"level": "warning", "th": "เตือนภัย", "en": "warning", "colour": "yellow", "min": 33.0, "max": 41.9},
+      {"level": "danger", "th": "อันตราย", "en": "danger", "colour": "orange", "min": 42.0, "max": 51.9},
+      {"level": "danger", "th": "อันตรายมาก", "en": "extreme danger", "colour": "red", "min": 52.0, "max": null}
+    ],
+    "formula": {
+      "tmd_agromet_page": "Stedman's Heat Index (Stedman, 1979)",
+      "tmd_2012_explainer": "NWS Rothfusz regression with NWS coefficients (carried over)",
+      "current_tmd_product": "unverified",
+      "nws_check": "33.0 °C, 80 % RH -> 48.1 °C by the NWS procedure; TMD's own example says 49 °C"
+    },
+    "old_bands_do_not_use": "TMD agromet page: <27 normal, 27-32, 32-41, 41-54, >54",
+    "source_ids": ["bma-heat-posttoday-2569", "doh-heat-dailynews-2569", "tmd-heat-thairath-2567", "hh-knowledge-heat", "tmd-arcims-heatindex", "nws-heatindex"]
+  },
+  "max_temperature": {
+    "unit": "°C",
+    "period": "daily maximum temperature; TMD uses these words only in the hot season",
+    "precision": 1,
+    "mapping": "app-choice (TMD words turned into levels; only when no heat index is available)",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": null, "en": "below TMD's hot-day words", "min": null, "max": 34.9},
+      {"level": "watch", "th": "อากาศร้อน", "en": "hot", "min": 35.0, "max": 39.9},
+      {"level": "warning", "th": "อากาศร้อนจัด", "en": "very hot", "min": 40.0, "max": null}
+    ],
+    "source_ids": ["tmd-criteria"]
+  },
+  "pm25": {
+    "unit": "µg/m³",
+    "period": "continuous 24-hour average",
+    "precision": 1,
+    "mapping": "agency bands; joining blue and green into 'normal' is the app's choice",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ดีมาก (ฟ้า)", "en": "very good (blue)", "aqi_min": 0, "aqi_max": 25, "min": 0, "max": 15.0},
+      {"level": "normal", "th": "ดี (เขียว)", "en": "good (green)", "aqi_min": 26, "aqi_max": 50, "min": 15.1, "max": 25.0},
+      {"level": "watch", "th": "ปานกลาง (เหลือง)", "en": "moderate (yellow)", "aqi_min": 51, "aqi_max": 100, "min": 25.1, "max": 37.5},
+      {"level": "warning", "th": "เริ่มมีผลกระทบต่อสุขภาพ (ส้ม)", "en": "starting to affect health (orange)", "aqi_min": 101, "aqi_max": 200, "min": 37.6, "max": 75.0},
+      {"level": "danger", "th": "มีผลกระทบต่อสุขภาพ (แดง)", "en": "affects health (red)", "aqi_min": 201, "aqi_max": null, "min": 75.1, "max": null}
+    ],
+    "hourly": "PCD shows 'ค่าเฉลี่ย 1 ชั่วโมง' for the trend and timing of outdoor activity; its daily report and the colour use the 24-h average. Colouring hourly values with these bands is not stated by PCD: show hourly as a trend only.",
+    "source_ids": ["pcd-aqi-2566", "pcd-hourly-thansettakij-2568", "pcd-hourly-thaipbs-2568"]
+  },
+  "aqi_thailand": {
+    "unit": "index (no unit)",
+    "period": "the highest of six sub-indices at that time (PM2.5 24 h, PM10 24 h, CO 8 h, O3 8 h, NO2 1 h, SO2 1 h); AQI 100 equals the standard",
+    "precision": 0,
+    "mapping": "agency bands; joining blue and green into 'normal' is the app's choice",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ดีมาก (ฟ้า)", "en": "very good (blue)", "min": 0, "max": 25},
+      {"level": "normal", "th": "ดี (เขียว)", "en": "good (green)", "min": 26, "max": 50},
+      {"level": "watch", "th": "ปานกลาง (เหลือง)", "en": "moderate (yellow)", "min": 51, "max": 100},
+      {"level": "warning", "th": "เริ่มมีผลกระทบต่อสุขภาพ (ส้ม)", "en": "starting to affect health (orange)", "min": 101, "max": 200},
+      {"level": "danger", "th": "มีผลกระทบต่อสุขภาพ (แดง)", "en": "affects health (red)", "min": 201, "max": null}
+    ],
+    "source_ids": ["pcd-aqi-2566"]
+  },
+  "pm10": {
+    "unit": "µg/m³",
+    "period": "continuous 24-hour average",
+    "precision": 0,
+    "mapping": "agency bands (same five levels as PM2.5)",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ดีมาก (ฟ้า)", "en": "very good (blue)", "min": 0, "max": 50},
+      {"level": "normal", "th": "ดี (เขียว)", "en": "good (green)", "min": 51, "max": 80},
+      {"level": "watch", "th": "ปานกลาง (เหลือง)", "en": "moderate (yellow)", "min": 81, "max": 120},
+      {"level": "warning", "th": "เริ่มมีผลกระทบต่อสุขภาพ (ส้ม)", "en": "starting to affect health (orange)", "min": 121, "max": 180},
+      {"level": "danger", "th": "มีผลกระทบต่อสุขภาพ (แดง)", "en": "affects health (red)", "min": 181, "max": null}
+    ],
+    "source_ids": ["pcd-aqi-2566"]
+  },
+  "co": {
+    "unit": "ppm",
+    "period": "continuous 8-hour average",
+    "precision": 1,
+    "mapping": "agency bands",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ดีมาก (ฟ้า)", "en": "very good (blue)", "min": 0, "max": 4.4},
+      {"level": "normal", "th": "ดี (เขียว)", "en": "good (green)", "min": 4.5, "max": 6.4},
+      {"level": "watch", "th": "ปานกลาง (เหลือง)", "en": "moderate (yellow)", "min": 6.5, "max": 9.0},
+      {"level": "warning", "th": "เริ่มมีผลกระทบต่อสุขภาพ (ส้ม)", "en": "starting to affect health (orange)", "min": 9.1, "max": 30.0},
+      {"level": "danger", "th": "มีผลกระทบต่อสุขภาพ (แดง)", "en": "affects health (red)", "min": 30.1, "max": null}
+    ],
+    "source_ids": ["pcd-aqi-2566"]
+  },
+  "o3": {
+    "unit": "ppb",
+    "period": "continuous 8-hour average",
+    "precision": 0,
+    "mapping": "agency bands",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ดีมาก (ฟ้า)", "en": "very good (blue)", "min": 0, "max": 35},
+      {"level": "normal", "th": "ดี (เขียว)", "en": "good (green)", "min": 36, "max": 50},
+      {"level": "watch", "th": "ปานกลาง (เหลือง)", "en": "moderate (yellow)", "min": 51, "max": 70},
+      {"level": "warning", "th": "เริ่มมีผลกระทบต่อสุขภาพ (ส้ม)", "en": "starting to affect health (orange)", "min": 71, "max": 120},
+      {"level": "danger", "th": "มีผลกระทบต่อสุขภาพ (แดง)", "en": "affects health (red)", "min": 121, "max": null}
+    ],
+    "source_ids": ["pcd-aqi-2566"]
+  },
+  "no2": {
+    "unit": "ppb",
+    "period": "continuous 1-hour average",
+    "precision": 0,
+    "mapping": "agency bands",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ดีมาก (ฟ้า)", "en": "very good (blue)", "min": 0, "max": 60},
+      {"level": "normal", "th": "ดี (เขียว)", "en": "good (green)", "min": 61, "max": 106},
+      {"level": "watch", "th": "ปานกลาง (เหลือง)", "en": "moderate (yellow)", "min": 107, "max": 170},
+      {"level": "warning", "th": "เริ่มมีผลกระทบต่อสุขภาพ (ส้ม)", "en": "starting to affect health (orange)", "min": 171, "max": 340},
+      {"level": "danger", "th": "มีผลกระทบต่อสุขภาพ (แดง)", "en": "affects health (red)", "min": 341, "max": null}
+    ],
+    "source_ids": ["pcd-aqi-2566"]
+  },
+  "so2": {
+    "unit": "ppb",
+    "period": "continuous 1-hour average",
+    "precision": 0,
+    "mapping": "agency bands",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ดีมาก (ฟ้า)", "en": "very good (blue)", "min": 0, "max": 100},
+      {"level": "normal", "th": "ดี (เขียว)", "en": "good (green)", "min": 101, "max": 200},
+      {"level": "watch", "th": "ปานกลาง (เหลือง)", "en": "moderate (yellow)", "min": 201, "max": 300},
+      {"level": "warning", "th": "เริ่มมีผลกระทบต่อสุขภาพ (ส้ม)", "en": "starting to affect health (orange)", "min": 301, "max": 400},
+      {"level": "danger", "th": "มีผลกระทบต่อสุขภาพ (แดง)", "en": "affects health (red)", "min": 401, "max": null}
+    ],
+    "source_ids": ["pcd-aqi-2566"]
+  },
+  "uv_index": {
+    "unit": "UVI (whole number)",
+    "period": "the current half-hourly value; WHO: a daily maximum is a 30-minute average; TMD's forecast is clear-sky (an upper bound)",
+    "precision": 0,
+    "mapping": "WHO categories; grouping moderate and high (3-7) into 'watch' follows WHO's advice tiers and is the app's choice",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": null, "en": "Low", "colour": "green", "min": 0, "max": 2},
+      {"level": "watch", "th": null, "en": "Moderate", "colour": "yellow", "min": 3, "max": 5},
+      {"level": "watch", "th": null, "en": "High", "colour": "orange", "min": 6, "max": 7},
+      {"level": "warning", "th": null, "en": "Very high", "colour": "red", "min": 8, "max": 10},
+      {"level": "danger", "th": null, "en": "Extreme", "colour": "purple", "min": 11, "max": null}
+    ],
+    "conflict": "TMD's protection chart (protectivetools_202512.png) uses 1-3 low, 4-6 medium, 7-9 high, 10+ extreme; TMD's own map uses WHO's edges. Use WHO's.",
+    "observed": "TMD clear-sky forecast for 2026-10-24: daily maxima 8.4-10.8 at all 77 stations",
+    "source_ids": ["who-uvi-2002", "who-uv-qa-2022", "tmd-uv-page", "tmd-uv-csv"]
+  },
+  "rain_24h": {
+    "unit": "mm",
+    "period": "24 hours, 07:00-07:00 Bangkok time (TMD's page prints no period; applying the words to 24 h is FloodWatch's and this app's reading)",
+    "precision": 1,
+    "mapping": "TMD words; mapping each one level below its TMD class is the app's choice",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ไม่มีฝน", "en": "no rain", "min": 0, "max": 0.0},
+      {"level": "normal", "th": "ฝนเล็กน้อย", "en": "light rain", "min": 0.1, "max": 10.0},
+      {"level": "watch", "th": "ฝนปานกลาง", "en": "moderate rain", "min": 10.1, "max": 35.0},
+      {"level": "warning", "th": "ฝนหนัก", "en": "heavy rain", "min": 35.1, "max": 90.0},
+      {"level": "danger", "th": "ฝนหนักมาก", "en": "very heavy rain", "min": 90.1, "max": null}
+    ],
+    "source_ids": ["tmd-criteria", "tmd-api-list", "dmr-daily-2567", "fw-rain-words"]
+  },
+  "rain_rate": {
+    "unit": "mm/h",
+    "period": "WMO: intensity based on a 3-minute measurement period; for the app, the latest 1-hour total",
+    "precision": 1,
+    "mapping": "app-choice (WMO classes; no TMD hourly criteria found)",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": null, "en": "light", "min": 0, "max": 2.4},
+      {"level": "watch", "th": null, "en": "moderate", "min": 2.5, "max": 9.9},
+      {"level": "warning", "th": null, "en": "heavy", "min": 10.0, "max": 49.9},
+      {"level": "danger", "th": null, "en": "violent (WMO suggests 'intense' or 'extreme')", "min": 50.0, "max": null}
+    ],
+    "source_ids": ["wmo-8-2008"]
+  },
+  "wind": {
+    "unit": "km/h",
+    "period": "10-minute mean at 10 m in the open (WMO); gusts are the highest 3-s average and using these bands for gusts is the app's choice",
+    "precision": 0,
+    "mapping": "TMD/WMO Beaufort words; grouping is the app's choice",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "beaufort": "0-4", "th": "ลมสงบ … ลมปานกลาง", "en": "calm to moderate breeze", "min": 0, "max": 28},
+      {"level": "normal", "beaufort": "5", "th": "ลมแรง", "en": "fresh breeze", "min": 29, "max": 38},
+      {"level": "watch", "beaufort": "6", "th": "ลมจัด", "en": "strong breeze", "min": 39, "max": 49},
+      {"level": "watch", "beaufort": "7", "th": "พายุเกลอ่อน", "en": "near gale", "min": 50, "max": 61},
+      {"level": "warning", "beaufort": "8", "th": "พายุเกล", "en": "gale", "min": 62, "max": 74},
+      {"level": "warning", "beaufort": "9", "th": "พายุเกลแรง", "en": "strong gale", "min": 75, "max": 88},
+      {"level": "danger", "beaufort": "10", "th": "พายุ", "en": "storm", "min": 89, "max": 102},
+      {"level": "danger", "beaufort": "11", "th": "พายุใหญ่", "en": "violent storm", "min": 103, "max": 117},
+      {"level": "danger", "beaufort": "12", "th": "พายุไต้ฝุ่น หรือ เฮอร์ริเคน", "en": "typhoon or hurricane", "min": 118, "max": null}
+    ],
+    "note": "TMD's table prints 'มากกว่า 117' for Bft 12; the Beaufort numbers are added by matching WMO-No. 8. No TMD wind or gust warning threshold was found. TMD's 'ลมแรง' is only Bft 5.",
+    "source_ids": ["tmd-criteria", "wmo-8-2008"]
+  },
+  "tropical_cyclone": {
+    "unit": "km/h (knots)",
+    "period": "maximum sustained wind near the centre; a level applies only when a TMD warning says the storm affects the province",
+    "precision": 0,
+    "mapping": "TMD classes; mapping to levels is the app's choice",
+    "status": "verified",
+    "levels": [
+      {"level": "watch", "th": "พายุดีเปรสชันเขตร้อน", "en": "tropical depression", "min": null, "max": 62, "knots_max_exclusive": 34},
+      {"level": "warning", "th": "พายุโซนร้อน", "en": "tropical storm", "min": 63, "max": 117, "knots_min": 34, "knots_max_exclusive": 64},
+      {"level": "danger", "th": "ไต้ฝุ่น", "en": "typhoon", "min": 118, "max": null, "knots_min": 64}
+    ],
+    "conflict": "TMD criteria page 5 gives typhoon '65 นอต หรือมากกว่า'; TMD's cyclone page gives 64 kt (118 km/h). Use 64 kt.",
+    "source_ids": ["tmd-cyclone", "tmd-criteria"]
+  },
+  "landslide": {
+    "unit": "mm",
+    "period": "24 hours, 07:00-07:00, in a DMR landslide-risk village area; DMR's AP Model uses HII's 72-h forecast against unpublished critical accumulated rain",
+    "precision": 1,
+    "mapping": "the 100 mm trigger is DMR's; every other edge is the app's choice",
+    "status": "partial",
+    "levels": [
+      {"level": "normal", "th": null, "en": "below the app's watch edge", "min": 0, "max": 35.0},
+      {"level": "watch", "th": "เฝ้าระวัง (app)", "en": "watch (app choice: TMD heavy rain, or DMR AP Model lists the province for 1-3 days)", "min": 35.1, "max": 100.0},
+      {"level": "warning", "th": "ปริมาณน้ำฝนในพื้นที่เสี่ยงภัย มากกว่า 100 มม. ขึ้นไป", "en": "rain over 100 mm in 24 h in a risk area (DMR)", "min": 100.0, "max": null, "min_exclusive": true},
+      {"level": "danger", "th": null, "en": "a DMR/DDPM evacuation notice or DWR 'อพยพ'", "min": null, "max": null, "trigger": "official notice"}
+    ],
+    "unverified": "any DMR multi-day (e.g. 3-day) critical rain number",
+    "source_ids": ["dmr-daily-2567", "dmr-daily-2564", "dmr-100mm-posttoday-2568", "hh-dmr"]
+  },
+  "flash_flood": {
+    "unit": "categorical",
+    "period": "HII: the next 24 h, per subdistrict, issued daily; DWR: live, per village post",
+    "precision": null,
+    "mapping": "each agency's own product; combining them is the app's choice",
+    "status": "partial",
+    "levels": [
+      {"level": "watch", "th": "เฝ้าระวัง (DWR)", "en": "DWR post at watch", "min": null, "max": null, "trigger": "DWR post status เฝ้าระวัง, or a TMD heavy-rain CAP alert for a hilly province (app choice)"},
+      {"level": "warning", "th": "พื้นที่เสี่ยงน้ำท่วมฉับพลัน (HII) / เตรียมพร้อม (DWR)", "en": "subdistrict listed by HII, or DWR post at prepare", "min": null, "max": null, "trigger": "listed in flashflood_report.txt, or DWR เตรียมพร้อม"},
+      {"level": "danger", "th": "อพยพ (DWR)", "en": "DWR evacuate, or an official evacuation notice", "min": null, "max": null, "trigger": "DWR อพยพ, or DMR/DDPM evacuation notice"}
+    ],
+    "unverified": "FFPI class edges; HII's rule for listing; DWR per-post thresholds; DWR status codes 0-3 and 9; DWR colour-to-name mapping (inferred: green เฝ้าระวัง, yellow เตรียมพร้อม, red อพยพ)",
+    "source_ids": ["hii-thaiwater-app", "hii-ffpi-report", "dwr-ews-2561", "dwr-ews-2566"]
+  },
+  "river_thaiwater": {
+    "unit": "% of channel capacity, (level - ground) / (bank - ground) x 100",
+    "period": "latest reading (HII, about every 10 min)",
+    "precision": 0,
+    "mapping": "ThaiWater's own classes; no app level is given to them directly (use FloodWatch's status, which splits level 4 at 90 %)",
+    "status": "verified",
+    "levels": [
+      {"level": null, "situation_level": 1, "th": "น้ำน้อยวิกฤต", "en": "critically low", "min": null, "max": 10},
+      {"level": null, "situation_level": 2, "th": "น้ำน้อย", "en": "low", "min": 10, "max": 30, "min_exclusive": true},
+      {"level": null, "situation_level": 3, "th": "ปกติ / น้ำปานกลาง", "en": "normal", "min": 30, "max": 70, "min_exclusive": true},
+      {"level": null, "situation_level": 4, "th": "น้ำมาก", "en": "high", "min": 70, "max": 100, "min_exclusive": true},
+      {"level": null, "situation_level": 5, "th": "น้ำล้นตลิ่ง", "en": "over the bank", "min": 100, "max": null, "min_exclusive": true}
+    ],
+    "note": "35 gauges carry ground_level 0, which inflates storage_percent (FloodWatch, 21 Oct 2026)",
+    "source_ids": ["hii-thaiwater-app", "fw-status"]
+  },
+  "river_floodwatch": {
+    "unit": "% of channel depth, (level - ground) / (bank - ground) x 100; BMA canals: BMA's own levels",
+    "period": "latest reading",
+    "precision": 0,
+    "mapping": "FloodWatch's own heuristic (its label); status to level 1:1 is the app's choice",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ยังรับน้ำได้", "en": "normal", "min": null, "max": 69.99},
+      {"level": "watch", "th": "น้ำเริ่มสูง", "en": "watch", "min": 70, "max": 89.99, "bma": "over BMA warning (คลองเริ่มเต็ม)"},
+      {"level": "warning", "th": "ใกล้ล้นตลิ่ง", "en": "warning", "min": 90, "max": null, "bma": "over BMA critical (คลองเต็ม)", "no_ground_rule": "bank - level < 0.3 m"},
+      {"level": "danger", "th": "ล้นตลิ่งแล้ว", "en": "critical", "min": null, "max": null, "trigger": "level >= bank (BMA: level > bank)"}
+    ],
+    "source_ids": ["fw-status"]
+  },
+  "earthquake_event": {
+    "unit": "magnitude (TMD 'ขนาด'; type not given in the RSS)",
+    "period": "per event, regardless of distance",
+    "precision": 1,
+    "mapping": "TMD's operating colours, shown as event context beside the app's level at the point",
+    "status": "partial",
+    "levels": [
+      {"level": null, "th": "ไม่มีผลกระทบ (สีเขียว)", "en": "no impact (green)", "min": null, "max": 2.4},
+      {"level": null, "th": "ผลกระทบ เล็กน้อย-ปานกลาง (สีเหลือง)", "en": "slight to moderate impact (yellow)", "min": 2.5, "max": 3.9},
+      {"level": null, "th": "ผลกระทบปานกลาง-รุนแรง (สีแดง)", "en": "moderate to severe impact (red)", "min": 4.0, "max": null, "min_exclusive": true, "note": "published as 'มากกว่า 4.0'; exactly 4.0 falls between bands"}
+    ],
+    "source_ids": ["tmd-eq-criteria-thaipbs-2568", "tmd-eq-rss", "tmd-eq-intensity"]
+  },
+  "earthquake_shaking": {
+    "unit": "MMI, estimated at the user's point",
+    "period": "per event; Allen, Wald & Worden (2012) IPE, hypocentral form, no site term",
+    "precision": 1,
+    "mapping": "app-choice (ShakeMap shaking and damage words)",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": "ไม่รู้สึก / รู้สึกเบามาก", "en": "Not felt / Weak (I-II)", "min": null, "max": 2.9},
+      {"level": "watch", "th": "รู้สึกได้ ไม่เสียหาย", "en": "Weak / Light (III-IV)", "min": 3.0, "max": 4.9},
+      {"level": "warning", "th": "รู้สึกเกือบทุกคน อาจเสียหายเล็กน้อยมาก", "en": "Moderate (V), very light damage", "min": 5.0, "max": 5.9},
+      {"level": "danger", "th": "แรง อาจเสียหาย", "en": "Strong and above (VI+), damage possible", "min": 6.0, "max": null}
+    ],
+    "ipe": {
+      "name": "Allen, Wald & Worden (2012), J. Seismology 16: 409-433",
+      "source": "openquake.engine 3.26.2, openquake/hazardlib/gsim/allen_2012_ipe.py",
+      "log": "natural",
+      "distance_unit": "km",
+      "rhypo": {
+        "equation": "MMI = c0 + c1*M + c2*ln(sqrt(Rhypo^2 + Rm^2)) + (c4*ln(Rhypo/50) if Rhypo > 50); Rm = m1 + m2*exp(M - 5); sigma = s1 + s2/(1 + (Rhypo/s3)^2)",
+        "c0": 2.085, "c1": 1.428, "c2": -1.402, "c3": 0.0, "c4": 0.078, "m1": -0.209, "m2": 2.042, "s1": 0.82, "s2": 0.37, "s3": 22.9
+      },
+      "rrup": {
+        "equation": "MMI = c0 + c1*M + c2*ln(sqrt(Rrup^2 + (1 + c3*exp(M - 5))^2)); sigma = s1 + s2/(1 + (Rrup/s3)^2)",
+        "c0": 3.950, "c1": 0.913, "c2": -1.107, "c3": 0.813, "s1": 0.72, "s2": 0.23, "s3": 44.7
+      },
+      "unverified": "magnitude type (the code comment says 'ML is used'), validity ranges, site amplification; Atkinson, Worden & Wald (2014) coefficients not found"
+    },
+    "source_ids": ["oq-allen2012", "usgs-shakemap-strings", "usgs-mmi", "tmd-eq-intensity", "tmd-eq-general-pdf", "usgs-teng-2022", "bkk-collapse-thairath-2568", "tmd-eq-myanmar-thansettakij-2568"]
+  },
+  "fire_hotspots": {
+    "unit": "count of VIIRS 375 m detections with confidence nominal or high",
+    "period": "last 24 h (FIRMS 24-h file), within a radius of the point",
+    "precision": 0,
+    "mapping": "app-choice entirely; no Thai agency publishes a hotspot level",
+    "status": "verified",
+    "levels": [
+      {"level": "normal", "th": null, "en": "none within 10 km", "min": 0, "max": 0, "radius_km": 10},
+      {"level": "watch", "th": null, "en": "1 or more within 10 km", "min": 1, "max": null, "radius_km": 10},
+      {"level": "warning", "th": null, "en": "1 or more within 2 km", "min": 1, "max": null, "radius_km": 2}
+    ],
+    "confidence_classes": {"viirs": ["low", "nominal", "high"], "modis": "0-100 % in three classes; the % edges are unverified"},
+    "note": "danger only through PM2.5 red or an official order; GISTDA counts hotspots by province and land use without a level",
+    "source_ids": ["firms-attributes", "firms-faq", "firms-csv", "gistda-hotspot-news-2568"]
+  },
+  "tsunami": {
+    "unit": "categorical (official messages)",
+    "period": "per event",
+    "precision": null,
+    "mapping": "official messages; the watch trigger is the app's choice",
+    "status": "partial",
+    "levels": [
+      {"level": "watch", "th": null, "en": "TMD has announced an earthquake in the Andaman Sea or off Sumatra (app choice)", "min": null, "max": null, "trigger": "TMD announcement, user in one of the 6 Andaman provinces"},
+      {"level": "danger", "th": "เกิดแผ่นดินไหวในทะเล อาจเกิดคลื่นสึนามิ (M2) / ขณะนี้เกิดคลื่นสึนามิ (M3)", "en": "tsunami warning, tower M2/M3, Cell Broadcast, or strong shaking felt at the coast", "min": null, "max": null, "trigger": "official message, or TMD's rule: leave the coast when you feel shaking, without waiting"}
+    ],
+    "risk_area": "DDPM (2022, via news): 6 provinces (ภูเก็ต พังงา ระนอง กระบี่ ตรัง สตูล), 27 districts, 102 subdistricts, 509 villages; 226 warning towers. No open official list or map; ndwc.go.th NXDOMAIN on 2026-10-23; Hazard-huntz recorded 108 subdistricts [unverified].",
+    "source_ids": ["tmd-tsunami", "ddpm-tsunami-bkbiz-2565", "ddpm-tsunami-drill-thaipbs-2568", "ndwc-dns", "hh-open-data"]
+  },
+  "official_warning_cap": {
+    "unit": "CAP 1.2 severity",
+    "period": "per alert, effective to expires; area as ISO 3166-2 province codes",
+    "precision": null,
+    "mapping": "app-choice (TMD marks its routine heavy-rain product 'Severe')",
+    "status": "verified",
+    "levels": [
+      {"level": "watch", "th": null, "en": "Minor - Minimal to no known threat to life or property", "min": null, "max": null, "cap_severity": "Minor"},
+      {"level": "watch", "th": null, "en": "Moderate - Possible threat to life or property", "min": null, "max": null, "cap_severity": "Moderate"},
+      {"level": "warning", "th": null, "en": "Severe - Significant threat to life or property", "min": null, "max": null, "cap_severity": "Severe"},
+      {"level": "danger", "th": null, "en": "Extreme - Extraordinary threat to life or property", "min": null, "max": null, "cap_severity": "Extreme"}
+    ],
+    "source_ids": ["tmd-cap", "oasis-cap12"]
+  },
+  "sources": {
+    "pcd-aqi-2566": {"title": "ประกาศกรมควบคุมมลพิษ เรื่อง ดัชนีคุณภาพอากาศของประเทศไทย พ.ศ. 2566 (ราชกิจจานุเบกษา เล่ม 140 ตอนพิเศษ 157 ง)", "url": "https://ratchakitcha.soc.go.th/documents/140D157S0000000000300.pdf", "read": "2026-10-23T19:54Z", "kind": "official", "status": "verified"},
+    "pcd-hourly-thansettakij-2568": {"title": "ศกพ. แจง ความแตกต่างค่า AQI กับค่าฝุ่น PM2.5 (ฐานเศรษฐกิจ, 2025-01-27)", "url": "https://www.thansettakij.com/economy/618002", "read": "2026-10-23T20:13Z", "kind": "secondary", "status": "partial"},
+    "pcd-hourly-thaipbs-2568": {"title": "ทำความเข้าใจ เทียบความต่างค่า AQI-ฝุ่น PM2.5 (Thai PBS, 2025-01-27)", "url": "https://www.thaipbs.or.th/news/content/348609", "read": "2026-10-23T20:13Z", "kind": "secondary", "status": "partial"},
+    "tmd-criteria": {"title": "กรมอุตุนิยมวิทยา: เกณฑ์อากาศ (pages 1-5)", "url": "https://www.tmd.go.th/info/เกณฑอากาศ", "read": "2026-10-23T19:55Z", "kind": "official", "status": "verified"},
+    "tmd-cyclone": {"title": "กรมอุตุนิยมวิทยา: พายุหมุนเขตร้อนในประเทศไทย", "url": "https://www.tmd.go.th/info/พายหมนเขตรอนในประเทศไทย-tropical-cyclone-in-thailand", "read": "2026-10-23T20:17Z", "kind": "official", "status": "verified"},
+    "tmd-api-list": {"title": "TMD Data Service API list (WeatherToday: daily observation at 07:00 with 24-h statistics)", "url": "https://data.tmd.go.th/api/index1.php", "read": "2026-10-23T20:10Z", "kind": "official", "status": "verified"},
+    "tmd-arcims-heatindex": {"title": "แผนที่ดรรชนีความร้อน (Heat Index Map), TMD agromet (undated)", "url": "http://www.arcims.tmd.go.th/dailydata/DetailHeatIndex.html", "read": "2026-10-23T20:04Z", "kind": "official", "status": "verified"},
+    "tmd-heat-thairath-2567": {"title": "กรมอุตุนิยมวิทยา คาดหมายค่าดัชนีความร้อนสูงสุดรายวัน 27-29 ก.พ. 67 (ไทยรัฐ)", "url": "https://www.thairath.co.th/news/society/2766399", "read": "2026-10-23T20:03Z", "kind": "secondary", "status": "partial"},
+    "bma-heat-posttoday-2569": {"title": "กทม.เตือนค่าดัชนีความร้อนวันนี้ อยู่ในเกณฑ์ อันตราย (โพสต์ทูเดย์, 2026-04-02)", "url": "https://www.posttoday.com/general-news/740308", "read": "2026-10-23T20:03Z", "kind": "secondary", "status": "partial"},
+    "doh-heat-dailynews-2569": {"title": "กรมอนามัย: ดัชนีความร้อน 4 ระดับ (เดลินิวส์)", "url": "https://www.dailynews.co.th/news/5756174/", "read": "2026-10-23T20:03Z", "kind": "secondary", "status": "partial"},
+    "hh-knowledge-heat": {"title": "Hazard-huntz KNOWLEDGE §32.8: TMD page of 7 Mar 2024 (danger band), TMD 2012 explainer (Rothfusz)", "url": "file:///home/user/Hazard-huntz/docs/KNOWLEDGE.md", "read": "carried-over (read there 2026-10-19)", "kind": "sister-project", "status": "partial"},
+    "nws-heatindex": {"title": "NWS WPC: The Heat Index Equation", "url": "https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml", "read": "2026-10-23T20:03Z", "kind": "international", "status": "verified"},
+    "tmd-uv-page": {"title": "TMD Ozone & Radiation Center: ข้อมูลเกี่ยวกับรังสี UV, Clear-Sky UV map, protection chart", "url": "https://ozone.tmd.go.th/UV_index.htm", "read": "2026-10-23T19:58Z", "kind": "official", "status": "verified"},
+    "tmd-uv-csv": {"title": "TMD clear-sky UVI forecast, 77 stations, half-hourly 07:30-16:30, 7 days ahead", "url": "https://ozone.tmd.go.th/ORC/uvi_forecast/uvi-2026-10-24.csv", "read": "2026-10-23T19:59Z", "kind": "official", "status": "verified"},
+    "who-uvi-2002": {"title": "Global Solar UV Index: A Practical Guide (WHO/WMO/UNEP/ICNIRP, WHO/SDE/OEH/02.2)", "url": "https://iris.who.int/server/api/core/bitstreams/94a908ec-14ee-4bb4-84eb-ace483c9eb51/content", "read": "2026-10-23T20:02Z", "kind": "international", "status": "verified"},
+    "who-uv-qa-2022": {"title": "WHO Q&A: Radiation: The ultraviolet (UV) index (2022-06-20)", "url": "https://www.who.int/news-room/questions-and-answers/item/radiation-the-ultraviolet-(uv)-index", "read": "2026-10-23T20:02Z", "kind": "international", "status": "verified"},
+    "wmo-8-2008": {"title": "WMO-No. 8, Guide to Meteorological Instruments and Methods of Observation, 7th edition (2008)", "url": "https://www.weather.gov/media/epz/mesonet/CWOP-WMO8.pdf", "read": "2026-10-23T20:14Z", "kind": "international", "status": "verified"},
+    "dmr-daily-2567": {"title": "กรมทรัพยากรธรณี: รายงานสถานการณ์ธรณีพิบัติภัยประจำวัน 31 ก.ค. 2567", "url": "https://www.dmr.go.th/wp-content/uploads/2024/07/ทธ-240731-รายงานประจำวัน.pdf", "read": "2026-10-23T20:09Z", "kind": "official", "status": "verified"},
+    "dmr-daily-2564": {"title": "กรมทรัพยากรธรณี: รายงานสถานการณ์ธรณีพิบัติภัยประจำวัน 13 ก.ค. 2564", "url": "https://www.dmr.go.th/wp-content/uploads/2022/10/article_20210713090439.pdf", "read": "2026-10-23T19:59Z", "kind": "official", "status": "verified"},
+    "dmr-100mm-posttoday-2568": {"title": "กรมทรัพยากรธรณีเตือน 21 จังหวัดเสี่ยงดินถล่ม น้ำป่า (โพสต์ทูเดย์, 2025-09-11)", "url": "https://www.posttoday.com/general-news/730219", "read": "2026-10-23T20:09Z", "kind": "secondary", "status": "partial"},
+    "hh-dmr": {"title": "Hazard-huntz sources dmr-rain-2568 and dmr-riskvillage-2565; docs/08 §2b (DMR hazard layers)", "url": "file:///home/user/Hazard-huntz/public/content/sources.json", "read": "carried-over", "kind": "sister-project", "status": "partial"},
+    "hii-thaiwater-app": {"title": "ThaiWater web app code: flash-flood system text and water-level classes", "url": "https://www.thaiwater.net/dist/js/app.chunk.js", "read": "2026-10-23T20:05Z", "kind": "official", "status": "verified"},
+    "hii-ffpi-report": {"title": "HII FEWS flash-flood report (header only at read time)", "url": "https://fews2.hii.or.th/model-output/data_portal/flashflood/flashflood_report.txt", "read": "2026-10-23T19:54Z", "kind": "official", "status": "verified"},
+    "dwr-ews-2561": {"title": "กรมทรัพยากรน้ำ: Early Warning report, 17 Sep 2018", "url": "https://dwr.go.th/uploads/file/statuswater/2018/DWR20180917%20Report_Early%20warning.pdf", "read": "2026-10-23T20:14Z", "kind": "official", "status": "verified"},
+    "dwr-ews-2566": {"title": "กรมทรัพยากรน้ำ: situation report, Mar 2023", "url": "https://dwr.go.th/uploads/file/statuswater/2023/660321%20Manager.pdf", "read": "2026-10-23T20:14Z", "kind": "official", "status": "verified"},
+    "fw-status": {"title": "FloodWatch classify_status and bma_status; KNOWLEDGE §97; research/2026-10-21_status_category_failures.log", "url": "file:///home/user/flood2026-research/src/floodwatch/forecast/__init__.py", "read": "re-read 2026-10-23", "kind": "sister-project", "status": "verified"},
+    "fw-rain-words": {"title": "FloodWatch KNOWLEDGE §9 and KI-224: TMD rain words applied to 24-h totals", "url": "file:///home/user/flood2026-research/docs/KNOWLEDGE.md", "read": "carried-over", "kind": "sister-project", "status": "partial"},
+    "tmd-eq-intensity": {"title": "กรมอุตุนิยมวิทยา: ความรุนแรงแผ่นดินไหว (Richter table, Mercalli I-XII in Thai)", "url": "https://www.tmd.go.th/info/ความรนแรงแผนดนไหว", "read": "2026-10-23T19:56Z", "kind": "official", "status": "verified"},
+    "tmd-eq-general-pdf": {"title": "TMD: ความรู้ทั่วไปแผ่นดินไหว (PDF)", "url": "https://earthquake.tmd.go.th/file_downloads/ความรู้ทั่วไปแผ่นดินไหว.pdf", "read": "2026-10-23T19:57Z", "kind": "official", "status": "verified"},
+    "tmd-eq-rss": {"title": "TMD: แผ่นดินไหวภายในประเทศและใกล้เคียง (list and RSS)", "url": "https://earthquake.tmd.go.th/feed/rss_inside.xml", "read": "2026-10-23T20:11Z", "kind": "official", "status": "verified"},
+    "tmd-eq-criteria-thaipbs-2568": {"title": "ข่าวค่ำ: เปิดเกณฑ์แผ่นดินไหวขนาดใด ถึงจะส่งข้อความแจ้งเตือนให้ประชาชน (Thai PBS, 2025-04-15, quoting the TMD deputy director-general)", "url": "https://www.thaipbs.or.th/program/EveningNews/watch/hvQXSI", "read": "2026-10-23T20:12Z", "kind": "secondary", "status": "partial"},
+    "tmd-eq-myanmar-thansettakij-2568": {"title": "ประกาศกรมอุตุนิยมวิทยา เรื่อง แผ่นดินไหวที่ประเทศเมียนมา, 2025-03-28 (ฐานเศรษฐกิจ)", "url": "https://www.thansettakij.com/general-news/623360", "read": "2026-10-23T20:12Z", "kind": "secondary", "status": "partial"},
+    "bkk-collapse-thairath-2568": {"title": "สรุป 24 ชม. การแผ่นดินไหวขนาด 8.2 ที่เมียนมา (ไทยรัฐ, 2025-03-29)", "url": "https://www.thairath.co.th/news/local/bangkok/2849972", "read": "2026-10-23T20:12Z", "kind": "secondary", "status": "partial"},
+    "usgs-mmi": {"title": "USGS: The Modified Mercalli Intensity Scale", "url": "https://www.usgs.gov/programs/earthquake-hazards/modified-mercalli-intensity-scale", "read": "2026-10-23T20:16Z", "kind": "international", "status": "verified"},
+    "usgs-shakemap-strings": {"title": "USGS ShakeMap shakemap_modules 1.1.18, data/mapping/map_strings.en (MMI legend)", "url": "https://pypi.org/project/shakemap-modules/", "read": "2026-10-23T20:15Z", "kind": "code", "status": "verified"},
+    "oq-allen2012": {"title": "OpenQuake 3.26.2 openquake/hazardlib/gsim/allen_2012_ipe.py (Allen, Wald & Worden 2012)", "url": "https://pypi.org/project/openquake.engine/", "read": "2026-10-23T20:00Z", "kind": "code", "status": "verified"},
+    "usgs-teng-2022": {"title": "Teng, Baker & Wald (2022), Evaluation of intensity prediction equations (IPEs) for small-magnitude earthquakes, BSSA 112(1), doi:10.1785/0120210150", "url": "https://pubs.usgs.gov/publication/70230088", "read": "2026-10-23T20:00Z", "kind": "international", "status": "partial"},
+    "firms-attributes": {"title": "NASA FIRMS: Active fire data attributes (MODIS and VIIRS)", "url": "https://www.earthdata.nasa.gov/data/tools/firms/active-fire-data-attributes-modis-viirs", "read": "2026-10-23T20:01Z", "kind": "international", "status": "verified"},
+    "firms-faq": {"title": "NASA FIRMS FAQ (detection confidence)", "url": "https://www.earthdata.nasa.gov/data/tools/firms/faq", "read": "2026-10-23T20:01Z", "kind": "international", "status": "verified"},
+    "firms-csv": {"title": "FIRMS VIIRS S-NPP 24 h, Southeast Asia (public file)", "url": "https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_SouthEast_Asia_24h.csv", "read": "2026-10-23T20:01Z", "kind": "international", "status": "verified"},
+    "gistda-hotspot-news-2568": {"title": "GISTDA เผยวานนี้จุดความร้อนประเทศไทยพบ 457 จุด (The Bangkok Insight, 2025-01-17)", "url": "https://www.thebangkokinsight.com/news/politics-general/general/1440402/", "read": "2026-10-23T20:17Z", "kind": "secondary", "status": "partial"},
+    "tmd-tsunami": {"title": "กรมอุตุนิยมวิทยา: มาตรการป้องกันภัยจากคลื่นสึนามิ", "url": "https://www.tmd.go.th/info/มาตรการปองกนภยจากคลนสนาม", "read": "2026-10-23T19:56Z", "kind": "official", "status": "verified"},
+    "ddpm-tsunami-bkbiz-2565": {"title": "จาก ทุ่นสึนามิ ชวนรู้จักระบบเตือนภัย สึนามิ ในไทย (กรุงเทพธุรกิจ, 2022-07-06, quoting DDPM)", "url": "https://www.bangkokbiznews.com/lifestyle/1013996", "read": "2026-10-23T20:13Z", "kind": "secondary", "status": "partial"},
+    "ddpm-tsunami-drill-thaipbs-2568": {"title": "ปภ.ซ้อมอพยพหนีภัย สึนามิ พร้อมกัน 6 จังหวัดอันดามัน (Thai PBS, 2025-06-27)", "url": "https://www.thaipbs.or.th/news/content/353652", "read": "2026-10-23T20:12Z", "kind": "secondary", "status": "partial"},
+    "ndwc-dns": {"title": "DNS lookup for ndwc.go.th and www.ndwc.go.th: NXDOMAIN (Status 3) at the go.th registry", "url": "https://dns.google/resolve?name=ndwc.go.th&type=A", "read": "2026-10-23T20:12Z", "kind": "observation", "status": "verified"},
+    "tmd-cap": {"title": "TMD CAP feed and item CAPTMD20261023164718_2 (Heavy Rain, Severe)", "url": "https://www.tmd.go.th/api/xml/CAP", "read": "2026-10-23T20:11Z", "kind": "official", "status": "verified"},
+    "oasis-cap12": {"title": "OASIS Common Alerting Protocol Version 1.2", "url": "https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html", "read": "2026-10-23T20:11Z", "kind": "international", "status": "verified"},
+    "hh-open-data": {"title": "Hazard-huntz docs/08-open-data.md and docs/research/open-data-2026-10-21.md", "url": "file:///home/user/Hazard-huntz/docs/08-open-data.md", "read": "carried-over", "kind": "sister-project", "status": "partial"}
+  }
+}

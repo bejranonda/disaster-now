@@ -143,3 +143,32 @@ test("collector: TMD storm track (UTC without offset) and its distance", async (
   const near = tmdStormsNear({ items: s }, 13.75, 100.5);
   assert.ok(near[0].km > 2400 && near[0].km < 2800, `${near[0].km}`); // the sources scout measured 2,592 km
 });
+
+test("AWW12 intensity: the thresholds researcher's table (OpenQuake coefficients)", async () => {
+  const { aww12 } = await import("../public/js/ipe.js");
+  // hypocentral distance → MMI, from docs/research/thresholds-2026-10-23.md §8.4 (one decimal)
+  for (const [m, r, want] of [[4.0, 10, 4.6], [5.0, 10, 6.0], [6.0, 100, 4.2], [7.0, 200, 4.8], [7.7, 1000, 3.6], [7.7, 50, 7.4]]) {
+    assert.equal(Math.round(aww12(m, r) * 10) / 10, want, `M${m} at ${r} km`);
+  }
+});
+
+test("UV tile: the level comes from the UV now, not the day's peak", () => {
+  const lat = 13.75;
+  const lon = 100.5;
+  const base = { point: { lat, lon, place: nearestTambon(TAMBON, lat, lon) }, aq: jx("aq_bkk.json"), errors: {} };
+  const night = assess({ ...base, now: NOW }).cards.find((c) => c.id === "uv"); // 02:50 Bangkok
+  assert.equal(night.level, 0);
+  const noon = assess({ ...base, now: Date.parse("2026-10-24T05:00:00Z") }).cards.find((c) => c.id === "uv"); // 12:00
+  const at = jx("aq_bkk.json").hourly;
+  const uvNoon = at.uv_index[at.time.indexOf("2026-10-24T12:00")];
+  assert.equal(noon.value, `UV ${Math.round(uvNoon)}`);
+});
+
+test("FloodWatch's own point answer leads the flood tile when it is there", () => {
+  const lat = 13.75;
+  const lon = 100.5;
+  const b = { now: NOW, point: { lat, lon, place: nearestTambon(TAMBON, lat, lon) }, twLevel: jx("tw_wl_bkk.json"), floodwatch: jx("fw_point.json"), errors: {} };
+  const flood = assess(b, "th").cards.find((c) => c.id === "flood");
+  assert.equal(flood.level, 0); // FloodWatch: area "normal"
+  assert.ok(flood.src.some((s) => s.name === "FloodWatch"));
+});
