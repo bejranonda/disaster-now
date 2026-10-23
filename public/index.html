@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ภัยรอบบ้าน ตอนนี้ · Disaster Now</title>
+<meta name="description" content="เปิดตำแหน่งหรือค้นหาพื้นที่ แล้วดูทุกความเสี่ยงที่จุดนั้น: ความร้อน ฝุ่น PM2.5 มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงาน">
+<meta name="theme-color" content="#0f3d5e">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/app.css?v=0.1.0">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo" aria-hidden="true">◉</span> <span data-t="brand">ภัยรอบบ้าน ตอนนี้</span></div>
+  <div class="tools">
+    <button type="button" id="bigger" class="tbtn" aria-pressed="false" data-t-title="bigger" title="ตัวหนังสือใหญ่ขึ้น">ก+</button>
+    <button type="button" id="lang" class="tbtn" lang="en">EN</button>
+  </div>
+</header>
+
+<main id="main">
+  <section class="finder" aria-labelledby="finder-h">
+    <h1 id="finder-h" class="sr-only" data-t="finderH">เลือกจุดที่จะดู</h1>
+    <button type="button" id="gps" class="btn primary big"><span aria-hidden="true">📍</span> <span data-t="gps">ใช้ตำแหน่งของฉันตอนนี้</span></button>
+    <form id="search" class="search" role="search" autocomplete="off">
+      <label for="q" class="sr-only" data-t="searchLabel">ค้นหาพื้นที่</label>
+      <input id="q" type="search" enterkeyhint="search" data-t-ph="searchPh" placeholder="หรือพิมพ์ ตำบล อำเภอ จังหวัด ซอย ถนน สถานที่">
+      <button type="submit" class="btn" data-t="searchBtn">ค้นหา</button>
+    </form>
+    <ul id="results" class="results" hidden></ul>
+    <div id="saved" class="saved" hidden></div>
+    <p id="finder-msg" class="msg" role="status" hidden></p>
+  </section>
+
+  <section id="welcome" class="welcome">
+    <p data-t="welcome1">ดูทุกความเสี่ยงที่จุดเดียว: ความร้อน ฝุ่น มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า</p>
+    <p class="muted" data-t="welcome2">ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงานไทยและนานาชาติ ตำแหน่งของคุณอยู่ในเครื่องนี้ ส่งให้แหล่งข้อมูลเฉพาะแบบปัดเศษ ~1 กม.</p>
+  </section>
+
+  <section id="report" hidden>
+    <div class="place">
+      <div class="place-main">
+        <div id="place-name" class="place-name"></div>
+        <div id="place-sub" class="place-sub muted"></div>
+      </div>
+      <div class="place-act">
+        <button type="button" id="save" class="btn small">⭐ <span data-t="save">บันทึก</span></button>
+        <button type="button" id="line" class="btn small line" data-t="line">ส่งใน LINE</button>
+        <button type="button" id="share" class="btn small">↗ <span data-t="share">แชร์</span></button>
+        <button type="button" id="refresh" class="btn small" data-t-title="refresh" title="อัปเดต">↻</button>
+      </div>
+    </div>
+
+    <div id="verdict" class="verdict lv-none" role="status" aria-live="polite"></div>
+    <div id="warnings"></div>
+    <h2 class="sr-only" data-t="tilesH">ทุกเรื่องที่จุดนี้</h2>
+    <nav id="tiles" class="tiles"></nav>
+    <section id="pre-wrap" class="block" hidden>
+      <h2 data-t="preH">⏰ เตือนล่วงหน้า 3 วัน</h2>
+      <ul id="pre" class="pre"></ul>
+    </section>
+    <div id="cards" class="cards"></div>
+    <section class="block">
+      <h2 data-t="outlookH">3 วันข้างหน้า</h2>
+      <div id="outlook" class="outlook-wrap"></div>
+      <p class="muted small" data-t="outlookNote">ตัวเลขกลางของแบบจำลอง 51 ชุด สีบอกระดับ ฝนคือรวมทั้งวัน ฝุ่นคือค่าเฉลี่ยทั้งวัน</p>
+    </section>
+    <section class="block" id="profile-wrap" hidden>
+      <h2 data-t="profileH">ข้อมูลพื้นที่ (ระยะยาว)</h2>
+      <ul id="profile" class="profile"></ul>
+    </section>
+    <p id="updated" class="muted small"></p>
+  </section>
+
+  <section class="block official">
+    <h2 data-t="officialH">ประกาศเตือนภัยทางการ</h2>
+    <p data-t="officialP">เว็บนี้สรุปข้อมูลเปิด ไม่ใช่ประกาศเตือนภัย ฟังประกาศจากหน่วยงาน:</p>
+    <ul class="links">
+      <li><a href="https://www.tmd.go.th/warning-and-events/warnings" rel="noopener" target="_blank" data-t="lTmd">กรมอุตุนิยมวิทยา: ประกาศเตือนภัย</a> · <a href="tel:1182">1182</a></li>
+      <li><a href="https://www.disaster.go.th" rel="noopener" target="_blank" data-t="lDdpm">ปภ. สายด่วนนิรภัย</a> · <a href="tel:1784">1784</a></li>
+      <li><a href="https://earthquake.tmd.go.th" rel="noopener" target="_blank" data-t="lQuake">กองเฝ้าระวังแผ่นดินไหว กรมอุตุฯ</a></li>
+      <li><a href="https://air4thai.pcd.go.th" rel="noopener" target="_blank" data-t="lAir">Air4Thai กรมควบคุมมลพิษ</a></li>
+      <li><a href="https://www.thaiwater.net" rel="noopener" target="_blank" data-t="lWater">คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</a> · <a href="https://flood.autobahn.bot" rel="noopener" target="_blank">FloodWatch</a></li>
+      <li><span data-t="lEmergency">เจ็บป่วยฉุกเฉิน</span> <a href="tel:1669">1669</a> · <span data-t="lFire">ไฟไหม้</span> <a href="tel:199">199</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <details>
+    <summary data-t="aboutH">ข้อมูลมาจากไหน · ความเป็นส่วนตัว</summary>
+    <div id="about" class="about"></div>
+  </details>
+  <p class="muted small"><span data-t="footer">ภัยรอบบ้าน ตอนนี้ · โครงการทดลอง ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ</span> · <span id="ver"></span></p>
+</footer>
+
+<script type="module" src="js/main.js?v=0.1.0"></script>
+</body>
+</html>

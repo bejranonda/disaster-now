@@ -1,0 +1,12 @@
+{
+  "name": "ภัยรอบบ้าน ตอนนี้ · Disaster Now",
+  "short_name": "ภัยรอบบ้าน",
+  "description": "ทุกความเสี่ยงภัยที่จุดเดียว ตอนนี้และ 3 วันข้างหน้า: ความร้อน ฝุ่น มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#0f3d5e",
+  "lang": "th",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

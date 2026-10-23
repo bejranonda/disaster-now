@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/"> 
+
+<channel>
+<title>แผ่นดินไหว</title>
+<link>https://earthquake.tmd.go.th</link>
+<description>กองเฝ้าระวังแผ่นดินไหว</description>
+<language>th-TH</language>	
+<ttl>120</ttl>
+<title>รายงานแผ่นดินไหว</title>		
+<link>https://earthquake.tmd.go.th</link>	
+<width>33</width>		
+<height>32</height>	
+<description>รายงานแผ่นดินไหว โดย กรมอุตุนิยมวิทยา กระทรวงดิจิทัลเพื่อเศรษฐกิจและสังคม</description>
+
+<item><title>แผ่นดินไหว ประเทศลาว (19.081,101.974) ขนาด 4.2 วันที่ 24 ตุลาคม 2569 เวลา 02:31 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17291</link>
+<description><![CDATA[ 2026-10-24 02:31:21 น.<br>Lat. 19.081 , Long. 101.974<br>ขนาด 4.2 <br><br> ]]></description>
+<pubDate>Sat, 24 Oct 2026 02:31:21 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ประเทศเมียนมา (21.477,98.305) ขนาด 2.5 วันที่ 24 ตุลาคม 2569 เวลา 01:46 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17290</link>
+<description><![CDATA[ 2026-10-24 01:46:06 น.<br>Lat. 21.477 , Long. 98.305<br>ขนาด 2.5 <br><br> ]]></description>
+<pubDate>Sat, 24 Oct 2026 01:46:06 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ต.ปากน้ำ อ.สวรรคโลก จ.สุโขทัย (17.244,99.926) ขนาด 1.8 วันที่ 23 ตุลาคม 2569 เวลา 22:30 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17288</link>
+<description><![CDATA[ 2026-10-23 22:30:46 น.<br>Lat. 17.244 , Long. 99.926<br>ขนาด 1.8 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 22:30:46 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ต.ปากน้ำ อ.สวรรคโลก จ.สุโขทัย (17.257,99.928) ขนาด 2.4 วันที่ 23 ตุลาคม 2569 เวลา 22:20 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17287</link>
+<description><![CDATA[ 2026-10-23 22:20:09 น.<br>Lat. 17.257 , Long. 99.928<br>ขนาด 2.4 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 22:20:09 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ประเทศลาว (19.903,101.087) ขนาด 1.9 วันที่ 23 ตุลาคม 2569 เวลา 18:01 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17285</link>
+<description><![CDATA[ 2026-10-23 18:01:49 น.<br>Lat. 19.903 , Long. 101.087<br>ขนาด 1.9 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 18:01:49 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ประเทศลาว (20.195,101.217) ขนาด 1.6 วันที่ 23 ตุลาคม 2569 เวลา 17:43 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17286</link>
+<description><![CDATA[ 2026-10-23 17:43:29 น.<br>Lat. 20.195 , Long. 101.217<br>ขนาด 1.6 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 17:43:29 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ต.เมืองนะ อ.เชียงดาว จ.เชียงใหม่ (19.761,98.940) ขนาด 1.9 วันที่ 23 ตุลาคม 2569 เวลา 16:39 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17284</link>
+<description><![CDATA[ 2026-10-23 16:39:24 น.<br>Lat. 19.761 , Long. 98.940<br>ขนาด 1.9 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 16:39:24 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ประเทศเมียนมา (17.936,96.579) ขนาด 2.4 วันที่ 23 ตุลาคม 2569 เวลา 12:31 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17283</link>
+<description><![CDATA[ 2026-10-23 12:31:05 น.<br>Lat. 17.936 , Long. 96.579<br>ขนาด 2.4 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 12:31:05 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ประเทศเมียนมา (21.544,98.565) ขนาด 2.5 วันที่ 23 ตุลาคม 2569 เวลา 11:49 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17282</link>
+<description><![CDATA[ 2026-10-23 11:49:23 น.<br>Lat. 21.544 , Long. 98.565<br>ขนาด 2.5 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 11:49:23 +0700</pubDate>
+</item>
+<item><title>แผ่นดินไหว ประเทศเมียนมา (21.687,98.490) ขนาด 2.9 วันที่ 23 ตุลาคม 2569 เวลา 09:45 น. ตามเวลาประเทศไทย [TMD] #แผ่นดินไหว #กองเฝ้าระวังแผ่นดินไหว #earthquaketmd</title>
+<link>https://earthquake.tmd.go.th/inside-info.html?earthquake=17281</link>
+<description><![CDATA[ 2026-10-23 09:45:18 น.<br>Lat. 21.687 , Long. 98.490<br>ขนาด 2.9 <br><br> ]]></description>
+<pubDate>Fri, 23 Oct 2026 09:45:18 +0700</pubDate>
+</item></channel></rss>

@@ -1,0 +1,30 @@
+# 2026-10-23T20:24:02Z node research/crosscheck_floodwatch.mjs tw_wl_all.json fw_stations_now.json (ThaiWater fetched 20:23:2x UTC, FloodWatch 20:23:4x UTC, 23 Oct 2026, cloud host outside Thailand)
+ThaiWater gauges judged by this app (fresh, with a bank): 707
+with a FloodWatch twin of the same code and both known: 693; same status: 678 (97.8 %)
+skipped (FloodWatch "unknown" or ours stale/no bank): 107
+pairs (ours→FloodWatch): {"normal→fw:normal":539,"warning→fw:warning":31,"watch→fw:watch":92,"critical→fw:critical":16,"watch→fw:normal":12,"warning→fw:normal":2,"normal→fw:watch":1}
+differences explained by: BMA thresholds 0 · another bank 0 · another reading 4 · other 11
+   {"code":"TCP010","name":"ทรบ. ปากคลองห้าวา (ทุ่งท่าวุ้ง)","ours":"watch","fw":"normal","basis":"bank","agency":"HII","level":6.93,"fwLevel":6.98,"bank":8,"fwBank":8,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"HDA006","name":"สะพานอนุสรณ์ 100 ปีสิงห์บุรี (สะพานหลวงพ่อแพ 89)","ours":"watch","fw":"normal","basis":"bank","agency":"HII","level":8.77,"fwLevel":8.77,"bank":12.15,"fwBank":12.15,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"TCP009","name":"สถานีสูบน้ำปากคลองสระตาแวว (ทุ่งซ้ายคลองชัยนาท)","ours":"watch","fw":"normal","basis":"bank","agency":"HII","level":11.77,"fwLevel":11.77,"bank":15.22,"fwBank":15.22,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"TCP008","name":"สถานีสูบน้ำปากคลองสายห้วยแก้ว (ทุ่งซ้ายคลองชัยนาท)","ours":"watch","fw":"normal","basis":"bank","agency":"HII","level":11.61,"fwLevel":11.59,"bank":15.44,"fwBank":15.44,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"TCP011","name":"สถานีสูบน้ำคลองระบายชัยนาท-ป่าสัก 2 (ทุ่งเชียงราก)","ours":"watch","fw":"normal","basis":"bank","agency":"HII","level":10.71,"fwLevel":10.71,"bank":12.3,"fwBank":12.3,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"CHK001","name":"บ่อดินขาว","ours":"warning","fw":"normal","basis":"bank","agency":"HII","level":15.18,"fwLevel":15.18,"bank":16.81,"fwBank":16.81,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"PATO01","name":"สะพานบ้านตรังพัฒนา","ours":"watch","fw":"normal","basis":"bank","agency":"HII","level":17.51,"fwLevel":17.5,"bank":22.56,"fwBank":22.56,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"X.176","name":"บ้านหาดทรายแก้ว ","ours":"watch","fw":"normal","basis":"bank","agency":"RID","level":24.29,"fwLevel":24.29,"bank":27.2,"fwBank":27.2,"time":"2026-10-23T22:00","fwTime":"2026-10-23T15:00:00+00:00"}
+   {"code":"ONE039","name":"สะพานข้ามคลองระโนด","ours":"normal","fw":"watch","basis":"bank","agency":"HII","level":0.43,"fwLevel":0.45,"bank":1.18,"fwBank":1.18,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"X.233","name":"บ้านไสหาร","ours":"watch","fw":"normal","basis":"bank","agency":"RID","level":15.99,"fwLevel":15.99,"bank":21.7,"fwBank":21.7,"time":"2026-10-23T22:00","fwTime":"2026-10-23T15:00:00+00:00"}
+   {"code":"X.265","name":"หน้าวัดภูผาพิมุข","ours":"watch","fw":"normal","basis":"bank","agency":"RID","level":6.85,"fwLevel":6.85,"bank":8,"fwBank":8,"time":"2026-10-23T22:00","fwTime":"2026-10-23T15:00:00+00:00"}
+   {"code":"X.273","name":"บ้านปายอยือนิ ","ours":"watch","fw":"normal","basis":"bank","agency":"RID","level":11.62,"fwLevel":11.62,"bank":16.5,"fwBank":16.5,"time":"2026-10-23T22:00","fwTime":"2026-10-23T15:00:00+00:00"}
+   {"code":"X.77","name":"บ้านหัวสะพาน","ours":"warning","fw":"normal","basis":"bank","agency":"RID","level":36.74,"fwLevel":36.74,"bank":40.3,"fwBank":40.3,"time":"2026-10-23T22:00","fwTime":"2026-10-23T15:00:00+00:00"}
+   {"code":"X.73A","name":"บ้านบองอ ","ours":"watch","fw":"normal","basis":"bank","agency":"RID","level":22.26,"fwLevel":22.26,"bank":26.8,"fwBank":26.8,"time":"2026-10-23T22:00","fwTime":"2026-10-23T15:00:00+00:00"}
+   {"code":"X.274","name":"บ้านบูเก๊ะตา","ours":"watch","fw":"normal","basis":"bank","agency":"RID","level":19.79,"fwLevel":19.79,"bank":23.5,"fwBank":23.5,"time":"2026-10-23T22:00","fwTime":"2026-10-23T15:00:00+00:00"}
+
+# after treating ground_level 0 as missing (FloodWatch's behaviour), 2026-10-23T20:24:20Z
+ThaiWater gauges judged by this app (fresh, with a bank): 707
+with a FloodWatch twin of the same code and both known: 693; same status: 691 (99.7 %)
+skipped (FloodWatch "unknown" or ours stale/no bank): 107
+pairs (ours→FloodWatch): {"normal→fw:normal":553,"warning→fw:warning":31,"watch→fw:watch":91,"critical→fw:critical":16,"normal→fw:watch":2}
+differences explained by: BMA thresholds 0 · another bank 0 · another reading 1 · other 1
+   {"code":"TCP004","name":"ปตร.ลาดชิด (ทุ่งผักไห่)","ours":"normal","fw":"watch","basis":"bank","agency":"HII","level":3.79,"fwLevel":3.79,"bank":5,"fwBank":5,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+   {"code":"ONE039","name":"สะพานข้ามคลองระโนด","ours":"normal","fw":"watch","basis":"bank","agency":"HII","level":0.43,"fwLevel":0.45,"bank":1.18,"fwBank":1.18,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}

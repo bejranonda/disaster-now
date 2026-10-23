@@ -1,0 +1,103 @@
+// The page's own words (the hazard cards' words are in assess.js beside the logic that picks them).
+// Every key has th and en; test/i18n.test.mjs checks that and that every data-t in index.html exists here.
+
+export const STR = {
+  brand: { th: "ภัยรอบบ้าน ตอนนี้", en: "Disaster Now" },
+  bigger: { th: "ตัวหนังสือใหญ่ขึ้น", en: "Larger text" },
+  finderH: { th: "เลือกจุดที่จะดู", en: "Choose a place" },
+  gps: { th: "ใช้ตำแหน่งของฉันตอนนี้", en: "Use my location now" },
+  searchLabel: { th: "ค้นหาพื้นที่", en: "Search for a place" },
+  searchPh: { th: "หรือพิมพ์ ตำบล อำเภอ จังหวัด ซอย ถนน สถานที่", en: "or type a subdistrict, district, province, road or place" },
+  searchBtn: { th: "ค้นหา", en: "Search" },
+  welcome1: { th: "ดูทุกความเสี่ยงที่จุดเดียว: ความร้อน ฝุ่น มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า",
+    en: "Every hazard at one point: heat, dust, pollution, UV, rain, wind, floods, flash floods, landslides, earthquakes, fires" },
+  welcome2: { th: "ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงานไทยและนานาชาติ ตำแหน่งของคุณอยู่ในเครื่องนี้ ส่งให้แหล่งข้อมูลเฉพาะแบบปัดเศษ ~1 กม.",
+    en: "Now and for the next 3 days, from Thai and international open data. Your location stays on this phone; data providers get it rounded to ~1 km." },
+  save: { th: "บันทึก", en: "Save" },
+  saved: { th: "บันทึกแล้ว", en: "Saved" },
+  share: { th: "แชร์", en: "Share" },
+  refresh: { th: "อัปเดต", en: "Refresh" },
+  preH: { th: "⏰ เตือนล่วงหน้า 3 วัน", en: "⏰ Heads-up for the next 3 days" },
+  outlookH: { th: "3 วันข้างหน้า", en: "The next 3 days" },
+  outlookNote: { th: "ตัวเลขกลางของแบบจำลอง 51 ชุด สีบอกระดับ ฝนคือรวมทั้งวัน ฝุ่นคือค่าเฉลี่ยทั้งวัน",
+    en: "The middle of 51 model runs; colours show the level. Rain is the day's total, dust the day's mean." },
+  profileH: { th: "ข้อมูลพื้นที่ (ระยะยาว)", en: "About this place (long term)" },
+  officialH: { th: "ประกาศเตือนภัยทางการ", en: "Official warnings" },
+  officialP: { th: "เว็บนี้สรุปข้อมูลเปิด ไม่ใช่ประกาศเตือนภัย ฟังประกาศจากหน่วยงาน:", en: "This page summarises open data; it is not a warning service. Follow the agencies:" },
+  lTmd: { th: "กรมอุตุนิยมวิทยา: ประกาศเตือนภัย", en: "Thai Meteorological Department: warnings" },
+  lDdpm: { th: "ปภ. สายด่วนนิรภัย", en: "DDPM disaster hotline" },
+  lQuake: { th: "กองเฝ้าระวังแผ่นดินไหว กรมอุตุฯ", en: "TMD earthquake watch" },
+  lAir: { th: "Air4Thai กรมควบคุมมลพิษ", en: "Air4Thai (Pollution Control Department)" },
+  lWater: { th: "คลังข้อมูลน้ำแห่งชาติ (ThaiWater)", en: "ThaiWater (HII)" },
+  lEmergency: { th: "เจ็บป่วยฉุกเฉิน", en: "Medical emergency" },
+  lFire: { th: "ไฟไหม้", en: "Fire" },
+  aboutH: { th: "ข้อมูลมาจากไหน · ความเป็นส่วนตัว", en: "Where the data comes from · privacy" },
+  footer: { th: "ภัยรอบบ้าน ตอนนี้ · โครงการทดลอง ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ",
+    en: "Disaster Now · an experiment; data can be wrong or late; always check with the agencies" },
+  // messages
+  locating: { th: "กำลังหาตำแหน่ง…", en: "Finding your location…" },
+  geoDenied: { th: "ไม่ได้รับอนุญาตให้ใช้ตำแหน่ง เปิดสิทธิ์ตำแหน่งในเบราว์เซอร์ หรือพิมพ์ค้นหาแทน", en: "Location permission was refused. Allow it in the browser, or search instead." },
+  geoFail: { th: "หาตำแหน่งไม่ได้ ลองอีกครั้ง หรือพิมพ์ค้นหาแทน (ถ้าเปิดจาก LINE ลองเปิดในเบราว์เซอร์)", en: "Couldn't get your location. Try again or search instead (from LINE, try opening in your browser)." },
+  geoNone: { th: "เบราว์เซอร์นี้ไม่มีตำแหน่ง พิมพ์ค้นหาแทน", en: "This browser has no location; please search instead." },
+  outside: { th: "จุดนี้อยู่นอกประเทศไทย ข้อมูลของเว็บนี้ครอบคลุมเฉพาะประเทศไทย", en: "This point is outside Thailand; this page covers Thailand only." },
+  osmBtn: { th: "🔎 ค้นหา “{q}” ใน OpenStreetMap (ซอย ถนน สถานที่) · คำที่พิมพ์จะส่งไปค้นที่นั่น", en: "🔎 Search OpenStreetMap for “{q}” (roads, places) · what you typed is sent there" },
+  osmWait: { th: "กำลังค้นหา…", en: "Searching…" },
+  osmNone: { th: "ไม่พบ ลองชื่อซอย ถนน อำเภอ หรือชื่อสถานที่ใกล้ ๆ", en: "Nothing found. Try a road, district or a nearby landmark." },
+  osmFail: { th: "ค้นหาไม่สำเร็จ ({e}) ลองอีกครั้ง", en: "Search failed ({e}); try again" },
+  osmCredit: { th: "© ผู้ร่วมสร้าง OpenStreetMap", en: "© OpenStreetMap contributors" },
+  loading: { th: "กำลังดึงข้อมูล…", en: "Loading…" },
+  nearT: { th: "ใกล้", en: "Near" },
+  gpsLabel: { th: "ตำแหน่งของฉัน", en: "My location" },
+  updated: { th: "อัปเดต {t} · แบบจำลอง {m} ชุด · จุดที่ส่งให้แหล่งข้อมูล {p}", en: "Updated {t} · {m} model runs · point sent to providers {p}" },
+  namePrompt: { th: "ตั้งชื่อที่นี่ (เช่น บ้าน บ้านแม่ ที่ทำงาน)", en: "Name this place (e.g. home, mum's, work)" },
+  copied: { th: "คัดลอกลิงก์แล้ว", en: "Link copied" },
+  shareText: { th: "ความเสี่ยงภัยที่ {n} ตอนนี้", en: "Hazards at {n} now" },
+  remove: { th: "ลบ", en: "Remove" },
+  how: { th: "ทำอย่างไร", en: "What to do" },
+  source: { th: "ข้อมูล", en: "Data" },
+  model: { th: "แบบจำลอง", en: "model" },
+  failed: { th: "ดึงข้อมูลไม่สำเร็จ", en: "Couldn't load" },
+  alsoL: { th: "เรื่องอื่น:", en: "Also:" },
+  quietSoFar: { th: "เรื่องที่มีข้อมูลอยู่ในระดับต่ำสุดของหน่วยงาน (บางเรื่องยังไม่มีข้อมูล)", en: "What we have is at the agencies' lowest step (some hazards have no data)" },
+  allQuiet: { th: "ทุกเรื่องอยู่ในระดับต่ำสุดของหน่วยงาน ณ ตอนนี้", en: "Every hazard is at the agencies' lowest step right now" },
+  official: { th: "ประกาศทางการ", en: "official notice" },
+  news: { th: "ข่าวอ้างหน่วยงาน", en: "news quoting the agency" },
+  noData: { th: "ไม่มีข้อมูล", en: "No data" },
+  hoursOld: { th: "{h} ชม.ก่อน", en: "{h} h old" },
+  notThis: { th: "ไม่ใช่ตำบลนี้?", en: "Not this subdistrict?" },
+  pickYourself: { th: "พิมพ์ชื่อตำบลหรือสถานที่ด้านบน", en: "Type your subdistrict or a place above" },
+  openBrowser: { th: "เปิดในเบราว์เซอร์ของเครื่อง", en: "Open in the phone's browser" },
+  line: { th: "ส่งใน LINE", en: "Send in LINE" },
+  tilesH: { th: "ทุกเรื่องที่จุดนี้", en: "Every hazard here" },
+  missing: { th: "ยังไม่มีข้อมูล:", en: "No data yet:" },
+  tableDay: { th: "", en: "" },
+  rowHeat: { th: "🌡️ ร้อน (°C)", en: "🌡️ Heat (°C)" },
+  rowRain: { th: "🌧️ ฝน", en: "🌧️ Rain" },
+  rowPm: { th: "😷 PM2.5", en: "😷 PM2.5" },
+  rowUv: { th: "☀️ UV", en: "☀️ UV" },
+  rowGust: { th: "💨 ลมกระโชก", en: "💨 Gusts" },
+  heavyChance: { th: "ฝนหนัก", en: "heavy" },
+  preItem: { th: "{icon} {what} · {day} · โอกาส {p}", en: "{icon} {what} · {day} · chance {p}" },
+  preItemNoP: { th: "{icon} {what} · {day}", en: "{icon} {what} · {day}" },
+  preNone: { th: "ไม่มีสิ่งผิดปกติที่แบบจำลองคาดไว้ใน 3 วัน", en: "Nothing unusual in the models for 3 days" },
+  officialNow: { th: "📢 ประกาศของกรมอุตุนิยมวิทยาสำหรับจังหวัดนี้", en: "📢 TMD warning for this province" },
+  until: { th: "ถึง", en: "until" },
+};
+
+/** t("key", {q: …}) in the current language, with {name} placeholders filled. */
+export function makeT(lang) {
+  return (key, vars = {}) => {
+    const s = STR[key] ? STR[key][lang === "en" ? "en" : "th"] : key;
+    return s.replace(/\{(\w+)\}/g, (_, k) => (vars[k] ?? ""));
+  };
+}
+
+/** The pre-warning's "what" in words. */
+export const PRE_WHAT = {
+  heat: { 3: { th: "ร้อนระดับอันตราย (≥ 42 °C)", en: "Dangerous heat (≥ 42 °C)" } },
+  rain24: { 2: { th: "ฝนหนัก (> 35 มม.)", en: "Heavy rain (> 35 mm)" }, 3: { th: "ฝนหนักมาก (> 90 มม.)", en: "Very heavy rain (> 90 mm)" } },
+  gust: { 2: { th: "ลมกระโชกแรงมาก (≥ 62 กม./ชม.)", en: "Gale-force gusts (≥ 62 km/h)" } },
+  pm25: { 2: { th: "ฝุ่นเริ่มมีผลต่อสุขภาพ", en: "Dust starting to affect health" }, 3: { th: "ฝุ่นมีผลต่อสุขภาพ", en: "Dust affecting health" } },
+  flash: { 2: { th: "เสี่ยงน้ำป่า (สสน.)", en: "Flash-flood risk (HII)" } },
+};
+export const PRE_ICON = { heat: "🌡️", rain24: "🌧️", gust: "💨", pm25: "😷", flash: "🌊" };

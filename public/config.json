@@ -1,0 +1,4 @@
+{
+  "_readme": "Runtime settings, read by the page without a code change. geocoder: photon (then nominatim if photon fails) | nominatim | floodwatch | off. See docs/GUIDELINES.md rule 9.",
+  "geocoder": "photon"
+}

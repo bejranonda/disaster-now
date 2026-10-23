@@ -1,0 +1,9 @@
+node_modules/
+# the collector's output is published by the deploy job, never committed (it is out of date the next hour)
+public/data/live/
+# big downloads for research stay in the session scratchpad; only small derived files are committed
+research/cache/
+*.tmp
+.env
+.DS_Store
+__pycache__/
