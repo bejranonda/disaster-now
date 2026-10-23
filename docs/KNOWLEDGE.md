@@ -32,9 +32,9 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 | Tropical cyclone (TMD) | depression < 63 · storm 63–< 118 · typhoon ≥ 118 km/h | TMD (its criteria page says 65 kt for a typhoon, its cyclone page 64 kt) | ✅ |
 | Landslide | DMR's trigger: > 100 mm of rain in 24 h in a risk area | DMR daily report legend (31 Jul 2024); Post Today 11 Sep 2025 | ✅; the AP Model's 3-day numbers aren't published |
 | River gauge | FloodWatch: ≥ bank → ล้นตลิ่ง (3) · ≥ 90 % of bed-to-bank → ใกล้ล้นตลิ่ง (2) · ≥ 70 % → เฝ้าระวัง (1) · else ยังรับน้ำได้ (0); no bed: within 0.3 m of the bank → 2 | FloodWatch `forecast.classify_status`, words `web/app.js STATUS` (re-read) | ✅ FloodWatch calls it heuristic |
-| Earthquake at a point (MMI) | < 3.0 → 0 · 3.0–4.9 → 1 · 5.0–5.9 → 2 · ≥ 6.0 → 3 (ShakeMap's words) | Allen, Wald & Worden 2012 (§10) | ✅ equation; cut points the app's |
+| Earthquake at a point (MMI, + 1.06 in greater Bangkok within 1,600 km) | < 2.5 "ส่วนใหญ่ไม่รู้สึก แต่บางคนอาจรู้สึกได้ โดยเฉพาะบนอาคารสูง" → 0 · 2.5–4.4 "อาจรู้สึกได้" → 1 · ≥ 4.5 "รู้สึกได้ชัด" → 2; never "ไม่รู้สึก", never a damage word | Allen, Wald & Worden 2012 (§10); edges and words from 357 Thai DYFI city reports (MODELS §5) | ✅ equation; edges validated in-sample (since 0.2.0; before: 3 / 5 / 6, ShakeMap words) |
 | Fire hotspots | nearest within 10 km → 1 · within 2 km → 2 (nominal + high confidence only) | none: no Thai agency grades hotspots | app's own |
-| Official warning (TMD CAP severity) | Minor, Moderate → 1 · Severe → 2 · Extreme → 3 | OASIS CAP 1.2; TMD marks its routine heavy-rain alert "Severe" | ✅; mapping the app's |
+| Official warning (TMD CAP severity) | Minor, Moderate → 1 · Severe → 2 · Extreme → 3; lifts its hazard's tile: rain/flood → rain, storm/wind/cyclone → wind, heat → heat (`events.capHazard`) | OASIS CAP 1.2; TMD marks its routine heavy-rain alert "Severe" | ✅; mapping the app's |
 
 **Rounding:** a value is rounded to the agency's resolution before banding (PM2.5 0.1, AQI and UV whole numbers), so 25.04 is ดี and 25.1 ปานกลาง (`levels.roundTo`, `test/core.test.mjs`).
 
@@ -45,6 +45,12 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 - UV from the value now in daylight (06–18), not the day's peak: on 24 Oct 2026 every one of TMD's 77 stations had a clear-sky peak of 8 or more (thresholds §3.2).
 - A river gauge sets the point's level through FloodWatch's area index only; a storm's distance (≤ 800 km → 1, ≤ 300 km → 2); fires by distance; Andaman tsunami watch after an M ≥ 6.5 in the Indian Ocean within 6 h.
 - Groupings of UV, rain, wind and MMI as above.
+- **A forecast alone tops out at เตรียมตัว** (`assess.MODEL_MAX = 2`, since 0.2.0): heat, rain and gust forecasts and CAMS's UV. "ทำทันที" needs a measurement (a PCD station, a gauge, measured rain) or an agency's warning or estimate (TMD CAP, HII's list, GISTDA). The tile still shows the agency's word for the value (MODELS §6; visitor audit V1).
+- **Rain in three words** at the validation's cut points: below 10 % "ต่ำ", 10–40 % "มีโอกาส", 40 % and more "สูง" (`outlook.RAIN_WORD_CUTS`); no forecast amount on screen (MODELS §3).
+- **Storm lines only within 1,500 km** (`assess.STORM_SHOW_KM`; the cross-check: lines at 2,100–7,500 km were noise).
+- **A quake gets a line** within 300 km or at a predicted MMI of 2.5 or more (`quake.quakesForPoint`).
+- **Heat numbers are floored** for display (41.6 shows 41, "เตือนภัย"), so a number never reads past its band (V26); the window is named ("บ่ายนี้" before 16:00 Bangkok, then "บ่ายพรุ่งนี้").
+- **PM2.5 days 2–3 show the band word with "อาจเปลี่ยน",** not a number (their tested miss is 6–11 µg/m³).
 
 ## 4. Time and data rules, per source
 
@@ -84,14 +90,25 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 
 A page that keeps nothing about a person is outside most of the PDPA's duties; the first per-person record (a push subscription, an account, a stored position, an IP log) brings consent, a notice with retention, a 72-hour breach duty and cross-border rules (Hazard-huntz docs/09 §7, a summary of the Act; a Thai lawyer must confirm). This app sends providers a ~1 km point and keeps saved places in the browser only.
 
-## 9. The ensemble
+## 9. The ensemble and its corrections
 
-ECMWF IFS 0.25° ensemble via Open-Meteo: the control and 50 members (51), hourly to 96 h from local midnight; temperature, humidity, precipitation and gusts are each member's own, so the heat index is computed per member. 26.7 KB gzip per call (4 days, 4 variables). For Bangkok on 24–26 Oct the median daily-max heat index was 38–39 °C (air 31.5–32.3 °C, humid), rain 2–4 mm a day, gusts about 25–27 km/h.
+ECMWF IFS 0.25° ensemble via Open-Meteo: the control and 50 members (51), hourly to 96 h from local midnight; temperature, humidity, precipitation and gusts are each member's own, so the heat index is computed per member. 26.7 KB gzip per call (4 days, 4 variables). For Bangkok on 24–26 Oct the raw median daily-max heat index was 38–39 °C (air 31.5–32.3 °C, humid), rain 2–4 mm a day, gusts about 25–27 km/h.
+
+**Corrections the page applies** (`public/js/calibration.js`, from `research/out/calibration.json`; MODELS §1–2):
+
+| What | Formula | Fitted on | Tested on |
+|---|---|---|---|
+| Heat index, 0–48 h | HI = 10.375 + 0.8647·HI_raw per member, dressed with N(0, 2.95 °C) | 2025, 8 TMD stations (sample A), ECMWF HRES day 1 | 2026 at A and 10 held-out stations; ENS Mar–May 2026 |
+| Heat index, 48–72 h | HI = 11.689 + 0.826·HI_raw, SD 3.01 °C | 2025 day-2 forecasts (54–57 h) | day 3 untested |
+| PM2.5, days 1 / 2 / 3 | measured 24-h mean × (CAMS(day) ÷ CAMS(past 24 h))^β, β = 0.45 / 0.55 / 0.55; needs ≥ 18 h of CAMS's past day | Dec 2025–Feb 2026, sample A | Mar–Apr 2026 at A and B, Dec–Feb at B, 20 Sep–22 Oct 2026 (post-hoc choice) |
+
+With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the live walk: "บ่ายนี้ 43 °C", range 39–47 °C).
 
 ## 10. Earthquakes
 
 - **Allen, Wald & Worden (2012), hypocentral form:** MMI = 2.085 + 1.428·M − 1.402·ln√(R² + Rm²) + 0.078·ln(R/50) [R > 50 km], Rm = −0.209 + 2.042·e^(M−5); σ = 0.82 + 0.37/(1 + (R/22.9)²). Copied from OpenQuake 3.26.2 `allen_2012_ipe.py` by two researchers independently (thresholds §8.4; `research/e4_quake_ipe.py`). Unit-tested against the table in thresholds §8.4 (e.g. M7.7 at 1,000 km → 3.6).
-- **Its limit, on screen:** no site term. The 28 Mar 2025 M7.7 Myanmar quake was 996 km from central Bangkok, where the equation gives MMI ≈ 3.6, yet a building under construction collapsed in Chatuchak (Thairath, 29 Mar 2025). Soft clay and tall buildings shake more; a point source understates a long rupture. Validation against "Did You Feel It?" is in [MODELS.md](MODELS.md).
+- **The Bangkok term (since 0.2.0):** + 1.06 MMI in Bangkok, Samut Prakan, Nonthaburi and Pathum Thani, for quakes within 1,600 km (MODELS §5; `assess.BKK_MMI_TERM`, `quake.SITE_MAX_KM`). Elsewhere the equation is used as is (Thai-city bias 0.00).
+- **Its limit, on screen:** no site term outside greater Bangkok. The 28 Mar 2025 M7.7 Myanmar quake was 996 km from central Bangkok, where the equation gives MMI ≈ 3.6, yet a building under construction collapsed in Chatuchak (Thairath, 29 Mar 2025). Soft clay and tall buildings shake more; a point source understates a long rupture. Validation against "Did You Feel It?" is in [MODELS.md](MODELS.md).
 - **TMD's event colours** (Thai PBS, 15 Apr 2025, quoting TMD): < 2.5 green, 2.5–3.9 yellow, > 4.0 red, by magnitude only ⚠️.
 
 ## 11. A snapshot of the night it was built (24 Oct 2026, 02:00–03:30 Bangkok)

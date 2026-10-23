@@ -9,6 +9,8 @@ How Disaster Now was researched, built and checked, and how each hazard is compu
 3. **Four researchers in parallel** (independent agents with written briefs): Thai thresholds with evidence; data sources the earlier research hadn't covered; UX of apps people open often, and Thai readers; forecast validation against observations. Their full records are in [research/](research/).
 4. **Build** the page and its tests while they worked, then adopt their findings (the action-named levels, Photon before Nominatim, codes instead of coordinates in shared links, JMA storms, the researched bands, the AWW12 intensity equation).
 5. **Check** with unit tests on saved live responses, a scripted visitor walk in headless Chromium, a gauge-by-gauge cross-check against FloodWatch, and two more independent agents: a visitor audit (personas, the UX scout's 12-task script) and an output audit (every number on the page against its source, recomputed).
+6. **Adopt what the checks found** (0.2.0): the validation's corrections and words (heat corrected per member and dressed, the damped PM2.5 ratio, rain as three words, the felt-intensity words and the Bangkok term); the output audit's M1–M5 and H1–H4; the visitor audit's four blockers and most majors. Each fix got a unit test named after its finding (`test/audit.test.mjs`); what is left is in KNOWN_ISSUES with the finding's ID.
+7. **Make it server-ready** (0.2.0): one image, a compose stack in FloodWatch's pattern, a collector loop, a health check, tested in Docker in the session ([SERVER.md](SERVER.md)).
 
 ## 2. Architecture
 
@@ -41,36 +43,41 @@ How Disaster Now was researched, built and checked, and how each hazard is compu
 
 | Tile | Now | 3-day outlook | Level |
 |---|---|---|---|
-| 🌧️ Rain | nearest ThaiWater gauge ≤ 10 km read ≤ 3 h ago (FloodWatch's measured_rain) | ensemble: each member's rain summed over the next 24 h and each calendar day; median, 10–90 % range, share of members > 35 mm and > 90 mm | the higher of the measured 24 h band and the forecast window's level (TMD rain words, one app level below each TMD class) |
+| 🌧️ Rain | nearest ThaiWater gauge ≤ 10 km read ≤ 3 h ago (FloodWatch's measured_rain) | ensemble: each member's rain summed over the next 24 h and each calendar day; the share of members > 35 mm shown as ต่ำ / มีโอกาส / สูง (cut points 10 % and 40 %), no amount | the higher of the measured 24 h band and the forecast window's level (capped at เตรียมตัว); a TMD rain warning lifts it |
 | 🌊 Flood | ThaiWater gauges ≤ 20 km judged by FloodWatch's bank rule; the point's level is FloodWatch's area index (IDW of the up-to-3 gauges within 3 km, else within 8 km; in Bangkok and its five neighbours canals only); HII's flash-flood list by subdistrict code | — (FloodWatch has 24–72 h; linked) | area category; HII listing → at least เตรียมตัว |
-| 😷 PM2.5 | nearest PCD station ≤ 15 km, ≤ 3 h old (24-h mean); else GISTDA's estimate at the point | CAMS daily means × (measured ÷ CAMS over the past 24 h, clipped 0.5–3) | PCD 2023 bands |
-| 🌡️ Heat | heat index (NWS: Steadman, then Rothfusz with its adjustments) per member per hour from the member's own T and RH | the day's max per member; median, range, share ≥ 42 °C | DOH/TMD bands on the median, lifted by the chance rule |
-| 🌏 Earthquakes | EMSC (region) + USGS (M4.5+) + TMD (collector), merged within 90 s and 100 km; AWW12 intensity at the point from magnitude and hypocentral distance | none: "พยากรณ์ล่วงหน้าไม่ได้" | the highest estimated MMI in the last 24 h (ShakeMap words); Andaman provinces: a watch line after an M ≥ 6.5 in the Indian Ocean within 6 h |
+| 😷 PM2.5 | nearest PCD station ≤ 15 km, ≤ 3 h old (24-h mean); else GISTDA's estimate at the point, with a late station's last reading beside it | the damped ratio: measured × (CAMS(day) ÷ CAMS(past 24 h))^β, β 0.45 / 0.55 / 0.55; day 1 a number, days 2–3 the band word "อาจเปลี่ยน" | PCD 2023 bands |
+| 🌡️ Heat | heat index (NWS: Steadman, then Rothfusz with its adjustments) per member per hour from the member's own T and RH | the window's max per member, **corrected** (a + b·HI) and **dressed** (SD 2.95 °C); corrected median, dressed 10–90 % range and chance of ≥ 42 °C | DOH/TMD bands on the corrected median, lifted by the chance rule, capped at เตรียมตัว without an agency heat warning |
+| 🌏 Earthquakes | EMSC (region) + USGS (M4.5+) + TMD (collector), merged within 90 s and 100 km; AWW12 intensity at the point from magnitude and hypocentral distance, + 1.06 MMI in greater Bangkok within 1,600 km | none: "พยากรณ์ล่วงหน้าไม่ได้" | the highest estimated MMI in the last 24 h in the validated words (2.5 "อาจรู้สึกได้", 4.5 "รู้สึกได้ชัด"); Andaman provinces: a watch line after an M ≥ 6.5 in the Indian Ocean within 6 h |
 | 🔥 Fires | FIRMS VIIRS hotspots (nominal + high) from the collector, within 25 km | — | nearest within 10 km → ติดตามไว้, within 2 km → เตรียมตัว (the app's own) |
-| 💨 Wind, storms | ensemble gusts (max per member) | the same per day | TMD's Beaufort words, grouped (the app's own); a storm (TMD track, JMA 70 % circle, GDACS) within 800 km → ติดตามไว้, 300 km → เตรียมตัว |
+| 💨 Wind, storms | ensemble gusts (max per member), labelled not validated | the same per day | plain gust words on the tile (TMD's Beaufort word in the card), grouped (the app's own), capped at เตรียมตัว; a storm (TMD track, JMA 70 % circle, GDACS) within 800 km → ติดตามไว้, 300 km → เตรียมตัว; lines only within 1,500 km |
 | ☀️ UV | CAMS UV index now (daylight 06–18) | the day's peak | WHO categories by WHO's advice tiers; from the value now, not the peak |
 | ⛰️ Landslide | DMR risk villages within 3 km; rain measured and forecast | — | in a risk area: > 100 mm in 24 h (DMR's trigger; measured, or ≥ 50 % of members) → เตรียมตัว; heavy rain or ≥ 20 % → ติดตามไว้ |
 | 🏭 Other pollution | nearest PCD station measuring PM10/O₃/CO/NO₂/SO₂ (the highest sub-index without PM2.5); else CAMS values, ungraded | — | PCD AQI bands |
 
 **The chance rule** (`outlook.windowLevel`): a window's level is the highest level at least half the 51 members reach; if เตรียมตัว or worse is reached by at least 20 %, the window is at least ติดตามไว้. **Pre-warnings** list, by day, the cases where at least 20 % of members reach danger heat (≥ 42 °C), heavy or very heavy rain, or gale gusts (≥ 62 km/h), plus PM2.5 ≥ orange in the corrected outlook and an HII flash-flood listing.
 
-**The verdict** takes the highest tile (and any TMD warning for the province), names the worst hazard in the agency's word with its one sourced action (บ้านรอดไหม's lines), lists the other tiles at ติดตามไว้ or above, and lists what has no data. With fewer than half the tiles answering it gives no verdict.
+**The verdict** takes the highest tile (and any TMD warning for the province, which also lifts its hazard's tile), names the worst hazard in the agency's word with its one sourced action (บ้านรอดไหม's lines; a mask line always with the under-2 line), prefers a tile an official warning lifted over a model-only tile of the same level, lists the other tiles at ติดตามไว้ or above, and lists what has no data (including unchecked warnings). With fewer than half the tiles answering it gives no verdict.
 
 ## 5. How it was checked
 
 | Check | What it proves | Where |
 |---|---|---|
-| Unit tests (33) on responses saved from live calls | parsers, time rules, bands, the chance rule, FloodWatch's rules, the IPE, search, the collector's parsers, every string in two languages; page values equal source values for Bangkok | `test/*.test.mjs` |
+| Unit tests (46) on responses saved from live calls | parsers, time rules, bands, the chance rule, FloodWatch's rules, the IPE, search, the collector's parsers, every string in two languages; page values equal source values for Bangkok; one test per fixed audit finding; the service worker's shell against the import graph | `test/*.test.mjs` |
 | Visitor walk (23 checks) in headless Chromium, clock pinned | the flows: welcome → GPS → report; English; local and street search; saved place on reopen; 320 px with larger text; every source down; no page errors; tap targets ≥ 44 px; no horizontal scroll | `tools/smoke.mjs` |
 | The same walk on the real sources | that today's live answers parse and read sensibly | `npm run smoke -- --live` |
 | FloodWatch cross-check | gauge statuses agree with FloodWatch's (691 of 693) | `research/crosscheck_floodwatch.mjs` |
 | GISTDA vs PCD | which PM2.5 to trust at a point | KNOWLEDGE §5 |
 | Advice sync | lines and bands equal บ้านรอดไหม's | `tools/check-advice.mjs` |
 | Independent visitor audit and output audit | a reading by agents who didn't build it | [research/visitor-audit-2026-10-23.md](research/visitor-audit-2026-10-23.md), [research/output-crosscheck-2026-10-23.md](research/output-crosscheck-2026-10-23.md) |
-| Forecast validation (PM2.5 correction, felt intensity, heat and rain where archives allowed) | whether the outlook and its corrections beat persistence, on a disjoint sample | [MODELS.md](MODELS.md), `research/` |
+| Forecast validation (heat and rain against TMD stations with ECMWF's forecasts as issued, PM2.5 against Air4Thai, felt intensity against USGS DYFI) | whether the outlook and its corrections beat raw and persistence, on disjoint stations and the newest season | [MODELS.md](MODELS.md), `research/` |
+| Docker stack | the image builds, both containers report healthy, the collector writes its files and stops cleanly | [SERVER.md](SERVER.md) |
 
 ## 6. Method rules carried from the sister projects
 
 - **Choose earlier, score later, confirm on a disjoint sample; the newest season counts** (FloodWatch GUIDELINES §4).
 - **"No record" is not "safe"** (Hazard-huntz docs/08 §4): a subdistrict not on the DMR's list may still slide; a quiet tile says "ยังไม่น่าห่วง", never "ปลอดภัย".
 - **Old readings are common** (Hazard-huntz docs/09: 15 % of Air4Thai, 18 % of ThaiWater, 50 % of FloodWatch's gauges older than 3 h at 03:45): every row carries its age.
+
+## 7. On a server (0.2.0)
+
+The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_headers` applied and no request logs; `tools/collect.mjs --every 900` refreshes `data/live/` in a shared volume; `tools/health.mjs` checks both; `docker-compose.yml` binds the page to 127.0.0.1 and leaves public traffic to a Cloudflare tunnel or the host's proxy, as FloodWatch does. What a server should add next, in order (Air4Thai from Thailand, district forecast files, a GDACS digest, national files by code, an as-issued archive), is in [SERVER.md §6](SERVER.md#6-what-to-build-on-the-server-next).

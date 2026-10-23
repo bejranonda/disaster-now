@@ -35,7 +35,7 @@ What was done, in order, with the evidence for each step, every design decision 
 | 20:40 | Two commits pushed; the branch `claude/dazzling-goldberg-z8pq18` created on the empty repository; the validation researcher's interim files committed | `git log` |
 | 20:40–20:47 | **Research record** (the owner: "record the research history, methods and results and details as much as we can"): the probe log rebuilt from the saved headers; the GISTDA–PCD script and the FloodWatch cross-check re-run from committed inputs (both reproduce); the UX palette check re-run on the shipped palette (reproduces 5.2–11.2 : 1, 18.4–24.5); the briefs; the raw call records archived with cookies and request ids stripped | this file, `research/` |
 
-The forecast-validation and audit results, and what was changed because of them, are in §5 (added when they returned).
+The forecast-validation and audit results, and what was changed because of them, are in §5.
 
 ## 2. Decisions
 
@@ -82,4 +82,48 @@ The forecast-validation and audit results, and what was changed because of them,
 
 ## 5. Forecast validation and the audits
 
-*Filled in when the three remaining agents return.*
+Three independent agents returned between 20:56 and 21:04 UTC. Their reports are [forecast-validation-2026-10-23.md](forecast-validation-2026-10-23.md), [output-crosscheck-2026-10-23.md](output-crosscheck-2026-10-23.md) and [visitor-audit-2026-10-23.md](visitor-audit-2026-10-23.md). The raw material is in `research/` (scripts, `logs/`, `out/*.json`) and `research/raw/output-crosscheck-2026-10-23.tar.gz`, which holds the cross-check's scripts, its per-point results and the code it audited, with sha256 sums.
+
+### 5.1 What they found
+
+| Agent | Method | Headline result |
+|---|---|---|
+| Forecast validation | ECMWF forecasts as issued (22 GB of open-data byte ranges from the Google Cloud mirror; Open-Meteo was rate-limited for the shared IP), 18 TMD stations (NOAA GHCNh), Air4Thai daily and hourly history, USGS DYFI; fit on A, test on later periods, disjoint stations and the newest season; block bootstrap for "made worse" | heat raw ~5 °C low → corrected MAE 2.4 °C; PM2.5: the planned ratio lost to persistence, a damped ratio (post-hoc) won every test; rain at a point barely skilful (POD 0.04–0.13); gusts unvalidatable; felt intensity MAE 0.96 MMI, Bangkok + 1.06 |
+| Output cross-check | 6 points (Bangkok, Chiang Mai, Hat Yai, Phuket, Ubon, Mae Sai), every number on the page against an independent fetch and computation seconds later | 292 of 308 items match; the 15 mismatches came from five code paths (M1–M5), not from sources; plus four consistency findings with บ้านรอดไหม (H1–H4) |
+| Visitor audit | 7 places, personas (older relative in LINE, Hat Yai resident, Chiang Mai runner, expat), the UX scout's 12-task script, throttling, offline, dark mode, 320–390 px | 41 findings (4 blockers, 23 major, 14 minor); 1 task passed, 2 nearly, 9 failed |
+
+### 5.2 Decisions taken because of them (0.2.0)
+
+| ID | Decision | Why | Evidence |
+|---|---|---|---|
+| D-020 | **Show only the corrected heat index**, per member, dressed with SD 2.95 °C | raw read 4.7–5.9 °C low and caught 0–6 % of danger days; corrected: 2.4 °C, POD 0.65–0.86, 0 of 18 stations made worse | MODELS §1, `calibration.js` |
+| D-021 | **PM2.5 by the damped ratio** (β 0.45 / 0.55 / 0.55) instead of the planned ratio | the planned ratio was worse than persistence at 4 of 10 stations; the damped one at none; post-hoc, so re-test as issued | MODELS §2 |
+| D-022 | **Rain as three chance words**, no forecast amounts | point POD 0.04–0.13; ENS Brier skill around zero | MODELS §3 |
+| D-023 | **Felt words from the Thai reports, + 1.06 MMI in greater Bangkok** (within 1,600 km) | Bangkok under-predicted in all 12 crustal events; "not felt" was told to cities that felt it | MODELS §5 |
+| D-024 | **A forecast alone tops out at เตรียมตัว** (`MODEL_MAX`) | "ทำทันที" on most October nights for tomorrow's heat (V1); keeps the agency's word, drops the "act now" | KNOWN_ISSUES KI-F07 |
+| D-025 | **A CAP warning lifts its tile and leads** | a Severe heavy-rain warning sat under a heat verdict (M5, V2) | KI-F08 |
+| D-026 | **A tile is graded only from its primary source** | a failed forecast or gauge feed read as calm (V4, M4) | KI-F10 |
+| D-027 | **No coordinates on screen for a GPS place; the FloodWatch link rounded** | screenshots in family groups; the link carried 4 decimals (V10) | KI-F14 |
+| D-028 | **The service worker's shell is checked against the imports by a test** | one missing file killed the page offline (V3) | KI-F09 |
+| D-029 | **Server-ready as a Docker stack in FloodWatch's pattern** (the owner: "make it ready to develop in server further") | one image, localhost bind, tunnel profile, collector loop with a 600 s floor, health checks; tested in the session | [SERVER.md](../SERVER.md) |
+
+### 5.3 Timeline after the first push
+
+| UTC (23 Oct) | What | Where |
+|---|---|---|
+| 20:47–20:57 | The validation researcher's interim and final files; `calibration.js` written from `research/out/calibration.json`; heat shown corrected only | `git log`, `research/out/` |
+| 21:00 | The output cross-check returned → M1–M5, H1–H4 fixed | KNOWN_ISSUES KI-F08 … F15 |
+| 21:04 | The visitor audit returned → V1–V4 and most majors fixed, one unit test per finding (`test/audit.test.mjs`) | KI-F07 … F22 |
+| 21:10–21:13 | Docker: the image built from Amazon's mirror of `node:22-alpine` (Docker Hub rate-limited), both containers healthy, the collector wrote 4 of 5 files in 8 s (Air4Thai 503); found and fixed: FIRMS failing wrote "0 hotspots" | SERVER.md, KI-F21 |
+| 21:13–21:15 | The visitor walk on fixtures and on live sources (Air4Thai read in Chromium; the Bangkok term met a far M7.0, giving KI-023, then fixed); screenshots refreshed | `npm run smoke`, `-- --live` |
+| 21:15– | Docs: MODELS, SERVER, HANDOFF written; KNOWN_ISSUES rewritten with the audits' IDs; the rest updated; v0.2.0 | this commit |
+
+### 5.4 Dead ends added
+
+| Tried | Result |
+|---|---|
+| A gradient-boosted PM2.5 model | won its choosing month, failed every later test (trees can't extrapolate to burning-season levels) |
+| A tuned HRES rain threshold | raised CSI at A, not at B; forecasts "heavy" 2.5–5× as often as it happens |
+| Docker Hub for `node:22-alpine` | HTTP 429 (anonymous limit); `public.ecr.aws/docker/library/node:22-alpine` worked |
+| nginx in the sandbox | "Data limit exceeded" on start; the Node static server is used instead (and applies `_headers` itself) |
+| The collector through the session's proxy | every TLS call "self-signed certificate in certificate chain" until the proxy's CA was mounted (sandbox only) |

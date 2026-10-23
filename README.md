@@ -2,7 +2,7 @@
 
 **One page that shows every hazard at a point in Thailand, now and for the next 3 days.** Tap 📍 (or search a subdistrict, a road, a place) and see, for that point: rain, river level and flash floods, PM2.5 dust and other pollution, heat, UV, wind and storms, landslides, earthquakes and fires, each in the agency's own words with its source and time, one sourced action, and a link to what to do.
 
-> v0.1.0 · 23 Oct 2026 · **built and tested, not deployed, not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
+> v0.2.0 · 23 Oct 2026 · **built, validated, audited and server-ready; not deployed, not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
 
 <img src="docs/screens/report-390.png" width="300" alt="The report for Bangkok's old town at 390 px, in Thai"> <img src="docs/screens/report-en-390.png" width="300" alt="The same in English">
 
@@ -11,7 +11,13 @@
 - **Choose a point:** GPS on a tap; instant search over all 7,425 subdistricts, 928 districts and 77 provinces on the phone; Enter asks OpenStreetMap for roads, sois and places (FloodWatch's way of searching: abbreviations and soi variants). Up to five saved places open first next time ("บ้าน", "บ้านแม่").
 - **A verdict in one line,** by what to do (ยังไม่น่าห่วง · ติดตามไว้ · เตรียมตัว · ทำทันที), never milder than any hazard, naming the worst one in the agency's word with one action from บ้านรอดไหม.
 - **Ten tiles** in a fixed order, each with the agency's word, the value and a 4-dot meter; **detail cards** with sources, times and ages; a **3-day table**; **pre-warnings** by day with chances ("พรุ่งนี้ ฝนหนัก โอกาส 40%"), never countdowns.
-- **Measurements first:** PCD stations, ThaiWater gauges (judged exactly as FloodWatch judges them), HII's flash-flood list, TMD's warnings; **models labelled:** the ECMWF ensemble (51 runs) for heat, rain and wind, CAMS for dust (corrected by the measurement), an intensity equation for "was it felt here?".
+- **Measurements first:** PCD stations, ThaiWater gauges (judged exactly as FloodWatch judges them), HII's flash-flood list, TMD's warnings, which lift their tile and lead.
+- **Models labelled and validated** ([docs/MODELS.md](docs/MODELS.md)):
+  - The ECMWF ensemble (51 runs) for heat. Raw it read 5 °C low; corrected it is within 2.4 °C on held-out stations.
+  - Rain as three chance words, gusts labelled unvalidated.
+  - CAMS for dust, damped and applied to the measurement, which beat persistence.
+  - An intensity equation for "was it felt here?", with a Bangkok term.
+  - A forecast alone never says "act now".
 - **Private by design:** the exact fix never leaves the phone (providers get ~1 km); shared links carry a subdistrict code, not a home; no server, cookies, analytics or accounts.
 - **Thai and English,** larger text, dark mode, installable.
 
@@ -27,7 +33,16 @@ npm run collect                   # the collector once → public/data/live/
 npm run check:advice              # advice lines still equal บ้านรอดไหม's
 ```
 
-Deploying: [docs/DEPLOY.md](docs/DEPLOY.md). The page is static (`public/`); the collector (`tools/collect.mjs`, Node ≥ 20, no packages) adds TMD's warnings, quakes and storm tracks, NASA FIRMS hotspots and Air4Thai.
+**On a server** ([docs/SERVER.md](docs/SERVER.md)):
+
+```
+cp .env.example .env              # WEB_PORT, COLLECT_EVERY; nothing secret needed
+docker compose up -d --build      # the page on http://127.0.0.1:8090/ + the collector every 15 min
+node tools/health.mjs --web http://127.0.0.1:8090/
+docker compose --profile public up -d   # also a Cloudflare tunnel (CLOUDFLARE_TUNNEL_TOKEN in .env)
+```
+
+The page is static (`public/`) and also runs on any static host ([docs/DEPLOY.md](docs/DEPLOY.md)). The collector (`tools/collect.mjs`, Node ≥ 20, no packages) adds TMD's warnings, quakes and storm tracks, NASA FIRMS hotspots and Air4Thai.
 
 ## Sources
 

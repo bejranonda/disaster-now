@@ -7,17 +7,20 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 1. **Never invent a number, an endpoint, a field or a safety line.** Every cut point in `public/js/levels.js`, every advice line in `public/js/actions.js` and every endpoint in `public/js/sources.js` has a source in [KNOWLEDGE.md](KNOWLEDGE.md) (a live call with date and host, or a document with its URL and the date read). Anything not confirmed is marked **[unverified]** in the docs. (FloodWatch's evidence rule; Hazard-huntz rule 1.)
 2. **The agency's own word leads every tile, and the app's level is never milder than that word.** PCD's "เริ่มมีผลกระทบต่อสุขภาพ" stays on the PM2.5 tile; TMD's warning is quoted, never re-graded. (UX scout §5a; a Swiss study found inconsistent warnings lower action.)
 3. **Measurements before models.** A PCD station within 15 km beats GISTDA's estimate; a rain gauge within 10 km and 3 h beats the model; every model value carries the "แบบจำลอง" tag. (FloodWatch's habit; KNOWLEDGE §5.)
+3b. **A forecast alone tops out at "เตรียมตัว".** "ทำทันที" needs a measurement or an agency's warning (`assess.MODEL_MAX`; the visitor audit found "act now" on most October nights for the next afternoon's heat). The tile keeps the agency's word for the value, and names the window ("บ่ายนี้").
+3c. **An official warning lifts its hazard's tile** (`events.capHazard`), leads the verdict over model-only tiles of the same level, and is listed first among the pre-warnings; "nothing unusual" is never said beside it.
+3d. **Only validated numbers, in validated words.** Raw model heat is never shown (it reads 5 °C low); rain is three chance words, never a forecast amount; gusts say "ยังไม่ได้ตรวจสอบความแม่นยำ"; quakes use the validated felt words and never "ไม่รู้สึก" or a damage word (MODELS.md).
 4. **Ranges and chances, never countdowns.** "พรุ่งนี้ โอกาส 40%", never "ฝนจะตกใน 2 ชม. 15 นาที". Chances are rounded to tens and never 0 or 100 % (51 ensemble members can't be certain). (FloodWatch D-005.)
 5. **One scale for every hazard, named by what to do:** ยังไม่น่าห่วง · ติดตามไว้ · เตรียมตัว · ทำทันที, with a 4-dot meter so colour is never the only signal, and a hatched grey "ไม่มีข้อมูล". Never "ปลอดภัย". (UX scout §5a.)
 6. **The chance rule** (this app's own choice, `levels.js → CHANCE`): a window's level is the highest level at least half the ensemble members reach; if "เตรียมตัว" or worse is only *possible* (≥ 20 % of members), the window is at least "ติดตามไว้". Change it only with a reliability test (MODELS.md).
-7. **The verdict is never milder than a tile, and missing data is never calm.** Its level is the highest tile's; fewer than half the tiles answering means no verdict ("ยังไม่มีข้อมูลพอ"); an incomplete page says so ("บางเรื่องยังไม่มีข้อมูล").
+7. **The verdict is never milder than a tile, and missing data is never calm.** Its level is the highest tile's; fewer than half the tiles answering means no verdict ("ยังไม่มีข้อมูลพอ"); an incomplete page says so ("บางเรื่องยังไม่มีข้อมูล"). **A tile is graded only from its primary source:** rain and wind need the forecast, flood needs gauges; a secondary source (yesterday's gauge, a far storm, HII's list) adds lines but never sets "ยังไม่น่าห่วง". Warnings that couldn't be checked are listed as missing. A failed source is worded as a failure, never as "no station here".
 8. **One failing source never stops the page.** Every call has a timeout (12 s) and its own error line; the page renders as answers arrive.
 9. **Switchable services:** the street geocoder is chosen in `public/config.json` (`photon` | `nominatim` | `floodwatch` | `off`), so komoot or the OSMF can be obeyed at once without a release (Nominatim's usage policy asks for this).
 10. **No secrets in git.** The page has no keys; a key (TMD, GISTDA, FIRMS) lives only in the collector's environment and goes in a header, never a URL.
 
 ## 2. Privacy
 
-- **The exact GPS fix never leaves the phone.** Providers that need a point get it rounded to 2 decimals (~1.1 km), as FloodWatch rounds before its reverse lookup (`geo.rounded`).
+- **The exact GPS fix never leaves the phone,** not even through a screenshot or a link: providers and links (FloodWatch's too) get it rounded to 2 decimals (~1.1 km), as FloodWatch rounds before its reverse lookup (`geo.rounded`), and a GPS place shows no coordinates on screen.
 - **The subdistrict comes from the phone** (nearest of 7,425 centres in `data/tambon.json`), not from a reverse-geocoding call.
 - **Search text leaves the phone only when the person presses search,** to Photon or Nominatim, and the button says so ("คำที่พิมพ์จะส่งไปค้นที่นั่น"). Never per keystroke (Nominatim forbids autocomplete).
 - **Shared links carry a subdistrict code (`#t=100103`) for a GPS fix or a saved place,** never the coordinates of a home; a searched public place may keep its rounded point (`#p=`). (UX scout §4c.6.)
@@ -26,7 +29,8 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 
 ## 3. Sources
 
-- **Honest User-Agent** in the collector and research (`disaster-now-collector/0.1 (+repo URL)`); browsers send their own and the page's origin as Referer.
+- **Honest User-Agent** in the collector and research (`disaster-now-collector/0.2 (+repo URL)`); browsers send their own.
+- **A failed fetch is never written as data:** the collector keeps the old file and lists the failure (FIRMS with no file read is a failure, not "0 hotspots").
 - **Never faster than the source updates;** the page caches each answer in `sessionStorage` for the source's cadence (`SOURCES[*].ttl`).
 - **No evasion:** no bot-challenge solving, no proxy rotation, no geo-block workaround. A Thai-only host waits for a host in Thailand (Hazard-huntz docs/09 §5).
 - **Each source's time rule is written in code with a test** (KNOWLEDGE §4): GISTDA's "Z" is Bangkok time; HII has no offset; TMD's CAP list `pubDate` is 7 h early (take the item's times); TMD's storm `time` is UTC without an offset; TMD's quake RSS description is Bangkok time in CE.
@@ -54,7 +58,9 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **Fixed tile order** (`assess.ORDER`): people learn where their tile is.
 - **Before a change is done:** `npm test` (unit tests on saved live responses) and `CHROME_PATH=/opt/pw-browsers/chromium npm run smoke` (the visitor walk on fixtures, the clock pinned to 23 Oct 2026 19:50 UTC); for source or wording changes also `npm run smoke -- --live` and read its output as a visitor would.
 - **A new source gets:** a fixture saved from a live call, a parser with a unit test (including its missing-value codes and its time rule), a row in [SOURCES.md](SOURCES.md), and its credit line.
-- **Bump `?v=`** on `css/app.css` and `js/main.js` in `index.html`, `VERSION` in `main.js` and `sw.js`, and `package.json` with every release.
+- **Bump `?v=`** on `css/app.css` and `js/main.js` in `index.html` and in `sw.js`'s `SHELL`, `VERSION` in `main.js` and `sw.js`, and `package.json` with every release.
+- **Every module the page imports is in `sw.js`'s `SHELL`** (one missing file kills the page offline: the visitor audit's V3); `test/audit.test.mjs` walks the imports and fails otherwise.
+- **Each audit finding that is fixed gets a test** named after its ID (`test/audit.test.mjs`: "M5/V2: …").
 
 ## 7. Models and forecasts
 
@@ -63,7 +69,11 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **A model value is never shown as a measurement,** and a model's correction is shown as such ("ปรับตามค่าวัด").
 - **No interpolated water surface over land** (FloodWatch D-019); elevation is context only ("ไม่ได้บอกว่าน้ำท่วมหรือไม่").
 
-## 8. Git
+## 8. The server
+
+The rules in [SERVER.md §5](SERVER.md#5-rules-that-apply-on-the-server): publish files and keep nothing about a person (no visitor logs, positions, cookies or accounts); the app binds to localhost and public traffic comes through a tunnel or proxy; containers run read-only as a non-root user; keys only in `.env`; the collector never loops faster than every 600 s; the page must keep working when the server is down.
+
+## 9. Git
 
 - Branch from `main` (or the branch you were given); push only there. Commit messages start with `feat:`, `fix:`, `docs:`, `test:`, `content:` or `chore:` and end with the attribution lines the harness gives.
 - Stage files by name; never commit `public/data/live/` (the collector's output), `.env`, keys or big downloads.

@@ -21,13 +21,15 @@ The owner has three apps that touch the same people on the same bad day. Built s
 | The point check for Bangkok's old town | FloodWatch `/api/point` says area "normal"; this app's mirror of `point.area_index` says ยังรับน้ำได้ (normal), because in Bangkok and its five neighbours only canals judge a point | `test/more.test.mjs` "FloodWatch's point rule" |
 | Measured rain at 13.75, 100.5 | the same gauge (ปากคลองตลาด) and amount (4.5 mm) as FloodWatch's point check, after adopting its 10 km / 3 h limits | `test/more.test.mjs` "assess on live fixtures" |
 | Advice lines and bands vs บ้านรอดไหม | all 9 lines and both band sets equal, live and in the repository | `npm run check:advice` |
+| The FloodWatch link from the flood card | carries the point rounded to 2 decimals (`#p=13.79,100.61`), never the GPS fix (0.2.0; the visitor audit's V10) | `test/audit.test.mjs` "V10/V15" |
+| The mask line and the under-2 line, as บ้านรอดไหม pairs them (its F129) | the verdict and the dust card show both since 0.2.0 (the output audit's H1) | `test/audit.test.mjs` "H1" |
 | Links to บ้านรอดไหม's guides (`/hot`, `/air`, `/storm`, `/flood`, `/landslide`, `/quake`, `/pm25`, `/mask`, `/en/…`) | all 200 | curl, 20:0x UTC |
 
 ## 3. Small changes in FloodWatch that would help most
 
 1. **CORS on `/api/point` for this site's origin.** Then the flood tile shows FloodWatch's own answer, which includes BMA's canal gauges (this app sees only ThaiWater's 8 Bangkok gauges; FloodWatch had 33 near the old town). `/api/point` is already a private-query path (not logged). Turn it on in `public/config.json` with `"floodwatchPoint": true` once FloodWatch allows it.
 2. **CORS on `/api/geocode`.** Nominatim's 1-request-a-second limit is for a whole application's users together; FloodWatch already throttles and caches to it and never logs queries (its D-032). Then set `"geocoder": "floodwatch"` in `public/config.json`.
-3. **Run this app's collector on FloodWatch's server** (one cron line, [DEPLOY.md §2](DEPLOY.md#2-the-collector-toolscollectmjs)), and serve `data/live/` with CORS. FloodWatch already fetches HII every 10 minutes; Hazard-huntz docs/09 recommended exactly this.
+3. **Run this app on FloodWatch's server** ([SERVER.md](SERVER.md): `docker compose up -d --build` puts the page on 127.0.0.1:8090 beside FloodWatch's 3000, with the collector every 15 minutes), and give it a public hostname on FloodWatch's tunnel. FloodWatch already fetches HII every 10 minutes; Hazard-huntz docs/09 recommended exactly this.
 4. **A frank one about FloodWatch itself:** its bank rule counts "% of the height from the river bed to the bank". On a deep river that reads "ใกล้ล้นตลิ่ง" while the water is far below the bank: C.12 (Chao Phraya at Samsen) was "warning" at 92 % with **1.31 m** of freeboard on 24 Oct 02:00. FloodWatch marks the rule heuristic (its `classify_status` docstring). A freeboard rule for rivers (e.g. watch under 1.0 m, warning under 0.5 m, as FloodWatch's own `scenarios.py` uses for the impact strip) would read better to citizens. This app copies FloodWatch's rule for consistency; change both together.
 
 ## 4. Small changes in บ้านรอดไหม

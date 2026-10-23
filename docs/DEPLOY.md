@@ -1,5 +1,7 @@
 # Deploying Disaster Now
 
+> **On a server, use [SERVER.md](SERVER.md)** (0.2.0): one Docker image, the page and the collector in a compose stack, FloodWatch's pattern. This page covers the static-host options and the collector on its own.
+
 The page is static files (`public/`). It works on any HTTPS static host without the collector; the collector adds the feeds a browser can't read (TMD's warnings, quakes and storm tracks, NASA FIRMS hotspots, Air4Thai with its certificate fixed). **Nothing is deployed yet** (23 Oct 2026): the agent session that built it had no deploy access (the Cloudflare connector wasn't authorised). The owner's choices are in [OWNER_ACTIONS.md](OWNER_ACTIONS.md).
 
 ## 1. The page
@@ -10,7 +12,7 @@ The page is static files (`public/`). It works on any HTTPS static host without 
 | GitHub Pages | Settings → Pages → deploy `public/` | needs a public repository or a paid plan for a private one; `_headers` is ignored there (GitHub sends its own headers; geolocation isn't blocked) |
 | Any web server | copy `public/` | serve `.webmanifest` as `application/manifest+json`, `.json` with `Cache-Control` as in `_headers` |
 
-Before a release: bump the version (`package.json`, `VERSION` in `public/js/main.js` and `public/sw.js`, `?v=` in `index.html`), run `npm test`, `CHROME_PATH=/opt/pw-browsers/chromium npm run smoke` and `npm run smoke -- --live`, then open the live URL on a phone, inside LINE too.
+Before a release: bump the version (`package.json`, `VERSION` in `public/js/main.js` and `public/sw.js`, `?v=` in `index.html` and in `sw.js`'s `SHELL`), run `npm test`, `CHROME_PATH=/opt/pw-browsers/chromium npm run smoke` and `npm run smoke -- --live`, then open the live URL on a phone, inside LINE too.
 
 ## 2. The collector (`tools/collect.mjs`)
 
@@ -18,7 +20,7 @@ It fetches on a schedule and writes `public/data/live/{warnings,tmd_quakes,storm
 
 **Where to run it** (Hazard-huntz docs/09 §5 measured the costs for a similar collector):
 
-1. **On the owner's FloodWatch server (recommended):** one more cron line, e.g. every 15 minutes:
+1. **On the owner's FloodWatch server (recommended):** the compose stack ([SERVER.md](SERVER.md)) runs `node tools/collect.mjs --every 900` in its own container. Without Docker, one more cron line, e.g. every 15 minutes:
    ```
    */15 * * * * cd /srv/disaster-now && node tools/collect.mjs --out /srv/disaster-now/public/data/live && npx wrangler@latest pages deploy public --project-name=disaster-now --branch=main
    ```
