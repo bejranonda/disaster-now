@@ -36,7 +36,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
-from common import DATA, OUT, Log, get, haversine_km  # noqa: E402
+from common import DATA, OUT, Log, clean, get, haversine_km  # noqa: E402
 
 L = Log("e4_quake_ipe")
 
@@ -311,7 +311,7 @@ def main():
             f"felt but app would say 'probably not felt' {miss} ({miss_resp} responses); CDI≥V {rec['cdi_ge5_cities']}, of which "
             f"said 'clearly' {rec['cdi_ge5_said_clearly']}; said 'clearly' {rec['said_clearly']} (of which CDI<IV {rec['said_clearly_and_cdi_lt4']})")
         L.w("    " + tab.to_string().replace("\n", "\n    "))
-    (OUT / "e4_results.json").write_text(json.dumps(res, indent=1, default=float))
+    (OUT / "e4_results.json").write_text(json.dumps(clean(res), indent=1, default=float))
     L.w(f"\nwrote {OUT / 'e4_results.json'} and {DATA / 'e4_dyfi_residuals.csv'} ({len(df)} rows)")
 
 

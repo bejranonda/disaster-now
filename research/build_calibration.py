@@ -31,7 +31,7 @@ def pick(d, *keys):
 
 
 def cat_short(c):
-    return pick(c, "events", "POD", "FAR", "CSI", "freq_bias")
+    return pick(c, "events", "obs_events", "POD", "FAR", "CSI", "freq_bias")
 
 
 def main():
@@ -67,9 +67,9 @@ def main():
             worse.setdefault(lead, []).append(s)
     cal["heat_index"] = {
         "use_raw": False,
-        "why": "the raw ECMWF heat index is about 5 °C too low against the stations' daily maximum (2–3 °C of it "
-               "from a too-cold, too-dry afternoon at the grid point; ~1 °C from sampling two afternoon hours), so "
-               "raw P(HI >= 42) is almost never above zero on days that reach 42",
+        "why": "the raw ECMWF heat index is about 5 °C too low against the stations' daily maximum (about 4 °C at "
+               "the same hours, from an afternoon 1.9 °C too cold and a dew point 1.0 °C too low at the grid point; "
+               "about 1 °C more from sampling two afternoon hours), so raw P(HI >= 42) is 0 on most days that reach 42",
         "formula": "NWS heat index (research/heat_index.py), per member, then HI_cal = a + b * HI_raw; daily max over "
                    "the member's afternoon hours",
         "applies_to": "Open-Meteo ensemble, models=ecmwf_ifs025 (checked: its members equal the ECMWF open-data "
@@ -121,11 +121,13 @@ def main():
     cal["rain_24h"] = {
         "use_raw": True,
         "verdict": "do not show a point yes/no or a point amount for heavy rain; show the ENS chance only as a coarse "
-                   "word, lead with TMD's own warning, and never make 'no heavy rain' sound safe",
+                   "word (below 10 %: 'ต่ำ'; 10–40 %: 'มีโอกาส'; 40 % and more: 'โอกาสสูง'), lead with TMD's own "
+                   "warning, and never make 'no heavy rain' sound safe",
         "why": "at a station, the HRES forecast of >= 35.1 mm in 24 h has POD 0.04–0.13 and CSI 0.03–0.09 at "
-               "24–72 h in 2025 (Brier worse than climatology); lowering the forecast threshold (chosen on 2024) "
-               "raises POD to ~0.4 but with FAR ~0.9; the ENS probability has a Brier skill near or below zero "
-               "against climatology; no correction tried beat raw on the later year by more than chance",
+               "24–72 h in 2025 (its yes/no Brier is worse than climatology's); a lower forecast threshold chosen on "
+               "2024 (15–17.5 mm) raises POD to 0.38–0.45 and CSI to 0.08–0.12 but with FAR 0.85–0.91 and a Brier "
+               "3–5 times climatology's; the ENS probability's Brier skill against climatology is -0.08 to +0.12 "
+               "(2025 and 2026), and days with P = 0 still had heavy rain 2–6 % of the time",
         "thresholds_mm": {"heavy": 35.1, "very_heavy": 90.1, "day": "07:00–07:00 Bangkok (TMD)"},
         "hres_tests": {"2025 A lead1 ≥35.1": rrow("2025 A (later)", 1, 35.1),
                        "2025 B lead1 ≥35.1": rrow("2025 B (later, held-out stations)", 1, 35.1),
@@ -175,6 +177,9 @@ def main():
     bt = e4["bangkok_term"]
     w = e4["wording"]
     cal["earthquake_felt"] = {
+        "use_raw": False,
+        "why": "the IPE alone under-predicts Bangkok-metro reports in all 12 crustal events that reached them; add the "
+               "Bangkok-metro term there (elsewhere the IPE is used as is: Thai-city bias 0.00 MMI)",
         "forecasting": "none: earthquakes cannot be forecast; this only estimates how strongly a quake that has "
                        "happened was probably felt at a point",
         "ipe": e4["ipe"],

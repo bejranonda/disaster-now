@@ -38,7 +38,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
-from common import DATA, OUT, SCRATCH, Log, block_bootstrap_rise  # noqa: E402
+from common import DATA, OUT, SCRATCH, Log, block_bootstrap_rise, clean  # noqa: E402
 from ecmwf_open import OUTDIR, STATIONS  # noqa: E402
 import heat_index as H  # noqa: E402
 
@@ -210,7 +210,25 @@ def fmt_cont(r, thr=()):
     return s
 
 
+def fetch_ghcnh(years=range(2020, 2027)):
+    """Download the GHCNh by-year files that are not in the scratchpad yet (sequential, honest UA)."""
+    import requests
+    from common import UA
+    GH.mkdir(parents=True, exist_ok=True)
+    base = "https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year"
+    for y in years:
+        for s in STATIONS:
+            f = GH / f"GHCNh_{s}_{y}.psv"
+            if f.exists() and f.stat().st_size > 0:
+                continue
+            r = requests.get(f"{base}/{y}/psv/{f.name}", headers={"User-Agent": UA}, timeout=300)
+            L.w(f"  GHCNh {f.name}: HTTP {r.status_code}, {len(r.content)} bytes")
+            if r.status_code == 200:
+                f.write_bytes(r.content)
+
+
 def main():
+    fetch_ghcnh()
     res = {"stations": {s: dict(lat=v[0], lon=v[1], elev=v[2], name=v[3],
                                 sample="A" if s in SAMPLE_A else "B") for s, v in STATIONS.items()}}
     L.w(f"sample A (fit/choose): {SAMPLE_A}\nsample B (held out): {SAMPLE_B}")
@@ -581,10 +599,12 @@ def main():
                 res["ens"][f"heat|{label}|{smp}|lead1"] = rec
 
     # small derived CSV
-    keep = heat[["station", "date", "lead", "hi_fc", "himax", "hi1316", "pers0"]].merge(
-        rain[rain.lead == 1][["station", "date", "rain_fc", "rain"]], on=["station", "date"], how="outer")
-    keep.to_csv(DATA / "e1e2_daily.csv", index=False, float_format="%.2f")
-    (OUT / "e1e2_results.json").write_text(json.dumps(res, indent=1, default=str))
+    # small derived CSV (< 1 MB): day-1 forecasts and the observations they are scored against
+    keep = heat[heat.lead == 1][["station", "date", "hi_fc", "himax", "pers0"]].rename(columns={"hi_fc": "hi_fc_day1"}).merge(
+        rain[rain.lead == 1][["station", "date", "rain_fc", "rain"]].rename(columns={"rain_fc": "rain_fc_day1"}),
+        on=["station", "date"], how="outer").sort_values(["station", "date"])
+    keep.to_csv(DATA / "e1e2_daily.csv", index=False, float_format="%.1f")
+    (OUT / "e1e2_results.json").write_text(json.dumps(clean(res), indent=1, default=str))
     L.w(f"\nwrote {OUT / 'e1e2_results.json'} and {DATA / 'e1e2_daily.csv'}")
 
 

@@ -1500,3 +1500,1416 @@ ENS heat: correction applied per member = HRES 2025 national lead-1 fit (+10.37 
     median: n=  422 MAE= 2.41 bias=-0.50 RMSE= 3.03 band= 73.9% | ≥33.0: ev= 419 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 264 POD= 0.82 FAR= 0.21 CSI= 0.68 fb= 1.03; 10–90 % range held 81.8 %
 
 wrote /home/user/disaster-now/research/out/e1e2_results.json and /home/user/disaster-now/research/data/e1e2_daily.csv
+
+===== run 2026-10-23T20:50:02+00:00 =====
+sample A (fit/choose): ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564']
+sample B (held out): ['THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+observed station-days: 44615; with HI max: 9287; with rain: 40956; years [np.int32(2019), np.int32(2020), np.int32(2021), np.int32(2022), np.int32(2023), np.int32(2024), np.int32(2025), np.int32(2026)]
+  2019: HI days      0  rain days     17  rain≥35.1    0  ≥90.1   0  HI≥42     0
+  2020: HI days     19  rain days   6376  rain≥35.1  208  ≥90.1  15  HI≥42     2
+  2021: HI days      0  rain days   6360  rain≥35.1  203  ≥90.1  14  HI≥42     0
+  2022: HI days     18  rain days   6377  rain≥35.1  282  ≥90.1  35  HI≥42     1
+  2023: HI days      0  rain days   6368  rain≥35.1  188  ≥90.1  11  HI≥42     0
+  2024: HI days   2388  rain days   6272  rain≥35.1  223  ≥90.1  24  HI≥42   863
+  2025: HI days   3796  rain days   6205  rain≥35.1  201  ≥90.1  31  HI≥42  1048
+  2026: HI days   3066  rain days   2981  rain≥35.1  119  ≥90.1  13  HI≥42  1134
+climatology from 2020–2024: 2425 HI station-days
+HRES runs: 724 (2024-03-01..2026-10-20)
+
+================ E1 heat index (daily max, °C) ================
+fit 2025 sample A lead 1: HI_obs ≈ +10.37 + 0.865 × HI_fc (n=1113); per station a/b: 48304 +1.5/1.04, 48334 +11.4/0.80, 48384 +1.9/1.12, 48409 -7.0/1.35, 48455 +9.9/0.86, 48478 +14.5/0.71, 48555 +27.5/0.43, 48564 +13.2/0.84
+fit 2025 sample A lead 2: HI_obs ≈ +11.69 + 0.826 × HI_fc (n=1107); per station a/b: 48304 +0.6/1.06, 48334 +7.0/0.93, 48384 +3.0/1.09, 48409 -4.2/1.27, 48455 +7.9/0.91, 48478 +16.6/0.65, 48555 +20.1/0.66, 48564 +16.1/0.76
+post-hoc fit 2025 A lead 1: blend HI ≈ +0.77 + 0.439·fc + 0.601·persist (n=909); persist + β·Δfc with β=0.5 (n=903)
+post-hoc fit 2025 A lead 2: blend HI ≈ +2.26 + 0.610·fc + 0.414·persist (n=855); persist + β·Δfc with β=0.65 (n=849)
+lead 1: residual SD of the linear-corrected HRES on 2025 A = 2.95 °C, 10/50/90 % -3.61/-0.24/+3.91
+lead 2: residual SD of the linear-corrected HRES on 2025 A = 3.01 °C, 10/50/90 % -3.66/-0.31/+3.89
+
+## 2025 A (fit), lead day 1 (30–33 h), obs = daily max HI, same 903 rows for all
+  raw                    n=  903 MAE= 5.53 bias=-5.51 RMSE= 6.26 band= 44.6% | ≥33.0: ev= 878 POD= 0.81 FAR= 0.00 CSI= 0.81 fb= 0.81 | ≥42.0: ev= 344 POD= 0.00 FAR= 0.00 CSI= 0.00 fb= 0.00
+  persist(issue day)     n=  903 MAE= 1.95 bias=+0.02 RMSE= 2.63 band= 75.9% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.73 FAR= 0.28 CSI= 0.57 fb= 1.01
+  persist(day before)    n=  763 MAE= 2.48 bias=+0.07 RMSE= 3.42 band= 71.3% | ≥33.0: ev= 741 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 293 POD= 0.70 FAR= 0.31 CSI= 0.53 fb= 1.02
+  climatology            n=  574 MAE= 2.19 bias=+0.98 RMSE= 2.93 band= 70.6% | ≥33.0: ev= 566 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 185 POD= 0.62 FAR= 0.43 CSI= 0.42 fb= 1.09
+  linear national        n=  903 MAE= 2.32 bias=+0.09 RMSE= 2.96 band= 71.1% | ≥33.0: ev= 878 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.03 | ≥42.0: ev= 344 POD= 0.65 FAR= 0.33 CSI= 0.50 fb= 0.97
+  linear per station     n=  903 MAE= 1.81 bias=-0.01 RMSE= 2.40 band= 77.9% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.02 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 344 POD= 0.70 FAR= 0.22 CSI= 0.58 fb= 0.89
+  blend+persist (post-hoc) n=  903 MAE= 1.72 bias=+0.00 RMSE= 2.26 band= 79.1% | ≥33.0: ev= 878 POD= 1.00 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 344 POD= 0.73 FAR= 0.22 CSI= 0.60 fb= 0.94
+  persist+β·Δfc (post-hoc) n=  903 MAE= 1.80 bias=-0.01 RMSE= 2.44 band= 77.2% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.76 FAR= 0.26 CSI= 0.60 fb= 1.03
+  raw vs obs 13/16 h     n=  901 MAE= 4.82 bias=-4.71 RMSE= 5.69 band= 51.7% | ≥33.0: ev= 859 POD= 0.81 FAR= 0.01 CSI= 0.81 fb= 0.82 | ≥42.0: ev= 279 POD= 0.00 FAR= 0.00 CSI= 0.00 fb= 0.00
+
+## 2025 A (fit), lead day 2 (54–57 h), obs = daily max HI, same 849 rows for all
+  raw                    n=  849 MAE= 5.42 bias=-5.37 RMSE= 6.16 band= 43.3% | ≥33.0: ev= 825 POD= 0.79 FAR= 0.00 CSI= 0.79 fb= 0.79 | ≥42.0: ev= 324 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+  persist(issue day)     n=  849 MAE= 2.47 bias=+0.07 RMSE= 3.41 band= 70.9% | ≥33.0: ev= 825 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 324 POD= 0.69 FAR= 0.32 CSI= 0.52 fb= 1.00
+  persist(day before)    n=  727 MAE= 2.74 bias=+0.08 RMSE= 3.87 band= 67.1% | ≥33.0: ev= 704 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 281 POD= 0.65 FAR= 0.37 CSI= 0.48 fb= 1.03
+  climatology            n=  536 MAE= 2.21 bias=+1.12 RMSE= 2.94 band= 70.9% | ≥33.0: ev= 529 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 166 POD= 0.64 FAR= 0.45 CSI= 0.42 fb= 1.16
+  linear national        n=  849 MAE= 2.35 bias=+0.15 RMSE= 3.00 band= 71.7% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 324 POD= 0.65 FAR= 0.32 CSI= 0.50 fb= 0.96
+  linear per station     n=  849 MAE= 1.83 bias=+0.05 RMSE= 2.43 band= 77.9% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.02 CSI= 0.97 fb= 1.02 | ≥42.0: ev= 324 POD= 0.69 FAR= 0.21 CSI= 0.58 fb= 0.87
+  blend+persist (post-hoc) n=  849 MAE= 1.99 bias=+0.00 RMSE= 2.65 band= 74.9% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.02 | ≥42.0: ev= 324 POD= 0.66 FAR= 0.24 CSI= 0.54 fb= 0.87
+  persist+β·Δfc (post-hoc) n=  849 MAE= 2.17 bias=+0.10 RMSE= 2.92 band= 74.6% | ≥33.0: ev= 825 POD= 0.99 FAR= 0.02 CSI= 0.97 fb= 1.01 | ≥42.0: ev= 324 POD= 0.73 FAR= 0.28 CSI= 0.57 fb= 1.02
+  raw vs obs 13/16 h     n=  847 MAE= 4.76 bias=-4.60 RMSE= 5.63 band= 49.8% | ≥33.0: ev= 806 POD= 0.80 FAR= 0.01 CSI= 0.79 fb= 0.81 | ≥42.0: ev= 268 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+
+## 2026 A (later), lead day 1 (30–33 h), obs = daily max HI, same 1009 rows for all
+  ΔMAE linear national − raw: -2.76 °C [90 % -3.07, -2.42]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.12 °C [90 % -0.18, -0.06]
+  ΔMAE linear national − persist(issue day): +0.62 °C [90 % +0.46, +0.79]
+  raw                    n= 1009 MAE= 5.12 bias=-5.01 RMSE= 5.82 band= 51.1% | ≥33.0: ev= 994 POD= 0.87 FAR= 0.00 CSI= 0.87 fb= 0.87 | ≥42.0: ev= 377 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00
+  persist(issue day)     n= 1009 MAE= 1.74 bias=+0.05 RMSE= 2.45 band= 83.6% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 377 POD= 0.81 FAR= 0.20 CSI= 0.67 fb= 1.02
+  persist(day before)    n=  862 MAE= 1.97 bias=+0.02 RMSE= 2.73 band= 81.3% | ≥33.0: ev= 851 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 326 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.01
+  climatology            n=  744 MAE= 2.27 bias=+1.10 RMSE= 3.08 band= 78.4% | ≥33.0: ev= 732 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.02 | ≥42.0: ev= 231 POD= 0.71 FAR= 0.33 CSI= 0.52 fb= 1.06
+  linear national        n= 1009 MAE= 2.36 bias=+0.50 RMSE= 2.97 band= 73.4% | ≥33.0: ev= 994 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 377 POD= 0.68 FAR= 0.34 CSI= 0.51 fb= 1.03
+  linear per station     n= 1009 MAE= 1.86 bias=+0.30 RMSE= 2.44 band= 80.0% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 377 POD= 0.80 FAR= 0.27 CSI= 0.62 fb= 1.10
+  blend+persist (post-hoc) n= 1009 MAE= 1.62 bias=+0.24 RMSE= 2.18 band= 85.0% | ≥33.0: ev= 994 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 377 POD= 0.81 FAR= 0.19 CSI= 0.68 fb= 1.00
+  persist+β·Δfc (post-hoc) n= 1009 MAE= 1.70 bias=+0.08 RMSE= 2.36 band= 82.5% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 377 POD= 0.79 FAR= 0.22 CSI= 0.65 fb= 1.01
+  raw vs obs 13/16 h     n=  989 MAE= 4.00 bias=-3.71 RMSE= 4.76 band= 63.2% | ≥33.0: ev= 968 POD= 0.87 FAR= 0.01 CSI= 0.87 fb= 0.88 | ≥42.0: ev= 240 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00
+
+## 2026 A (later), lead day 2 (54–57 h), obs = daily max HI, same 958 rows for all
+  ΔMAE linear national − raw: -2.72 °C [90 % -3.04, -2.39]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.12 °C [90 % -0.22, -0.02]
+  ΔMAE linear national − persist(issue day): +0.45 °C [90 % +0.29, +0.62]
+  raw                    n=  958 MAE= 5.14 bias=-5.02 RMSE= 5.86 band= 50.2% | ≥33.0: ev= 947 POD= 0.87 FAR= 0.00 CSI= 0.86 fb= 0.87 | ≥42.0: ev= 362 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+  persist(issue day)     n=  958 MAE= 1.97 bias=-0.01 RMSE= 2.72 band= 81.0% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.77 FAR= 0.22 CSI= 0.63 fb= 0.99
+  persist(day before)    n=  825 MAE= 2.08 bias=+0.05 RMSE= 2.86 band= 81.2% | ≥33.0: ev= 816 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 313 POD= 0.79 FAR= 0.24 CSI= 0.63 fb= 1.03
+  climatology            n=  716 MAE= 2.27 bias=+1.12 RMSE= 3.06 band= 78.2% | ≥33.0: ev= 706 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 220 POD= 0.70 FAR= 0.33 CSI= 0.52 fb= 1.05
+  linear national        n=  958 MAE= 2.42 bias=+0.41 RMSE= 3.00 band= 70.6% | ≥33.0: ev= 947 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 362 POD= 0.65 FAR= 0.37 CSI= 0.47 fb= 1.03
+  linear per station     n=  958 MAE= 1.90 bias=+0.26 RMSE= 2.47 band= 78.3% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.78 FAR= 0.28 CSI= 0.60 fb= 1.09
+  blend+persist (post-hoc) n=  958 MAE= 1.84 bias=+0.18 RMSE= 2.42 band= 81.1% | ≥33.0: ev= 947 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 362 POD= 0.75 FAR= 0.22 CSI= 0.62 fb= 0.96
+  persist+β·Δfc (post-hoc) n=  958 MAE= 1.92 bias=+0.01 RMSE= 2.65 band= 80.8% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.77 FAR= 0.23 CSI= 0.62 fb= 1.01
+  raw vs obs 13/16 h     n=  936 MAE= 4.07 bias=-3.78 RMSE= 4.88 band= 61.5% | ≥33.0: ev= 919 POD= 0.87 FAR= 0.01 CSI= 0.86 fb= 0.87 | ≥42.0: ev= 239 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+
+## 2026 B (later, held-out stations), lead day 1 (30–33 h), obs = daily max HI, same 1072 rows for all
+  ΔMAE linear national − raw: -2.32 °C [90 % -2.61, -2.00]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.11 °C [90 % -0.18, -0.04]
+  ΔMAE linear national − persist(issue day): +0.64 °C [90 % +0.46, +0.83]
+  raw                    n= 1072 MAE= 4.77 bias=-4.68 RMSE= 5.67 band= 47.2% | ≥33.0: ev=1056 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.95 | ≥42.0: ev= 545 POD= 0.06 FAR= 0.00 CSI= 0.06 fb= 0.06
+  persist(issue day)     n= 1072 MAE= 1.81 bias=+0.01 RMSE= 2.69 band= 78.8% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 545 POD= 0.81 FAR= 0.18 CSI= 0.69 fb= 1.00
+  persist(day before)    n=  892 MAE= 2.12 bias=+0.03 RMSE= 2.90 band= 74.0% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 454 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.02
+  climatology            n=  765 MAE= 2.23 bias=+0.08 RMSE= 2.87 band= 69.3% | ≥33.0: ev= 753 POD= 0.98 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.65 FAR= 0.28 CSI= 0.52 fb= 0.91
+  linear national        n= 1072 MAE= 2.45 bias=+0.61 RMSE= 3.21 band= 64.4% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 545 POD= 0.86 FAR= 0.37 CSI= 0.57 fb= 1.38
+  blend+persist (post-hoc) n= 1072 MAE= 1.70 bias=+0.42 RMSE= 2.42 band= 77.8% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 545 POD= 0.88 FAR= 0.24 CSI= 0.69 fb= 1.16
+  persist+β·Δfc (post-hoc) n= 1072 MAE= 1.71 bias=+0.00 RMSE= 2.53 band= 79.2% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 545 POD= 0.82 FAR= 0.18 CSI= 0.69 fb= 1.00
+  raw vs obs 13/16 h     n= 1071 MAE= 4.06 bias=-3.84 RMSE= 5.00 band= 55.6% | ≥33.0: ev=1048 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.96 | ≥42.0: ev= 437 POD= 0.07 FAR= 0.00 CSI= 0.07 fb= 0.07
+
+## 2026 B (later, held-out stations), lead day 2 (54–57 h), obs = daily max HI, same 1023 rows for all
+  ΔMAE linear national − raw: -2.32 °C [90 % -2.60, -2.05]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.18 °C [90 % -0.28, -0.07]
+  ΔMAE linear national − persist(issue day): +0.28 °C [90 % +0.11, +0.48]
+  raw                    n= 1023 MAE= 4.73 bias=-4.64 RMSE= 5.58 band= 47.5% | ≥33.0: ev=1009 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.95 | ≥42.0: ev= 518 POD= 0.06 FAR= 0.00 CSI= 0.06 fb= 0.06
+  persist(issue day)     n= 1023 MAE= 2.12 bias=+0.01 RMSE= 2.91 band= 74.4% | ≥33.0: ev=1009 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 518 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.02
+  persist(day before)    n=  859 MAE= 2.27 bias=+0.06 RMSE= 3.04 band= 71.5% | ≥33.0: ev= 848 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 435 POD= 0.76 FAR= 0.26 CSI= 0.60 fb= 1.03
+  climatology            n=  737 MAE= 2.25 bias=+0.19 RMSE= 2.89 band= 70.8% | ≥33.0: ev= 726 POD= 0.98 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 321 POD= 0.68 FAR= 0.28 CSI= 0.53 fb= 0.94
+  linear national        n= 1023 MAE= 2.40 bias=+0.50 RMSE= 3.10 band= 65.3% | ≥33.0: ev=1009 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 518 POD= 0.85 FAR= 0.37 CSI= 0.57 fb= 1.35
+  blend+persist (post-hoc) n= 1023 MAE= 1.94 bias=+0.46 RMSE= 2.53 band= 72.8% | ≥33.0: ev=1009 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 518 POD= 0.86 FAR= 0.29 CSI= 0.64 fb= 1.20
+  persist+β·Δfc (post-hoc) n= 1023 MAE= 1.93 bias=+0.01 RMSE= 2.62 band= 77.8% | ≥33.0: ev=1009 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 518 POD= 0.81 FAR= 0.20 CSI= 0.67 fb= 1.01
+  raw vs obs 13/16 h     n= 1022 MAE= 4.00 bias=-3.74 RMSE= 4.87 band= 55.3% | ≥33.0: ev= 995 POD= 0.94 FAR= 0.02 CSI= 0.92 fb= 0.96 | ≥42.0: ev= 411 POD= 0.07 FAR= 0.03 CSI= 0.07 fb= 0.07
+
+## 2026 A+B hot season Mar–May, lead day 1 (30–33 h), obs = daily max HI, same 898 rows for all
+  ΔMAE linear national − raw: -3.21 °C [90 % -3.53, -2.88]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.16 °C [90 % -0.24, -0.08]
+  ΔMAE linear national − persist(issue day): +0.68 °C [90 % +0.47, +0.90]
+  raw                    n=  898 MAE= 5.74 bias=-5.65 RMSE= 6.56 band= 37.2% | ≥33.0: ev= 890 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 543 POD= 0.04 FAR= 0.00 CSI= 0.04 fb= 0.04
+  persist(issue day)     n=  898 MAE= 1.85 bias=-0.01 RMSE= 2.76 band= 81.5% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 543 POD= 0.87 FAR= 0.13 CSI= 0.76 fb= 1.00
+  persist(day before)    n=  764 MAE= 2.12 bias=-0.05 RMSE= 2.87 band= 78.8% | ≥33.0: ev= 758 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 483 POD= 0.84 FAR= 0.15 CSI= 0.73 fb= 0.99
+  climatology            n=  338 MAE= 2.54 bias=+1.44 RMSE= 3.33 band= 71.9% | ≥33.0: ev= 336 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 196 POD= 0.91 FAR= 0.30 CSI= 0.66 fb= 1.31
+  linear national        n=  898 MAE= 2.53 bias=-0.34 RMSE= 3.32 band= 70.8% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 543 POD= 0.79 FAR= 0.24 CSI= 0.63 fb= 1.04
+  linear per station     n=  411 MAE= 1.93 bias=-0.28 RMSE= 2.46 band= 84.4% | ≥33.0: ev= 408 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 227 POD= 0.85 FAR= 0.12 CSI= 0.77 fb= 0.97
+  blend+persist (post-hoc) n=  898 MAE= 1.69 bias=+0.01 RMSE= 2.45 band= 83.4% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 543 POD= 0.90 FAR= 0.14 CSI= 0.78 fb= 1.05
+  persist+β·Δfc (post-hoc) n=  898 MAE= 1.74 bias=+0.01 RMSE= 2.60 band= 81.8% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 543 POD= 0.87 FAR= 0.13 CSI= 0.77 fb= 1.01
+  raw vs obs 13/16 h     n=  897 MAE= 4.85 bias=-4.66 RMSE= 5.70 band= 46.4% | ≥33.0: ev= 884 POD= 0.93 FAR= 0.01 CSI= 0.92 fb= 0.94 | ≥42.0: ev= 441 POD= 0.05 FAR= 0.00 CSI= 0.05 fb= 0.05
+
+## 2026 A+B hot season Mar–May, lead day 2 (54–57 h), obs = daily max HI, same 851 rows for all
+  ΔMAE linear national − raw: -3.05 °C [90 % -3.38, -2.72]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.14 °C [90 % -0.27, -0.01]
+  ΔMAE linear national − persist(issue day): +0.47 °C [90 % +0.26, +0.67]
+  raw                    n=  851 MAE= 5.62 bias=-5.52 RMSE= 6.42 band= 35.7% | ≥33.0: ev= 845 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 532 POD= 0.05 FAR= 0.00 CSI= 0.05 fb= 0.05
+  persist(issue day)     n=  851 MAE= 2.11 bias=-0.06 RMSE= 2.84 band= 78.4% | ≥33.0: ev= 845 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 532 POD= 0.83 FAR= 0.15 CSI= 0.73 fb= 0.98
+  persist(day before)    n=  731 MAE= 2.29 bias=-0.05 RMSE= 3.04 band= 76.3% | ≥33.0: ev= 727 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 468 POD= 0.82 FAR= 0.17 CSI= 0.70 fb= 0.99
+  climatology            n=  334 MAE= 2.54 bias=+1.47 RMSE= 3.33 band= 73.4% | ≥33.0: ev= 332 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 193 POD= 0.93 FAR= 0.29 CSI= 0.67 fb= 1.31
+  linear national        n=  851 MAE= 2.57 bias=-0.38 RMSE= 3.25 band= 67.8% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 532 POD= 0.77 FAR= 0.26 CSI= 0.61 fb= 1.04
+  linear per station     n=  383 MAE= 1.95 bias=-0.23 RMSE= 2.47 band= 79.9% | ≥33.0: ev= 381 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 221 POD= 0.85 FAR= 0.17 CSI= 0.72 fb= 1.03
+  blend+persist (post-hoc) n=  851 MAE= 1.96 bias=-0.09 RMSE= 2.55 band= 77.0% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 532 POD= 0.85 FAR= 0.18 CSI= 0.71 fb= 1.04
+  persist+β·Δfc (post-hoc) n=  851 MAE= 1.89 bias=+0.08 RMSE= 2.58 band= 81.4% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 532 POD= 0.87 FAR= 0.14 CSI= 0.76 fb= 1.01
+  raw vs obs 13/16 h     n=  850 MAE= 4.78 bias=-4.53 RMSE= 5.59 band= 44.6% | ≥33.0: ev= 840 POD= 0.93 FAR= 0.01 CSI= 0.92 fb= 0.94 | ≥42.0: ev= 436 POD= 0.06 FAR= 0.04 CSI= 0.06 fb= 0.06
+
+## 2025 B (same period, held-out), lead day 1 (30–33 h), obs = daily max HI, same 1038 rows for all
+  raw                    n= 1038 MAE= 4.39 bias=-4.22 RMSE= 5.14 band= 49.4% | ≥33.0: ev= 987 POD= 0.91 FAR= 0.01 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 471 POD= 0.05 FAR= 0.08 CSI= 0.05 fb= 0.06
+  persist(issue day)     n= 1038 MAE= 2.12 bias=-0.06 RMSE= 2.84 band= 73.2% | ≥33.0: ev= 987 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 471 POD= 0.73 FAR= 0.24 CSI= 0.60 fb= 0.97
+  persist(day before)    n=  860 MAE= 2.81 bias=-0.03 RMSE= 3.79 band= 63.5% | ≥33.0: ev= 816 POD= 0.96 FAR= 0.04 CSI= 0.92 fb= 1.00 | ≥42.0: ev= 378 POD= 0.65 FAR= 0.34 CSI= 0.49 fb= 0.98
+  climatology            n=  674 MAE= 2.43 bias=+0.83 RMSE= 3.17 band= 68.4% | ≥33.0: ev= 656 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 289 POD= 0.65 FAR= 0.33 CSI= 0.49 fb= 0.97
+  linear national        n= 1038 MAE= 2.43 bias=+1.18 RMSE= 3.13 band= 68.3% | ≥33.0: ev= 987 POD= 1.00 FAR= 0.05 CSI= 0.95 fb= 1.05 | ≥42.0: ev= 471 POD= 0.84 FAR= 0.34 CSI= 0.58 fb= 1.28
+  blend+persist (post-hoc) n= 1038 MAE= 1.79 bias=+0.53 RMSE= 2.41 band= 75.8% | ≥33.0: ev= 987 POD= 1.00 FAR= 0.03 CSI= 0.96 fb= 1.03 | ≥42.0: ev= 471 POD= 0.81 FAR= 0.25 CSI= 0.64 fb= 1.08
+  persist+β·Δfc (post-hoc) n= 1038 MAE= 1.94 bias=-0.08 RMSE= 2.56 band= 74.2% | ≥33.0: ev= 987 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 471 POD= 0.73 FAR= 0.22 CSI= 0.60 fb= 0.93
+  raw vs obs 13/16 h     n= 1035 MAE= 3.56 bias=-3.22 RMSE= 4.24 band= 60.6% | ≥33.0: ev= 972 POD= 0.92 FAR= 0.01 CSI= 0.91 fb= 0.93 | ≥42.0: ev= 339 POD= 0.07 FAR= 0.08 CSI= 0.07 fb= 0.08
+
+## 2025 B (same period, held-out), lead day 2 (54–57 h), obs = daily max HI, same 977 rows for all
+  raw                    n=  977 MAE= 4.24 bias=-4.05 RMSE= 4.98 band= 49.8% | ≥33.0: ev= 931 POD= 0.91 FAR= 0.00 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 430 POD= 0.05 FAR= 0.08 CSI= 0.05 fb= 0.06
+  persist(issue day)     n=  977 MAE= 2.79 bias=+0.04 RMSE= 3.74 band= 62.6% | ≥33.0: ev= 931 POD= 0.96 FAR= 0.03 CSI= 0.93 fb= 1.00 | ≥42.0: ev= 430 POD= 0.66 FAR= 0.36 CSI= 0.48 fb= 1.02
+  persist(day before)    n=  808 MAE= 3.12 bias=-0.06 RMSE= 4.23 band= 60.8% | ≥33.0: ev= 768 POD= 0.95 FAR= 0.04 CSI= 0.91 fb= 0.99 | ≥42.0: ev= 344 POD= 0.61 FAR= 0.38 CSI= 0.45 fb= 0.99
+  climatology            n=  629 MAE= 2.47 bias=+0.93 RMSE= 3.19 band= 68.8% | ≥33.0: ev= 613 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 263 POD= 0.65 FAR= 0.34 CSI= 0.49 fb= 0.99
+  linear national        n=  977 MAE= 2.39 bias=+1.21 RMSE= 3.12 band= 67.7% | ≥33.0: ev= 931 POD= 1.00 FAR= 0.05 CSI= 0.95 fb= 1.05 | ≥42.0: ev= 430 POD= 0.84 FAR= 0.36 CSI= 0.57 fb= 1.30
+  blend+persist (post-hoc) n=  977 MAE= 2.12 bias=+0.79 RMSE= 2.79 band= 70.5% | ≥33.0: ev= 931 POD= 1.00 FAR= 0.04 CSI= 0.96 fb= 1.04 | ≥42.0: ev= 430 POD= 0.79 FAR= 0.32 CSI= 0.58 fb= 1.15
+  persist+β·Δfc (post-hoc) n=  977 MAE= 2.34 bias=+0.03 RMSE= 3.06 band= 68.3% | ≥33.0: ev= 931 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 430 POD= 0.69 FAR= 0.31 CSI= 0.53 fb= 1.00
+  raw vs obs 13/16 h     n=  974 MAE= 3.48 bias=-3.11 RMSE= 4.13 band= 59.4% | ≥33.0: ev= 915 POD= 0.92 FAR= 0.01 CSI= 0.91 fb= 0.93 | ≥42.0: ev= 315 POD= 0.07 FAR= 0.08 CSI= 0.07 fb= 0.08
+
+## 2026, per station: linear national vs raw and vs persistence (made worse = >3 % and bootstrap > 0)
+  THM00048455 BANGKOK METROPOLIS A n=168 MAE raw 5.59 lin 1.80 persist 1.69 clim 1.79 | lin vs raw -67.8% | raw vs persist +231.3% WORSE | blend 1.46 vs persist -13.7%
+  THM00048304 CHAING RAI ARGOMET A n=113 MAE raw 3.12 lin 3.07 persist 2.06 clim 3.53 | lin vs raw -1.4% | raw vs persist +51.5% WORSE | blend 1.90 vs persist -7.5%
+  THM00048334 LAMPANG AGROMET    A n=151 MAE raw 3.80 lin 2.36 persist 1.69 clim 2.56 | lin vs raw -37.9% | raw vs persist +124.3% WORSE | blend 1.50 vs persist -11.2%
+  THM00048384 THA PHRA AGROMET   A n=101 MAE raw 3.98 lin 1.69 persist 1.71 clim 2.09 | lin vs raw -57.6% | raw vs persist +132.3% WORSE | blend 1.41 vs persist -17.7%
+  THM00048409 SI SAKET AGROMET   A n= 74 MAE raw 6.82 lin 1.99 persist 1.59 clim 1.50 | lin vs raw -70.9% | raw vs persist +330.1% WORSE | blend 1.43 vs persist -9.6%
+  THM00048478 RAYONG             A n=170 MAE raw 3.46 lin 2.74 persist 1.79 clim 2.71 | lin vs raw -20.7% | raw vs persist +93.2% WORSE | blend 1.82 vs persist +1.9%
+  THM00048555 SURAT THANI AGROME A n= 69 MAE raw 9.43 lin 3.86 persist 1.72 clim 1.91 | lin vs raw -59.0% | raw vs persist +447.5% WORSE | blend 1.90 vs persist +10.3%
+  THM00048564 PHUKET             A n=163 MAE raw 7.09 lin 1.99 persist 1.64 clim 1.70 | lin vs raw -71.9% | raw vs persist +332.6% WORSE | blend 1.57 vs persist -4.1%
+  THM00048415 AYUTTHAYA          B n= 73 MAE raw 8.85 lin 3.81 persist 3.09 clim 2.16 | lin vs raw -56.9% | raw vs persist +186.2% WORSE | blend 2.55 vs persist -17.5%
+  THM00048333 NAN AGROMET        B n=119 MAE raw 3.38 lin 2.65 persist 1.94 clim 2.75 | lin vs raw -21.5% | raw vs persist +74.1% WORSE | blend 1.71 vs persist -11.7%
+  THM00048325 MAE SARIANG        B n= 52 MAE raw 11.56 lin 5.51 persist 1.80 clim 2.55 | lin vs raw -52.4% | raw vs persist +541.0% WORSE | blend 2.79 vs persist +54.6% WORSE
+  THM00048372 SUKHOTHAI          B n=181 MAE raw 3.48 lin 2.49 persist 1.82 clim 2.08 | lin vs raw -28.7% | raw vs persist +91.7% WORSE | blend 1.80 vs persist -1.1%
+  THM00048357 NAKHON PHANOM      B n=109 MAE raw 4.28 lin 1.84 persist 1.95 clim 2.98 | lin vs raw -57.1% | raw vs persist +119.6% WORSE | blend 1.60 vs persist -17.9%
+  THM00048432 SURIN              B n=132 MAE raw 4.79 lin 1.42 persist 1.42 clim 1.89 | lin vs raw -70.4% | raw vs persist +235.9% WORSE | blend 1.14 vs persist -19.7%
+  THM00048425 SUPHAN BURI        B n=162 MAE raw 4.76 lin 1.93 persist 1.92 clim 2.12 | lin vs raw -59.6% | raw vs persist +147.6% WORSE | blend 1.65 vs persist -14.2%
+  THM00048554 NAKHONSI THAMMARAT B n= 79 MAE raw 5.31 lin 2.12 persist 1.75 clim 2.12 | lin vs raw -60.0% | raw vs persist +204.1% WORSE | blend 1.55 vs persist -11.1%
+  THM00048571 KHO HONG AGROMET   B n=131 MAE raw 2.61 lin 2.94 persist 1.28 clim 2.00 | lin vs raw +12.5% | raw vs persist +104.4% WORSE | blend 1.56 vs persist +21.8% WORSE
+  THM00048440 SRAKAEW            B n= 34 MAE raw 5.92 lin 1.32 persist 1.32 clim 1.68 | lin vs raw -77.8% | raw vs persist +348.4% WORSE | blend 1.18 vs persist -10.3%
+  lead 1: linear national vs raw: made worse at 0 of 18 stations []
+  lead 1: linear national vs persist(issue day): made worse at 9 of 18 stations ['THM00048304', 'THM00048334', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048571']
+  lead 1: raw vs persist(issue day): made worse at 18 of 18 stations ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564', 'THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+  lead 1: blend+persist (post-hoc) vs persist(issue day): made worse at 2 of 18 stations ['THM00048325', 'THM00048571']
+  lead 1: persist+β·Δfc (post-hoc) vs persist(issue day): made worse at 0 of 18 stations []
+  lead 2: linear national vs raw: made worse at 0 of 18 stations []
+  lead 2: linear national vs persist(issue day): made worse at 6 of 18 stations ['THM00048304', 'THM00048334', 'THM00048478', 'THM00048555', 'THM00048325', 'THM00048571']
+  lead 2: raw vs persist(issue day): made worse at 18 of 18 stations ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564', 'THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+  lead 2: blend+persist (post-hoc) vs persist(issue day): made worse at 3 of 18 stations ['THM00048555', 'THM00048325', 'THM00048571']
+  lead 2: persist+β·Δfc (post-hoc) vs persist(issue day): made worse at 2 of 18 stations ['THM00048478', 'THM00048564']
+
+================ E2 24-h rain (07–07 Bangkok), mm ================
+tuned on 2024 A: event ≥35.1 lead 0: forecast threshold 15.0 mm (CSI 0.149, 97 events)
+tuned on 2024 A: event ≥35.1 lead 1: forecast threshold 15.0 mm (CSI 0.155, 97 events)
+tuned on 2024 A: event ≥35.1 lead 2: forecast threshold 17.5 mm (CSI 0.123, 97 events)
+tuned on 2024 A: event ≥90.1 lead 0: forecast threshold 57.5 mm (CSI 0.091, 7 events)
+tuned on 2024 A: event ≥90.1 lead 1: forecast threshold 37.5 mm (CSI 0.053, 7 events)
+tuned on 2024 A: event ≥90.1 lead 2: forecast threshold 22.5 mm (CSI 0.033, 7 events)
+rain-day sources by year: {"2024": {"iR3": 2301, "p24": 1942, "missing": 80}, "2025": {"p24": 2201, "iR3": 2009, "missing": 98}, "2026": {"missing": 2102, "p24": 1407, "iR3": 372, "hourly": 223}}
+
+## 2024 A (fit), lead 0 (steps 0–24 h, optimistic), n=1892 station-days
+  amounts: MAE=7.21 bias=+0.52 mm; obs mean 6.17, fc mean 6.69
+  ≥35.1: events  97 | raw POD= 0.09 FAR= 0.59 CSI= 0.08 fb= 0.23 | tuned(≥15.0) POD= 0.49 FAR= 0.82 CSI= 0.15 fb= 2.81 | persistence CSI= 0.07 | Brier clim 0.0465 raw 0.0534 tuned 0.1448
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.14 FAR= 0.80 CSI= 0.09 fb= 0.71 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0053
+
+## 2024 A (fit), lead 1 (steps 24–48 h), n=1884 station-days
+  amounts: MAE=7.29 bias=+0.44 mm; obs mean 6.20, fc mean 6.64
+  ≥35.1: events  97 | raw POD= 0.07 FAR= 0.53 CSI= 0.07 fb= 0.15 | tuned(≥15.0) POD= 0.51 FAR= 0.82 CSI= 0.16 fb= 2.76 | persistence CSI= 0.06 | Brier clim 0.0467 raw 0.0520 tuned 0.1417
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.14 FAR= 0.92 CSI= 0.05 fb= 1.86 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0096
+
+## 2024 A (fit), lead 2 (steps 48–72 h), n=1876 station-days
+  amounts: MAE=7.67 bias=+0.45 mm; obs mean 6.22, fc mean 6.68
+  ≥35.1: events  97 | raw POD= 0.05 FAR= 0.76 CSI= 0.04 fb= 0.22 | tuned(≥17.5) POD= 0.32 FAR= 0.83 CSI= 0.12 fb= 1.92 | persistence CSI= 0.04 | Brier clim 0.0469 raw 0.0576 tuned 0.1178
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.43 FAR= 0.97 CSI= 0.03 fb=12.29 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0464
+
+## 2025 A (later), lead 0 (steps 0–24 h, optimistic), n=1902 station-days
+  amounts: MAE=7.10 bias=+0.40 mm; obs mean 6.38, fc mean 6.79
+  ≥35.1: events  84 | raw POD= 0.05 FAR= 0.79 CSI= 0.04 fb= 0.23 | tuned(≥15.0) POD= 0.45 FAR= 0.86 CSI= 0.12 fb= 3.15 | persistence CSI= 0.06 | Brier clim 0.0419 raw 0.0499 tuned 0.1435
+  ≥90.1: events   4 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 0.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0021 tuned 0.0026
+
+## 2025 A (later), lead 1 (steps 24–48 h), n=1894 station-days
+  amounts: MAE=7.41 bias=+0.66 mm; obs mean 6.41, fc mean 7.07
+  ≥35.1: events  84 | raw POD= 0.04 FAR= 0.84 CSI= 0.03 fb= 0.23 | tuned(≥15.0) POD= 0.38 FAR= 0.88 CSI= 0.10 fb= 3.11 | persistence CSI= 0.06 | Brier clim 0.0421 raw 0.0512 tuned 0.1484
+  ≥90.1: events   4 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 4.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0021 tuned 0.0111
+
+## 2025 A (later), lead 2 (steps 48–72 h), n=1886 station-days
+  amounts: MAE=7.74 bias=+1.10 mm; obs mean 6.44, fc mean 7.54
+  ≥35.1: events  84 | raw POD= 0.08 FAR= 0.70 CSI= 0.07 fb= 0.27 | tuned(≥17.5) POD= 0.38 FAR= 0.85 CSI= 0.12 fb= 2.48 | persistence CSI= 0.02 | Brier clim 0.0423 raw 0.0493 tuned 0.1209
+  ≥90.1: events   4 | raw POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 0.25 | tuned(≥22.5) POD= 1.00 FAR= 0.96 CSI= 0.04 fb=28.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0027 tuned 0.0578
+
+## 2025 B (later, held-out stations), lead 0 (steps 0–24 h, optimistic), n=2308 station-days
+  amounts: MAE=7.18 bias=+1.98 mm; obs mean 5.42, fc mean 7.40
+  ≥35.1: events  71 | raw POD= 0.11 FAR= 0.78 CSI= 0.08 fb= 0.52 | tuned(≥15.0) POD= 0.48 FAR= 0.91 CSI= 0.09 fb= 5.06 | persistence CSI= 0.02 | Brier clim 0.0295 raw 0.0399 tuned 0.1568
+  ≥90.1: events  11 | raw POD= 0.09 FAR= 0.00 CSI= 0.09 fb= 0.09 | tuned(≥57.5) POD= 0.27 FAR= 0.57 CSI= 0.20 fb= 0.64 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0043 tuned 0.0052
+
+## 2025 B (later, held-out stations), lead 1 (steps 24–48 h), n=2298 station-days
+  amounts: MAE=7.41 bias=+2.24 mm; obs mean 5.44, fc mean 7.68
+  ≥35.1: events  71 | raw POD= 0.10 FAR= 0.77 CSI= 0.07 fb= 0.42 | tuned(≥15.0) POD= 0.45 FAR= 0.91 CSI= 0.08 fb= 4.89 | persistence CSI= 0.02 | Brier clim 0.0296 raw 0.0379 tuned 0.1540
+  ≥90.1: events  11 | raw POD= 0.09 FAR= 0.00 CSI= 0.09 fb= 0.09 | tuned(≥37.5) POD= 0.27 FAR= 0.88 CSI= 0.09 fb= 2.27 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0044 tuned 0.0131
+
+## 2025 B (later, held-out stations), lead 2 (steps 48–72 h), n=2288 station-days
+  amounts: MAE=7.69 bias=+2.48 mm; obs mean 5.45, fc mean 7.93
+  ≥35.1: events  71 | raw POD= 0.13 FAR= 0.76 CSI= 0.09 fb= 0.54 | tuned(≥17.5) POD= 0.42 FAR= 0.90 CSI= 0.09 fb= 4.11 | persistence CSI= 0.01 | Brier clim 0.0298 raw 0.0398 tuned 0.1324
+  ≥90.1: events  11 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.27 FAR= 0.98 CSI= 0.02 fb=14.27 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0048 tuned 0.0708
+
+## 2024 B (same period, held-out), lead 0 (steps 0–24 h, optimistic), n=2351 station-days
+  amounts: MAE=6.87 bias=+2.49 mm; obs mean 5.00, fc mean 7.49
+  ≥35.1: events  86 | raw POD= 0.12 FAR= 0.75 CSI= 0.09 fb= 0.47 | tuned(≥15.0) POD= 0.65 FAR= 0.86 CSI= 0.13 fb= 4.80 | persistence CSI= 0.03 | Brier clim 0.0343 raw 0.0451 tuned 0.1646
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 2.00 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0026
+
+## 2024 B (same period, held-out), lead 1 (steps 24–48 h), n=2341 station-days
+  amounts: MAE=7.19 bias=+2.34 mm; obs mean 5.02, fc mean 7.36
+  ≥35.1: events  86 | raw POD= 0.07 FAR= 0.82 CSI= 0.05 fb= 0.40 | tuned(≥15.0) POD= 0.51 FAR= 0.89 CSI= 0.10 fb= 4.67 | persistence CSI= 0.02 | Brier clim 0.0345 raw 0.0461 tuned 0.1709
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb=12.50 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0115
+
+## 2024 B (same period, held-out), lead 2 (steps 48–72 h), n=2331 station-days
+  amounts: MAE=7.36 bias=+2.27 mm; obs mean 5.04, fc mean 7.31
+  ≥35.1: events  86 | raw POD= 0.09 FAR= 0.73 CSI= 0.07 fb= 0.35 | tuned(≥17.5) POD= 0.40 FAR= 0.88 CSI= 0.10 fb= 3.30 | persistence CSI= 0.04 | Brier clim 0.0346 raw 0.0429 tuned 0.1296
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.50 FAR= 0.99 CSI= 0.01 fb=75.00 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0644
+
+## 2026 A+B (newest, partial: BUFR), lead 0 (steps 0–24 h, optimistic), n=2002 station-days
+  amounts: MAE=8.40 bias=-1.38 mm; obs mean 9.01, fc mean 7.63
+  ≥35.1: events 118 | raw POD= 0.13 FAR= 0.58 CSI= 0.11 fb= 0.31 | tuned(≥15.0) POD= 0.42 FAR= 0.85 CSI= 0.13 fb= 2.75 | persistence CSI= 0.06 | Brier clim 0.0551 raw 0.0619 tuned 0.1708
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.08 FAR= 0.80 CSI= 0.06 fb= 0.38 | persistence CSI= 0.04 | Brier clim 0.0064 raw 0.0065 tuned 0.0080
+
+## 2026 A+B (newest, partial: BUFR), lead 1 (steps 24–48 h), n=1985 station-days
+  amounts: MAE=8.94 bias=-1.01 mm; obs mean 9.09, fc mean 8.07
+  ≥35.1: events 118 | raw POD= 0.12 FAR= 0.53 CSI= 0.10 fb= 0.25 | tuned(≥15.0) POD= 0.39 FAR= 0.87 CSI= 0.11 fb= 3.00 | persistence CSI= 0.04 | Brier clim 0.0555 raw 0.0605 tuned 0.1914
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.38 FAR= 0.79 CSI= 0.16 fb= 1.85 | persistence CSI= 0.00 | Brier clim 0.0065 raw 0.0065 tuned 0.0136
+
+## 2026 A+B (newest, partial: BUFR), lead 2 (steps 48–72 h), n=1969 station-days
+  amounts: MAE=9.01 bias=-0.76 mm; obs mean 9.16, fc mean 8.40
+  ≥35.1: events 118 | raw POD= 0.14 FAR= 0.60 CSI= 0.11 fb= 0.34 | tuned(≥17.5) POD= 0.36 FAR= 0.84 CSI= 0.12 fb= 2.28 | persistence CSI= 0.05 | Brier clim 0.0560 raw 0.0640 tuned 0.1529
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.62 FAR= 0.95 CSI= 0.05 fb=11.62 | persistence CSI= 0.05 | Brier clim 0.0065 raw 0.0066 tuned 0.0752
+
+================ ENS rain probabilities (51 members) ================
+ENS rain runs: 99 (2025-06-01..2026-10-20), members per run-station: 51.0
+  2025 lead 0 ≥35.1: n=877 events=35 Brier ENS 0.0373 clim 0.0381 BSS +0.019 | vs base rate BSS +0.025 | as a warning at P≥10 %: POD  0.23 FAR  0.79
+      P in [0.000,0.00): n= 685 mean P=0.000 observed 0.031
+      P in [0.001,0.10): n= 154 mean P=0.039 observed 0.039
+      P in [0.100,0.20): n=  18 mean P=0.157 observed 0.222
+      P in [0.200,0.40): n=  13 mean P=0.282 observed 0.077
+      P in [0.400,0.60): n=   4 mean P=0.490 observed 0.250
+      P in [0.600,1.01): n=   3 mean P=0.869 observed 0.667
+  2025 lead 0 ≥90.1: n=877 events=5 Brier ENS 0.0056 clim 0.0057 BSS +0.024 | vs base rate BSS +0.014 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 867 mean P=0.000 observed 0.005
+      P in [0.001,0.10): n=  10 mean P=0.039 observed 0.100
+  2025 lead 0: ENS median MAE 7.24 mm, 10–90 % range held 27.6 % (n=877)
+  2025 lead 1 ≥35.1: n=885 events=33 Brier ENS 0.0342 clim 0.0361 BSS +0.054 | vs base rate BSS +0.049 | as a warning at P≥10 %: POD  0.27 FAR  0.79
+      P in [0.000,0.00): n= 628 mean P=0.000 observed 0.021
+      P in [0.001,0.10): n= 214 mean P=0.038 observed 0.051
+      P in [0.100,0.20): n=  23 mean P=0.147 observed 0.174
+      P in [0.200,0.40): n=  10 mean P=0.296 observed 0.100
+      P in [0.400,0.60): n=   6 mean P=0.464 observed 0.167
+      P in [0.600,1.01): n=   4 mean P=0.745 observed 0.750
+  2025 lead 1 ≥90.1: n=885 events=3 Brier ENS 0.0029 clim 0.0034 BSS +0.147 | vs base rate BSS +0.145 | as a warning at P≥10 %: POD  0.33 FAR  0.00
+      P in [0.000,0.00): n= 865 mean P=0.000 observed 0.002
+      P in [0.001,0.10): n=  19 mean P=0.034 observed 0.000
+      P in [0.200,0.40): n=   1 mean P=0.275 observed 1.000
+  2025 lead 1: ENS median MAE 7.15 mm, 10–90 % range held 32.4 % (n=885)
+  2025 lead 2 ≥35.1: n=857 events=37 Brier ENS 0.0426 clim 0.0408 BSS -0.045 | vs base rate BSS -0.030 | as a warning at P≥10 %: POD  0.27 FAR  0.82
+      P in [0.000,0.00): n= 536 mean P=0.000 observed 0.026
+      P in [0.001,0.10): n= 265 mean P=0.038 observed 0.049
+      P in [0.100,0.20): n=  29 mean P=0.143 observed 0.207
+      P in [0.200,0.40): n=  16 mean P=0.273 observed 0.062
+      P in [0.400,0.60): n=   7 mean P=0.482 observed 0.286
+      P in [0.600,1.01): n=   4 mean P=0.784 observed 0.250
+  2025 lead 2 ≥90.1: n=857 events=3 Brier ENS 0.0032 clim 0.0035 BSS +0.088 | vs base rate BSS +0.075 | as a warning at P≥10 %: POD  0.33 FAR  0.75
+      P in [0.000,0.00): n= 833 mean P=0.000 observed 0.002
+      P in [0.001,0.10): n=  20 mean P=0.025 observed 0.000
+      P in [0.100,0.20): n=   3 mean P=0.170 observed 0.333
+      P in [0.200,0.40): n=   1 mean P=0.235 observed 0.000
+  2025 lead 2: ENS median MAE 7.84 mm, 10–90 % range held 29.9 % (n=857)
+  2026 lead 0 ≥35.1: n=416 events=25 Brier ENS 0.0491 clim 0.0560 BSS +0.124 | vs base rate BSS +0.131 | as a warning at P≥10 %: POD  0.44 FAR  0.69
+      P in [0.000,0.00): n= 289 mean P=0.000 observed 0.028
+      P in [0.001,0.10): n=  91 mean P=0.035 observed 0.066
+      P in [0.100,0.20): n=  20 mean P=0.122 observed 0.200
+      P in [0.200,0.40): n=   6 mean P=0.273 observed 0.333
+      P in [0.400,0.60): n=   2 mean P=0.500 observed 0.000
+      P in [0.600,1.01): n=   8 mean P=0.712 observed 0.625
+  2026 lead 0 ≥90.1: n=416 events=3 Brier ENS 0.0072 clim 0.0070 BSS -0.017 | vs base rate BSS +0.001 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 407 mean P=0.000 observed 0.005
+      P in [0.001,0.10): n=   9 mean P=0.038 observed 0.111
+  2026 lead 0: ENS median MAE 9.49 mm, 10–90 % range held 42.5 % (n=416)
+  2026 lead 1 ≥35.1: n=318 events=20 Brier ENS 0.0619 clim 0.0576 BSS -0.075 | vs base rate BSS -0.050 | as a warning at P≥10 %: POD  0.20 FAR  0.87
+      P in [0.000,0.00): n= 192 mean P=0.000 observed 0.026
+      P in [0.001,0.10): n=  96 mean P=0.035 observed 0.115
+      P in [0.100,0.20): n=  18 mean P=0.134 observed 0.167
+      P in [0.200,0.40): n=   9 mean P=0.271 observed 0.000
+      P in [0.400,0.60): n=   2 mean P=0.410 observed 0.500
+      P in [0.600,1.01): n=   1 mean P=0.860 observed 0.000
+  2026 lead 1 ≥90.1: n=318 events=3 Brier ENS 0.0095 clim 0.0093 BSS -0.018 | vs base rate BSS -0.014 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 310 mean P=0.000 observed 0.010
+      P in [0.001,0.10): n=   8 mean P=0.033 observed 0.000
+  2026 lead 1: ENS median MAE 9.99 mm, 10–90 % range held 39.6 % (n=318)
+  2026 lead 2 ≥35.1: n=370 events=32 Brier ENS 0.0750 clim 0.0796 BSS +0.057 | vs base rate BSS +0.050 | as a warning at P≥10 %: POD  0.34 FAR  0.80
+      P in [0.000,0.00): n= 207 mean P=0.000 observed 0.063
+      P in [0.001,0.10): n= 109 mean P=0.037 observed 0.073
+      P in [0.100,0.20): n=  29 mean P=0.133 observed 0.138
+      P in [0.200,0.40): n=  12 mean P=0.268 observed 0.000
+      P in [0.400,0.60): n=  10 mean P=0.448 observed 0.400
+      P in [0.600,1.01): n=   3 mean P=0.720 observed 1.000
+  2026 lead 2 ≥90.1: n=370 events=5 Brier ENS 0.0134 clim 0.0136 BSS +0.011 | vs base rate BSS -0.005 | as a warning at P≥10 %: POD  0.00 FAR  1.00
+      P in [0.000,0.00): n= 345 mean P=0.000 observed 0.012
+      P in [0.001,0.10): n=  24 mean P=0.030 observed 0.042
+      P in [0.100,0.20): n=   1 mean P=0.100 observed 0.000
+  2026 lead 2: ENS median MAE 10.74 mm, 10–90 % range held 38.6 % (n=370)
+
+================ ENS heat probabilities (51 members, day 1) ================
+ENS heat: correction applied per member = HRES 2025 national lead-1 fit (+10.37 + 0.865·HI)
+  dressing (post-hoc design, SD from 2025 HRES residuals): 2.95 °C
+
+  ENS heat raw, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.5597, climatology (2024 station-month frequency) 0.4344, BSS -0.288; vs the test sample's own base rate 0.2454, BSS -1.280
+      P in [0.000,0.00): n= 176 mean P=0.000 observed 0.534
+      P in [0.001,0.10): n=  14 mean P=0.041 observed 0.929
+      P in [0.100,0.30): n=   2 mean P=0.127 observed 1.000
+    P(HI≥33.0): events 190 of 192; Brier 0.0456; vs the test sample's own base rate 0.0103, BSS -3.421
+      P in [0.000,0.00): n=   3 mean P=0.000 observed 0.667
+      P in [0.001,0.10): n=   4 mean P=0.074 observed 1.000
+      P in [0.100,0.30): n=   2 mean P=0.265 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.379 observed 0.667
+      P in [0.500,0.70): n=   4 mean P=0.544 observed 1.000
+      P in [0.700,0.90): n=  15 mean P=0.822 observed 1.000
+      P in [0.900,1.01): n= 161 mean P=0.995 observed 1.000
+    median: n=  192 MAE= 5.87 bias=-5.75 RMSE= 6.46 band= 38.5% | ≥33.0: ev= 190 POD= 0.95 FAR= 0.00 CSI= 0.95 fb= 0.95 | ≥42.0: ev= 109 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00; 10–90 % range held 2.1 %
+
+  ENS heat raw, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.6170, climatology (2024 station-month frequency) 0.5379, BSS -0.147; vs the test sample's own base rate 0.2198, BSS -1.807
+      P in [0.000,0.00): n= 173 mean P=0.000 observed 0.590
+      P in [0.001,0.10): n=  39 mean P=0.042 observed 0.897
+      P in [0.100,0.30): n=   9 mean P=0.169 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.418 observed 1.000
+      P in [0.500,0.70): n=   4 mean P=0.627 observed 1.000
+      P in [0.700,0.90): n=   2 mean P=0.824 observed 1.000
+    P(HI≥33.0): events 229 of 230; Brier 0.0824; vs the test sample's own base rate 0.0043, BSS -18.039
+      P in [0.000,0.00): n=  10 mean P=0.000 observed 1.000
+      P in [0.001,0.10): n=   5 mean P=0.051 observed 1.000
+      P in [0.100,0.30): n=   4 mean P=0.245 observed 1.000
+      P in [0.300,0.50): n=   1 mean P=0.333 observed 1.000
+      P in [0.500,0.70): n=   5 mean P=0.647 observed 1.000
+      P in [0.700,0.90): n=   3 mean P=0.763 observed 1.000
+      P in [0.900,1.01): n= 202 mean P=0.995 observed 0.995
+    median: n=  230 MAE= 5.96 bias=-5.89 RMSE= 6.63 band= 30.9% | ≥33.0: ev= 229 POD= 0.91 FAR= 0.00 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 155 POD= 0.04 FAR= 0.00 CSI= 0.04 fb= 0.04; 10–90 % range held 2.2 %
+
+  ENS heat raw, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.5909, climatology (2024 station-month frequency) 0.4880, BSS -0.211; vs the test sample's own base rate 0.2342, BSS -1.523
+      P in [0.000,0.00): n= 349 mean P=0.000 observed 0.562
+      P in [0.001,0.10): n=  53 mean P=0.041 observed 0.906
+      P in [0.100,0.30): n=  11 mean P=0.161 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.418 observed 1.000
+      P in [0.500,0.70): n=   4 mean P=0.627 observed 1.000
+      P in [0.700,0.90): n=   2 mean P=0.824 observed 1.000
+    P(HI≥33.0): events 419 of 422; Brier 0.0657; vs the test sample's own base rate 0.0071, BSS -8.302
+      P in [0.000,0.00): n=  13 mean P=0.000 observed 0.923
+      P in [0.001,0.10): n=   9 mean P=0.061 observed 1.000
+      P in [0.100,0.30): n=   6 mean P=0.252 observed 1.000
+      P in [0.300,0.50): n=   4 mean P=0.368 observed 0.750
+      P in [0.500,0.70): n=   9 mean P=0.601 observed 1.000
+      P in [0.700,0.90): n=  18 mean P=0.812 observed 1.000
+      P in [0.900,1.01): n= 363 mean P=0.995 observed 0.997
+    median: n=  422 MAE= 5.92 bias=-5.83 RMSE= 6.56 band= 34.4% | ≥33.0: ev= 419 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 264 POD= 0.02 FAR= 0.00 CSI= 0.02 fb= 0.02; 10–90 % range held 2.1 %
+
+  ENS heat corrected, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.2202, climatology (2024 station-month frequency) 0.4344, BSS +0.493; vs the test sample's own base rate 0.2454, BSS +0.103
+      P in [0.000,0.00): n=  39 mean P=0.000 observed 0.154
+      P in [0.001,0.10): n=  24 mean P=0.042 observed 0.500
+      P in [0.100,0.30): n=  21 mean P=0.188 observed 0.429
+      P in [0.300,0.50): n=   7 mean P=0.426 observed 0.286
+      P in [0.500,0.70): n=  10 mean P=0.606 observed 0.500
+      P in [0.700,0.90): n=  15 mean P=0.813 observed 0.667
+      P in [0.900,1.01): n=  76 mean P=0.983 observed 0.855
+    P(HI≥33.0): events 190 of 192; Brier 0.0108; vs the test sample's own base rate 0.0103, BSS -0.051
+      P in [0.700,0.90): n=   1 mean P=0.720 observed 1.000
+      P in [0.900,1.01): n= 191 mean P=1.000 observed 0.990
+    median: n=  192 MAE= 2.36 bias=-0.34 RMSE= 2.99 band= 72.4% | ≥33.0: ev= 190 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 109 POD= 0.73 FAR= 0.21 CSI= 0.62 fb= 0.93; 10–90 % range held 21.4 %
+
+  ENS heat corrected, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.2010, climatology (2024 station-month frequency) 0.5379, BSS +0.626; vs the test sample's own base rate 0.2198, BSS +0.085
+      P in [0.000,0.00): n=  35 mean P=0.000 observed 0.429
+      P in [0.001,0.10): n=   9 mean P=0.050 observed 0.111
+      P in [0.100,0.30): n=   7 mean P=0.174 observed 0.143
+      P in [0.300,0.50): n=   8 mean P=0.391 observed 0.250
+      P in [0.500,0.70): n=   8 mean P=0.605 observed 0.250
+      P in [0.700,0.90): n=  17 mean P=0.837 observed 0.412
+      P in [0.900,1.01): n= 146 mean P=0.985 observed 0.870
+    P(HI≥33.0): events 229 of 230; Brier 0.0044; vs the test sample's own base rate 0.0043, BSS -0.010
+      P in [0.900,1.01): n= 230 mean P=0.999 observed 0.996
+    median: n=  230 MAE= 2.45 bias=-0.62 RMSE= 3.06 band= 75.2% | ≥33.0: ev= 229 POD= 1.00 FAR= 0.00 CSI= 1.00 fb= 1.00 | ≥42.0: ev= 155 POD= 0.88 FAR= 0.20 CSI= 0.72 fb= 1.10; 10–90 % range held 21.7 %
+
+  ENS heat corrected, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.2098, climatology (2024 station-month frequency) 0.4880, BSS +0.570; vs the test sample's own base rate 0.2342, BSS +0.104
+      P in [0.000,0.00): n=  74 mean P=0.000 observed 0.284
+      P in [0.001,0.10): n=  33 mean P=0.045 observed 0.394
+      P in [0.100,0.30): n=  28 mean P=0.184 observed 0.357
+      P in [0.300,0.50): n=  15 mean P=0.407 observed 0.267
+      P in [0.500,0.70): n=  18 mean P=0.606 observed 0.389
+      P in [0.700,0.90): n=  32 mean P=0.826 observed 0.531
+      P in [0.900,1.01): n= 222 mean P=0.984 observed 0.865
+    P(HI≥33.0): events 419 of 422; Brier 0.0073; vs the test sample's own base rate 0.0071, BSS -0.036
+      P in [0.700,0.90): n=   1 mean P=0.720 observed 1.000
+      P in [0.900,1.01): n= 421 mean P=1.000 observed 0.993
+    median: n=  422 MAE= 2.41 bias=-0.50 RMSE= 3.03 band= 73.9% | ≥33.0: ev= 419 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 264 POD= 0.82 FAR= 0.21 CSI= 0.68 fb= 1.03; 10–90 % range held 21.6 %
+
+  ENS heat corrected+dressed, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.1761, climatology (2024 station-month frequency) 0.4344, BSS +0.595; vs the test sample's own base rate 0.2454, BSS +0.283
+      P in [0.001,0.10): n=   5 mean P=0.065 observed 0.000
+      P in [0.100,0.30): n=  35 mean P=0.207 observed 0.257
+      P in [0.300,0.50): n=  48 mean P=0.398 observed 0.417
+      P in [0.500,0.70): n=  48 mean P=0.609 observed 0.562
+      P in [0.700,0.90): n=  56 mean P=0.778 observed 0.946
+    P(HI≥33.0): events 190 of 192; Brier 0.0100; vs the test sample's own base rate 0.0103, BSS +0.029
+      P in [0.500,0.70): n=   1 mean P=0.663 observed 1.000
+      P in [0.900,1.01): n= 191 mean P=0.994 observed 0.990
+    median: n=  192 MAE= 2.36 bias=-0.34 RMSE= 2.99 band= 72.4% | ≥33.0: ev= 190 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 109 POD= 0.73 FAR= 0.21 CSI= 0.62 fb= 0.93; 10–90 % range held 82.8 %
+
+  ENS heat corrected+dressed, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.1733, climatology (2024 station-month frequency) 0.5379, BSS +0.678; vs the test sample's own base rate 0.2198, BSS +0.211
+      P in [0.001,0.10): n=  13 mean P=0.050 observed 0.385
+      P in [0.100,0.30): n=  23 mean P=0.200 observed 0.478
+      P in [0.300,0.50): n=  23 mean P=0.405 observed 0.130
+      P in [0.500,0.70): n=  53 mean P=0.624 observed 0.528
+      P in [0.700,0.90): n= 107 mean P=0.790 observed 0.907
+      P in [0.900,1.01): n=  11 mean P=0.930 observed 1.000
+    P(HI≥33.0): events 229 of 230; Brier 0.0053; vs the test sample's own base rate 0.0043, BSS -0.222
+      P in [0.700,0.90): n=   6 mean P=0.828 observed 1.000
+      P in [0.900,1.01): n= 224 mean P=0.995 observed 0.996
+    median: n=  230 MAE= 2.45 bias=-0.62 RMSE= 3.06 band= 75.2% | ≥33.0: ev= 229 POD= 1.00 FAR= 0.00 CSI= 1.00 fb= 1.00 | ≥42.0: ev= 155 POD= 0.88 FAR= 0.20 CSI= 0.72 fb= 1.10; 10–90 % range held 80.9 %
+
+  ENS heat corrected+dressed, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.1746, climatology (2024 station-month frequency) 0.4880, BSS +0.642; vs the test sample's own base rate 0.2342, BSS +0.255
+      P in [0.001,0.10): n=  18 mean P=0.054 observed 0.278
+      P in [0.100,0.30): n=  58 mean P=0.205 observed 0.345
+      P in [0.300,0.50): n=  71 mean P=0.400 observed 0.324
+      P in [0.500,0.70): n= 101 mean P=0.617 observed 0.545
+      P in [0.700,0.90): n= 163 mean P=0.786 observed 0.920
+      P in [0.900,1.01): n=  11 mean P=0.930 observed 1.000
+    P(HI≥33.0): events 419 of 422; Brier 0.0074; vs the test sample's own base rate 0.0071, BSS -0.054
+      P in [0.500,0.70): n=   1 mean P=0.663 observed 1.000
+      P in [0.700,0.90): n=   6 mean P=0.828 observed 1.000
+      P in [0.900,1.01): n= 415 mean P=0.994 observed 0.993
+    median: n=  422 MAE= 2.41 bias=-0.50 RMSE= 3.03 band= 73.9% | ≥33.0: ev= 419 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 264 POD= 0.82 FAR= 0.21 CSI= 0.68 fb= 1.03; 10–90 % range held 81.8 %
+
+wrote /home/user/disaster-now/research/out/e1e2_results.json and /home/user/disaster-now/research/data/e1e2_daily.csv
+
+===== run 2026-10-23T20:55:30+00:00 =====
+sample A (fit/choose): ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564']
+sample B (held out): ['THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+observed station-days: 44615; with HI max: 9287; with rain: 40956; years [np.int32(2019), np.int32(2020), np.int32(2021), np.int32(2022), np.int32(2023), np.int32(2024), np.int32(2025), np.int32(2026)]
+  2019: HI days      0  rain days     17  rain≥35.1    0  ≥90.1   0  HI≥42     0
+  2020: HI days     19  rain days   6376  rain≥35.1  208  ≥90.1  15  HI≥42     2
+  2021: HI days      0  rain days   6360  rain≥35.1  203  ≥90.1  14  HI≥42     0
+  2022: HI days     18  rain days   6377  rain≥35.1  282  ≥90.1  35  HI≥42     1
+  2023: HI days      0  rain days   6368  rain≥35.1  188  ≥90.1  11  HI≥42     0
+  2024: HI days   2388  rain days   6272  rain≥35.1  223  ≥90.1  24  HI≥42   863
+  2025: HI days   3796  rain days   6205  rain≥35.1  201  ≥90.1  31  HI≥42  1048
+  2026: HI days   3066  rain days   2981  rain≥35.1  119  ≥90.1  13  HI≥42  1134
+climatology from 2020–2024: 2425 HI station-days
+HRES runs: 724 (2024-03-01..2026-10-20)
+
+================ E1 heat index (daily max, °C) ================
+fit 2025 sample A lead 1: HI_obs ≈ +10.37 + 0.865 × HI_fc (n=1113); per station a/b: 48304 +1.5/1.04, 48334 +11.4/0.80, 48384 +1.9/1.12, 48409 -7.0/1.35, 48455 +9.9/0.86, 48478 +14.5/0.71, 48555 +27.5/0.43, 48564 +13.2/0.84
+fit 2025 sample A lead 2: HI_obs ≈ +11.69 + 0.826 × HI_fc (n=1107); per station a/b: 48304 +0.6/1.06, 48334 +7.0/0.93, 48384 +3.0/1.09, 48409 -4.2/1.27, 48455 +7.9/0.91, 48478 +16.6/0.65, 48555 +20.1/0.66, 48564 +16.1/0.76
+post-hoc fit 2025 A lead 1: blend HI ≈ +0.77 + 0.439·fc + 0.601·persist (n=909); persist + β·Δfc with β=0.5 (n=903)
+post-hoc fit 2025 A lead 2: blend HI ≈ +2.26 + 0.610·fc + 0.414·persist (n=855); persist + β·Δfc with β=0.65 (n=849)
+lead 1: residual SD of the linear-corrected HRES on 2025 A = 2.95 °C, 10/50/90 % -3.61/-0.24/+3.91
+lead 2: residual SD of the linear-corrected HRES on 2025 A = 3.01 °C, 10/50/90 % -3.66/-0.31/+3.89
+
+## 2025 A (fit), lead day 1 (30–33 h), obs = daily max HI, same 903 rows for all
+  raw                    n=  903 MAE= 5.53 bias=-5.51 RMSE= 6.26 band= 44.6% | ≥33.0: ev= 878 POD= 0.81 FAR= 0.00 CSI= 0.81 fb= 0.81 | ≥42.0: ev= 344 POD= 0.00 FAR= 0.00 CSI= 0.00 fb= 0.00
+  persist(issue day)     n=  903 MAE= 1.95 bias=+0.02 RMSE= 2.63 band= 75.9% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.73 FAR= 0.28 CSI= 0.57 fb= 1.01
+  persist(day before)    n=  763 MAE= 2.48 bias=+0.07 RMSE= 3.42 band= 71.3% | ≥33.0: ev= 741 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 293 POD= 0.70 FAR= 0.31 CSI= 0.53 fb= 1.02
+  climatology            n=  574 MAE= 2.19 bias=+0.98 RMSE= 2.93 band= 70.6% | ≥33.0: ev= 566 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 185 POD= 0.62 FAR= 0.43 CSI= 0.42 fb= 1.09
+  linear national        n=  903 MAE= 2.32 bias=+0.09 RMSE= 2.96 band= 71.1% | ≥33.0: ev= 878 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.03 | ≥42.0: ev= 344 POD= 0.65 FAR= 0.33 CSI= 0.50 fb= 0.97
+  linear per station     n=  903 MAE= 1.81 bias=-0.01 RMSE= 2.40 band= 77.9% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.02 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 344 POD= 0.70 FAR= 0.22 CSI= 0.58 fb= 0.89
+  blend+persist (post-hoc) n=  903 MAE= 1.72 bias=+0.00 RMSE= 2.26 band= 79.1% | ≥33.0: ev= 878 POD= 1.00 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 344 POD= 0.73 FAR= 0.22 CSI= 0.60 fb= 0.94
+  persist+β·Δfc (post-hoc) n=  903 MAE= 1.80 bias=-0.01 RMSE= 2.44 band= 77.2% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.76 FAR= 0.26 CSI= 0.60 fb= 1.03
+  raw vs obs 13/16 h     n=  901 MAE= 4.82 bias=-4.71 RMSE= 5.69 band= 51.7% | ≥33.0: ev= 859 POD= 0.81 FAR= 0.01 CSI= 0.81 fb= 0.82 | ≥42.0: ev= 279 POD= 0.00 FAR= 0.00 CSI= 0.00 fb= 0.00
+
+## 2025 A (fit), lead day 2 (54–57 h), obs = daily max HI, same 849 rows for all
+  raw                    n=  849 MAE= 5.42 bias=-5.37 RMSE= 6.16 band= 43.3% | ≥33.0: ev= 825 POD= 0.79 FAR= 0.00 CSI= 0.79 fb= 0.79 | ≥42.0: ev= 324 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+  persist(issue day)     n=  849 MAE= 2.47 bias=+0.07 RMSE= 3.41 band= 70.9% | ≥33.0: ev= 825 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 324 POD= 0.69 FAR= 0.32 CSI= 0.52 fb= 1.00
+  persist(day before)    n=  727 MAE= 2.74 bias=+0.08 RMSE= 3.87 band= 67.1% | ≥33.0: ev= 704 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 281 POD= 0.65 FAR= 0.37 CSI= 0.48 fb= 1.03
+  climatology            n=  536 MAE= 2.21 bias=+1.12 RMSE= 2.94 band= 70.9% | ≥33.0: ev= 529 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 166 POD= 0.64 FAR= 0.45 CSI= 0.42 fb= 1.16
+  linear national        n=  849 MAE= 2.35 bias=+0.15 RMSE= 3.00 band= 71.7% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 324 POD= 0.65 FAR= 0.32 CSI= 0.50 fb= 0.96
+  linear per station     n=  849 MAE= 1.83 bias=+0.05 RMSE= 2.43 band= 77.9% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.02 CSI= 0.97 fb= 1.02 | ≥42.0: ev= 324 POD= 0.69 FAR= 0.21 CSI= 0.58 fb= 0.87
+  blend+persist (post-hoc) n=  849 MAE= 1.99 bias=+0.00 RMSE= 2.65 band= 74.9% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.02 | ≥42.0: ev= 324 POD= 0.66 FAR= 0.24 CSI= 0.54 fb= 0.87
+  persist+β·Δfc (post-hoc) n=  849 MAE= 2.17 bias=+0.10 RMSE= 2.92 band= 74.6% | ≥33.0: ev= 825 POD= 0.99 FAR= 0.02 CSI= 0.97 fb= 1.01 | ≥42.0: ev= 324 POD= 0.73 FAR= 0.28 CSI= 0.57 fb= 1.02
+  raw vs obs 13/16 h     n=  847 MAE= 4.76 bias=-4.60 RMSE= 5.63 band= 49.8% | ≥33.0: ev= 806 POD= 0.80 FAR= 0.01 CSI= 0.79 fb= 0.81 | ≥42.0: ev= 268 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+
+## 2026 A (later), lead day 1 (30–33 h), obs = daily max HI, same 1009 rows for all
+  ΔMAE linear national − raw: -2.76 °C [90 % -3.07, -2.42]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.12 °C [90 % -0.18, -0.06]
+  ΔMAE linear national − persist(issue day): +0.62 °C [90 % +0.46, +0.79]
+  raw                    n= 1009 MAE= 5.12 bias=-5.01 RMSE= 5.82 band= 51.1% | ≥33.0: ev= 994 POD= 0.87 FAR= 0.00 CSI= 0.87 fb= 0.87 | ≥42.0: ev= 377 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00
+  persist(issue day)     n= 1009 MAE= 1.74 bias=+0.05 RMSE= 2.45 band= 83.6% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 377 POD= 0.81 FAR= 0.20 CSI= 0.67 fb= 1.02
+  persist(day before)    n=  862 MAE= 1.97 bias=+0.02 RMSE= 2.73 band= 81.3% | ≥33.0: ev= 851 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 326 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.01
+  climatology            n=  744 MAE= 2.27 bias=+1.10 RMSE= 3.08 band= 78.4% | ≥33.0: ev= 732 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.02 | ≥42.0: ev= 231 POD= 0.71 FAR= 0.33 CSI= 0.52 fb= 1.06
+  linear national        n= 1009 MAE= 2.36 bias=+0.50 RMSE= 2.97 band= 73.4% | ≥33.0: ev= 994 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 377 POD= 0.68 FAR= 0.34 CSI= 0.51 fb= 1.03
+  linear per station     n= 1009 MAE= 1.86 bias=+0.30 RMSE= 2.44 band= 80.0% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 377 POD= 0.80 FAR= 0.27 CSI= 0.62 fb= 1.10
+  blend+persist (post-hoc) n= 1009 MAE= 1.62 bias=+0.24 RMSE= 2.18 band= 85.0% | ≥33.0: ev= 994 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 377 POD= 0.81 FAR= 0.19 CSI= 0.68 fb= 1.00
+  persist+β·Δfc (post-hoc) n= 1009 MAE= 1.70 bias=+0.08 RMSE= 2.36 band= 82.5% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 377 POD= 0.79 FAR= 0.22 CSI= 0.65 fb= 1.01
+  raw vs obs 13/16 h     n=  989 MAE= 4.00 bias=-3.71 RMSE= 4.76 band= 63.2% | ≥33.0: ev= 968 POD= 0.87 FAR= 0.01 CSI= 0.87 fb= 0.88 | ≥42.0: ev= 240 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00
+
+## 2026 A (later), lead day 2 (54–57 h), obs = daily max HI, same 958 rows for all
+  ΔMAE linear national − raw: -2.72 °C [90 % -3.04, -2.39]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.12 °C [90 % -0.22, -0.02]
+  ΔMAE linear national − persist(issue day): +0.45 °C [90 % +0.29, +0.62]
+  raw                    n=  958 MAE= 5.14 bias=-5.02 RMSE= 5.86 band= 50.2% | ≥33.0: ev= 947 POD= 0.87 FAR= 0.00 CSI= 0.86 fb= 0.87 | ≥42.0: ev= 362 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+  persist(issue day)     n=  958 MAE= 1.97 bias=-0.01 RMSE= 2.72 band= 81.0% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.77 FAR= 0.22 CSI= 0.63 fb= 0.99
+  persist(day before)    n=  825 MAE= 2.08 bias=+0.05 RMSE= 2.86 band= 81.2% | ≥33.0: ev= 816 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 313 POD= 0.79 FAR= 0.24 CSI= 0.63 fb= 1.03
+  climatology            n=  716 MAE= 2.27 bias=+1.12 RMSE= 3.06 band= 78.2% | ≥33.0: ev= 706 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 220 POD= 0.70 FAR= 0.33 CSI= 0.52 fb= 1.05
+  linear national        n=  958 MAE= 2.42 bias=+0.41 RMSE= 3.00 band= 70.6% | ≥33.0: ev= 947 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 362 POD= 0.65 FAR= 0.37 CSI= 0.47 fb= 1.03
+  linear per station     n=  958 MAE= 1.90 bias=+0.26 RMSE= 2.47 band= 78.3% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.78 FAR= 0.28 CSI= 0.60 fb= 1.09
+  blend+persist (post-hoc) n=  958 MAE= 1.84 bias=+0.18 RMSE= 2.42 band= 81.1% | ≥33.0: ev= 947 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 362 POD= 0.75 FAR= 0.22 CSI= 0.62 fb= 0.96
+  persist+β·Δfc (post-hoc) n=  958 MAE= 1.92 bias=+0.01 RMSE= 2.65 band= 80.8% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.77 FAR= 0.23 CSI= 0.62 fb= 1.01
+  raw vs obs 13/16 h     n=  936 MAE= 4.07 bias=-3.78 RMSE= 4.88 band= 61.5% | ≥33.0: ev= 919 POD= 0.87 FAR= 0.01 CSI= 0.86 fb= 0.87 | ≥42.0: ev= 239 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+
+## 2026 B (later, held-out stations), lead day 1 (30–33 h), obs = daily max HI, same 1072 rows for all
+  ΔMAE linear national − raw: -2.32 °C [90 % -2.61, -2.00]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.11 °C [90 % -0.18, -0.04]
+  ΔMAE linear national − persist(issue day): +0.64 °C [90 % +0.46, +0.83]
+  raw                    n= 1072 MAE= 4.77 bias=-4.68 RMSE= 5.67 band= 47.2% | ≥33.0: ev=1056 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.95 | ≥42.0: ev= 545 POD= 0.06 FAR= 0.00 CSI= 0.06 fb= 0.06
+  persist(issue day)     n= 1072 MAE= 1.81 bias=+0.01 RMSE= 2.69 band= 78.8% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 545 POD= 0.81 FAR= 0.18 CSI= 0.69 fb= 1.00
+  persist(day before)    n=  892 MAE= 2.12 bias=+0.03 RMSE= 2.90 band= 74.0% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 454 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.02
+  climatology            n=  765 MAE= 2.23 bias=+0.08 RMSE= 2.87 band= 69.3% | ≥33.0: ev= 753 POD= 0.98 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.65 FAR= 0.28 CSI= 0.52 fb= 0.91
+  linear national        n= 1072 MAE= 2.45 bias=+0.61 RMSE= 3.21 band= 64.4% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 545 POD= 0.86 FAR= 0.37 CSI= 0.57 fb= 1.38
+  blend+persist (post-hoc) n= 1072 MAE= 1.70 bias=+0.42 RMSE= 2.42 band= 77.8% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 545 POD= 0.88 FAR= 0.24 CSI= 0.69 fb= 1.16
+  persist+β·Δfc (post-hoc) n= 1072 MAE= 1.71 bias=+0.00 RMSE= 2.53 band= 79.2% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 545 POD= 0.82 FAR= 0.18 CSI= 0.69 fb= 1.00
+  raw vs obs 13/16 h     n= 1071 MAE= 4.06 bias=-3.84 RMSE= 5.00 band= 55.6% | ≥33.0: ev=1048 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.96 | ≥42.0: ev= 437 POD= 0.07 FAR= 0.00 CSI= 0.07 fb= 0.07
+
+## 2026 B (later, held-out stations), lead day 2 (54–57 h), obs = daily max HI, same 1023 rows for all
+  ΔMAE linear national − raw: -2.32 °C [90 % -2.60, -2.05]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.18 °C [90 % -0.28, -0.07]
+  ΔMAE linear national − persist(issue day): +0.28 °C [90 % +0.11, +0.48]
+  raw                    n= 1023 MAE= 4.73 bias=-4.64 RMSE= 5.58 band= 47.5% | ≥33.0: ev=1009 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.95 | ≥42.0: ev= 518 POD= 0.06 FAR= 0.00 CSI= 0.06 fb= 0.06
+  persist(issue day)     n= 1023 MAE= 2.12 bias=+0.01 RMSE= 2.91 band= 74.4% | ≥33.0: ev=1009 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 518 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.02
+  persist(day before)    n=  859 MAE= 2.27 bias=+0.06 RMSE= 3.04 band= 71.5% | ≥33.0: ev= 848 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 435 POD= 0.76 FAR= 0.26 CSI= 0.60 fb= 1.03
+  climatology            n=  737 MAE= 2.25 bias=+0.19 RMSE= 2.89 band= 70.8% | ≥33.0: ev= 726 POD= 0.98 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 321 POD= 0.68 FAR= 0.28 CSI= 0.53 fb= 0.94
+  linear national        n= 1023 MAE= 2.40 bias=+0.50 RMSE= 3.10 band= 65.3% | ≥33.0: ev=1009 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 518 POD= 0.85 FAR= 0.37 CSI= 0.57 fb= 1.35
+  blend+persist (post-hoc) n= 1023 MAE= 1.94 bias=+0.46 RMSE= 2.53 band= 72.8% | ≥33.0: ev=1009 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 518 POD= 0.86 FAR= 0.29 CSI= 0.64 fb= 1.20
+  persist+β·Δfc (post-hoc) n= 1023 MAE= 1.93 bias=+0.01 RMSE= 2.62 band= 77.8% | ≥33.0: ev=1009 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 518 POD= 0.81 FAR= 0.20 CSI= 0.67 fb= 1.01
+  raw vs obs 13/16 h     n= 1022 MAE= 4.00 bias=-3.74 RMSE= 4.87 band= 55.3% | ≥33.0: ev= 995 POD= 0.94 FAR= 0.02 CSI= 0.92 fb= 0.96 | ≥42.0: ev= 411 POD= 0.07 FAR= 0.03 CSI= 0.07 fb= 0.07
+
+## 2026 A+B hot season Mar–May, lead day 1 (30–33 h), obs = daily max HI, same 898 rows for all
+  ΔMAE linear national − raw: -3.21 °C [90 % -3.53, -2.88]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.16 °C [90 % -0.24, -0.08]
+  ΔMAE linear national − persist(issue day): +0.68 °C [90 % +0.47, +0.90]
+  raw                    n=  898 MAE= 5.74 bias=-5.65 RMSE= 6.56 band= 37.2% | ≥33.0: ev= 890 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 543 POD= 0.04 FAR= 0.00 CSI= 0.04 fb= 0.04
+  persist(issue day)     n=  898 MAE= 1.85 bias=-0.01 RMSE= 2.76 band= 81.5% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 543 POD= 0.87 FAR= 0.13 CSI= 0.76 fb= 1.00
+  persist(day before)    n=  764 MAE= 2.12 bias=-0.05 RMSE= 2.87 band= 78.8% | ≥33.0: ev= 758 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 483 POD= 0.84 FAR= 0.15 CSI= 0.73 fb= 0.99
+  climatology            n=  338 MAE= 2.54 bias=+1.44 RMSE= 3.33 band= 71.9% | ≥33.0: ev= 336 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 196 POD= 0.91 FAR= 0.30 CSI= 0.66 fb= 1.31
+  linear national        n=  898 MAE= 2.53 bias=-0.34 RMSE= 3.32 band= 70.8% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 543 POD= 0.79 FAR= 0.24 CSI= 0.63 fb= 1.04
+  linear per station     n=  411 MAE= 1.93 bias=-0.28 RMSE= 2.46 band= 84.4% | ≥33.0: ev= 408 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 227 POD= 0.85 FAR= 0.12 CSI= 0.77 fb= 0.97
+  blend+persist (post-hoc) n=  898 MAE= 1.69 bias=+0.01 RMSE= 2.45 band= 83.4% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 543 POD= 0.90 FAR= 0.14 CSI= 0.78 fb= 1.05
+  persist+β·Δfc (post-hoc) n=  898 MAE= 1.74 bias=+0.01 RMSE= 2.60 band= 81.8% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 543 POD= 0.87 FAR= 0.13 CSI= 0.77 fb= 1.01
+  raw vs obs 13/16 h     n=  897 MAE= 4.85 bias=-4.66 RMSE= 5.70 band= 46.4% | ≥33.0: ev= 884 POD= 0.93 FAR= 0.01 CSI= 0.92 fb= 0.94 | ≥42.0: ev= 441 POD= 0.05 FAR= 0.00 CSI= 0.05 fb= 0.05
+
+## 2026 A+B hot season Mar–May, lead day 2 (54–57 h), obs = daily max HI, same 851 rows for all
+  ΔMAE linear national − raw: -3.05 °C [90 % -3.38, -2.72]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.14 °C [90 % -0.27, -0.01]
+  ΔMAE linear national − persist(issue day): +0.47 °C [90 % +0.26, +0.67]
+  raw                    n=  851 MAE= 5.62 bias=-5.52 RMSE= 6.42 band= 35.7% | ≥33.0: ev= 845 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 532 POD= 0.05 FAR= 0.00 CSI= 0.05 fb= 0.05
+  persist(issue day)     n=  851 MAE= 2.11 bias=-0.06 RMSE= 2.84 band= 78.4% | ≥33.0: ev= 845 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 532 POD= 0.83 FAR= 0.15 CSI= 0.73 fb= 0.98
+  persist(day before)    n=  731 MAE= 2.29 bias=-0.05 RMSE= 3.04 band= 76.3% | ≥33.0: ev= 727 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 468 POD= 0.82 FAR= 0.17 CSI= 0.70 fb= 0.99
+  climatology            n=  334 MAE= 2.54 bias=+1.47 RMSE= 3.33 band= 73.4% | ≥33.0: ev= 332 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 193 POD= 0.93 FAR= 0.29 CSI= 0.67 fb= 1.31
+  linear national        n=  851 MAE= 2.57 bias=-0.38 RMSE= 3.25 band= 67.8% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 532 POD= 0.77 FAR= 0.26 CSI= 0.61 fb= 1.04
+  linear per station     n=  383 MAE= 1.95 bias=-0.23 RMSE= 2.47 band= 79.9% | ≥33.0: ev= 381 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 221 POD= 0.85 FAR= 0.17 CSI= 0.72 fb= 1.03
+  blend+persist (post-hoc) n=  851 MAE= 1.96 bias=-0.09 RMSE= 2.55 band= 77.0% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 532 POD= 0.85 FAR= 0.18 CSI= 0.71 fb= 1.04
+  persist+β·Δfc (post-hoc) n=  851 MAE= 1.89 bias=+0.08 RMSE= 2.58 band= 81.4% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 532 POD= 0.87 FAR= 0.14 CSI= 0.76 fb= 1.01
+  raw vs obs 13/16 h     n=  850 MAE= 4.78 bias=-4.53 RMSE= 5.59 band= 44.6% | ≥33.0: ev= 840 POD= 0.93 FAR= 0.01 CSI= 0.92 fb= 0.94 | ≥42.0: ev= 436 POD= 0.06 FAR= 0.04 CSI= 0.06 fb= 0.06
+
+## 2025 B (same period, held-out), lead day 1 (30–33 h), obs = daily max HI, same 1038 rows for all
+  raw                    n= 1038 MAE= 4.39 bias=-4.22 RMSE= 5.14 band= 49.4% | ≥33.0: ev= 987 POD= 0.91 FAR= 0.01 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 471 POD= 0.05 FAR= 0.08 CSI= 0.05 fb= 0.06
+  persist(issue day)     n= 1038 MAE= 2.12 bias=-0.06 RMSE= 2.84 band= 73.2% | ≥33.0: ev= 987 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 471 POD= 0.73 FAR= 0.24 CSI= 0.60 fb= 0.97
+  persist(day before)    n=  860 MAE= 2.81 bias=-0.03 RMSE= 3.79 band= 63.5% | ≥33.0: ev= 816 POD= 0.96 FAR= 0.04 CSI= 0.92 fb= 1.00 | ≥42.0: ev= 378 POD= 0.65 FAR= 0.34 CSI= 0.49 fb= 0.98
+  climatology            n=  674 MAE= 2.43 bias=+0.83 RMSE= 3.17 band= 68.4% | ≥33.0: ev= 656 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 289 POD= 0.65 FAR= 0.33 CSI= 0.49 fb= 0.97
+  linear national        n= 1038 MAE= 2.43 bias=+1.18 RMSE= 3.13 band= 68.3% | ≥33.0: ev= 987 POD= 1.00 FAR= 0.05 CSI= 0.95 fb= 1.05 | ≥42.0: ev= 471 POD= 0.84 FAR= 0.34 CSI= 0.58 fb= 1.28
+  blend+persist (post-hoc) n= 1038 MAE= 1.79 bias=+0.53 RMSE= 2.41 band= 75.8% | ≥33.0: ev= 987 POD= 1.00 FAR= 0.03 CSI= 0.96 fb= 1.03 | ≥42.0: ev= 471 POD= 0.81 FAR= 0.25 CSI= 0.64 fb= 1.08
+  persist+β·Δfc (post-hoc) n= 1038 MAE= 1.94 bias=-0.08 RMSE= 2.56 band= 74.2% | ≥33.0: ev= 987 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 471 POD= 0.73 FAR= 0.22 CSI= 0.60 fb= 0.93
+  raw vs obs 13/16 h     n= 1035 MAE= 3.56 bias=-3.22 RMSE= 4.24 band= 60.6% | ≥33.0: ev= 972 POD= 0.92 FAR= 0.01 CSI= 0.91 fb= 0.93 | ≥42.0: ev= 339 POD= 0.07 FAR= 0.08 CSI= 0.07 fb= 0.08
+
+## 2025 B (same period, held-out), lead day 2 (54–57 h), obs = daily max HI, same 977 rows for all
+  raw                    n=  977 MAE= 4.24 bias=-4.05 RMSE= 4.98 band= 49.8% | ≥33.0: ev= 931 POD= 0.91 FAR= 0.00 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 430 POD= 0.05 FAR= 0.08 CSI= 0.05 fb= 0.06
+  persist(issue day)     n=  977 MAE= 2.79 bias=+0.04 RMSE= 3.74 band= 62.6% | ≥33.0: ev= 931 POD= 0.96 FAR= 0.03 CSI= 0.93 fb= 1.00 | ≥42.0: ev= 430 POD= 0.66 FAR= 0.36 CSI= 0.48 fb= 1.02
+  persist(day before)    n=  808 MAE= 3.12 bias=-0.06 RMSE= 4.23 band= 60.8% | ≥33.0: ev= 768 POD= 0.95 FAR= 0.04 CSI= 0.91 fb= 0.99 | ≥42.0: ev= 344 POD= 0.61 FAR= 0.38 CSI= 0.45 fb= 0.99
+  climatology            n=  629 MAE= 2.47 bias=+0.93 RMSE= 3.19 band= 68.8% | ≥33.0: ev= 613 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 263 POD= 0.65 FAR= 0.34 CSI= 0.49 fb= 0.99
+  linear national        n=  977 MAE= 2.39 bias=+1.21 RMSE= 3.12 band= 67.7% | ≥33.0: ev= 931 POD= 1.00 FAR= 0.05 CSI= 0.95 fb= 1.05 | ≥42.0: ev= 430 POD= 0.84 FAR= 0.36 CSI= 0.57 fb= 1.30
+  blend+persist (post-hoc) n=  977 MAE= 2.12 bias=+0.79 RMSE= 2.79 band= 70.5% | ≥33.0: ev= 931 POD= 1.00 FAR= 0.04 CSI= 0.96 fb= 1.04 | ≥42.0: ev= 430 POD= 0.79 FAR= 0.32 CSI= 0.58 fb= 1.15
+  persist+β·Δfc (post-hoc) n=  977 MAE= 2.34 bias=+0.03 RMSE= 3.06 band= 68.3% | ≥33.0: ev= 931 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 430 POD= 0.69 FAR= 0.31 CSI= 0.53 fb= 1.00
+  raw vs obs 13/16 h     n=  974 MAE= 3.48 bias=-3.11 RMSE= 4.13 band= 59.4% | ≥33.0: ev= 915 POD= 0.92 FAR= 0.01 CSI= 0.91 fb= 0.93 | ≥42.0: ev= 315 POD= 0.07 FAR= 0.08 CSI= 0.07 fb= 0.08
+
+## 2026, per station: linear national vs raw and vs persistence (made worse = >3 % and bootstrap > 0)
+  THM00048455 BANGKOK METROPOLIS A n=168 MAE raw 5.59 lin 1.80 persist 1.69 clim 1.79 | lin vs raw -67.8% | raw vs persist +231.3% WORSE | blend 1.46 vs persist -13.7%
+  THM00048304 CHAING RAI ARGOMET A n=113 MAE raw 3.12 lin 3.07 persist 2.06 clim 3.53 | lin vs raw -1.4% | raw vs persist +51.5% WORSE | blend 1.90 vs persist -7.5%
+  THM00048334 LAMPANG AGROMET    A n=151 MAE raw 3.80 lin 2.36 persist 1.69 clim 2.56 | lin vs raw -37.9% | raw vs persist +124.3% WORSE | blend 1.50 vs persist -11.2%
+  THM00048384 THA PHRA AGROMET   A n=101 MAE raw 3.98 lin 1.69 persist 1.71 clim 2.09 | lin vs raw -57.6% | raw vs persist +132.3% WORSE | blend 1.41 vs persist -17.7%
+  THM00048409 SI SAKET AGROMET   A n= 74 MAE raw 6.82 lin 1.99 persist 1.59 clim 1.50 | lin vs raw -70.9% | raw vs persist +330.1% WORSE | blend 1.43 vs persist -9.6%
+  THM00048478 RAYONG             A n=170 MAE raw 3.46 lin 2.74 persist 1.79 clim 2.71 | lin vs raw -20.7% | raw vs persist +93.2% WORSE | blend 1.82 vs persist +1.9%
+  THM00048555 SURAT THANI AGROME A n= 69 MAE raw 9.43 lin 3.86 persist 1.72 clim 1.91 | lin vs raw -59.0% | raw vs persist +447.5% WORSE | blend 1.90 vs persist +10.3%
+  THM00048564 PHUKET             A n=163 MAE raw 7.09 lin 1.99 persist 1.64 clim 1.70 | lin vs raw -71.9% | raw vs persist +332.6% WORSE | blend 1.57 vs persist -4.1%
+  THM00048415 AYUTTHAYA          B n= 73 MAE raw 8.85 lin 3.81 persist 3.09 clim 2.16 | lin vs raw -56.9% | raw vs persist +186.2% WORSE | blend 2.55 vs persist -17.5%
+  THM00048333 NAN AGROMET        B n=119 MAE raw 3.38 lin 2.65 persist 1.94 clim 2.75 | lin vs raw -21.5% | raw vs persist +74.1% WORSE | blend 1.71 vs persist -11.7%
+  THM00048325 MAE SARIANG        B n= 52 MAE raw 11.56 lin 5.51 persist 1.80 clim 2.55 | lin vs raw -52.4% | raw vs persist +541.0% WORSE | blend 2.79 vs persist +54.6% WORSE
+  THM00048372 SUKHOTHAI          B n=181 MAE raw 3.48 lin 2.49 persist 1.82 clim 2.08 | lin vs raw -28.7% | raw vs persist +91.7% WORSE | blend 1.80 vs persist -1.1%
+  THM00048357 NAKHON PHANOM      B n=109 MAE raw 4.28 lin 1.84 persist 1.95 clim 2.98 | lin vs raw -57.1% | raw vs persist +119.6% WORSE | blend 1.60 vs persist -17.9%
+  THM00048432 SURIN              B n=132 MAE raw 4.79 lin 1.42 persist 1.42 clim 1.89 | lin vs raw -70.4% | raw vs persist +235.9% WORSE | blend 1.14 vs persist -19.7%
+  THM00048425 SUPHAN BURI        B n=162 MAE raw 4.76 lin 1.93 persist 1.92 clim 2.12 | lin vs raw -59.6% | raw vs persist +147.6% WORSE | blend 1.65 vs persist -14.2%
+  THM00048554 NAKHONSI THAMMARAT B n= 79 MAE raw 5.31 lin 2.12 persist 1.75 clim 2.12 | lin vs raw -60.0% | raw vs persist +204.1% WORSE | blend 1.55 vs persist -11.1%
+  THM00048571 KHO HONG AGROMET   B n=131 MAE raw 2.61 lin 2.94 persist 1.28 clim 2.00 | lin vs raw +12.5% | raw vs persist +104.4% WORSE | blend 1.56 vs persist +21.8% WORSE
+  THM00048440 SRAKAEW            B n= 34 MAE raw 5.92 lin 1.32 persist 1.32 clim 1.68 | lin vs raw -77.8% | raw vs persist +348.4% WORSE | blend 1.18 vs persist -10.3%
+  lead 1: linear national vs raw: made worse at 0 of 18 stations []
+  lead 1: linear national vs persist(issue day): made worse at 9 of 18 stations ['THM00048304', 'THM00048334', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048571']
+  lead 1: raw vs persist(issue day): made worse at 18 of 18 stations ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564', 'THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+  lead 1: blend+persist (post-hoc) vs persist(issue day): made worse at 2 of 18 stations ['THM00048325', 'THM00048571']
+  lead 1: persist+β·Δfc (post-hoc) vs persist(issue day): made worse at 0 of 18 stations []
+  lead 2: linear national vs raw: made worse at 0 of 18 stations []
+  lead 2: linear national vs persist(issue day): made worse at 6 of 18 stations ['THM00048304', 'THM00048334', 'THM00048478', 'THM00048555', 'THM00048325', 'THM00048571']
+  lead 2: raw vs persist(issue day): made worse at 18 of 18 stations ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564', 'THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+  lead 2: blend+persist (post-hoc) vs persist(issue day): made worse at 3 of 18 stations ['THM00048555', 'THM00048325', 'THM00048571']
+  lead 2: persist+β·Δfc (post-hoc) vs persist(issue day): made worse at 2 of 18 stations ['THM00048478', 'THM00048564']
+
+================ E2 24-h rain (07–07 Bangkok), mm ================
+tuned on 2024 A: event ≥35.1 lead 0: forecast threshold 15.0 mm (CSI 0.149, 97 events)
+tuned on 2024 A: event ≥35.1 lead 1: forecast threshold 15.0 mm (CSI 0.155, 97 events)
+tuned on 2024 A: event ≥35.1 lead 2: forecast threshold 17.5 mm (CSI 0.123, 97 events)
+tuned on 2024 A: event ≥90.1 lead 0: forecast threshold 57.5 mm (CSI 0.091, 7 events)
+tuned on 2024 A: event ≥90.1 lead 1: forecast threshold 37.5 mm (CSI 0.053, 7 events)
+tuned on 2024 A: event ≥90.1 lead 2: forecast threshold 22.5 mm (CSI 0.033, 7 events)
+rain-day sources by year: {"2024": {"iR3": 2301, "p24": 1942, "missing": 80}, "2025": {"p24": 2201, "iR3": 2009, "missing": 98}, "2026": {"missing": 2102, "p24": 1407, "iR3": 372, "hourly": 223}}
+
+## 2024 A (fit), lead 0 (steps 0–24 h, optimistic), n=1892 station-days
+  amounts: MAE=7.21 bias=+0.52 mm; obs mean 6.17, fc mean 6.69
+  ≥35.1: events  97 | raw POD= 0.09 FAR= 0.59 CSI= 0.08 fb= 0.23 | tuned(≥15.0) POD= 0.49 FAR= 0.82 CSI= 0.15 fb= 2.81 | persistence CSI= 0.07 | Brier clim 0.0465 raw 0.0534 tuned 0.1448
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.14 FAR= 0.80 CSI= 0.09 fb= 0.71 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0053
+
+## 2024 A (fit), lead 1 (steps 24–48 h), n=1884 station-days
+  amounts: MAE=7.29 bias=+0.44 mm; obs mean 6.20, fc mean 6.64
+  ≥35.1: events  97 | raw POD= 0.07 FAR= 0.53 CSI= 0.07 fb= 0.15 | tuned(≥15.0) POD= 0.51 FAR= 0.82 CSI= 0.16 fb= 2.76 | persistence CSI= 0.06 | Brier clim 0.0467 raw 0.0520 tuned 0.1417
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.14 FAR= 0.92 CSI= 0.05 fb= 1.86 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0096
+
+## 2024 A (fit), lead 2 (steps 48–72 h), n=1876 station-days
+  amounts: MAE=7.67 bias=+0.45 mm; obs mean 6.22, fc mean 6.68
+  ≥35.1: events  97 | raw POD= 0.05 FAR= 0.76 CSI= 0.04 fb= 0.22 | tuned(≥17.5) POD= 0.32 FAR= 0.83 CSI= 0.12 fb= 1.92 | persistence CSI= 0.04 | Brier clim 0.0469 raw 0.0576 tuned 0.1178
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.43 FAR= 0.97 CSI= 0.03 fb=12.29 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0464
+
+## 2025 A (later), lead 0 (steps 0–24 h, optimistic), n=1902 station-days
+  amounts: MAE=7.10 bias=+0.40 mm; obs mean 6.38, fc mean 6.79
+  ≥35.1: events  84 | raw POD= 0.05 FAR= 0.79 CSI= 0.04 fb= 0.23 | tuned(≥15.0) POD= 0.45 FAR= 0.86 CSI= 0.12 fb= 3.15 | persistence CSI= 0.06 | Brier clim 0.0419 raw 0.0499 tuned 0.1435
+  ≥90.1: events   4 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 0.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0021 tuned 0.0026
+
+## 2025 A (later), lead 1 (steps 24–48 h), n=1894 station-days
+  amounts: MAE=7.41 bias=+0.66 mm; obs mean 6.41, fc mean 7.07
+  ≥35.1: events  84 | raw POD= 0.04 FAR= 0.84 CSI= 0.03 fb= 0.23 | tuned(≥15.0) POD= 0.38 FAR= 0.88 CSI= 0.10 fb= 3.11 | persistence CSI= 0.06 | Brier clim 0.0421 raw 0.0512 tuned 0.1484
+  ≥90.1: events   4 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 4.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0021 tuned 0.0111
+
+## 2025 A (later), lead 2 (steps 48–72 h), n=1886 station-days
+  amounts: MAE=7.74 bias=+1.10 mm; obs mean 6.44, fc mean 7.54
+  ≥35.1: events  84 | raw POD= 0.08 FAR= 0.70 CSI= 0.07 fb= 0.27 | tuned(≥17.5) POD= 0.38 FAR= 0.85 CSI= 0.12 fb= 2.48 | persistence CSI= 0.02 | Brier clim 0.0423 raw 0.0493 tuned 0.1209
+  ≥90.1: events   4 | raw POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 0.25 | tuned(≥22.5) POD= 1.00 FAR= 0.96 CSI= 0.04 fb=28.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0027 tuned 0.0578
+
+## 2025 B (later, held-out stations), lead 0 (steps 0–24 h, optimistic), n=2308 station-days
+  amounts: MAE=7.18 bias=+1.98 mm; obs mean 5.42, fc mean 7.40
+  ≥35.1: events  71 | raw POD= 0.11 FAR= 0.78 CSI= 0.08 fb= 0.52 | tuned(≥15.0) POD= 0.48 FAR= 0.91 CSI= 0.09 fb= 5.06 | persistence CSI= 0.02 | Brier clim 0.0295 raw 0.0399 tuned 0.1568
+  ≥90.1: events  11 | raw POD= 0.09 FAR= 0.00 CSI= 0.09 fb= 0.09 | tuned(≥57.5) POD= 0.27 FAR= 0.57 CSI= 0.20 fb= 0.64 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0043 tuned 0.0052
+
+## 2025 B (later, held-out stations), lead 1 (steps 24–48 h), n=2298 station-days
+  amounts: MAE=7.41 bias=+2.24 mm; obs mean 5.44, fc mean 7.68
+  ≥35.1: events  71 | raw POD= 0.10 FAR= 0.77 CSI= 0.07 fb= 0.42 | tuned(≥15.0) POD= 0.45 FAR= 0.91 CSI= 0.08 fb= 4.89 | persistence CSI= 0.02 | Brier clim 0.0296 raw 0.0379 tuned 0.1540
+  ≥90.1: events  11 | raw POD= 0.09 FAR= 0.00 CSI= 0.09 fb= 0.09 | tuned(≥37.5) POD= 0.27 FAR= 0.88 CSI= 0.09 fb= 2.27 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0044 tuned 0.0131
+
+## 2025 B (later, held-out stations), lead 2 (steps 48–72 h), n=2288 station-days
+  amounts: MAE=7.69 bias=+2.48 mm; obs mean 5.45, fc mean 7.93
+  ≥35.1: events  71 | raw POD= 0.13 FAR= 0.76 CSI= 0.09 fb= 0.54 | tuned(≥17.5) POD= 0.42 FAR= 0.90 CSI= 0.09 fb= 4.11 | persistence CSI= 0.01 | Brier clim 0.0298 raw 0.0398 tuned 0.1324
+  ≥90.1: events  11 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.27 FAR= 0.98 CSI= 0.02 fb=14.27 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0048 tuned 0.0708
+
+## 2024 B (same period, held-out), lead 0 (steps 0–24 h, optimistic), n=2351 station-days
+  amounts: MAE=6.87 bias=+2.49 mm; obs mean 5.00, fc mean 7.49
+  ≥35.1: events  86 | raw POD= 0.12 FAR= 0.75 CSI= 0.09 fb= 0.47 | tuned(≥15.0) POD= 0.65 FAR= 0.86 CSI= 0.13 fb= 4.80 | persistence CSI= 0.03 | Brier clim 0.0343 raw 0.0451 tuned 0.1646
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 2.00 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0026
+
+## 2024 B (same period, held-out), lead 1 (steps 24–48 h), n=2341 station-days
+  amounts: MAE=7.19 bias=+2.34 mm; obs mean 5.02, fc mean 7.36
+  ≥35.1: events  86 | raw POD= 0.07 FAR= 0.82 CSI= 0.05 fb= 0.40 | tuned(≥15.0) POD= 0.51 FAR= 0.89 CSI= 0.10 fb= 4.67 | persistence CSI= 0.02 | Brier clim 0.0345 raw 0.0461 tuned 0.1709
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb=12.50 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0115
+
+## 2024 B (same period, held-out), lead 2 (steps 48–72 h), n=2331 station-days
+  amounts: MAE=7.36 bias=+2.27 mm; obs mean 5.04, fc mean 7.31
+  ≥35.1: events  86 | raw POD= 0.09 FAR= 0.73 CSI= 0.07 fb= 0.35 | tuned(≥17.5) POD= 0.40 FAR= 0.88 CSI= 0.10 fb= 3.30 | persistence CSI= 0.04 | Brier clim 0.0346 raw 0.0429 tuned 0.1296
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.50 FAR= 0.99 CSI= 0.01 fb=75.00 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0644
+
+## 2026 A+B (newest, partial: BUFR), lead 0 (steps 0–24 h, optimistic), n=2002 station-days
+  amounts: MAE=8.40 bias=-1.38 mm; obs mean 9.01, fc mean 7.63
+  ≥35.1: events 118 | raw POD= 0.13 FAR= 0.58 CSI= 0.11 fb= 0.31 | tuned(≥15.0) POD= 0.42 FAR= 0.85 CSI= 0.13 fb= 2.75 | persistence CSI= 0.06 | Brier clim 0.0551 raw 0.0619 tuned 0.1708
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.08 FAR= 0.80 CSI= 0.06 fb= 0.38 | persistence CSI= 0.04 | Brier clim 0.0064 raw 0.0065 tuned 0.0080
+
+## 2026 A+B (newest, partial: BUFR), lead 1 (steps 24–48 h), n=1985 station-days
+  amounts: MAE=8.94 bias=-1.01 mm; obs mean 9.09, fc mean 8.07
+  ≥35.1: events 118 | raw POD= 0.12 FAR= 0.53 CSI= 0.10 fb= 0.25 | tuned(≥15.0) POD= 0.39 FAR= 0.87 CSI= 0.11 fb= 3.00 | persistence CSI= 0.04 | Brier clim 0.0555 raw 0.0605 tuned 0.1914
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.38 FAR= 0.79 CSI= 0.16 fb= 1.85 | persistence CSI= 0.00 | Brier clim 0.0065 raw 0.0065 tuned 0.0136
+
+## 2026 A+B (newest, partial: BUFR), lead 2 (steps 48–72 h), n=1969 station-days
+  amounts: MAE=9.01 bias=-0.76 mm; obs mean 9.16, fc mean 8.40
+  ≥35.1: events 118 | raw POD= 0.14 FAR= 0.60 CSI= 0.11 fb= 0.34 | tuned(≥17.5) POD= 0.36 FAR= 0.84 CSI= 0.12 fb= 2.28 | persistence CSI= 0.05 | Brier clim 0.0560 raw 0.0640 tuned 0.1529
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.62 FAR= 0.95 CSI= 0.05 fb=11.62 | persistence CSI= 0.05 | Brier clim 0.0065 raw 0.0066 tuned 0.0752
+
+================ ENS rain probabilities (51 members) ================
+ENS rain runs: 99 (2025-06-01..2026-10-20), members per run-station: 51.0
+  2025 lead 0 ≥35.1: n=877 events=35 Brier ENS 0.0373 clim 0.0381 BSS +0.019 | vs base rate BSS +0.025 | as a warning at P≥10 %: POD  0.23 FAR  0.79
+      P in [0.000,0.00): n= 685 mean P=0.000 observed 0.031
+      P in [0.001,0.10): n= 154 mean P=0.039 observed 0.039
+      P in [0.100,0.20): n=  18 mean P=0.157 observed 0.222
+      P in [0.200,0.40): n=  13 mean P=0.282 observed 0.077
+      P in [0.400,0.60): n=   4 mean P=0.490 observed 0.250
+      P in [0.600,1.01): n=   3 mean P=0.869 observed 0.667
+  2025 lead 0 ≥90.1: n=877 events=5 Brier ENS 0.0056 clim 0.0057 BSS +0.024 | vs base rate BSS +0.014 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 867 mean P=0.000 observed 0.005
+      P in [0.001,0.10): n=  10 mean P=0.039 observed 0.100
+  2025 lead 0: ENS median MAE 7.24 mm, 10–90 % range held 27.6 % (n=877)
+  2025 lead 1 ≥35.1: n=885 events=33 Brier ENS 0.0342 clim 0.0361 BSS +0.054 | vs base rate BSS +0.049 | as a warning at P≥10 %: POD  0.27 FAR  0.79
+      P in [0.000,0.00): n= 628 mean P=0.000 observed 0.021
+      P in [0.001,0.10): n= 214 mean P=0.038 observed 0.051
+      P in [0.100,0.20): n=  23 mean P=0.147 observed 0.174
+      P in [0.200,0.40): n=  10 mean P=0.296 observed 0.100
+      P in [0.400,0.60): n=   6 mean P=0.464 observed 0.167
+      P in [0.600,1.01): n=   4 mean P=0.745 observed 0.750
+  2025 lead 1 ≥90.1: n=885 events=3 Brier ENS 0.0029 clim 0.0034 BSS +0.147 | vs base rate BSS +0.145 | as a warning at P≥10 %: POD  0.33 FAR  0.00
+      P in [0.000,0.00): n= 865 mean P=0.000 observed 0.002
+      P in [0.001,0.10): n=  19 mean P=0.034 observed 0.000
+      P in [0.200,0.40): n=   1 mean P=0.275 observed 1.000
+  2025 lead 1: ENS median MAE 7.15 mm, 10–90 % range held 32.4 % (n=885)
+  2025 lead 2 ≥35.1: n=857 events=37 Brier ENS 0.0426 clim 0.0408 BSS -0.045 | vs base rate BSS -0.030 | as a warning at P≥10 %: POD  0.27 FAR  0.82
+      P in [0.000,0.00): n= 536 mean P=0.000 observed 0.026
+      P in [0.001,0.10): n= 265 mean P=0.038 observed 0.049
+      P in [0.100,0.20): n=  29 mean P=0.143 observed 0.207
+      P in [0.200,0.40): n=  16 mean P=0.273 observed 0.062
+      P in [0.400,0.60): n=   7 mean P=0.482 observed 0.286
+      P in [0.600,1.01): n=   4 mean P=0.784 observed 0.250
+  2025 lead 2 ≥90.1: n=857 events=3 Brier ENS 0.0032 clim 0.0035 BSS +0.088 | vs base rate BSS +0.075 | as a warning at P≥10 %: POD  0.33 FAR  0.75
+      P in [0.000,0.00): n= 833 mean P=0.000 observed 0.002
+      P in [0.001,0.10): n=  20 mean P=0.025 observed 0.000
+      P in [0.100,0.20): n=   3 mean P=0.170 observed 0.333
+      P in [0.200,0.40): n=   1 mean P=0.235 observed 0.000
+  2025 lead 2: ENS median MAE 7.84 mm, 10–90 % range held 29.9 % (n=857)
+  2026 lead 0 ≥35.1: n=416 events=25 Brier ENS 0.0491 clim 0.0560 BSS +0.124 | vs base rate BSS +0.131 | as a warning at P≥10 %: POD  0.44 FAR  0.69
+      P in [0.000,0.00): n= 289 mean P=0.000 observed 0.028
+      P in [0.001,0.10): n=  91 mean P=0.035 observed 0.066
+      P in [0.100,0.20): n=  20 mean P=0.122 observed 0.200
+      P in [0.200,0.40): n=   6 mean P=0.273 observed 0.333
+      P in [0.400,0.60): n=   2 mean P=0.500 observed 0.000
+      P in [0.600,1.01): n=   8 mean P=0.712 observed 0.625
+  2026 lead 0 ≥90.1: n=416 events=3 Brier ENS 0.0072 clim 0.0070 BSS -0.017 | vs base rate BSS +0.001 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 407 mean P=0.000 observed 0.005
+      P in [0.001,0.10): n=   9 mean P=0.038 observed 0.111
+  2026 lead 0: ENS median MAE 9.49 mm, 10–90 % range held 42.5 % (n=416)
+  2026 lead 1 ≥35.1: n=318 events=20 Brier ENS 0.0619 clim 0.0576 BSS -0.075 | vs base rate BSS -0.050 | as a warning at P≥10 %: POD  0.20 FAR  0.87
+      P in [0.000,0.00): n= 192 mean P=0.000 observed 0.026
+      P in [0.001,0.10): n=  96 mean P=0.035 observed 0.115
+      P in [0.100,0.20): n=  18 mean P=0.134 observed 0.167
+      P in [0.200,0.40): n=   9 mean P=0.271 observed 0.000
+      P in [0.400,0.60): n=   2 mean P=0.410 observed 0.500
+      P in [0.600,1.01): n=   1 mean P=0.860 observed 0.000
+  2026 lead 1 ≥90.1: n=318 events=3 Brier ENS 0.0095 clim 0.0093 BSS -0.018 | vs base rate BSS -0.014 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 310 mean P=0.000 observed 0.010
+      P in [0.001,0.10): n=   8 mean P=0.033 observed 0.000
+  2026 lead 1: ENS median MAE 9.99 mm, 10–90 % range held 39.6 % (n=318)
+  2026 lead 2 ≥35.1: n=370 events=32 Brier ENS 0.0750 clim 0.0796 BSS +0.057 | vs base rate BSS +0.050 | as a warning at P≥10 %: POD  0.34 FAR  0.80
+      P in [0.000,0.00): n= 207 mean P=0.000 observed 0.063
+      P in [0.001,0.10): n= 109 mean P=0.037 observed 0.073
+      P in [0.100,0.20): n=  29 mean P=0.133 observed 0.138
+      P in [0.200,0.40): n=  12 mean P=0.268 observed 0.000
+      P in [0.400,0.60): n=  10 mean P=0.448 observed 0.400
+      P in [0.600,1.01): n=   3 mean P=0.720 observed 1.000
+  2026 lead 2 ≥90.1: n=370 events=5 Brier ENS 0.0134 clim 0.0136 BSS +0.011 | vs base rate BSS -0.005 | as a warning at P≥10 %: POD  0.00 FAR  1.00
+      P in [0.000,0.00): n= 345 mean P=0.000 observed 0.012
+      P in [0.001,0.10): n=  24 mean P=0.030 observed 0.042
+      P in [0.100,0.20): n=   1 mean P=0.100 observed 0.000
+  2026 lead 2: ENS median MAE 10.74 mm, 10–90 % range held 38.6 % (n=370)
+
+================ ENS heat probabilities (51 members, day 1) ================
+ENS heat: correction applied per member = HRES 2025 national lead-1 fit (+10.37 + 0.865·HI)
+  dressing (post-hoc design, SD from 2025 HRES residuals): 2.95 °C
+
+  ENS heat raw, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.5597, climatology (2024 station-month frequency) 0.4344, BSS -0.288; vs the test sample's own base rate 0.2454, BSS -1.280
+      P in [0.000,0.00): n= 176 mean P=0.000 observed 0.534
+      P in [0.001,0.10): n=  14 mean P=0.041 observed 0.929
+      P in [0.100,0.30): n=   2 mean P=0.127 observed 1.000
+    P(HI≥33.0): events 190 of 192; Brier 0.0456; vs the test sample's own base rate 0.0103, BSS -3.421
+      P in [0.000,0.00): n=   3 mean P=0.000 observed 0.667
+      P in [0.001,0.10): n=   4 mean P=0.074 observed 1.000
+      P in [0.100,0.30): n=   2 mean P=0.265 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.379 observed 0.667
+      P in [0.500,0.70): n=   4 mean P=0.544 observed 1.000
+      P in [0.700,0.90): n=  15 mean P=0.822 observed 1.000
+      P in [0.900,1.01): n= 161 mean P=0.995 observed 1.000
+    median: n=  192 MAE= 5.87 bias=-5.75 RMSE= 6.46 band= 38.5% | ≥33.0: ev= 190 POD= 0.95 FAR= 0.00 CSI= 0.95 fb= 0.95 | ≥42.0: ev= 109 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00; 10–90 % range held 2.1 %
+
+  ENS heat raw, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.6170, climatology (2024 station-month frequency) 0.5379, BSS -0.147; vs the test sample's own base rate 0.2198, BSS -1.807
+      P in [0.000,0.00): n= 173 mean P=0.000 observed 0.590
+      P in [0.001,0.10): n=  39 mean P=0.042 observed 0.897
+      P in [0.100,0.30): n=   9 mean P=0.169 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.418 observed 1.000
+      P in [0.500,0.70): n=   4 mean P=0.627 observed 1.000
+      P in [0.700,0.90): n=   2 mean P=0.824 observed 1.000
+    P(HI≥33.0): events 229 of 230; Brier 0.0824; vs the test sample's own base rate 0.0043, BSS -18.039
+      P in [0.000,0.00): n=  10 mean P=0.000 observed 1.000
+      P in [0.001,0.10): n=   5 mean P=0.051 observed 1.000
+      P in [0.100,0.30): n=   4 mean P=0.245 observed 1.000
+      P in [0.300,0.50): n=   1 mean P=0.333 observed 1.000
+      P in [0.500,0.70): n=   5 mean P=0.647 observed 1.000
+      P in [0.700,0.90): n=   3 mean P=0.763 observed 1.000
+      P in [0.900,1.01): n= 202 mean P=0.995 observed 0.995
+    median: n=  230 MAE= 5.96 bias=-5.89 RMSE= 6.63 band= 30.9% | ≥33.0: ev= 229 POD= 0.91 FAR= 0.00 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 155 POD= 0.04 FAR= 0.00 CSI= 0.04 fb= 0.04; 10–90 % range held 2.2 %
+
+  ENS heat raw, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.5909, climatology (2024 station-month frequency) 0.4880, BSS -0.211; vs the test sample's own base rate 0.2342, BSS -1.523
+      P in [0.000,0.00): n= 349 mean P=0.000 observed 0.562
+      P in [0.001,0.10): n=  53 mean P=0.041 observed 0.906
+      P in [0.100,0.30): n=  11 mean P=0.161 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.418 observed 1.000
+      P in [0.500,0.70): n=   4 mean P=0.627 observed 1.000
+      P in [0.700,0.90): n=   2 mean P=0.824 observed 1.000
+    P(HI≥33.0): events 419 of 422; Brier 0.0657; vs the test sample's own base rate 0.0071, BSS -8.302
+      P in [0.000,0.00): n=  13 mean P=0.000 observed 0.923
+      P in [0.001,0.10): n=   9 mean P=0.061 observed 1.000
+      P in [0.100,0.30): n=   6 mean P=0.252 observed 1.000
+      P in [0.300,0.50): n=   4 mean P=0.368 observed 0.750
+      P in [0.500,0.70): n=   9 mean P=0.601 observed 1.000
+      P in [0.700,0.90): n=  18 mean P=0.812 observed 1.000
+      P in [0.900,1.01): n= 363 mean P=0.995 observed 0.997
+    median: n=  422 MAE= 5.92 bias=-5.83 RMSE= 6.56 band= 34.4% | ≥33.0: ev= 419 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 264 POD= 0.02 FAR= 0.00 CSI= 0.02 fb= 0.02; 10–90 % range held 2.1 %
+
+  ENS heat corrected, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.2202, climatology (2024 station-month frequency) 0.4344, BSS +0.493; vs the test sample's own base rate 0.2454, BSS +0.103
+      P in [0.000,0.00): n=  39 mean P=0.000 observed 0.154
+      P in [0.001,0.10): n=  24 mean P=0.042 observed 0.500
+      P in [0.100,0.30): n=  21 mean P=0.188 observed 0.429
+      P in [0.300,0.50): n=   7 mean P=0.426 observed 0.286
+      P in [0.500,0.70): n=  10 mean P=0.606 observed 0.500
+      P in [0.700,0.90): n=  15 mean P=0.813 observed 0.667
+      P in [0.900,1.01): n=  76 mean P=0.983 observed 0.855
+    P(HI≥33.0): events 190 of 192; Brier 0.0108; vs the test sample's own base rate 0.0103, BSS -0.051
+      P in [0.700,0.90): n=   1 mean P=0.720 observed 1.000
+      P in [0.900,1.01): n= 191 mean P=1.000 observed 0.990
+    median: n=  192 MAE= 2.36 bias=-0.34 RMSE= 2.99 band= 72.4% | ≥33.0: ev= 190 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 109 POD= 0.73 FAR= 0.21 CSI= 0.62 fb= 0.93; 10–90 % range held 21.4 %
+
+  ENS heat corrected, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.2010, climatology (2024 station-month frequency) 0.5379, BSS +0.626; vs the test sample's own base rate 0.2198, BSS +0.085
+      P in [0.000,0.00): n=  35 mean P=0.000 observed 0.429
+      P in [0.001,0.10): n=   9 mean P=0.050 observed 0.111
+      P in [0.100,0.30): n=   7 mean P=0.174 observed 0.143
+      P in [0.300,0.50): n=   8 mean P=0.391 observed 0.250
+      P in [0.500,0.70): n=   8 mean P=0.605 observed 0.250
+      P in [0.700,0.90): n=  17 mean P=0.837 observed 0.412
+      P in [0.900,1.01): n= 146 mean P=0.985 observed 0.870
+    P(HI≥33.0): events 229 of 230; Brier 0.0044; vs the test sample's own base rate 0.0043, BSS -0.010
+      P in [0.900,1.01): n= 230 mean P=0.999 observed 0.996
+    median: n=  230 MAE= 2.45 bias=-0.62 RMSE= 3.06 band= 75.2% | ≥33.0: ev= 229 POD= 1.00 FAR= 0.00 CSI= 1.00 fb= 1.00 | ≥42.0: ev= 155 POD= 0.88 FAR= 0.20 CSI= 0.72 fb= 1.10; 10–90 % range held 21.7 %
+
+  ENS heat corrected, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.2098, climatology (2024 station-month frequency) 0.4880, BSS +0.570; vs the test sample's own base rate 0.2342, BSS +0.104
+      P in [0.000,0.00): n=  74 mean P=0.000 observed 0.284
+      P in [0.001,0.10): n=  33 mean P=0.045 observed 0.394
+      P in [0.100,0.30): n=  28 mean P=0.184 observed 0.357
+      P in [0.300,0.50): n=  15 mean P=0.407 observed 0.267
+      P in [0.500,0.70): n=  18 mean P=0.606 observed 0.389
+      P in [0.700,0.90): n=  32 mean P=0.826 observed 0.531
+      P in [0.900,1.01): n= 222 mean P=0.984 observed 0.865
+    P(HI≥33.0): events 419 of 422; Brier 0.0073; vs the test sample's own base rate 0.0071, BSS -0.036
+      P in [0.700,0.90): n=   1 mean P=0.720 observed 1.000
+      P in [0.900,1.01): n= 421 mean P=1.000 observed 0.993
+    median: n=  422 MAE= 2.41 bias=-0.50 RMSE= 3.03 band= 73.9% | ≥33.0: ev= 419 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 264 POD= 0.82 FAR= 0.21 CSI= 0.68 fb= 1.03; 10–90 % range held 21.6 %
+
+  ENS heat corrected+dressed, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.1761, climatology (2024 station-month frequency) 0.4344, BSS +0.595; vs the test sample's own base rate 0.2454, BSS +0.283
+      P in [0.001,0.10): n=   5 mean P=0.065 observed 0.000
+      P in [0.100,0.30): n=  35 mean P=0.207 observed 0.257
+      P in [0.300,0.50): n=  48 mean P=0.398 observed 0.417
+      P in [0.500,0.70): n=  48 mean P=0.609 observed 0.562
+      P in [0.700,0.90): n=  56 mean P=0.778 observed 0.946
+    P(HI≥33.0): events 190 of 192; Brier 0.0100; vs the test sample's own base rate 0.0103, BSS +0.029
+      P in [0.500,0.70): n=   1 mean P=0.663 observed 1.000
+      P in [0.900,1.01): n= 191 mean P=0.994 observed 0.990
+    median: n=  192 MAE= 2.36 bias=-0.34 RMSE= 2.99 band= 72.4% | ≥33.0: ev= 190 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 109 POD= 0.73 FAR= 0.21 CSI= 0.62 fb= 0.93; 10–90 % range held 82.8 %
+
+  ENS heat corrected+dressed, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.1733, climatology (2024 station-month frequency) 0.5379, BSS +0.678; vs the test sample's own base rate 0.2198, BSS +0.211
+      P in [0.001,0.10): n=  13 mean P=0.050 observed 0.385
+      P in [0.100,0.30): n=  23 mean P=0.200 observed 0.478
+      P in [0.300,0.50): n=  23 mean P=0.405 observed 0.130
+      P in [0.500,0.70): n=  53 mean P=0.624 observed 0.528
+      P in [0.700,0.90): n= 107 mean P=0.790 observed 0.907
+      P in [0.900,1.01): n=  11 mean P=0.930 observed 1.000
+    P(HI≥33.0): events 229 of 230; Brier 0.0053; vs the test sample's own base rate 0.0043, BSS -0.222
+      P in [0.700,0.90): n=   6 mean P=0.828 observed 1.000
+      P in [0.900,1.01): n= 224 mean P=0.995 observed 0.996
+    median: n=  230 MAE= 2.45 bias=-0.62 RMSE= 3.06 band= 75.2% | ≥33.0: ev= 229 POD= 1.00 FAR= 0.00 CSI= 1.00 fb= 1.00 | ≥42.0: ev= 155 POD= 0.88 FAR= 0.20 CSI= 0.72 fb= 1.10; 10–90 % range held 80.9 %
+
+  ENS heat corrected+dressed, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.1746, climatology (2024 station-month frequency) 0.4880, BSS +0.642; vs the test sample's own base rate 0.2342, BSS +0.255
+      P in [0.001,0.10): n=  18 mean P=0.054 observed 0.278
+      P in [0.100,0.30): n=  58 mean P=0.205 observed 0.345
+      P in [0.300,0.50): n=  71 mean P=0.400 observed 0.324
+      P in [0.500,0.70): n= 101 mean P=0.617 observed 0.545
+      P in [0.700,0.90): n= 163 mean P=0.786 observed 0.920
+      P in [0.900,1.01): n=  11 mean P=0.930 observed 1.000
+    P(HI≥33.0): events 419 of 422; Brier 0.0074; vs the test sample's own base rate 0.0071, BSS -0.054
+      P in [0.500,0.70): n=   1 mean P=0.663 observed 1.000
+      P in [0.700,0.90): n=   6 mean P=0.828 observed 1.000
+      P in [0.900,1.01): n= 415 mean P=0.994 observed 0.993
+    median: n=  422 MAE= 2.41 bias=-0.50 RMSE= 3.03 band= 73.9% | ≥33.0: ev= 419 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 264 POD= 0.82 FAR= 0.21 CSI= 0.68 fb= 1.03; 10–90 % range held 81.8 %
+
+wrote /home/user/disaster-now/research/out/e1e2_results.json and /home/user/disaster-now/research/data/e1e2_daily.csv
+
+===== run 2026-10-23T20:57:02+00:00 =====
+sample A (fit/choose): ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564']
+sample B (held out): ['THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+observed station-days: 44615; with HI max: 9287; with rain: 40956; years [np.int32(2019), np.int32(2020), np.int32(2021), np.int32(2022), np.int32(2023), np.int32(2024), np.int32(2025), np.int32(2026)]
+  2019: HI days      0  rain days     17  rain≥35.1    0  ≥90.1   0  HI≥42     0
+  2020: HI days     19  rain days   6376  rain≥35.1  208  ≥90.1  15  HI≥42     2
+  2021: HI days      0  rain days   6360  rain≥35.1  203  ≥90.1  14  HI≥42     0
+  2022: HI days     18  rain days   6377  rain≥35.1  282  ≥90.1  35  HI≥42     1
+  2023: HI days      0  rain days   6368  rain≥35.1  188  ≥90.1  11  HI≥42     0
+  2024: HI days   2388  rain days   6272  rain≥35.1  223  ≥90.1  24  HI≥42   863
+  2025: HI days   3796  rain days   6205  rain≥35.1  201  ≥90.1  31  HI≥42  1048
+  2026: HI days   3066  rain days   2981  rain≥35.1  119  ≥90.1  13  HI≥42  1134
+climatology from 2020–2024: 2425 HI station-days
+HRES runs: 724 (2024-03-01..2026-10-20)
+
+================ E1 heat index (daily max, °C) ================
+fit 2025 sample A lead 1: HI_obs ≈ +10.37 + 0.865 × HI_fc (n=1113); per station a/b: 48304 +1.5/1.04, 48334 +11.4/0.80, 48384 +1.9/1.12, 48409 -7.0/1.35, 48455 +9.9/0.86, 48478 +14.5/0.71, 48555 +27.5/0.43, 48564 +13.2/0.84
+fit 2025 sample A lead 2: HI_obs ≈ +11.69 + 0.826 × HI_fc (n=1107); per station a/b: 48304 +0.6/1.06, 48334 +7.0/0.93, 48384 +3.0/1.09, 48409 -4.2/1.27, 48455 +7.9/0.91, 48478 +16.6/0.65, 48555 +20.1/0.66, 48564 +16.1/0.76
+post-hoc fit 2025 A lead 1: blend HI ≈ +0.77 + 0.439·fc + 0.601·persist (n=909); persist + β·Δfc with β=0.5 (n=903)
+post-hoc fit 2025 A lead 2: blend HI ≈ +2.26 + 0.610·fc + 0.414·persist (n=855); persist + β·Δfc with β=0.65 (n=849)
+lead 1: residual SD of the linear-corrected HRES on 2025 A = 2.95 °C, 10/50/90 % -3.61/-0.24/+3.91
+lead 2: residual SD of the linear-corrected HRES on 2025 A = 3.01 °C, 10/50/90 % -3.66/-0.31/+3.89
+
+## 2025 A (fit), lead day 1 (30–33 h), obs = daily max HI, same 903 rows for all
+  raw                    n=  903 MAE= 5.53 bias=-5.51 RMSE= 6.26 band= 44.6% | ≥33.0: ev= 878 POD= 0.81 FAR= 0.00 CSI= 0.81 fb= 0.81 | ≥42.0: ev= 344 POD= 0.00 FAR= 0.00 CSI= 0.00 fb= 0.00
+  persist(issue day)     n=  903 MAE= 1.95 bias=+0.02 RMSE= 2.63 band= 75.9% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.73 FAR= 0.28 CSI= 0.57 fb= 1.01
+  persist(day before)    n=  763 MAE= 2.48 bias=+0.07 RMSE= 3.42 band= 71.3% | ≥33.0: ev= 741 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 293 POD= 0.70 FAR= 0.31 CSI= 0.53 fb= 1.02
+  climatology            n=  574 MAE= 2.19 bias=+0.98 RMSE= 2.93 band= 70.6% | ≥33.0: ev= 566 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 185 POD= 0.62 FAR= 0.43 CSI= 0.42 fb= 1.09
+  linear national        n=  903 MAE= 2.32 bias=+0.09 RMSE= 2.96 band= 71.1% | ≥33.0: ev= 878 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.03 | ≥42.0: ev= 344 POD= 0.65 FAR= 0.33 CSI= 0.50 fb= 0.97
+  linear per station     n=  903 MAE= 1.81 bias=-0.01 RMSE= 2.40 band= 77.9% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.02 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 344 POD= 0.70 FAR= 0.22 CSI= 0.58 fb= 0.89
+  blend+persist (post-hoc) n=  903 MAE= 1.72 bias=+0.00 RMSE= 2.26 band= 79.1% | ≥33.0: ev= 878 POD= 1.00 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 344 POD= 0.73 FAR= 0.22 CSI= 0.60 fb= 0.94
+  persist+β·Δfc (post-hoc) n=  903 MAE= 1.80 bias=-0.01 RMSE= 2.44 band= 77.2% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.76 FAR= 0.26 CSI= 0.60 fb= 1.03
+  raw vs obs 13/16 h     n=  901 MAE= 4.82 bias=-4.71 RMSE= 5.69 band= 51.7% | ≥33.0: ev= 859 POD= 0.81 FAR= 0.01 CSI= 0.81 fb= 0.82 | ≥42.0: ev= 279 POD= 0.00 FAR= 0.00 CSI= 0.00 fb= 0.00
+
+## 2025 A (fit), lead day 2 (54–57 h), obs = daily max HI, same 849 rows for all
+  raw                    n=  849 MAE= 5.42 bias=-5.37 RMSE= 6.16 band= 43.3% | ≥33.0: ev= 825 POD= 0.79 FAR= 0.00 CSI= 0.79 fb= 0.79 | ≥42.0: ev= 324 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+  persist(issue day)     n=  849 MAE= 2.47 bias=+0.07 RMSE= 3.41 band= 70.9% | ≥33.0: ev= 825 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 324 POD= 0.69 FAR= 0.32 CSI= 0.52 fb= 1.00
+  persist(day before)    n=  727 MAE= 2.74 bias=+0.08 RMSE= 3.87 band= 67.1% | ≥33.0: ev= 704 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 281 POD= 0.65 FAR= 0.37 CSI= 0.48 fb= 1.03
+  climatology            n=  536 MAE= 2.21 bias=+1.12 RMSE= 2.94 band= 70.9% | ≥33.0: ev= 529 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 166 POD= 0.64 FAR= 0.45 CSI= 0.42 fb= 1.16
+  linear national        n=  849 MAE= 2.35 bias=+0.15 RMSE= 3.00 band= 71.7% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 324 POD= 0.65 FAR= 0.32 CSI= 0.50 fb= 0.96
+  linear per station     n=  849 MAE= 1.83 bias=+0.05 RMSE= 2.43 band= 77.9% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.02 CSI= 0.97 fb= 1.02 | ≥42.0: ev= 324 POD= 0.69 FAR= 0.21 CSI= 0.58 fb= 0.87
+  blend+persist (post-hoc) n=  849 MAE= 1.99 bias=+0.00 RMSE= 2.65 band= 74.9% | ≥33.0: ev= 825 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.02 | ≥42.0: ev= 324 POD= 0.66 FAR= 0.24 CSI= 0.54 fb= 0.87
+  persist+β·Δfc (post-hoc) n=  849 MAE= 2.17 bias=+0.10 RMSE= 2.92 band= 74.6% | ≥33.0: ev= 825 POD= 0.99 FAR= 0.02 CSI= 0.97 fb= 1.01 | ≥42.0: ev= 324 POD= 0.73 FAR= 0.28 CSI= 0.57 fb= 1.02
+  raw vs obs 13/16 h     n=  847 MAE= 4.76 bias=-4.60 RMSE= 5.63 band= 49.8% | ≥33.0: ev= 806 POD= 0.80 FAR= 0.01 CSI= 0.79 fb= 0.81 | ≥42.0: ev= 268 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+
+## 2026 A (later), lead day 1 (30–33 h), obs = daily max HI, same 1009 rows for all
+  ΔMAE linear national − raw: -2.76 °C [90 % -3.07, -2.42]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.12 °C [90 % -0.18, -0.06]
+  ΔMAE linear national − persist(issue day): +0.62 °C [90 % +0.46, +0.79]
+  raw                    n= 1009 MAE= 5.12 bias=-5.01 RMSE= 5.82 band= 51.1% | ≥33.0: ev= 994 POD= 0.87 FAR= 0.00 CSI= 0.87 fb= 0.87 | ≥42.0: ev= 377 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00
+  persist(issue day)     n= 1009 MAE= 1.74 bias=+0.05 RMSE= 2.45 band= 83.6% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 377 POD= 0.81 FAR= 0.20 CSI= 0.67 fb= 1.02
+  persist(day before)    n=  862 MAE= 1.97 bias=+0.02 RMSE= 2.73 band= 81.3% | ≥33.0: ev= 851 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 326 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.01
+  climatology            n=  744 MAE= 2.27 bias=+1.10 RMSE= 3.08 band= 78.4% | ≥33.0: ev= 732 POD= 1.00 FAR= 0.02 CSI= 0.98 fb= 1.02 | ≥42.0: ev= 231 POD= 0.71 FAR= 0.33 CSI= 0.52 fb= 1.06
+  linear national        n= 1009 MAE= 2.36 bias=+0.50 RMSE= 2.97 band= 73.4% | ≥33.0: ev= 994 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 377 POD= 0.68 FAR= 0.34 CSI= 0.51 fb= 1.03
+  linear per station     n= 1009 MAE= 1.86 bias=+0.30 RMSE= 2.44 band= 80.0% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 377 POD= 0.80 FAR= 0.27 CSI= 0.62 fb= 1.10
+  blend+persist (post-hoc) n= 1009 MAE= 1.62 bias=+0.24 RMSE= 2.18 band= 85.0% | ≥33.0: ev= 994 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 377 POD= 0.81 FAR= 0.19 CSI= 0.68 fb= 1.00
+  persist+β·Δfc (post-hoc) n= 1009 MAE= 1.70 bias=+0.08 RMSE= 2.36 band= 82.5% | ≥33.0: ev= 994 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 377 POD= 0.79 FAR= 0.22 CSI= 0.65 fb= 1.01
+  raw vs obs 13/16 h     n=  989 MAE= 4.00 bias=-3.71 RMSE= 4.76 band= 63.2% | ≥33.0: ev= 968 POD= 0.87 FAR= 0.01 CSI= 0.87 fb= 0.88 | ≥42.0: ev= 240 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00
+
+## 2026 A (later), lead day 2 (54–57 h), obs = daily max HI, same 958 rows for all
+  ΔMAE linear national − raw: -2.72 °C [90 % -3.04, -2.39]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.12 °C [90 % -0.22, -0.02]
+  ΔMAE linear national − persist(issue day): +0.45 °C [90 % +0.29, +0.62]
+  raw                    n=  958 MAE= 5.14 bias=-5.02 RMSE= 5.86 band= 50.2% | ≥33.0: ev= 947 POD= 0.87 FAR= 0.00 CSI= 0.86 fb= 0.87 | ≥42.0: ev= 362 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+  persist(issue day)     n=  958 MAE= 1.97 bias=-0.01 RMSE= 2.72 band= 81.0% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.77 FAR= 0.22 CSI= 0.63 fb= 0.99
+  persist(day before)    n=  825 MAE= 2.08 bias=+0.05 RMSE= 2.86 band= 81.2% | ≥33.0: ev= 816 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 313 POD= 0.79 FAR= 0.24 CSI= 0.63 fb= 1.03
+  climatology            n=  716 MAE= 2.27 bias=+1.12 RMSE= 3.06 band= 78.2% | ≥33.0: ev= 706 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 220 POD= 0.70 FAR= 0.33 CSI= 0.52 fb= 1.05
+  linear national        n=  958 MAE= 2.42 bias=+0.41 RMSE= 3.00 band= 70.6% | ≥33.0: ev= 947 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 362 POD= 0.65 FAR= 0.37 CSI= 0.47 fb= 1.03
+  linear per station     n=  958 MAE= 1.90 bias=+0.26 RMSE= 2.47 band= 78.3% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.78 FAR= 0.28 CSI= 0.60 fb= 1.09
+  blend+persist (post-hoc) n=  958 MAE= 1.84 bias=+0.18 RMSE= 2.42 band= 81.1% | ≥33.0: ev= 947 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 362 POD= 0.75 FAR= 0.22 CSI= 0.62 fb= 0.96
+  persist+β·Δfc (post-hoc) n=  958 MAE= 1.92 bias=+0.01 RMSE= 2.65 band= 80.8% | ≥33.0: ev= 947 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 362 POD= 0.77 FAR= 0.23 CSI= 0.62 fb= 1.01
+  raw vs obs 13/16 h     n=  936 MAE= 4.07 bias=-3.78 RMSE= 4.88 band= 61.5% | ≥33.0: ev= 919 POD= 0.87 FAR= 0.01 CSI= 0.86 fb= 0.87 | ≥42.0: ev= 239 POD= 0.01 FAR= 0.00 CSI= 0.01 fb= 0.01
+
+## 2026 B (later, held-out stations), lead day 1 (30–33 h), obs = daily max HI, same 1072 rows for all
+  ΔMAE linear national − raw: -2.32 °C [90 % -2.61, -2.00]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.11 °C [90 % -0.18, -0.04]
+  ΔMAE linear national − persist(issue day): +0.64 °C [90 % +0.46, +0.83]
+  raw                    n= 1072 MAE= 4.77 bias=-4.68 RMSE= 5.67 band= 47.2% | ≥33.0: ev=1056 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.95 | ≥42.0: ev= 545 POD= 0.06 FAR= 0.00 CSI= 0.06 fb= 0.06
+  persist(issue day)     n= 1072 MAE= 1.81 bias=+0.01 RMSE= 2.69 band= 78.8% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 545 POD= 0.81 FAR= 0.18 CSI= 0.69 fb= 1.00
+  persist(day before)    n=  892 MAE= 2.12 bias=+0.03 RMSE= 2.90 band= 74.0% | ≥33.0: ev= 878 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.01 | ≥42.0: ev= 454 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.02
+  climatology            n=  765 MAE= 2.23 bias=+0.08 RMSE= 2.87 band= 69.3% | ≥33.0: ev= 753 POD= 0.98 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 344 POD= 0.65 FAR= 0.28 CSI= 0.52 fb= 0.91
+  linear national        n= 1072 MAE= 2.45 bias=+0.61 RMSE= 3.21 band= 64.4% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 545 POD= 0.86 FAR= 0.37 CSI= 0.57 fb= 1.38
+  blend+persist (post-hoc) n= 1072 MAE= 1.70 bias=+0.42 RMSE= 2.42 band= 77.8% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.02 | ≥42.0: ev= 545 POD= 0.88 FAR= 0.24 CSI= 0.69 fb= 1.16
+  persist+β·Δfc (post-hoc) n= 1072 MAE= 1.71 bias=+0.00 RMSE= 2.53 band= 79.2% | ≥33.0: ev=1056 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 545 POD= 0.82 FAR= 0.18 CSI= 0.69 fb= 1.00
+  raw vs obs 13/16 h     n= 1071 MAE= 4.06 bias=-3.84 RMSE= 5.00 band= 55.6% | ≥33.0: ev=1048 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.96 | ≥42.0: ev= 437 POD= 0.07 FAR= 0.00 CSI= 0.07 fb= 0.07
+
+## 2026 B (later, held-out stations), lead day 2 (54–57 h), obs = daily max HI, same 1023 rows for all
+  ΔMAE linear national − raw: -2.32 °C [90 % -2.60, -2.05]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.18 °C [90 % -0.28, -0.07]
+  ΔMAE linear national − persist(issue day): +0.28 °C [90 % +0.11, +0.48]
+  raw                    n= 1023 MAE= 4.73 bias=-4.64 RMSE= 5.58 band= 47.5% | ≥33.0: ev=1009 POD= 0.94 FAR= 0.01 CSI= 0.93 fb= 0.95 | ≥42.0: ev= 518 POD= 0.06 FAR= 0.00 CSI= 0.06 fb= 0.06
+  persist(issue day)     n= 1023 MAE= 2.12 bias=+0.01 RMSE= 2.91 band= 74.4% | ≥33.0: ev=1009 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 518 POD= 0.78 FAR= 0.23 CSI= 0.63 fb= 1.02
+  persist(day before)    n=  859 MAE= 2.27 bias=+0.06 RMSE= 3.04 band= 71.5% | ≥33.0: ev= 848 POD= 0.99 FAR= 0.01 CSI= 0.98 fb= 1.00 | ≥42.0: ev= 435 POD= 0.76 FAR= 0.26 CSI= 0.60 fb= 1.03
+  climatology            n=  737 MAE= 2.25 bias=+0.19 RMSE= 2.89 band= 70.8% | ≥33.0: ev= 726 POD= 0.98 FAR= 0.01 CSI= 0.97 fb= 1.00 | ≥42.0: ev= 321 POD= 0.68 FAR= 0.28 CSI= 0.53 fb= 0.94
+  linear national        n= 1023 MAE= 2.40 bias=+0.50 RMSE= 3.10 band= 65.3% | ≥33.0: ev=1009 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 518 POD= 0.85 FAR= 0.37 CSI= 0.57 fb= 1.35
+  blend+persist (post-hoc) n= 1023 MAE= 1.94 bias=+0.46 RMSE= 2.53 band= 72.8% | ≥33.0: ev=1009 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 518 POD= 0.86 FAR= 0.29 CSI= 0.64 fb= 1.20
+  persist+β·Δfc (post-hoc) n= 1023 MAE= 1.93 bias=+0.01 RMSE= 2.62 band= 77.8% | ≥33.0: ev=1009 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 518 POD= 0.81 FAR= 0.20 CSI= 0.67 fb= 1.01
+  raw vs obs 13/16 h     n= 1022 MAE= 4.00 bias=-3.74 RMSE= 4.87 band= 55.3% | ≥33.0: ev= 995 POD= 0.94 FAR= 0.02 CSI= 0.92 fb= 0.96 | ≥42.0: ev= 411 POD= 0.07 FAR= 0.03 CSI= 0.07 fb= 0.07
+
+## 2026 A+B hot season Mar–May, lead day 1 (30–33 h), obs = daily max HI, same 898 rows for all
+  ΔMAE linear national − raw: -3.21 °C [90 % -3.53, -2.88]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.16 °C [90 % -0.24, -0.08]
+  ΔMAE linear national − persist(issue day): +0.68 °C [90 % +0.47, +0.90]
+  raw                    n=  898 MAE= 5.74 bias=-5.65 RMSE= 6.56 band= 37.2% | ≥33.0: ev= 890 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 543 POD= 0.04 FAR= 0.00 CSI= 0.04 fb= 0.04
+  persist(issue day)     n=  898 MAE= 1.85 bias=-0.01 RMSE= 2.76 band= 81.5% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 543 POD= 0.87 FAR= 0.13 CSI= 0.76 fb= 1.00
+  persist(day before)    n=  764 MAE= 2.12 bias=-0.05 RMSE= 2.87 band= 78.8% | ≥33.0: ev= 758 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 483 POD= 0.84 FAR= 0.15 CSI= 0.73 fb= 0.99
+  climatology            n=  338 MAE= 2.54 bias=+1.44 RMSE= 3.33 band= 71.9% | ≥33.0: ev= 336 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 196 POD= 0.91 FAR= 0.30 CSI= 0.66 fb= 1.31
+  linear national        n=  898 MAE= 2.53 bias=-0.34 RMSE= 3.32 band= 70.8% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 543 POD= 0.79 FAR= 0.24 CSI= 0.63 fb= 1.04
+  linear per station     n=  411 MAE= 1.93 bias=-0.28 RMSE= 2.46 band= 84.4% | ≥33.0: ev= 408 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 227 POD= 0.85 FAR= 0.12 CSI= 0.77 fb= 0.97
+  blend+persist (post-hoc) n=  898 MAE= 1.69 bias=+0.01 RMSE= 2.45 band= 83.4% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 543 POD= 0.90 FAR= 0.14 CSI= 0.78 fb= 1.05
+  persist+β·Δfc (post-hoc) n=  898 MAE= 1.74 bias=+0.01 RMSE= 2.60 band= 81.8% | ≥33.0: ev= 890 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 543 POD= 0.87 FAR= 0.13 CSI= 0.77 fb= 1.01
+  raw vs obs 13/16 h     n=  897 MAE= 4.85 bias=-4.66 RMSE= 5.70 band= 46.4% | ≥33.0: ev= 884 POD= 0.93 FAR= 0.01 CSI= 0.92 fb= 0.94 | ≥42.0: ev= 441 POD= 0.05 FAR= 0.00 CSI= 0.05 fb= 0.05
+
+## 2026 A+B hot season Mar–May, lead day 2 (54–57 h), obs = daily max HI, same 851 rows for all
+  ΔMAE linear national − raw: -3.05 °C [90 % -3.38, -2.72]
+  ΔMAE blend+persist (post-hoc) − persist(issue day): -0.14 °C [90 % -0.27, -0.01]
+  ΔMAE linear national − persist(issue day): +0.47 °C [90 % +0.26, +0.67]
+  raw                    n=  851 MAE= 5.62 bias=-5.52 RMSE= 6.42 band= 35.7% | ≥33.0: ev= 845 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 532 POD= 0.05 FAR= 0.00 CSI= 0.05 fb= 0.05
+  persist(issue day)     n=  851 MAE= 2.11 bias=-0.06 RMSE= 2.84 band= 78.4% | ≥33.0: ev= 845 POD= 0.99 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 532 POD= 0.83 FAR= 0.15 CSI= 0.73 fb= 0.98
+  persist(day before)    n=  731 MAE= 2.29 bias=-0.05 RMSE= 3.04 band= 76.3% | ≥33.0: ev= 727 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 468 POD= 0.82 FAR= 0.17 CSI= 0.70 fb= 0.99
+  climatology            n=  334 MAE= 2.54 bias=+1.47 RMSE= 3.33 band= 73.4% | ≥33.0: ev= 332 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 193 POD= 0.93 FAR= 0.29 CSI= 0.67 fb= 1.31
+  linear national        n=  851 MAE= 2.57 bias=-0.38 RMSE= 3.25 band= 67.8% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 532 POD= 0.77 FAR= 0.26 CSI= 0.61 fb= 1.04
+  linear per station     n=  383 MAE= 1.95 bias=-0.23 RMSE= 2.47 band= 79.9% | ≥33.0: ev= 381 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 221 POD= 0.85 FAR= 0.17 CSI= 0.72 fb= 1.03
+  blend+persist (post-hoc) n=  851 MAE= 1.96 bias=-0.09 RMSE= 2.55 band= 77.0% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 532 POD= 0.85 FAR= 0.18 CSI= 0.71 fb= 1.04
+  persist+β·Δfc (post-hoc) n=  851 MAE= 1.89 bias=+0.08 RMSE= 2.58 band= 81.4% | ≥33.0: ev= 845 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.00 | ≥42.0: ev= 532 POD= 0.87 FAR= 0.14 CSI= 0.76 fb= 1.01
+  raw vs obs 13/16 h     n=  850 MAE= 4.78 bias=-4.53 RMSE= 5.59 band= 44.6% | ≥33.0: ev= 840 POD= 0.93 FAR= 0.01 CSI= 0.92 fb= 0.94 | ≥42.0: ev= 436 POD= 0.06 FAR= 0.04 CSI= 0.06 fb= 0.06
+
+## 2025 B (same period, held-out), lead day 1 (30–33 h), obs = daily max HI, same 1038 rows for all
+  raw                    n= 1038 MAE= 4.39 bias=-4.22 RMSE= 5.14 band= 49.4% | ≥33.0: ev= 987 POD= 0.91 FAR= 0.01 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 471 POD= 0.05 FAR= 0.08 CSI= 0.05 fb= 0.06
+  persist(issue day)     n= 1038 MAE= 2.12 bias=-0.06 RMSE= 2.84 band= 73.2% | ≥33.0: ev= 987 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 471 POD= 0.73 FAR= 0.24 CSI= 0.60 fb= 0.97
+  persist(day before)    n=  860 MAE= 2.81 bias=-0.03 RMSE= 3.79 band= 63.5% | ≥33.0: ev= 816 POD= 0.96 FAR= 0.04 CSI= 0.92 fb= 1.00 | ≥42.0: ev= 378 POD= 0.65 FAR= 0.34 CSI= 0.49 fb= 0.98
+  climatology            n=  674 MAE= 2.43 bias=+0.83 RMSE= 3.17 band= 68.4% | ≥33.0: ev= 656 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 289 POD= 0.65 FAR= 0.33 CSI= 0.49 fb= 0.97
+  linear national        n= 1038 MAE= 2.43 bias=+1.18 RMSE= 3.13 band= 68.3% | ≥33.0: ev= 987 POD= 1.00 FAR= 0.05 CSI= 0.95 fb= 1.05 | ≥42.0: ev= 471 POD= 0.84 FAR= 0.34 CSI= 0.58 fb= 1.28
+  blend+persist (post-hoc) n= 1038 MAE= 1.79 bias=+0.53 RMSE= 2.41 band= 75.8% | ≥33.0: ev= 987 POD= 1.00 FAR= 0.03 CSI= 0.96 fb= 1.03 | ≥42.0: ev= 471 POD= 0.81 FAR= 0.25 CSI= 0.64 fb= 1.08
+  persist+β·Δfc (post-hoc) n= 1038 MAE= 1.94 bias=-0.08 RMSE= 2.56 band= 74.2% | ≥33.0: ev= 987 POD= 0.98 FAR= 0.02 CSI= 0.96 fb= 1.00 | ≥42.0: ev= 471 POD= 0.73 FAR= 0.22 CSI= 0.60 fb= 0.93
+  raw vs obs 13/16 h     n= 1035 MAE= 3.56 bias=-3.22 RMSE= 4.24 band= 60.6% | ≥33.0: ev= 972 POD= 0.92 FAR= 0.01 CSI= 0.91 fb= 0.93 | ≥42.0: ev= 339 POD= 0.07 FAR= 0.08 CSI= 0.07 fb= 0.08
+
+## 2025 B (same period, held-out), lead day 2 (54–57 h), obs = daily max HI, same 977 rows for all
+  raw                    n=  977 MAE= 4.24 bias=-4.05 RMSE= 4.98 band= 49.8% | ≥33.0: ev= 931 POD= 0.91 FAR= 0.00 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 430 POD= 0.05 FAR= 0.08 CSI= 0.05 fb= 0.06
+  persist(issue day)     n=  977 MAE= 2.79 bias=+0.04 RMSE= 3.74 band= 62.6% | ≥33.0: ev= 931 POD= 0.96 FAR= 0.03 CSI= 0.93 fb= 1.00 | ≥42.0: ev= 430 POD= 0.66 FAR= 0.36 CSI= 0.48 fb= 1.02
+  persist(day before)    n=  808 MAE= 3.12 bias=-0.06 RMSE= 4.23 band= 60.8% | ≥33.0: ev= 768 POD= 0.95 FAR= 0.04 CSI= 0.91 fb= 0.99 | ≥42.0: ev= 344 POD= 0.61 FAR= 0.38 CSI= 0.45 fb= 0.99
+  climatology            n=  629 MAE= 2.47 bias=+0.93 RMSE= 3.19 band= 68.8% | ≥33.0: ev= 613 POD= 1.00 FAR= 0.03 CSI= 0.97 fb= 1.03 | ≥42.0: ev= 263 POD= 0.65 FAR= 0.34 CSI= 0.49 fb= 0.99
+  linear national        n=  977 MAE= 2.39 bias=+1.21 RMSE= 3.12 band= 67.7% | ≥33.0: ev= 931 POD= 1.00 FAR= 0.05 CSI= 0.95 fb= 1.05 | ≥42.0: ev= 430 POD= 0.84 FAR= 0.36 CSI= 0.57 fb= 1.30
+  blend+persist (post-hoc) n=  977 MAE= 2.12 bias=+0.79 RMSE= 2.79 band= 70.5% | ≥33.0: ev= 931 POD= 1.00 FAR= 0.04 CSI= 0.96 fb= 1.04 | ≥42.0: ev= 430 POD= 0.79 FAR= 0.32 CSI= 0.58 fb= 1.15
+  persist+β·Δfc (post-hoc) n=  977 MAE= 2.34 bias=+0.03 RMSE= 3.06 band= 68.3% | ≥33.0: ev= 931 POD= 0.98 FAR= 0.03 CSI= 0.95 fb= 1.00 | ≥42.0: ev= 430 POD= 0.69 FAR= 0.31 CSI= 0.53 fb= 1.00
+  raw vs obs 13/16 h     n=  974 MAE= 3.48 bias=-3.11 RMSE= 4.13 band= 59.4% | ≥33.0: ev= 915 POD= 0.92 FAR= 0.01 CSI= 0.91 fb= 0.93 | ≥42.0: ev= 315 POD= 0.07 FAR= 0.08 CSI= 0.07 fb= 0.08
+
+## 2026, per station: linear national vs raw and vs persistence (made worse = >3 % and bootstrap > 0)
+  THM00048455 BANGKOK METROPOLIS A n=168 MAE raw 5.59 lin 1.80 persist 1.69 clim 1.79 | lin vs raw -67.8% | raw vs persist +231.3% WORSE | blend 1.46 vs persist -13.7%
+  THM00048304 CHAING RAI ARGOMET A n=113 MAE raw 3.12 lin 3.07 persist 2.06 clim 3.53 | lin vs raw -1.4% | raw vs persist +51.5% WORSE | blend 1.90 vs persist -7.5%
+  THM00048334 LAMPANG AGROMET    A n=151 MAE raw 3.80 lin 2.36 persist 1.69 clim 2.56 | lin vs raw -37.9% | raw vs persist +124.3% WORSE | blend 1.50 vs persist -11.2%
+  THM00048384 THA PHRA AGROMET   A n=101 MAE raw 3.98 lin 1.69 persist 1.71 clim 2.09 | lin vs raw -57.6% | raw vs persist +132.3% WORSE | blend 1.41 vs persist -17.7%
+  THM00048409 SI SAKET AGROMET   A n= 74 MAE raw 6.82 lin 1.99 persist 1.59 clim 1.50 | lin vs raw -70.9% | raw vs persist +330.1% WORSE | blend 1.43 vs persist -9.6%
+  THM00048478 RAYONG             A n=170 MAE raw 3.46 lin 2.74 persist 1.79 clim 2.71 | lin vs raw -20.7% | raw vs persist +93.2% WORSE | blend 1.82 vs persist +1.9%
+  THM00048555 SURAT THANI AGROME A n= 69 MAE raw 9.43 lin 3.86 persist 1.72 clim 1.91 | lin vs raw -59.0% | raw vs persist +447.5% WORSE | blend 1.90 vs persist +10.3%
+  THM00048564 PHUKET             A n=163 MAE raw 7.09 lin 1.99 persist 1.64 clim 1.70 | lin vs raw -71.9% | raw vs persist +332.6% WORSE | blend 1.57 vs persist -4.1%
+  THM00048415 AYUTTHAYA          B n= 73 MAE raw 8.85 lin 3.81 persist 3.09 clim 2.16 | lin vs raw -56.9% | raw vs persist +186.2% WORSE | blend 2.55 vs persist -17.5%
+  THM00048333 NAN AGROMET        B n=119 MAE raw 3.38 lin 2.65 persist 1.94 clim 2.75 | lin vs raw -21.5% | raw vs persist +74.1% WORSE | blend 1.71 vs persist -11.7%
+  THM00048325 MAE SARIANG        B n= 52 MAE raw 11.56 lin 5.51 persist 1.80 clim 2.55 | lin vs raw -52.4% | raw vs persist +541.0% WORSE | blend 2.79 vs persist +54.6% WORSE
+  THM00048372 SUKHOTHAI          B n=181 MAE raw 3.48 lin 2.49 persist 1.82 clim 2.08 | lin vs raw -28.7% | raw vs persist +91.7% WORSE | blend 1.80 vs persist -1.1%
+  THM00048357 NAKHON PHANOM      B n=109 MAE raw 4.28 lin 1.84 persist 1.95 clim 2.98 | lin vs raw -57.1% | raw vs persist +119.6% WORSE | blend 1.60 vs persist -17.9%
+  THM00048432 SURIN              B n=132 MAE raw 4.79 lin 1.42 persist 1.42 clim 1.89 | lin vs raw -70.4% | raw vs persist +235.9% WORSE | blend 1.14 vs persist -19.7%
+  THM00048425 SUPHAN BURI        B n=162 MAE raw 4.76 lin 1.93 persist 1.92 clim 2.12 | lin vs raw -59.6% | raw vs persist +147.6% WORSE | blend 1.65 vs persist -14.2%
+  THM00048554 NAKHONSI THAMMARAT B n= 79 MAE raw 5.31 lin 2.12 persist 1.75 clim 2.12 | lin vs raw -60.0% | raw vs persist +204.1% WORSE | blend 1.55 vs persist -11.1%
+  THM00048571 KHO HONG AGROMET   B n=131 MAE raw 2.61 lin 2.94 persist 1.28 clim 2.00 | lin vs raw +12.5% | raw vs persist +104.4% WORSE | blend 1.56 vs persist +21.8% WORSE
+  THM00048440 SRAKAEW            B n= 34 MAE raw 5.92 lin 1.32 persist 1.32 clim 1.68 | lin vs raw -77.8% | raw vs persist +348.4% WORSE | blend 1.18 vs persist -10.3%
+  lead 1: linear national vs raw: made worse at 0 of 18 stations []
+  lead 1: linear national vs persist(issue day): made worse at 9 of 18 stations ['THM00048304', 'THM00048334', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048571']
+  lead 1: raw vs persist(issue day): made worse at 18 of 18 stations ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564', 'THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+  lead 1: blend+persist (post-hoc) vs persist(issue day): made worse at 2 of 18 stations ['THM00048325', 'THM00048571']
+  lead 1: persist+β·Δfc (post-hoc) vs persist(issue day): made worse at 0 of 18 stations []
+  lead 2: linear national vs raw: made worse at 0 of 18 stations []
+  lead 2: linear national vs persist(issue day): made worse at 6 of 18 stations ['THM00048304', 'THM00048334', 'THM00048478', 'THM00048555', 'THM00048325', 'THM00048571']
+  lead 2: raw vs persist(issue day): made worse at 18 of 18 stations ['THM00048455', 'THM00048304', 'THM00048334', 'THM00048384', 'THM00048409', 'THM00048478', 'THM00048555', 'THM00048564', 'THM00048415', 'THM00048333', 'THM00048325', 'THM00048372', 'THM00048357', 'THM00048432', 'THM00048425', 'THM00048554', 'THM00048571', 'THM00048440']
+  lead 2: blend+persist (post-hoc) vs persist(issue day): made worse at 3 of 18 stations ['THM00048555', 'THM00048325', 'THM00048571']
+  lead 2: persist+β·Δfc (post-hoc) vs persist(issue day): made worse at 2 of 18 stations ['THM00048478', 'THM00048564']
+
+================ E2 24-h rain (07–07 Bangkok), mm ================
+tuned on 2024 A: event ≥35.1 lead 0: forecast threshold 15.0 mm (CSI 0.149, 97 events)
+tuned on 2024 A: event ≥35.1 lead 1: forecast threshold 15.0 mm (CSI 0.155, 97 events)
+tuned on 2024 A: event ≥35.1 lead 2: forecast threshold 17.5 mm (CSI 0.123, 97 events)
+tuned on 2024 A: event ≥90.1 lead 0: forecast threshold 57.5 mm (CSI 0.091, 7 events)
+tuned on 2024 A: event ≥90.1 lead 1: forecast threshold 37.5 mm (CSI 0.053, 7 events)
+tuned on 2024 A: event ≥90.1 lead 2: forecast threshold 22.5 mm (CSI 0.033, 7 events)
+rain-day sources by year: {"2024": {"iR3": 2301, "p24": 1942, "missing": 80}, "2025": {"p24": 2201, "iR3": 2009, "missing": 98}, "2026": {"missing": 2102, "p24": 1407, "iR3": 372, "hourly": 223}}
+
+## 2024 A (fit), lead 0 (steps 0–24 h, optimistic), n=1892 station-days
+  amounts: MAE=7.21 bias=+0.52 mm; obs mean 6.17, fc mean 6.69
+  ≥35.1: events  97 | raw POD= 0.09 FAR= 0.59 CSI= 0.08 fb= 0.23 | tuned(≥15.0) POD= 0.49 FAR= 0.82 CSI= 0.15 fb= 2.81 | persistence CSI= 0.07 | Brier clim 0.0465 raw 0.0534 tuned 0.1448
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.14 FAR= 0.80 CSI= 0.09 fb= 0.71 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0053
+
+## 2024 A (fit), lead 1 (steps 24–48 h), n=1884 station-days
+  amounts: MAE=7.29 bias=+0.44 mm; obs mean 6.20, fc mean 6.64
+  ≥35.1: events  97 | raw POD= 0.07 FAR= 0.53 CSI= 0.07 fb= 0.15 | tuned(≥15.0) POD= 0.51 FAR= 0.82 CSI= 0.16 fb= 2.76 | persistence CSI= 0.06 | Brier clim 0.0467 raw 0.0520 tuned 0.1417
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.14 FAR= 0.92 CSI= 0.05 fb= 1.86 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0096
+
+## 2024 A (fit), lead 2 (steps 48–72 h), n=1876 station-days
+  amounts: MAE=7.67 bias=+0.45 mm; obs mean 6.22, fc mean 6.68
+  ≥35.1: events  97 | raw POD= 0.05 FAR= 0.76 CSI= 0.04 fb= 0.22 | tuned(≥17.5) POD= 0.32 FAR= 0.83 CSI= 0.12 fb= 1.92 | persistence CSI= 0.04 | Brier clim 0.0469 raw 0.0576 tuned 0.1178
+  ≥90.1: events   7 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.43 FAR= 0.97 CSI= 0.03 fb=12.29 | persistence CSI= 0.00 | Brier clim 0.0037 raw 0.0037 tuned 0.0464
+
+## 2025 A (later), lead 0 (steps 0–24 h, optimistic), n=1902 station-days
+  amounts: MAE=7.10 bias=+0.40 mm; obs mean 6.38, fc mean 6.79
+  ≥35.1: events  84 | raw POD= 0.05 FAR= 0.79 CSI= 0.04 fb= 0.23 | tuned(≥15.0) POD= 0.45 FAR= 0.86 CSI= 0.12 fb= 3.15 | persistence CSI= 0.06 | Brier clim 0.0419 raw 0.0499 tuned 0.1435
+  ≥90.1: events   4 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 0.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0021 tuned 0.0026
+
+## 2025 A (later), lead 1 (steps 24–48 h), n=1894 station-days
+  amounts: MAE=7.41 bias=+0.66 mm; obs mean 6.41, fc mean 7.07
+  ≥35.1: events  84 | raw POD= 0.04 FAR= 0.84 CSI= 0.03 fb= 0.23 | tuned(≥15.0) POD= 0.38 FAR= 0.88 CSI= 0.10 fb= 3.11 | persistence CSI= 0.06 | Brier clim 0.0421 raw 0.0512 tuned 0.1484
+  ≥90.1: events   4 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 4.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0021 tuned 0.0111
+
+## 2025 A (later), lead 2 (steps 48–72 h), n=1886 station-days
+  amounts: MAE=7.74 bias=+1.10 mm; obs mean 6.44, fc mean 7.54
+  ≥35.1: events  84 | raw POD= 0.08 FAR= 0.70 CSI= 0.07 fb= 0.27 | tuned(≥17.5) POD= 0.38 FAR= 0.85 CSI= 0.12 fb= 2.48 | persistence CSI= 0.02 | Brier clim 0.0423 raw 0.0493 tuned 0.1209
+  ≥90.1: events   4 | raw POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 0.25 | tuned(≥22.5) POD= 1.00 FAR= 0.96 CSI= 0.04 fb=28.25 | persistence CSI= 0.00 | Brier clim 0.0021 raw 0.0027 tuned 0.0578
+
+## 2025 B (later, held-out stations), lead 0 (steps 0–24 h, optimistic), n=2308 station-days
+  amounts: MAE=7.18 bias=+1.98 mm; obs mean 5.42, fc mean 7.40
+  ≥35.1: events  71 | raw POD= 0.11 FAR= 0.78 CSI= 0.08 fb= 0.52 | tuned(≥15.0) POD= 0.48 FAR= 0.91 CSI= 0.09 fb= 5.06 | persistence CSI= 0.02 | Brier clim 0.0295 raw 0.0399 tuned 0.1568
+  ≥90.1: events  11 | raw POD= 0.09 FAR= 0.00 CSI= 0.09 fb= 0.09 | tuned(≥57.5) POD= 0.27 FAR= 0.57 CSI= 0.20 fb= 0.64 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0043 tuned 0.0052
+
+## 2025 B (later, held-out stations), lead 1 (steps 24–48 h), n=2298 station-days
+  amounts: MAE=7.41 bias=+2.24 mm; obs mean 5.44, fc mean 7.68
+  ≥35.1: events  71 | raw POD= 0.10 FAR= 0.77 CSI= 0.07 fb= 0.42 | tuned(≥15.0) POD= 0.45 FAR= 0.91 CSI= 0.08 fb= 4.89 | persistence CSI= 0.02 | Brier clim 0.0296 raw 0.0379 tuned 0.1540
+  ≥90.1: events  11 | raw POD= 0.09 FAR= 0.00 CSI= 0.09 fb= 0.09 | tuned(≥37.5) POD= 0.27 FAR= 0.88 CSI= 0.09 fb= 2.27 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0044 tuned 0.0131
+
+## 2025 B (later, held-out stations), lead 2 (steps 48–72 h), n=2288 station-days
+  amounts: MAE=7.69 bias=+2.48 mm; obs mean 5.45, fc mean 7.93
+  ≥35.1: events  71 | raw POD= 0.13 FAR= 0.76 CSI= 0.09 fb= 0.54 | tuned(≥17.5) POD= 0.42 FAR= 0.90 CSI= 0.09 fb= 4.11 | persistence CSI= 0.01 | Brier clim 0.0298 raw 0.0398 tuned 0.1324
+  ≥90.1: events  11 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.27 FAR= 0.98 CSI= 0.02 fb=14.27 | persistence CSI= 0.00 | Brier clim 0.0048 raw 0.0048 tuned 0.0708
+
+## 2024 B (same period, held-out), lead 0 (steps 0–24 h, optimistic), n=2351 station-days
+  amounts: MAE=6.87 bias=+2.49 mm; obs mean 5.00, fc mean 7.49
+  ≥35.1: events  86 | raw POD= 0.12 FAR= 0.75 CSI= 0.09 fb= 0.47 | tuned(≥15.0) POD= 0.65 FAR= 0.86 CSI= 0.13 fb= 4.80 | persistence CSI= 0.03 | Brier clim 0.0343 raw 0.0451 tuned 0.1646
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb= 2.00 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0026
+
+## 2024 B (same period, held-out), lead 1 (steps 24–48 h), n=2341 station-days
+  amounts: MAE=7.19 bias=+2.34 mm; obs mean 5.02, fc mean 7.36
+  ≥35.1: events  86 | raw POD= 0.07 FAR= 0.82 CSI= 0.05 fb= 0.40 | tuned(≥15.0) POD= 0.51 FAR= 0.89 CSI= 0.10 fb= 4.67 | persistence CSI= 0.02 | Brier clim 0.0345 raw 0.0461 tuned 0.1709
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.00 FAR= 1.00 CSI= 0.00 fb=12.50 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0115
+
+## 2024 B (same period, held-out), lead 2 (steps 48–72 h), n=2331 station-days
+  amounts: MAE=7.36 bias=+2.27 mm; obs mean 5.04, fc mean 7.31
+  ≥35.1: events  86 | raw POD= 0.09 FAR= 0.73 CSI= 0.07 fb= 0.35 | tuned(≥17.5) POD= 0.40 FAR= 0.88 CSI= 0.10 fb= 3.30 | persistence CSI= 0.04 | Brier clim 0.0346 raw 0.0429 tuned 0.1296
+  ≥90.1: events   2 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.50 FAR= 0.99 CSI= 0.01 fb=75.00 | persistence CSI= 0.00 | Brier clim 0.0009 raw 0.0009 tuned 0.0644
+
+## 2026 A+B (newest, partial: BUFR), lead 0 (steps 0–24 h, optimistic), n=2002 station-days
+  amounts: MAE=8.40 bias=-1.38 mm; obs mean 9.01, fc mean 7.63
+  ≥35.1: events 118 | raw POD= 0.13 FAR= 0.58 CSI= 0.11 fb= 0.31 | tuned(≥15.0) POD= 0.42 FAR= 0.85 CSI= 0.13 fb= 2.75 | persistence CSI= 0.06 | Brier clim 0.0551 raw 0.0619 tuned 0.1708
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥57.5) POD= 0.08 FAR= 0.80 CSI= 0.06 fb= 0.38 | persistence CSI= 0.04 | Brier clim 0.0064 raw 0.0065 tuned 0.0080
+
+## 2026 A+B (newest, partial: BUFR), lead 1 (steps 24–48 h), n=1985 station-days
+  amounts: MAE=8.94 bias=-1.01 mm; obs mean 9.09, fc mean 8.07
+  ≥35.1: events 118 | raw POD= 0.12 FAR= 0.53 CSI= 0.10 fb= 0.25 | tuned(≥15.0) POD= 0.39 FAR= 0.87 CSI= 0.11 fb= 3.00 | persistence CSI= 0.04 | Brier clim 0.0555 raw 0.0605 tuned 0.1914
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥37.5) POD= 0.38 FAR= 0.79 CSI= 0.16 fb= 1.85 | persistence CSI= 0.00 | Brier clim 0.0065 raw 0.0065 tuned 0.0136
+
+## 2026 A+B (newest, partial: BUFR), lead 2 (steps 48–72 h), n=1969 station-days
+  amounts: MAE=9.01 bias=-0.76 mm; obs mean 9.16, fc mean 8.40
+  ≥35.1: events 118 | raw POD= 0.14 FAR= 0.60 CSI= 0.11 fb= 0.34 | tuned(≥17.5) POD= 0.36 FAR= 0.84 CSI= 0.12 fb= 2.28 | persistence CSI= 0.05 | Brier clim 0.0560 raw 0.0640 tuned 0.1529
+  ≥90.1: events  13 | raw POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00 | tuned(≥22.5) POD= 0.62 FAR= 0.95 CSI= 0.05 fb=11.62 | persistence CSI= 0.05 | Brier clim 0.0065 raw 0.0066 tuned 0.0752
+
+================ ENS rain probabilities (51 members) ================
+ENS rain runs: 99 (2025-06-01..2026-10-20), members per run-station: 51.0
+  2025 lead 0 ≥35.1: n=877 events=35 Brier ENS 0.0373 clim 0.0381 BSS +0.019 | vs base rate BSS +0.025 | as a warning at P≥10 %: POD  0.23 FAR  0.79
+      P in [0.000,0.00): n= 685 mean P=0.000 observed 0.031
+      P in [0.001,0.10): n= 154 mean P=0.039 observed 0.039
+      P in [0.100,0.20): n=  18 mean P=0.157 observed 0.222
+      P in [0.200,0.40): n=  13 mean P=0.282 observed 0.077
+      P in [0.400,0.60): n=   4 mean P=0.490 observed 0.250
+      P in [0.600,1.01): n=   3 mean P=0.869 observed 0.667
+  2025 lead 0 ≥90.1: n=877 events=5 Brier ENS 0.0056 clim 0.0057 BSS +0.024 | vs base rate BSS +0.014 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 867 mean P=0.000 observed 0.005
+      P in [0.001,0.10): n=  10 mean P=0.039 observed 0.100
+  2025 lead 0: ENS median MAE 7.24 mm, 10–90 % range held 27.6 % (n=877)
+  2025 lead 1 ≥35.1: n=885 events=33 Brier ENS 0.0342 clim 0.0361 BSS +0.054 | vs base rate BSS +0.049 | as a warning at P≥10 %: POD  0.27 FAR  0.79
+      P in [0.000,0.00): n= 628 mean P=0.000 observed 0.021
+      P in [0.001,0.10): n= 214 mean P=0.038 observed 0.051
+      P in [0.100,0.20): n=  23 mean P=0.147 observed 0.174
+      P in [0.200,0.40): n=  10 mean P=0.296 observed 0.100
+      P in [0.400,0.60): n=   6 mean P=0.464 observed 0.167
+      P in [0.600,1.01): n=   4 mean P=0.745 observed 0.750
+  2025 lead 1 ≥90.1: n=885 events=3 Brier ENS 0.0029 clim 0.0034 BSS +0.147 | vs base rate BSS +0.145 | as a warning at P≥10 %: POD  0.33 FAR  0.00
+      P in [0.000,0.00): n= 865 mean P=0.000 observed 0.002
+      P in [0.001,0.10): n=  19 mean P=0.034 observed 0.000
+      P in [0.200,0.40): n=   1 mean P=0.275 observed 1.000
+  2025 lead 1: ENS median MAE 7.15 mm, 10–90 % range held 32.4 % (n=885)
+  2025 lead 2 ≥35.1: n=857 events=37 Brier ENS 0.0426 clim 0.0408 BSS -0.045 | vs base rate BSS -0.030 | as a warning at P≥10 %: POD  0.27 FAR  0.82
+      P in [0.000,0.00): n= 536 mean P=0.000 observed 0.026
+      P in [0.001,0.10): n= 265 mean P=0.038 observed 0.049
+      P in [0.100,0.20): n=  29 mean P=0.143 observed 0.207
+      P in [0.200,0.40): n=  16 mean P=0.273 observed 0.062
+      P in [0.400,0.60): n=   7 mean P=0.482 observed 0.286
+      P in [0.600,1.01): n=   4 mean P=0.784 observed 0.250
+  2025 lead 2 ≥90.1: n=857 events=3 Brier ENS 0.0032 clim 0.0035 BSS +0.088 | vs base rate BSS +0.075 | as a warning at P≥10 %: POD  0.33 FAR  0.75
+      P in [0.000,0.00): n= 833 mean P=0.000 observed 0.002
+      P in [0.001,0.10): n=  20 mean P=0.025 observed 0.000
+      P in [0.100,0.20): n=   3 mean P=0.170 observed 0.333
+      P in [0.200,0.40): n=   1 mean P=0.235 observed 0.000
+  2025 lead 2: ENS median MAE 7.84 mm, 10–90 % range held 29.9 % (n=857)
+  2026 lead 0 ≥35.1: n=416 events=25 Brier ENS 0.0491 clim 0.0560 BSS +0.124 | vs base rate BSS +0.131 | as a warning at P≥10 %: POD  0.44 FAR  0.69
+      P in [0.000,0.00): n= 289 mean P=0.000 observed 0.028
+      P in [0.001,0.10): n=  91 mean P=0.035 observed 0.066
+      P in [0.100,0.20): n=  20 mean P=0.122 observed 0.200
+      P in [0.200,0.40): n=   6 mean P=0.273 observed 0.333
+      P in [0.400,0.60): n=   2 mean P=0.500 observed 0.000
+      P in [0.600,1.01): n=   8 mean P=0.712 observed 0.625
+  2026 lead 0 ≥90.1: n=416 events=3 Brier ENS 0.0072 clim 0.0070 BSS -0.017 | vs base rate BSS +0.001 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 407 mean P=0.000 observed 0.005
+      P in [0.001,0.10): n=   9 mean P=0.038 observed 0.111
+  2026 lead 0: ENS median MAE 9.49 mm, 10–90 % range held 42.5 % (n=416)
+  2026 lead 1 ≥35.1: n=318 events=20 Brier ENS 0.0619 clim 0.0576 BSS -0.075 | vs base rate BSS -0.050 | as a warning at P≥10 %: POD  0.20 FAR  0.87
+      P in [0.000,0.00): n= 192 mean P=0.000 observed 0.026
+      P in [0.001,0.10): n=  96 mean P=0.035 observed 0.115
+      P in [0.100,0.20): n=  18 mean P=0.134 observed 0.167
+      P in [0.200,0.40): n=   9 mean P=0.271 observed 0.000
+      P in [0.400,0.60): n=   2 mean P=0.410 observed 0.500
+      P in [0.600,1.01): n=   1 mean P=0.860 observed 0.000
+  2026 lead 1 ≥90.1: n=318 events=3 Brier ENS 0.0095 clim 0.0093 BSS -0.018 | vs base rate BSS -0.014 | as a warning at P≥10 %: POD  0.00 FAR   -  
+      P in [0.000,0.00): n= 310 mean P=0.000 observed 0.010
+      P in [0.001,0.10): n=   8 mean P=0.033 observed 0.000
+  2026 lead 1: ENS median MAE 9.99 mm, 10–90 % range held 39.6 % (n=318)
+  2026 lead 2 ≥35.1: n=370 events=32 Brier ENS 0.0750 clim 0.0796 BSS +0.057 | vs base rate BSS +0.050 | as a warning at P≥10 %: POD  0.34 FAR  0.80
+      P in [0.000,0.00): n= 207 mean P=0.000 observed 0.063
+      P in [0.001,0.10): n= 109 mean P=0.037 observed 0.073
+      P in [0.100,0.20): n=  29 mean P=0.133 observed 0.138
+      P in [0.200,0.40): n=  12 mean P=0.268 observed 0.000
+      P in [0.400,0.60): n=  10 mean P=0.448 observed 0.400
+      P in [0.600,1.01): n=   3 mean P=0.720 observed 1.000
+  2026 lead 2 ≥90.1: n=370 events=5 Brier ENS 0.0134 clim 0.0136 BSS +0.011 | vs base rate BSS -0.005 | as a warning at P≥10 %: POD  0.00 FAR  1.00
+      P in [0.000,0.00): n= 345 mean P=0.000 observed 0.012
+      P in [0.001,0.10): n=  24 mean P=0.030 observed 0.042
+      P in [0.100,0.20): n=   1 mean P=0.100 observed 0.000
+  2026 lead 2: ENS median MAE 10.74 mm, 10–90 % range held 38.6 % (n=370)
+
+================ ENS heat probabilities (51 members, day 1) ================
+ENS heat: correction applied per member = HRES 2025 national lead-1 fit (+10.37 + 0.865·HI)
+  dressing (post-hoc design, SD from 2025 HRES residuals): 2.95 °C
+
+  ENS heat raw, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.5597, climatology (2024 station-month frequency) 0.4344, BSS -0.288; vs the test sample's own base rate 0.2454, BSS -1.280
+      P in [0.000,0.00): n= 176 mean P=0.000 observed 0.534
+      P in [0.001,0.10): n=  14 mean P=0.041 observed 0.929
+      P in [0.100,0.30): n=   2 mean P=0.127 observed 1.000
+    P(HI≥33.0): events 190 of 192; Brier 0.0456; vs the test sample's own base rate 0.0103, BSS -3.421
+      P in [0.000,0.00): n=   3 mean P=0.000 observed 0.667
+      P in [0.001,0.10): n=   4 mean P=0.074 observed 1.000
+      P in [0.100,0.30): n=   2 mean P=0.265 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.379 observed 0.667
+      P in [0.500,0.70): n=   4 mean P=0.544 observed 1.000
+      P in [0.700,0.90): n=  15 mean P=0.822 observed 1.000
+      P in [0.900,1.01): n= 161 mean P=0.995 observed 1.000
+    median: n=  192 MAE= 5.87 bias=-5.75 RMSE= 6.46 band= 38.5% | ≥33.0: ev= 190 POD= 0.95 FAR= 0.00 CSI= 0.95 fb= 0.95 | ≥42.0: ev= 109 POD= 0.00 FAR=  -   CSI= 0.00 fb= 0.00; 10–90 % range held 2.1 %
+
+  ENS heat raw, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.6170, climatology (2024 station-month frequency) 0.5379, BSS -0.147; vs the test sample's own base rate 0.2198, BSS -1.807
+      P in [0.000,0.00): n= 173 mean P=0.000 observed 0.590
+      P in [0.001,0.10): n=  39 mean P=0.042 observed 0.897
+      P in [0.100,0.30): n=   9 mean P=0.169 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.418 observed 1.000
+      P in [0.500,0.70): n=   4 mean P=0.627 observed 1.000
+      P in [0.700,0.90): n=   2 mean P=0.824 observed 1.000
+    P(HI≥33.0): events 229 of 230; Brier 0.0824; vs the test sample's own base rate 0.0043, BSS -18.039
+      P in [0.000,0.00): n=  10 mean P=0.000 observed 1.000
+      P in [0.001,0.10): n=   5 mean P=0.051 observed 1.000
+      P in [0.100,0.30): n=   4 mean P=0.245 observed 1.000
+      P in [0.300,0.50): n=   1 mean P=0.333 observed 1.000
+      P in [0.500,0.70): n=   5 mean P=0.647 observed 1.000
+      P in [0.700,0.90): n=   3 mean P=0.763 observed 1.000
+      P in [0.900,1.01): n= 202 mean P=0.995 observed 0.995
+    median: n=  230 MAE= 5.96 bias=-5.89 RMSE= 6.63 band= 30.9% | ≥33.0: ev= 229 POD= 0.91 FAR= 0.00 CSI= 0.91 fb= 0.92 | ≥42.0: ev= 155 POD= 0.04 FAR= 0.00 CSI= 0.04 fb= 0.04; 10–90 % range held 2.2 %
+
+  ENS heat raw, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.5909, climatology (2024 station-month frequency) 0.4880, BSS -0.211; vs the test sample's own base rate 0.2342, BSS -1.523
+      P in [0.000,0.00): n= 349 mean P=0.000 observed 0.562
+      P in [0.001,0.10): n=  53 mean P=0.041 observed 0.906
+      P in [0.100,0.30): n=  11 mean P=0.161 observed 1.000
+      P in [0.300,0.50): n=   3 mean P=0.418 observed 1.000
+      P in [0.500,0.70): n=   4 mean P=0.627 observed 1.000
+      P in [0.700,0.90): n=   2 mean P=0.824 observed 1.000
+    P(HI≥33.0): events 419 of 422; Brier 0.0657; vs the test sample's own base rate 0.0071, BSS -8.302
+      P in [0.000,0.00): n=  13 mean P=0.000 observed 0.923
+      P in [0.001,0.10): n=   9 mean P=0.061 observed 1.000
+      P in [0.100,0.30): n=   6 mean P=0.252 observed 1.000
+      P in [0.300,0.50): n=   4 mean P=0.368 observed 0.750
+      P in [0.500,0.70): n=   9 mean P=0.601 observed 1.000
+      P in [0.700,0.90): n=  18 mean P=0.812 observed 1.000
+      P in [0.900,1.01): n= 363 mean P=0.995 observed 0.997
+    median: n=  422 MAE= 5.92 bias=-5.83 RMSE= 6.56 band= 34.4% | ≥33.0: ev= 419 POD= 0.93 FAR= 0.00 CSI= 0.93 fb= 0.93 | ≥42.0: ev= 264 POD= 0.02 FAR= 0.00 CSI= 0.02 fb= 0.02; 10–90 % range held 2.1 %
+
+  ENS heat corrected, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.2202, climatology (2024 station-month frequency) 0.4344, BSS +0.493; vs the test sample's own base rate 0.2454, BSS +0.103
+      P in [0.000,0.00): n=  39 mean P=0.000 observed 0.154
+      P in [0.001,0.10): n=  24 mean P=0.042 observed 0.500
+      P in [0.100,0.30): n=  21 mean P=0.188 observed 0.429
+      P in [0.300,0.50): n=   7 mean P=0.426 observed 0.286
+      P in [0.500,0.70): n=  10 mean P=0.606 observed 0.500
+      P in [0.700,0.90): n=  15 mean P=0.813 observed 0.667
+      P in [0.900,1.01): n=  76 mean P=0.983 observed 0.855
+    P(HI≥33.0): events 190 of 192; Brier 0.0108; vs the test sample's own base rate 0.0103, BSS -0.051
+      P in [0.700,0.90): n=   1 mean P=0.720 observed 1.000
+      P in [0.900,1.01): n= 191 mean P=1.000 observed 0.990
+    median: n=  192 MAE= 2.36 bias=-0.34 RMSE= 2.99 band= 72.4% | ≥33.0: ev= 190 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 109 POD= 0.73 FAR= 0.21 CSI= 0.62 fb= 0.93; 10–90 % range held 21.4 %
+
+  ENS heat corrected, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.2010, climatology (2024 station-month frequency) 0.5379, BSS +0.626; vs the test sample's own base rate 0.2198, BSS +0.085
+      P in [0.000,0.00): n=  35 mean P=0.000 observed 0.429
+      P in [0.001,0.10): n=   9 mean P=0.050 observed 0.111
+      P in [0.100,0.30): n=   7 mean P=0.174 observed 0.143
+      P in [0.300,0.50): n=   8 mean P=0.391 observed 0.250
+      P in [0.500,0.70): n=   8 mean P=0.605 observed 0.250
+      P in [0.700,0.90): n=  17 mean P=0.837 observed 0.412
+      P in [0.900,1.01): n= 146 mean P=0.985 observed 0.870
+    P(HI≥33.0): events 229 of 230; Brier 0.0044; vs the test sample's own base rate 0.0043, BSS -0.010
+      P in [0.900,1.01): n= 230 mean P=0.999 observed 0.996
+    median: n=  230 MAE= 2.45 bias=-0.62 RMSE= 3.06 band= 75.2% | ≥33.0: ev= 229 POD= 1.00 FAR= 0.00 CSI= 1.00 fb= 1.00 | ≥42.0: ev= 155 POD= 0.88 FAR= 0.20 CSI= 0.72 fb= 1.10; 10–90 % range held 21.7 %
+
+  ENS heat corrected, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.2098, climatology (2024 station-month frequency) 0.4880, BSS +0.570; vs the test sample's own base rate 0.2342, BSS +0.104
+      P in [0.000,0.00): n=  74 mean P=0.000 observed 0.284
+      P in [0.001,0.10): n=  33 mean P=0.045 observed 0.394
+      P in [0.100,0.30): n=  28 mean P=0.184 observed 0.357
+      P in [0.300,0.50): n=  15 mean P=0.407 observed 0.267
+      P in [0.500,0.70): n=  18 mean P=0.606 observed 0.389
+      P in [0.700,0.90): n=  32 mean P=0.826 observed 0.531
+      P in [0.900,1.01): n= 222 mean P=0.984 observed 0.865
+    P(HI≥33.0): events 419 of 422; Brier 0.0073; vs the test sample's own base rate 0.0071, BSS -0.036
+      P in [0.700,0.90): n=   1 mean P=0.720 observed 1.000
+      P in [0.900,1.01): n= 421 mean P=1.000 observed 0.993
+    median: n=  422 MAE= 2.41 bias=-0.50 RMSE= 3.03 band= 73.9% | ≥33.0: ev= 419 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 264 POD= 0.82 FAR= 0.21 CSI= 0.68 fb= 1.03; 10–90 % range held 21.6 %
+
+  ENS heat corrected+dressed, sample A: runs 26, station-days 192
+    P(HI≥42.0): events 109 of 192; Brier 0.1761, climatology (2024 station-month frequency) 0.4344, BSS +0.595; vs the test sample's own base rate 0.2454, BSS +0.283
+      P in [0.001,0.10): n=   5 mean P=0.065 observed 0.000
+      P in [0.100,0.30): n=  35 mean P=0.207 observed 0.257
+      P in [0.300,0.50): n=  48 mean P=0.398 observed 0.417
+      P in [0.500,0.70): n=  48 mean P=0.609 observed 0.562
+      P in [0.700,0.90): n=  56 mean P=0.778 observed 0.946
+    P(HI≥33.0): events 190 of 192; Brier 0.0100; vs the test sample's own base rate 0.0103, BSS +0.029
+      P in [0.500,0.70): n=   1 mean P=0.663 observed 1.000
+      P in [0.900,1.01): n= 191 mean P=0.994 observed 0.990
+    median: n=  192 MAE= 2.36 bias=-0.34 RMSE= 2.99 band= 72.4% | ≥33.0: ev= 190 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 109 POD= 0.73 FAR= 0.21 CSI= 0.62 fb= 0.93; 10–90 % range held 82.8 %
+
+  ENS heat corrected+dressed, sample B: runs 26, station-days 230
+    P(HI≥42.0): events 155 of 230; Brier 0.1733, climatology (2024 station-month frequency) 0.5379, BSS +0.678; vs the test sample's own base rate 0.2198, BSS +0.211
+      P in [0.001,0.10): n=  13 mean P=0.050 observed 0.385
+      P in [0.100,0.30): n=  23 mean P=0.200 observed 0.478
+      P in [0.300,0.50): n=  23 mean P=0.405 observed 0.130
+      P in [0.500,0.70): n=  53 mean P=0.624 observed 0.528
+      P in [0.700,0.90): n= 107 mean P=0.790 observed 0.907
+      P in [0.900,1.01): n=  11 mean P=0.930 observed 1.000
+    P(HI≥33.0): events 229 of 230; Brier 0.0053; vs the test sample's own base rate 0.0043, BSS -0.222
+      P in [0.700,0.90): n=   6 mean P=0.828 observed 1.000
+      P in [0.900,1.01): n= 224 mean P=0.995 observed 0.996
+    median: n=  230 MAE= 2.45 bias=-0.62 RMSE= 3.06 band= 75.2% | ≥33.0: ev= 229 POD= 1.00 FAR= 0.00 CSI= 1.00 fb= 1.00 | ≥42.0: ev= 155 POD= 0.88 FAR= 0.20 CSI= 0.72 fb= 1.10; 10–90 % range held 80.9 %
+
+  ENS heat corrected+dressed, sample A+B: runs 26, station-days 422
+    P(HI≥42.0): events 264 of 422; Brier 0.1746, climatology (2024 station-month frequency) 0.4880, BSS +0.642; vs the test sample's own base rate 0.2342, BSS +0.255
+      P in [0.001,0.10): n=  18 mean P=0.054 observed 0.278
+      P in [0.100,0.30): n=  58 mean P=0.205 observed 0.345
+      P in [0.300,0.50): n=  71 mean P=0.400 observed 0.324
+      P in [0.500,0.70): n= 101 mean P=0.617 observed 0.545
+      P in [0.700,0.90): n= 163 mean P=0.786 observed 0.920
+      P in [0.900,1.01): n=  11 mean P=0.930 observed 1.000
+    P(HI≥33.0): events 419 of 422; Brier 0.0074; vs the test sample's own base rate 0.0071, BSS -0.054
+      P in [0.500,0.70): n=   1 mean P=0.663 observed 1.000
+      P in [0.700,0.90): n=   6 mean P=0.828 observed 1.000
+      P in [0.900,1.01): n= 415 mean P=0.994 observed 0.993
+    median: n=  422 MAE= 2.41 bias=-0.50 RMSE= 3.03 band= 73.9% | ≥33.0: ev= 419 POD= 1.00 FAR= 0.01 CSI= 0.99 fb= 1.01 | ≥42.0: ev= 264 POD= 0.82 FAR= 0.21 CSI= 0.68 fb= 1.03; 10–90 % range held 81.8 %
+
+wrote /home/user/disaster-now/research/out/e1e2_results.json and /home/user/disaster-now/research/data/e1e2_daily.csv

@@ -418,3 +418,237 @@ Check: our hypocentral distance vs DYFI's own column: median |diff| 1.4 km, 95th
     probably not felt             0           29                 20
 
 wrote /home/user/disaster-now/research/out/e4_results.json and /home/user/disaster-now/research/data/e4_dyfi_residuals.csv (1776 rows)
+
+===== run 2026-10-23T20:55:29+00:00 =====
+IPE: Allen, Wald & Worden (2012) J. Seismol. 16:409-433; coefficients from https://raw.githubusercontent.com/gem/oq-engine/master/openquake/hazardlib/gsim/allen_2012_ipe.py (oq-engine HEAD 91db5142ba7905a33c94483fad8f8467b5d92d6f, read 2026-10-23)
+FDSN query (1300 km around 15.5N 100.5E, M>=5, DYFI): 238 events
+crustal  us7000pn9s M7.7 mww 2025 Mandalay, Burma (Myanmar) Earthquake     depth 10 km geo boxes 436 cities 230 finite fault yes
+crustal  us7000pn9z M6.7 mww Burma (Myanmar)                               depth 10 km geo boxes 58 cities 44 finite fault no
+crustal  usb000qack M6.1 mww 32 km SSW of Chiang Rai, Thailand             depth 6 km geo boxes 26 cities 26 finite fault no
+crustal  us70006ara M6.2 mww 43 km WNW of Sainyabuli, Laos                 depth 10 km geo boxes 78 cities 50 finite fault no
+crustal  us70006anm M5.7 mww 44 km ENE of Chiang Klang, Thailand           depth 10 km geo boxes 41 cities 29 finite fault no
+crustal  usp000hyfx M6.9 mww 27 km NNW of Tachilek, Myanmar                depth 8 km geo boxes 35 cities 64 finite fault no
+crustal  usp000fc2v M6.3 mwc 40 km NE of Ban Houakhoua, Laos               depth 9 km geo boxes 15 cities 23 finite fault no
+crustal  us6000lp06 M5.7 mww 76 km SW of Kēng Tung, Myanmar                depth 16 km geo boxes 32 cities 21 finite fault no
+crustal  us7000hsg4 M5.9 mww 53 km S of K?ng Tung, Myanmar                 depth 5 km geo boxes 26 cities 13 finite fault no
+crustal  us2000cifa M6 mww 40 km WSW of Pyu, Myanmar                     depth 9 km geo boxes 78 cities 47 finite fault no
+crustal  us6000gdng M5.5 mww 53 km NW of Sainyabuli, Laos                  depth 10 km geo boxes 19 cities 15 finite fault no
+crustal  us7000k9he M5.6 mww 131 km SSE of Pyapon, Myanmar                 depth 14 km geo boxes 12 cities 10 finite fault no
+crustal  usp000jvbq M6.8 mww 51 km NNE of Shwebo, Myanmar                  depth 14 km geo boxes 19 cities 22 finite fault no
+offshore usp000hdwb M7.5 mwc Nicobar Islands, India region                 depth 35 km geo boxes 33 cities 69 finite fault yes
+offshore usp000h05x M7.5 mwc 266 km N of Bamboo Flat, India                depth 24 km geo boxes 41 cities 87 finite fault yes
+offshore us6000qvpp M6.4 mww 264 km WNW of Sabang, Indonesia               depth 21 km geo boxes 7 cities 6 finite fault no
+offshore us10007ghm M6.5 mww 14 km WNW of Reuleuet, Indonesia              depth 13 km geo boxes 38 cities 26 finite fault no
+
+Check: our hypocentral distance vs DYFI's own column: median |diff| 1.4 km, 95th pct 5.2 km (n=1776)
+
+## crustal|geo10km|nresp>=1|res_rhypo: residual = DYFI CDI − predicted MMI (res_rhypo)
+     band km     n    MAE   bias  n_resp
+     0–50       36   1.70  -0.07     150
+    50–100      33   1.37  +0.12     144
+   100–200     113   1.02  +0.02     302
+   200–400     151   1.05  +0.46     523
+   400–700     219   1.12  +0.16    1039
+   700–1000    108   1.17  -0.09     184
+  1000–1600    171   0.93  +0.02    1365
+         all   875   1.09  +0.10    3799
+
+## crustal|geo10km|nresp>=1|res_rrup: residual = DYFI CDI − predicted MMI (res_rrup)
+     band km     n    MAE   bias  n_resp
+     0–50       67   1.36  +0.49     257
+    50–100      37   1.39  +0.34     130
+   100–200     134   0.95  -0.25     528
+   200–400     186   0.82  -0.26     784
+   400–700     243   0.95  -0.09    1718
+   700–1000     92   1.16  -0.55     154
+  1000–1600     90   1.05  -0.00     199
+         all   875   1.00  -0.14    3799
+
+## crustal|geo10km|nresp>=3|res_rhypo: residual = DYFI CDI − predicted MMI (res_rhypo)
+     band km     n    MAE   bias  n_resp
+     0–50       13   1.23  +0.36     121
+    50–100      14   1.44  +0.53     120
+   100–200      31   0.95  +0.20     206
+   200–400      51   0.80  +0.45     399
+   400–700      60   1.07  +0.64     853
+   700–1000     16   0.95  +0.44      84
+  1000–1600     55   0.64  +0.35    1229
+         all   244   0.92  +0.44    3059
+
+## crustal|geo10km|nresp>=3|res_rrup: residual = DYFI CDI − predicted MMI (res_rrup)
+     band km     n    MAE   bias  n_resp
+     0–50       22   1.34  +0.92     200
+    50–100      16   1.50  +0.81     104
+   100–200      41   0.78  -0.01     419
+   200–400      61   0.63  +0.08     630
+   400–700      78   0.66  +0.34    1528
+   700–1000     13   0.68  -0.39      67
+  1000–1600     12   0.83  +0.38     108
+         all   244   0.80  +0.27    3059
+
+## crustal|city|nresp>=1|res_rhypo: residual = DYFI CDI − predicted MMI (res_rhypo)
+     band km     n    MAE   bias  n_resp
+     0–50       13   1.34  +0.50     142
+    50–100      29   1.21  -0.13     165
+   100–200      72   0.86  -0.24     322
+   200–400     109   0.81  +0.05     770
+   400–700     138   1.11  +0.24     919
+   700–1000     85   1.16  -0.02     405
+  1000–1600    110   0.99  +0.07    1158
+         all   594   1.01  +0.03    3953
+
+## crustal|city|nresp>=1|res_rrup: residual = DYFI CDI − predicted MMI (res_rrup)
+     band km     n    MAE   bias  n_resp
+     0–50       21   1.27  +0.77     252
+    50–100      29   1.19  -0.01     138
+   100–200      82   0.81  -0.35     511
+   200–400     132   0.74  -0.19     944
+   400–700     156   0.95  -0.09    1469
+   700–1000     79   1.17  -0.38     382
+  1000–1600     68   1.06  +0.06     227
+         all   594   0.95  -0.15    3953
+
+## crustal|city|nresp>=3|res_rhypo: residual = DYFI CDI − predicted MMI (res_rhypo)
+     band km     n    MAE   bias  n_resp
+     0–50        9   1.03  +0.72     138
+    50–100      13   1.33  -0.12     144
+   100–200      31   0.82  +0.11     269
+   200–400      41   0.82  +0.17     682
+   400–700      50   1.12  +0.54     815
+   700–1000     21   0.87  +0.50     335
+  1000–1600     42   0.81  +0.40    1073
+         all   208   0.93  +0.33    3486
+
+## crustal|city|nresp>=3|res_rrup: residual = DYFI CDI − predicted MMI (res_rrup)
+     band km     n    MAE   bias  n_resp
+     0–50       16   1.09  +1.00     247
+    50–100      13   1.33  +0.10     117
+   100–200      39   0.69  -0.07     456
+   200–400      51   0.63  -0.09     840
+   400–700      56   0.74  +0.28    1352
+   700–1000     20   0.75  +0.02     314
+  1000–1600     13   0.97  +0.57     160
+         all   208   0.78  +0.16    3486
+
+## crustal events, cities in Thailand (res_rhypo): residual = DYFI CDI − predicted MMI (res_rhypo)
+     band km     n    MAE   bias  n_resp
+     0–50        3   1.26  -1.09      18
+    50–100      16   1.27  -0.58      70
+   100–200      46   0.81  -0.52     151
+   200–400      72   0.70  -0.07     576
+   400–700      79   0.99  +0.45     572
+   700–1000     62   1.21  -0.00     356
+  1000–1600     76   0.99  +0.10    1094
+         all   357   0.96  +0.00    2841
+
+## crustal events, cities in Thailand (res_rrup): residual = DYFI CDI − predicted MMI (res_rrup)
+     band km     n    MAE   bias  n_resp
+     0–50        3   1.16  -0.84      18
+    50–100      16   1.17  -0.47      70
+   100–200      47   0.81  -0.61     158
+   200–400      98   0.64  -0.26     823
+   400–700     108   0.87  +0.03    1295
+   700–1000     57   1.18  -0.34     348
+  1000–1600     27   1.20  +0.43     128
+         all   357   0.89  -0.19    2841
+
+## offshore subduction events, cities (outside the IPE's domain): residual = DYFI CDI − predicted MMI (res_rhypo)
+     band km     n    MAE   bias  n_resp
+     0–50        1   0.82  +0.82       4
+    50–100       2   0.42  -0.25       5
+   100–200       2   0.36  +0.19       3
+   200–400       8   0.73  -0.66      43
+   400–700      21   0.70  -0.48      58
+   700–1000      9   1.30  -0.18      26
+  1000–1600    109   0.75  +0.21     778
+         all   188   0.78  +0.14    1086
+
+## Per event, cities in Thailand (rhypo form)
+  us2000cifa M6: n= 16 cities,    69 responses, R 303–876 km, MAE 0.59, bias -0.29
+  us6000gdng M5.5: n=  9 cities,    18 responses, R 56–666 km, MAE 1.07, bias +0.65
+  us6000lp06 M5.7: n= 17 cities,    64 responses, R 106–1625 km, MAE 1.03, bias +0.94
+  us70006anm M5.7: n= 23 cities,    93 responses, R 44–700 km, MAE 1.08, bias +0.64
+  us70006ara M6.2: n= 37 cities,   291 responses, R 55–655 km, MAE 0.92, bias -0.27
+  us7000hsg4 M5.9: n=  8 cities,    41 responses, R 80–816 km, MAE 0.92, bias +0.29
+  us7000k9he M5.6: n=  8 cities,    13 responses, R 293–548 km, MAE 0.96, bias +0.96
+  us7000pn9s M7.7: n=120 cities,  1324 responses, R 369–1777 km, MAE 0.94, bias -0.32
+  us7000pn9z M6.7: n= 34 cities,    74 responses, R 395–1146 km, MAE 1.33, bias +1.06
+  usb000qack M6.1: n= 24 cities,    82 responses, R 33–680 km, MAE 0.83, bias -0.12
+  usp000fc2v M6.3: n= 17 cities,   151 responses, R 90–754 km, MAE 0.75, bias +0.00
+  usp000hyfx M6.9: n= 33 cities,   517 responses, R 30–871 km, MAE 1.04, bias -0.92
+  usp000jvbq M6.8: n= 11 cities,   104 responses, R 467–1157 km, MAE 0.79, bias +0.35
+
+## Bangkok (soft clay basin) vs other Thai cities at similar distance, 2025-03-28 M7.7
+  city Bangkok::Bangkok::Thailand: CDI 4.7 (428 responses), Rhyp 1040 km, Rrup 665 km, predicted 3.58 (rhypo) / 3.78 (rrup), residual +1.12 / +0.92
+  Bangkok 10-km boxes: n=2, responses 152, mean CDI 4.45, mean residual +0.88 (rhypo) +0.68 (rrup)
+  other Thai cities 800–1300 km: n=77, responses 602, mean CDI 3.19, mean residual -0.43 (rhypo)  [single-response cities included; DYFI favours people who felt it]
+
+## Bangkok-metro term (Bangkok, Nonthaburi, Samut Prakan, Pathum Thani cities): mean of per-event response-weighted residuals, fitted on crustal events before 2025, scored on the 2025 events
+  us2000cifa (2018) M6: 2 cities, 6 responses, weighted residual +0.49 (rhypo) -0.01 (rrup)
+  us6000gdng (2021) M5.5: 2 cities, 5 responses, weighted residual +1.95 (rhypo) +1.21 (rrup)
+  us6000lp06 (2023) M5.7: 2 cities, 7 responses, weighted residual +1.43 (rhypo) +0.73 (rrup)
+  us70006anm (2019) M5.7: 5 cities, 40 responses, weighted residual +2.01 (rhypo) +1.38 (rrup)
+  us70006ara (2019) M6.2: 7 cities, 175 responses, weighted residual +1.26 (rhypo) +0.88 (rrup)
+  us7000k9he (2023) M5.6: 5 cities, 10 responses, weighted residual +0.96 (rhypo) +0.33 (rrup)
+  us7000pn9s (2025) M7.7: 14 cities, 859 responses, weighted residual +0.95 (rhypo) +0.74 (rrup)
+  us7000pn9z (2025) M6.7: 10 cities, 41 responses, weighted residual +1.99 (rhypo) +1.77 (rrup)
+  usb000qack (2014) M6.1: 5 cities, 21 responses, weighted residual +1.09 (rhypo) +0.65 (rrup)
+  usp000fc2v (2007) M6.3: 3 cities, 70 responses, weighted residual +0.68 (rhypo) +0.32 (rrup)
+  usp000hyfx (2011) M6.9: 3 cities, 166 responses, weighted residual +0.16 (rhypo) +0.10 (rrup)
+  usp000jvbq (2012) M6.8: 5 cities, 72 responses, weighted residual +0.55 (rhypo) +0.36 (rrup)
+  fitted on 10 events before 2025: Bangkok-metro term = +1.06 MMI (rest of Thailand, same events: mean of per-event weighted residuals +0.16)
+  test us7000pn9s: residual without the term +0.95, with it -0.11
+  test us7000pn9z: residual without the term +1.99, with it +0.94
+  2025 test (2 events, one sequence — a very small sample): event-level |residual| 1.47 → 0.52 MMI
+
+## Share of DYFI city reports at CDI ≥ III and ≥ V by predicted MMI (Thai cities, crustal events; DYFI over-represents people who felt it, so these shares are upper bounds of 'felt')
+  predictor pred_rhypo:
+     -9.0–2.0   cities  34 ( 103 resp): CDI≥III  47.1 % (by response  66.0 %), CDI≥V   0.0 % (by response   0.0 %)
+      2.0–2.5   cities  52 ( 417 resp): CDI≥III  65.4 % (by response  63.5 %), CDI≥V   0.0 % (by response   0.0 %)
+      2.5–3.0   cities  40 ( 312 resp): CDI≥III  40.0 % (by response  81.4 %), CDI≥V   2.5 % (by response   0.3 %)
+      3.0–3.5   cities  60 ( 247 resp): CDI≥III  43.3 % (by response  52.6 %), CDI≥V   3.3 % (by response   1.6 %)
+      3.5–4.0   cities  90 (1064 resp): CDI≥III  67.8 % (by response  94.8 %), CDI≥V   5.6 % (by response   0.6 %)
+      4.0–5.0   cities  70 ( 624 resp): CDI≥III  91.4 % (by response  98.4 %), CDI≥V  18.6 % (by response  31.6 %)
+      5.0–12.0  cities  11 (  74 resp): CDI≥III  90.9 % (by response  98.6 %), CDI≥V  27.3 % (by response  24.3 %)
+  predictor pred_adj:
+     -9.0–2.0   cities  13 (  14 resp): CDI≥III  38.5 % (by response  35.7 %), CDI≥V   0.0 % (by response   0.0 %)
+      2.0–2.5   cities  36 ( 111 resp): CDI≥III  66.7 % (by response  84.7 %), CDI≥V   0.0 % (by response   0.0 %)
+      2.5–3.0   cities  49 ( 183 resp): CDI≥III  38.8 % (by response  61.2 %), CDI≥V   2.0 % (by response   0.5 %)
+      3.0–3.5   cities  85 ( 605 resp): CDI≥III  49.4 % (by response  57.0 %), CDI≥V   2.4 % (by response   0.7 %)
+      3.5–4.0   cities  79 ( 371 resp): CDI≥III  62.0 % (by response  83.8 %), CDI≥V   6.3 % (by response   1.6 %)
+      4.0–5.0   cities  84 (1483 resp): CDI≥III  92.9 % (by response  99.3 %), CDI≥V  15.5 % (by response  13.3 %)
+      5.0–12.0  cities  11 (  74 resp): CDI≥III  90.9 % (by response  98.6 %), CDI≥V  27.3 % (by response  24.3 %)
+
+## Wording rule on cities in Thailand, crustal events (pred = rhypo form)
+  [pred_rhypo] thresholds predicted ≥3.0 'อาจรู้สึกได้', ≥5.0 'รู้สึกได้ชัด': cities 357, felt (CDI≥III) 227, felt but app would say 'probably not felt' 66 (587 responses); CDI≥V 24, of which said 'clearly' 3; said 'clearly' 11 (of which CDI<IV 4)
+    observed CDI       felt clearly  may be felt  probably not felt
+    predicted                                                      
+    felt clearly                  3            7                  1
+    may be felt                  20          131                 69
+    probably not felt             1           65                 60
+  [pred_rhypo] thresholds predicted ≥2.5 'อาจรู้สึกได้', ≥4.5 'รู้สึกได้ชัด': cities 357, felt (CDI≥III) 227, felt but app would say 'probably not felt' 50 (333 responses); CDI≥V 24, of which said 'clearly' 12; said 'clearly' 37 (of which CDI<IV 12)
+    observed CDI       felt clearly  may be felt  probably not felt
+    predicted                                                      
+    felt clearly                 12           22                  3
+    may be felt                  12          131                 91
+    probably not felt             0           50                 36
+  [pred_rhypo] thresholds predicted ≥3.5 'อาจรู้สึกได้', ≥5.5 'รู้สึกได้ชัด': cities 357, felt (CDI≥III) 227, felt but app would say 'probably not felt' 92 (717 responses); CDI≥V 24, of which said 'clearly' 2; said 'clearly' 6 (of which CDI<IV 2)
+    observed CDI       felt clearly  may be felt  probably not felt
+    predicted                                                      
+    felt clearly                  2            3                  1
+    may be felt                  19          111                 35
+    probably not felt             3           89                 94
+  [pred_adj = with the Bangkok term, in-sample for pre-2025 events] thresholds predicted ≥3.0 'อาจรู้สึกได้', ≥5.0 'รู้สึกได้ชัด': cities 357, felt (CDI≥III) 227, felt but app would say 'probably not felt' 48 (211 responses); CDI≥V 24, of which said 'clearly' 3; said 'clearly' 11 (of which CDI<IV 4)
+    observed CDI       felt clearly  may be felt  probably not felt
+    predicted                                                      
+    felt clearly                  3            7                  1
+    may be felt                  20          149                 79
+    probably not felt             1           47                 50
+  [pred_adj = with the Bangkok term, in-sample for pre-2025 events] thresholds predicted ≥2.5 'อาจรู้สึกได้', ≥4.5 'รู้สึกได้ชัด': cities 357, felt (CDI≥III) 227, felt but app would say 'probably not felt' 29 (99 responses); CDI≥V 24, of which said 'clearly' 12; said 'clearly' 51 (of which CDI<IV 16)
+    observed CDI       felt clearly  may be felt  probably not felt
+    predicted                                                      
+    felt clearly                 12           36                  3
+    may be felt                  12          138                107
+    probably not felt             0           29                 20
+
+wrote /home/user/disaster-now/research/out/e4_results.json and /home/user/disaster-now/research/data/e4_dyfi_residuals.csv (1776 rows)

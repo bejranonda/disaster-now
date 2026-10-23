@@ -39,6 +39,20 @@ for p in (LOGS, OUT, DATA):
 # intermediate and its cross-signed root are added to the proxy bundle (verification stays on).
 AIR4THAI_CA = SCRATCH / "certs" / "air4thai-ca.pem"
 
+
+def ensure_air4thai_ca():
+    """Build the bundle once: the proxy's CA bundle + Let's Encrypt Gen-Y YR1 + Root YR (cross-signed by ISRG X1)."""
+    if AIR4THAI_CA.exists():
+        return AIR4THAI_CA
+    AIR4THAI_CA.parent.mkdir(parents=True, exist_ok=True)
+    parts = [pathlib.Path("/root/.ccr/ca-bundle.crt").read_text()]
+    for u in ("https://letsencrypt.org/certs/gen-y/int-yr1.pem", "https://letsencrypt.org/certs/gen-y/root-yr-by-x1.pem"):
+        r = requests.get(u, headers={"User-Agent": UA}, timeout=60)
+        r.raise_for_status()
+        parts.append(r.text)
+    AIR4THAI_CA.write_text("\n".join(parts))
+    return AIR4THAI_CA
+
 LEDGER = LOGS / "openmeteo-calls-2026-10-23.log"
 
 
@@ -147,6 +161,22 @@ class Log:
         print(s)
         self.f.write(s + "\n")
         self.f.flush()
+
+
+def clean(obj):
+    """Make results strict JSON: NaN/inf → None, numpy scalars → Python numbers."""
+    if isinstance(obj, dict):
+        return {str(k): clean(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [clean(v) for v in obj]
+    if hasattr(obj, "item") and not isinstance(obj, (str, bytes)):
+        try:
+            obj = obj.item()
+        except (ValueError, AttributeError):
+            pass
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    return obj
 
 
 def haversine_km(lat1, lon1, lat2, lon2):

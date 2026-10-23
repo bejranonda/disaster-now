@@ -41,7 +41,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
-from common import (AIR4THAI_CA, DATA, OUT, Log, block_bootstrap_rise, get,  # noqa: E402
+from common import (AIR4THAI_CA, DATA, OUT, Log, block_bootstrap_rise, clean, get,  # noqa: E402
                     ledger_total, om_get)
 
 L = Log("e3_pm25")
@@ -255,6 +255,8 @@ def apply_gbm(m, df):
 
 
 def main():
+    from common import ensure_air4thai_ca
+    ensure_air4thai_ca()
     meta = station_meta()
     for sid, m in meta.items():
         L.w(f"station {sid} {m['sample']} {m['region']:30s} {m['lat']:.4f},{m['lon']:.4f} {m['name']}")
@@ -479,7 +481,7 @@ def main():
         L.w(f"  next-24 h mean, {m:9s}: {fmt(r)}  (issues overlap: hourly issues of the same day are not independent)")
     results["hourly_newest"] = hres
     results["openmeteo_weighted_calls_total_ledger"] = ledger_total()
-    (OUT / "e3_results.json").write_text(json.dumps(results, indent=1, default=str))
+    (OUT / "e3_results.json").write_text(json.dumps(clean(results), indent=1, default=str))
     L.w(f"\nwrote {OUT / 'e3_results.json'}; Open-Meteo ledger total {ledger_total():.1f} weighted calls")
 
 
