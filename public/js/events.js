@@ -14,6 +14,16 @@ export function warningsFor(live, pv, nowMs) {
  *  Extreme → danger). */
 export const CAP_LEVEL = { Minor: 1, Moderate: 1, Severe: 2, Extreme: 3, Unknown: 1 };
 
+/** The tile a TMD CAP warning belongs to, from its event (English in TMD's CAP, e.g. "Heavy Rain") or its Thai
+ *  headline; null when it matches none (it then lifts the verdict only). */
+export function capHazard(w) {
+  const t = `${w.event || ""} ${w.headline || ""}`;
+  if (/rain|flood|ฝน|น้ำท่วม|น้ำป่า/i.test(t)) return "rain";
+  if (/storm|wind|cyclone|typhoon|depression|thunder|พายุ|ลมแรง|คลื่นลม/i.test(t)) return "wind";
+  if (/heat|hot|ร้อน/i.test(t)) return "heat";
+  return null;
+}
+
 /** GDACS event list → current events near the point. Tropical cyclones within 1,000 km, other kinds only when GDACS
  *  lists Thailand. GDACS says it is "not meant to substitute … official" warnings; the app shows it as context. */
 export function gdacsNear(j, lat, lon) {
@@ -36,8 +46,9 @@ export function cycloneLevel(e) {
 }
 
 /** FIRMS hotspots (collector: [{lat, lon, t, conf, frp}]) within `radius` km in the file's 24 hours. */
-export function hotspotsNear(live, lat, lon, radius = 25) {
-  const rows = (live && live.items) || [];
+export function hotspotsNear(live, lat, lon, radius = 25, nowMs = null) {
+  // the collector's file can span 36 h (FIRMS's "24h" file is by pass date): count the last 24 h only (visitor audit V24)
+  const rows = ((live && live.items) || []).filter((h) => nowMs == null || !h.t || nowMs - Date.parse(h.t) <= 864e5);
   const near = rows.map((h) => ({ ...h, km: km(lat, lon, h.lat, h.lon) })).filter((h) => h.km <= radius);
   return { count: near.length, nearest: near.sort((a, b) => a.km - b.km)[0] || null, radius };
 }

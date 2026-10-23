@@ -20,8 +20,8 @@ export const HAZARDS = {
     unit: "°C", step: 0.1, src: ["doh-heatlevels-2569", "bma-heat-posttoday-2569", "tmd-heatindex-posttoday-2567"],
     bands: [
       { min: -Infinity, level: 0, th: "ปกติ", en: "Normal" },
-      { min: 27.0, level: 1, th: "เฝ้าระวัง", en: "Caution" },
-      { min: 33.0, level: 2, th: "เตือนภัย", en: "Extreme caution" },
+      { min: 27.0, level: 1, th: "เฝ้าระวัง", en: "Watch" },
+      { min: 33.0, level: 2, th: "เตือนภัย", en: "Warning" },
       { min: 42.0, level: 3, th: "อันตราย", en: "Danger" },
       { min: 52.0, level: 3, th: "อันตรายมาก", en: "Extreme danger" },
     ],
@@ -88,16 +88,17 @@ export const HAZARDS = {
     ],
   },
 
-  mmi: { // shaking at the point (Modified Mercalli), estimated by Allen, Wald & Worden 2012 (ipe.js); ShakeMap's words,
-    // the cut points are the app's choice (thresholds §8). No site term: soft ground (Bangkok) can shake more.
-    unit: "", step: 0.1, src: ["usgs-mmi", "aww2012"],
+  mmi: { // shaking at the point (Modified Mercalli), estimated by Allen, Wald & Worden 2012 (ipe.js), plus +1.06 in
+    // greater Bangkok. The edges 2.5 / 4.5 and the words are the validation's (MODELS.md §6, from 357 Thai city reports,
+    // in-sample: re-check after the next felt quake). Never "not felt", never a word on damage.
+    unit: "", step: 0.1, src: ["usgs-dyfi-th", "aww2012"],
     bands: [
-      { min: -Infinity, level: 0, th: "ไม่น่ารู้สึก", en: "Probably not felt" },
-      { min: 3.0, level: 1, th: "อาจรู้สึกได้เบา ๆ", en: "Weak to light shaking" },
-      { min: 5.0, level: 2, th: "สั่นปานกลาง ของอาจตก", en: "Moderate shaking" },
-      { min: 6.0, level: 3, th: "สั่นแรง อาจเสียหาย", en: "Strong shaking, damage possible" },
+      { min: -Infinity, level: 0, th: "ส่วนใหญ่ไม่รู้สึก แต่บางคนอาจรู้สึกได้ โดยเฉพาะบนอาคารสูง", en: "Most people won't feel it; some may, especially high up in buildings" },
+      { min: 2.5, level: 1, th: "อาจรู้สึกได้", en: "May be felt" },
+      { min: 4.5, level: 2, th: "รู้สึกได้ชัด", en: "Clearly felt" },
     ],
   },
+
 
 };
 

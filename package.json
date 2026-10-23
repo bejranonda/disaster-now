@@ -1,7 +1,7 @@
 {
   "name": "disaster-now",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ภัยรอบบ้าน ตอนนี้ (Disaster Now): one page that shows every hazard at a point in Thailand — heat, PM2.5 and other pollution, UV, rain, wind, river level, flash flood, landslide, earthquake, fire, storms — now and for the next 72 hours, from free and open sources",
   "type": "module",
   "scripts": {

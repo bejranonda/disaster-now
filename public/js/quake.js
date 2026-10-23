@@ -44,19 +44,23 @@ export function mergeQuakes(lists) {
 export const rhypo = (q, lat, lon) => Math.hypot(km(lat, lon, q.lat, q.lon), q.depth || 10);
 
 /** Estimated intensity (MMI) at the point, or null without coefficients. `ipe` is one of content/ipe.js. */
-export function mmiAt(q, lat, lon, ipe) {
+export function mmiAt(q, lat, lon, ipe, site = 0) {
   if (!ipe) return null;
-  return ipe.mmi(q.mag, rhypo(q, lat, lon), q.depth || 10);
+  const m = ipe.mmi(q.mag, rhypo(q, lat, lon), q.depth || 10);
+  return m == null ? null : m + site;
 }
 
-/** Quakes worth a line for this point: within `days`, and either estimated to be felt (MMI ≥ 3) or within 300 km.
- *  Sorted by the shaking they may have caused, then by time. */
-export function quakesForPoint(quakes, lat, lon, nowMs, ipe, { days = 7 } = {}) {
+/** The site term is used only as far as the reports it was fitted on reach (about 1,600 km; MODELS.md §5). */
+export const SITE_MAX_KM = 1600;
+
+/** Quakes worth a line for this point: within `days`, and either perhaps felt (MMI ≥ 2.5, the validated "อาจรู้สึกได้"
+ *  edge) or within 300 km. `site` is added to the IPE (the Bangkok-metro term). Sorted by shaking, then by time. */
+export function quakesForPoint(quakes, lat, lon, nowMs, ipe, { days = 7, site = 0 } = {}) {
   return quakes.filter((q) => nowMs - q.t <= days * 864e5 && q.t <= nowMs + 6e5).map((q) => {
     const d = km(lat, lon, q.lat, q.lon);
-    const mmi = mmiAt(q, lat, lon, ipe);
+    const mmi = mmiAt(q, lat, lon, ipe, d <= SITE_MAX_KM ? site : 0);
     return { ...q, km: d, dir: bearing(lat, lon, q.lat, q.lon), mmi, band: band("mmi", mmi) };
-  }).filter((q) => (q.mmi != null && q.mmi >= 3.0) || q.km <= 300)
+  }).filter((q) => (q.mmi != null && q.mmi >= 2.5) || q.km <= 300)
     .sort((a, b) => (b.mmi ?? 0) - (a.mmi ?? 0) || b.t - a.t);
 }
 

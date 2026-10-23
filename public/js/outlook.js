@@ -3,6 +3,7 @@
 
 import { heatIndexC } from "./heat.js";
 import { HAZARDS, CHANCE, band } from "./levels.js";
+import { HEAT, correctHeat, dressedChance, dressedQuantile } from "./calibration.js";
 
 /** Control run plus every member for one variable, as arrays aligned with hourly.time. */
 export function memberSeries(hourly, v) {
@@ -79,6 +80,20 @@ export function summarize(hazard, vals) {
   return { n, p10, p50, p90, chance };
 }
 
+/** Heat: each member's daily max corrected (calibration.HEAT), then dressed with the correction's tested error, so
+ *  the range and the chances are as wide as the validation found them (MODELS.md §2). */
+export function summarizeHeat(rawVals, c) {
+  const vals = rawVals.map((v) => correctHeat(v, c));
+  const sorted = [...vals].sort((a, b) => a - b);
+  const chance = {};
+  for (const b of HAZARDS.heat.bands) {
+    if (b.level < 1 || chance[b.level] != null) continue;
+    chance[b.level] = dressedChance(vals, b.min, c.sd);
+  }
+  return { n: vals.length, p10: dressedQuantile(vals, 0.1, c.sd), p50: quantile(sorted, 0.5), p90: dressedQuantile(vals, 0.9, c.sd),
+    chance, rawP50: quantile([...rawVals].sort((a, b) => a - b), 0.5), corrected: true };
+}
+
 /** The level a window gets from its members (GUIDELINES rule 6): the highest level at least half the members reach;
  *  if a level of "warning" or worse is only possible (≥ 20 %), the window is at least "watch". */
 export function windowLevel(s) {
@@ -115,13 +130,13 @@ export function buildOutlook(ens, nowMs = Date.now()) {
     return quantile(v, 0.5);
   };
   const share = (vals, thr) => (vals.length ? vals.filter((v) => v > thr).length / vals.length : null);
-  const win = (a, b) => ({
-    heat: summarize("heat", perMember(heat, a, b, "max")),
+  const win = (a, b, c = HEAT.lead1) => ({
+    heat: summarizeHeat(perMember(heat, a, b, "max"), c),
     rain24: summarize("rain24", perMember(rain, a, b, "sum")),
     gust: summarize("gust", perMember(gust, a, b, "max")),
     tmax: stats(perMember(temp, a, b, "max")), // air temperature, for TMD's "อากาศร้อน / ร้อนจัด" words only
   });
-  const days = dayWindows(h.time, i0).map((d) => ({ ...d, ...win(d.i0, d.i1) }));
+  const days = dayWindows(h.time, i0).map((d, k) => ({ ...d, ...win(d.i0, d.i1, k >= 2 ? HEAT.lead2 : HEAT.lead1) }));
   return {
     issued: h.time[i0], members: heat.length,
     now: { time: h.time[i0], heat: at(heat, i0), temp: at(temp, i0) },
@@ -143,8 +158,9 @@ export function prewarnings(outlook, extra = []) {
     if (heat >= CHANCE.possible) out.push({ hazard: "heat", day: di, date: d.date, level: 3, chance: heat, value: d.heat.p90 });
     const r3 = d.rain24.chance[3];
     const r2 = d.rain24.chance[2];
+    // both lines when heavy rain is likelier than very heavy (visitor audit V8: "very heavy 30%" hid "heavy over 90%")
+    if (r2 >= CHANCE.possible && (r3 < CHANCE.possible || r2 - r3 >= 0.2)) out.push({ hazard: "rain24", day: di, date: d.date, level: 2, chance: r2, value: d.rain24.p90 });
     if (r3 >= CHANCE.possible) out.push({ hazard: "rain24", day: di, date: d.date, level: 3, chance: r3, value: d.rain24.p90 });
-    else if (r2 >= CHANCE.possible) out.push({ hazard: "rain24", day: di, date: d.date, level: 2, chance: r2, value: d.rain24.p90 });
     const g = d.gust.chance[2];
     if (g >= CHANCE.possible) out.push({ hazard: "gust", day: di, date: d.date, level: 2, chance: g, value: d.gust.p90 });
   });
@@ -157,6 +173,15 @@ export function chanceText(p, lang = "th") {
   if (p < 0.1) return lang === "en" ? "under 10%" : "ไม่ถึง 10%";
   if (p > 0.9) return lang === "en" ? "over 90%" : "เกิน 90%";
   return `${Math.round(p * 10) * 10}%`;
+}
+
+/** Three words for a chance of heavy rain, at the validation's cut points (forecast-validation §4: below 10 % "ต่ำ",
+ *  10–40 % "มีโอกาส", 40 % and more "สูง"; the top word rests on 4–10 cases a year). Never a "no". */
+export const RAIN_WORD_CUTS = [0.1, 0.4];
+export function chanceWord(p, lang = "th") {
+  if (p == null) return "–";
+  const i = p >= RAIN_WORD_CUTS[1] ? 2 : p >= RAIN_WORD_CUTS[0] ? 1 : 0;
+  return (lang === "en" ? ["low", "possible", "high"] : ["ต่ำ", "มีโอกาส", "สูง"])[i];
 }
 
 export { band };

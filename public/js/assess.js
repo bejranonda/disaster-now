@@ -3,11 +3,11 @@
 // Pure: same inputs → same words, so tests can check the page against the sources (test/assess.test.mjs).
 
 import { band, scale, HAZARDS, RIVER_WORDS } from "./levels.js";
-import { buildOutlook, prewarnings, windowLevel, chanceText } from "./outlook.js";
+import { buildOutlook, prewarnings, windowLevel, chanceText, chanceWord } from "./outlook.js";
 import { parseGistda, parseAir4Thai, nearestStation, buildAir } from "./airq.js";
 import { nearRain, nearGauges, parseFlashFlood, parseFloodWatchPoint, FW_LEVEL, areaIndex, waterWord, POLDER_PROVINCES } from "./water.js";
 import { parseEmsc, parseUsgs, mergeQuakes, quakesForPoint, tsunamiWatch } from "./quake.js";
-import { warningsFor, gdacsNear, cycloneLevel, hotspotsNear, hotspotLevel, arcCount, jmaStorm, stormLevel, tmdStormsNear } from "./events.js";
+import { warningsFor, capHazard, gdacsNear, cycloneLevel, hotspotsNear, hotspotLevel, arcCount, jmaStorm, stormLevel, tmdStormsNear } from "./events.js";
 import { actionFor } from "./actions.js";
 import { compass } from "./geo.js";
 
@@ -72,19 +72,24 @@ export function assess(b, lang = "th", ipe = null) {
       const w = ens.next24.heat;
       const lv = windowLevel(w);
       const bd = band("heat", w.p50);
-      c.level = Math.max(bd.level, lv.level);
+      c.level = Math.min(MODEL_MAX, Math.max(bd.level, lv.level));
       c.word = word(band("heat", w.p50));
-      c.value = `${fmt(w.p50)} °C`;
+      const pm = new Date(now + 7 * 3.6e6).getUTCHours() < 16;
+      c.value = L(`${pm ? "บ่ายนี้" : "บ่ายพรุ่งนี้"} ${Math.floor(w.p50)} °C`, `${pm ? "This afternoon" : "Tomorrow afternoon"} ${Math.floor(w.p50)} °C`);
       c.action = actionFor("heat", w.p50, lang);
       c.lines = [
         L(`สูงสุดใน 24 ชม. ข้างหน้า ราว ${fmt(w.p10)}–${fmt(w.p90)} °C (ดัชนีความร้อน = ร้อนที่ร่างกายรู้สึก)`,
           `Peak in the next 24 h about ${fmt(w.p10)}–${fmt(w.p90)} °C (heat index: how hot it feels)`),
-        L(`อุณหภูมิอากาศสูงสุดราว ${fmt(ens.next24.tmax.p50)} °C · ตอนนี้รู้สึกราว ${fmt(ens.now.heat)} °C`,
-          `Air temperature peak about ${fmt(ens.next24.tmax.p50)} °C · feels like ${fmt(ens.now.heat)} °C now`),
+        // the raw model reads ~5 °C low in Thailand: only corrected numbers are shown (MODELS.md §2)
+        L("ปรับแก้ตามสถานีวัดของกรมอุตุฯ แล้ว: แบบจำลองดิบต่ำกว่าค่าวัดจริงราว 5 °C (ทดสอบ 2025–2026, 18 สถานี)",
+          "Corrected to TMD's stations: the raw model reads about 5 °C low (tested 2025–2026, 18 stations)"),
       ];
+      c.note = L("ความแม่นยำที่ทดสอบ (2026): พลาดราว ±2.4 °C ใน 1–2 วันข้างหน้า ระดับถูกราว 7 ใน 10 วัน วันที่ 3 ยังไม่ได้ทดสอบ",
+        "Tested skill (2026): a typical miss of ±2.4 °C 1–2 days ahead, the level right on about 7 days in 10; day 3 is untested");
       if (w.chance[3] >= 0.1) c.lines.push(L(`โอกาสถึงระดับอันตราย (≥ 42 °C) ${chanceText(w.chance[3], lang)}`, `Chance of danger level (≥ 42 °C): ${chanceText(w.chance[3], lang)}`));
-      c.days = ens.days.map((d, i) => ({ name: dayName(i, d.date, lang), level: band("heat", d.heat.p50).level, text: `${fmt(d.heat.p50)}°` }));
-      c.src.push({ name: L("แบบจำลอง ECMWF 51 ชุด", "ECMWF ensemble, 51 runs"), time: timeText(ens.issued, now, lang), model: true });
+      c.days = ens.days.map((d, i) => ({ name: dayName(i, d.date, lang), level: band("heat", d.heat.p50).level, text: `${Math.floor(d.heat.p50)}°` }));
+      // no clock: Open-Meteo doesn't say which run it served (visitor audit V25)
+      c.src.push({ name: L("พยากรณ์ล่าสุดที่มี: แบบจำลอง ECMWF 51 ชุด ปรับตามสถานีวัด", "Latest available forecast: ECMWF ensemble, 51 runs, corrected to stations"), model: true });
     } else c.error = b.errors?.ens;
     cards.push(c);
   }
@@ -106,14 +111,24 @@ export function assess(b, lang = "th", ipe = null) {
         c.src.push({ name: L("สถานีตรวจวัด คพ. (Air4Thai)", "PCD station (Air4Thai)"), time: timeText(p.time, now, lang), ageH: station.ageH });
         // GISTDA's estimate is not shown beside a measurement: on 24 Oct 2026 it read 1.3× the stations (KNOWLEDGE §5)
       } else {
-        c.lines.push(L("ไม่มีสถานีวัดของ คพ. ในรัศมี 15 กม. ใช้ค่าประมาณ 24 ชม. จากดาวเทียมของ GISTDA",
-          "No PCD station within 15 km: GISTDA's 24-h satellite estimate"));
-        c.note = L("ค่าประมาณมักต่างจากสถานีวัด (24 ต.ค. 2569 สูงกว่าสถานีราว 1.3 เท่า)", "Estimates can differ from stations (on 24 Oct 2026 about 1.3× higher)");
+        // the audit (output-crosscheck M1): a failed Air4Thai read must not be worded as "no station here"
+        const late = b.a4t ? nearestStation(stations, lat, lon, now, { maxAgeH: 48 }) : null;
+        if (late) {
+          c.lines.push(L(`สถานีใกล้สุด ${late.name.th} (ห่าง ${fmt(late.km, 1)} กม.) ยังไม่ส่งข้อมูลมา ${fmt(late.ageH)} ชม.: ค่าล่าสุด ${fmt(late.pm25, 1)} (${word(band("pm25", late.pm25))})`,
+            `The nearest station, ${late.name.en || late.name.th} (${fmt(late.km, 1)} km), hasn't reported for ${fmt(late.ageH)} h: last ${fmt(late.pm25, 1)} (${word(band("pm25", late.pm25))})`));
+        }
+        c.lines.push(b.a4t
+          ? L("ไม่มีสถานีวัดของ คพ. ที่ส่งข้อมูลใน 3 ชม. ในรัศมี 15 กม. ใช้ค่าประมาณ 24 ชม. จากดาวเทียมของ GISTDA",
+            "No PCD station reporting within 15 km in the last 3 h: GISTDA's 24-h satellite estimate")
+          : L(`ดึงข้อมูลสถานีวัดของ คพ. ไม่ได้ตอนนี้${b.errors?.a4t ? ` (${b.errors.a4t})` : ""} ใช้ค่าประมาณ 24 ชม. จากดาวเทียมของ GISTDA แทน`,
+            `PCD station data couldn't be read now${b.errors?.a4t ? ` (${b.errors.a4t})` : ""}: GISTDA's 24-h satellite estimate instead`));
+        c.note = L("ค่าประมาณอาจต่างจากสถานีวัดมาก (24 ต.ค. 2569 ใน 60 จังหวัด มัธยฐานสูงกว่าสถานี 1.3 เท่า)", "Estimates can differ a lot from stations (24 Oct 2026, 60 provinces: a median 1.3× the stations)");
         c.src.push({ name: "GISTDA", time: timeText(p.time, now, lang), model: true });
       }
       if (air.outlook.length) {
-        c.days = air.outlook.map((d, i) => ({ name: dayName(i, d.date, lang), level: d.band.level, text: fmt(d.mean) }));
-        c.src.push({ name: L(`แบบจำลอง CAMS${air.ratio ? " ปรับตามค่าวัด" : ""}`, `CAMS model${air.ratio ? ", adjusted to the measurement" : ""}`), model: true });
+        c.days = air.outlook.map((d, i) => (i === 0 ? { name: dayName(i, d.date, lang), level: d.band.level, text: fmt(d.mean) }
+          : { name: dayName(i, d.date, lang), level: d.band.level, text: word(d.band), sub: L("อาจเปลี่ยน", "may change") }));
+        c.src.push({ name: L(`แบบจำลอง CAMS${air.ratio ? " ปรับตามค่าวัดล่าสุด" : " (ยังไม่ได้ปรับ: ต่ำกว่าค่าจริง)"}`, `CAMS model${air.ratio ? ", adjusted to the latest measurement" : " (unadjusted: reads low)"}`), model: true });
         air.outlook.forEach((d, i) => {
           if (i > 0 && d.band.level >= 2) extraPre.push({ hazard: "pm25", day: i, date: d.date, level: d.band.level, value: d.mean });
         });
@@ -148,7 +163,8 @@ export function assess(b, lang = "th", ipe = null) {
       const p = air.pollutants;
       c.word = L("ค่าจากแบบจำลอง ไม่มีระดับทางการ", "Model values, no official level");
       c.value = `O₃ ${fmt(p.o3)}`;
-      c.lines = [L("ไม่มีสถานีวัดใกล้ ๆ: ค่าจากแบบจำลอง CAMS (µg/m³)", "No station nearby: CAMS model values (µg/m³)"),
+      c.lines = [b.a4t ? L("ไม่มีสถานีวัดก๊าซอื่นในรัศมี 15 กม.: ค่าจากแบบจำลอง CAMS (µg/m³)", "No station measuring other gases within 15 km: CAMS model values (µg/m³)")
+        : L("ดึงข้อมูลสถานีวัดของ คพ. ไม่ได้ตอนนี้: ค่าจากแบบจำลอง CAMS (µg/m³)", "PCD station data couldn't be read now: CAMS model values (µg/m³)"),
         `PM10 ${fmt(p.pm10)} · O₃ ${fmt(p.o3)} · NO₂ ${fmt(p.no2)} · SO₂ ${fmt(p.so2)} · CO ${fmt(p.co)}`];
       c.src.push({ name: "CAMS", time: timeText(p.time, now, lang), model: true });
     } else c.error = b.errors?.aq;
@@ -165,10 +181,11 @@ export function assess(b, lang = "th", ipe = null) {
       const day = hour >= 6 && hour < 18;
       const cur = air.uvNow;
       const u = day ? { max: cur, band: band("uv", cur) } : { max: 0, band: band("uv", 0) };
+      // the next daylight: today's before 16:00 (also before dawn), tomorrow's after (output-crosscheck M3)
       const peak = hour >= 16 && air.uv[1] ? { ...air.uv[1], when: L("พรุ่งนี้", "tomorrow") } : { ...air.uv[0], when: L("วันนี้", "today") };
-      c.level = u.band.level;
+      c.level = Math.min(MODEL_MAX, u.band.level); // CAMS's UV is a model value: "ทำทันที" needs a measurement
       c.word = day ? word(u.band) : L("กลางคืน", "Night");
-      c.value = day ? `UV ${fmt(cur)}` : L(`พรุ่งนี้สูงสุด ${fmt(air.uv[1]?.max)}`, `Tomorrow up to ${fmt(air.uv[1]?.max)}`);
+      c.value = day ? `UV ${fmt(cur)}` : L(`${peak.when}สูงสุด ${fmt(peak.max)}`, `${peak.when === "today" ? "Today" : "Tomorrow"} up to ${fmt(peak.max)}`);
       c.lines = [L(`สูงสุด${peak.when}ราว ${fmt(peak.max)} (${word(peak.band)}) ช่วงเที่ยง เมฆมากจะต่ำกว่านี้`,
         `${peak.when === "today" ? "Today's" : "Tomorrow's"} peak about ${fmt(peak.max)} (${word(peak.band)}) around noon; lower under cloud`)];
       if (peak.max >= 6) c.lines.push(L("ช่วงสาย–บ่ายเลี่ยงแดดจัด สวมหมวก ทาครีมกันแดด (คำแนะนำ WHO)", "Late morning to afternoon: seek shade, wear a hat, use sunscreen (WHO)"));
@@ -182,7 +199,7 @@ export function assess(b, lang = "th", ipe = null) {
   const rainNear = b.twRain ? nearRain(b.twRain, lat, lon, now) : [];
   {
     const c = { id: "rain", icon: "🌧️", title: L("ฝน", "Rain"), short: L("ฝน", "Rain"), level: -1, lines: [], src: [],
-      link: { href: `${GUIDE}/storm`, text: L("พายุ ฝนหนัก ทำอย่างไร", "What to do in a storm") } };
+      link: { href: `${GUIDE}/flood`, text: L("ฝนหนัก น้ำท่วม ทำอย่างไร", "What to do about heavy rain and floods") } };
     let lvObs = -1;
     if (rainNear.length) {
       const r = rainNear[0];
@@ -194,19 +211,25 @@ export function assess(b, lang = "th", ipe = null) {
     if (ens) {
       const w = ens.next24.rain24;
       const lv = windowLevel(w);
-      c.level = Math.max(lvObs, lv.level);
-      c.value = L(`${fmt(w.p50, 0)} มม.`, `${fmt(w.p50, 0)} mm`);
-      c.word = word(band("rain24", w.p50));
-      c.lines.unshift(L(`24 ชม. ข้างหน้า: น่าจะ ${fmt(w.p50)} มม. (ช่วง ${fmt(w.p10)}–${fmt(w.p90)} มม.) · โอกาสฝนหนัก (> 35 มม.) ${chanceText(w.chance[2], lang)}`,
-        `Next 24 h: likely ${fmt(w.p50)} mm (range ${fmt(w.p10)}–${fmt(w.p90)} mm) · chance of heavy rain (> 35 mm): ${chanceText(w.chance[2], lang)}`));
+      c.level = Math.max(lvObs, Math.min(MODEL_MAX, lv.level));
+      // the validation (MODELS.md §3): a point's rain amount and yes/no have almost no skill 1–2 days ahead, so the tile
+      // gives the chance of heavy rain in three words; the amount stays in the detail as a rough range
+      c.value = L(`โอกาสฝนหนัก ${chanceWord(w.chance[2], "th")}`, `Heavy rain: ${chanceWord(w.chance[2], "en")} chance`);
+      c.word = rainNear.length && lvObs >= lv.level ? word(rainNear[0].band) : word(scale(c.level));
+      c.lines.unshift(L(`24 ชม. ข้างหน้า: โอกาสฝนหนัก (> 35 มม. ใน 24 ชม.) ในพื้นที่ราว ${chanceText(w.chance[2], lang)} · ฝนหนักเกิดได้แม้วันที่คาดว่าโอกาสต่ำ`,
+        `Next 24 h: chance of heavy rain (> 35 mm in 24 h) in the area about ${chanceText(w.chance[2], lang)} · heavy rain can come even on a "low" day`));
       c.days = ens.days.map((d, i) => ({ name: dayName(i, d.date, lang), level: windowLevel(d.rain24).level,
-        text: `${fmt(d.rain24.p50)}`, sub: d.rain24.chance[2] >= 0.1 ? chanceText(d.rain24.chance[2], lang) : "" }));
+        text: chanceWord(d.rain24.chance[2], lang), sub: L("ฝนหนัก", "heavy") }));
       c.src.push({ name: L("แบบจำลอง ECMWF 51 ชุด", "ECMWF ensemble, 51 runs"), model: true });
     } else {
-      c.level = lvObs;
+      c.level = lvObs >= 1 ? lvObs : -1; // no forecast: a dry gauge yesterday is not "calm" for the next 24 h
+      if (c.level >= 0) c.word = word(rainNear[0].band);
       c.error = b.errors?.ens;
     }
     if (lvObs >= 2) c.lines.push(L("ฝนหนักเมื่อ 24 ชม. ที่ผ่านมา ระวังน้ำท่วมขังและน้ำป่า", "Heavy rain in the last 24 h: watch for flooding"));
+    // the validation's honest number (MODELS.md §3): at a single station, heavy rain 1–2 days ahead is mostly missed
+    if (ens) c.note = L("ฝนหนักเฉพาะจุดพยากรณ์ล่วงหน้าได้ไม่แม่น: ปี 2026 แบบจำลองจับวันฝนหนักที่สถานีได้ราว 1 ใน 8 ดูประกาศกรมอุตุฯ ประกอบ",
+      "Heavy rain at one place is hard to forecast: in 2026 the model caught about 1 in 8 heavy-rain days at stations; check TMD's warnings too");
     cards.push(c);
   }
 
@@ -217,19 +240,22 @@ export function assess(b, lang = "th", ipe = null) {
     if (ens) {
       const w = ens.next24.gust;
       const lv = windowLevel(w);
-      c.level = Math.max(band("gust", w.p50).level, lv.level);
-      c.word = word(band("gust", w.p50));
-      c.value = L(`${fmt(w.p50)} กม./ชม.`, `${fmt(w.p50)} km/h`);
-      c.lines.push(L(`ลมกระโชกแรงสุดใน 24 ชม. ราว ${fmt(w.p10)}–${fmt(w.p90)} กม./ชม.`, `Strongest gust in 24 h about ${fmt(w.p10)}–${fmt(w.p90)} km/h`));
+      c.level = Math.min(MODEL_MAX, Math.max(band("gust", w.p50).level, lv.level));
+      c.word = GUST_WORDS[c.level] ? word(GUST_WORDS[c.level]) : "";
+      c.value = L(`กระโชก ${fmt(w.p50)} กม./ชม.`, `gusts ${fmt(w.p50)} km/h`);
+      c.lines.push(L(`ลมกระโชกแรงสุดใน 24 ชม. ราว ${fmt(w.p10)}–${fmt(w.p90)} กม./ชม. (กรมอุตุฯ เรียกลมระดับนี้ว่า "${band("gust", w.p50).th}")`,
+        `Strongest gust in 24 h about ${fmt(w.p10)}–${fmt(w.p90)} km/h (TMD's word for it: "${band("gust", w.p50).en}")`));
       c.days = ens.days.map((d, i) => ({ name: dayName(i, d.date, lang), level: windowLevel(d.gust).level, text: fmt(d.gust.p50) }));
       c.src.push({ name: L("แบบจำลอง ECMWF 51 ชุด", "ECMWF ensemble, 51 runs"), model: true });
+      c.note = L("ลมกระโชกจากแบบจำลอง ยังไม่ได้ตรวจสอบความแม่นยำ (ไม่มีข้อมูลลมกระโชกจากสถานีให้เทียบ)", "Model gusts, not yet checked for accuracy (no station gust records to compare)");
     } else c.error = b.errors?.ens;
+    const gustLevel = c.level;
     // tropical cyclones: JMA's forecast circles (western Pacific, South China Sea), GDACS for the rest
     const tmdNames = new Set(((b.storms && b.storms.items) || []).map((x) => String(x.nameEN || "").toLowerCase()));
     const storms = (b.jma || []).map((f) => jmaStorm(f, lat, lon)).filter(Boolean)
       .filter((x) => !tmdNames.has(x.name.toLowerCase())) // TMD's own track wins for a storm both carry
       .sort((a, z) => a.closest.edge - z.closest.edge);
-    if (storms.length) {
+    if (storms.length && storms[0].closest.edge <= STORM_SHOW_KM) {
       const st = storms[0];
       c.level = Math.max(c.level, stormLevel(st));
       const near = st.closest.edge <= 0 ? L("จุดนี้อยู่ในวงคาดการณ์", "this point is inside the forecast circle")
@@ -240,7 +266,7 @@ export function assess(b, lang = "th", ipe = null) {
     }
     // TMD's own track (collector) names the storm in Thai; the official words lead (GUIDELINES rule 2)
     const tmdS = b.storms ? tmdStormsNear(b.storms, lat, lon) : [];
-    if (tmdS.length) {
+    if (tmdS.length && tmdS[0].closest.km <= STORM_SHOW_KM) {
       const st = tmdS[0];
       const lv = st.closest.km <= 300 ? 2 : st.closest.km <= 800 ? 1 : 0;
       c.level = Math.max(c.level, lv);
@@ -249,14 +275,17 @@ export function assess(b, lang = "th", ipe = null) {
       c.src.push({ name: L("กรมอุตุนิยมวิทยา (เส้นทางพายุ)", "TMD storm track") });
     }
     if (b.gdacs) {
-      const tcs = gdacsNear(b.gdacs, lat, lon).filter((e) => e.type === "TC").sort((a, z) => a.km - z.km);
+      const tcs = gdacsNear(b.gdacs, lat, lon).filter((e) => e.type === "TC" && e.km <= STORM_SHOW_KM).sort((a, z) => a.km - z.km);
       if (tcs.length) {
         const t = tcs[0];
         c.level = Math.max(c.level, cycloneLevel(t));
         c.lines.push(L(`พายุหมุนเขตร้อน ${t.name} ห่างราว ${fmt(t.km)} กม. (GDACS ระดับ ${t.alert})`, `Tropical cyclone ${t.name} about ${fmt(t.km)} km away (GDACS ${t.alert})`));
-      } else if (!storms.some((x) => x.closest.edge <= 1000)) c.lines.push(L("ไม่มีพายุหมุนเขตร้อนในรัศมี 1,000 กม.", "No tropical cyclone within 1,000 km"));
+      } else if (!storms.some((x) => x.closest.edge <= STORM_SHOW_KM) && !tmdS.some((x) => x.closest.km <= STORM_SHOW_KM)) {
+        c.lines.push(L("ไม่มีพายุหมุนเขตร้อนในรัศมี 1,500 กม.", "No tropical cyclone within 1,500 km"));
+      }
       c.src.push({ name: "GDACS" });
     }
+    if (gustLevel < 0 && c.level === 0) c.level = -1; // a far storm alone doesn't make the wind "calm" (visitor audit V4)
     cards.push(c);
   }
 
@@ -267,7 +296,7 @@ export function assess(b, lang = "th", ipe = null) {
   {
     const c = { id: "flood", icon: "🌊", title: L("น้ำท่วม ระดับน้ำ", "Flood and river level"), short: L("น้ำท่วม", "Flood"), level: -1, lines: [], src: [],
       link: { href: `${GUIDE}/flood`, text: L("ก่อนน้ำมา ทำอย่างไร", "Before the water comes") },
-      more: { href: `${FLOODWATCH}/#p=${lat.toFixed(4)},${lon.toFixed(4)}`, text: L("ดูระดับน้ำละเอียดที่ FloodWatch", "River detail on FloodWatch") } };
+      more: { href: `${FLOODWATCH}/#p=${(Math.round(lat * 100) / 100).toFixed(2)},${(Math.round(lon * 100) / 100).toFixed(2)}`, text: L("ดูระดับน้ำละเอียดที่ FloodWatch", "River detail on FloodWatch") } };
     const fresh = gauges.filter((g) => !g.stale);
     if (fw && (fw.area || fw.river)) {
       // FloodWatch's own area category for the point (BMA's canals included), its nearest river as a line
@@ -283,13 +312,13 @@ export function assess(b, lang = "th", ipe = null) {
       // the point's level is FloodWatch's area category (water.areaIndex), not the nearest gauge's own status
       const ai = areaIndex(fresh, place?.pv);
       const polder = POLDER_PROVINCES.includes(place?.pv);
-      c.level = ai.category ?? 0;
+      c.level = ai.category ?? -1; // no gauge close enough is no data, never calm (output-crosscheck M4; FloodWatch says the same)
       const conf = { medium: L("ปานกลาง", "medium"), low: L("ต่ำ", "low"), very_low: L("ต่ำมาก", "very low"), none: L("ไม่มี", "none") }[ai.confidence];
       c.lines.push(ai.category == null
         ? L(polder ? "ไม่มีสถานีวัดน้ำในคลองที่ส่งข้อมูลในรัศมี 8 กม. (ในกรุงเทพฯ และปริมณฑล แม่น้ำนอกแนวคันกั้นน้ำไม่ใช้ตัดสินจุดนี้)" : "ไม่มีสถานีวัดระดับน้ำที่ส่งข้อมูลในรัศมี 8 กม.",
           polder ? "No canal gauge reporting within 8 km (in Bangkok and its neighbours the river outside the walls doesn't judge a point)" : "No water-level gauge reporting within 8 km")
         : L(`ภาพรวมทางน้ำรอบจุดนี้: ${word(RIVER_WORDS[ai.category])} (จาก ${ai.basis.length} สถานี ใกล้สุด ${fmt(ai.nearestKm, 1)} กม. · ความมั่นใจ${conf})`,
-          `Waterways around this point: ${word(RIVER_WORDS[ai.category])} (from ${ai.basis.length} gauge(s), nearest ${fmt(ai.nearestKm, 1)} km · confidence ${conf})`));
+          `Waterways around this point: ${word(RIVER_WORDS[ai.category])} (from ${ai.basis.length} gauge${ai.basis.length === 1 ? "" : "s"}, nearest ${fmt(ai.nearestKm, 1)} km · confidence ${conf})`));
       for (const x of fresh.slice(0, 3)) {
         const fb = x.freeboard == null ? L("ไม่มีระดับตลิ่ง", "no bank level")
           : x.freeboard >= 0 ? L(`ต่ำกว่าตลิ่ง ${fmt(x.freeboard * 100)} ซม.`, `${fmt(x.freeboard * 100)} cm below the bank`)
@@ -311,9 +340,8 @@ export function assess(b, lang = "th", ipe = null) {
         "The same rule and method as FloodWatch (each gauge against its own bank); it doesn't say whether your house floods");
       c.word = word(RIVER_WORDS[c.level]);
     } else if (b.twLevel) {
-      c.level = 0;
-      c.word = L("ไม่มีสถานีวัดใกล้", "No gauge nearby");
-      c.lines.push(L("ไม่มีสถานีวัดระดับน้ำที่ส่งข้อมูลในรัศมี 20 กม.", "No water-level gauge reporting within 20 km"));
+      // no gauge is no data (FloodWatch: "ไม่มีสถานีวัดน้ำใกล้พอ ยังสรุประดับลำน้ำไม่ได้")
+      c.lines.push(L("ไม่มีสถานีวัดระดับน้ำที่ส่งข้อมูลใน 3 ชม. ในรัศมี 20 กม. ยังสรุประดับลำน้ำไม่ได้", "No water-level gauge reporting within 20 km in the last 3 h: the waterways can't be judged"));
     }
     if (ff) {
       const hit = place && ff.find((r) => r.code === place.code);
@@ -324,8 +352,10 @@ export function assess(b, lang = "th", ipe = null) {
           `⚠️ HII rates this subdistrict at risk of flash flooding (FFPI ${fmt(hit.ffpi, 2)}, ${fmt(hit.rainNextDay)} mm forecast)`));
         extraPre.push({ hazard: "flash", day: 1, level: 2, value: hit.ffpi });
       } else {
-        c.lines.push(L(`น้ำป่า: ตำบลนี้ไม่อยู่ในรายชื่อเสี่ยงของ สสน. คืนนี้ (${ff.length} ตำบลทั่วประเทศ)`, `Flash flood: not on HII's list tonight (${ff.length} subdistricts nationwide)`));
-        if (c.level < 0) c.level = 0;
+        // V41: say what the report says, without "คืนนี้" or a bare "0 ตำบล"
+        c.lines.push(ff.length
+          ? L(`น้ำป่า: ตำบลนี้ไม่อยู่ในรายชื่อเสี่ยงในรายงานล่าสุดของ สสน. (มี ${ff.length} ตำบลทั่วประเทศ)`, `Flash flood: not on HII's latest list (${ff.length} subdistricts nationwide)`)
+          : L("น้ำป่า: รายงานล่าสุดของ สสน. ไม่มีตำบลเสี่ยงน้ำป่า", "Flash flood: HII's latest report lists no subdistrict at risk"));
       }
       c.src.push({ name: L("รายงานน้ำป่า สสน.", "HII flash-flood report") });
     }
@@ -351,7 +381,7 @@ export function assess(b, lang = "th", ipe = null) {
           : (obs != null && obs >= 35.1) || p100 >= 0.2 || heavy >= 0.5 ? 1 : 0;
         if (p100 >= 0.1) c.lines.push(L(`โอกาสฝนเกิน 100 มม. ใน 24 ชม. (เกณฑ์เตือนของ ทธ.) ${chanceText(p100, lang)}`, `Chance of over 100 mm in 24 h (DMR's trigger): ${chanceText(p100, lang)}`));
         c.word = c.level ? word(scale(c.level)) : L("พื้นที่เสี่ยง ฝนยังไม่มาก", "Risk area, little rain");
-        c.lines.push(L(`มีหมู่บ้านเสี่ยงดินถล่ม ${n} แห่งในรัศมี 3 กม. (กรมทรัพยากรธรณี)`, `${n} landslide-risk village(s) within 3 km (DMR)`));
+        c.lines.push(L(`มีหมู่บ้านเสี่ยงดินถล่ม ${n} แห่งในรัศมี 3 กม. (กรมทรัพยากรธรณี)`, `${n} landslide-risk village${n === 1 ? "" : "s"} within 3 km (DMR)`));
         c.lines.push(L("ฝนตกหนักต่อเนื่อง สังเกตน้ำในลำห้วยขุ่นข้น ดินร้าว ต้นไม้เอียง", "In long heavy rain watch for muddy streams, cracks in the ground, leaning trees"));
       } else {
         c.level = 0;
@@ -369,19 +399,23 @@ export function assess(b, lang = "th", ipe = null) {
     const c = { id: "quake", icon: "🌏", title: L("แผ่นดินไหว", "Earthquakes"), short: L("แผ่นดินไหว", "Earthquakes"), level: -1, lines: [], src: [],
       link: { href: `${GUIDE}/quake`, text: L("แผ่นดินไหว ทำอย่างไร", "What to do in an earthquake") } };
     if (b.emsc || b.usgs) {
-      const list = quakesForPoint(quakes, lat, lon, now, ipe);
+      const site = place && BKK_METRO.includes(place.pv) ? BKK_MMI_TERM : 0;
+      const list = quakesForPoint(quakes, lat, lon, now, ipe, { site });
       const recent = list.filter((q) => now - q.t <= 864e5);
       c.level = recent.length ? Math.max(0, ...recent.map((q) => q.band.level)) : 0;
-      c.word = recent.length && c.level > 0 ? word(recent.sort((a, z) => z.band.level - a.band.level)[0].band) : L("ไม่มีที่น่ารู้สึกได้ใน 24 ชม.", "None likely felt in 24 h");
+      c.word = recent.length && c.level > 0 ? word(recent.sort((a, z) => z.band.level - a.band.level)[0].band) : L("24 ชม. นี้ไม่มีรายงานใกล้ ๆ", "None reported nearby in 24 h");
       for (const q of list.slice(0, 3)) {
         const when = timeText(localOf(q.t), now, lang);
         const felt = q.mmi != null ? ` · ${word(q.band)}` : "";
         c.lines.push(L(`ขนาด ${fmt(q.mag, 1)} ${q.placeTh || q.place || ""} ห่าง ${fmt(q.km)} กม. ทาง${compass(q.dir, "th")} · ${when}${felt}`,
           `M${fmt(q.mag, 1)} ${q.place || ""}, ${fmt(q.km)} km ${compass(q.dir, "en")} · ${when}${felt}`));
       }
-      if (!list.length) c.lines.push(L("ไม่มีแผ่นดินไหวในรัศมี 300 กม. ใน 7 วัน ที่น่าจะรู้สึกได้", "No quake within 300 km in 7 days that was likely felt"));
-      c.note = L("แผ่นดินไหวพยากรณ์ล่วงหน้าไม่ได้ ความแรงที่จุดนี้เป็นค่าประมาณจากขนาดและระยะทาง ดินอ่อน (เช่น กรุงเทพฯ) และตึกสูงอาจสั่นแรงกว่านี้",
-        "Earthquakes can't be forecast. Shaking here is estimated from size and distance; soft ground (e.g. Bangkok) and tall buildings can shake more");
+      if (!list.length) c.lines.push(L("7 วันนี้ไม่มีแผ่นดินไหวในรัศมี 300 กม. หรือที่ใหญ่พอจะรู้สึกได้ถึงที่นี่", "No quake within 300 km in 7 days, nor one big enough to reach here"));
+      c.note = site
+        ? L("แผ่นดินไหวพยากรณ์ล่วงหน้าไม่ได้ ความแรงที่จุดนี้ประมาณจากขนาดและระยะทาง และบวกเพิ่มสำหรับกรุงเทพฯ และปริมณฑล (ดินอ่อน คนในพื้นที่เคยรายงานว่าแรงกว่าค่าประมาณ) ตึกสูงอาจรู้สึกแรงกว่านี้",
+          "Earthquakes can't be forecast. Shaking here is estimated from size and distance, raised for greater Bangkok (soft clay: people there have reported more than the estimate); tall buildings can feel more")
+        : L("แผ่นดินไหวพยากรณ์ล่วงหน้าไม่ได้ ความแรงที่จุดนี้เป็นค่าประมาณจากขนาดและระยะทาง ดินอ่อนและตึกสูงอาจรู้สึกแรงกว่านี้",
+          "Earthquakes can't be forecast. Shaking here is estimated from size and distance; soft ground and tall buildings can feel more");
       c.src.push({ name: [b.emsc && "EMSC", b.usgs && "USGS", b.tmdQuakes && L("กรมอุตุฯ", "TMD")].filter(Boolean).join(" · ") });
       const ts = place ? tsunamiWatch(quakes, place.pv, now) : null;
       if (ts) {
@@ -399,14 +433,16 @@ export function assess(b, lang = "th", ipe = null) {
     const c = { id: "fire", icon: "🔥", title: L("ไฟป่า จุดความร้อน", "Fires and hotspots"), short: L("ไฟป่า", "Fires"), level: -1, lines: [], src: [],
       link: { href: `${GUIDE}/pm25`, text: L("ควันไฟ ฝุ่น ทำอย่างไร", "What to do about smoke") } };
     if (b.hotspots && b.hotspots.items) {
-      const h = hotspotsNear(b.hotspots, lat, lon, 25);
+      const h = hotspotsNear(b.hotspots, lat, lon, 25, now);
+      const lastPass = (b.hotspots.items || []).reduce((m, x) => (x.t && x.t > m ? x.t : m), "");
       // the app's own rule (no Thai agency grades hotspots): one within 10 km → watch, within 2 km → get ready
       c.level = !h.nearest ? 0 : h.nearest.km <= 2 ? 2 : h.nearest.km <= 10 ? 1 : 0;
-      c.word = h.count ? L(`${h.count} จุด`, `${h.count} hotspot(s)`) : L("ไม่พบ", "None");
+      c.word = h.count ? L(`${h.count} จุด`, `${h.count} hotspot${h.count === 1 ? "" : "s"}`) : L("ไม่พบ", "None");
       c.value = L(`${h.count} จุด`, `${h.count}`);
       c.lines.push(L(`จุดความร้อนจากดาวเทียมในรัศมี 25 กม. ใน 24 ชม.${h.nearest ? ` ใกล้สุดห่าง ${fmt(h.nearest.km, 1)} กม.` : ""}`,
         `Satellite hotspots within 25 km in 24 h${h.nearest ? `; nearest ${fmt(h.nearest.km, 1)} km` : ""}`));
-      c.src.push({ name: "NASA FIRMS (VIIRS)", time: b.hotspots.fetched ? timeText(localOf(Date.parse(b.hotspots.fetched)), now, lang) : "" });
+      // the time of the latest satellite pass in the file, not the collector's fetch (visitor audit V24)
+      c.src.push({ name: L("NASA FIRMS (VIIRS) ภาพดาวเทียมล่าสุด", "NASA FIRMS (VIIRS), latest pass"), time: lastPass ? timeText(localOf(Date.parse(lastPass)), now, lang) : "" });
     } else {
       c.lines.push(L("ยังไม่มีข้อมูลจุดความร้อน (ต้องเปิดตัวเก็บข้อมูลของเว็บนี้)", "No hotspot data yet (this site's collector isn't running)"));
     }
@@ -415,13 +451,26 @@ export function assess(b, lang = "th", ipe = null) {
 
   // ---------- official warnings and the verdict ----------
   const warnings = b.warnings ? warningsFor(b.warnings, place?.pv, now) : [];
+  // An official warning lifts its hazard's tile (GUIDELINES rule 2; cross-check M5): never milder than TMD
+  for (const w of warnings) {
+    const c = cards.find((x) => x.id === capHazard(w));
+    if (!c) continue;
+    if (w.level >= c.level) {
+      c.level = w.level;
+      c.word = L("กรมอุตุฯ เตือนภัย", "TMD warning");
+    }
+    c.lines.unshift(L(`ประกาศกรมอุตุฯ: ${w.headline || w.event}${w.expires ? ` (ถึง ${timeText(localOf(Date.parse(w.expires)), now, lang)})` : ""}`,
+      `TMD notice: ${w.event || w.headline}${w.expires ? ` (until ${timeText(localOf(Date.parse(w.expires)), now, lang)})` : ""}`));
+    c.official = true;
+  }
   for (const c of cards) if (c.level >= 0 && !c.word) c.word = word(scale(c.level));
   const graded = cards.filter((c) => c.level >= 0);
   // The verdict is never milder than any tile (GUIDELINES rule 7): its level is the highest one, its headline the worst
   // hazard in the agency's own word, with that hazard's one sourced action.
   const order = ORDER.map((id) => cards.find((c) => c.id === id)).filter(Boolean);
   const top = Math.max(-1, ...graded.map((c) => c.level), ...warnings.map((w) => w.level));
-  const worst = graded.filter((c) => c.level === top && top > 0).sort((x, y) => ORDER.indexOf(x.id) - ORDER.indexOf(y.id))[0] || null;
+  const worst = graded.filter((c) => c.level === top && top > 0)
+    .sort((x, y) => (y.official ? 1 : 0) - (x.official ? 1 : 0) || ORDER.indexOf(x.id) - ORDER.indexOf(y.id))[0] || null;
   const item = (c) => ({ id: c.id, icon: c.icon, short: c.short, level: c.level, word: c.word, value: c.value });
   // Missing tiles are never counted as calm (the UX scout §5a): fewer than half answered → no verdict at all
   const enough = graded.length * 2 >= cards.length;
@@ -433,15 +482,15 @@ export function assess(b, lang = "th", ipe = null) {
     warning: warnings[0] || null,
     action: worst?.action || null,
     others: order.filter((c) => c.level >= 1 && c !== worst).sort((x, y) => y.level - x.level).map(item),
-    missing: order.filter((c) => c.level < 0).map((c) => c.short),
+    missing: [...order.filter((c) => c.level < 0).map((c) => c.short), ...(b.warnings ? [] : [L("ประกาศเตือนภัย", "official warnings")])],
   };
   const pre = prewarnings(ens, extraPre);
   const outlook = ens ? ens.days.map((d, i) => ({
     name: dayName(i, d.date, lang), date: d.date,
     heat: { level: band("heat", d.heat.p50).level, text: `${fmt(d.heat.p50)}°` },
-    rain: { level: windowLevel(d.rain24).level, text: fmt(d.rain24.p50), sub: d.rain24.chance[2] >= 0.1 ? chanceText(d.rain24.chance[2], lang) : "" },
+    rain: { level: windowLevel(d.rain24).level, text: chanceWord(d.rain24.chance[2], lang), sub: L("ฝนหนัก", "heavy") },
     gust: { level: windowLevel(d.gust).level, text: fmt(d.gust.p50) },
-    pm25: air.outlook[i] ? { level: air.outlook[i].band.level, text: fmt(air.outlook[i].mean) } : null,
+    pm25: air.outlook[i] ? { level: air.outlook[i].band.level, text: i === 0 ? fmt(air.outlook[i].mean) : word(air.outlook[i].band) } : null,
     uv: air.uv[i] ? { level: air.uv[i].band.level, text: fmt(air.uv[i].max) } : null,
   })) : [];
 
@@ -459,7 +508,7 @@ export function assess(b, lang = "th", ipe = null) {
       : { icon: "〰️", text: L("ตำบลนี้ไม่อยู่ในรายชื่อตำบลใกล้รอยเลื่อนมีพลัง (รัศมี 20 กม.) ของกรมทรัพยากรธรณี", "Not on DMR's list of subdistricts within 20 km of an active fault") });
   }
   const slideN = arcCount(b.dmrSlide);
-  if (slideN) profile.push({ icon: "⛰️", text: L(`หมู่บ้านเสี่ยงดินถล่ม ${slideN} แห่งในรัศมี 3 กม.`, `${slideN} landslide-risk village(s) within 3 km`) });
+  if (slideN) profile.push({ icon: "⛰️", text: L(`หมู่บ้านเสี่ยงดินถล่ม ${slideN} แห่งในรัศมี 3 กม.`, `${slideN} landslide-risk village${slideN === 1 ? "" : "s"} within 3 km`) });
   if (place && [85, 82, 83, 81, 92, 91].includes(place.pv)) {
     profile.push({ icon: "🌊", text: L("จังหวัดชายฝั่งอันดามัน: รู้เส้นทางอพยพสึนามิและจุดรวมพลใกล้บ้าน", "Andaman coast province: know your tsunami evacuation route") });
   }
@@ -473,5 +522,23 @@ export const ORDER = ["rain", "flood", "pm25", "heat", "quake", "fire", "wind", 
 
 /** The rain (24 h) above which the DMR's landslide watch applies; see levels.js and KNOWLEDGE §3 (provisional). */
 export const LANDSLIDE_RAIN_MM = 100;
+
+/** Storm lines only for storms that come within this distance (the cross-check: 7,000 km away is noise). */
+export const STORM_SHOW_KM = 1500;
+
+/** The highest level a model forecast reaches on its own: "เตรียมตัว". "ทำทันที" needs a measurement or an agency's
+ *  warning (GUIDELINES rule 2b; the visitor audit V1: a heat-index forecast put "act now" on most October nights). */
+export const MODEL_MAX = 2;
+
+/** Plain gust words for the tile (the visitor audit V16: TMD's Beaufort words such as "พายุเกลอ่อน" read as a storm). */
+const GUST_WORDS = [null,
+  { th: "ลมกระโชกแรง", en: "Strong gusts" },
+  { th: "ลมกระโชกแรงมาก", en: "Very strong gusts" },
+  { th: "ลมกระโชกรุนแรง", en: "Violent gusts" }];
+
+/** Bangkok-metro provinces, where the IPE under-predicts felt shaking (soft clay): Bangkok, Samut Prakan, Nonthaburi,
+ *  Pathum Thani. The validation's term (MODELS.md §6; research/out/calibration.json → earthquake_felt). */
+export const BKK_METRO = [10, 11, 12, 13];
+export const BKK_MMI_TERM = 1.06;
 
 export { HAZARDS, ageText };

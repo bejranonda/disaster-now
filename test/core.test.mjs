@@ -8,7 +8,8 @@ import { km, rounded, nearestTambon, placeLabel, compass, bearing } from "../pub
 import { heatIndexC } from "../public/js/heat.js";
 import { band, riverLevel, roundTo, HAZARDS } from "../public/js/levels.js";
 import { buildOutlook, prewarnings, chanceText, windowLevel, summarize, quantile, dayWindows } from "../public/js/outlook.js";
-import { parseGistda, camsRatio, buildAir } from "../public/js/airq.js";
+import { parseGistda, camsRatio, buildAir, camsPast24 } from "../public/js/airq.js";
+import { HEAT, PM25, phi, dressedChance, dressedQuantile } from "../public/js/calibration.js";
 import { nearRain, nearGauges, parseFlashFlood, parseFloodWatchPoint } from "../public/js/water.js";
 import { parseEmsc, parseUsgs, mergeQuakes, quakesForPoint, tsunamiWatch, ANDAMAN_PROVINCES } from "../public/js/quake.js";
 import { gdacsNear, warningsFor, hotspotsNear, hotspotLevel } from "../public/js/events.js";
@@ -87,7 +88,7 @@ test("ensemble outlook from a live response", () => {
   assert.equal(o.issued, "2026-10-24T02:00");
   assert.equal(o.days.length, 3);
   assert.equal(o.days[0].date, "2026-10-24");
-  assert.ok(o.days[0].heat.p50 > 30 && o.days[0].heat.p50 < 50, `heat ${o.days[0].heat.p50}`);
+  assert.ok(o.days[0].heat.p50 > 35 && o.days[0].heat.p50 < 50, `heat ${o.days[0].heat.p50}`);
   assert.ok(o.days[0].heat.p10 <= o.days[0].heat.p50 && o.days[0].heat.p50 <= o.days[0].heat.p90);
   assert.ok(o.next24.rain24.n === 51);
   for (const d of o.days) for (const v of Object.values(d.rain24.chance)) assert.ok(v >= 0 && v <= 1);
@@ -119,20 +120,32 @@ test("GISTDA point: Bangkok time with a fake Z", () => {
   assert.equal(band("pm25", g.mean24).level, 2);
 });
 
-test("CAMS correction ratio from overlapping hours", () => {
+test("PM2.5 outlook: the validated damped method (measurement × CAMS change^β)", () => {
   const g = parseGistda(jx("gistda_loc.json"));
   const aq = jx("aq_bkk.json");
-  const r = camsRatio(g.hours, aq.hourly.time, aq.hourly.pm2_5);
-  assert.ok(r && r.hours >= 20, JSON.stringify(r));
-  assert.ok(r.ratio >= 0.5 && r.ratio <= 3);
+  const r = camsRatio(g.hours, aq.hourly.time, aq.hourly.pm2_5); // the first method, kept for the record
+  assert.ok(r && r.hours >= 20 && r.ratio >= 0.5 && r.ratio <= 3);
   const air = buildAir(aq, g, NOW);
   assert.equal(air.outlook.length, 3);
   assert.ok(air.outlook.every((d) => d.corrected));
   assert.equal(air.uv.length, 3);
   assert.ok(air.pollutants && air.pollutants.time === "2026-10-24T02:00");
-  // with the ratio, tomorrow's mean is the model's mean × ratio
-  const raw = buildAir(aq, null, NOW);
-  assert.ok(Math.abs(air.outlook[1].mean - raw.outlook[1].mean * r.ratio) < 1e-9);
+  const prev = camsPast24(g.time, aq.hourly.time, aq.hourly.pm2_5);
+  const raw = buildAir(aq, null, NOW); // no measurement: raw CAMS, not corrected
+  assert.ok(raw.outlook.every((d) => !d.corrected));
+  const want = g.mean24 * (raw.outlook[1].mean / prev) ** PM25.beta[1];
+  assert.ok(Math.abs(air.outlook[1].mean - want) < 1e-9);
+});
+
+test("heat calibration: dressing widens the range; the corrected median is a + b × raw", () => {
+  assert.ok(Math.abs(phi(0) - 0.5) < 1e-7 && Math.abs(phi(1.96) - 0.975) < 1e-3);
+  const vals = [40, 41, 42, 43, 44];
+  assert.ok(Math.abs(dressedChance(vals, 42, 3) - 0.5) < 1e-6);
+  assert.ok(dressedQuantile(vals, 0.1, 3) < 40 && dressedQuantile(vals, 0.9, 3) > 44);
+  const o = buildOutlook(jx("ens_bkk.json"), NOW);
+  const d0 = o.days[0].heat;
+  assert.ok(Math.abs(d0.p50 - (HEAT.lead1.a + HEAT.lead1.b * d0.rawP50)) < 0.6, `${d0.p50} vs raw ${d0.rawP50}`);
+  assert.ok(d0.p50 > d0.rawP50 + 3); // ECMWF reads ~5 °C low in Thailand
 });
 
 test("ThaiWater rain near Bangkok's old town", () => {

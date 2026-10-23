@@ -93,7 +93,7 @@ async function main() {
       ok(fl.includes("131 ซม."), "flood card leads with cm below the bank for C.12 (1.31 m in ThaiWater's fixture)");
       ok((await text(page, "#outlook")).includes("พรุ่งนี้"), "3-day table has tomorrow");
       const heat = await text(page, "#card-heat");
-      ok(/3[0-9] °C/.test(heat), `heat card value: ${heat.split("\n").slice(0, 3).join(" | ")}`);
+      ok(/4[0-9] °C/.test(heat) && heat.includes("ปรับแก้"), `heat card shows the corrected value (ECMWF + 5 °C, MODELS §1): ${heat.split("\n").slice(0, 5).join(" | ")}`);
     }
     ok((await overflow(page)) <= 0, "no horizontal scroll at 390 px");
     const small = await tapTargets(page);

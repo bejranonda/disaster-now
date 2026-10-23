@@ -6,6 +6,7 @@
 import { band } from "./levels.js";
 import { km } from "./geo.js";
 import { dayWindows, nowIndex } from "./outlook.js";
+import { PM25 } from "./calibration.js";
 
 const fnum = (v) => (v == null || v === "" || Number(v) < 0 ? null : Number(v)); // Air4Thai writes -1 for "not measured"
 
@@ -38,7 +39,23 @@ export function nearestStation(stations, lat, lon, nowMs, { maxKm = 15, maxAgeH 
   return best;
 }
 
-/** Ratio of a measured 24-hour mean to CAMS's mean over the 24 hours that end at the measurement, clipped. */
+/** CAMS's mean over the 24 hours that end at a Bangkok time "YYYY-MM-DDTHH:MM" (null if fewer than `minHours`). */
+export function camsPast24(endLocal, camsTimes, camsPm, minHours = 18) {
+  const end = camsTimes.findIndex((t) => t.slice(0, 13) === String(endLocal).slice(0, 13));
+  if (end < 0) return null;
+  const vals = camsPm.slice(Math.max(0, end - 23), end + 1).filter((v) => v != null);
+  return vals.length >= minHours ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+}
+
+/** The validated PM2.5 outlook (calibration.PM25, MODELS.md §1): measured 24-h mean × (CAMS(day) ÷ CAMS(past 24 h))^β,
+ *  β per day ahead. Beat persistence, the ratio method and raw CAMS on disjoint stations and on the newest season. */
+export function dampedOutlook(measured, camsPrev, camsDays, beta = PM25.beta) {
+  return camsDays.map((d, i) => ({ ...d, mean: d.mean == null || measured == null || camsPrev == null ? null
+    : measured * (Math.max(d.mean, 0.5) / Math.max(camsPrev, 0.5)) ** beta[Math.min(i, beta.length - 1)] }));
+}
+
+/** Ratio of a measured 24-hour mean to CAMS's mean over the 24 hours that end at the measurement, clipped. The app's
+ *  first correction: worse than persistence in the validation (MODELS.md §1), kept for the record and the tests. */
 export function camsRatioMean(mean24, endLocal, camsTimes, camsPm, { lo = 0.5, hi = 3, minHours = 18 } = {}) {
   const end = camsTimes.findIndex((t) => t.slice(0, 13) === String(endLocal).slice(0, 13));
   if (mean24 == null || end < 0) return null;
@@ -117,10 +134,15 @@ export function buildAir(aq, gistda, nowMs = Date.now(), station = null) {
       band: band("pm25", gistda.mean24 ?? gistda.now) };
   }
   if (aq && aq.hourly) {
-    const r = station ? camsRatioMean(station.pm25, station.time, aq.hourly.time, aq.hourly.pm2_5)
-      : gistda ? camsRatio(gistda.hours, aq.hourly.time, aq.hourly.pm2_5) : null;
-    out.ratio = r && { ...r, basis: station ? "station" : "estimate" };
-    out.outlook = dailyMeans(aq, "pm2_5", nowMs, r ? r.ratio : 1).map((d) => ({ ...d, band: band("pm25", d.mean), corrected: !!r }));
+    // the damped outlook needs the measurement and CAMS over the same past 24 hours
+    const measured = station ? station.pm25 : gistda ? (gistda.mean24 ?? gistda.now) : null;
+    const endLocal = station ? station.time : gistda ? gistda.time : null;
+    const camsPrev = endLocal ? camsPast24(endLocal, aq.hourly.time, aq.hourly.pm2_5) : null;
+    const days = dailyMeans(aq, "pm2_5", nowMs);
+    const damped = measured != null && camsPrev != null;
+    out.ratio = damped ? { method: "damped", measured, camsPrev, basis: station ? "station" : "estimate" } : null;
+    out.outlook = (damped ? dampedOutlook(measured, camsPrev, days) : days)
+      .map((d) => ({ ...d, band: band("pm25", d.mean), corrected: damped }));
     out.uv = dailyMax(aq, "uv_index", nowMs).map((d) => ({ ...d, band: band("uv", d.max) }));
     const i = nowIndex(aq.hourly.time, aq.utc_offset_seconds || 0, nowMs);
     out.uvNow = i >= 0 ? aq.hourly.uv_index?.[i] ?? null : null;

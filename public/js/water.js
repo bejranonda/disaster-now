@@ -36,7 +36,7 @@ export function nearRain(j, lat, lon, nowMs, { maxKm = 10, maxAgeH = 3 } = {}) {
 /** Water-level gauges of ThaiWater's waterlevel_load near the point, judged by FloodWatch's bank rule against
  *  min_bank (ONWR's bank, FloodWatch D-199). ThaiWater's own situation_level is not used: it counts % of the
  *  bank above the river bed, so a deep river reads "high" while 1.3 m below its bank (C.12, 24 Oct 2026). */
-export function nearGauges(j, lat, lon, nowMs, { maxKm = 20, maxAgeH = 6 } = {}) {
+export function nearGauges(j, lat, lon, nowMs, { maxKm = 20, maxAgeH = 3 } = {}) { // 3 h = FloodWatch's STALE_MIN 180
   const rows = j?.waterlevel_data?.data || [];
   const out = [];
   for (const r of rows) {
@@ -57,7 +57,8 @@ export function nearGauges(j, lat, lon, nowMs, { maxKm = 20, maxAgeH = 6 } = {})
     const st = stale ? { level: -1, pct: null } : riverLevel(lvl, bank, ground);
     const prev = num(r.waterlevel_msl_previous);
     out.push({ name: s.tele_station_name?.th || s.tele_station_oldcode, code: s.tele_station_oldcode,
-      river: r.river_name || r.basin?.basin_name?.th || null, agency: r.agency?.agency_shortname?.th?.trim(),
+      // only the agency's river name: a basin name ("ลุ่มน้ำ…") would make waterWord() call a river a canal in the polders
+      river: r.river_name || null, basin: r.basin?.basin_name?.th || null, agency: r.agency?.agency_shortname?.th?.trim(),
       km: d, level: lvl, bank, freeboard: bank == null ? null : bank - lvl, pct: st.pct, status: st.level,
       change: prev == null ? null : lvl - prev, time: t, ageH, stale });
   }
