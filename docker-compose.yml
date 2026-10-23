@@ -1,0 +1,55 @@
+# Disaster Now on a server (docs/SERVER.md). The same pattern as FloodWatch's compose: the app listens on localhost
+# only, and public traffic comes through a Cloudflare tunnel (profile "public") or the host's existing reverse proxy.
+#   docker compose up -d --build                     web on http://127.0.0.1:8090/ + the collector every 15 min
+#   docker compose --profile public up -d            also the tunnel (needs CLOUDFLARE_TUNNEL_TOKEN in .env)
+#   docker compose run --rm collector node tools/collect.mjs        one collector run now
+#   docker compose exec web node tools/health.mjs --web http://127.0.0.1:8080/
+name: disaster-now
+
+services:
+  web:
+    build:
+      context: .
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:22-alpine}
+    image: disaster-now:local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${WEB_PORT:-8090}:8080"   # local only; FloodWatch already uses 3000 on its server
+    volumes:
+      - live:/app/public/data/live:ro         # the collector's files, read only here
+    read_only: true
+    tmpfs: [/tmp]
+
+  collector:
+    build:                                     # the same image as web (cached: built once)
+      context: .
+      args:
+        NODE_IMAGE: ${NODE_IMAGE:-node:22-alpine}
+    image: disaster-now:local
+    restart: unless-stopped
+    command: ["node", "tools/collect.mjs", "--every", "${COLLECT_EVERY:-900}"]
+    environment:
+      LIVE_DIR: /app/public/data/live
+    volumes:
+      - live:/app/public/data/live
+    read_only: true
+    tmpfs: [/tmp]
+    healthcheck:
+      test: ["CMD", "node", "tools/health.mjs", "--live", "/app/public/data/live", "--max-age", "2700"]
+      interval: 5m
+      timeout: 10s
+      start_period: 3m
+      retries: 2
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: ["tunnel", "--no-autoupdate", "run", "--url", "http://web:8080"]
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}   # from .env; the tunnel exits with an error without it
+    depends_on: [web]
+    profiles: ["public"]
+
+volumes:
+  live:

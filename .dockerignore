@@ -1,0 +1,10 @@
+# only public/, tools/ and package.json go into the image
+.git
+.env
+.env.*
+node_modules
+research
+docs
+test
+public/data/live
+*.tmp

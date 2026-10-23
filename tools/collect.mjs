@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // The collector: the feeds a phone can't read itself (no CORS, or a broken certificate chain), fetched on a schedule
 // and written as small static files the page reads from data/live/. It keeps nothing about people: it never sees a
-// visitor. Run every 10–30 minutes (never faster than the sources update), e.g. from cron on the owner's FloodWatch
-// server or a CI schedule (docs/DEPLOY.md):
-//   node tools/collect.mjs [--out public/data/live]
+// visitor. Run every 10–30 minutes (never faster than the sources update), from cron, a CI schedule or its own loop
+// (docker-compose.yml's `collector` service; docs/SERVER.md):
+//   node tools/collect.mjs [--out public/data/live]          once
+//   node tools/collect.mjs --every 900                        forever, every 900 s (at least 600)
+// LIVE_DIR sets the output folder too (the container's volume).
 // Files: warnings.json (TMD CAP by province code), tmd_quakes.json (TMD's earthquake RSS), storms.json (TMD's storm
 // tracks), hotspots.json (NASA FIRMS
 // VIIRS, Thailand's box), air4thai.json (PCD stations), index.json (what was written, when, what failed).
@@ -11,9 +13,12 @@ import { mkdirSync, readFileSync, writeFileSync, renameSync } from "node:fs";
 import https from "node:https";
 import tls from "node:tls";
 
-const UA = "disaster-now-collector/0.1 (+https://github.com/bejranonda/disaster-now)";
+const UA = "disaster-now-collector/0.2 (+https://github.com/bejranonda/disaster-now)";
 const args = process.argv.slice(2);
-const OUT = args.includes("--out") ? args[args.indexOf("--out") + 1] : new URL("../public/data/live/", import.meta.url).pathname;
+const OUT = args.includes("--out") ? args[args.indexOf("--out") + 1]
+  : process.env.LIVE_DIR || new URL("../public/data/live/", import.meta.url).pathname;
+/** The loop's interval: never under 10 minutes (TMD's CAP and FIRMS update every 10–60 min; GUIDELINES §5). */
+export const MIN_EVERY_S = 600;
 const TIMEOUT = 60000;
 // `ca` replaces Node's default list, so keep the host's extra CAs (NODE_EXTRA_CA_CERTS, e.g. a proxy's) in it
 const EXTRA_CA = process.env.NODE_EXTRA_CA_CERTS ? [readFileSync(process.env.NODE_EXTRA_CA_CERTS, "utf8")] : [];
@@ -140,10 +145,13 @@ async function hotspots() {
   const files = ["suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_SouthEast_Asia_24h.csv", "noaa-20-viirs-c2/csv/J1_VIIRS_C2_SouthEast_Asia_24h.csv"];
   const items = [];
   const used = [];
+  let ok = 0;
   for (const f of files) {
     const url = `https://firms.modaps.eosdis.nasa.gov/data/active_fire/${f}`;
-    try { items.push(...parseFirms(await fetchText(url))); used.push(url); } catch (e) { used.push(`${url} (${e.message})`); }
+    try { items.push(...parseFirms(await fetchText(url))); used.push(url); ok++; } catch (e) { used.push(`${url} (${e.message})`); }
   }
+  // no file read is no data, never "0 hotspots" (the old file stays and the page shows its age)
+  if (!ok) throw new Error(`every FIRMS file failed: ${used.join(" ")}`);
   return { source: "NASA FIRMS VIIRS 375 m, last 24 h", url: used.join(" "), items };
 }
 
@@ -186,4 +194,26 @@ async function main() {
   write("index.json", index);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main();
+/** --every N: run, wait N seconds, run again; one failed run never stops the loop. SIGTERM ends it between runs. */
+async function loop(everyS) {
+  let stop = false;
+  let wake = null;
+  let timer = null;
+  for (const sig of ["SIGTERM", "SIGINT"]) process.on(sig, () => { stop = true; clearTimeout(timer); if (wake) wake(); });
+  while (!stop) {
+    const t0 = Date.now();
+    try { await main(); } catch (e) { console.error(`run FAILED ${e.message || e}`); }
+    console.log(`${new Date().toISOString()} done in ${Math.round((Date.now() - t0) / 1000)} s; next in ${everyS} s`);
+    if (stop) break;
+    await new Promise((ok) => { wake = ok; timer = setTimeout(ok, everyS * 1000); });
+    wake = null;
+  }
+}
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const every = args.includes("--every") ? Number(args[args.indexOf("--every") + 1]) : 0;
+  if (every) {
+    if (!(every >= MIN_EVERY_S)) { console.error(`--every must be at least ${MIN_EVERY_S} seconds`); process.exit(2); }
+    loop(every);
+  } else main();
+}
