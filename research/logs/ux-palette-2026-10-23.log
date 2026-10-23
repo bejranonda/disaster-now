@@ -1,0 +1,11 @@
+# 2026-10-23T20:45:36Z python3 -I research/ux_palette_check.py
+WCAG contrast of label text on fill:
+  L1 ยังไม่น่าห่วง: 5.2:1   L* of fill 46
+  L2 ติดตามไว้: 11.2:1   L* of fill 90
+  L3 เตรียมตัว: 5.6:1   L* of fill 59
+  L4 ทำทันที: 6.9:1   L* of fill 38
+  ND ไม่มีข้อมูล: 6.9:1   L* of fill 67
+normal: smallest CIEDE2000 between two fills = 24.5 (L1 ยังไม่น่าห่วง vs ND ไม่มีข้อมูล); adjacent levels: L1-L2 72.9, L2-L3 41.9, L3-L4 30.4
+protan: smallest CIEDE2000 between two fills = 22.9 (L1 ยังไม่น่าห่วง vs ND ไม่มีข้อมูล); adjacent levels: L1-L2 64.2, L2-L3 28.5, L3-L4 26.4
+deutan: smallest CIEDE2000 between two fills = 20.2 (L2 ติดตามไว้ vs L3 เตรียมตัว); adjacent levels: L1-L2 69.1, L2-L3 20.2, L3-L4 21.8
+tritan: smallest CIEDE2000 between two fills = 18.4 (L3 เตรียมตัว vs L4 ทำทันที); adjacent levels: L1-L2 47.3, L2-L3 30.3, L3-L4 18.4

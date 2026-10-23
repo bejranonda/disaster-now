@@ -1,0 +1,32 @@
+# disaster-now source probe, 23 Oct 2026 19:47:4x–19:48:21 UTC (curl, parallel, 40 s timeout), cloud host outside Thailand via the session's proxy
+# User-Agent: disaster-now-research/0.1 (+https://github.com/bejranonda/disaster-now); Origin: https://disaster-now.example; Accept-Encoding: gzip
+# name | url | first HTTP status | body bytes on the wire | access-control-allow-origin | content-type | date header
+isd_bkk | https://www.ncei.noaa.gov/data/global-hourly/access/2026/48455099999.csv | 301 | 266 | - | text/html; charset=iso-8859-1 | Fri, 23 Oct 2026 19:48:17 GMT
+meteostat_daily_bkk | https://bulk.meteostat.net/v2/daily/48455.csv.gz | 200 | 227333 | - | application/x-gzip | Fri, 23 Oct 2026 19:48:17 GMT
+meteostat_hourly_bkk | https://bulk.meteostat.net/v2/hourly/48455.csv.gz | 200 | 2527228 | - | application/x-gzip | Fri, 23 Oct 2026 19:48:17 GMT
+a4t_now | http://air4thai.pcd.go.th/services/getNewAQI_JSON.php | 301 | 332 | - | text/html; charset=iso-8859-1 | Fri, 23 Oct 2026 19:48:17 GMT
+a4t_mirror | https://air4thai.com/forweb/getAQI_JSON.php | ERR | 0 | - | - | -
+a4t_hist | http://air4thai.pcd.go.th/webV2/history/api/data.php?stationID=10t&param=PM25&type=hr&sdate=2026-10-20&edate=2026-10-22&stime=00&etime=23 | 301 | 440 | - | text/html; charset=iso-8859-1 | Fri, 23 Oct 2026 19:48:17 GMT
+gistda_prov | https://pm25.gistda.or.th/rest/getPm25byProvince | 200 | 3525 | * | application/json; charset=utf-8 | Fri, 23 Oct 2026 19:48:20 GMT
+gistda_loc | https://pm25.gistda.or.th/rest/getPm25byLocation?lat=13.75&lng=100.50 | 200 | 2847 | * | application/json; charset=utf-8 | Fri, 23 Oct 2026 19:48:20 GMT
+tw_rain_bkk | https://api-v3.thaiwater.net/api/v1/thaiwater30/public/rain_24h?province_code=10 | 200 | 13560 | https://disaster-now.example | application/json; charset=utf-8 | Fri, 23 Oct 2026 19:48:18 GMT
+tw_wl_bkk | https://api-v3.thaiwater.net/api/v1/thaiwater30/public/waterlevel_load?province_code=10 | 200 | 12188 | https://disaster-now.example | application/json; charset=utf-8 | Fri, 23 Oct 2026 19:48:18 GMT
+hii_ff | https://fews2.hii.or.th/model-output/data_portal/flashflood/flashflood_report.txt | 200 | 271 | * | text/plain; charset=utf-8 | Fri, 23 Oct 2026 19:48:18 GMT
+fw_stations | https://flood.autobahn.bot/api/stations | 200 | 251257 | - | application/json | Fri, 23 Oct 2026 19:48:18 GMT
+fw_point | https://flood.autobahn.bot/api/point?lat=13.75&lon=100.5 | 200 | 2789 | - | application/json | Fri, 23 Oct 2026 19:48:19 GMT
+fw_health | https://flood.autobahn.bot/api/health | 200 | 1496 | - | application/json | Fri, 23 Oct 2026 19:48:17 GMT
+usgs_day | https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson | 200 | 2092 | * | application/json; charset=utf-8 | Fri, 23 Oct 2026 19:47:35 GMT
+emsc | https://www.seismicportal.eu/fdsnws/event/1/query?format=json&limit=5&minlat=0&maxlat=30&minlon=88&maxlon=110 | 200 | 2745 | * | application/json | Fri, 23 Oct 2026 19:48:18 GMT
+bmkg | https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json | 200 | 328 | * | application/json | Fri, 23 Oct 2026 19:48:17 GMT
+tmd_cap | https://www.tmd.go.th/api/xml/CAP | 200 | 1912 | - | text/xml | Fri, 23 Oct 2026 19:48:19 GMT
+tmd_eq | https://earthquake.tmd.go.th/feed/rss_inside.xml | 200 | 1211 | - | text/xml | Fri, 23 Oct 2026 19:48:18 GMT
+firms_sea | https://firms.modaps.eosdis.nasa.gov/data/active_fire/suomi-npp-viirs-c2/csv/SUOMI_VIIRS_C2_SouthEast_Asia_24h.csv | 200 | 1923883 | - | text/csv | Fri, 23 Oct 2026 19:48:17 GMT
+gdacs | https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=EQ;TC;FL;DR;WF&country=Thailand | 200 | 4258 | * | application/json; charset=utf-8 | Fri, 23 Oct 2026 19:48:20 GMT
+dmr_fault | https://gisportal.dmr.go.th/arcgis/rest/services/HAZARD/T_ACTIVEFAULT/MapServer/0/query?where=1%3D1&returnCountOnly=true&f=json | 200 | 34 | https://disaster-now.example | application/json;charset=UTF-8 | Fri, 23 Oct 2026 19:48:18 GMT
+dmr_vill | https://gisportal.dmr.go.th/arcgis/rest/services/HAZARD/VILLLAGE_RISK/MapServer/0/query?geometry=98.98,18.79&geometryType=esriGeometryPoint&inSR=4326&distance=10000&units=esriSRUnit_Meter&returnCountOnly=true&f=json | 200 | 32 | https://disaster-now.example | application/json;charset=UTF-8 | Fri, 23 Oct 2026 19:48:18 GMT
+hdx | https://data.humdata.org/api/3/action/package_show?id=cod-ab-tha | 200 | 4372 | * | application/json;charset=utf-8 | Fri, 23 Oct 2026 19:48:17 GMT
+nominatim | https://nominatim.openstreetmap.org/search?q=%E0%B8%A5%E0%B8%B2%E0%B8%94%E0%B8%9E%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%A7&format=jsonv2&limit=2&countrycodes=th | 200 | 485 | * | application/json; charset=utf-8 | Fri, 23 Oct 2026 19:48:17 GMT
+photon | https://photon.komoot.io/api/?q=Lat%20Phrao&limit=2&lat=13.75&lon=100.5 | 200 | 464 | * | application/json | Fri, 23 Oct 2026 19:48:17 GMT
+# a4t_mirror: curl (60) SSL certificate problem: unable to get local issuer certificate (Let's Encrypt YR1 missing); with LE int-yr1 + root-yr-by-x1 added: 200, 173 stations (20:03 UTC)
+# isd_bkk: 301 to the NOAA S3 bucket index; noaa-global-hourly-pds had no 2026/48455* key (2025 keys exist)
+# api.open-meteo.com: 200 once, then {"reason":"Daily API request limit exceeded…"} (19:45 UTC); previous-runs-api and historical-forecast-api: the same; archive-api: timeout 25 s; air-quality-api, ensemble-api, flood-api, geocoding-api: 200

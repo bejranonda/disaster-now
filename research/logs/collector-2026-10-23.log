@@ -1,0 +1,6 @@
+# 2026-10-23T20:48:00Z node tools/collect.mjs (into public/data/live/, not committed)
+warnings.json: 1 items
+tmd_quakes.json: 10 items
+storms.json: 1 items
+hotspots.json: 306 items
+air4thai.json: FAILED HTTP 503

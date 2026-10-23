@@ -1,0 +1,38 @@
+# 2026-10-23T20:47:54Z npm test
+ok 1 - distance and rounding
+ok 2 - nearest subdistrict and its label
+ok 3 - Andaman province codes are the six coastal provinces
+ok 4 - heat index matches the NWS method
+ok 5 - bands use the sources' own edges
+ok 6 - river level follows FloodWatch's rule
+ok 7 - quantiles and day windows
+ok 8 - ensemble outlook from a live response
+ok 9 - window level from chances
+ok 10 - chance wording never says 0 or 100
+ok 11 - GISTDA point: Bangkok time with a fake Z
+ok 12 - CAMS correction ratio from overlapping hours
+ok 13 - ThaiWater rain near Bangkok's old town
+ok 14 - ThaiWater gauges use the bank, not situation_level
+ok 15 - HII flash-flood report: header only means none tonight
+ok 16 - FloodWatch point parses
+ok 17 - quakes: EMSC + USGS merged, the Laos M4.2 near Nan
+ok 18 - GDACS: only current events; TCs only within 1,000 km
+ok 19 - warnings and hotspots by province and distance
+ok 20 - local search: provinces and districts first, prefixes stripped, several words narrow
+ok 21 - FloodWatch's soi variants and abbreviations
+ok 22 - geocoder answers parse; outside Thailand dropped
+ok 23 - FloodWatch's point rule: in Bangkok the river doesn't judge a point
+ok 24 - ThaiWater ground 0 means no bed level (as FloodWatch reads it)
+ok 25 - JMA storm: distance and forecast circle
+ok 26 - sourced actions follow the bands
+ok 27 - collector: TMD CAP item → province codes and times from the item
+ok 28 - collector: TMD quake RSS and FIRMS CSV
+ok 29 - every data-t in index.html has Thai and English
+ok 30 - assess on live fixtures: page values equal the sources (cross-check)
+ok 31 - collector: TMD storm track (UTC without offset) and its distance
+ok 32 - AWW12 intensity: the thresholds researcher's table (OpenQuake coefficients)
+ok 33 - UV tile: the level comes from the UV now, not the day's peak
+ok 34 - FloodWatch's own point answer leads the flood tile when it is there
+# tests 34
+# pass 34
+# fail 0

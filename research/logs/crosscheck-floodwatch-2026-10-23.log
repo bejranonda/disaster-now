@@ -28,3 +28,9 @@ pairs (ours→FloodWatch): {"normal→fw:normal":553,"warning→fw:warning":31,"
 differences explained by: BMA thresholds 0 · another bank 0 · another reading 1 · other 1
    {"code":"TCP004","name":"ปตร.ลาดชิด (ทุ่งผักไห่)","ours":"normal","fw":"watch","basis":"bank","agency":"HII","level":3.79,"fwLevel":3.79,"bank":5,"fwBank":5,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
    {"code":"ONE039","name":"สะพานข้ามคลองระโนด","ours":"normal","fw":"watch","basis":"bank","agency":"HII","level":0.43,"fwLevel":0.45,"bank":1.18,"fwBank":1.18,"time":"2026-10-24T03:10","fwTime":"2026-10-23T20:00:00+00:00"}
+
+# re-run from the archived inputs, 2026-10-23T20:43:42Z: node research/crosscheck_floodwatch.mjs research/data/thaiwater_waterlevel_load_2026-10-23T2023Z.json.gz research/data/floodwatch_stations_2026-10-23T2023Z.json.gz --now 2026-10-23T20:24:00Z
+ThaiWater gauges judged by this app (fresh, with a bank): 707
+with a FloodWatch twin of the same code and both known: 693; same status: 691 (99.7 %)
+skipped (FloodWatch "unknown" or ours stale/no bank): 107
+pairs (ours→FloodWatch): {"normal→fw:normal":553,"warning→fw:warning":31,"watch→fw:watch":91,"critical→fw:critical":16,"normal→fw:watch":2}

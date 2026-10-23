@@ -1,0 +1,28 @@
+# 2026-10-23T20:47:54Z CHROME_PATH=/opt/pw-browsers/chromium npm run smoke (fixtures of 23 Oct 19:50 UTC, clock pinned)
+ok   first visit shows the welcome and the GPS button
+ok   GPS names the subdistrict: "แขวงบวรนิเวศ เขตพระนคร กรุงเทพมหานคร"
+ok   verdict: ●●●○ เตรียมตัว 🌡️ ความร้อน: เตือนภัย · 38 °C 👉 ลดกิจกรรมกลางแดด (ข่าวอ้างหน่วยงาน) เรื่องอื่น: 😷 ฝุ่น PM2.5: ปานกลาง ยังไม่มีข้อมูล: ไฟป่า
+ok   10 hazard cards (10)
+ok   PM2.5 card shows the nearest PCD station's 24-h mean (31.9 at bkp92t, from the fixture)
+ok   PM2.5 card names the station
+ok   flood card leads with cm below the bank for C.12 (1.31 m in ThaiWater's fixture)
+ok   3-day table has tomorrow
+ok   heat card value: 🌡️ | ความร้อน (ดัชนีความร้อน) | เตือนภัย
+ok   no horizontal scroll at 390 px
+ok   tap targets ≥ 44 px (0 smaller: [])
+ok   English switch translates the cards and headings
+ok   no Thai left in English headings ([])
+ok   local search: first hit "📌 จังหวัดเชียงใหม่"
+ok   the OpenStreetMap button is offered
+ok   choosing a hit opens that place
+ok   reopening the app shows the saved place first
+ok   Enter asks OpenStreetMap; the soi is found
+ok   no page errors ()
+ok   no horizontal scroll at 320 px with larger text
+ok   all sources down → "– – – –
+ยังไม่มีข้อมูลพอ
+ยังไม่มีข้อมูล: ฝน, น้ำท่วม, ฝุ่น PM2.5, ความร้อน, แผ่นดินไหว, ไฟป่า, ลม พายุ, UV, ดินถล่ม, มลพิษอื่น"
+ok   every card says it couldn't load, none shows a level
+ok   no page errors with sources down ()
+
+all checks passed

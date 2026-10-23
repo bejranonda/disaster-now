@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 // Cross-check: does this app's gauge rule (public/js/levels.js riverLevel, on ThaiWater's waterlevel_load) give the
 // same status as FloodWatch's own /api/stations for the same gauge at about the same time?
-//   node research/crosscheck_floodwatch.mjs <thaiwater waterlevel_load.json> <floodwatch stations.json>
-// Both files fetched within a minute of each other (log: research/logs/crosscheck-floodwatch-2026-10-23.log).
+//   node research/crosscheck_floodwatch.mjs <thaiwater waterlevel_load.json[.gz]> <floodwatch stations.json[.gz]> [--now ISO]
+// Both files fetched within a minute of each other (log: research/logs/crosscheck-floodwatch-2026-10-23.log). The
+// inputs of 23 Oct 2026 are archived: research/data/{thaiwater_waterlevel_load,floodwatch_stations}_2026-10-23T2023Z.json.gz
+// (re-run with --now 2026-10-23T20:24:00Z, or every gauge reads as stale).
 import { readFileSync } from "node:fs";
+import { gunzipSync } from "node:zlib";
 import { nearGauges } from "../public/js/water.js";
 
-const [twPath, fwPath] = process.argv.slice(2);
-const tw = JSON.parse(readFileSync(twPath, "utf8"));
-const fw = JSON.parse(readFileSync(fwPath, "utf8"));
-const NOW = Date.now();
+const args = process.argv.slice(2);
+const read = (p) => JSON.parse((p.endsWith(".gz") ? gunzipSync(readFileSync(p)) : readFileSync(p)).toString("utf8"));
+const [twPath, fwPath] = args.filter((a, i) => !a.startsWith("--") && args[i - 1] !== "--now");
+const tw = read(twPath);
+const fw = read(fwPath);
+const NOW = args.includes("--now") ? Date.parse(args[args.indexOf("--now") + 1]) : Date.now();
 // every ThaiWater gauge, judged by this app (distance filter off: a point in the middle, radius the whole country)
 const ours = nearGauges(tw, 13, 101, NOW, { maxKm: 5000, maxAgeH: 6 });
 const NAMES = ["normal", "watch", "warning", "critical"];
