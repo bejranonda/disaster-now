@@ -1,0 +1,15 @@
+
+===== run 2026-10-23T20:35:48+00:00 =====
+Open-Meteo grid point 13.75,100.5 elevation 9.0 m; members 51
+Open-Meteo T2m at 2026-10-24 12 UTC: median 28.50, min 27.90, max 29.50
+GRIB 00z step 36: 50 members, median 28.46, min 26.18, max 29.60
+GRIB 06z step 30: 50 members, median 28.46, min 27.84, max 29.51
+GRIB 12z step 24: 50 members, median 28.51, min 27.38, max 29.70
+
+===== run 2026-10-23T20:36:42+00:00 =====
+Open-Meteo grid point 13.75,100.5 elevation 9.0 m; members 51
+Open-Meteo T2m at 2026-10-24 12 UTC: median 28.50, min 27.90, max 29.50
+GRIB 00z step 36: 50 members, median 28.46, min 26.18, max 29.60; member-by-member difference Open-Meteo − GRIB (members 1–50; the -ef files hold no control): mean +0.098, max |d| 2.220 °C
+GRIB 06z step 30: 50 members, median 28.46, min 27.84, max 29.51; member-by-member difference Open-Meteo − GRIB (members 1–50; the -ef files hold no control): mean +0.022, max |d| 0.074 °C
+GRIB 12z step 24: 50 members, median 28.51, min 27.38, max 29.70; member-by-member difference Open-Meteo − GRIB (members 1–50; the -ef files hold no control): mean +0.009, max |d| 1.259 °C
+closest run: 06z (mean |difference| 0.030 °C)

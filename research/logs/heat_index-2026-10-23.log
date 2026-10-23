@@ -1,0 +1,13 @@
+T= 25.0 °C RH= 50.0 %  HI= 24.861 °C  want  24.86  level=None  ok  [simple formula ((HI_s+T)/2 < 80 °F)]
+T= 30.0 °C RH= 60.0 %  HI= 32.832 °C  want  32.83  level=เฝ้าระวัง  ok  [Rothfusz, no adjustment]
+T= 32.0 °C RH= 70.0 %  HI= 40.409 °C  want  40.41  level=เตือนภัย  ok  [Rothfusz, no adjustment]
+T= 35.0 °C RH= 75.0 %  HI= 53.329 °C  want  53.33  level=อันตรายมาก  ok  [Rothfusz, no adjustment, extreme band]
+T= 38.0 °C RH= 10.0 %  HI= 34.727 °C  want  34.73  level=เตือนภัย  ok  [Rothfusz minus the low-RH adjustment (RH < 13, 80–112 °F)]
+T= 29.0 °C RH= 90.0 %  HI= 37.231 °C  want  37.23  level=เตือนภัย  ok  [Rothfusz plus the high-RH adjustment (RH > 85, 80–87 °F)]
+MetPy check T=25.0 RH=50.0: 24.861 °C (diff 0.001)
+MetPy check T=30.0 RH=60.0: 32.832 °C (diff 0.002)
+MetPy check T=32.0 RH=70.0: 40.409 °C (diff 0.001)
+MetPy check T=35.0 RH=75.0: 53.329 °C (diff 0.001)
+MetPy check T=38.0 RH=10.0: 34.727 °C (diff 0.003)
+MetPy check T=29.0 RH=90.0: 37.231 °C (diff 0.001)
+ALL OK

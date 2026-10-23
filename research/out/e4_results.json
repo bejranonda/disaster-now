@@ -1,0 +1,1290 @@
+{
+ "ipe": {
+  "name": "Allen, Wald & Worden (2012) active crust",
+  "source": "Allen, Wald & Worden (2012) J. Seismol. 16:409-433; coefficients from https://raw.githubusercontent.com/gem/oq-engine/master/openquake/hazardlib/gsim/allen_2012_ipe.py (oq-engine HEAD 91db5142ba7905a33c94483fad8f8467b5d92d6f, read 2026-10-23)",
+  "rhypo_form": {
+   "c0": 2.085,
+   "c1": 1.428,
+   "c2": -1.402,
+   "c4": 0.078,
+   "m1": -0.209,
+   "m2": 2.042,
+   "s1": 0.82,
+   "s2": 0.37,
+   "s3": 22.9
+  },
+  "rrup_form": {
+   "c0": 3.95,
+   "c1": 0.913,
+   "c2": -1.107,
+   "c3": 0.813,
+   "s1": 0.72,
+   "s2": 0.23,
+   "s3": 44.7
+  }
+ },
+ "events": {
+  "us7000pn9s": {
+   "mag": 7.7,
+   "magType": "mww",
+   "place": "2025 Mandalay, Burma (Myanmar) Earthquake",
+   "lon": 95.9363,
+   "lat": 22.011,
+   "depth": 10,
+   "group": "crustal",
+   "finite_fault": true
+  },
+  "us7000pn9z": {
+   "mag": 6.7,
+   "magType": "mww",
+   "place": "Burma (Myanmar)",
+   "lon": 95.969,
+   "lat": 21.6975,
+   "depth": 10,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "usb000qack": {
+   "mag": 6.1,
+   "magType": "mww",
+   "place": "32 km SSW of Chiang Rai, Thailand",
+   "lon": 99.6696,
+   "lat": 19.6557,
+   "depth": 6,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "us70006ara": {
+   "mag": 6.2,
+   "magType": "mww",
+   "place": "43 km WNW of Sainyabuli, Laos",
+   "lon": 101.3558,
+   "lat": 19.4533,
+   "depth": 10,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "us70006anm": {
+   "mag": 5.7,
+   "magType": "mww",
+   "place": "44 km ENE of Chiang Klang, Thailand",
+   "lon": 101.2534,
+   "lat": 19.4452,
+   "depth": 10,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "usp000hyfx": {
+   "mag": 6.9,
+   "magType": "mww",
+   "place": "27 km NNW of Tachilek, Myanmar",
+   "lon": 99.822,
+   "lat": 20.687,
+   "depth": 8,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "usp000fc2v": {
+   "mag": 6.3,
+   "magType": "mwc",
+   "place": "40 km NE of Ban Houakhoua, Laos",
+   "lon": 100.732,
+   "lat": 20.503,
+   "depth": 9,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "us6000lp06": {
+   "mag": 5.7,
+   "magType": "mww",
+   "place": "76 km SW of K\u0113ng Tung, Myanmar",
+   "lon": 99.3304,
+   "lat": 21.217,
+   "depth": 15.733,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "us7000hsg4": {
+   "mag": 5.9,
+   "magType": "mww",
+   "place": "53 km S of K?ng Tung, Myanmar",
+   "lon": 99.8777,
+   "lat": 21.1504,
+   "depth": 5,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "us2000cifa": {
+   "mag": 6,
+   "magType": "mww",
+   "place": "40 km WSW of Pyu, Myanmar",
+   "lon": 96.0717,
+   "lat": 18.3719,
+   "depth": 9,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "us6000gdng": {
+   "mag": 5.5,
+   "magType": "mww",
+   "place": "53 km NW of Sainyabuli, Laos",
+   "lon": 101.3109,
+   "lat": 19.5613,
+   "depth": 10,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "us7000k9he": {
+   "mag": 5.6,
+   "magType": "mww",
+   "place": "131 km SSE of Pyapon, Myanmar",
+   "lon": 96.2895,
+   "lat": 15.2546,
+   "depth": 13.518,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "usp000jvbq": {
+   "mag": 6.8,
+   "magType": "mww",
+   "place": "51 km NNE of Shwebo, Myanmar",
+   "lon": 95.885,
+   "lat": 23.005,
+   "depth": 13.7,
+   "group": "crustal",
+   "finite_fault": false
+  },
+  "usp000hdwb": {
+   "mag": 7.5,
+   "magType": "mwc",
+   "place": "Nicobar Islands, India region",
+   "lon": 91.936,
+   "lat": 7.881,
+   "depth": 35,
+   "group": "offshore",
+   "finite_fault": true
+  },
+  "usp000h05x": {
+   "mag": 7.5,
+   "magType": "mwc",
+   "place": "266 km N of Bamboo Flat, India",
+   "lon": 92.902,
+   "lat": 14.099,
+   "depth": 24,
+   "group": "offshore",
+   "finite_fault": true
+  },
+  "us6000qvpp": {
+   "mag": 6.4,
+   "magType": "mww",
+   "place": "264 km WNW of Sabang, Indonesia",
+   "lon": 93.0637,
+   "lat": 6.6907,
+   "depth": 21,
+   "group": "offshore",
+   "finite_fault": false
+  },
+  "us10007ghm": {
+   "mag": 6.5,
+   "magType": "mww",
+   "place": "14 km WNW of Reuleuet, Indonesia",
+   "lon": 96.1678,
+   "lat": 5.2834,
+   "depth": 13,
+   "group": "offshore",
+   "finite_fault": false
+  }
+ },
+ "summaries": {
+  "crustal|geo10km|nresp>=1|res_rhypo": {
+   "0-50": {
+    "n": 36,
+    "mae": 1.6979187101662165,
+    "bias": -0.07084446022395278,
+    "responses": 150
+   },
+   "50-100": {
+    "n": 33,
+    "mae": 1.370712927453422,
+    "bias": 0.11701264478236166,
+    "responses": 144
+   },
+   "100-200": {
+    "n": 113,
+    "mae": 1.0204913201196122,
+    "bias": 0.016690342972503467,
+    "responses": 302
+   },
+   "200-400": {
+    "n": 151,
+    "mae": 1.045073713142204,
+    "bias": 0.4588251513580908,
+    "responses": 523
+   },
+   "400-700": {
+    "n": 219,
+    "mae": 1.12301525170672,
+    "bias": 0.1566163172241691,
+    "responses": 1039
+   },
+   "700-1000": {
+    "n": 108,
+    "mae": 1.1712809749418789,
+    "bias": -0.09344968558300591,
+    "responses": 184
+   },
+   "1000-1600": {
+    "n": 171,
+    "mae": 0.9322169935464071,
+    "bias": 0.0153137408471977,
+    "responses": 1365
+   },
+   "all": {
+    "n": 875,
+    "mae": 1.0940137275048754,
+    "bias": 0.0971420733087019,
+    "responses": 3799
+   }
+  },
+  "crustal|geo10km|nresp>=1|res_rrup": {
+   "0-50": {
+    "n": 67,
+    "mae": 1.3586724365738152,
+    "bias": 0.4932917560874659,
+    "responses": 257
+   },
+   "50-100": {
+    "n": 37,
+    "mae": 1.3869839115738452,
+    "bias": 0.34189621788486557,
+    "responses": 130
+   },
+   "100-200": {
+    "n": 134,
+    "mae": 0.9524710056923682,
+    "bias": -0.25200385404733383,
+    "responses": 528
+   },
+   "200-400": {
+    "n": 186,
+    "mae": 0.8179006331434172,
+    "bias": -0.26055878658077464,
+    "responses": 784
+   },
+   "400-700": {
+    "n": 243,
+    "mae": 0.947196283468292,
+    "bias": -0.09261156766678115,
+    "responses": 1718
+   },
+   "700-1000": {
+    "n": 92,
+    "mae": 1.1559496829045766,
+    "bias": -0.5491421457146469,
+    "responses": 154
+   },
+   "1000-1600": {
+    "n": 90,
+    "mae": 1.046286757399362,
+    "bias": -0.003421048073608245,
+    "responses": 199
+   },
+   "all": {
+    "n": 875,
+    "mae": 1.0039060393287238,
+    "bias": -0.13632819911020244,
+    "responses": 3799
+   }
+  },
+  "crustal|geo10km|nresp>=3|res_rhypo": {
+   "0-50": {
+    "n": 13,
+    "mae": 1.227008864015518,
+    "bias": 0.355747480757954,
+    "responses": 121
+   },
+   "50-100": {
+    "n": 14,
+    "mae": 1.442825812980238,
+    "bias": 0.5326050751885422,
+    "responses": 120
+   },
+   "100-200": {
+    "n": 31,
+    "mae": 0.9524186311633989,
+    "bias": 0.1978926097595197,
+    "responses": 206
+   },
+   "200-400": {
+    "n": 51,
+    "mae": 0.7973148659202711,
+    "bias": 0.4488646874652247,
+    "responses": 399
+   },
+   "400-700": {
+    "n": 60,
+    "mae": 1.0666229367661135,
+    "bias": 0.636449431710186,
+    "responses": 853
+   },
+   "700-1000": {
+    "n": 16,
+    "mae": 0.950362719516941,
+    "bias": 0.4413367809968237,
+    "responses": 84
+   },
+   "1000-1600": {
+    "n": 55,
+    "mae": 0.6445931306027245,
+    "bias": 0.34792433346736684,
+    "responses": 1229
+   },
+   "all": {
+    "n": 244,
+    "mae": 0.9228764656064454,
+    "bias": 0.44316166725759504,
+    "responses": 3059
+   }
+  },
+  "crustal|geo10km|nresp>=3|res_rrup": {
+   "0-50": {
+    "n": 22,
+    "mae": 1.336531054312485,
+    "bias": 0.9231451538464398,
+    "responses": 200
+   },
+   "50-100": {
+    "n": 16,
+    "mae": 1.5011024218766522,
+    "bias": 0.8086064714157549,
+    "responses": 104
+   },
+   "100-200": {
+    "n": 41,
+    "mae": 0.7779852799918162,
+    "bias": -0.01260159174803012,
+    "responses": 419
+   },
+   "200-400": {
+    "n": 61,
+    "mae": 0.6347011377390448,
+    "bias": 0.07827652240922373,
+    "responses": 630
+   },
+   "400-700": {
+    "n": 78,
+    "mae": 0.6576417006621965,
+    "bias": 0.3360770628528937,
+    "responses": 1528
+   },
+   "700-1000": {
+    "n": 13,
+    "mae": 0.6798047229944503,
+    "bias": -0.39178830780153073,
+    "responses": 67
+   },
+   "1000-1600": {
+    "n": 12,
+    "mae": 0.8302292004430032,
+    "bias": 0.37780014519211963,
+    "responses": 108
+   },
+   "all": {
+    "n": 244,
+    "mae": 0.8035896687687251,
+    "bias": 0.2668179962008393,
+    "responses": 3059
+   }
+  },
+  "crustal|city|nresp>=1|res_rhypo": {
+   "0-50": {
+    "n": 13,
+    "mae": 1.3411390395984246,
+    "bias": 0.4961436370172848,
+    "responses": 142
+   },
+   "50-100": {
+    "n": 29,
+    "mae": 1.2065785985253976,
+    "bias": -0.130382531697254,
+    "responses": 165
+   },
+   "100-200": {
+    "n": 72,
+    "mae": 0.8620214584255533,
+    "bias": -0.24418929383486265,
+    "responses": 322
+   },
+   "200-400": {
+    "n": 109,
+    "mae": 0.8123144033054605,
+    "bias": 0.05146856190279661,
+    "responses": 770
+   },
+   "400-700": {
+    "n": 138,
+    "mae": 1.1076073505191844,
+    "bias": 0.2389456851103845,
+    "responses": 919
+   },
+   "700-1000": {
+    "n": 85,
+    "mae": 1.1603786503728435,
+    "bias": -0.01848726070383629,
+    "responses": 405
+   },
+   "1000-1600": {
+    "n": 110,
+    "mae": 0.9942002365608289,
+    "bias": 0.06811796860444207,
+    "responses": 1158
+   },
+   "all": {
+    "n": 594,
+    "mae": 1.013246911244014,
+    "bias": 0.028573482977947564,
+    "responses": 3953
+   }
+  },
+  "crustal|city|nresp>=1|res_rrup": {
+   "0-50": {
+    "n": 21,
+    "mae": 1.2651585351841388,
+    "bias": 0.7679063209746062,
+    "responses": 252
+   },
+   "50-100": {
+    "n": 29,
+    "mae": 1.194120943922348,
+    "bias": -0.005041483112414705,
+    "responses": 138
+   },
+   "100-200": {
+    "n": 82,
+    "mae": 0.807036369513448,
+    "bias": -0.3467033028946007,
+    "responses": 511
+   },
+   "200-400": {
+    "n": 132,
+    "mae": 0.7366608865070439,
+    "bias": -0.18890565365829443,
+    "responses": 944
+   },
+   "400-700": {
+    "n": 156,
+    "mae": 0.9481261027424025,
+    "bias": -0.09499375601277273,
+    "responses": 1469
+   },
+   "700-1000": {
+    "n": 79,
+    "mae": 1.1653302820549019,
+    "bias": -0.3753127184863468,
+    "responses": 382
+   },
+   "1000-1600": {
+    "n": 68,
+    "mae": 1.0590852367502064,
+    "bias": 0.06216365626679071,
+    "responses": 227
+   },
+   "all": {
+    "n": 594,
+    "mae": 0.9453482188958359,
+    "bias": -0.14540001510711414,
+    "responses": 3953
+   }
+  },
+  "crustal|city|nresp>=3|res_rhypo": {
+   "0-50": {
+    "n": 9,
+    "mae": 1.0309828822215668,
+    "bias": 0.7206655768463306,
+    "responses": 138
+   },
+   "50-100": {
+    "n": 13,
+    "mae": 1.3327479052460187,
+    "bias": -0.11730535249994004,
+    "responses": 144
+   },
+   "100-200": {
+    "n": 31,
+    "mae": 0.8214415648321743,
+    "bias": 0.1059631086223681,
+    "responses": 269
+   },
+   "200-400": {
+    "n": 41,
+    "mae": 0.8158587884280908,
+    "bias": 0.169046017111766,
+    "responses": 682
+   },
+   "400-700": {
+    "n": 50,
+    "mae": 1.1188404401405208,
+    "bias": 0.5389877719633849,
+    "responses": 815
+   },
+   "700-1000": {
+    "n": 21,
+    "mae": 0.8744447318573163,
+    "bias": 0.4978084088170143,
+    "responses": 335
+   },
+   "1000-1600": {
+    "n": 42,
+    "mae": 0.8101277207170935,
+    "bias": 0.3987147941195038,
+    "responses": 1073
+   },
+   "all": {
+    "n": 208,
+    "mae": 0.9327825364255644,
+    "bias": 0.33410925289022864,
+    "responses": 3486
+   }
+  },
+  "crustal|city|nresp>=3|res_rrup": {
+   "0-50": {
+    "n": 16,
+    "mae": 1.0916226691869548,
+    "bias": 0.9979102428320947,
+    "responses": 247
+   },
+   "50-100": {
+    "n": 13,
+    "mae": 1.3276069388910394,
+    "bias": 0.09661661336070684,
+    "responses": 117
+   },
+   "100-200": {
+    "n": 39,
+    "mae": 0.6891602118030372,
+    "bias": -0.06809689286348093,
+    "responses": 456
+   },
+   "200-400": {
+    "n": 51,
+    "mae": 0.6289739214650774,
+    "bias": -0.09402009039307561,
+    "responses": 840
+   },
+   "400-700": {
+    "n": 56,
+    "mae": 0.7391072752922144,
+    "bias": 0.28473748690022666,
+    "responses": 1352
+   },
+   "700-1000": {
+    "n": 20,
+    "mae": 0.7548879685855381,
+    "bias": 0.01556231205937828,
+    "responses": 314
+   },
+   "1000-1600": {
+    "n": 13,
+    "mae": 0.9694172188922179,
+    "bias": 0.5651896111134721,
+    "responses": 160
+   },
+   "all": {
+    "n": 208,
+    "mae": 0.7825478932754124,
+    "bias": 0.1604605138430552,
+    "responses": 3486
+   }
+  },
+  "crustal|city|Thailand|res_rhypo": {
+   "0-50": {
+    "n": 3,
+    "mae": 1.258349824666514,
+    "bias": -1.0943842121609715,
+    "responses": 18
+   },
+   "50-100": {
+    "n": 16,
+    "mae": 1.2659311849563095,
+    "bias": -0.5820041576400833,
+    "responses": 70
+   },
+   "100-200": {
+    "n": 46,
+    "mae": 0.8121599129297721,
+    "bias": -0.518330299909765,
+    "responses": 151
+   },
+   "200-400": {
+    "n": 72,
+    "mae": 0.7002787623986715,
+    "bias": -0.07420974429310195,
+    "responses": 576
+   },
+   "400-700": {
+    "n": 79,
+    "mae": 0.9888803103104679,
+    "bias": 0.44537922225719556,
+    "responses": 572
+   },
+   "700-1000": {
+    "n": 62,
+    "mae": 1.2108352109969074,
+    "bias": -0.0034110765079364406,
+    "responses": 356
+   },
+   "1000-1600": {
+    "n": 76,
+    "mae": 0.9891831460548438,
+    "bias": 0.09841178675231647,
+    "responses": 1094
+   },
+   "all": {
+    "n": 357,
+    "mae": 0.9641879463913025,
+    "bias": 0.0021721200541918425,
+    "responses": 2841
+   }
+  },
+  "crustal|city|Thailand|res_rrup": {
+   "0-50": {
+    "n": 3,
+    "mae": 1.1573918182545755,
+    "bias": -0.8431587442957401,
+    "responses": 18
+   },
+   "50-100": {
+    "n": 16,
+    "mae": 1.1711442335114417,
+    "bias": -0.4743313336953646,
+    "responses": 70
+   },
+   "100-200": {
+    "n": 47,
+    "mae": 0.8069129542583898,
+    "bias": -0.6064438946649129,
+    "responses": 158
+   },
+   "200-400": {
+    "n": 98,
+    "mae": 0.6427724346146274,
+    "bias": -0.26007578102787454,
+    "responses": 823
+   },
+   "400-700": {
+    "n": 108,
+    "mae": 0.8740637899615606,
+    "bias": 0.028260665506185906,
+    "responses": 1295
+   },
+   "700-1000": {
+    "n": 57,
+    "mae": 1.1786319080725416,
+    "bias": -0.33672039734730214,
+    "responses": 348
+   },
+   "1000-1600": {
+    "n": 27,
+    "mae": 1.1999853521846957,
+    "bias": 0.42639438699104915,
+    "responses": 128
+   },
+   "all": {
+    "n": 357,
+    "mae": 0.8917029150866813,
+    "bias": -0.1890952157414986,
+    "responses": 2841
+   }
+  },
+  "offshore|city|res_rhypo": {
+   "0-50": {
+    "n": 1,
+    "mae": 0.8202676566517102,
+    "bias": 0.8202676566517102,
+    "responses": 4
+   },
+   "50-100": {
+    "n": 2,
+    "mae": 0.4196306664849194,
+    "bias": -0.2489486098114284,
+    "responses": 5
+   },
+   "100-200": {
+    "n": 2,
+    "mae": 0.3621197049463807,
+    "bias": 0.19123022986044313,
+    "responses": 3
+   },
+   "200-400": {
+    "n": 8,
+    "mae": 0.7333016892862341,
+    "bias": -0.6647201904185442,
+    "responses": 43
+   },
+   "400-700": {
+    "n": 21,
+    "mae": 0.7010761887102708,
+    "bias": -0.4779963002555121,
+    "responses": 58
+   },
+   "700-1000": {
+    "n": 9,
+    "mae": 1.3020907786205145,
+    "bias": -0.18197974166122352,
+    "responses": 26
+   },
+   "1000-1600": {
+    "n": 109,
+    "mae": 0.7544278023019422,
+    "bias": 0.2134614429612311,
+    "responses": 778
+   },
+   "all": {
+    "n": 188,
+    "mae": 0.7813033201485077,
+    "bias": 0.14026334068988586,
+    "responses": 1086
+   }
+  }
+ },
+ "per_event_thailand": {
+  "us2000cifa": {
+   "n": 16,
+   "responses": 69,
+   "mae": 0.593324141132624,
+   "bias": -0.28524575037577143,
+   "dist_range": [
+    302.75457462723733,
+    876.3451841789114
+   ]
+  },
+  "us6000gdng": {
+   "n": 9,
+   "responses": 18,
+   "mae": 1.0721960958073682,
+   "bias": 0.6483285400918779,
+   "dist_range": [
+    55.513450761178184,
+    666.0267732724612
+   ]
+  },
+  "us6000lp06": {
+   "n": 17,
+   "responses": 64,
+   "mae": 1.0295856742101794,
+   "bias": 0.9401231851783719,
+   "dist_range": [
+    105.68023882125584,
+    1625.1376452668126
+   ]
+  },
+  "us70006anm": {
+   "n": 23,
+   "responses": 93,
+   "mae": 1.0824370107915238,
+   "bias": 0.6389857768961521,
+   "dist_range": [
+    44.47687201014371,
+    699.8044700573168
+   ]
+  },
+  "us70006ara": {
+   "n": 37,
+   "responses": 291,
+   "mae": 0.9207768683468082,
+   "bias": -0.2667095047327763,
+   "dist_range": [
+    54.65679676938292,
+    654.6620997586664
+   ]
+  },
+  "us7000hsg4": {
+   "n": 8,
+   "responses": 41,
+   "mae": 0.9154726350145463,
+   "bias": 0.2886728641672466,
+   "dist_range": [
+    80.26107511562698,
+    816.2309618074814
+   ]
+  },
+  "us7000k9he": {
+   "n": 8,
+   "responses": 13,
+   "mae": 0.956218468078889,
+   "bias": 0.956218468078889,
+   "dist_range": [
+    292.90953347542586,
+    547.9266413904431
+   ]
+  },
+  "us7000pn9s": {
+   "n": 120,
+   "responses": 1324,
+   "mae": 0.9373557565938474,
+   "bias": -0.3177275992134183,
+   "dist_range": [
+    368.8104664408544,
+    1777.2146097138445
+   ]
+  },
+  "us7000pn9z": {
+   "n": 34,
+   "responses": 74,
+   "mae": 1.3326929399421155,
+   "bias": 1.0629416545941939,
+   "dist_range": [
+    394.5803028738967,
+    1146.1072112936993
+   ]
+  },
+  "usb000qack": {
+   "n": 24,
+   "responses": 82,
+   "mae": 0.8325771430749965,
+   "bias": -0.1194452112736446,
+   "dist_range": [
+    33.425308345801895,
+    679.6942916102327
+   ]
+  },
+  "usp000fc2v": {
+   "n": 17,
+   "responses": 151,
+   "mae": 0.7503318933289961,
+   "bias": 0.0033466048455959804,
+   "dist_range": [
+    89.58144913046121,
+    753.579824875178
+   ]
+  },
+  "usp000hyfx": {
+   "n": 33,
+   "responses": 517,
+   "mae": 1.041460527468568,
+   "bias": -0.9170761522890958,
+   "dist_range": [
+    30.283902298929895,
+    871.2628028706037
+   ]
+  },
+  "usp000jvbq": {
+   "n": 11,
+   "responses": 104,
+   "mae": 0.7937203001636379,
+   "bias": 0.3450343152883484,
+   "dist_range": [
+    466.511321746123,
+    1157.4045530337164
+   ]
+  }
+ },
+ "bangkok_2025": {
+  "city": [
+   {
+    "cdi": 4.7,
+    "nresp": 428,
+    "rhypo": 1039.569067164181,
+    "rrup": 664.8745738300764,
+    "pred_rhypo": 3.577624331964122,
+    "pred_rrup": 3.7848298181442575
+   }
+  ],
+  "boxes": {
+   "n": 2,
+   "responses": 152,
+   "mean_cdi": 4.449999999999999,
+   "mean_res_rhypo": 0.8835515045570141,
+   "mean_res_rrup": 0.6789140679894965
+  },
+  "other_thai_800_1300": {
+   "n": 77,
+   "mean_cdi": 3.1870129870129866,
+   "mean_res_rhypo": -0.434497298611691
+  }
+ },
+ "bangkok_term": {
+  "value": 1.0589545069213606,
+  "fitted_on": [
+   "us2000cifa",
+   "us6000gdng",
+   "us6000lp06",
+   "us70006anm",
+   "us70006ara",
+   "us7000k9he",
+   "usb000qack",
+   "usp000fc2v",
+   "usp000hyfx",
+   "usp000jvbq"
+  ],
+  "tested_on": [
+   "us7000pn9s",
+   "us7000pn9z"
+  ],
+  "per_event": {
+   "us2000cifa": {
+    "year": 2018,
+    "n": 2,
+    "responses": 6,
+    "res_rhypo": 0.4886273056808999,
+    "res_rrup": -0.012493503567797548
+   },
+   "us6000gdng": {
+    "year": 2021,
+    "n": 2,
+    "responses": 5,
+    "res_rhypo": 1.9549547885310878,
+    "res_rrup": 1.2096267175189237
+   },
+   "us6000lp06": {
+    "year": 2023,
+    "n": 2,
+    "responses": 7,
+    "res_rhypo": 1.42862478985688,
+    "res_rrup": 0.7320954963387509
+   },
+   "us70006anm": {
+    "year": 2019,
+    "n": 5,
+    "responses": 40,
+    "res_rhypo": 2.01341420285422,
+    "res_rrup": 1.3769707772853939
+   },
+   "us70006ara": {
+    "year": 2019,
+    "n": 7,
+    "responses": 175,
+    "res_rhypo": 1.2609797840234689,
+    "res_rrup": 0.8808126911725479
+   },
+   "us7000k9he": {
+    "year": 2023,
+    "n": 5,
+    "responses": 10,
+    "res_rhypo": 0.9621832567932949,
+    "res_rrup": 0.33389973609086854
+   },
+   "us7000pn9s": {
+    "year": 2025,
+    "n": 14,
+    "responses": 859,
+    "res_rhypo": 0.9499831204456008,
+    "res_rrup": 0.7443207982452658
+   },
+   "us7000pn9z": {
+    "year": 2025,
+    "n": 10,
+    "responses": 41,
+    "res_rhypo": 1.9943559934080726,
+    "res_rrup": 1.7739473232441274
+   },
+   "usb000qack": {
+    "year": 2014,
+    "n": 5,
+    "responses": 21,
+    "res_rhypo": 1.0875709176948087,
+    "res_rrup": 0.6482696007477532
+   },
+   "usp000fc2v": {
+    "year": 2007,
+    "n": 3,
+    "responses": 70,
+    "res_rhypo": 0.6798223520861799,
+    "res_rrup": 0.316705367691014
+   },
+   "usp000hyfx": {
+    "year": 2011,
+    "n": 3,
+    "responses": 166,
+    "res_rhypo": 0.16193856010780655,
+    "res_rrup": 0.10111924325653557
+   },
+   "usp000jvbq": {
+    "year": 2012,
+    "n": 5,
+    "responses": 72,
+    "res_rhypo": 0.551429111584958,
+    "res_rrup": 0.3558040803417589
+   }
+  },
+  "test_mae_without": 1.4721695569268367,
+  "test_mae_with": 0.5221864364812359,
+  "rest_of_thailand_mean": 0.16108221083347962
+ },
+ "by_predicted": {
+  "pred_rhypo|-9-2.0": {
+   "n": 34,
+   "responses": 103,
+   "felt3": 0.47058823529411764,
+   "felt3_w": 0.6601941747572816,
+   "felt5": 0.0,
+   "felt5_w": 0.0
+  },
+  "pred_rhypo|2.0-2.5": {
+   "n": 52,
+   "responses": 417,
+   "felt3": 0.6538461538461539,
+   "felt3_w": 0.6354916067146283,
+   "felt5": 0.0,
+   "felt5_w": 0.0
+  },
+  "pred_rhypo|2.5-3.0": {
+   "n": 40,
+   "responses": 312,
+   "felt3": 0.4,
+   "felt3_w": 0.8141025641025641,
+   "felt5": 0.025,
+   "felt5_w": 0.003205128205128205
+  },
+  "pred_rhypo|3.0-3.5": {
+   "n": 60,
+   "responses": 247,
+   "felt3": 0.43333333333333335,
+   "felt3_w": 0.5263157894736842,
+   "felt5": 0.03333333333333333,
+   "felt5_w": 0.016194331983805668
+  },
+  "pred_rhypo|3.5-4.0": {
+   "n": 90,
+   "responses": 1064,
+   "felt3": 0.6777777777777778,
+   "felt3_w": 0.9483082706766918,
+   "felt5": 0.05555555555555555,
+   "felt5_w": 0.005639097744360902
+  },
+  "pred_rhypo|4.0-5.0": {
+   "n": 70,
+   "responses": 624,
+   "felt3": 0.9142857142857143,
+   "felt3_w": 0.9839743589743589,
+   "felt5": 0.18571428571428572,
+   "felt5_w": 0.3157051282051282
+  },
+  "pred_rhypo|5.0-12": {
+   "n": 11,
+   "responses": 74,
+   "felt3": 0.9090909090909091,
+   "felt3_w": 0.9864864864864865,
+   "felt5": 0.2727272727272727,
+   "felt5_w": 0.24324324324324326
+  },
+  "pred_adj|-9-2.0": {
+   "n": 13,
+   "responses": 14,
+   "felt3": 0.38461538461538464,
+   "felt3_w": 0.35714285714285715,
+   "felt5": 0.0,
+   "felt5_w": 0.0
+  },
+  "pred_adj|2.0-2.5": {
+   "n": 36,
+   "responses": 111,
+   "felt3": 0.6666666666666666,
+   "felt3_w": 0.8468468468468469,
+   "felt5": 0.0,
+   "felt5_w": 0.0
+  },
+  "pred_adj|2.5-3.0": {
+   "n": 49,
+   "responses": 183,
+   "felt3": 0.3877551020408163,
+   "felt3_w": 0.6120218579234973,
+   "felt5": 0.02040816326530612,
+   "felt5_w": 0.00546448087431694
+  },
+  "pred_adj|3.0-3.5": {
+   "n": 85,
+   "responses": 605,
+   "felt3": 0.49411764705882355,
+   "felt3_w": 0.5702479338842975,
+   "felt5": 0.023529411764705882,
+   "felt5_w": 0.006611570247933884
+  },
+  "pred_adj|3.5-4.0": {
+   "n": 79,
+   "responses": 371,
+   "felt3": 0.620253164556962,
+   "felt3_w": 0.8382749326145552,
+   "felt5": 0.06329113924050633,
+   "felt5_w": 0.016172506738544475
+  },
+  "pred_adj|4.0-5.0": {
+   "n": 84,
+   "responses": 1483,
+   "felt3": 0.9285714285714286,
+   "felt3_w": 0.9932569116655429,
+   "felt5": 0.15476190476190477,
+   "felt5_w": 0.13283884018880648
+  },
+  "pred_adj|5.0-12": {
+   "n": 11,
+   "responses": 74,
+   "felt3": 0.9090909090909091,
+   "felt3_w": 0.9864864864864865,
+   "felt5": 0.2727272727272727,
+   "felt5_w": 0.24324324324324326
+  }
+ },
+ "wording": {
+  "pred_rhypo|III=3.0,V=5.0": {
+   "predictor": "pred_rhypo",
+   "thresholds": [
+    3.0,
+    5.0
+   ],
+   "n": 357,
+   "felt_cities": 227,
+   "felt_but_said_not": 66,
+   "felt_but_said_not_responses": 587,
+   "cdi_ge5_cities": 24,
+   "cdi_ge5_said_clearly": 3,
+   "said_clearly": 11,
+   "said_clearly_and_cdi_lt4": 4,
+   "table": {
+    "felt clearly": {
+     "felt clearly": 3,
+     "may be felt": 20,
+     "probably not felt": 1
+    },
+    "may be felt": {
+     "felt clearly": 7,
+     "may be felt": 131,
+     "probably not felt": 65
+    },
+    "probably not felt": {
+     "felt clearly": 1,
+     "may be felt": 69,
+     "probably not felt": 60
+    }
+   }
+  },
+  "pred_rhypo|III=2.5,V=4.5": {
+   "predictor": "pred_rhypo",
+   "thresholds": [
+    2.5,
+    4.5
+   ],
+   "n": 357,
+   "felt_cities": 227,
+   "felt_but_said_not": 50,
+   "felt_but_said_not_responses": 333,
+   "cdi_ge5_cities": 24,
+   "cdi_ge5_said_clearly": 12,
+   "said_clearly": 37,
+   "said_clearly_and_cdi_lt4": 12,
+   "table": {
+    "felt clearly": {
+     "felt clearly": 12,
+     "may be felt": 12,
+     "probably not felt": 0
+    },
+    "may be felt": {
+     "felt clearly": 22,
+     "may be felt": 131,
+     "probably not felt": 50
+    },
+    "probably not felt": {
+     "felt clearly": 3,
+     "may be felt": 91,
+     "probably not felt": 36
+    }
+   }
+  },
+  "pred_rhypo|III=3.5,V=5.5": {
+   "predictor": "pred_rhypo",
+   "thresholds": [
+    3.5,
+    5.5
+   ],
+   "n": 357,
+   "felt_cities": 227,
+   "felt_but_said_not": 92,
+   "felt_but_said_not_responses": 717,
+   "cdi_ge5_cities": 24,
+   "cdi_ge5_said_clearly": 2,
+   "said_clearly": 6,
+   "said_clearly_and_cdi_lt4": 2,
+   "table": {
+    "felt clearly": {
+     "felt clearly": 2,
+     "may be felt": 19,
+     "probably not felt": 3
+    },
+    "may be felt": {
+     "felt clearly": 3,
+     "may be felt": 111,
+     "probably not felt": 89
+    },
+    "probably not felt": {
+     "felt clearly": 1,
+     "may be felt": 35,
+     "probably not felt": 94
+    }
+   }
+  },
+  "pred_adj|III=3.0,V=5.0": {
+   "predictor": "pred_adj",
+   "thresholds": [
+    3.0,
+    5.0
+   ],
+   "n": 357,
+   "felt_cities": 227,
+   "felt_but_said_not": 48,
+   "felt_but_said_not_responses": 211,
+   "cdi_ge5_cities": 24,
+   "cdi_ge5_said_clearly": 3,
+   "said_clearly": 11,
+   "said_clearly_and_cdi_lt4": 4,
+   "table": {
+    "felt clearly": {
+     "felt clearly": 3,
+     "may be felt": 20,
+     "probably not felt": 1
+    },
+    "may be felt": {
+     "felt clearly": 7,
+     "may be felt": 149,
+     "probably not felt": 47
+    },
+    "probably not felt": {
+     "felt clearly": 1,
+     "may be felt": 79,
+     "probably not felt": 50
+    }
+   }
+  },
+  "pred_adj|III=2.5,V=4.5": {
+   "predictor": "pred_adj",
+   "thresholds": [
+    2.5,
+    4.5
+   ],
+   "n": 357,
+   "felt_cities": 227,
+   "felt_but_said_not": 29,
+   "felt_but_said_not_responses": 99,
+   "cdi_ge5_cities": 24,
+   "cdi_ge5_said_clearly": 12,
+   "said_clearly": 51,
+   "said_clearly_and_cdi_lt4": 16,
+   "table": {
+    "felt clearly": {
+     "felt clearly": 12,
+     "may be felt": 12,
+     "probably not felt": 0
+    },
+    "may be felt": {
+     "felt clearly": 36,
+     "may be felt": 138,
+     "probably not felt": 29
+    },
+    "probably not felt": {
+     "felt clearly": 3,
+     "may be felt": 107,
+     "probably not felt": 20
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,847 @@
+
+===== run 2026-10-23T20:03:27+00:00 =====
+
+===== run 2026-10-23T20:03:46+00:00 =====
+station 35t A north (Chiang Mai)             18.8407,98.9698 City Hall, Chiangmai
+station 50t A Bangkok (Pathum Wan)           13.7299,100.5365 Chulalongkorn Hospital
+station 46t A northeast (Khon Kaen)          16.4454,102.8353 Hydrogeological Group Water Resources Regional Office4 khonkaen
+station 44t A south (Hat Yai)                7.0204,100.4841 Hat Yai Municipality
+station 57t B north (Chiang Rai)             19.9092,99.8235 Natural Resources and Environment Office, Chiangrai
+station 67t B north (Nan)                    18.7889,100.7763 Municipality Office, Nan
+station 05t B Bangkok (Bang Na)              13.6662,100.6057 Thai Meteorological Department 
+station 41t B central (Nakhon Sawan)         15.6862,100.1106 Nakhonsawan Irrigation Project 
+station 83t B northeast (Ubon Ratchathani)   15.2454,104.8462 OTOP Center, Ubon Ratchathani
+station 42t B south (Surat Thani)            9.1260,99.3251 Environment Agency Section 14, Surat Thani
+Air4Thai daily rows 5365 (2025-01-01..2026-06-30); hourly rows 9165 (2026-09-15 00:00:00..2026-10-23 23:00:00)
+
+===== run 2026-10-23T20:04:57+00:00 =====
+station 35t A north (Chiang Mai)             18.8407,98.9698 City Hall, Chiangmai
+station 50t A Bangkok (Pathum Wan)           13.7299,100.5365 Chulalongkorn Hospital
+station 46t A northeast (Khon Kaen)          16.4454,102.8353 Hydrogeological Group Water Resources Regional Office4 khonkaen
+station 44t A south (Hat Yai)                7.0204,100.4841 Hat Yai Municipality
+station 57t B north (Chiang Rai)             19.9092,99.8235 Natural Resources and Environment Office, Chiangrai
+station 67t B north (Nan)                    18.7889,100.7763 Municipality Office, Nan
+station 05t B Bangkok (Bang Na)              13.6662,100.6057 Thai Meteorological Department 
+station 41t B central (Nakhon Sawan)         15.6862,100.1106 Nakhonsawan Irrigation Project 
+station 83t B northeast (Ubon Ratchathani)   15.2454,104.8462 OTOP Center, Ubon Ratchathani
+station 42t B south (Surat Thani)            9.1260,99.3251 Environment Agency Section 14, Surat Thani
+Air4Thai daily rows 5365 (2025-01-01..2026-06-30); hourly rows 9165 (2026-09-15 00:00:00..2026-10-23 23:00:00)
+CAMS hourly rows 46800; Open-Meteo weighted calls so far (ledger): 139.0
+  CAMS grid for 05t: 13.700,100.600
+  CAMS grid for 35t: 18.800,99.000
+  CAMS grid for 41t: 15.700,100.100
+  CAMS grid for 42t: 9.100,99.300
+  CAMS grid for 44t: 7.000,100.500
+  CAMS grid for 46t: 16.400,102.800
+  CAMS grid for 50t: 13.700,100.500
+  CAMS grid for 57t: 19.900,99.800
+  CAMS grid for 67t: 18.800,100.800
+  CAMS grid for 83t: 15.200,104.800
+daily obs+CAMS pairs: 1895 → /home/user/disaster-now/research/data/e3_pm25_daily.csv
+
+## Choosing period: fit Dec 2025–Jan 2026 (n=714 rows, 3 leads), choose on Feb 2026 (n=336), sample A
+  raw       n= 336 MAE=  6.65 bias= -3.22 band= 58.0% | ≥37.6: ev= 45 POD= 0.53 FAR= 0.38 CSI= 0.40 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  persist   n= 336 MAE=  6.96 bias= +0.78 band= 55.4% | ≥37.6: ev= 45 POD= 0.24 FAR= 0.80 CSI= 0.12 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  ratio     n= 336 MAE=  5.76 bias= +1.41 band= 66.7% | ≥37.6: ev= 45 POD= 0.80 FAR= 0.48 CSI= 0.46 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+  blend     n= 336 MAE=  5.32 bias= +1.62 band= 58.6% | ≥37.6: ev= 45 POD= 0.49 FAR= 0.51 CSI= 0.32 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  blend_log n= 336 MAE=  5.14 bias= +0.70 band= 59.8% | ≥37.6: ev= 45 POD= 0.27 FAR= 0.60 CSI= 0.19 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  gbm       n= 336 MAE=  3.93 bias= +1.73 band= 70.5% | ≥37.6: ev= 45 POD= 0.91 FAR= 0.38 CSI= 0.59 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  → blend form chosen on Feb: blend_log (MAE 5.14); gbm Feb MAE 3.93
+
+final blend_log coefficients (fit Dec–Feb, sample A, n=1050): {"1": [0.2832564248614915, 0.7349161458868496, 0.1919226568117428], "2": [0.5169055856270617, 0.5410531555592223, 0.32375361306147415], "3": [0.6721235174827122, 0.4576078427967321, 0.3625769408770895]}  [y = a + b*persist + c*CAMS in log1p space]
+
+## A_MarApr (later period, fit stations)
+ lead 1 (0–24 h):
+   raw      n= 242 MAE= 11.84 bias= -9.95 band= 50.4% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 23 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  5.20 bias= -0.09 band= 72.3% | ≥37.6: ev= 84 POD= 0.86 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.13 CSI= 0.77
+   ratio    n= 242 MAE=  6.44 bias= +0.80 band= 71.1% | ≥37.6: ev= 84 POD= 0.92 FAR= 0.15 CSI= 0.79 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.20 CSI= 0.71
+   blend    n= 242 MAE=  5.17 bias= -2.39 band= 76.4% | ≥37.6: ev= 84 POD= 0.89 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 23 POD= 0.74 FAR= 0.00 CSI= 0.74
+   gbm      n= 241 MAE=  8.56 bias= -4.72 band= 66.4% | ≥37.6: ev= 83 POD= 0.93 FAR= 0.10 CSI= 0.84 | ≥75.1: ev= 22 POD= 0.00 FAR=  -   CSI= 0.00
+ lead 2 (24–48 h):
+   raw      n= 242 MAE= 11.86 bias= -9.97 band= 50.4% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 23 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  7.29 bias= -0.13 band= 65.7% | ≥37.6: ev= 84 POD= 0.82 FAR= 0.17 CSI= 0.70 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.13 CSI= 0.77
+   ratio    n= 242 MAE=  8.33 bias= +1.38 band= 61.2% | ≥37.6: ev= 84 POD= 0.85 FAR= 0.20 CSI= 0.70 | ≥75.1: ev= 23 POD= 0.74 FAR= 0.32 CSI= 0.55
+   blend    n= 242 MAE=  7.52 bias= -4.00 band= 70.2% | ≥37.6: ev= 84 POD= 0.87 FAR= 0.14 CSI= 0.76 | ≥75.1: ev= 23 POD= 0.48 FAR= 0.00 CSI= 0.48
+   gbm      n= 241 MAE=  9.46 bias= -5.15 band= 62.7% | ≥37.6: ev= 83 POD= 0.86 FAR= 0.17 CSI= 0.72 | ≥75.1: ev= 23 POD= 0.00 FAR=  -   CSI= 0.00
+ lead 3 (48–72 h):
+   raw      n= 242 MAE= 11.91 bias=-10.02 band= 50.0% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 24 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  8.75 bias= -0.13 band= 60.3% | ≥37.6: ev= 84 POD= 0.80 FAR= 0.19 CSI= 0.67 | ≥75.1: ev= 24 POD= 0.83 FAR= 0.13 CSI= 0.74
+   ratio    n= 242 MAE=  9.29 bias= +1.86 band= 63.6% | ≥37.6: ev= 84 POD= 0.90 FAR= 0.16 CSI= 0.78 | ≥75.1: ev= 24 POD= 0.71 FAR= 0.41 CSI= 0.47
+   blend    n= 242 MAE=  8.68 bias= -4.89 band= 66.9% | ≥37.6: ev= 84 POD= 0.83 FAR= 0.12 CSI= 0.74 | ≥75.1: ev= 24 POD= 0.33 FAR= 0.00 CSI= 0.33
+   gbm      n= 241 MAE=  9.81 bias= -5.32 band= 62.7% | ≥37.6: ev= 83 POD= 0.84 FAR= 0.15 CSI= 0.74 | ≥75.1: ev= 23 POD= 0.00 FAR=  -   CSI= 0.00
+
+## B_MarApr (later period, disjoint stations)
+ lead 1 (0–24 h):
+   raw      n= 363 MAE= 16.72 bias=-12.73 band= 53.7% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 363 MAE=  7.31 bias= -0.09 band= 75.8% | ≥37.6: ev=172 POD= 0.92 FAR= 0.07 CSI= 0.86 | ≥75.1: ev= 53 POD= 0.85 FAR= 0.15 CSI= 0.74
+   ratio    n= 363 MAE=  8.76 bias= +1.01 band= 70.0% | ≥37.6: ev=172 POD= 0.93 FAR= 0.09 CSI= 0.85 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.25 CSI= 0.64
+   blend    n= 363 MAE=  8.08 bias= -3.96 band= 75.2% | ≥37.6: ev=172 POD= 0.92 FAR= 0.07 CSI= 0.86 | ≥75.1: ev= 53 POD= 0.72 FAR= 0.07 CSI= 0.68
+   gbm      n= 362 MAE= 14.04 bias= -8.76 band= 58.6% | ≥37.6: ev=172 POD= 0.92 FAR= 0.10 CSI= 0.84 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+ lead 2 (24–48 h):
+   raw      n= 362 MAE= 16.75 bias=-12.74 band= 53.6% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 362 MAE= 11.11 bias= -0.14 band= 67.7% | ≥37.6: ev=172 POD= 0.89 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.19 CSI= 0.68
+   ratio    n= 362 MAE= 11.42 bias= +2.10 band= 64.9% | ≥37.6: ev=172 POD= 0.90 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 53 POD= 0.79 FAR= 0.37 CSI= 0.54
+   blend    n= 362 MAE= 11.55 bias= -6.55 band= 65.5% | ≥37.6: ev=172 POD= 0.87 FAR= 0.10 CSI= 0.79 | ≥75.1: ev= 53 POD= 0.51 FAR= 0.10 CSI= 0.48
+   gbm      n= 361 MAE= 14.93 bias= -9.16 band= 55.7% | ≥37.6: ev=172 POD= 0.90 FAR= 0.13 CSI= 0.79 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+ lead 3 (48–72 h):
+   raw      n= 362 MAE= 16.77 bias=-12.76 band= 53.6% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 362 MAE= 13.81 bias= -0.14 band= 60.2% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.77 FAR= 0.23 CSI= 0.63
+   ratio    n= 362 MAE= 12.50 bias= +2.26 band= 62.2% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.77 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.31 CSI= 0.60
+   blend    n= 362 MAE= 13.45 bias= -7.98 band= 61.3% | ≥37.6: ev=172 POD= 0.85 FAR= 0.12 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.34 FAR= 0.18 CSI= 0.32
+   gbm      n= 361 MAE= 15.58 bias= -9.30 band= 55.4% | ≥37.6: ev=171 POD= 0.88 FAR= 0.13 CSI= 0.78 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+
+## B_DecFeb (same period, disjoint stations)
+ lead 1 (0–24 h):
+   raw      n= 504 MAE=  8.25 bias= -6.04 band= 44.0% | ≥37.6: ev= 54 POD= 0.31 FAR= 0.51 CSI= 0.24 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 504 MAE=  3.99 bias= +0.14 band= 68.7% | ≥37.6: ev= 54 POD= 0.67 FAR= 0.35 CSI= 0.49 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 504 MAE=  4.87 bias= +0.73 band= 63.5% | ≥37.6: ev= 54 POD= 0.70 FAR= 0.46 CSI= 0.44 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 504 MAE=  3.69 bias= -0.53 band= 70.0% | ≥37.6: ev= 54 POD= 0.61 FAR= 0.27 CSI= 0.50 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 502 MAE=  4.70 bias= +1.78 band= 62.0% | ≥37.6: ev= 53 POD= 0.64 FAR= 0.37 CSI= 0.47 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 2 (24–48 h):
+   raw      n= 504 MAE=  8.26 bias= -6.04 band= 44.0% | ≥37.6: ev= 53 POD= 0.32 FAR= 0.51 CSI= 0.24 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 504 MAE=  6.13 bias= +0.23 band= 55.8% | ≥37.6: ev= 53 POD= 0.42 FAR= 0.60 CSI= 0.26 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 504 MAE=  5.79 bias= +1.26 band= 53.8% | ≥37.6: ev= 53 POD= 0.79 FAR= 0.51 CSI= 0.44 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 504 MAE=  5.05 bias= -0.89 band= 58.9% | ≥37.6: ev= 53 POD= 0.32 FAR= 0.45 CSI= 0.25 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 500 MAE=  5.04 bias= +1.67 band= 59.4% | ≥37.6: ev= 51 POD= 0.57 FAR= 0.38 CSI= 0.42 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 3 (48–72 h):
+   raw      n= 500 MAE=  8.19 bias= -5.95 band= 44.2% | ≥37.6: ev= 51 POD= 0.33 FAR= 0.51 CSI= 0.25 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 500 MAE=  7.26 bias= +0.31 band= 48.2% | ≥37.6: ev= 51 POD= 0.27 FAR= 0.74 CSI= 0.15 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 500 MAE=  5.88 bias= +1.55 band= 55.4% | ≥37.6: ev= 51 POD= 0.82 FAR= 0.52 CSI= 0.43 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 500 MAE=  5.52 bias= -0.94 band= 56.0% | ≥37.6: ev= 51 POD= 0.27 FAR= 0.46 CSI= 0.22 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 497 MAE=  5.40 bias= +1.69 band= 56.7% | ≥37.6: ev= 49 POD= 0.47 FAR= 0.55 CSI= 0.30 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+
+## all_Oct2026 (newest, all stations)
+ lead 1 (0–24 h):
+   raw      n= 328 MAE=  6.08 bias= -3.72 band= 60.1% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 328 MAE=  3.04 bias= -0.28 band= 73.5% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 328 MAE=  4.65 bias= +0.57 band= 65.9% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   blend    n= 328 MAE=  2.59 bias= -0.18 band= 75.3% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 324 MAE=  6.11 bias= +4.50 band= 42.9% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 2 (24–48 h):
+   raw      n= 327 MAE=  6.07 bias= -3.69 band= 60.2% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 327 MAE=  4.36 bias= -0.44 band= 65.4% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 327 MAE=  5.55 bias= +1.36 band= 60.6% | ≥37.6: ev=  1 POD= 1.00 FAR= 0.90 CSI= 0.10 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   blend    n= 327 MAE=  3.34 bias= -0.03 band= 70.3% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 323 MAE=  6.31 bias= +4.60 band= 41.8% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 3 (48–72 h):
+   raw      n= 326 MAE=  6.05 bias= -3.67 band= 60.4% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 326 MAE=  4.92 bias= -0.44 band= 59.8% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 326 MAE=  6.64 bias= +2.14 band= 56.7% | ≥37.6: ev=  1 POD= 1.00 FAR= 0.96 CSI= 0.04 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 326 MAE=  3.58 bias= +0.28 band= 68.7% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 322 MAE=  6.53 bias= +4.75 band= 40.7% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+
+## Per station, lead 1, Mar–Apr 2026: MAE and 'made worse' (rise > 3 % and block-bootstrap lower 5 % bound > 0; blocks of 5 days)
+  MarApr 35t A n= 59 MAE raw= 24.00 persist=  9.94 ratio= 10.04 blend= 10.76 gbm= 23.97 | ratio vs raw  -58.2% vs persist   +1.1% | blend vs raw  -55.2% vs persist   +8.3%
+  MarApr 50t A n= 61 MAE raw=  5.48 persist=  3.66 ratio=  4.25 blend=  2.70 gbm=  3.38 | ratio vs raw  -22.4% vs persist  +16.1% WORSE | blend vs raw  -50.6% vs persist  -26.1%
+  MarApr 46t A n= 61 MAE raw= 14.81 persist=  5.58 ratio=  8.63 blend=  5.84 gbm=  5.82 | ratio vs raw  -41.7% vs persist  +54.7% WORSE | blend vs raw  -60.5% vs persist   +4.7%
+  MarApr 44t A n= 61 MAE raw=  3.47 persist=  1.76 ratio=  2.97 blend=  1.56 gbm=  1.83 | ratio vs raw  -14.2% vs persist  +68.7% WORSE | blend vs raw  -54.9% vs persist  -11.3%
+  MarApr 57t B n= 61 MAE raw= 26.36 persist= 14.99 ratio= 15.56 blend= 16.27 gbm= 30.20 | ratio vs raw  -41.0% vs persist   +3.8% | blend vs raw  -38.3% vs persist   +8.5%
+  MarApr 67t B n= 58 MAE raw= 40.58 persist= 11.16 ratio= 13.52 blend= 15.99 gbm= 34.93 | ratio vs raw  -66.7% vs persist  +21.2% | blend vs raw  -60.6% vs persist  +43.4% WORSE
+  MarApr 05t B n= 61 MAE raw=  3.60 persist=  3.29 ratio=  3.46 blend=  2.49 gbm=  4.22 | ratio vs raw   -4.0% vs persist   +5.3% | blend vs raw  -30.9% vs persist  -24.2%
+  MarApr 41t B n= 61 MAE raw= 15.87 persist=  5.53 ratio=  8.63 blend=  5.79 gbm=  5.95 | ratio vs raw  -45.6% vs persist  +56.1% WORSE | blend vs raw  -63.5% vs persist   +4.7%
+  MarApr 83t B n= 61 MAE raw= 12.33 persist=  7.19 ratio=  8.91 blend=  6.58 gbm=  8.10 | ratio vs raw  -27.8% vs persist  +23.8% | blend vs raw  -46.6% vs persist   -8.5%
+  MarApr 42t B n= 61 MAE raw=  2.78 persist=  1.86 ratio=  2.69 blend=  1.76 gbm=  2.23 | ratio vs raw   -3.1% vs persist  +44.4% | blend vs raw  -36.8% vs persist   -5.8%
+  Oct2026 35t A n= 34 MAE raw=  2.83 persist=  2.00 ratio=  3.08 blend=  1.79 gbm=  5.04 | ratio vs raw   +8.8% vs persist  +54.3% WORSE | blend vs raw  -36.9% vs persist  -10.5%
+  Oct2026 50t A n= 34 MAE raw=  4.87 persist=  4.30 ratio=  6.06 blend=  3.41 gbm=  6.37 | ratio vs raw  +24.4% vs persist  +40.8% WORSE | blend vs raw  -29.9% vs persist  -20.7%
+  Oct2026 46t A n= 32 MAE raw= 10.93 persist=  4.05 ratio=  5.90 blend=  3.46 gbm=  4.30 | ratio vs raw  -46.0% vs persist  +45.6% WORSE | blend vs raw  -68.4% vs persist  -14.7%
+  Oct2026 44t A n= 34 MAE raw=  6.95 persist=  3.96 ratio=  4.86 blend=  3.06 gbm=  4.43 | ratio vs raw  -30.1% vs persist  +22.8% | blend vs raw  -56.0% vs persist  -22.8%
+  Oct2026 57t B n= 28 MAE raw=  4.91 persist=  2.20 ratio=  3.28 blend=  1.84 gbm=  6.33 | ratio vs raw  -33.2% vs persist  +49.1% WORSE | blend vs raw  -62.6% vs persist  -16.6%
+  Oct2026 67t B n= 30 MAE raw=  9.99 persist=  2.18 ratio=  4.81 blend=  2.19 gbm=  3.37 | ratio vs raw  -51.9% vs persist +120.7% WORSE | blend vs raw  -78.0% vs persist   +0.7%
+  Oct2026 05t B n= 34 MAE raw=  5.41 persist=  3.49 ratio=  5.62 blend=  2.97 gbm=  7.66 | ratio vs raw   +3.8% vs persist  +61.0% WORSE | blend vs raw  -45.2% vs persist  -15.0%
+  Oct2026 41t B n= 34 MAE raw=  3.59 persist=  1.72 ratio=  5.94 blend=  1.52 gbm= 10.53 | ratio vs raw  +65.4% WORSE vs persist +246.0% WORSE | blend vs raw  -57.8% vs persist  -11.7%
+  Oct2026 83t B n= 34 MAE raw=  4.09 persist=  3.01 ratio=  3.51 blend=  2.54 gbm=  8.26 | ratio vs raw  -14.0% vs persist  +16.8% | blend vs raw  -37.9% vs persist  -15.6%
+  Oct2026 42t B n= 34 MAE raw=  7.79 persist=  3.30 ratio=  3.26 blend=  2.99 gbm=  4.22 | ratio vs raw  -58.2% vs persist   -1.3% | blend vs raw  -61.7% vs persist   -9.5%
+  MarApr lead 1: ratio made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: ratio made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: ratio made worse than raw beyond chance at 1 stations ['42t']
+  MarApr lead 1: ratio made worse than persist beyond chance at 4 stations ['50t', '46t', '44t', '41t']
+  MarApr lead 2: ratio made worse than persist beyond chance at 2 stations ['46t', '41t']
+  MarApr lead 3: ratio made worse than persist beyond chance at 2 stations ['46t', '41t']
+  MarApr lead 1: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 1: blend made worse than persist beyond chance at 1 stations ['67t']
+  MarApr lead 2: blend made worse than persist beyond chance at 0 stations []
+  MarApr lead 3: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 1: ratio made worse than raw beyond chance at 1 stations ['41t']
+  Oct2026 lead 2: ratio made worse than raw beyond chance at 4 stations ['35t', '50t', '05t', '41t']
+  Oct2026 lead 3: ratio made worse than raw beyond chance at 4 stations ['35t', '50t', '05t', '41t']
+  Oct2026 lead 1: ratio made worse than persist beyond chance at 7 stations ['35t', '50t', '46t', '57t', '67t', '05t', '41t']
+  Oct2026 lead 2: ratio made worse than persist beyond chance at 2 stations ['35t', '41t']
+  Oct2026 lead 3: ratio made worse than persist beyond chance at 5 stations ['35t', '50t', '67t', '05t', '41t']
+  Oct2026 lead 1: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 2: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 3: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 1: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 2: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 3: blend made worse than persist beyond chance at 0 stations []
+
+## Hourly, newest data (2026-09-20 … 2026-10-22), issue every hour, next 1–24 h
+  hourly values, raw      : n=181279 MAE=  7.56
+  hourly values, persist24: n=181279 MAE=  4.24
+  hourly values, persist1 : n=181279 MAE=  4.32
+  hourly values, ratio    : n=181279 MAE=  7.15
+  next-24 h mean, raw      : n=7608 MAE=  6.12 bias= -3.70 band= 58.6% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+  next-24 h mean, persist24: n=7608 MAE=  3.12 bias= -0.24 band= 71.4% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+  next-24 h mean, ratio    : n=7608 MAE=  4.77 bias= +0.66 band= 62.4% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+
+wrote /home/user/disaster-now/research/out/e3_results.json; Open-Meteo ledger total 139.0 weighted calls
+
+===== run 2026-10-23T20:06:07+00:00 =====
+station 35t A north (Chiang Mai)             18.8407,98.9698 City Hall, Chiangmai
+station 50t A Bangkok (Pathum Wan)           13.7299,100.5365 Chulalongkorn Hospital
+station 46t A northeast (Khon Kaen)          16.4454,102.8353 Hydrogeological Group Water Resources Regional Office4 khonkaen
+station 44t A south (Hat Yai)                7.0204,100.4841 Hat Yai Municipality
+station 57t B north (Chiang Rai)             19.9092,99.8235 Natural Resources and Environment Office, Chiangrai
+station 67t B north (Nan)                    18.7889,100.7763 Municipality Office, Nan
+station 05t B Bangkok (Bang Na)              13.6662,100.6057 Thai Meteorological Department 
+station 41t B central (Nakhon Sawan)         15.6862,100.1106 Nakhonsawan Irrigation Project 
+station 83t B northeast (Ubon Ratchathani)   15.2454,104.8462 OTOP Center, Ubon Ratchathani
+station 42t B south (Surat Thani)            9.1260,99.3251 Environment Agency Section 14, Surat Thani
+Air4Thai daily rows 5365 (2025-01-01..2026-06-30); hourly rows 9165 (2026-09-15 00:00:00..2026-10-23 23:00:00)
+CAMS hourly rows 46800; Open-Meteo weighted calls so far (ledger): 139.0
+  CAMS grid for 05t: 13.700,100.600
+  CAMS grid for 35t: 18.800,99.000
+  CAMS grid for 41t: 15.700,100.100
+  CAMS grid for 42t: 9.100,99.300
+  CAMS grid for 44t: 7.000,100.500
+  CAMS grid for 46t: 16.400,102.800
+  CAMS grid for 50t: 13.700,100.500
+  CAMS grid for 57t: 19.900,99.800
+  CAMS grid for 67t: 18.800,100.800
+  CAMS grid for 83t: 15.200,104.800
+daily obs+CAMS pairs: 1895 → /home/user/disaster-now/research/data/e3_pm25_daily.csv
+
+## Choosing period: fit Dec 2025–Jan 2026 (n=714 rows, 3 leads), choose on Feb 2026 (n=336), sample A
+  raw       n= 336 MAE=  6.65 bias= -3.22 band= 58.0% | ≥37.6: ev= 45 POD= 0.53 FAR= 0.38 CSI= 0.40 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  persist   n= 336 MAE=  6.96 bias= +0.78 band= 55.4% | ≥37.6: ev= 45 POD= 0.24 FAR= 0.80 CSI= 0.12 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  ratio     n= 336 MAE=  5.76 bias= +1.41 band= 66.7% | ≥37.6: ev= 45 POD= 0.80 FAR= 0.48 CSI= 0.46 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+  blend     n= 336 MAE=  5.32 bias= +1.62 band= 58.6% | ≥37.6: ev= 45 POD= 0.49 FAR= 0.51 CSI= 0.32 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  blend_log n= 336 MAE=  5.14 bias= +0.70 band= 59.8% | ≥37.6: ev= 45 POD= 0.27 FAR= 0.60 CSI= 0.19 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  gbm       n= 336 MAE=  3.93 bias= +1.73 band= 70.5% | ≥37.6: ev= 45 POD= 0.91 FAR= 0.38 CSI= 0.59 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  damped_posthoc n= 336 MAE=  4.08 bias= +0.36 band= 71.7% | ≥37.6: ev= 45 POD= 0.60 FAR= 0.45 CSI= 0.40 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  (damped_posthoc betas fitted Dec–Jan: {1: 0.4, 2: 0.5, 3: 0.55})
+  → blend form chosen on Feb: blend_log (MAE 5.14); gbm Feb MAE 3.93
+
+final damped_posthoc betas (fit Dec–Feb, sample A): {1: 0.45, 2: 0.55, 3: 0.55}
+
+final blend_log coefficients (fit Dec–Feb, sample A, n=1050): {"1": [0.2832564248614915, 0.7349161458868496, 0.1919226568117428], "2": [0.5169055856270617, 0.5410531555592223, 0.32375361306147415], "3": [0.6721235174827122, 0.4576078427967321, 0.3625769408770895]}  [y = a + b*persist + c*CAMS in log1p space]
+
+## A_MarApr (later period, fit stations)
+ lead 1 (0–24 h):
+   raw      n= 242 MAE= 11.84 bias= -9.95 band= 50.4% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 23 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  5.20 bias= -0.09 band= 72.3% | ≥37.6: ev= 84 POD= 0.86 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.13 CSI= 0.77
+   ratio    n= 242 MAE=  6.44 bias= +0.80 band= 71.1% | ≥37.6: ev= 84 POD= 0.92 FAR= 0.15 CSI= 0.79 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.20 CSI= 0.71
+   blend    n= 242 MAE=  5.17 bias= -2.39 band= 76.4% | ≥37.6: ev= 84 POD= 0.89 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 23 POD= 0.74 FAR= 0.00 CSI= 0.74
+   gbm      n= 241 MAE=  8.56 bias= -4.72 band= 66.4% | ≥37.6: ev= 83 POD= 0.93 FAR= 0.10 CSI= 0.84 | ≥75.1: ev= 22 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 242 MAE=  4.34 bias= +0.03 band= 77.7% | ≥37.6: ev= 84 POD= 0.92 FAR= 0.10 CSI= 0.83 | ≥75.1: ev= 23 POD= 0.83 FAR= 0.14 CSI= 0.73
+ lead 2 (24–48 h):
+   raw      n= 242 MAE= 11.86 bias= -9.97 band= 50.4% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 23 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  7.29 bias= -0.13 band= 65.7% | ≥37.6: ev= 84 POD= 0.82 FAR= 0.17 CSI= 0.70 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.13 CSI= 0.77
+   ratio    n= 242 MAE=  8.33 bias= +1.38 band= 61.2% | ≥37.6: ev= 84 POD= 0.85 FAR= 0.20 CSI= 0.70 | ≥75.1: ev= 23 POD= 0.74 FAR= 0.32 CSI= 0.55
+   blend    n= 242 MAE=  7.52 bias= -4.00 band= 70.2% | ≥37.6: ev= 84 POD= 0.87 FAR= 0.14 CSI= 0.76 | ≥75.1: ev= 23 POD= 0.48 FAR= 0.00 CSI= 0.48
+   gbm      n= 241 MAE=  9.46 bias= -5.15 band= 62.7% | ≥37.6: ev= 83 POD= 0.86 FAR= 0.17 CSI= 0.72 | ≥75.1: ev= 23 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 242 MAE=  6.12 bias= +0.17 band= 70.7% | ≥37.6: ev= 84 POD= 0.86 FAR= 0.15 CSI= 0.74 | ≥75.1: ev= 23 POD= 0.78 FAR= 0.18 CSI= 0.67
+ lead 3 (48–72 h):
+   raw      n= 242 MAE= 11.91 bias=-10.02 band= 50.0% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 24 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  8.75 bias= -0.13 band= 60.3% | ≥37.6: ev= 84 POD= 0.80 FAR= 0.19 CSI= 0.67 | ≥75.1: ev= 24 POD= 0.83 FAR= 0.13 CSI= 0.74
+   ratio    n= 242 MAE=  9.29 bias= +1.86 band= 63.6% | ≥37.6: ev= 84 POD= 0.90 FAR= 0.16 CSI= 0.78 | ≥75.1: ev= 24 POD= 0.71 FAR= 0.41 CSI= 0.47
+   blend    n= 242 MAE=  8.68 bias= -4.89 band= 66.9% | ≥37.6: ev= 84 POD= 0.83 FAR= 0.12 CSI= 0.74 | ≥75.1: ev= 24 POD= 0.33 FAR= 0.00 CSI= 0.33
+   gbm      n= 241 MAE=  9.81 bias= -5.32 band= 62.7% | ≥37.6: ev= 83 POD= 0.84 FAR= 0.15 CSI= 0.74 | ≥75.1: ev= 23 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 242 MAE=  6.92 bias= +0.28 band= 68.6% | ≥37.6: ev= 84 POD= 0.89 FAR= 0.13 CSI= 0.79 | ≥75.1: ev= 24 POD= 0.79 FAR= 0.21 CSI= 0.66
+
+## B_MarApr (later period, disjoint stations)
+ lead 1 (0–24 h):
+   raw      n= 363 MAE= 16.72 bias=-12.73 band= 53.7% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 363 MAE=  7.31 bias= -0.09 band= 75.8% | ≥37.6: ev=172 POD= 0.92 FAR= 0.07 CSI= 0.86 | ≥75.1: ev= 53 POD= 0.85 FAR= 0.15 CSI= 0.74
+   ratio    n= 363 MAE=  8.76 bias= +1.01 band= 70.0% | ≥37.6: ev=172 POD= 0.93 FAR= 0.09 CSI= 0.85 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.25 CSI= 0.64
+   blend    n= 363 MAE=  8.08 bias= -3.96 band= 75.2% | ≥37.6: ev=172 POD= 0.92 FAR= 0.07 CSI= 0.86 | ≥75.1: ev= 53 POD= 0.72 FAR= 0.07 CSI= 0.68
+   gbm      n= 362 MAE= 14.04 bias= -8.76 band= 58.6% | ≥37.6: ev=172 POD= 0.92 FAR= 0.10 CSI= 0.84 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 363 MAE=  6.55 bias= +0.18 band= 78.2% | ≥37.6: ev=172 POD= 0.94 FAR= 0.06 CSI= 0.89 | ≥75.1: ev= 53 POD= 0.85 FAR= 0.17 CSI= 0.73
+ lead 2 (24–48 h):
+   raw      n= 362 MAE= 16.75 bias=-12.74 band= 53.6% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 362 MAE= 11.11 bias= -0.14 band= 67.7% | ≥37.6: ev=172 POD= 0.89 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.19 CSI= 0.68
+   ratio    n= 362 MAE= 11.42 bias= +2.10 band= 64.9% | ≥37.6: ev=172 POD= 0.90 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 53 POD= 0.79 FAR= 0.37 CSI= 0.54
+   blend    n= 362 MAE= 11.55 bias= -6.55 band= 65.5% | ≥37.6: ev=172 POD= 0.87 FAR= 0.10 CSI= 0.79 | ≥75.1: ev= 53 POD= 0.51 FAR= 0.10 CSI= 0.48
+   gbm      n= 361 MAE= 14.93 bias= -9.16 band= 55.7% | ≥37.6: ev=172 POD= 0.90 FAR= 0.13 CSI= 0.79 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 362 MAE=  9.23 bias= +0.57 band= 70.7% | ≥37.6: ev=172 POD= 0.91 FAR= 0.09 CSI= 0.83 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.20 CSI= 0.67
+ lead 3 (48–72 h):
+   raw      n= 362 MAE= 16.77 bias=-12.76 band= 53.6% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 362 MAE= 13.81 bias= -0.14 band= 60.2% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.77 FAR= 0.23 CSI= 0.63
+   ratio    n= 362 MAE= 12.50 bias= +2.26 band= 62.2% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.77 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.31 CSI= 0.60
+   blend    n= 362 MAE= 13.45 bias= -7.98 band= 61.3% | ≥37.6: ev=172 POD= 0.85 FAR= 0.12 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.34 FAR= 0.18 CSI= 0.32
+   gbm      n= 361 MAE= 15.58 bias= -9.30 band= 55.4% | ≥37.6: ev=171 POD= 0.88 FAR= 0.13 CSI= 0.78 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 362 MAE= 11.04 bias= +0.51 band= 63.0% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.77 FAR= 0.24 CSI= 0.62
+
+## B_DecFeb (same period, disjoint stations)
+ lead 1 (0–24 h):
+   raw      n= 504 MAE=  8.25 bias= -6.04 band= 44.0% | ≥37.6: ev= 54 POD= 0.31 FAR= 0.51 CSI= 0.24 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 504 MAE=  3.99 bias= +0.14 band= 68.7% | ≥37.6: ev= 54 POD= 0.67 FAR= 0.35 CSI= 0.49 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 504 MAE=  4.87 bias= +0.73 band= 63.5% | ≥37.6: ev= 54 POD= 0.70 FAR= 0.46 CSI= 0.44 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 504 MAE=  3.69 bias= -0.53 band= 70.0% | ≥37.6: ev= 54 POD= 0.61 FAR= 0.27 CSI= 0.50 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 502 MAE=  4.70 bias= +1.78 band= 62.0% | ≥37.6: ev= 53 POD= 0.64 FAR= 0.37 CSI= 0.47 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 504 MAE=  3.38 bias= +0.15 band= 70.8% | ≥37.6: ev= 54 POD= 0.70 FAR= 0.36 CSI= 0.51 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 2 (24–48 h):
+   raw      n= 504 MAE=  8.26 bias= -6.04 band= 44.0% | ≥37.6: ev= 53 POD= 0.32 FAR= 0.51 CSI= 0.24 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 504 MAE=  6.13 bias= +0.23 band= 55.8% | ≥37.6: ev= 53 POD= 0.42 FAR= 0.60 CSI= 0.26 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 504 MAE=  5.79 bias= +1.26 band= 53.8% | ≥37.6: ev= 53 POD= 0.79 FAR= 0.51 CSI= 0.44 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 504 MAE=  5.05 bias= -0.89 band= 58.9% | ≥37.6: ev= 53 POD= 0.32 FAR= 0.45 CSI= 0.25 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 500 MAE=  5.04 bias= +1.67 band= 59.4% | ≥37.6: ev= 51 POD= 0.57 FAR= 0.38 CSI= 0.42 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 504 MAE=  4.47 bias= +0.34 band= 61.5% | ≥37.6: ev= 53 POD= 0.75 FAR= 0.40 CSI= 0.50 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 3 (48–72 h):
+   raw      n= 500 MAE=  8.19 bias= -5.95 band= 44.2% | ≥37.6: ev= 51 POD= 0.33 FAR= 0.51 CSI= 0.25 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 500 MAE=  7.26 bias= +0.31 band= 48.2% | ≥37.6: ev= 51 POD= 0.27 FAR= 0.74 CSI= 0.15 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 500 MAE=  5.88 bias= +1.55 band= 55.4% | ≥37.6: ev= 51 POD= 0.82 FAR= 0.52 CSI= 0.43 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 500 MAE=  5.52 bias= -0.94 band= 56.0% | ≥37.6: ev= 51 POD= 0.27 FAR= 0.46 CSI= 0.22 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 497 MAE=  5.40 bias= +1.69 band= 56.7% | ≥37.6: ev= 49 POD= 0.47 FAR= 0.55 CSI= 0.30 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 500 MAE=  4.88 bias= +0.43 band= 61.4% | ≥37.6: ev= 51 POD= 0.67 FAR= 0.42 CSI= 0.45 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+
+## all_Oct2026 (newest, all stations)
+ lead 1 (0–24 h):
+   raw      n= 328 MAE=  6.08 bias= -3.72 band= 60.1% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 328 MAE=  3.04 bias= -0.28 band= 73.5% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 328 MAE=  4.65 bias= +0.57 band= 65.9% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   blend    n= 328 MAE=  2.59 bias= -0.18 band= 75.3% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 324 MAE=  6.11 bias= +4.50 band= 42.9% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 328 MAE=  2.78 bias= -0.15 band= 76.2% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 2 (24–48 h):
+   raw      n= 327 MAE=  6.07 bias= -3.69 band= 60.2% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 327 MAE=  4.36 bias= -0.44 band= 65.4% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 327 MAE=  5.55 bias= +1.36 band= 60.6% | ≥37.6: ev=  1 POD= 1.00 FAR= 0.90 CSI= 0.10 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   blend    n= 327 MAE=  3.34 bias= -0.03 band= 70.3% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 323 MAE=  6.31 bias= +4.60 band= 41.8% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 327 MAE=  3.61 bias= +0.06 band= 70.3% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 3 (48–72 h):
+   raw      n= 326 MAE=  6.05 bias= -3.67 band= 60.4% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 326 MAE=  4.92 bias= -0.44 band= 59.8% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 326 MAE=  6.64 bias= +2.14 band= 56.7% | ≥37.6: ev=  1 POD= 1.00 FAR= 0.96 CSI= 0.04 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 326 MAE=  3.58 bias= +0.28 band= 68.7% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 322 MAE=  6.53 bias= +4.75 band= 40.7% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 326 MAE=  4.06 bias= +0.28 band= 66.9% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+
+## Per station, lead 1, Mar–Apr 2026: MAE and 'made worse' (rise > 3 % and block-bootstrap lower 5 % bound > 0; blocks of 5 days)
+  MarApr 35t A n= 59 MAE raw= 24.00 persist=  9.94 ratio= 10.04 blend= 10.76 gbm= 23.97 | ratio vs raw  -58.2% vs persist   +1.1% | blend vs raw  -55.2% vs persist   +8.3%
+  MarApr 50t A n= 61 MAE raw=  5.48 persist=  3.66 ratio=  4.25 blend=  2.70 gbm=  3.38 | ratio vs raw  -22.4% vs persist  +16.1% WORSE | blend vs raw  -50.6% vs persist  -26.1%
+  MarApr 46t A n= 61 MAE raw= 14.81 persist=  5.58 ratio=  8.63 blend=  5.84 gbm=  5.82 | ratio vs raw  -41.7% vs persist  +54.7% WORSE | blend vs raw  -60.5% vs persist   +4.7%
+  MarApr 44t A n= 61 MAE raw=  3.47 persist=  1.76 ratio=  2.97 blend=  1.56 gbm=  1.83 | ratio vs raw  -14.2% vs persist  +68.7% WORSE | blend vs raw  -54.9% vs persist  -11.3%
+  MarApr 57t B n= 61 MAE raw= 26.36 persist= 14.99 ratio= 15.56 blend= 16.27 gbm= 30.20 | ratio vs raw  -41.0% vs persist   +3.8% | blend vs raw  -38.3% vs persist   +8.5%
+  MarApr 67t B n= 58 MAE raw= 40.58 persist= 11.16 ratio= 13.52 blend= 15.99 gbm= 34.93 | ratio vs raw  -66.7% vs persist  +21.2% | blend vs raw  -60.6% vs persist  +43.4% WORSE
+  MarApr 05t B n= 61 MAE raw=  3.60 persist=  3.29 ratio=  3.46 blend=  2.49 gbm=  4.22 | ratio vs raw   -4.0% vs persist   +5.3% | blend vs raw  -30.9% vs persist  -24.2%
+  MarApr 41t B n= 61 MAE raw= 15.87 persist=  5.53 ratio=  8.63 blend=  5.79 gbm=  5.95 | ratio vs raw  -45.6% vs persist  +56.1% WORSE | blend vs raw  -63.5% vs persist   +4.7%
+  MarApr 83t B n= 61 MAE raw= 12.33 persist=  7.19 ratio=  8.91 blend=  6.58 gbm=  8.10 | ratio vs raw  -27.8% vs persist  +23.8% | blend vs raw  -46.6% vs persist   -8.5%
+  MarApr 42t B n= 61 MAE raw=  2.78 persist=  1.86 ratio=  2.69 blend=  1.76 gbm=  2.23 | ratio vs raw   -3.1% vs persist  +44.4% | blend vs raw  -36.8% vs persist   -5.8%
+  Oct2026 35t A n= 34 MAE raw=  2.83 persist=  2.00 ratio=  3.08 blend=  1.79 gbm=  5.04 | ratio vs raw   +8.8% vs persist  +54.3% WORSE | blend vs raw  -36.9% vs persist  -10.5%
+  Oct2026 50t A n= 34 MAE raw=  4.87 persist=  4.30 ratio=  6.06 blend=  3.41 gbm=  6.37 | ratio vs raw  +24.4% vs persist  +40.8% WORSE | blend vs raw  -29.9% vs persist  -20.7%
+  Oct2026 46t A n= 32 MAE raw= 10.93 persist=  4.05 ratio=  5.90 blend=  3.46 gbm=  4.30 | ratio vs raw  -46.0% vs persist  +45.6% WORSE | blend vs raw  -68.4% vs persist  -14.7%
+  Oct2026 44t A n= 34 MAE raw=  6.95 persist=  3.96 ratio=  4.86 blend=  3.06 gbm=  4.43 | ratio vs raw  -30.1% vs persist  +22.8% | blend vs raw  -56.0% vs persist  -22.8%
+  Oct2026 57t B n= 28 MAE raw=  4.91 persist=  2.20 ratio=  3.28 blend=  1.84 gbm=  6.33 | ratio vs raw  -33.2% vs persist  +49.1% WORSE | blend vs raw  -62.6% vs persist  -16.6%
+  Oct2026 67t B n= 30 MAE raw=  9.99 persist=  2.18 ratio=  4.81 blend=  2.19 gbm=  3.37 | ratio vs raw  -51.9% vs persist +120.7% WORSE | blend vs raw  -78.0% vs persist   +0.7%
+  Oct2026 05t B n= 34 MAE raw=  5.41 persist=  3.49 ratio=  5.62 blend=  2.97 gbm=  7.66 | ratio vs raw   +3.8% vs persist  +61.0% WORSE | blend vs raw  -45.2% vs persist  -15.0%
+  Oct2026 41t B n= 34 MAE raw=  3.59 persist=  1.72 ratio=  5.94 blend=  1.52 gbm= 10.53 | ratio vs raw  +65.4% WORSE vs persist +246.0% WORSE | blend vs raw  -57.8% vs persist  -11.7%
+  Oct2026 83t B n= 34 MAE raw=  4.09 persist=  3.01 ratio=  3.51 blend=  2.54 gbm=  8.26 | ratio vs raw  -14.0% vs persist  +16.8% | blend vs raw  -37.9% vs persist  -15.6%
+  Oct2026 42t B n= 34 MAE raw=  7.79 persist=  3.30 ratio=  3.26 blend=  2.99 gbm=  4.22 | ratio vs raw  -58.2% vs persist   -1.3% | blend vs raw  -61.7% vs persist   -9.5%
+
+## Pooled MAE difference vs persistence, 90 % block-bootstrap interval (blocks of 5 days within station)
+  A_MarApr (later period, fit stations)         lead 1 raw             ΔMAE vs persist  +6.64 [ +4.19,  +9.35]
+  A_MarApr (later period, fit stations)         lead 1 ratio           ΔMAE vs persist  +1.25 [ +0.73,  +1.76]
+  A_MarApr (later period, fit stations)         lead 1 blend           ΔMAE vs persist  -0.02 [ -0.66,  +0.70]
+  A_MarApr (later period, fit stations)         lead 1 damped_posthoc  ΔMAE vs persist  -0.86 [ -1.30,  -0.43]
+  A_MarApr (later period, fit stations)         lead 2 raw             ΔMAE vs persist  +4.57 [ +2.23,  +7.26]
+  A_MarApr (later period, fit stations)         lead 2 ratio           ΔMAE vs persist  +1.04 [ -0.06,  +2.14]
+  A_MarApr (later period, fit stations)         lead 2 blend           ΔMAE vs persist  +0.23 [ -0.97,  +1.71]
+  A_MarApr (later period, fit stations)         lead 2 damped_posthoc  ΔMAE vs persist  -1.17 [ -1.83,  -0.58]
+  A_MarApr (later period, fit stations)         lead 3 raw             ΔMAE vs persist  +3.16 [ +0.93,  +5.73]
+  A_MarApr (later period, fit stations)         lead 3 ratio           ΔMAE vs persist  +0.55 [ -1.16,  +2.28]
+  A_MarApr (later period, fit stations)         lead 3 blend           ΔMAE vs persist  -0.07 [ -1.47,  +1.48]
+  A_MarApr (later period, fit stations)         lead 3 damped_posthoc  ΔMAE vs persist  -1.82 [ -2.70,  -0.93]
+  B_MarApr (later period, disjoint stations)    lead 1 raw             ΔMAE vs persist  +9.42 [ +6.70, +12.45]
+  B_MarApr (later period, disjoint stations)    lead 1 ratio           ΔMAE vs persist  +1.45 [ +0.46,  +2.45]
+  B_MarApr (later period, disjoint stations)    lead 1 blend           ΔMAE vs persist  +0.78 [ -0.01,  +1.67]
+  B_MarApr (later period, disjoint stations)    lead 1 damped_posthoc  ΔMAE vs persist  -0.76 [ -1.33,  -0.22]
+  B_MarApr (later period, disjoint stations)    lead 2 raw             ΔMAE vs persist  +5.64 [ +2.86,  +8.39]
+  B_MarApr (later period, disjoint stations)    lead 2 ratio           ΔMAE vs persist  +0.31 [ -1.37,  +2.01]
+  B_MarApr (later period, disjoint stations)    lead 2 blend           ΔMAE vs persist  +0.44 [ -1.09,  +2.10]
+  B_MarApr (later period, disjoint stations)    lead 2 damped_posthoc  ΔMAE vs persist  -1.88 [ -3.02,  -0.79]
+  B_MarApr (later period, disjoint stations)    lead 3 raw             ΔMAE vs persist  +2.96 [ +0.63,  +5.61]
+  B_MarApr (later period, disjoint stations)    lead 3 ratio           ΔMAE vs persist  -1.31 [ -3.20,  +0.67]
+  B_MarApr (later period, disjoint stations)    lead 3 blend           ΔMAE vs persist  -0.36 [ -2.22,  +1.52]
+  B_MarApr (later period, disjoint stations)    lead 3 damped_posthoc  ΔMAE vs persist  -2.77 [ -3.93,  -1.58]
+  B_DecFeb (same period, disjoint stations)     lead 1 raw             ΔMAE vs persist  +4.27 [ +3.34,  +5.20]
+  B_DecFeb (same period, disjoint stations)     lead 1 ratio           ΔMAE vs persist  +0.89 [ +0.42,  +1.34]
+  B_DecFeb (same period, disjoint stations)     lead 1 blend           ΔMAE vs persist  -0.29 [ -0.51,  -0.05]
+  B_DecFeb (same period, disjoint stations)     lead 1 damped_posthoc  ΔMAE vs persist  -0.61 [ -0.89,  -0.34]
+  B_DecFeb (same period, disjoint stations)     lead 2 raw             ΔMAE vs persist  +2.13 [ +1.08,  +3.20]
+  B_DecFeb (same period, disjoint stations)     lead 2 ratio           ΔMAE vs persist  -0.34 [ -1.10,  +0.39]
+  B_DecFeb (same period, disjoint stations)     lead 2 blend           ΔMAE vs persist  -1.08 [ -1.54,  -0.61]
+  B_DecFeb (same period, disjoint stations)     lead 2 damped_posthoc  ΔMAE vs persist  -1.66 [ -2.16,  -1.15]
+  B_DecFeb (same period, disjoint stations)     lead 3 raw             ΔMAE vs persist  +0.93 [ -0.11,  +2.01]
+  B_DecFeb (same period, disjoint stations)     lead 3 ratio           ΔMAE vs persist  -1.38 [ -2.32,  -0.47]
+  B_DecFeb (same period, disjoint stations)     lead 3 blend           ΔMAE vs persist  -1.74 [ -2.34,  -1.13]
+  B_DecFeb (same period, disjoint stations)     lead 3 damped_posthoc  ΔMAE vs persist  -2.38 [ -2.98,  -1.80]
+  all_Oct2026 (newest, all stations)            lead 1 raw             ΔMAE vs persist  +3.04 [ +2.38,  +3.73]
+  all_Oct2026 (newest, all stations)            lead 1 ratio           ΔMAE vs persist  +1.61 [ +1.21,  +2.01]
+  all_Oct2026 (newest, all stations)            lead 1 blend           ΔMAE vs persist  -0.45 [ -0.60,  -0.30]
+  all_Oct2026 (newest, all stations)            lead 1 damped_posthoc  ΔMAE vs persist  -0.26 [ -0.51,  -0.02]
+  all_Oct2026 (newest, all stations)            lead 2 raw             ΔMAE vs persist  +1.70 [ +1.00,  +2.40]
+  all_Oct2026 (newest, all stations)            lead 2 ratio           ΔMAE vs persist  +1.18 [ +0.62,  +1.77]
+  all_Oct2026 (newest, all stations)            lead 2 blend           ΔMAE vs persist  -1.03 [ -1.35,  -0.71]
+  all_Oct2026 (newest, all stations)            lead 2 damped_posthoc  ΔMAE vs persist  -0.75 [ -1.09,  -0.40]
+  all_Oct2026 (newest, all stations)            lead 3 raw             ΔMAE vs persist  +1.12 [ +0.40,  +1.89]
+  all_Oct2026 (newest, all stations)            lead 3 ratio           ΔMAE vs persist  +1.71 [ +0.84,  +2.68]
+  all_Oct2026 (newest, all stations)            lead 3 blend           ΔMAE vs persist  -1.35 [ -1.74,  -0.94]
+  all_Oct2026 (newest, all stations)            lead 3 damped_posthoc  ΔMAE vs persist  -0.86 [ -1.21,  -0.52]
+
+## Onsets (diagnostic): target day ≥ threshold while the last observed day (persist) was below it
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 raw             onsets= 12 caught=  9 false alarms=  6 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 ratio           onsets= 12 caught=  8 false alarms=  8 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 blend           onsets= 12 caught=  4 false alarms=  0 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 damped_posthoc  onsets= 12 caught=  6 false alarms=  2 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 raw             onsets=  3 caught=  0 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 ratio           onsets=  3 caught=  2 false alarms=  3 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 blend           onsets=  3 caught=  0 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 damped_posthoc  onsets=  3 caught=  1 false alarms=  1 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 raw             onsets= 15 caught=  9 false alarms=  6 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 ratio           onsets= 15 caught=  7 false alarms= 10 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 blend           onsets= 15 caught=  5 false alarms=  2 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 damped_posthoc  onsets= 15 caught=  5 false alarms=  3 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 raw             onsets=  3 caught=  1 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 ratio           onsets=  3 caught=  2 false alarms=  5 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 blend           onsets=  3 caught=  1 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 damped_posthoc  onsets=  3 caught=  2 false alarms=  1 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 raw             onsets= 17 caught=  8 false alarms=  7 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 ratio           onsets= 17 caught= 11 false alarms=  8 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 blend           onsets= 17 caught=  3 false alarms=  1 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 damped_posthoc  onsets= 17 caught=  8 false alarms=  3 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 raw             onsets=  4 caught=  1 false alarms=  0 of 215 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 ratio           onsets=  4 caught=  2 false alarms=  9 of 215 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 blend           onsets=  4 caught=  0 false alarms=  0 of 215 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 damped_posthoc  onsets=  4 caught=  2 false alarms=  2 of 215 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 raw             onsets= 13 caught=  5 false alarms= 19 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 ratio           onsets= 13 caught=  6 false alarms= 10 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 blend           onsets= 13 caught=  3 false alarms=  1 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 damped_posthoc  onsets= 13 caught=  5 false alarms=  3 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 raw             onsets=  8 caught=  1 false alarms=  1 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 ratio           onsets=  8 caught=  2 false alarms= 10 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 blend           onsets=  8 caught=  0 false alarms=  0 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 damped_posthoc  onsets=  8 caught=  1 false alarms=  4 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 raw             onsets= 19 caught=  9 false alarms= 15 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 ratio           onsets= 19 caught= 11 false alarms=  9 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 blend           onsets= 19 caught=  4 false alarms=  2 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 damped_posthoc  onsets= 19 caught=  7 false alarms=  4 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 raw             onsets= 10 caught=  1 false alarms=  0 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 ratio           onsets= 10 caught=  4 false alarms= 18 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 blend           onsets= 10 caught=  0 false alarms=  0 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 damped_posthoc  onsets= 10 caught=  2 false alarms=  4 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 raw             onsets= 23 caught= 13 false alarms= 13 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 ratio           onsets= 23 caught= 14 false alarms=  8 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 blend           onsets= 23 caught=  7 false alarms=  3 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 damped_posthoc  onsets= 23 caught=  8 false alarms=  4 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 raw             onsets= 12 caught=  1 false alarms=  0 of 297 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 ratio           onsets= 12 caught=  6 false alarms= 13 of 297 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 blend           onsets= 12 caught=  0 false alarms=  0 of 297 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 damped_posthoc  onsets= 12 caught=  3 false alarms=  4 of 297 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 raw             onsets= 18 caught=  8 false alarms= 15 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 ratio           onsets= 18 caught= 11 false alarms= 28 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 blend           onsets= 18 caught=  3 false alarms=  0 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 damped_posthoc  onsets= 18 caught=  6 false alarms= 10 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  1 of 504 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 raw             onsets= 31 caught= 13 false alarms= 17 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 ratio           onsets= 31 caught= 26 false alarms= 37 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 blend           onsets= 31 caught=  7 false alarms=  5 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 damped_posthoc  onsets= 31 caught= 22 false alarms= 15 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  4 of 504 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 raw             onsets= 37 caught= 16 false alarms= 16 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 ratio           onsets= 37 caught= 30 false alarms= 41 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 blend           onsets= 37 caught=  8 false alarms=  4 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 damped_posthoc  onsets= 37 caught= 21 false alarms= 16 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  1 of 500 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 raw             onsets=  1 caught=  0 false alarms=  2 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 ratio           onsets=  1 caught=  0 false alarms=  7 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 blend           onsets=  1 caught=  0 false alarms=  0 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 damped_posthoc  onsets=  1 caught=  0 false alarms=  0 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 raw             onsets=  1 caught=  0 false alarms=  2 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 ratio           onsets=  1 caught=  1 false alarms=  9 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 blend           onsets=  1 caught=  0 false alarms=  0 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 damped_posthoc  onsets=  1 caught=  0 false alarms=  1 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 raw             onsets=  1 caught=  0 false alarms=  2 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 ratio           onsets=  1 caught=  1 false alarms= 22 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 blend           onsets=  1 caught=  0 false alarms=  0 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 damped_posthoc  onsets=  1 caught=  0 false alarms=  0 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  1 of 326 quiet days
+  MarApr lead 1: ratio made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: ratio made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: ratio made worse than raw beyond chance at 1 stations ['42t']
+  MarApr lead 1: ratio made worse than persist beyond chance at 4 stations ['50t', '46t', '44t', '41t']
+  MarApr lead 2: ratio made worse than persist beyond chance at 2 stations ['46t', '41t']
+  MarApr lead 3: ratio made worse than persist beyond chance at 2 stations ['46t', '41t']
+  MarApr lead 1: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 1: blend made worse than persist beyond chance at 1 stations ['67t']
+  MarApr lead 2: blend made worse than persist beyond chance at 0 stations []
+  MarApr lead 3: blend made worse than persist beyond chance at 0 stations []
+  MarApr lead 1: damped_posthoc made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: damped_posthoc made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: damped_posthoc made worse than raw beyond chance at 0 stations []
+  MarApr lead 1: damped_posthoc made worse than persist beyond chance at 0 stations []
+  MarApr lead 2: damped_posthoc made worse than persist beyond chance at 0 stations []
+  MarApr lead 3: damped_posthoc made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 1: ratio made worse than raw beyond chance at 1 stations ['41t']
+  Oct2026 lead 2: ratio made worse than raw beyond chance at 4 stations ['35t', '50t', '05t', '41t']
+  Oct2026 lead 3: ratio made worse than raw beyond chance at 4 stations ['35t', '50t', '05t', '41t']
+  Oct2026 lead 1: ratio made worse than persist beyond chance at 7 stations ['35t', '50t', '46t', '57t', '67t', '05t', '41t']
+  Oct2026 lead 2: ratio made worse than persist beyond chance at 2 stations ['35t', '41t']
+  Oct2026 lead 3: ratio made worse than persist beyond chance at 5 stations ['35t', '50t', '67t', '05t', '41t']
+  Oct2026 lead 1: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 2: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 3: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 1: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 2: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 3: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 1: damped_posthoc made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 2: damped_posthoc made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 3: damped_posthoc made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 1: damped_posthoc made worse than persist beyond chance at 1 stations ['41t']
+  Oct2026 lead 2: damped_posthoc made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 3: damped_posthoc made worse than persist beyond chance at 0 stations []
+
+## Hourly, newest data (2026-09-20 … 2026-10-22), issue every hour, next 1–24 h
+  hourly values, raw      : n=181279 MAE=  7.56
+  hourly values, persist24: n=181279 MAE=  4.24
+  hourly values, persist1 : n=181279 MAE=  4.32
+  hourly values, ratio    : n=181279 MAE=  7.15
+  next-24 h mean, raw      : n=7608 MAE=  6.12 bias= -3.70 band= 58.6% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+  next-24 h mean, persist24: n=7608 MAE=  3.12 bias= -0.24 band= 71.4% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+  next-24 h mean, ratio    : n=7608 MAE=  4.77 bias= +0.66 band= 62.4% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+
+wrote /home/user/disaster-now/research/out/e3_results.json; Open-Meteo ledger total 139.0 weighted calls
+
+===== run 2026-10-23T20:07:05+00:00 =====
+station 35t A north (Chiang Mai)             18.8407,98.9698 City Hall, Chiangmai
+station 50t A Bangkok (Pathum Wan)           13.7299,100.5365 Chulalongkorn Hospital
+station 46t A northeast (Khon Kaen)          16.4454,102.8353 Hydrogeological Group Water Resources Regional Office4 khonkaen
+station 44t A south (Hat Yai)                7.0204,100.4841 Hat Yai Municipality
+station 57t B north (Chiang Rai)             19.9092,99.8235 Natural Resources and Environment Office, Chiangrai
+station 67t B north (Nan)                    18.7889,100.7763 Municipality Office, Nan
+station 05t B Bangkok (Bang Na)              13.6662,100.6057 Thai Meteorological Department 
+station 41t B central (Nakhon Sawan)         15.6862,100.1106 Nakhonsawan Irrigation Project 
+station 83t B northeast (Ubon Ratchathani)   15.2454,104.8462 OTOP Center, Ubon Ratchathani
+station 42t B south (Surat Thani)            9.1260,99.3251 Environment Agency Section 14, Surat Thani
+Air4Thai daily rows 5365 (2025-01-01..2026-06-30); hourly rows 9165 (2026-09-15 00:00:00..2026-10-23 23:00:00)
+CAMS hourly rows 46800; Open-Meteo weighted calls so far (ledger): 139.0
+  CAMS grid for 05t: 13.700,100.600
+  CAMS grid for 35t: 18.800,99.000
+  CAMS grid for 41t: 15.700,100.100
+  CAMS grid for 42t: 9.100,99.300
+  CAMS grid for 44t: 7.000,100.500
+  CAMS grid for 46t: 16.400,102.800
+  CAMS grid for 50t: 13.700,100.500
+  CAMS grid for 57t: 19.900,99.800
+  CAMS grid for 67t: 18.800,100.800
+  CAMS grid for 83t: 15.200,104.800
+daily obs+CAMS pairs: 1895 → /home/user/disaster-now/research/data/e3_pm25_daily.csv
+
+## Choosing period: fit Dec 2025–Jan 2026 (n=714 rows, 3 leads), choose on Feb 2026 (n=336), sample A
+  raw       n= 336 MAE=  6.65 bias= -3.22 band= 58.0% | ≥37.6: ev= 45 POD= 0.53 FAR= 0.38 CSI= 0.40 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  persist   n= 336 MAE=  6.96 bias= +0.78 band= 55.4% | ≥37.6: ev= 45 POD= 0.24 FAR= 0.80 CSI= 0.12 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  ratio     n= 336 MAE=  5.76 bias= +1.41 band= 66.7% | ≥37.6: ev= 45 POD= 0.80 FAR= 0.48 CSI= 0.46 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+  blend     n= 336 MAE=  5.32 bias= +1.62 band= 58.6% | ≥37.6: ev= 45 POD= 0.49 FAR= 0.51 CSI= 0.32 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  blend_log n= 336 MAE=  5.14 bias= +0.70 band= 59.8% | ≥37.6: ev= 45 POD= 0.27 FAR= 0.60 CSI= 0.19 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  gbm       n= 336 MAE=  3.93 bias= +1.73 band= 70.5% | ≥37.6: ev= 45 POD= 0.91 FAR= 0.38 CSI= 0.59 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  damped_posthoc n= 336 MAE=  4.08 bias= +0.36 band= 71.7% | ≥37.6: ev= 45 POD= 0.60 FAR= 0.45 CSI= 0.40 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+  (damped_posthoc betas fitted Dec–Jan: {1: 0.4, 2: 0.5, 3: 0.55})
+  → blend form chosen on Feb: blend_log (MAE 5.14); gbm Feb MAE 3.93
+
+final damped_posthoc betas (fit Dec–Feb, sample A): {1: 0.45, 2: 0.55, 3: 0.55}
+
+final blend_log coefficients (fit Dec–Feb, sample A, n=1050): {"1": [0.2832564248614915, 0.7349161458868496, 0.1919226568117428], "2": [0.5169055856270617, 0.5410531555592223, 0.32375361306147415], "3": [0.6721235174827122, 0.4576078427967321, 0.3625769408770895]}  [y = a + b*persist + c*CAMS in log1p space]
+
+## A_MarApr (later period, fit stations)
+ lead 1 (0–24 h):
+   raw      n= 242 MAE= 11.84 bias= -9.95 band= 50.4% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 23 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  5.20 bias= -0.09 band= 72.3% | ≥37.6: ev= 84 POD= 0.86 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.13 CSI= 0.77
+   ratio    n= 242 MAE=  6.44 bias= +0.80 band= 71.1% | ≥37.6: ev= 84 POD= 0.92 FAR= 0.15 CSI= 0.79 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.20 CSI= 0.71
+   blend    n= 242 MAE=  5.17 bias= -2.39 band= 76.4% | ≥37.6: ev= 84 POD= 0.89 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 23 POD= 0.74 FAR= 0.00 CSI= 0.74
+   gbm      n= 241 MAE=  8.56 bias= -4.72 band= 66.4% | ≥37.6: ev= 83 POD= 0.93 FAR= 0.10 CSI= 0.84 | ≥75.1: ev= 22 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 242 MAE=  4.34 bias= +0.03 band= 77.7% | ≥37.6: ev= 84 POD= 0.92 FAR= 0.10 CSI= 0.83 | ≥75.1: ev= 23 POD= 0.83 FAR= 0.14 CSI= 0.73
+ lead 2 (24–48 h):
+   raw      n= 242 MAE= 11.86 bias= -9.97 band= 50.4% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 23 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  7.29 bias= -0.13 band= 65.7% | ≥37.6: ev= 84 POD= 0.82 FAR= 0.17 CSI= 0.70 | ≥75.1: ev= 23 POD= 0.87 FAR= 0.13 CSI= 0.77
+   ratio    n= 242 MAE=  8.33 bias= +1.38 band= 61.2% | ≥37.6: ev= 84 POD= 0.85 FAR= 0.20 CSI= 0.70 | ≥75.1: ev= 23 POD= 0.74 FAR= 0.32 CSI= 0.55
+   blend    n= 242 MAE=  7.52 bias= -4.00 band= 70.2% | ≥37.6: ev= 84 POD= 0.87 FAR= 0.14 CSI= 0.76 | ≥75.1: ev= 23 POD= 0.48 FAR= 0.00 CSI= 0.48
+   gbm      n= 241 MAE=  9.46 bias= -5.15 band= 62.7% | ≥37.6: ev= 83 POD= 0.86 FAR= 0.17 CSI= 0.72 | ≥75.1: ev= 23 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 242 MAE=  6.12 bias= +0.17 band= 70.7% | ≥37.6: ev= 84 POD= 0.86 FAR= 0.15 CSI= 0.74 | ≥75.1: ev= 23 POD= 0.78 FAR= 0.18 CSI= 0.67
+ lead 3 (48–72 h):
+   raw      n= 242 MAE= 11.91 bias=-10.02 band= 50.0% | ≥37.6: ev= 84 POD= 0.61 FAR= 0.18 CSI= 0.54 | ≥75.1: ev= 24 POD= 0.17 FAR= 0.00 CSI= 0.17
+   persist  n= 242 MAE=  8.75 bias= -0.13 band= 60.3% | ≥37.6: ev= 84 POD= 0.80 FAR= 0.19 CSI= 0.67 | ≥75.1: ev= 24 POD= 0.83 FAR= 0.13 CSI= 0.74
+   ratio    n= 242 MAE=  9.29 bias= +1.86 band= 63.6% | ≥37.6: ev= 84 POD= 0.90 FAR= 0.16 CSI= 0.78 | ≥75.1: ev= 24 POD= 0.71 FAR= 0.41 CSI= 0.47
+   blend    n= 242 MAE=  8.68 bias= -4.89 band= 66.9% | ≥37.6: ev= 84 POD= 0.83 FAR= 0.12 CSI= 0.74 | ≥75.1: ev= 24 POD= 0.33 FAR= 0.00 CSI= 0.33
+   gbm      n= 241 MAE=  9.81 bias= -5.32 band= 62.7% | ≥37.6: ev= 83 POD= 0.84 FAR= 0.15 CSI= 0.74 | ≥75.1: ev= 23 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 242 MAE=  6.92 bias= +0.28 band= 68.6% | ≥37.6: ev= 84 POD= 0.89 FAR= 0.13 CSI= 0.79 | ≥75.1: ev= 24 POD= 0.79 FAR= 0.21 CSI= 0.66
+
+## B_MarApr (later period, disjoint stations)
+ lead 1 (0–24 h):
+   raw      n= 363 MAE= 16.72 bias=-12.73 band= 53.7% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 363 MAE=  7.31 bias= -0.09 band= 75.8% | ≥37.6: ev=172 POD= 0.92 FAR= 0.07 CSI= 0.86 | ≥75.1: ev= 53 POD= 0.85 FAR= 0.15 CSI= 0.74
+   ratio    n= 363 MAE=  8.76 bias= +1.01 band= 70.0% | ≥37.6: ev=172 POD= 0.93 FAR= 0.09 CSI= 0.85 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.25 CSI= 0.64
+   blend    n= 363 MAE=  8.08 bias= -3.96 band= 75.2% | ≥37.6: ev=172 POD= 0.92 FAR= 0.07 CSI= 0.86 | ≥75.1: ev= 53 POD= 0.72 FAR= 0.07 CSI= 0.68
+   gbm      n= 362 MAE= 14.04 bias= -8.76 band= 58.6% | ≥37.6: ev=172 POD= 0.92 FAR= 0.10 CSI= 0.84 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 363 MAE=  6.55 bias= +0.18 band= 78.2% | ≥37.6: ev=172 POD= 0.94 FAR= 0.06 CSI= 0.89 | ≥75.1: ev= 53 POD= 0.85 FAR= 0.17 CSI= 0.73
+ lead 2 (24–48 h):
+   raw      n= 362 MAE= 16.75 bias=-12.74 band= 53.6% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 362 MAE= 11.11 bias= -0.14 band= 67.7% | ≥37.6: ev=172 POD= 0.89 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.19 CSI= 0.68
+   ratio    n= 362 MAE= 11.42 bias= +2.10 band= 64.9% | ≥37.6: ev=172 POD= 0.90 FAR= 0.11 CSI= 0.81 | ≥75.1: ev= 53 POD= 0.79 FAR= 0.37 CSI= 0.54
+   blend    n= 362 MAE= 11.55 bias= -6.55 band= 65.5% | ≥37.6: ev=172 POD= 0.87 FAR= 0.10 CSI= 0.79 | ≥75.1: ev= 53 POD= 0.51 FAR= 0.10 CSI= 0.48
+   gbm      n= 361 MAE= 14.93 bias= -9.16 band= 55.7% | ≥37.6: ev=172 POD= 0.90 FAR= 0.13 CSI= 0.79 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 362 MAE=  9.23 bias= +0.57 band= 70.7% | ≥37.6: ev=172 POD= 0.91 FAR= 0.09 CSI= 0.83 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.20 CSI= 0.67
+ lead 3 (48–72 h):
+   raw      n= 362 MAE= 16.77 bias=-12.76 band= 53.6% | ≥37.6: ev=172 POD= 0.64 FAR= 0.17 CSI= 0.56 | ≥75.1: ev= 53 POD= 0.21 FAR= 0.15 CSI= 0.20
+   persist  n= 362 MAE= 13.81 bias= -0.14 band= 60.2% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.77 FAR= 0.23 CSI= 0.63
+   ratio    n= 362 MAE= 12.50 bias= +2.26 band= 62.2% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.77 | ≥75.1: ev= 53 POD= 0.81 FAR= 0.31 CSI= 0.60
+   blend    n= 362 MAE= 13.45 bias= -7.98 band= 61.3% | ≥37.6: ev=172 POD= 0.85 FAR= 0.12 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.34 FAR= 0.18 CSI= 0.32
+   gbm      n= 361 MAE= 15.58 bias= -9.30 band= 55.4% | ≥37.6: ev=171 POD= 0.88 FAR= 0.13 CSI= 0.78 | ≥75.1: ev= 53 POD= 0.00 FAR=  -   CSI= 0.00
+   damped_posthoc n= 362 MAE= 11.04 bias= +0.51 band= 63.0% | ≥37.6: ev=172 POD= 0.87 FAR= 0.13 CSI= 0.76 | ≥75.1: ev= 53 POD= 0.77 FAR= 0.24 CSI= 0.62
+
+## B_DecFeb (same period, disjoint stations)
+ lead 1 (0–24 h):
+   raw      n= 504 MAE=  8.25 bias= -6.04 band= 44.0% | ≥37.6: ev= 54 POD= 0.31 FAR= 0.51 CSI= 0.24 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 504 MAE=  3.99 bias= +0.14 band= 68.7% | ≥37.6: ev= 54 POD= 0.67 FAR= 0.35 CSI= 0.49 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 504 MAE=  4.87 bias= +0.73 band= 63.5% | ≥37.6: ev= 54 POD= 0.70 FAR= 0.46 CSI= 0.44 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 504 MAE=  3.69 bias= -0.53 band= 70.0% | ≥37.6: ev= 54 POD= 0.61 FAR= 0.27 CSI= 0.50 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 502 MAE=  4.70 bias= +1.78 band= 62.0% | ≥37.6: ev= 53 POD= 0.64 FAR= 0.37 CSI= 0.47 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 504 MAE=  3.38 bias= +0.15 band= 70.8% | ≥37.6: ev= 54 POD= 0.70 FAR= 0.36 CSI= 0.51 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 2 (24–48 h):
+   raw      n= 504 MAE=  8.26 bias= -6.04 band= 44.0% | ≥37.6: ev= 53 POD= 0.32 FAR= 0.51 CSI= 0.24 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 504 MAE=  6.13 bias= +0.23 band= 55.8% | ≥37.6: ev= 53 POD= 0.42 FAR= 0.60 CSI= 0.26 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 504 MAE=  5.79 bias= +1.26 band= 53.8% | ≥37.6: ev= 53 POD= 0.79 FAR= 0.51 CSI= 0.44 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 504 MAE=  5.05 bias= -0.89 band= 58.9% | ≥37.6: ev= 53 POD= 0.32 FAR= 0.45 CSI= 0.25 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 500 MAE=  5.04 bias= +1.67 band= 59.4% | ≥37.6: ev= 51 POD= 0.57 FAR= 0.38 CSI= 0.42 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 504 MAE=  4.47 bias= +0.34 band= 61.5% | ≥37.6: ev= 53 POD= 0.75 FAR= 0.40 CSI= 0.50 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 3 (48–72 h):
+   raw      n= 500 MAE=  8.19 bias= -5.95 band= 44.2% | ≥37.6: ev= 51 POD= 0.33 FAR= 0.51 CSI= 0.25 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 500 MAE=  7.26 bias= +0.31 band= 48.2% | ≥37.6: ev= 51 POD= 0.27 FAR= 0.74 CSI= 0.15 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 500 MAE=  5.88 bias= +1.55 band= 55.4% | ≥37.6: ev= 51 POD= 0.82 FAR= 0.52 CSI= 0.43 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 500 MAE=  5.52 bias= -0.94 band= 56.0% | ≥37.6: ev= 51 POD= 0.27 FAR= 0.46 CSI= 0.22 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 497 MAE=  5.40 bias= +1.69 band= 56.7% | ≥37.6: ev= 49 POD= 0.47 FAR= 0.55 CSI= 0.30 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 500 MAE=  4.88 bias= +0.43 band= 61.4% | ≥37.6: ev= 51 POD= 0.67 FAR= 0.42 CSI= 0.45 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+
+## all_Oct2026 (newest, all stations)
+ lead 1 (0–24 h):
+   raw      n= 328 MAE=  6.08 bias= -3.72 band= 60.1% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 328 MAE=  3.04 bias= -0.28 band= 73.5% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 328 MAE=  4.65 bias= +0.57 band= 65.9% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   blend    n= 328 MAE=  2.59 bias= -0.18 band= 75.3% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 324 MAE=  6.11 bias= +4.50 band= 42.9% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 328 MAE=  2.78 bias= -0.15 band= 76.2% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 2 (24–48 h):
+   raw      n= 327 MAE=  6.07 bias= -3.69 band= 60.2% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 327 MAE=  4.36 bias= -0.44 band= 65.4% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 327 MAE=  5.55 bias= +1.36 band= 60.6% | ≥37.6: ev=  1 POD= 1.00 FAR= 0.90 CSI= 0.10 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   blend    n= 327 MAE=  3.34 bias= -0.03 band= 70.3% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 323 MAE=  6.31 bias= +4.60 band= 41.8% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 327 MAE=  3.61 bias= +0.06 band= 70.3% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+ lead 3 (48–72 h):
+   raw      n= 326 MAE=  6.05 bias= -3.67 band= 60.4% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   persist  n= 326 MAE=  4.92 bias= -0.44 band= 59.8% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   ratio    n= 326 MAE=  6.64 bias= +2.14 band= 56.7% | ≥37.6: ev=  1 POD= 1.00 FAR= 0.96 CSI= 0.04 | ≥75.1: ev=  0 POD=  -   FAR= 1.00 CSI= 0.00
+   blend    n= 326 MAE=  3.58 bias= +0.28 band= 68.7% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   gbm      n= 322 MAE=  6.53 bias= +4.75 band= 40.7% | ≥37.6: ev=  1 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+   damped_posthoc n= 326 MAE=  4.06 bias= +0.28 band= 66.9% | ≥37.6: ev=  1 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -  
+
+## Per station, lead 1, Mar–Apr 2026: MAE and 'made worse' (rise > 3 % and block-bootstrap lower 5 % bound > 0; blocks of 5 days)
+  MarApr 35t A n= 59 MAE raw= 24.00 persist=  9.94 ratio= 10.04 blend= 10.76 gbm= 23.97 | ratio vs raw  -58.2% vs persist   +1.1% | blend vs raw  -55.2% vs persist   +8.3%
+  MarApr 50t A n= 61 MAE raw=  5.48 persist=  3.66 ratio=  4.25 blend=  2.70 gbm=  3.38 | ratio vs raw  -22.4% vs persist  +16.1% WORSE | blend vs raw  -50.6% vs persist  -26.1%
+  MarApr 46t A n= 61 MAE raw= 14.81 persist=  5.58 ratio=  8.63 blend=  5.84 gbm=  5.82 | ratio vs raw  -41.7% vs persist  +54.7% WORSE | blend vs raw  -60.5% vs persist   +4.7%
+  MarApr 44t A n= 61 MAE raw=  3.47 persist=  1.76 ratio=  2.97 blend=  1.56 gbm=  1.83 | ratio vs raw  -14.2% vs persist  +68.7% WORSE | blend vs raw  -54.9% vs persist  -11.3%
+  MarApr 57t B n= 61 MAE raw= 26.36 persist= 14.99 ratio= 15.56 blend= 16.27 gbm= 30.20 | ratio vs raw  -41.0% vs persist   +3.8% | blend vs raw  -38.3% vs persist   +8.5%
+  MarApr 67t B n= 58 MAE raw= 40.58 persist= 11.16 ratio= 13.52 blend= 15.99 gbm= 34.93 | ratio vs raw  -66.7% vs persist  +21.2% | blend vs raw  -60.6% vs persist  +43.4% WORSE
+  MarApr 05t B n= 61 MAE raw=  3.60 persist=  3.29 ratio=  3.46 blend=  2.49 gbm=  4.22 | ratio vs raw   -4.0% vs persist   +5.3% | blend vs raw  -30.9% vs persist  -24.2%
+  MarApr 41t B n= 61 MAE raw= 15.87 persist=  5.53 ratio=  8.63 blend=  5.79 gbm=  5.95 | ratio vs raw  -45.6% vs persist  +56.1% WORSE | blend vs raw  -63.5% vs persist   +4.7%
+  MarApr 83t B n= 61 MAE raw= 12.33 persist=  7.19 ratio=  8.91 blend=  6.58 gbm=  8.10 | ratio vs raw  -27.8% vs persist  +23.8% | blend vs raw  -46.6% vs persist   -8.5%
+  MarApr 42t B n= 61 MAE raw=  2.78 persist=  1.86 ratio=  2.69 blend=  1.76 gbm=  2.23 | ratio vs raw   -3.1% vs persist  +44.4% | blend vs raw  -36.8% vs persist   -5.8%
+  Oct2026 35t A n= 34 MAE raw=  2.83 persist=  2.00 ratio=  3.08 blend=  1.79 gbm=  5.04 | ratio vs raw   +8.8% vs persist  +54.3% WORSE | blend vs raw  -36.9% vs persist  -10.5%
+  Oct2026 50t A n= 34 MAE raw=  4.87 persist=  4.30 ratio=  6.06 blend=  3.41 gbm=  6.37 | ratio vs raw  +24.4% vs persist  +40.8% WORSE | blend vs raw  -29.9% vs persist  -20.7%
+  Oct2026 46t A n= 32 MAE raw= 10.93 persist=  4.05 ratio=  5.90 blend=  3.46 gbm=  4.30 | ratio vs raw  -46.0% vs persist  +45.6% WORSE | blend vs raw  -68.4% vs persist  -14.7%
+  Oct2026 44t A n= 34 MAE raw=  6.95 persist=  3.96 ratio=  4.86 blend=  3.06 gbm=  4.43 | ratio vs raw  -30.1% vs persist  +22.8% | blend vs raw  -56.0% vs persist  -22.8%
+  Oct2026 57t B n= 28 MAE raw=  4.91 persist=  2.20 ratio=  3.28 blend=  1.84 gbm=  6.33 | ratio vs raw  -33.2% vs persist  +49.1% WORSE | blend vs raw  -62.6% vs persist  -16.6%
+  Oct2026 67t B n= 30 MAE raw=  9.99 persist=  2.18 ratio=  4.81 blend=  2.19 gbm=  3.37 | ratio vs raw  -51.9% vs persist +120.7% WORSE | blend vs raw  -78.0% vs persist   +0.7%
+  Oct2026 05t B n= 34 MAE raw=  5.41 persist=  3.49 ratio=  5.62 blend=  2.97 gbm=  7.66 | ratio vs raw   +3.8% vs persist  +61.0% WORSE | blend vs raw  -45.2% vs persist  -15.0%
+  Oct2026 41t B n= 34 MAE raw=  3.59 persist=  1.72 ratio=  5.94 blend=  1.52 gbm= 10.53 | ratio vs raw  +65.4% WORSE vs persist +246.0% WORSE | blend vs raw  -57.8% vs persist  -11.7%
+  Oct2026 83t B n= 34 MAE raw=  4.09 persist=  3.01 ratio=  3.51 blend=  2.54 gbm=  8.26 | ratio vs raw  -14.0% vs persist  +16.8% | blend vs raw  -37.9% vs persist  -15.6%
+  Oct2026 42t B n= 34 MAE raw=  7.79 persist=  3.30 ratio=  3.26 blend=  2.99 gbm=  4.22 | ratio vs raw  -58.2% vs persist   -1.3% | blend vs raw  -61.7% vs persist   -9.5%
+
+## Pooled MAE difference vs persistence, 90 % block-bootstrap interval (blocks of 5 days within station)
+  A_MarApr (later period, fit stations)         lead 1 raw             ΔMAE vs persist  +6.64 [ +4.19,  +9.35]
+  A_MarApr (later period, fit stations)         lead 1 ratio           ΔMAE vs persist  +1.25 [ +0.73,  +1.76]
+  A_MarApr (later period, fit stations)         lead 1 blend           ΔMAE vs persist  -0.02 [ -0.66,  +0.70]
+  A_MarApr (later period, fit stations)         lead 1 damped_posthoc  ΔMAE vs persist  -0.86 [ -1.30,  -0.43]
+  A_MarApr (later period, fit stations)         lead 2 raw             ΔMAE vs persist  +4.57 [ +2.23,  +7.26]
+  A_MarApr (later period, fit stations)         lead 2 ratio           ΔMAE vs persist  +1.04 [ -0.06,  +2.14]
+  A_MarApr (later period, fit stations)         lead 2 blend           ΔMAE vs persist  +0.23 [ -0.97,  +1.71]
+  A_MarApr (later period, fit stations)         lead 2 damped_posthoc  ΔMAE vs persist  -1.17 [ -1.83,  -0.58]
+  A_MarApr (later period, fit stations)         lead 3 raw             ΔMAE vs persist  +3.16 [ +0.93,  +5.73]
+  A_MarApr (later period, fit stations)         lead 3 ratio           ΔMAE vs persist  +0.55 [ -1.16,  +2.28]
+  A_MarApr (later period, fit stations)         lead 3 blend           ΔMAE vs persist  -0.07 [ -1.47,  +1.48]
+  A_MarApr (later period, fit stations)         lead 3 damped_posthoc  ΔMAE vs persist  -1.82 [ -2.70,  -0.93]
+  B_MarApr (later period, disjoint stations)    lead 1 raw             ΔMAE vs persist  +9.42 [ +6.70, +12.45]
+  B_MarApr (later period, disjoint stations)    lead 1 ratio           ΔMAE vs persist  +1.45 [ +0.46,  +2.45]
+  B_MarApr (later period, disjoint stations)    lead 1 blend           ΔMAE vs persist  +0.78 [ -0.01,  +1.67]
+  B_MarApr (later period, disjoint stations)    lead 1 damped_posthoc  ΔMAE vs persist  -0.76 [ -1.33,  -0.22]
+  B_MarApr (later period, disjoint stations)    lead 2 raw             ΔMAE vs persist  +5.64 [ +2.86,  +8.39]
+  B_MarApr (later period, disjoint stations)    lead 2 ratio           ΔMAE vs persist  +0.31 [ -1.37,  +2.01]
+  B_MarApr (later period, disjoint stations)    lead 2 blend           ΔMAE vs persist  +0.44 [ -1.09,  +2.10]
+  B_MarApr (later period, disjoint stations)    lead 2 damped_posthoc  ΔMAE vs persist  -1.88 [ -3.02,  -0.79]
+  B_MarApr (later period, disjoint stations)    lead 3 raw             ΔMAE vs persist  +2.96 [ +0.63,  +5.61]
+  B_MarApr (later period, disjoint stations)    lead 3 ratio           ΔMAE vs persist  -1.31 [ -3.20,  +0.67]
+  B_MarApr (later period, disjoint stations)    lead 3 blend           ΔMAE vs persist  -0.36 [ -2.22,  +1.52]
+  B_MarApr (later period, disjoint stations)    lead 3 damped_posthoc  ΔMAE vs persist  -2.77 [ -3.93,  -1.58]
+  B_DecFeb (same period, disjoint stations)     lead 1 raw             ΔMAE vs persist  +4.27 [ +3.34,  +5.20]
+  B_DecFeb (same period, disjoint stations)     lead 1 ratio           ΔMAE vs persist  +0.89 [ +0.42,  +1.34]
+  B_DecFeb (same period, disjoint stations)     lead 1 blend           ΔMAE vs persist  -0.29 [ -0.51,  -0.05]
+  B_DecFeb (same period, disjoint stations)     lead 1 damped_posthoc  ΔMAE vs persist  -0.61 [ -0.89,  -0.34]
+  B_DecFeb (same period, disjoint stations)     lead 2 raw             ΔMAE vs persist  +2.13 [ +1.08,  +3.20]
+  B_DecFeb (same period, disjoint stations)     lead 2 ratio           ΔMAE vs persist  -0.34 [ -1.10,  +0.39]
+  B_DecFeb (same period, disjoint stations)     lead 2 blend           ΔMAE vs persist  -1.08 [ -1.54,  -0.61]
+  B_DecFeb (same period, disjoint stations)     lead 2 damped_posthoc  ΔMAE vs persist  -1.66 [ -2.16,  -1.15]
+  B_DecFeb (same period, disjoint stations)     lead 3 raw             ΔMAE vs persist  +0.93 [ -0.11,  +2.01]
+  B_DecFeb (same period, disjoint stations)     lead 3 ratio           ΔMAE vs persist  -1.38 [ -2.32,  -0.47]
+  B_DecFeb (same period, disjoint stations)     lead 3 blend           ΔMAE vs persist  -1.74 [ -2.34,  -1.13]
+  B_DecFeb (same period, disjoint stations)     lead 3 damped_posthoc  ΔMAE vs persist  -2.38 [ -2.98,  -1.80]
+  all_Oct2026 (newest, all stations)            lead 1 raw             ΔMAE vs persist  +3.04 [ +2.38,  +3.73]
+  all_Oct2026 (newest, all stations)            lead 1 ratio           ΔMAE vs persist  +1.61 [ +1.21,  +2.01]
+  all_Oct2026 (newest, all stations)            lead 1 blend           ΔMAE vs persist  -0.45 [ -0.60,  -0.30]
+  all_Oct2026 (newest, all stations)            lead 1 damped_posthoc  ΔMAE vs persist  -0.26 [ -0.51,  -0.02]
+  all_Oct2026 (newest, all stations)            lead 2 raw             ΔMAE vs persist  +1.70 [ +1.00,  +2.40]
+  all_Oct2026 (newest, all stations)            lead 2 ratio           ΔMAE vs persist  +1.18 [ +0.62,  +1.77]
+  all_Oct2026 (newest, all stations)            lead 2 blend           ΔMAE vs persist  -1.03 [ -1.35,  -0.71]
+  all_Oct2026 (newest, all stations)            lead 2 damped_posthoc  ΔMAE vs persist  -0.75 [ -1.09,  -0.40]
+  all_Oct2026 (newest, all stations)            lead 3 raw             ΔMAE vs persist  +1.12 [ +0.40,  +1.89]
+  all_Oct2026 (newest, all stations)            lead 3 ratio           ΔMAE vs persist  +1.71 [ +0.84,  +2.68]
+  all_Oct2026 (newest, all stations)            lead 3 blend           ΔMAE vs persist  -1.35 [ -1.74,  -0.94]
+  all_Oct2026 (newest, all stations)            lead 3 damped_posthoc  ΔMAE vs persist  -0.86 [ -1.21,  -0.52]
+
+## Onsets (diagnostic): target day ≥ threshold while the last observed day (persist) was below it
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 raw             onsets= 12 caught=  9 false alarms=  6 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 ratio           onsets= 12 caught=  8 false alarms=  8 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 blend           onsets= 12 caught=  4 false alarms=  0 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 37.6 damped_posthoc  onsets= 12 caught=  6 false alarms=  2 of 147 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 raw             onsets=  3 caught=  0 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 ratio           onsets=  3 caught=  2 false alarms=  3 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 blend           onsets=  3 caught=  0 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 1 ≥ 75.1 damped_posthoc  onsets=  3 caught=  1 false alarms=  1 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 raw             onsets= 15 caught=  9 false alarms=  6 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 ratio           onsets= 15 caught=  7 false alarms= 10 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 blend           onsets= 15 caught=  5 false alarms=  2 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 37.6 damped_posthoc  onsets= 15 caught=  5 false alarms=  3 of 144 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 raw             onsets=  3 caught=  1 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 ratio           onsets=  3 caught=  2 false alarms=  5 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 blend           onsets=  3 caught=  1 false alarms=  0 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 2 ≥ 75.1 damped_posthoc  onsets=  3 caught=  2 false alarms=  1 of 216 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 raw             onsets= 17 caught=  8 false alarms=  7 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 ratio           onsets= 17 caught= 11 false alarms=  8 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 blend           onsets= 17 caught=  3 false alarms=  1 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 37.6 damped_posthoc  onsets= 17 caught=  8 false alarms=  3 of 142 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 raw             onsets=  4 caught=  1 false alarms=  0 of 215 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 ratio           onsets=  4 caught=  2 false alarms=  9 of 215 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 blend           onsets=  4 caught=  0 false alarms=  0 of 215 quiet days
+  A_MarApr (later period, fit stations)         lead 3 ≥ 75.1 damped_posthoc  onsets=  4 caught=  2 false alarms=  2 of 215 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 raw             onsets= 13 caught=  5 false alarms= 19 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 ratio           onsets= 13 caught=  6 false alarms= 10 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 blend           onsets= 13 caught=  3 false alarms=  1 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 37.6 damped_posthoc  onsets= 13 caught=  5 false alarms=  3 of 179 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 raw             onsets=  8 caught=  1 false alarms=  1 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 ratio           onsets=  8 caught=  2 false alarms= 10 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 blend           onsets=  8 caught=  0 false alarms=  0 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 1 ≥ 75.1 damped_posthoc  onsets=  8 caught=  1 false alarms=  4 of 302 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 raw             onsets= 19 caught=  9 false alarms= 15 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 ratio           onsets= 19 caught= 11 false alarms=  9 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 blend           onsets= 19 caught=  4 false alarms=  2 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 37.6 damped_posthoc  onsets= 19 caught=  7 false alarms=  4 of 172 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 raw             onsets= 10 caught=  1 false alarms=  0 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 ratio           onsets= 10 caught=  4 false alarms= 18 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 blend           onsets= 10 caught=  0 false alarms=  0 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 2 ≥ 75.1 damped_posthoc  onsets= 10 caught=  2 false alarms=  4 of 299 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 raw             onsets= 23 caught= 13 false alarms= 13 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 ratio           onsets= 23 caught= 14 false alarms=  8 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 blend           onsets= 23 caught=  7 false alarms=  3 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 37.6 damped_posthoc  onsets= 23 caught=  8 false alarms=  4 of 167 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 raw             onsets= 12 caught=  1 false alarms=  0 of 297 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 ratio           onsets= 12 caught=  6 false alarms= 13 of 297 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 blend           onsets= 12 caught=  0 false alarms=  0 of 297 quiet days
+  B_MarApr (later period, disjoint stations)    lead 3 ≥ 75.1 damped_posthoc  onsets= 12 caught=  3 false alarms=  4 of 297 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 raw             onsets= 18 caught=  8 false alarms= 15 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 ratio           onsets= 18 caught= 11 false alarms= 28 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 blend           onsets= 18 caught=  3 false alarms=  0 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 37.6 damped_posthoc  onsets= 18 caught=  6 false alarms= 10 of 431 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 1 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  1 of 504 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 raw             onsets= 31 caught= 13 false alarms= 17 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 ratio           onsets= 31 caught= 26 false alarms= 37 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 blend           onsets= 31 caught=  7 false alarms=  5 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 37.6 damped_posthoc  onsets= 31 caught= 22 false alarms= 15 of 418 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 2 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  4 of 504 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 raw             onsets= 37 caught= 16 false alarms= 16 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 ratio           onsets= 37 caught= 30 false alarms= 41 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 blend           onsets= 37 caught=  8 false alarms=  4 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 37.6 damped_posthoc  onsets= 37 caught= 21 false alarms= 16 of 409 quiet days
+  B_DecFeb (same period, disjoint stations)     lead 3 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  1 of 500 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 raw             onsets=  1 caught=  0 false alarms=  2 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 ratio           onsets=  1 caught=  0 false alarms=  7 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 blend           onsets=  1 caught=  0 false alarms=  0 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 1 ≥ 37.6 damped_posthoc  onsets=  1 caught=  0 false alarms=  0 of 326 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 raw             onsets=  1 caught=  0 false alarms=  2 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 ratio           onsets=  1 caught=  1 false alarms=  9 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 blend           onsets=  1 caught=  0 false alarms=  0 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 2 ≥ 37.6 damped_posthoc  onsets=  1 caught=  0 false alarms=  1 of 325 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 raw             onsets=  1 caught=  0 false alarms=  2 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 ratio           onsets=  1 caught=  1 false alarms= 22 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 blend           onsets=  1 caught=  0 false alarms=  0 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 37.6 damped_posthoc  onsets=  1 caught=  0 false alarms=  0 of 324 quiet days
+  all_Oct2026 (newest, all stations)            lead 3 ≥ 75.1 ratio           onsets=  0 caught=  0 false alarms=  1 of 326 quiet days
+  MarApr lead 1: ratio made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: ratio made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: ratio made worse than raw beyond chance at 1 stations ['42t']
+  MarApr lead 1: ratio made worse than persist beyond chance at 4 stations ['50t', '46t', '44t', '41t']
+  MarApr lead 2: ratio made worse than persist beyond chance at 2 stations ['46t', '41t']
+  MarApr lead 3: ratio made worse than persist beyond chance at 2 stations ['46t', '41t']
+  MarApr lead 1: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: blend made worse than raw beyond chance at 0 stations []
+  MarApr lead 1: blend made worse than persist beyond chance at 1 stations ['67t']
+  MarApr lead 2: blend made worse than persist beyond chance at 0 stations []
+  MarApr lead 3: blend made worse than persist beyond chance at 0 stations []
+  MarApr lead 1: damped_posthoc made worse than raw beyond chance at 0 stations []
+  MarApr lead 2: damped_posthoc made worse than raw beyond chance at 0 stations []
+  MarApr lead 3: damped_posthoc made worse than raw beyond chance at 0 stations []
+  MarApr lead 1: damped_posthoc made worse than persist beyond chance at 0 stations []
+  MarApr lead 2: damped_posthoc made worse than persist beyond chance at 0 stations []
+  MarApr lead 3: damped_posthoc made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 1: ratio made worse than raw beyond chance at 1 stations ['41t']
+  Oct2026 lead 2: ratio made worse than raw beyond chance at 4 stations ['35t', '50t', '05t', '41t']
+  Oct2026 lead 3: ratio made worse than raw beyond chance at 4 stations ['35t', '50t', '05t', '41t']
+  Oct2026 lead 1: ratio made worse than persist beyond chance at 7 stations ['35t', '50t', '46t', '57t', '67t', '05t', '41t']
+  Oct2026 lead 2: ratio made worse than persist beyond chance at 2 stations ['35t', '41t']
+  Oct2026 lead 3: ratio made worse than persist beyond chance at 5 stations ['35t', '50t', '67t', '05t', '41t']
+  Oct2026 lead 1: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 2: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 3: blend made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 1: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 2: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 3: blend made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 1: damped_posthoc made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 2: damped_posthoc made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 3: damped_posthoc made worse than raw beyond chance at 0 stations []
+  Oct2026 lead 1: damped_posthoc made worse than persist beyond chance at 1 stations ['41t']
+  Oct2026 lead 2: damped_posthoc made worse than persist beyond chance at 0 stations []
+  Oct2026 lead 3: damped_posthoc made worse than persist beyond chance at 0 stations []
+
+## Hourly, newest data (2026-09-20 … 2026-10-22), issue every hour, next 1–24 h
+  hourly values, raw      : n=181279 MAE=  7.56
+  hourly values, persist24: n=181279 MAE=  4.24
+  hourly values, persist1 : n=181279 MAE=  4.32
+  hourly values, ratio    : n=181279 MAE=  7.15
+  next-24 h mean, raw      : n=7608 MAE=  6.12 bias= -3.70 band= 58.6% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+  next-24 h mean, persist24: n=7608 MAE=  3.12 bias= -0.24 band= 71.4% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+  next-24 h mean, ratio    : n=7608 MAE=  4.77 bias= +0.66 band= 62.4% | ≥37.6: ev= 23 POD= 0.00 FAR= 1.00 CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+  next-24 h mean, damped_posthoc: n=7608 MAE=  2.86 bias= -0.08 band= 74.5% | ≥37.6: ev= 23 POD= 0.00 FAR=  -   CSI= 0.00 | ≥75.1: ev=  0 POD=  -   FAR=  -   CSI=  -    (issues overlap: hourly issues of the same day are not independent)
+
+wrote /home/user/disaster-now/research/out/e3_results.json; Open-Meteo ledger total 139.0 weighted calls
