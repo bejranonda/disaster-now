@@ -1,0 +1,123 @@
+# research/eq_aftershock.py
+# started 2026-10-24T09:08:40+00:00
+mainshocks M>=5.5, GK-independent: 401; with circle inside the box and >= 7 d of catalog after: 391
+by set: {'train': 322, 'test': 69}
+by regime:
+set           test  train
+regime                   
+ANSR-ABSLDEC     6     19
+ANSR-DEEPCON    15     58
+ANSR-SHALCON     2      6
+SCR-GENERIC      1      2
+SOR-GENERIC      0      5
+SZ-GENERIC      21    121
+SZ-INLBACK       1     13
+SZ-ONSHORE      16     75
+SZ-OUTERTR       7     23
+depth > 70 km: 55
+
+regional refit on 322 training sequences (counts above Mc(t) in (1 h, +30 d]): a_mean = -2.968, sigma_a = 0.615, p = 0.612 (b = 1, c = 0.018 fixed); success=True, -logL=295.7
+training sequences with zero counted events: 242 of 322; median count 0, max 29
+
+===== TEST set =====
+
+-- event: >= 1 quake M>=5 within 7 d (from 1 h after), n = 69, observed 5 (7.2 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.137  0.0713  0.000 -0.2805   +0.0000 .. +0.0000
+    B1   0.129  0.0842 -0.180 -0.2993   -0.0401 .. +0.0103
+     G   0.288  0.1365 -0.913 -0.4534   -0.1078 .. -0.0219
+     R   0.115  0.0796 -0.116 -0.2834   -0.0301 .. +0.0102
+   reliability G: [0.10,0.20) n=29.0 p=0.16 obs=0.07; [0.20,0.40) n=26.0 p=0.28 obs=0.04; [0.40,0.70) n=11.0 p=0.50 obs=0.18; [0.70,1.00) n=3.0 p=0.81 obs=0.00
+   reliability R: [0.00,0.05) n=22.0 p=0.04 obs=0.05; [0.05,0.10) n=21.0 p=0.07 obs=0.05; [0.10,0.20) n=15.0 p=0.13 obs=0.07; [0.20,0.40) n=8.0 p=0.26 obs=0.25; [0.40,0.70) n=2.0 p=0.41 obs=0.00; [0.70,1.00) n=1.0 p=0.79 obs=0.00
+
+-- event: >= 1 quake M>=4 within 7 d (from 1 h after), n = 69, observed 23 (33.3 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.298  0.2235  0.000 -0.6394   +0.0000 .. +0.0000
+    B1   0.290  0.2164  0.032 -0.6217   -0.0198 .. +0.0357
+     G   0.688  0.3318 -0.485 -0.9625   -0.2096 .. -0.0159
+     R   0.421  0.2325 -0.041 -0.6632   -0.0644 .. +0.0432
+   reliability G: [0.20,0.40) n=1.0 p=0.35 obs=0.00; [0.40,0.70) n=37.0 p=0.57 obs=0.22; [0.70,1.00) n=31.0 p=0.84 obs=0.48
+   reliability R: [0.20,0.40) n=38.0 p=0.28 obs=0.26; [0.40,0.70) n=23.0 p=0.51 obs=0.39; [0.70,1.00) n=8.0 p=0.81 obs=0.50
+
+-- event: >= 1 quake M>=5 within 30 d (from 1 h after), n = 69, observed 7 (10.1 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.155  0.0941  0.000 -0.3406   +0.0000 .. +0.0000
+    B1   0.146  0.0891  0.053 -0.3162   -0.0199 .. +0.0376
+     G   0.342  0.1610 -0.712 -0.5026   -0.1134 .. -0.0177
+     R   0.174  0.0943 -0.003 -0.3336   -0.0267 .. +0.0305
+   reliability G: [0.10,0.20) n=14.0 p=0.17 obs=0.14; [0.20,0.40) n=34.0 p=0.27 obs=0.06; [0.40,0.70) n=16.0 p=0.49 obs=0.12; [0.70,1.00) n=5.0 p=0.81 obs=0.20
+   reliability R: [0.05,0.10) n=34.0 p=0.08 obs=0.09; [0.10,0.20) n=19.0 p=0.16 obs=0.05; [0.20,0.40) n=11.0 p=0.30 obs=0.18; [0.40,0.70) n=4.0 p=0.51 obs=0.00; [0.70,1.00) n=1.0 p=0.88 obs=1.00
+
+-- event: >= 1 quake M>=4 within 30 d (from 1 h after), n = 69, observed 26 (37.7 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.339  0.2363  0.000 -0.6657   +0.0000 .. +0.0000
+    B1   0.334  0.2397 -0.015 -0.6726   -0.0375 .. +0.0307
+     G   0.742  0.3625 -0.534 -1.0772   -0.2256 .. -0.0272
+     R   0.543  0.2727 -0.154 -0.7697   -0.1005 .. +0.0293
+   reliability G: [0.40,0.70) n=33.0 p=0.61 obs=0.30; [0.70,1.00) n=36.0 p=0.86 obs=0.44
+   reliability R: [0.20,0.40) n=22.0 p=0.37 obs=0.27; [0.40,0.70) n=35.0 p=0.55 obs=0.43; [0.70,1.00) n=12.0 p=0.85 obs=0.42
+
+===== TRAIN set =====
+
+-- event: >= 1 quake M>=5 within 7 d (from 1 h after), n = 322, observed 44 (13.7 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.137  0.1180  0.000 -0.3988   +0.0000 .. +0.0000
+    B1   0.137  0.0915  0.224 -0.3231   +0.0101 .. +0.0442
+     G   0.284  0.1207 -0.023 -0.4074   -0.0257 .. +0.0215
+     R   0.117  0.0952  0.193 -0.3362   +0.0104 .. +0.0370
+
+-- event: >= 1 quake M>=4 within 7 d (from 1 h after), n = 322, observed 96 (29.8 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.298  0.2093  0.000 -0.6093   +0.0000 .. +0.0000
+    B1   0.298  0.1811  0.134 -0.5419   +0.0141 .. +0.0429
+     G   0.677  0.3377 -0.614 -0.9207   -0.1710 .. -0.0880
+     R   0.424  0.2040  0.025 -0.5956   -0.0186 .. +0.0285
+
+-- event: >= 1 quake M>=5 within 30 d (from 1 h after), n = 322, observed 50 (15.5 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.155  0.1312  0.000 -0.4318   +0.0000 .. +0.0000
+    B1   0.155  0.0996  0.241 -0.3457   +0.0145 .. +0.0490
+     G   0.338  0.1421 -0.083 -0.4572   -0.0358 .. +0.0140
+     R   0.176  0.1034  0.211 -0.3570   +0.0130 .. +0.0446
+
+-- event: >= 1 quake M>=4 within 30 d (from 1 h after), n = 322, observed 109 (33.9 %)
+ model  mean p   Brier    BSS    logS   bootstrap 95% of Brier(B0)-Brier(model)
+    B0   0.339  0.2239  0.000 -0.6400   +0.0000 .. +0.0000
+    B1   0.339  0.1919  0.143 -0.5656   +0.0160 .. +0.0474
+     G   0.733  0.3602 -0.608 -0.9849   -0.1800 .. -0.0935
+     R   0.545  0.2388 -0.066 -0.6710   -0.0438 .. +0.0134
+
+M>=5 within 7 d, all sequences 1973-2026, by Page regime and by depth: n, observed share, mean G, mean R
+   ANSR-ABSLDEC: n= 25 observed 0.04  G 0.31  R 0.12
+   ANSR-DEEPCON: n= 73 observed 0.15  G 0.34  R 0.11
+   ANSR-SHALCON: n=  8 observed 0.25  G 0.33  R 0.15
+    SCR-GENERIC: n=  3 observed 0.00  G 0.12  R 0.05
+    SOR-GENERIC: n=  5 observed 0.20  G 0.08  R 0.06
+     SZ-GENERIC: n=142 observed 0.17  G 0.27  R 0.13
+     SZ-INLBACK: n= 14 observed 0.00  G 0.23  R 0.08
+     SZ-ONSHORE: n= 91 observed 0.11  G 0.29  R 0.12
+     SZ-OUTERTR: n= 30 observed 0.00  G 0.25  R 0.11
+      depth<=70: n=336 observed 0.14  G 0.28  R 0.12
+       depth>70: n= 55 observed 0.04  G 0.28  R 0.12
+
+share of sequences with the event, by mainshock magnitude (train 1973-2014 | test 2015-2026):
+  M5_7d: M5.5-6.0: 16/203 | 2/43; M6-6.5: 8/83 | 2/18; M6.5-7.0: 10/24 | 1/7; M7-: 10/12 | 0/1
+  M4_7d: M5.5-6.0: 45/203 | 11/43; M6-6.5: 25/83 | 8/18; M6.5-7.0: 14/24 | 3/7; M7-: 12/12 | 1/1
+  M5_30d: M5.5-6.0: 18/203 | 3/43; M6-6.5: 10/83 | 2/18; M6.5-7.0: 11/24 | 1/7; M7-: 11/12 | 1/1
+  M4_30d: M5.5-6.0: 50/203 | 14/43; M6-6.5: 30/83 | 8/18; M6.5-7.0: 17/24 | 3/7; M7-: 12/12 | 1/1
+
+largest test-set mainshocks (forecasts G / R, outcomes):
+2025-03-28 M7.7 SZ-GENERIC    R=  124 km | M5 7d: G 0.95 R 0.79 obs 0 | M5 30d: G 0.97 R 0.88 obs 1 | max M in 30 d 5.300000000000001
+2016-04-13 M6.9 ANSR-ABSLDEC  R=   35 km | M5 7d: G 0.76 R 0.41 obs 0 | M5 30d: G 0.81 R 0.55 obs 0 | max M in 30 d nan
+2026-08-15 M6.9 SZ-ONSHORE    R=   35 km | M5 7d: G 0.72 R 0.41 obs 0 | M5 30d: G 0.81 R 0.55 obs 0 | max M in 30 d nan
+2016-08-24 M6.8 SZ-GENERIC    R=   30 km | M5 7d: G 0.61 R 0.36 obs 0 | M5 30d: G 0.69 R 0.50 obs 0 | max M in 30 d nan
+2016-01-03 M6.7 ANSR-ABSLDEC  R=   25 km | M5 7d: G 0.66 R 0.32 obs 0 | M5 30d: G 0.71 R 0.45 obs 0 | max M in 30 d nan
+2022-09-05 M6.6 ANSR-DEEPCON  R=   22 km | M5 7d: G 0.69 R 0.28 obs 0 | M5 30d: G 0.75 R 0.40 obs 0 | max M in 30 d 4.800000000000001
+2015-11-08 M6.6 SZ-GENERIC    R=   22 km | M5 7d: G 0.50 R 0.28 obs 1 | M5 30d: G 0.58 R 0.40 obs 1 | max M in 30 d 5.6000000000000005
+2016-12-06 M6.5 SZ-INLBACK    R=   18 km | M5 7d: G 0.47 R 0.24 obs 0 | M5 30d: G 0.55 R 0.35 obs 0 | max M in 30 d 4.9
+2025-07-28 M6.4 SZ-GENERIC    R=   16 km | M5 7d: G 0.40 R 0.21 obs 0 | M5 30d: G 0.48 R 0.31 obs 0 | max M in 30 d nan
+2025-11-27 M6.4 SZ-GENERIC    R=   16 km | M5 7d: G 0.40 R 0.21 obs 0 | M5 30d: G 0.48 R 0.31 obs 0 | max M in 30 d nan
+2017-11-17 M6.4 ANSR-DEEPCON  R=   16 km | M5 7d: G 0.58 R 0.21 obs 1 | M5 30d: G 0.65 R 0.31 obs 1 | max M in 30 d 5.1000000000000005
+2020-01-07 M6.3 SZ-ONSHORE    R=   13 km | M5 7d: G 0.41 R 0.18 obs 0 | M5 30d: G 0.51 R 0.27 obs 0 | max M in 30 d nan
+
+wrote research/data/eq_aftershock_sequences.csv and research/out/eq_aftershock_results.json

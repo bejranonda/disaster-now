@@ -1,0 +1,86 @@
+# research/eq_catalog.py
+# started 2026-10-24T08:50:33+00:00
+catalog: 19718 events M>=4.0, 1973-02-10 04:25:29.700000+00:00 .. 2026-10-23 17:06:25.116000+00:00
+magnitude types among M>=6.0: {'mwc': 53, 'mww': 52, 'mwb': 41, 'mw': 37, 'ms': 23, 'mb': 9}
+
+== Mc and b by period (whole box, all events) ==
+     period     n Mc_maxc boot_p10-p90 Mc_gft90  GFT best R@Mc     b(Mc_maxc)  n>=Mc
+1973-1979   605     5.0   4.9-5.1        nan     79.1@4.9      1.14±0.08     231
+1980-1984   723     4.8   4.8-4.9        nan     87.0@4.8      1.31±0.08     311
+1985-1989   736     4.6   4.6-4.8        nan     76.9@4.8      1.03±0.05     414
+1990-1994   727     4.8   4.8-4.9        nan     82.9@4.6      1.08±0.07     256
+1995-1999   950     4.5   4.5-4.5        nan     87.4@4.5      1.16±0.06     452
+2000-2004  1734     4.7   4.5-4.8        nan     82.9@5.4      0.99±0.03     769
+2005-2009  6773     4.7   4.7-4.7        4.9     90.9@4.9      1.32±0.03    2159
+2010-2014  2791     4.6   4.5-4.7        4.6     91.7@4.6      1.20±0.04    1188
+2015-2019  1895     4.6   4.5-4.7        nan     85.3@4.6      1.43±0.05     780
+2020-2026  2784     4.6   4.5-4.6        nan     86.1@4.4      1.33±0.05     963
+
+== Mc, sub-box 5-22 N, 95-106 E (Thailand and immediate neighbours) ==
+1973-1989: n=250 Mc_maxc=5.0 GFT90=nan (best R 77.8 at 4.8) b=1.20±0.15 (n>=Mc 66)
+1990-2004: n=259 Mc_maxc=4.6 GFT90=nan (best R 76.8 at 4.4) b=0.99±0.09 (n>=Mc 122)
+2005-2014: n=297 Mc_maxc=4.4 GFT90=nan (best R 75.0 at 4.4) b=1.10±0.08 (n>=Mc 170)
+2015-2026: n=364 Mc_maxc=4.6 GFT90=nan (best R 82.0 at 4.4) b=1.33±0.12 (n>=Mc 143)
+
+Mc model used downstream (MAXC + 0.2 per period): 1973-1979: 5.0, 1980-1984: 4.8, 1985-1989: 4.6, 1990-1994: 4.8, 1995-1999: 4.5, 2000-2004: 4.7, 2005-2009: 4.7, 2010-2014: 4.6, 2015-2019: 4.6, 2020-2026: 4.6
+
+b-value, whole catalog, time-varying Mc: b = 1.226 (95% bootstrap 1.199-1.255), n = 7523
+
+== Gardner-Knopoff declustering ==
+independent (mainshocks + singletons): 6733 of 19718 (34.1 %); aftershocks 9245, foreshocks 3740, clusters 1836
+b-value, declustered, time-varying Mc: b = 1.016 (95% 0.977-1.057), n = 2877
+
+== Annual rates of independent events (declustered), whole box ==
+M>=4.5: complete in 1 of 10 periods (5.0 yr); 286 independent events -> 57.20/yr
+M>=5.0: complete in 10 of 10 periods (53.8 yr); 1285 independent events -> 23.88/yr
+M>=5.5: complete in 10 of 10 periods (53.8 yr); 401 independent events -> 7.45/yr
+M>=6.0: complete in 10 of 10 periods (53.8 yr); 155 independent events -> 2.88/yr
+M>=6.5: complete in 10 of 10 periods (53.8 yr); 52 independent events -> 0.97/yr
+M>=7.0: complete in 10 of 10 periods (53.8 yr); 18 independent events -> 0.33/yr
+
+Largest 25 events in the box:
+                           time  latitude  longitude  depth    m magType  flag                                      place
+4791   2004-12-26T00:58:53.450Z    3.2950    95.9820   30.0  9.1      mw     0  2004 Sumatra - Andaman Islands Earthquake
+13141  2012-04-11T08:38:36.720Z    2.3270    93.0630   20.0  8.6      mw     0              2012 Wharton Basin Earthquake
+7262   2005-03-28T16:09:36.530Z    2.0850    97.1080   30.0  8.6     mww     0            78 km WSW of Singkil, Indonesia
+13179  2012-04-11T10:43:10.850Z    0.8020    92.4630   25.1  8.2     mwc     0              2012 Wharton Basin Aftershock
+12323  2010-04-06T22:15:01.580Z    2.3830    97.0480   31.0  7.8     mwc     0             75 km E of Sinabang, Indonesia
+19013  2025-03-28T06:20:52.715Z   22.0110    95.9363   10.0  7.7     mww     0  2025 Mandalay, Burma (Myanmar) Earthquake
+1830   1988-11-06T13:03:19.340Z   22.7890    99.6110   17.8  7.7      mw     0               145 km NW of Jinghong, China
+12411  2010-06-12T19:26:50.460Z    7.8810    91.9360   35.0  7.5     mwc     0              Nicobar Islands, India region
+12081  2009-08-10T19:55:38.730Z   14.0990    92.9020   24.0  7.5     mwc     0             266 km N of Bamboo Flat, India
+4235   2002-11-02T01:26:10.700Z    2.8240    96.0850   30.0  7.4     mwb    -1            50 km NW of Sinabang, Indonesia
+11212  2008-02-20T08:08:30.520Z    2.7680    95.9640   26.0  7.4     mwc     0            56 km NW of Sinabang, Indonesia
+1796   1988-08-06T00:36:24.650Z   25.1490    95.1270   90.5  7.3      mw     0                    85 km SE of Phek, India
+13027  2012-01-10T18:36:59.080Z    2.4330    93.2100   19.0  7.2     mww    -1     off the west coast of northern Sumatra
+4845   2004-12-26T04:21:29.810Z    6.9100    92.9580   39.2  7.2     mwc     0            284 km WNW of Sabang, Indonesia
+12380  2010-05-09T05:59:41.620Z    3.7480    96.0180   38.0  7.2     mwc     0           45 km SSW of Meulaboh, Indonesia
+9000   2005-07-24T15:42:06.210Z    7.9200    92.1900   16.0  7.2     mwc     0              Nicobar Islands, India region
+1310   1984-11-17T06:49:30.020Z    0.1970    98.0270   33.0  7.1      mw     0           190 km SSW of Sibolga, Indonesia
+249    1976-06-20T20:53:13.400Z    3.3970    96.3180   33.0  7.0      ms     0           85 km SSE of Meulaboh, Indonesia
+2210   1991-01-05T14:57:11.590Z   23.6130    95.9010   19.7  7.0      mw     0                 99 km NW of Mogok, Myanmar
+229    1976-05-29T14:00:18.500Z   24.5310    98.7100   10.0  7.0      ms     0               152 km ENE of Bhamo, Myanmar
+8536   2005-05-19T01:54:52.850Z    1.9890    97.0410   30.0  6.9     mwc     1            89 km WSW of Singkil, Indonesia
+19655  2026-08-15T10:54:51.798Z    2.9863    98.9853  175.0  6.9     mww     0     9 km WNW of Pematangsiantar, Indonesia
+986    1983-06-24T09:07:14.300Z   21.4000   102.6040   33.0  6.9      ms     0          43 km W of Dien Bien Phu, Vietnam
+227    1976-05-29T12:23:18.700Z   24.5700    98.9530    8.0  6.9      ms    -1                   169 km SW of Dali, China
+12916  2011-09-18T12:40:51.830Z   27.7300    88.1550   50.0  6.9     mww     0                  43 km NW of Mangan, India
+
+Largest events within 600 km of Bangkok (13.75N 100.49E):
+                           time  latitude  longitude   depth    m          km                                 place
+2250   1991-04-01T03:53:04.660Z   15.7460    95.7380  15.000  6.0  557.196454            60 km S of Pyapon, Myanmar
+141    1975-02-17T03:38:19.800Z   17.6380    97.9020   6.000  5.9  513.406348          87 km NNE of Hpa-An, Myanmar
+14704  2014-07-31T13:41:00.830Z   12.4337    95.2033  10.000  5.8  591.214178       280 km ENE of Port Blair, India
+138    1975-01-23T08:30:41.520Z   14.6970    95.8230  35.000  5.7  514.099471   176 km S of Pyapon, Burma (Myanmar)
+956    1983-04-22T00:37:37.000Z   14.9260    99.0230  10.000  5.7  205.175893  66 km ESE of Sangkhla Buri, Thailand
+4719   2004-09-17T11:25:48.200Z   15.8140    95.8790  15.000  5.7  546.379784          56 km SSE of Pyapon, Myanmar
+484    1978-09-30T09:04:31.200Z   16.6030    95.8570  10.000  5.7  589.809116          14 km SSW of Twante, Myanmar
+18372  2023-06-19T01:40:24.074Z   15.2546    96.2895  13.518  5.6  482.267860         131 km SSE of Pyapon, Myanmar
+1530   1986-06-29T12:31:16.150Z   15.1880    96.2010  14.800  5.6  488.811987         133 km SSE of Pyapon, Myanmar
+14323  2013-11-20T10:09:18.430Z   12.3975    95.1481  10.260  5.5  598.048531       273 km ENE of Port Blair, India
+1529   1986-06-29T09:55:39.200Z   15.1680    96.3140  17.400  5.5  476.610710         141 km SSE of Pyapon, Myanmar
+14826  2014-09-26T04:21:24.080Z   12.5193    95.2254  20.220  5.5  586.504902       285 km ENE of Port Blair, India
+135    1975-01-22T08:30:37.100Z   14.6500    96.1390  15.000  5.5  479.744050         187 km SSE of Pyapon, Myanmar
+2273   1991-06-09T20:39:33.830Z   12.6270    95.1100  24.300  5.5  595.911154       278 km ENE of Port Blair, India
+2251   1991-04-01T05:45:20.880Z   15.8440    95.7010  12.700  5.4  565.136854            48 km S of Pyapon, Myanmar
+wrote research/out/eq_catalog_results.json and research/data/eq_comcat/comcat_declustered_flags.csv.gz

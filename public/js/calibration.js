@@ -40,7 +40,20 @@ export const rhFrom = (t, td) => Math.max(0, Math.min(100, 100 * Math.exp((MA * 
  *  Next-day MAE (µg/m³): Mar–Apr on disjoint stations 6.55 vs persistence 7.31, the ratio method 8.76, raw CAMS 16.7;
  *  newest season (20 Sep–22 Oct 2026, all stations) 2.78 vs 3.04, 4.65, 6.08. Chosen after the first test run (post
  *  hoc), then confirmed on the newest season (research/out/e3_results.json → damped_posthoc_betas, tests). */
-export const PM25 = { beta: [0.45, 0.55, 0.55], source: "research/out/e3_results.json" };
+export const PM25 = {
+  beta: [0.45, 0.55, 0.55], source: "research/out/e3_results.json",
+  /** The chance that a day's mean reaches a PCD band, from the damped forecast f: 1 − Φ((ln T − ln f) / σ), a lognormal
+   *  error with μ = 0 (fitted +0.003/+0.004), so the chance is 50 % exactly at the band edge and adds words, not levels.
+   *  σ for tomorrow and the day after (fitted 0.3433 and 0.3795, dust seasons Dec 2022–Apr 2024, sample A). On disjoint
+   *  stations, Dec 2024–Apr 2025 and Dec 2025–Apr 2026: Brier skill +0.58 to +0.76 vs climatology, +0.10 to +0.24 vs
+   *  persistence (the north ties persistence on day 1). PROVISIONAL: it inherits the damped ratio's post-hoc status
+   *  (docs/research/predict-air-2026-10-24.md §4, §7.1). Only Dec–Apr, only from a PCD station (GISTDA's estimate as
+   *  input is untested), never for the rest of today. */
+  chance: { months: [12, 1, 2, 3, 4], sigma: [null, 0.343, 0.38], source: "research/aq_expA.py, research/out/aq_expA_results.json" },
+};
+
+/** P(a lognormal with median f exceeds T), σ in log units. */
+export const lognormalExceed = (f, T, sigma) => (f > 0 ? 1 - phi((Math.log(T) - Math.log(f)) / sigma) : 0);
 
 /** Normal CDF, for dressing ensemble members with the corrected forecast's tested error. */
 export function phi(z) {

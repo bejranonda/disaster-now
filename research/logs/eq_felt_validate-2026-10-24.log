@@ -1,0 +1,85 @@
+# research/eq_felt_validate.py
+# started 2026-10-24T11:49:25+00:00
+raw files read: 924; Thai DYFI city rows: 666 from 150 events
+DYFI era (first Thai report): 2004-12-26 04:21:29.810000+00:00; Thai reports by event magnitude: {Interval(0.0, 4.5, closed='right'): 33, Interval(4.5, 5.0, closed='right'): 44, Interval(5.0, 5.5, closed='right'): 26, Interval(5.5, 6.0, closed='right'): 17, Interval(6.0, 7.0, closed='right'): 20, Interval(7.0, 10.0, closed='right'): 10}
+
+per city, DYFI era 2004-12-26 .. 2026-10-23 (21.8 yr)
+               city | events w/ report | CDI>=3 | CDI>=4 || predicted>=3 | predicted>=4 (ComCat M>=4, all events) || of CDI>=3 events: share predicted >=3 / >=2.5 | median resid (CDI-pred)
+            Bangkok |               54 |     11 |      2 ||           27 |            6                           ||  0.27 / 0.36                       | +0.57
+         Chiang Mai |               50 |     19 |      3 ||           15 |            7                           ||  0.37 / 0.47                       | +0.70
+         Chiang Rai |               33 |     16 |      8 ||           30 |            6                           ||  0.56 / 0.62                       | +0.52
+       Mae Hong Son |                8 |      5 |      2 ||           13 |            4                           ||  0.80 / 1.00                       | -0.29
+      Mae Sot (Tak) |                7 |      2 |      1 ||            8 |            3                           ||  0.50 / 0.50                       | +0.84
+       Kanchanaburi |                3 |      2 |      0 ||            7 |            2                           ||  1.00 / 1.00                       | +0.01
+             Phuket |               40 |     12 |      2 ||           16 |            4                           ||  0.58 / 0.67                       | +0.19
+             Ranong |                0 |      0 |      0 ||           11 |            3                           ||   nan / nan                        | +nan
+          Khon Kaen |                6 |      5 |      0 ||            7 |            2                           ||  0.20 / 0.40                       | +1.11
+         Udon Thani |                6 |      3 |      0 ||            8 |            2                           ||  0.33 / 0.33                       | +0.26
+  Nakhon Ratchasima |                4 |      3 |      0 ||            7 |            2                           ||  0.33 / 0.33                       | +1.04
+ Hat Yai (Songkhla) |                6 |      2 |      0 ||           13 |            4                           ||  0.50 / 0.50                       | -0.49
+        Surat Thani |                2 |      1 |      1 ||           11 |            4                           ||  1.00 / 1.00                       | +0.11
+   Ubon Ratchathani |                4 |      1 |      0 ||            6 |            2                           ||  0.00 / 0.00                       | +1.27
+                Nan |               10 |      5 |      3 ||           11 |            4                           ||  0.80 / 0.80                       | -0.27
+
+DYFI place names matched (within 20 km): Bangkok: Bang Bo Thong, Bang Kruai, Bang Yai, Bangkok, Pak Kret, Phra Pradaeng; Chiang Mai: Chiang Mai, Hangdong, Maerim, Sankamphaeng, Sansai; Chiang Rai: Chiang Rai; Mae Hong Son: Mae Hong Son; Mae Sot (Tak): Mae Sot; Kanchanaburi: Kanchanaburi; Phuket: Kathu, Phuket; Khon Kaen: Khon Kaen; Udon Thani: Udon Thani; Nakhon Ratchasima: Nakhon Ratchasima; Hat Yai (Songkhla): Hat Yai; Surat Thani: Surat Thani; Ubon Ratchathani: Ubon Ratchathani, Warin Chamrap; Nan: Nan
+
+pooled city-event pairs, residual CDI - predicted, by magnitude band:
+  M 0-5.5: n = 103 pairs (82 events), MAE 1.41, bias +1.26, median +1.20
+  M 5.5-10: n = 130 pairs (49 events), MAE 0.84, bias -0.08, median +0.05
+  reported CDI >= 3.0: 87 city-events; predicted >= 3.0: 42 (48 %), predicted >= 2.5: 49 (56 %)
+  predicted >= 3.0 among reported city-events: 74; of them reported CDI >= 3.0: 42 (57 %)
+  reported CDI >= 4.0: 22 city-events; predicted >= 4.0: 9 (41 %), predicted >= 3.5: 11 (50 %)
+  predicted >= 4.0 among reported city-events: 23; of them reported CDI >= 4.0: 9 (39 %)
+
+all 15 cities, DYFI era: predicted >= 3.0 city-events 190; DYFI-reported CDI >= 3.0 city-events 87
+
+the 25 city-event pairs with the largest |residual|:
+         city                        event  mag  epi_km  depth  cdi  nresp  pred   res
+      Bangkok                   us6000hz6u  4.2 1890.52  10.00 2.00      1 -2.21  4.21
+      Bangkok                   us7000pnba  4.6 1115.48  10.00 3.90      1  0.12  3.78
+   Chiang Rai                   us6000hfgp  4.9  983.23  10.00 3.30      1 -0.35  3.65
+   Chiang Rai                   us7000h0zn  4.4  250.65  10.00 4.30      1  0.75  3.55
+   Chiang Rai                   us7000cbnb  4.4 1052.64  10.00 2.00      1 -1.15  3.15
+      Bangkok                   us70008f3x  4.5 1082.92  10.00 3.10      1  0.01  3.09
+   Chiang Rai                   us7000fpvn  4.3  162.18  15.21 4.10      1  1.18  2.92
+   Chiang Rai                   us6000ccf2  4.4  857.40  44.64 2.00      1 -0.88  2.88
+       Phuket                   us2000c3tv  4.6  612.85 133.85 2.70      1 -0.18  2.88
+      Bangkok                   us70006ea0  4.4  653.47  10.00 3.40      1  0.54  2.86
+      Bangkok official20120411083836720_20  8.6 1510.13  20.00 2.60     71  5.43 -2.82
+       Phuket                   usp000hdwb  7.5  711.73  35.00 1.00      1  3.79 -2.79
+   Chiang Mai                   us70005alm  5.4  567.56  10.00 3.80      1  1.09  2.71
+       Phuket                   usp000jj2b  5.3 1029.63  23.50 2.83     70  0.16  2.66
+   Chiang Rai                   us7000h2pw  4.6  902.18  10.00 2.00      1 -0.66  2.66
+      Bangkok                   us70006any  4.5  634.50  10.00 3.34      5  0.72  2.62
+   Chiang Mai                   us70006e6m  5.2  575.62  10.00 3.40      1  0.79  2.61
+ Mae Hong Son                   usb000qack  6.1  182.92   6.00 1.00      1  3.59 -2.59
+   Chiang Mai                   us7000fpvn  4.3  262.35  15.21 3.10      1  0.54  2.56
+   Chiang Rai                   us6000c688  4.6  821.50  61.51 2.00      4 -0.54  2.54
+   Chiang Mai                   us10006fx8  5.0  720.26 101.74 2.70      1  0.20  2.50
+      Bangkok                   us6000ccf2  4.4 1353.06  44.64 2.00      1 -0.42  2.42
+Mae Sot (Tak)                   us6000iu1q  4.6  738.86  10.00 2.00      1 -0.40  2.40
+      Bangkok                   usp000h05x  7.5  820.04  24.00 2.30      9  4.67 -2.37
+  Surat Thani                   us7000pn9s  7.7 1476.50  10.00 5.40      1  3.11  2.29
+
+POST-HOC robustness: counts per city in the DYFI era (predicted >= 3.0 vs reported CDI >= 3.0)
+               city | all reports | >= 3 responses | M >= 5.5 only (pred / rep) | M >= 5.5 and >= 3 responses
+            Bangkok |  27 / 11   |  27 / 7       |  27 / 6                    |  27 / 6  
+         Chiang Mai |  15 / 19   |  15 / 12      |  13 / 10                   |  13 / 9  
+         Chiang Rai |  30 / 16   |  30 / 8       |  17 / 10                   |  17 / 8  
+       Mae Hong Son |  13 / 5    |  13 / 3       |  13 / 5                    |  13 / 3  
+      Mae Sot (Tak) |   8 / 2    |   8 / 1       |   8 / 2                    |   8 / 1  
+       Kanchanaburi |   7 / 2    |   7 / 0       |   7 / 2                    |   7 / 0  
+             Phuket |  16 / 12   |  16 / 6       |  16 / 8                    |  16 / 3  
+             Ranong |  11 / 0    |  11 / 0       |  11 / 0                    |  11 / 0  
+          Khon Kaen |   7 / 5    |   7 / 2       |   7 / 5                    |   7 / 2  
+         Udon Thani |   8 / 3    |   8 / 2       |   8 / 3                    |   8 / 2  
+  Nakhon Ratchasima |   7 / 3    |   7 / 1       |   7 / 3                    |   7 / 1  
+ Hat Yai (Songkhla) |  13 / 2    |  13 / 1       |  13 / 2                    |  13 / 1  
+        Surat Thani |  11 / 1    |  11 / 0       |  11 / 1                    |  11 / 0  
+   Ubon Ratchathani |   6 / 1    |   6 / 0       |   6 / 1                    |   6 / 0  
+                Nan |  11 / 5    |  11 / 2       |  11 / 4                    |  11 / 2  
+             all 15 | 190 / 87 | 190 / 45 | 175 / 62 | 175 / 38
+M >= 5.5 pairs with >= 3 responses: n = 68, MAE 0.71, bias -0.17; reported CDI >= 3: 38, of them predicted >= 3: 28, >= 2.5: 33
+M < 5.5 pairs with >= 3 responses: n = 29, MAE 1.03, bias +0.83
+
+wrote research/out/eq_felt_validate.json and research/data/eq_dyfi/city_event_pairs.csv

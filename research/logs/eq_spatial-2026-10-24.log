@@ -1,0 +1,14 @@
+# research/eq_spatial.py
+# started 2026-10-24T09:06:07+00:00
+declustered M>=5.0: 1973-2003 617, 2004-2014 364, 2015-2026 304
+choice on 1973-2003 -> 2004-2014 (gain in bits per quake over uniform):
+  h= 10 km  w=0.01: -0.89  w=0.05: -0.11  w=0.1: 0.23  w=0.2: 0.55
+  h= 25 km  w=0.01: 0.62  w=0.05: 0.97  w=0.1: 1.11  w=0.2: 1.21
+  h= 50 km  w=0.01: 1.08  w=0.05: 1.19  w=0.1: 1.24  w=0.2: 1.25
+  h= 75 km  w=0.01: 1.24  w=0.05: 1.29  w=0.1: 1.29  w=0.2: 1.26
+  h=100 km  w=0.01: 1.28  w=0.05: 1.31  w=0.1: 1.30  w=0.2: 1.26
+  h=150 km  w=0.01: 1.24  w=0.05: 1.25  w=0.1: 1.24  w=0.2: 1.18
+  h=200 km  w=0.01: 1.16  w=0.05: 1.16  w=0.1: 1.14  w=0.2: 1.08
+chosen h = 100 km, w = 0.05 (validation gain 1.31 bits)
+TEST 2015-2026 (n = 304): information gain 1.51 bits per quake over uniform (x2.8 likelihood per quake); share of test quakes in the map's top 10 % of the area: 55 % (uniform: 10 %)
+wrote research/out/eq_spatial.json

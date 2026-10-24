@@ -1,0 +1,62 @@
+# research/eq_felt_future.py
+# started 2026-10-24T09:05:37+00:00
+declustered events above completeness: 2877; training 42.00 yr, test 11.81 yr
+
+== predicted MMI >= 2.5 ==
+              city  n_train  n_test  exp_city  exp_flat  p_ge  p_le
+           Bangkok       67      14      18.8       7.4 0.895 0.158
+        Chiang Mai       28       7       7.9       7.4 0.671 0.471
+        Chiang Rai       37       7      10.4       7.4 0.893 0.186
+      Mae Hong Son       36       8      10.1       7.4 0.791 0.319
+     Mae Sot (Tak)       27       5       7.6       7.4 0.875 0.231
+      Kanchanaburi       18       1       5.1       7.4 0.994 0.038
+            Phuket       29       4       8.2       7.4 0.962 0.091
+            Ranong       22       4       6.2       7.4 0.865 0.261
+         Khon Kaen       16       2       4.5       7.4 0.939 0.174
+        Udon Thani       17       2       4.8       7.4 0.951 0.144
+ Nakhon Ratchasima       15       1       4.2       7.4 0.985 0.077
+Hat Yai (Songkhla)       24       4       6.7       7.4 0.904 0.197
+       Surat Thani       21       4       5.9       7.4 0.840 0.298
+  Ubon Ratchathani       12       1       3.4       7.4 0.966 0.150
+               Nan       25       6       7.0       7.4 0.703 0.445
+total test count 70 vs expected 110.8; log-likelihood city rate -35.97, flat rate -49.13 (difference +13.17); cities with p < 0.05 either side: 1 of 15
+
+== predicted MMI >= 3.0 ==
+              city  n_train  n_test  exp_city  exp_flat  p_ge  p_le
+           Bangkok       35       6       9.8       4.3 0.927 0.140
+        Chiang Mai       19       4       5.3       4.3 0.780 0.383
+        Chiang Rai       21       6       5.9       4.3 0.539 0.622
+      Mae Hong Son       23       4       6.5       4.3 0.886 0.227
+     Mae Sot (Tak)       15       1       4.2       4.3 0.985 0.077
+      Kanchanaburi        9       1       2.5       4.3 0.920 0.281
+            Phuket       14       4       3.9       4.3 0.554 0.641
+            Ranong       13       1       3.7       4.3 0.974 0.120
+         Khon Kaen        9       1       2.5       4.3 0.920 0.281
+        Udon Thani        9       2       2.5       4.3 0.719 0.536
+ Nakhon Ratchasima        8       1       2.2       4.3 0.895 0.343
+Hat Yai (Songkhla)       16       1       4.5       4.3 0.989 0.061
+       Surat Thani       14       1       3.9       4.3 0.980 0.096
+  Ubon Ratchathani        7       1       2.0       4.3 0.860 0.415
+               Nan       16       3       4.5       4.3 0.826 0.342
+total test count 37 vs expected 64.1; log-likelihood city rate -29.94, flat rate -35.55 (difference +5.60); cities with p < 0.05 either side: 0 of 15
+
+== predicted MMI >= 4.0 ==
+              city  n_train  n_test  exp_city  exp_flat  p_ge  p_le
+           Bangkok        7       1       2.0       1.3 0.860 0.415
+        Chiang Mai        6       1       1.7       1.3 0.815 0.497
+        Chiang Rai        6       1       1.7       1.3 0.815 0.497
+      Mae Hong Son        5       1       1.4       1.3 0.755 0.590
+     Mae Sot (Tak)        4       1       1.1       1.3 0.675 0.690
+      Kanchanaburi        3       0       0.8       1.3 1.000 0.430
+            Phuket        5       0       1.4       1.3 1.000 0.245
+            Ranong        4       0       1.1       1.3 1.000 0.325
+         Khon Kaen        3       0       0.8       1.3 1.000 0.430
+        Udon Thani        4       0       1.1       1.3 1.000 0.325
+ Nakhon Ratchasima        3       0       0.8       1.3 1.000 0.430
+Hat Yai (Songkhla)        5       0       1.4       1.3 1.000 0.245
+       Surat Thani        5       0       1.4       1.3 1.000 0.245
+  Ubon Ratchathani        3       0       0.8       1.3 1.000 0.430
+               Nan        4       2       1.1       1.3 0.310 0.895
+total test count 7 vs expected 18.8; log-likelihood city rate -17.12, flat rate -17.94 (difference +0.82); cities with p < 0.05 either side: 0 of 15
+
+wrote research/out/eq_felt_future.json

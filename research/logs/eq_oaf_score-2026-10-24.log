@@ -1,0 +1,126 @@
+# research/eq_oaf_score.py
+# started 2026-10-24T09:11:52+00:00
+2 events, 76 forecast versions with at least one window inside the catalog; models: ['Epidemic-Type aftershock model (Bayesian Combination)']
+
+== per window and magnitude (all versions pooled; overlapping, not independent) ==
+      event   window  M>=    n  mean p obs freq   Brier in 95% range
+ us6000rpht    1 Day    4    1   0.071    0.000  0.0050         1.00
+ us6000rpht    1 Day    5    1   0.009    0.000  0.0001         1.00
+ us6000rpht    1 Day    6    1   0.001    0.000  0.0000         1.00
+ us6000rpht    1 Day    7    1   0.000    0.000  0.0000         1.00
+ us6000rpht  1 Month    4    1   0.256    1.000  0.5534         1.00
+ us6000rpht  1 Month    5    1   0.041    0.000  0.0016         1.00
+ us6000rpht  1 Month    6    1   0.005    0.000  0.0000         1.00
+ us6000rpht  1 Month    7    1   0.000    0.000  0.0000         1.00
+ us6000rpht   1 Week    4    1   0.177    1.000  0.6777         1.00
+ us6000rpht   1 Week    5    1   0.025    0.000  0.0006         1.00
+ us6000rpht   1 Week    6    1   0.003    0.000  0.0000         1.00
+ us6000rpht   1 Week    7    1   0.000    0.000  0.0000         1.00
+ us7000pn9s    1 Day    4   75   0.327    0.320  0.2249         0.88
+ us7000pn9s    1 Day    5   75   0.091    0.013  0.0438         0.97
+ us7000pn9s    1 Day    6   75   0.034    0.000  0.0242         1.00
+ us7000pn9s    1 Day    7   75   0.008    0.000  0.0019         1.00
+ us7000pn9s  1 Month    4   75   0.973    0.973  0.0280         0.81
+ us7000pn9s  1 Month    5   75   0.469    0.667  0.2570         0.91
+ us7000pn9s  1 Month    6   75   0.112    0.000  0.0441         0.97
+ us7000pn9s  1 Month    7   75   0.030    0.000  0.0160         1.00
+ us7000pn9s   1 Week    4   75   0.720    0.880  0.1689         0.95
+ us7000pn9s   1 Week    5   75   0.242    0.187  0.2089         0.96
+ us7000pn9s   1 Week    6   75   0.062    0.000  0.0318         0.97
+ us7000pn9s   1 Week    7   75   0.020    0.000  0.0093         1.00
+ us7000pn9s   1 Year    4   50   1.000    0.960  0.0400         0.82
+ us7000pn9s   1 Year    5   50   0.932    0.960  0.0478         0.96
+ us7000pn9s   1 Year    6   50   0.369    0.000  0.1719         0.96
+ us7000pn9s   1 Year    7   50   0.085    0.000  0.0368         1.00
+
+== the first forecasts after the M7.7 (as issued) ==
+issued 2025-03-28 17:02:18.461000+00:00 (window starts 9.7 h after the mainshock, circle 196 km):
+      1 Day M>=4: P=1.000 (95% count 3-70) -> observed 5
+      1 Day M>=5: P=0.812 (95% count 0-8) -> observed 0
+      1 Day M>=6: P=0.190 (95% count 0-2) -> observed 0
+      1 Day M>=7: P=0.020 (95% count 0-0) -> observed 0
+    1 Month M>=4: P=1.000 (95% count 20-340) -> observed 27
+    1 Month M>=5: P=0.992 (95% count 1-35) -> observed 1
+    1 Month M>=6: P=0.547 (95% count 0-5) -> observed 0
+    1 Month M>=7: P=0.089 (95% count 0-1) -> observed 0
+     1 Week M>=4: P=1.000 (95% count 10-195) -> observed 18
+     1 Week M>=5: P=0.966 (95% count 0-20) -> observed 0
+     1 Week M>=6: P=0.401 (95% count 0-3) -> observed 0
+     1 Week M>=7: P=0.058 (95% count 0-1) -> observed 0
+     1 Year M>=4: P=1.000 (95% count 35-826) -> observed 72
+     1 Year M>=5: P=0.998 (95% count 3-83) -> observed 5
+     1 Year M>=6: P=0.726 (95% count 0-10) -> observed 0
+     1 Year M>=7: P=0.158 (95% count 0-2) -> observed 0
+issued 2025-03-29 00:55:01.818000+00:00 (window starts 16.7 h after the mainshock, circle 400 km):
+      1 Day M>=4: P=1.000 (95% count 1-33) -> observed 3
+      1 Day M>=5: P=0.625 (95% count 0-4) -> observed 1
+      1 Day M>=6: P=0.113 (95% count 0-1) -> observed 0
+      1 Day M>=7: P=0.014 (95% count 0-0) -> observed 0
+    1 Month M>=4: P=1.000 (95% count 9-186) -> observed 32
+    1 Month M>=5: P=0.979 (95% count 1-21) -> observed 2
+    1 Month M>=6: P=0.452 (95% count 0-4) -> observed 0
+    1 Month M>=7: P=0.071 (95% count 0-1) -> observed 0
+     1 Week M>=4: P=1.000 (95% count 6-100) -> observed 18
+     1 Week M>=5: P=0.921 (95% count 0-12) -> observed 1
+     1 Week M>=6: P=0.296 (95% count 0-2) -> observed 0
+     1 Week M>=7: P=0.040 (95% count 0-1) -> observed 0
+     1 Year M>=4: P=1.000 (95% count 23-592) -> observed 116
+     1 Year M>=5: P=0.996 (95% count 2-66) -> observed 10
+     1 Year M>=6: P=0.652 (95% count 0-9) -> observed 0
+     1 Year M>=7: P=0.135 (95% count 0-2) -> observed 0
+issued 2025-03-29 22:59:55.744000+00:00 (window starts 40.7 h after the mainshock, circle 400 km):
+      1 Day M>=4: P=0.986 (95% count 0-20) -> observed 6
+      1 Day M>=5: P=0.361 (95% count 0-2) -> observed 0
+      1 Day M>=6: P=0.050 (95% count 0-1) -> observed 0
+      1 Day M>=7: P=0.004 (95% count 0-0) -> observed 0
+    1 Month M>=4: P=1.000 (95% count 7-115) -> observed 30
+    1 Month M>=5: P=0.935 (95% count 0-12) -> observed 1
+    1 Month M>=6: P=0.295 (95% count 0-2) -> observed 0
+    1 Month M>=7: P=0.034 (95% count 0-1) -> observed 0
+     1 Week M>=4: P=1.000 (95% count 3-55) -> observed 15
+     1 Week M>=5: P=0.797 (95% count 0-6) -> observed 0
+     1 Week M>=6: P=0.167 (95% count 0-2) -> observed 0
+     1 Week M>=7: P=0.018 (95% count 0-0) -> observed 0
+     1 Year M>=4: P=1.000 (95% count 15-395) -> observed 110
+     1 Year M>=5: P=0.987 (95% count 1-41) -> observed 8
+     1 Year M>=6: P=0.515 (95% count 0-6) -> observed 0
+     1 Year M>=7: P=0.081 (95% count 0-1) -> observed 0
+issued 2025-03-30 22:22:25.086000+00:00 (window starts 64.7 h after the mainshock, circle 400 km):
+      1 Day M>=4: P=0.955 (95% count 0-15) -> observed 4
+      1 Day M>=5: P=0.275 (95% count 0-2) -> observed 0
+      1 Day M>=6: P=0.029 (95% count 0-1) -> observed 0
+      1 Day M>=7: P=0.003 (95% count 0-0) -> observed 0
+    1 Month M>=4: P=1.000 (95% count 6-100) -> observed 24
+    1 Month M>=5: P=0.913 (95% count 0-11) -> observed 1
+    1 Month M>=6: P=0.250 (95% count 0-2) -> observed 0
+    1 Month M>=7: P=0.030 (95% count 0-1) -> observed 0
+     1 Week M>=4: P=1.000 (95% count 2-45) -> observed 9
+     1 Week M>=5: P=0.724 (95% count 0-5) -> observed 0
+     1 Week M>=6: P=0.128 (95% count 0-1) -> observed 0
+     1 Week M>=7: P=0.013 (95% count 0-0) -> observed 0
+     1 Year M>=4: P=1.000 (95% count 15-360) -> observed 108
+     1 Year M>=5: P=0.985 (95% count 1-38) -> observed 9
+     1 Year M>=6: P=0.476 (95% count 0-5) -> observed 0
+     1 Year M>=7: P=0.076 (95% count 0-1) -> observed 0
+
+== Bangladesh M5.4 (us6000rpht) ==
+      1 Day M>=4: P=0.071 (95% count 0-1) -> observed 0
+      1 Day M>=5: P=0.009 (95% count 0-0) -> observed 0
+      1 Day M>=6: P=0.001 (95% count 0-0) -> observed 0
+      1 Day M>=7: P=0.000 (95% count 0-0) -> observed 0
+    1 Month M>=4: P=0.256 (95% count 0-3) -> observed 1
+    1 Month M>=5: P=0.041 (95% count 0-1) -> observed 0
+    1 Month M>=6: P=0.005 (95% count 0-0) -> observed 0
+    1 Month M>=7: P=0.000 (95% count 0-0) -> observed 0
+     1 Week M>=4: P=0.177 (95% count 0-2) -> observed 1
+     1 Week M>=5: P=0.025 (95% count 0-1) -> observed 0
+     1 Week M>=6: P=0.003 (95% count 0-0) -> observed 0
+     1 Week M>=7: P=0.000 (95% count 0-0) -> observed 0
+
+== ComCat M>=5 within 500 km of the M7.7 epicentre, first 30 days (time after, distance from the epicentre) ==
+   +    0.19 h  M6.7     35 km  21.70N 95.97E  Burma (Myanmar)
+   +   27.00 h  M5.1    259 km  19.69N 96.08E  8 km SW of Nay Pyi Taw, Burma (Myanmar)
+   +  380.07 h  M5.3     88 km  21.23N 96.09E  41 km S of Kyaukse, Burma (Myanmar)
+   distances of all M>=4 in 30 d within 500 km: median 71 km, share beyond 124 km 0.27
+
+wrote research/out/eq_oaf_score.json

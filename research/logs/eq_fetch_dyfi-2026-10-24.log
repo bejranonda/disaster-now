@@ -1,0 +1,55 @@
+# research/eq_fetch_dyfi.py
+# started 2026-10-24T09:03:21+00:00
+events with a DYFI product: 1427; with felt >= 1: 924
+  100/924 events read, 59 Thai city rows so far
+  200/924 events read, 204 Thai city rows so far
+  300/924 events read, 242 Thai city rows so far
+  400/924 events read, 271 Thai city rows so far
+  500/924 events read, 358 Thai city rows so far
+  600/924 events read, 374 Thai city rows so far
+  700/924 events read, 431 Thai city rows so far
+  800/924 events read, 464 Thai city rows so far
+  900/924 events read, 663 Thai city rows so far
+Thai city rows: 666 from 150 events
+                   events  max_cdi
+city                              
+Bangkok                52      4.7
+Chiang Mai             47      5.2
+Chiang Rai             33      6.1
+Phuket                 33      4.1
+Kathu                  22      3.7
+Mae Chan               22      5.2
+Sansai                 17      5.2
+Phra Pradaeng          15      4.6
+Maerim                 14      5.1
+Hangdong               14      5.1
+Mae Sai                14      6.2
+Pak Kret               13      4.6
+Lampang                12      4.5
+Sankamphaeng           10      5.1
+Maeai                  10      5.8
+Nan                    10      5.8
+Samut Prakan           10      4.7
+Krabi                  10      9.1
+Mae Hong Son            8      5.0
+Maetaeng                8      4.9
+Phangnga                7      3.4
+Pa Daet                 7      4.6
+Mae Sot                 7      5.2
+Bang Kruai              6      4.6
+Hat Yai                 6      3.2
+Khon Kaen               6      3.8
+Phrae                   6      3.1
+Udon Thani              6      3.4
+Chiang Klang            5      3.9
+Chomthong               5      5.4
+Ban Bung                5      3.0
+Chiang Khong            5      3.9
+Phitsanulok             5      5.0
+Phayao                  5      5.8
+Samut Sakhon            4      4.1
+Lamphun                 4      4.1
+Lam Luk Ka              4      4.0
+Nonthaburi              4      3.8
+Pathum Thani            4      4.5
+Nakhon Ratchasima       4      3.6

@@ -53,12 +53,18 @@ export function mmiAt(q, lat, lon, ipe, site = 0) {
 /** The site term is used only as far as the reports it was fitted on reach (about 1,600 km; MODELS.md §5). */
 export const SITE_MAX_KM = 1600;
 
+/** …and only for the kind of quake it was fitted on: shallow mainland (crustal) events, depth ≤ 40 km, epicentre east
+ *  of 94.5°E and north of 12°N (research/e4_quake_ipe.py). Offshore subduction quakes are outside it: the 2012 M8.6 gave
+ *  Bangkok CDI 2.6 from 71 reports against 5.4 predicted with the term, the 2009 M7.5 2.3 against 4.7
+ *  (docs/research/predict-earthquake-2026-10-24.md; two events, GUIDELINES 3e). */
+export const inSiteDomain = (q) => (q.depth == null || q.depth <= 40) && q.lon > 94.5 && q.lat > 12;
+
 /** Quakes worth a line for this point: within `days`, and either perhaps felt (MMI ≥ 2.5, the validated "อาจรู้สึกได้"
  *  edge) or within 300 km. `site` is added to the IPE (the Bangkok-metro term). Sorted by shaking, then by time. */
 export function quakesForPoint(quakes, lat, lon, nowMs, ipe, { days = 7, site = 0 } = {}) {
   return quakes.filter((q) => nowMs - q.t <= days * 864e5 && q.t <= nowMs + 6e5).map((q) => {
     const d = km(lat, lon, q.lat, q.lon);
-    const mmi = mmiAt(q, lat, lon, ipe, d <= SITE_MAX_KM ? site : 0);
+    const mmi = mmiAt(q, lat, lon, ipe, d <= SITE_MAX_KM && inSiteDomain(q) ? site : 0);
     return { ...q, km: d, dir: bearing(lat, lon, q.lat, q.lon), mmi, band: band("mmi", mmi) };
   }).filter((q) => (q.mmi != null && q.mmi >= 2.5) || q.km <= 300)
     .sort((a, b) => (b.mmi ?? 0) - (a.mmi ?? 0) || b.t - a.t);

@@ -3,6 +3,10 @@ node_modules/
 public/data/live/
 # big downloads for research stay in the session scratchpad; only small derived files are committed
 research/cache/
+# the earthquake study's raw downloads: re-fetched by research/eq_fetch_*.py; the derived tables are committed
+research/data/eq_dyfi/raw/
+research/data/eq_oaf/*.json
+research/data/eq_opensha_oaf/
 *.tmp
 # secrets: .env and every copy or backup of it; only the template is committed
 .env

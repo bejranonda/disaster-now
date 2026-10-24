@@ -246,6 +246,11 @@ report with its time (SERVER §6.3).
 **Next:** OWNER_ACTIONS A9: a token scoped to `autobahn.bot` and the Workers permissions, a KV-only `CF_KV_TOKEN`, then
 `docker compose up -d` (the collector reads `.env` at start) and revoke the broad one.
 
+### KI-038 The dust chance is provisional, and over-warns at its low end (low)
+- Shown 20 % → 8 % happened (disjoint stations, two dust seasons); it inherits the damped ratio's post-hoc status, and
+  every CAMS-based score is an upper bound (Open-Meteo stitches short leads).
+- **Next:** re-test as issued in Dec 2026–Apr 2027 (`research/archive_forecasts.mjs`); recalibrate the low end if it holds.
+
 ### KI-037 The cool season's heat correction is provisional and post-hoc (medium; D-046)
 - From November to February the page uses C6 (corrected T and Td, then the heat index; MODELS §1.1). It beat the
   year-round line on disjoint stations in two winters (MAE 1.53–1.56 vs 3.45–3.56 °C) and kept danger days (7 vs 8 of

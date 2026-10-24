@@ -6,7 +6,7 @@
 import { band } from "./levels.js";
 import { km } from "./geo.js";
 import { dayWindows, nowIndex } from "./outlook.js";
-import { PM25 } from "./calibration.js";
+import { PM25, lognormalExceed } from "./calibration.js";
 
 const fnum = (v) => (v == null || v === "" || Number(v) < 0 ? null : Number(v)); // Air4Thai writes -1 for "not measured"
 
@@ -123,6 +123,15 @@ export function dailyMax(aq, v, nowMs) {
   });
 }
 
+/** The chance that a day's mean reaches PCD's "เริ่มมีผลกระทบ" (37.5) and "มีผลกระทบ" (75) bands, inside the domain it
+ *  was tested on only: tomorrow or the day after (not the rest of today), Dec–Apr, a damped forecast from a PCD station
+ *  (calibration.PM25.chance; predict-air-2026-10-24 §7.1). */
+export function dustChance(d, i) {
+  const c = PM25.chance;
+  if (i < 1 || i >= c.sigma.length || d.mean == null || !c.months.includes(Number(String(d.date).slice(5, 7)))) return null;
+  return { warn: lognormalExceed(d.mean, 37.5, c.sigma[i]), harm: lognormalExceed(d.mean, 75, c.sigma[i]) };
+}
+
 /** Everything the dust, pollution and UV cards need. `station` is nearestStation()'s answer or null. */
 export function buildAir(aq, gistda, nowMs = Date.now(), station = null) {
   const out = { pm25: null, estimate: null, station, outlook: [], ratio: null, pollutants: null, uv: [] };
@@ -142,7 +151,8 @@ export function buildAir(aq, gistda, nowMs = Date.now(), station = null) {
     const damped = measured != null && camsPrev != null;
     out.ratio = damped ? { method: "damped", measured, camsPrev, basis: station ? "station" : "estimate" } : null;
     out.outlook = (damped ? dampedOutlook(measured, camsPrev, days) : days)
-      .map((d) => ({ ...d, band: band("pm25", d.mean), corrected: damped }));
+      .map((d, i) => ({ ...d, band: band("pm25", d.mean), corrected: damped,
+        chance: damped && station ? dustChance(d, i) : null }));
     out.uv = dailyMax(aq, "uv_index", nowMs).map((d) => ({ ...d, band: band("uv", d.max) }));
     const i = nowIndex(aq.hourly.time, aq.utc_offset_seconds || 0, nowMs);
     out.uvNow = i >= 0 ? aq.hourly.uv_index?.[i] ?? null : null;

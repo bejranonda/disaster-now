@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+**From the prediction research** ([predict-air](docs/research/predict-air-2026-10-24.md)):
+- **The chance of a dust day,** Dec–Apr, tomorrow and the day after, from a PCD station only: "พรุ่งนี้
+  โอกาสที่ฝุ่นเฉลี่ยทั้งวันจะถึงระดับ “เริ่มมีผลกระทบต่อสุขภาพ” ราว 40%" (lognormal dressing of the damped ratio, σ 0.343 / 0.380;
+  Brier skill +0.10 to +0.24 vs persistence on disjoint stations); provisional (KI-038). The dust pre-warning carries it.
+- **PCD's 7-day dust forecast** linked from the dust card, the visitor's region (an image; never parsed).
+- **Earthquakes** ([predict-earthquake](docs/research/predict-earthquake-2026-10-24.md)): aftershock chances tested on
+  this region had no skill over the base rate, so the page computes none. The card now says what can't be predicted
+  ("เมื่อไร ที่ไหน แรงแค่ไหน") and where early warning exists (Android's earthquake alerts, M4.5+, verified on Google's
+  page). The Bangkok +1.06 term applies only to crustal quakes, the domain it was fitted on (offshore subduction quakes
+  over-predicted Bangkok by 2–3 MMI). The place profile shows the province's seismic zone from the 2564 regulation
+  (43 provinces read from the Royal Gazette), labelled long-term hazard, not a prediction. The rule change for
+  aftershock words and links is the owner's (D11).
+- Tests: 88.
+
 ## 0.4.0 (24 Oct 2026, not deployed): ภัยรอบบ้าน · Thai Risk, one grading for every forecast view, the cool-season heat fix
 
 **The name** (A2, D-044): **ภัยรอบบ้าน · Thai Risk**. The Thai name fits the 320 px header on one line; "Thai Risk"

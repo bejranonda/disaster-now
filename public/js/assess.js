@@ -14,6 +14,18 @@ import { compass } from "./geo.js";
 export const GUIDE = "https://baanrodmai.autobahn.bot"; // the sister app's "what to do" pages (Hazard-huntz)
 export const FLOODWATCH = "https://flood.autobahn.bot";
 
+/** PCD's 7-day dust forecast: one image per region, renewed each afternoon (200 on 24 Oct 2026; the host's certificate
+ *  chain is the one in KI-002). The grouping of provinces is this app's: Bangkok and its five neighbours, the 17
+ *  northern provinces, the northeast, the east, the south, and the rest as central and west. */
+export function pcdForecastImage(pv) {
+  const r = [10, 11, 12, 13, 73, 74].includes(pv) ? "bkk"
+    : (pv >= 50 && pv <= 58) || (pv >= 60 && pv <= 67) ? "north"
+      : pv >= 30 && pv <= 49 ? "esan"
+        : [20, 21, 22, 23, 24, 25, 27].includes(pv) ? "east"
+          : pv >= 80 ? "south" : "centralwest";
+  return `https://air4thai.pcd.go.th/UpdateV2/forecastImage/forecast_img_${r}.png`;
+}
+
 const fmt = (v, d = 0) => (v == null || Number.isNaN(v) ? "–"
   : Math.abs(v) >= 1000 ? Number(v).toLocaleString("en-US", { maximumFractionDigits: d }) : Number(v).toFixed(d));
 const DAY_TH = ["อา.", "จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส."];
@@ -115,7 +127,9 @@ export function assess(b, lang = "th", ipe = null) {
   // ---------- PM2.5 ----------
   {
     const c = { id: "pm25", icon: "😷", title: L("ฝุ่น PM2.5", "Dust (PM2.5)"), short: L("ฝุ่น PM2.5", "PM2.5"), level: -1,
-      link: { href: guide("air"), text: L("ฝุ่นวันนี้ ต้องทำอะไร", "What to do about today's dust") }, src: [] };
+      link: { href: guide("air"), text: L("ฝุ่นวันนี้ ต้องทำอะไร", "What to do about today's dust") }, src: [],
+      // the agency's own outlook, a picture with categories only, linked, never parsed (predict-air §7.2)
+      more: place ? { href: pcdForecastImage(place.pv), text: L("คาดการณ์ฝุ่น 7 วันของกรมควบคุมมลพิษ (ภาพ)", "PCD's 7-day dust forecast (image)") } : null };
     if (air.pm25) {
       const p = air.pm25;
       c.level = p.band.level;
@@ -152,8 +166,24 @@ export function assess(b, lang = "th", ipe = null) {
         c.src.push({ name: L(`แบบจำลอง CAMS${!air.ratio ? " (ยังไม่ได้ปรับ: ต่ำกว่าค่าจริง)" : basis ? " ปรับตามค่าประมาณของ GISTDA (วิธีนี้ยังไม่ได้ทดสอบกับค่าประมาณ)" : " ปรับตามค่าวัดล่าสุด"}`,
           `CAMS model${!air.ratio ? " (unadjusted: reads low)" : basis ? ", adjusted to GISTDA's estimate (the method is untested on estimates)" : ", adjusted to the latest measurement"}`), model: true });
         air.outlook.forEach((d, i) => {
-          if (i > 0 && d.band.level >= 2) extraPre.push({ hazard: "pm25", day: i, date: d.date, level: d.band.level, value: d.mean });
+          if (i > 0 && d.band.level >= 2) extraPre.push({ hazard: "pm25", day: i, date: d.date, level: d.band.level, value: d.mean,
+            chance: d.chance ? (d.band.level >= 3 ? d.chance.harm : d.chance.warn) : null });
         });
+        // the chance of a dust day, Dec–Apr only, from a station (airq.dustChance; provisional, predict-air §7.1)
+        const w37 = word(band("pm25", 37.6));
+        const w75 = word(band("pm25", 75.1));
+        const pct = (p) => `${p < 0.1 || p > 0.9 ? "" : L("ราว ", "about ")}${chanceText(p, lang)}`;
+        air.outlook.forEach((d, i) => {
+          if (!d.chance) return;
+          const day = dayName(i, d.date, lang, now);
+          const harm = d.chance.harm >= 0.1;
+          c.lines.push(L(`${day} โอกาสที่ฝุ่นเฉลี่ยทั้งวันจะถึงระดับ “${w37}” ${pct(d.chance.warn)}${harm ? ` · ถึงระดับ “${w75}” ${pct(d.chance.harm)}` : ""}`,
+            `${day}: chance that the day's mean reaches “${w37}”: ${pct(d.chance.warn)}${harm ? `; “${w75}”: ${pct(d.chance.harm)}` : ""}`));
+        });
+        if (air.outlook.some((d) => d.chance)) {
+          c.note = L("โอกาสจากแบบจำลอง CAMS ปรับตามค่าวัดล่าสุด ตรวจกับค่าวัดจริง 2 ฤดูฝุ่น (ธ.ค. 2567–เม.ย. 2569) ใช้ชั่วคราว",
+            "Chances from the CAMS model, corrected by the latest measurement; checked against two dust seasons (Dec 2024–Apr 2026); provisional");
+        }
       }
     } else c.error = b.errors?.gistda || b.errors?.a4t;
     cards.push(c);
@@ -452,10 +482,14 @@ export function assess(b, lang = "th", ipe = null) {
       }
       if (!list.length) c.lines.push(L("7 วันนี้ไม่มีแผ่นดินไหวในรัศมี 300 กม. หรือที่ใหญ่พอจะรู้สึกได้ถึงที่นี่", "No quake within 300 km in 7 days, nor one big enough to reach here"));
       c.note = site
-        ? L("แผ่นดินไหวพยากรณ์ล่วงหน้าไม่ได้ ความแรงที่จุดนี้ประมาณจากขนาดและระยะทาง และบวกเพิ่มสำหรับกรุงเทพฯ และปริมณฑล (ดินอ่อน คนในพื้นที่เคยรายงานว่าแรงกว่าค่าประมาณ) ตึกสูงอาจรู้สึกแรงกว่านี้",
-          "Earthquakes can't be forecast. Shaking here is estimated from size and distance, raised for greater Bangkok (soft clay: people there have reported more than the estimate); tall buildings can feel more")
-        : L("แผ่นดินไหวพยากรณ์ล่วงหน้าไม่ได้ ความแรงที่จุดนี้เป็นค่าประมาณจากขนาดและระยะทาง ดินอ่อนและตึกสูงอาจรู้สึกแรงกว่านี้",
-          "Earthquakes can't be forecast. Shaking here is estimated from size and distance; soft ground and tall buildings can feel more");
+        ? L("แผ่นดินไหวยังพยากรณ์ล่วงหน้าไม่ได้ว่าจะเกิดเมื่อไร ที่ไหน แรงแค่ไหน ความแรงที่จุดนี้ประมาณจากขนาดและระยะทาง และบวกเพิ่มสำหรับกรุงเทพฯ และปริมณฑลเมื่อแผ่นดินไหวเกิดบนแผ่นดิน (ดินอ่อน คนในพื้นที่เคยรายงานว่าแรงกว่าค่าประมาณ) ตึกสูงอาจรู้สึกแรงกว่านี้",
+          "No one can predict when, where or how big an earthquake will be. Shaking here is estimated from size and distance, raised for greater Bangkok for quakes on land (soft clay: people there have reported more than the estimate); tall buildings can feel more")
+        : L("แผ่นดินไหวยังพยากรณ์ล่วงหน้าไม่ได้ว่าจะเกิดเมื่อไร ที่ไหน แรงแค่ไหน ความแรงที่จุดนี้เป็นค่าประมาณจากขนาดและระยะทาง ดินอ่อนและตึกสูงอาจรู้สึกแรงกว่านี้",
+          "No one can predict when, where or how big an earthquake will be. Shaking here is estimated from size and distance; soft ground and tall buildings can feel more");
+      // early warning is a phone push, not this page: say where it exists (Google's help page lists Thailand, M4.5+,
+      // read 24 Oct 2026; predict-earthquake §7)
+      c.lines.push(L("📱 มือถือ Android ในไทยมีระบบแจ้งเตือนแผ่นดินไหวของ Google (ขนาด 4.5 ขึ้นไป) ตรวจว่าเปิดไว้: การตั้งค่า > ความปลอดภัยและเหตุฉุกเฉิน > การแจ้งเตือนแผ่นดินไหว อาจเตือนก่อน ระหว่าง หรือหลังเริ่มสั่น และบางครั้งตรวจไม่พบ หน้านี้แสดงแผ่นดินไหวหลังเกิดแล้วเท่านั้น",
+        "📱 Android phones in Thailand have Google's earthquake alerts (M4.5 and up). Check they're on: Settings > Safety & emergency > Earthquake alerts. An alert may come before, during or after the shaking starts, and some quakes are missed. This page only shows quakes after they happen"));
       c.src.push({ name: [b.emsc && "EMSC", b.usgs && "USGS", b.tmdQuakes && L("กรมอุตุฯ", "TMD")].filter(Boolean).join(" · ") });
       const ts = place ? tsunamiWatch(quakes, place.pv, now) : null;
       if (ts) {
@@ -579,6 +613,19 @@ export function assess(b, lang = "th", ipe = null) {
         `Within 20 km of an active fault: ${faultRows[0].attributes?.F_ZONE_E || faultRows[0].attributes?.F_ZONE_T || ""} (DMR)`) }
       : { icon: "〰️", text: L("ตำบลนี้ไม่อยู่ในรายชื่อตำบลใกล้รอยเลื่อนมีพลัง (รัศมี 20 กม.) ของกรมทรัพยากรธรณี", "Not on DMR's list of subdistricts within 20 km of an active fault") });
   }
+  // the law's long-term zones, as the law words them (Ministerial Regulation B.E. 2564, Royal Gazette 138/16 ก; read
+  // from the Gazette, research/data/eq_zones_2564.json): official hazard, never a prediction (predict-earthquake §8)
+  if (place) {
+    const z = SEISMIC_ZONE[place.pv];
+    const what = { 1: L("บริเวณที่ต้องเฝ้าระวัง", "an area to watch"),
+      2: L("อาคารอาจได้รับผลกระทบจากแผ่นดินไหวในระดับปานกลาง", "buildings may be affected by earthquakes at a moderate level"),
+      3: L("อาคารอาจได้รับผลกระทบจากแผ่นดินไหวในระดับสูง", "buildings may be affected by earthquakes at a high level") }[z];
+    profile.push({ icon: "🏢", text: z
+      ? L(`กฎกระทรวงเรื่องอาคารต้านทานแรงสั่นสะเทือนของแผ่นดินไหว (พ.ศ. 2564) จัดจังหวัดนี้เป็น "บริเวณที่ ${z}": ${what} (ความเสี่ยงระยะยาว ไม่ใช่การทำนาย)`,
+        `Thailand's seismic building rules (2021) put this province in zone ${z}: ${what} (long-term hazard, not a prediction)`)
+      : L("จังหวัดนี้ไม่อยู่ในบริเวณที่กฎกระทรวงเรื่องอาคารต้านทานแผ่นดินไหว (พ.ศ. 2564) กำหนด ซึ่งไม่ได้แปลว่าไม่มีแผ่นดินไหว",
+        "This province is not in a zone of Thailand's seismic building rules (2021); that doesn't mean no earthquakes") });
+  }
   const slideN = arcCount(b.dmrSlide);
   if (slideN) profile.push({ icon: "⛰️", text: L(`หมู่บ้านเสี่ยงดินถล่ม ${slideN} แห่งในรัศมี 3 กม.`, `${slideN} landslide-risk village${slideN === 1 ? "" : "s"} within 3 km`) });
   if (place && [85, 82, 83, 81, 92, 91].includes(place.pv)) {
@@ -621,6 +668,14 @@ const GUST_WORDS = [null,
  *  Pathum Thani. The validation's term (MODELS.md §6; research/out/calibration.json → earthquake_felt). */
 export const BKK_METRO = [10, 11, 12, 13];
 export const BKK_MMI_TERM = 1.06;
+
+/** Province code → seismic zone of the Ministerial Regulation B.E. 2564 (clause 3; 14 / 17 / 12 provinces), from
+ *  research/data/eq_zones_2564.json (read from the Royal Gazette PDF, cross-checked with its text layer). */
+export const SEISMIC_ZONE = Object.fromEntries([
+  [1, [81, 86, 92, 48, 80, 38, 77, 65, 76, 42, 90, 91, 84, 43]],
+  [2, [10, 62, 18, 73, 60, 12, 13, 14, 82, 83, 85, 70, 11, 75, 74, 72, 61]],
+  [3, [71, 57, 50, 63, 55, 56, 54, 58, 52, 51, 64, 53]],
+].flatMap(([z, codes]) => codes.map((c) => [c, z])));
 /** The lowest felt band's words are said only from this magnitude: the felt reports behind them are all M5.5+ (U15). */
 export const FELT_WORDS_MIN_MAG = 5.5;
 

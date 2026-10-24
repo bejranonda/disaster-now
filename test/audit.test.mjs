@@ -398,3 +398,75 @@ test("S12: the collector's files count only while fresh (KV keeps the last uploa
   assert.ok(!liveFresh({ files: {} }, now), "no time, no trust");
   assert.ok(!liveFresh({ generated: "2026-10-25T09:00:00Z" }, now), "a clock far in the future isn't trusted either");
 });
+
+// ---------- the prediction research of 24 Oct 2026 (docs/research/predict-air-2026-10-24.md) ----------
+
+test("PM2.5 chance (predict-air §7.1): only Dec–Apr, only tomorrow and after, 50 % at the band edge", async () => {
+  const { dustChance } = await import("../public/js/airq.js");
+  const c = (f, date = "2026-12-10", i = 1) => dustChance({ mean: f, date }, i);
+  assert.ok(Math.abs(c(37.5).warn - 0.5) < 1e-9, "the chance adds words, not levels");
+  assert.ok(Math.abs(c(28.1).warn - 0.2) < 0.005 && Math.abs(c(60).harm - 0.258) < 0.005);
+  assert.ok(c(50, "2026-12-10", 2).warn < c(50).warn, "the day after is wider (σ 0.380 vs 0.343)");
+  assert.equal(c(50, "2026-10-25"), null, "October is outside the fitted domain");
+  assert.equal(c(50, "2026-05-02"), null);
+  assert.equal(c(50, "2026-12-10", 0), null, "never the rest of today");
+});
+
+test("PM2.5 chance on the page: the card's words, the pre-warning's chance, a station only", () => {
+  const shift = (f) => JSON.parse(fx(f).replaceAll("2026-10-", "2026-12-"));
+  const dec = { now: NOW + 61 * 864e5, ens: shift("ens_bkk.json"), aq: shift("aq_bkk.json"), a4t: shift("a4t.json"), gistda: shift("gistda_loc.json") };
+  const pm = card(assess(full(at(13.7563, 100.5018), dec), "th"), "pm25");
+  const line = pm.lines.find((l) => l.includes("โอกาสที่ฝุ่นเฉลี่ยทั้งวันจะถึงระดับ “เริ่มมีผลกระทบต่อสุขภาพ”"));
+  assert.ok(line && line.startsWith("พรุ่งนี้ "), JSON.stringify(pm.lines));
+  assert.doesNotMatch(line, /ราว (ไม่ถึง|เกิน)/);
+  assert.match(pm.note, /ใช้ชั่วคราว/);
+  // the same day in October: no chance line
+  const oct = card(assess(full(at(13.7563, 100.5018)), "th"), "pm25");
+  assert.ok(!oct.lines.some((l) => l.includes("โอกาสที่ฝุ่น")));
+  // without a station (GISTDA's estimate as input): no chance line
+  const est = card(assess(full(at(13.7563, 100.5018), { ...dec, a4t: undefined, errors: { a4t: "HTTP 503" } }), "th"), "pm25");
+  assert.ok(!est.lines.some((l) => l.includes("โอกาสที่ฝุ่น")));
+});
+
+test("PCD's 7-day dust forecast image: one region per province", async () => {
+  const { pcdForecastImage } = await import("../public/js/assess.js");
+  const r = (pv) => pcdForecastImage(pv).match(/forecast_img_(\w+)\.png$/)[1];
+  assert.deepEqual([10, 12, 50, 63, 67, 40, 34, 20, 26, 83, 90, 71, 15].map(r),
+    ["bkk", "bkk", "north", "north", "north", "esan", "esan", "east", "centralwest", "south", "south", "centralwest", "centralwest"]);
+  assert.match(pcdForecastImage(50), /^https:\/\/air4thai\.pcd\.go\.th\//);
+});
+
+test("predict-earthquake: the Bangkok term only for crustal quakes, the domain it was fitted on", async () => {
+  const { inSiteDomain } = await import("../public/js/quake.js");
+  const mandalay = { lat: 22.0, lon: 95.9, depth: 10, mag: 7.7, t: NOW - 3600e3 };
+  const sumatra = { lat: 2.3, lon: 93.0, depth: 20, mag: 8.6, t: NOW - 3600e3 };
+  const deep = { lat: 23.0, lon: 95.0, depth: 120, mag: 6.5, t: NOW - 3600e3 };
+  assert.ok(inSiteDomain(mandalay) && !inSiteDomain(sumatra) && !inSiteDomain(deep));
+  const withTerm = (q) => quakesForPoint([q], 13.75, 100.5, NOW, IPE, { site: BKK_MMI_TERM })[0];
+  const noTerm = (q) => quakesForPoint([q], 13.75, 100.5, NOW, IPE)[0];
+  assert.ok(Math.abs(withTerm(mandalay).mmi - noTerm(mandalay).mmi - BKK_MMI_TERM) < 1e-9);
+  assert.equal(withTerm(sumatra)?.mmi, noTerm(sumatra)?.mmi, "no term for an offshore subduction quake");
+});
+
+test("predict-earthquake: the card says what can't be predicted, and where early warning exists", () => {
+  for (const lang of ["th", "en"]) {
+    const q = card(assess(full(at(13.7563, 100.5018)), lang), "quake");
+    assert.match(q.note, lang === "en" ? /^No one can predict when, where or how big/ : /^แผ่นดินไหวยังพยากรณ์ล่วงหน้าไม่ได้ว่าจะเกิดเมื่อไร ที่ไหน แรงแค่ไหน/);
+    const eew = q.lines.find((l) => l.startsWith("📱"));
+    assert.ok(eew && (lang === "en" ? /only shows quakes after they happen/ : /หลังเกิดแล้วเท่านั้น/).test(eew), eew);
+    assert.doesNotMatch(q.lines.join(" "), /โอกาสเกิดแผ่นดินไหว|chance of an earthquake/i, "no earthquake chance of our own");
+  }
+});
+
+test("predict-earthquake: the province's seismic zone, as the 2564 regulation words it, equal to the Gazette file", async () => {
+  const { SEISMIC_ZONE } = await import("../public/js/assess.js");
+  const z = JSON.parse(readFileSync(new URL("../research/data/eq_zones_2564.json", import.meta.url), "utf8"));
+  for (const [zone, codes] of Object.entries(z.province_codes)) for (const c of codes) assert.equal(SEISMIC_ZONE[+c], +zone, `province ${c}`);
+  assert.equal(Object.keys(SEISMIC_ZONE).length, 43);
+  const line = (lat, lon, lang = "th") => assess(full(at(lat, lon)), lang).profile.find((p) => p.icon === "🏢")?.text;
+  assert.match(line(18.79, 98.99), /"บริเวณที่ 3": อาคารอาจได้รับผลกระทบจากแผ่นดินไหวในระดับสูง \(ความเสี่ยงระยะยาว ไม่ใช่การทำนาย\)/);
+  assert.match(line(13.7563, 100.5018), /"บริเวณที่ 2"/);
+  assert.match(line(16.43, 102.83), /ไม่อยู่ในบริเวณ.*ไม่ได้แปลว่าไม่มีแผ่นดินไหว/);
+  assert.match(line(18.79, 98.99, "en"), /zone 3: .*\(long-term hazard, not a prediction\)$/);
+  assert.doesNotMatch(line(16.43, 102.83), /ปลอดภัย/);
+});

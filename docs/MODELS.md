@@ -140,6 +140,27 @@ Days 2–3 (B, Mar–Apr): damped 9.23 and 11.04 vs persistence 11.11 and 13.81.
 - It was scored with station means; with GISTDA's estimate as the input it is **[unverified]**.
 - October tests only the quiet regime.
 
+### 2.1 The chance of a dust day (since the 24 Oct 2026 research; provisional)
+
+[research/predict-air-2026-10-24.md](research/predict-air-2026-10-24.md) (scripts `research/aq_*.py`): 14 stations (7
+northern); seasons Dec 2022–Apr 2023 and Dec 2023–Apr 2024 to fit (sample A), Dec 2024–Apr 2025 and Dec 2025–Apr 2026
+to test, on disjoint stations B (Chiang Rai, Nan, Mae Hong Son, Phrae, Bang Na, Nakhon Sawan, Ubon, Surat Thani).
+
+- **The damped ratio held:** day 1 MAE 5.94 vs persistence 6.80 (B, 2024–25); day 2 6.58 vs 8.08 (B, 2025–26). In the
+  north on day 1 it only ties persistence.
+- **The chance** (`airq.dustChance`, `calibration.PM25.chance`): p = 1 − Φ((ln T − ln f)/σ), f the damped forecast,
+  T = 37.5 or 75, σ 0.343 (tomorrow), 0.380 (the day after); μ = 0, so 50 % at the band edge.
+  Brier skill vs climatology +0.40 to +0.76, vs persistence +0.10 to +0.24 (B, both test seasons, days 1–2); the north
+  ties persistence on day 1 (+0.04, interval crossing 0). Reliability: shown 20 % → 8 % happened, 50 % → 47 %, 80 % → 80 %:
+  **the low end over-warns**. In the quiet season (Sep–Oct 2026) it lost to climatology on day 2 (−0.28): hence Dec–Apr only.
+- **On screen:** the dust card adds "พรุ่งนี้ โอกาสที่ฝุ่นเฉลี่ยทั้งวันจะถึงระดับ “เริ่มมีผลกระทบต่อสุขภาพ” ราว 40%" (and the
+  "มีผลกระทบต่อสุขภาพ" chance when it is 10 % or more), a dust pre-warning carries its chance, and the note says
+  "ใช้ชั่วคราว". Only Dec–Apr, only from a PCD station, never for the rest of today. Levels don't change.
+- **Not shipped:** weather predictors (ERA5 and as-issued ECMWF help day 2 by 0.25 µg/m³, one station worse; wait),
+  fires (FIRMS: −0.10 on day 1 at B, nothing on day 2; don't), gradient boosting (24–46 % worse at Surat Thani; don't),
+  PM10 and ozone outlooks (wait; no open dry-season history for ozone).
+- **Re-test as issued** in Dec 2026–Apr 2027 with the damped ratio, from `research/archive_forecasts.mjs`.
+
 ## 3. Rain
 
 **What is computed:** for each member, rain summed over the next 24 h and over each calendar day. The page shows the share of members above 35 mm, as one of three words (`outlook.chanceWord`, cut points from the validation):
@@ -190,6 +211,28 @@ No gust observations were available in the station records used, so **nothing is
 - Never "ไม่รู้สึก", and never a word on damage: Thai cities reached CDI VI or more only 5 times, 4 of them single reports.
 - A quake gets a line if it is within 300 km or reached 2.5 or more.
 - **Range:** the reports behind the Bangkok term reach about 1,600 km, so the term applies only within that distance (`quake.SITE_MAX_KM`, KI-023).
+
+### 5.1 Can anything forecast earthquakes here? (research of 24 Oct 2026)
+
+[research/predict-earthquake-2026-10-24.md](research/predict-earthquake-2026-10-24.md), framed on PNSN's four
+categories (prediction, early warning, probabilities, forecasts; https://pnsn.org/education/seismology/earthquake-prediction,
+read 24 Oct 2026). Scripts `research/eq_*.py`; USGS ComCat 1973–2026, box 0–30°N 88–110°E, M ≥ 4 (19,718 events).
+
+- **Prediction:** none exists (USGS, ICEF 2011, TMD). The card now says what can't be predicted: when, where, how big.
+- **Aftershock chances, tested here, have no skill:** 322 sequences before 2015 to fit, 69 after to test (M ≥ 5.5
+  mainshocks). Page et al. 2016's generic parameters (USGS's own code) scored **worse than the base rate** on all four
+  targets (Brier skill −0.49 to −0.91); a regional refit tied the base rate at best (−0.15 to −0.00). USGS's own 75
+  forecasts for the 2025 M7.7 gave P(M ≥ 5 within a week) 0.97 in its circle; none came. **The page computes no
+  earthquake chance of its own.**
+- **Long-term felt shaking** (the app's equation on the declustered catalogue): Bangkok 7.6 events per 10 years at
+  predicted ≥ III, Chiang Rai and Mae Hong Son 5.0, Chiang Mai 4.3 … Ubon 1.5; but 2015–2026 had 37 such events
+  against 64 expected, and the equation's scatter moves counts 2–3×. **Not shipped** (wait); the official zones say the
+  long-term part better (below).
+- **The Bangkok term's domain** (since this research): +1.06 MMI applies only to crustal quakes, the kind it was fitted
+  on (depth ≤ 40 km, east of 94.5°E, north of 12°N; `quake.inSiteDomain`). Offshore subduction quakes over-predicted
+  Bangkok: 2012 M8.6, CDI 2.6 (71 reports) vs 5.4 predicted; 2009 M7.5, 2.3 vs 4.7. Two events, GUIDELINES 3e.
+- **The felt-word floor holds:** predicted ≥ III vs reported, bias +1.26 for M < 5.5 and −0.08 for M ≥ 5.5 (the M5.5
+  floor, KNOWLEDGE §10).
 
 ## 6. How a forecast becomes a level
 

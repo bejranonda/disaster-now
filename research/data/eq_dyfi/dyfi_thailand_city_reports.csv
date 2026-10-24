@@ -1,0 +1,667 @@
+event,mag,magType,ev_lat,ev_lon,depth,time,key,city,cdi,nresp,dist_usgs,lat,lon
+usp000dbg6,7.2,mwc,6.91,92.958,39.2,1104034889810,Lampang::Lampang::Thailand,Lampang,2.2,1,1445.0,18.29,99.48
+usp000dbg6,7.2,mwc,6.91,92.958,39.2,1104034889810,Phuket::Phuket::Thailand,Phuket,4.1,2,609.0,7.88,98.38
+usp000dbuz,6.1,mwb,5.348,94.65,35.0,1104140346800,Phuket::Phuket::Thailand,Phuket,2.7,2,499.0,7.88,98.38
+usp000dbuz,6.1,mwb,5.348,94.65,35.0,1104140346800,Hat Yai::Songkhla::Thailand,Hat Yai,3.1,1,670.0,7.0,100.47
+usp000dc5b,5.6,mwb,5.23,94.625,29.5,1104354779470,Phuket::Phuket::Thailand,Phuket,2.0,1,509.0,7.88,98.38
+usp000dvtc,7.2,mwc,7.92,92.19,16.0,1122219726210,Phuket::Phuket::Thailand,Phuket,3.4,1,682.0,7.88,98.38
+usp000e1m7,5.9,mwb,4.82,95.098,30.0,1129043139660,Phuket::Phuket::Thailand,Phuket,3.1,1,497.0,7.88,98.38
+usp000egzp,5.7,mwc,5.521,94.432,34.0,1147489901610,Bangkok::Bangkok::Thailand,Bangkok,2.7,1,1126.0,13.73,100.5
+usp000f035,4.6,mb,18.901,98.916,9.6,1165942949740,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.5,62,16.0,18.8,98.98
+usp000f035,4.6,mb,18.901,98.916,9.6,1165942949740,Hangdong::Chiang Mai::Thailand,Hangdong,3.4,1,25.0,18.69,98.92
+usp000f035,4.6,mb,18.901,98.916,9.6,1165942949740,Maerim::Chiang Mai::Thailand,Maerim,3.8,2,9.0,18.91,98.94
+usp000f035,4.6,mb,18.901,98.916,9.6,1165942949740,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,3.4,2,29.0,18.74,99.12
+usp000f035,4.6,mb,18.901,98.916,9.6,1165942949740,Sansai::Chiang Mai::Thailand,Sansai,4.2,15,17.0,18.85,99.05
+usp000f035,4.6,mb,18.901,98.916,9.6,1165942949740,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.3,2,147.0,19.91,99.83
+usp000f035,4.6,mb,18.901,98.916,9.6,1165942949740,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,1.0,2,111.0,19.27,97.93
+usp000faqb,5.9,mwb,5.359,94.635,38.0,1177660969650,Krabi::Krabi::Thailand,Krabi,2.7,1,559.0,8.05,98.91
+usp000faqb,5.9,mwb,5.359,94.635,38.0,1177660969650,Thung Song::Nakhon Si Thammarat::Thailand,Thung Song,1.0,1,643.0,8.15,99.73
+usp000faqb,5.9,mwb,5.359,94.635,38.0,1177660969650,Kathu::Phuket::Thailand,Kathu,2.1,2,500.0,7.92,98.35
+usp000faqb,5.9,mwb,5.359,94.635,38.0,1177660969650,Phuket::Phuket::Thailand,Phuket,2.0,2,500.0,7.88,98.38
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Bangkok::Bangkok::Thailand,Bangkok,2.7,68,749.0,13.73,100.5
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,4.0,46,263.0,18.8,98.98
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Hangdong::Chiang Mai::Thailand,Hangdong,3.4,5,276.0,18.69,98.92
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Maeai::Chiang Mai::Thailand,Maeai,4.1,1,156.0,20.03,99.32
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Maerim::Chiang Mai::Thailand,Maerim,4.1,2,257.0,18.91,98.94
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Maetaeng::Chiang Mai::Thailand,Maetaeng,2.0,2,241.0,19.12,98.95
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Sansai::Chiang Mai::Thailand,Sansai,4.4,2,254.0,18.85,99.05
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,4.6,12,115.0,19.91,99.83
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Mae Chan::Chiang Rai::Thailand,Mae Chan,5.2,2,98.0,20.15,99.87
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Mae Sai::Chiang Rai::Thailand,Mae Sai,6.2,1,89.0,20.43,99.88
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Pa Daet::Chiang Rai::Thailand,Pa Daet,3.4,1,135.0,19.5,100.0
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Lampang::Lampang::Thailand,Lampang,2.8,2,278.0,18.29,99.48
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Lamphun::Lamphun::Thailand,Lamphun,2.0,1,281.0,18.5,99.08
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Nan::Nan::Thailand,Nan,2.9,2,190.0,18.78,100.77
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Nonthaburi::Nonthaburi::Thailand,Nonthaburi,3.4,1,744.0,13.8,100.18
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Pathum Thani::Pathum Thani::Thailand,Pathum Thani,1.0,1,717.0,14.02,100.52
+usp000fc2v,6.3,mwc,20.503,100.732,9.0,1179305774120,Phayao::Phayao::Thailand,Phayao,3.8,2,171.0,19.17,99.91
+usp000femg,5.6,mwb,21.473,99.779,22.0,1182586639890,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,860.0,13.73,100.5
+usp000femg,5.6,mwb,21.473,99.779,22.0,1182586639890,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,6,308.0,18.8,98.98
+usp000femg,5.6,mwb,21.473,99.779,22.0,1182586639890,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.0,6,174.0,19.91,99.83
+usp000femg,5.6,mwb,21.473,99.779,22.0,1182586639890,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.7,1,148.0,20.15,99.87
+usp000femg,5.6,mwb,21.473,99.779,22.0,1182586639890,Mae Sai::Chiang Rai::Thailand,Mae Sai,3.8,4,118.0,20.43,99.88
+usp000fh38,6.1,mwb,7.157,92.518,15.0,1185406651520,Phuket::Phuket::Thailand,Phuket,2.0,2,652.0,7.88,98.38
+usp000fvfh,5.4,mwc,5.418,95.661,20.9,1198819454840,Kathu::Phuket::Thailand,Kathu,2.0,1,406.0,7.92,98.35
+usp000fvfh,5.4,mwc,5.418,95.661,20.9,1198819454840,Phuket::Phuket::Thailand,Phuket,2.0,1,406.0,7.88,98.38
+usp000fzau,7.4,mwc,2.768,95.964,26.0,1203494910520,Kathu::Phuket::Thailand,Kathu,2.2,1,628.0,7.92,98.35
+usp000gf5p,6.0,mwc,25.039,97.697,10.0,1219321470930,Bangkok::Bangkok::Thailand,Bangkok,2.6,6,1286.0,13.73,100.5
+usp000gz2j,5.7,mwc,25.632,101.095,7.0,1247138356240,Bangkok::Bangkok::Thailand,Bangkok,2.0,2,1318.0,13.73,100.5
+usp000h05x,7.5,mwc,14.099,92.902,24.0,1249934138730,Bangkok::Bangkok::Thailand,Bangkok,2.3,9,822.0,13.73,100.5
+usp000h05x,7.5,mwc,14.099,92.902,24.0,1249934138730,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.5,4,832.0,18.8,98.98
+usp000h05x,7.5,mwc,14.099,92.902,24.0,1249934138730,Kanchanaburi::Kanchanaburi::Thailand,Kanchanaburi,3.8,1,716.0,14.02,99.53
+usp000h05x,7.5,mwc,14.099,92.902,24.0,1249934138730,Phuket::Phuket::Thailand,Phuket,4.1,1,912.0,7.88,98.38
+usp000h05x,7.5,mwc,14.099,92.902,24.0,1249934138730,Mae Sot::Tak::Thailand,Mae Sot,2.2,1,673.0,16.71,98.57
+usp000hat4,5.3,mb,2.346,97.17,35.0,1270594446000,Bangkok::Bangkok::Thailand,Bangkok,1.0,1,1311.0,13.73,100.5
+usp000hchk,7.2,mwc,3.748,96.018,38.0,1273384781620,Bangkok::Bangkok::Thailand,Bangkok,2.0,2,1209.0,13.73,100.5
+usp000hchk,7.2,mwc,3.748,96.018,38.0,1273384781620,Phrae::Phrae::Thailand,Phrae,2.0,1,1656.0,18.15,100.16
+usp000hchk,7.2,mwc,3.748,96.018,38.0,1273384781620,Kathu::Phuket::Thailand,Kathu,1.0,1,530.0,7.92,98.35
+usp000hchk,7.2,mwc,3.748,96.018,38.0,1273384781620,Phuket::Phuket::Thailand,Phuket,4.1,11,527.0,7.88,98.38
+usp000hchk,7.2,mwc,3.748,96.018,38.0,1273384781620,Hat Yai::Songkhla::Thailand,Hat Yai,2.7,1,611.0,7.0,100.47
+usp000hchk,7.2,mwc,3.748,96.018,38.0,1273384781620,Yala::Yala::Thailand,Yala,2.7,1,662.0,6.55,101.29
+usp000hdwb,7.5,mwc,7.881,91.936,35.0,1276370810460,Kathu::Phuket::Thailand,Kathu,1.0,1,708.0,7.92,98.35
+usp000hk1h,5.1,mb,12.788,92.563,24.7,1283386599460,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,866.0,13.73,100.5
+usp000huzp,4.6,mb,18.915,101.727,10.0,1298476396270,Khon Kaen::Khon Kaen::Thailand,Khon Kaen,2.0,1,300.0,16.42,102.83
+usp000huzp,4.6,mb,18.915,101.727,10.0,1298476396270,Nan::Nan::Thailand,Nan,2.0,1,102.0,18.78,100.77
+usp000huzp,4.6,mb,18.915,101.727,10.0,1298476396270,Nong Khai::Nong Khai::Thailand,Nong Khai,3.5,4,157.0,17.88,102.74
+usp000huzp,4.6,mb,18.915,101.727,10.0,1298476396270,Tha Bo::Nong Khai::Thailand,Tha Bo,4.8,1,148.0,17.85,102.58
+usp000huzp,4.6,mb,18.915,101.727,10.0,1298476396270,Pong::Phayao::Thailand,Pong,3.1,1,155.0,19.17,100.28
+usp000huzp,4.6,mb,18.915,101.727,10.0,1298476396270,Nam Som::Udon Thani::Thailand,Nam Som,4.3,3,136.0,17.77,102.19
+usp000huzp,4.6,mb,18.915,101.727,10.0,1298476396270,Udon Thani::Udon Thani::Thailand,Udon Thani,2.5,7,201.0,17.41,102.79
+usp000hvm3,5.5,mwc,24.727,97.957,10.0,1299733093750,Chaam::Phetchaburi::Thailand,Chaam,2.0,1,1337.0,12.8,99.97
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Amnat Charoen::Amnat Charoen::Thailand,Amnat Charoen,3.8,5,737.0,15.86,104.63
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Bangkok::Bangkok::Thailand,Bangkok,3.0,158,773.0,13.73,100.5
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.7,186,226.0,18.8,98.98
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Chomthong::Chiang Mai::Thailand,Chomthong,4.1,1,277.0,18.43,98.68
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Hangdong::Chiang Mai::Thailand,Hangdong,3.5,24,240.0,18.69,98.92
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Maeai::Chiang Mai::Thailand,Maeai,3.8,2,90.0,20.03,99.32
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Maerim::Chiang Mai::Thailand,Maerim,4.0,6,217.0,18.91,98.94
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Maetaeng::Chiang Mai::Thailand,Maetaeng,4.6,2,196.0,19.12,98.95
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,3.2,7,227.0,18.74,99.12
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Sanpatong::Chiang Mai::Thailand,Sanpatong,3.6,6,248.0,18.62,98.89
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Sansai::Chiang Mai::Thailand,Sansai,3.6,10,219.0,18.85,99.05
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Chiang Khong::Chiang Rai::Thailand,Chiang Khong,2.2,1,75.0,20.28,100.4
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,4.2,39,86.0,19.91,99.83
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Mae Chan::Chiang Rai::Thailand,Mae Chan,4.2,5,60.0,20.15,99.87
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Mae Sai::Chiang Rai::Thailand,Mae Sai,5.7,8,30.0,20.43,99.88
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Pa Daet::Chiang Rai::Thailand,Pa Daet,4.1,2,132.0,19.5,100.0
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Bang Lamung::Chon Buri::Thailand,Bang Lamung,1.0,1,861.0,12.97,100.9
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Pattaya::Chon Buri::Thailand,Pattaya,1.0,1,867.0,12.92,100.9
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Bo Phloi::Kanchanaburi::Thailand,Bo Phloi,2.7,1,705.0,14.32,99.52
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Lampang::Lampang::Thailand,Lampang,3.7,12,267.0,18.29,99.48
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Lamphun::Lamphun::Thailand,Lamphun,3.5,4,254.0,18.5,99.08
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,3.7,7,252.0,19.27,97.93
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Chiang Klang::Nan::Thailand,Chiang Klang,2.2,1,188.0,19.3,100.87
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Nan::Nan::Thailand,Nan,4.1,4,233.0,18.78,100.77
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Nonthaburi::Nonthaburi::Thailand,Nonthaburi,3.8,3,763.0,13.8,100.18
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Pak Kret::Nonthaburi::Thailand,Pak Kret,2.0,5,754.0,13.9,100.51
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Chiang Kham::Phayao::Thailand,Chiang Kham,3.1,1,137.0,19.53,100.3
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Phayao::Phayao::Thailand,Phayao,3.7,4,168.0,19.17,99.91
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Pong::Phayao::Thailand,Pong,4.5,2,174.0,19.17,100.28
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Phitsanulok::Phitsanulok::Thailand,Phitsanulok,2.0,1,430.0,16.82,100.27
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Rong Kwang::Phrae::Thailand,Rong Kwang,4.1,2,264.0,18.35,100.32
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Sukhothai::Sukhothai::Thailand,Sukhothai,2.6,1,407.0,17.01,99.75
+usp000hyfx,6.9,mww,20.687,99.822,8.0,1300974912010,Udon Thani::Udon Thani::Thailand,Udon Thani,3.0,5,478.0,17.41,102.79
+usp000hyhd,5.0,mwc,20.712,99.879,10.0,1301012559300,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,3,231.0,18.8,98.98
+usp000hyhd,5.0,mwc,20.712,99.879,10.0,1301012559300,Phrae::Phrae::Thailand,Phrae,2.0,1,285.0,18.15,100.16
+usp000j7nn,6.7,mww,2.965,97.893,91.0,1315245311220,Bangkok::Bangkok::Thailand,Bangkok,2.0,2,1228.0,13.73,100.5
+usp000j7nn,6.7,mww,2.965,97.893,91.0,1315245311220,Kathu::Phuket::Thailand,Kathu,2.7,4,558.0,7.92,98.35
+usp000j7nn,6.7,mww,2.965,97.893,91.0,1315245311220,Hat Yai::Songkhla::Thailand,Hat Yai,2.9,5,536.0,7.0,100.47
+usp000j8t0,5.2,mb,12.969,95.838,46.8,1317442939210,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,518.0,13.73,100.5
+usp000jdar,7.2,mww,2.433,93.21,19.0,1326220619080,Bangkok::Bangkok::Thailand,Bangkok,2.0,2,1485.0,13.73,100.5
+usp000jdar,7.2,mww,2.433,93.21,19.0,1326220619080,Phuket::Phuket::Thailand,Phuket,2.0,1,831.0,7.88,98.38
+usp000jftd,5.1,mb,4.197,97.062,46.1,1330930530780,Kathu::Phuket::Thailand,Kathu,2.7,2,442.0,7.92,98.35
+usp000jftd,5.1,mb,4.197,97.062,46.1,1330930530780,Phuket::Phuket::Thailand,Phuket,2.8,3,439.0,7.88,98.38
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Amnat Charoen::Amnat Charoen::Thailand,Amnat Charoen,4.6,1,1964.0,15.86,104.63
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Bangkok::Bangkok::Thailand,Bangkok,2.6,67,1504.0,13.73,100.5
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,1,1933.0,18.8,98.98
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Ao Luk::Krabi::Thailand,Ao Luk,3.3,1,917.0,8.38,98.72
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Krabi::Krabi::Thailand,Krabi,3.3,7,906.0,8.05,98.91
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Nakhon Si Thammarat::Nakhon Si Thammarat::Thailand,Nakhon Si Thammarat,2.5,1,1018.0,8.4,99.97
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Pak Phanang::Nakhon Si Thammarat::Thailand,Pak Phanang,2.0,1,1035.0,8.35,100.21
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Pak Kret::Nonthaburi::Thailand,Pak Kret,2.7,2,1520.0,13.9,100.51
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Phangnga::Phangnga::Thailand,Phangnga,2.5,3,908.0,8.45,98.53
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Ayutthaya::Phra Nakhon Si Ayutthaya::Thailand,Ayutthaya,1.0,1,1566.0,14.36,100.57
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Kathu::Phuket::Thailand,Kathu,3.0,36,852.0,7.92,98.35
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Phuket::Phuket::Thailand,Phuket,3.1,64,851.0,7.88,98.38
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.6,2,1500.0,13.67,100.53
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Nong Khae::Saraburi::Thailand,Nong Khae,2.0,1,1581.0,14.33,100.87
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Hat Yai::Songkhla::Thailand,Hat Yai,3.2,17,970.0,7.0,100.47
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Sadao::Songkhla::Thailand,Sadao,4.0,1,946.0,6.63,100.43
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Songkhla::Songkhla::Thailand,Songkhla,2.5,3,991.0,7.21,100.56
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Ko Samui::Surat Thani::Thailand,Ko Samui,2.2,1,1101.0,9.53,99.93
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Surat Thani::Surat Thani::Thailand,Surat Thani,2.8,3,1024.0,9.14,99.33
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Trat::Trat::Thailand,Trat,2.2,1,1511.0,12.23,102.5
+official20120411083836720_20,8.6,mw,2.327,93.063,20.0,1334133516720,Yala::Yala::Thailand,Yala,4.6,1,1025.0,6.55,101.29
+usp000jhjb,8.2,mwc,0.802,92.463,25.1,1334140990850,Bangkok::Bangkok::Thailand,Bangkok,2.0,2,1686.0,13.73,100.5
+usp000jhjb,8.2,mwc,0.802,92.463,25.1,1334140990850,Krabi::Krabi::Thailand,Krabi,9.1,1,1077.0,8.05,98.91
+usp000jhjb,8.2,mwc,0.802,92.463,25.1,1334140990850,Nakhon Si Thammarat::Nakhon Si Thammarat::Thailand,Nakhon Si Thammarat,3.4,1,1186.0,8.4,99.97
+usp000jhjb,8.2,mwc,0.802,92.463,25.1,1334140990850,Kathu::Phuket::Thailand,Kathu,2.3,3,1026.0,7.92,98.35
+usp000jhjb,8.2,mwc,0.802,92.463,25.1,1334140990850,Phuket::Phuket::Thailand,Phuket,2.2,5,1025.0,7.88,98.38
+usp000jj2a,3.9,ml,8.097,98.481,10.0,1334569466560,Kathu::Phuket::Thailand,Kathu,3.7,23,32.0,7.92,98.35
+usp000jj2a,3.9,ml,8.097,98.481,10.0,1334569466560,Phuket::Phuket::Thailand,Phuket,3.4,34,33.0,7.88,98.38
+usp000jj2b,5.3,mwc,0.798,92.417,23.5,1334569587660,Kathu::Phuket::Thailand,Kathu,2.9,18,1023.0,7.92,98.35
+usp000jj2b,5.3,mwc,0.798,92.417,23.5,1334569587660,Phuket::Phuket::Thailand,Phuket,2.8,52,1022.0,7.88,98.38
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Bangkok::Bangkok::Thailand,Bangkok,2.7,59,1136.0,13.73,100.5
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.0,17,566.0,18.8,98.98
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Hangdong::Chiang Mai::Thailand,Hangdong,2.2,8,572.0,18.69,98.92
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Maeai::Chiang Mai::Thailand,Maeai,2.7,1,485.0,20.03,99.32
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Sansai::Chiang Mai::Thailand,Sansai,2.2,2,565.0,18.85,99.05
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,4.3,3,465.0,19.27,97.93
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Bang Kruai::Nonthaburi::Thailand,Bang Kruai,3.1,3,1126.0,13.81,100.45
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Pak Kret::Nonthaburi::Thailand,Pak Kret,2.7,3,1120.0,13.9,100.51
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Bang Sai::Phra Nakhon Si Ayutthaya::Thailand,Bang Sai,4.1,1,1088.0,14.21,100.5
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.7,6,1144.0,13.67,100.53
+usp000jvbq,6.8,mww,23.005,95.885,13.7,1352596358870,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,3.1,1,1153.0,13.61,100.61
+usp000jvbv,4.9,mb,22.679,95.839,13.7,1352597547630,Bangkok::Bangkok::Thailand,Bangkok,2.0,2,1107.0,13.73,100.5
+usp000jvbv,4.9,mb,22.679,95.839,13.7,1352597547630,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.6,3,539.0,18.8,98.98
+usp000jvbv,4.9,mb,22.679,95.839,13.7,1352597547630,Hangdong::Chiang Mai::Thailand,Hangdong,2.6,1,546.0,18.69,98.92
+usp000jvbv,4.9,mb,22.679,95.839,13.7,1352597547630,Nonthaburi::Nonthaburi::Thailand,Nonthaburi,1.0,1,1085.0,13.8,100.18
+usp000jvcs,5.8,mww,22.72,95.832,6.0,1352631281350,Bangkok::Bangkok::Thailand,Bangkok,2.0,3,1110.0,13.73,100.5
+usp000jvcs,5.8,mww,22.72,95.832,6.0,1352631281350,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.2,1,543.0,18.8,98.98
+usp000jvcs,5.8,mww,22.72,95.832,6.0,1352631281350,Hangdong::Chiang Mai::Thailand,Hangdong,2.5,1,550.0,18.69,98.92
+usp000jvcs,5.8,mww,22.72,95.832,6.0,1352631281350,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.0,1,1118.0,13.67,100.53
+usb000i4re,6.1,mww,4.645,96.665,13.0,1372750622610,Phuket::Phuket::Thailand,Phuket,2.7,2,405.0,7.88,98.38
+usb000iftx,5.3,mb,5.375,97.969,29.3,1374018074390,Krabi::Krabi::Thailand,Krabi,2.7,1,314.0,8.05,98.91
+usb000iftx,5.3,mb,5.375,97.969,29.3,1374018074390,Kathu::Phuket::Thailand,Kathu,2.7,4,286.0,7.92,98.35
+usb000iftx,5.3,mb,5.375,97.969,29.3,1374018074390,Phuket::Phuket::Thailand,Phuket,2.5,7,282.0,7.88,98.38
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Bangkok::Bangkok::Thailand,Bangkok,3.2,14,661.0,13.73,100.5
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,4.6,17,119.0,18.8,98.98
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Chomthong::Chiang Mai::Thailand,Chomthong,3.1,2,171.0,18.43,98.68
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Hangdong::Chiang Mai::Thailand,Hangdong,4.6,7,132.0,18.69,98.92
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Maerim::Chiang Mai::Thailand,Maerim,3.3,3,112.0,18.91,98.94
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Maetaeng::Chiang Mai::Thailand,Maetaeng,4.1,1,96.0,19.12,98.95
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,2.9,2,116.0,18.74,99.12
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Sansai::Chiang Mai::Thailand,Sansai,4.1,3,110.0,18.85,99.05
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Chiang Khong::Chiang Rai::Thailand,Chiang Khong,3.8,1,103.0,20.28,100.4
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,6.1,9,33.0,19.91,99.83
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Mae Chan::Chiang Rai::Thailand,Mae Chan,4.2,2,58.0,20.15,99.87
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Mae Sai::Chiang Rai::Thailand,Mae Sai,3.9,1,88.0,20.43,99.88
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Kamphaeng Phet::Kamphaeng Phet::Thailand,Kamphaeng Phet,2.0,1,352.0,16.47,99.52
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Lampang::Lampang::Thailand,Lampang,4.3,5,152.0,18.29,99.48
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Pa Sang::Lamphun::Thailand,Pa Sang,2.0,2,147.0,18.52,98.94
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,1.0,1,187.0,19.27,97.93
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Bang Kruai::Nonthaburi::Thailand,Bang Kruai,3.8,1,652.0,13.81,100.45
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Pak Kret::Nonthaburi::Thailand,Pak Kret,3.4,1,643.0,13.9,100.51
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Dok Kham Tai::Phayao::Thailand,Dok Kham Tai,6.4,1,63.0,19.17,99.98
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Phayao::Phayao::Thailand,Phayao,5.4,1,59.0,19.17,99.91
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Phrae::Phrae::Thailand,Phrae,3.1,1,174.0,18.15,100.16
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Rong Kwang::Phrae::Thailand,Rong Kwang,3.4,1,160.0,18.35,100.32
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.1,4,668.0,13.67,100.53
+usb000qack,6.1,mww,19.6557,99.6696,6.0,1399288123420,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,2.0,1,676.0,13.61,100.61
+usb000qb7j,4.4,mb,19.7666,99.6121,10.0,1399324623470,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.1,2,126.0,18.8,98.98
+usb000qb7j,4.4,mb,19.7666,99.6121,10.0,1399324623470,Maetaeng::Chiang Mai::Thailand,Maetaeng,2.0,1,100.0,19.12,98.95
+usb000qbj8,5.0,mb,19.6185,99.4702,10.0,1399337900540,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.8,4,104.0,18.8,98.98
+usb000qbj8,5.0,mb,19.6185,99.4702,10.0,1399337900540,Maerim::Chiang Mai::Thailand,Maerim,3.4,1,96.0,18.91,98.94
+usb000qbj8,5.0,mb,19.6185,99.4702,10.0,1399337900540,Sansai::Chiang Mai::Thailand,Sansai,2.2,1,96.0,18.85,99.05
+usb000qbj8,5.0,mb,19.6185,99.4702,10.0,1399337900540,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.1,2,50.0,19.91,99.83
+usb000qbj8,5.0,mb,19.6185,99.4702,10.0,1399337900540,Mae Chan::Chiang Rai::Thailand,Mae Chan,3.4,1,72.0,20.15,99.87
+usb000qbj8,5.0,mb,19.6185,99.4702,10.0,1399337900540,Phrae::Phrae::Thailand,Phrae,2.2,1,178.0,18.15,100.16
+usb000qc0x,4.6,mb,19.6832,99.5271,10.0,1399387814150,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,2,113.0,18.8,98.98
+usb000qc0x,4.6,mb,19.6832,99.5271,10.0,1399387814150,Samut Sakhon::Samut Sakhon::Thailand,Samut Sakhon,2.7,1,684.0,13.54,100.28
+usb000rzmg,6.2,mww,27.1891,103.4086,12.0,1407054613570,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,1520.0,13.73,100.5
+usb000rzmg,6.2,mww,27.1891,103.4086,12.0,1407054613570,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,1,1034.0,18.8,98.98
+usb000s5wt,4.5,mb,19.5784,99.4487,20.44,1408919568420,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.2,1,101.0,18.8,98.98
+usb000s5wt,4.5,mb,19.5784,99.4487,20.44,1408919568420,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,4.3,1,101.0,18.8,98.98
+usb000s5wt,4.5,mb,19.5784,99.4487,20.44,1408919568420,Sansai::Chiang Mai::Thailand,Sansai,2.0,1,93.0,18.85,99.05
+usb000sqt8,4.7,mb,5.2888,97.9817,59.65,1414368169630,Kathu::Phuket::Thailand,Kathu,2.0,2,299.0,7.92,98.35
+usb000sqt8,4.7,mb,5.2888,97.9817,59.65,1414368169630,Phuket::Phuket::Thailand,Phuket,2.2,2,295.0,7.88,98.38
+usc000t48q,5.6,mww,23.3577,100.533,10.0,1417861201520,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,2,529.0,18.8,98.98
+usc000t48q,5.6,mww,23.3577,100.533,10.0,1417861201520,Chomthong::Chiang Mai::Thailand,Chomthong,2.2,1,578.0,18.43,98.68
+us10001qhn,3.4,ml,7.7449,98.7375,10.0,1427236342380,Phuket::Phuket::Thailand,Phuket,3.9,5,43.0,7.88,98.38
+us20002c1t,4.2,mb,7.8492,98.7288,10.0,1430860686940,Krabi::Krabi::Thailand,Krabi,2.6,6,31.0,8.05,98.91
+us20002c1t,4.2,mb,7.8492,98.7288,10.0,1430860686940,Phangnga::Phangnga::Thailand,Phangnga,2.7,1,70.0,8.45,98.53
+us20002c1t,4.2,mb,7.8492,98.7288,10.0,1430860686940,Kathu::Phuket::Thailand,Kathu,2.9,11,43.0,7.92,98.35
+us20002c1t,4.2,mb,7.8492,98.7288,10.0,1430860686940,Phuket::Phuket::Thailand,Phuket,3.3,33,39.0,7.88,98.38
+us20002cdv,3.8,mb,7.9373,98.5931,14.5,1430933414660,Krabi::Krabi::Thailand,Krabi,3.3,10,39.0,8.05,98.91
+us20002cdv,3.8,mb,7.9373,98.5931,14.5,1430933414660,Phangnga::Phangnga::Thailand,Phangnga,3.1,1,58.0,8.45,98.53
+us20002cdv,3.8,mb,7.9373,98.5931,14.5,1430933414660,Kathu::Phuket::Thailand,Kathu,2.5,4,30.0,7.92,98.35
+us20002cdv,3.8,mb,7.9373,98.5931,14.5,1430933414660,Phuket::Phuket::Thailand,Phuket,2.8,9,28.0,7.88,98.38
+us100033ab,4.7,mb,4.3967,95.4397,27.45,1439945204110,Phuket::Phuket::Thailand,Phuket,2.0,1,505.0,7.88,98.38
+us10003vry,6.6,mww,6.8431,94.648,10.0,1447001222160,Phuket::Phuket::Thailand,Phuket,2.0,1,427.0,7.88,98.38
+us10004uwq,4.5,mb,21.6851,101.3736,15.79,1457176826100,Mae Sai::Chiang Rai::Thailand,Mae Sai,2.0,1,208.0,20.43,99.88
+us10006fx8,5.0,mwr,23.8972,94.6983,101.74,1471918272810,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.7,1,725.0,18.8,98.98
+us10006fx8,5.0,mwr,23.8972,94.6983,101.74,1471918272810,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,1.0,1,697.0,19.91,99.83
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Bangkok::Bangkok::Thailand,Bangkok,3.1,25,1018.0,13.73,100.5
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.9,13,524.0,18.8,98.98
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Hangdong::Chiang Mai::Thailand,Hangdong,2.6,2,525.0,18.69,98.92
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,2.0,1,540.0,18.74,99.12
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Sansai::Chiang Mai::Thailand,Sansai,2.9,1,528.0,18.85,99.05
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,3.8,1,404.0,19.27,97.93
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Pak Kret::Nonthaburi::Thailand,Pak Kret,2.6,5,1004.0,13.9,100.51
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.8,6,1025.0,13.67,100.53
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,1.0,1,1036.0,13.61,100.61
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Samut Sakhon::Samut Sakhon::Thailand,Samut Sakhon,4.1,1,1021.0,13.54,100.28
+us10006gbf,6.8,mww,20.9228,94.569,82.0,1472034894580,Songkhla::Songkhla::Thailand,Songkhla,1.0,1,1651.0,7.21,100.56
+us10007ghm,6.5,mww,5.2834,96.1678,13.0,1481061813390,Bangkok::Bangkok::Thailand,Bangkok,2.2,2,1048.0,13.73,100.5
+us10007ghm,6.5,mww,5.2834,96.1678,13.0,1481061813390,Krabi::Krabi::Thailand,Krabi,2.9,2,430.0,8.05,98.91
+us10007ghm,6.5,mww,5.2834,96.1678,13.0,1481061813390,Phangnga::Phangnga::Thailand,Phangnga,2.2,2,436.0,8.45,98.53
+us10007ghm,6.5,mww,5.2834,96.1678,13.0,1481061813390,Kathu::Phuket::Thailand,Kathu,3.3,15,378.0,7.92,98.35
+us10007ghm,6.5,mww,5.2834,96.1678,13.0,1481061813390,Phuket::Phuket::Thailand,Phuket,2.7,10,377.0,7.88,98.38
+us10007ghm,6.5,mww,5.2834,96.1678,13.0,1481061813390,Kantang::Trang::Thailand,Kantang,2.0,1,439.0,7.42,99.52
+us10007ghm,6.5,mww,5.2834,96.1678,13.0,1481061813390,Trang::Trang::Thailand,Trang,2.9,1,456.0,7.56,99.61
+us20007zvy,4.9,mb,5.3016,96.2091,17.94,1481424635690,Phuket::Phuket::Thailand,Phuket,3.1,2,362.0,7.88,98.38
+us20008k1z,5.4,mww,5.2964,96.066,13.0,1487188027380,Krabi::Krabi::Thailand,Krabi,2.0,1,438.0,8.05,98.91
+us100088mq,5.1,mb,17.3991,95.9998,10.0,1489414746670,Maeai::Chiang Mai::Thailand,Maeai,3.1,1,455.0,20.03,99.32
+us10008ijh,4.7,mb,20.7105,100.1532,9.87,1492506790100,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,1,93.0,19.91,99.83
+us10008ijh,4.7,mb,20.7105,100.1532,9.87,1492506790100,Mae Chan::Chiang Rai::Thailand,Mae Chan,3.4,3,67.0,20.15,99.87
+us10008ijh,4.7,mb,20.7105,100.1532,9.87,1492506790100,Mae Sai::Chiang Rai::Thailand,Mae Sai,3.8,1,40.0,20.43,99.88
+us2000c3tv,4.6,mb,2.4004,98.9469,133.85,1513172251090,Kathu::Phuket::Thailand,Kathu,2.7,1,628.0,7.92,98.35
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Bangkok::Bangkok::Thailand,Bangkok,2.4,5,697.0,13.73,100.5
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.2,46,310.0,18.8,98.98
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Maetaeng::Chiang Mai::Thailand,Maetaeng,3.4,1,314.0,19.12,98.95
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,2.2,1,324.0,18.74,99.12
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Sansai::Chiang Mai::Thailand,Sansai,2.7,2,318.0,18.85,99.05
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Sattahip::Chon Buri::Thailand,Sattahip,1.0,1,815.0,12.67,100.9
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Yang Talat::Kalasin::Thailand,Yang Talat,1.0,1,805.0,16.4,103.38
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Lampang::Lampang::Thailand,Lampang,1.0,1,359.0,18.29,99.48
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Pa Sang::Lamphun::Thailand,Pa Sang,2.7,1,303.0,18.52,98.94
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Lat Yao::Nakhon Sawan::Thailand,Lat Yao,1.0,1,490.0,15.75,99.8
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Pak Kret::Nonthaburi::Thailand,Pak Kret,1.0,1,684.0,13.9,100.51
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Phetchabun::Phetchabun::Thailand,Phetchabun,1.0,2,581.0,16.42,101.16
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Phon Thong::Roi Et::Thailand,Phon Thong,1.0,1,870.0,16.3,103.98
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Selaphum::Roi Et::Thailand,Selaphum,2.0,1,876.0,16.03,103.95
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Mae Ramat::Tak::Thailand,Mae Ramat,2.7,1,301.0,16.97,98.52
+us2000cifa,6.0,mww,18.3719,96.0717,9.0,1515695184240,Mae Sot::Tak::Thailand,Mae Sot,2.0,3,321.0,16.71,98.57
+us2000cig2,4.9,mww,18.4183,96.0697,10.0,1515696239650,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.4,1,310.0,18.8,98.98
+us1000cfci,4.6,mb,20.5966,99.5264,10.0,1517671750640,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.8,8,82.0,19.91,99.83
+us1000cfci,4.6,mb,20.5966,99.5264,10.0,1517671750640,Mae Chan::Chiang Rai::Thailand,Mae Chan,3.3,2,61.0,20.15,99.87
+us1000cfci,4.6,mb,20.5966,99.5264,10.0,1517671750640,Mae Sai::Chiang Rai::Thailand,Mae Sai,2.0,1,42.0,20.43,99.88
+us1000cfci,4.6,mb,20.5966,99.5264,10.0,1517671750640,Pa Daet::Chiang Rai::Thailand,Pa Daet,2.7,1,131.0,19.5,100.0
+us1000etva,5.0,mww,18.2751,96.0703,10.0,1529241690230,Maerim::Chiang Mai::Thailand,Maerim,2.0,1,309.0,18.91,98.94
+us1000etva,5.0,mww,18.2751,96.0703,10.0,1529241690230,Lampang::Lampang::Thailand,Lampang,2.2,1,359.0,18.29,99.48
+us2000ft1f,4.6,mb,20.2592,97.9109,10.0,1530457837390,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,1.0,1,109.0,19.27,97.93
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,612.0,13.73,100.5
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.8,23,80.0,18.8,98.98
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Hangdong::Chiang Mai::Thailand,Hangdong,2.0,3,92.0,18.69,98.92
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Maerim::Chiang Mai::Thailand,Maerim,2.2,3,78.0,18.91,98.94
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,2.0,1,73.0,18.74,99.12
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Sanpatong::Chiang Mai::Thailand,Sanpatong,2.0,1,99.0,18.62,98.89
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Sansai::Chiang Mai::Thailand,Sansai,2.0,3,71.0,18.85,99.05
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,2,82.0,19.91,99.83
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Lampang::Lampang::Thailand,Lampang,1.0,1,101.0,18.29,99.48
+us2000jkje,4.6,mb,19.1948,99.615,10.0,1550653542270,Phayao::Phayao::Thailand,Phayao,5.8,3,32.0,19.17,99.91
+us1000jkna,4.9,mww,13.9762,93.1001,10.0,1553340841596,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,800.0,13.73,100.5
+us2000k69x,5.2,mb,11.1534,95.1558,10.0,1553742493487,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,647.0,13.73,100.5
+us2000k8cy,5.1,mww,7.538,94.3882,10.0,1554097958792,Kathu::Phuket::Thailand,Kathu,1.0,1,440.0,7.92,98.35
+us60003qg7,5.6,mww,13.8921,92.9916,29.0,1558485574963,Kathu::Phuket::Thailand,Kathu,2.0,1,883.0,7.92,98.35
+us70005alm,5.4,mww,22.7414,95.522,10.0,1567264161828,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,1127.0,13.73,100.5
+us70005alm,5.4,mww,22.7414,95.522,10.0,1567264161828,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.8,1,565.0,18.8,98.98
+us70005w67,3.8,ml,18.8969,99.2514,10.0,1571409986456,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,1,32.0,18.8,98.98
+us70005w67,3.8,ml,18.8969,99.2514,10.0,1571409986456,Sansai::Chiang Mai::Thailand,Sansai,2.5,2,24.0,18.85,99.05
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Bangkok::Bangkok::Thailand,Bangkok,3.4,31,637.0,13.73,100.5
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.7,24,249.0,18.8,98.98
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Hangdong::Chiang Mai::Thailand,Hangdong,2.0,2,259.0,18.69,98.92
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Maerim::Chiang Mai::Thailand,Maerim,2.0,1,250.0,18.91,98.94
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Sansai::Chiang Mai::Thailand,Sansai,2.9,1,241.0,18.85,99.05
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Chiang Khong::Chiang Rai::Thailand,Chiang Khong,3.9,1,128.0,20.28,100.4
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.6,7,158.0,19.91,99.83
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Mae Chan::Chiang Rai::Thailand,Mae Chan,3.1,1,164.0,20.15,99.87
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Pa Daet::Chiang Rai::Thailand,Pa Daet,3.8,1,132.0,19.5,100.0
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Si Racha::Chon Buri::Thailand,Si Racha,3.4,1,696.0,13.16,100.93
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Khon Kaen::Khon Kaen::Thailand,Khon Kaen,3.1,1,374.0,16.42,102.83
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Lampang::Lampang::Thailand,Lampang,2.0,2,226.0,18.29,99.48
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Wang Saphung::Loei::Thailand,Wang Saphung,3.1,1,243.0,17.3,101.77
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Chiang Klang::Nan::Thailand,Chiang Klang,2.7,1,44.0,19.3,100.87
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Nan::Nan::Thailand,Nan,5.8,2,90.0,18.78,100.77
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Si Chiang Mai::Nong Khai::Thailand,Si Chiang Mai,3.8,1,216.0,17.96,102.59
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Bang Kruai::Nonthaburi::Thailand,Bang Kruai,3.9,1,629.0,13.81,100.45
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Pak Kret::Nonthaburi::Thailand,Pak Kret,3.2,3,618.0,13.9,100.51
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Lam Luk Ka::Pathum Thani::Thailand,Lam Luk Ka,3.1,1,612.0,13.93,100.75
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Chiang Kham::Phayao::Thailand,Chiang Kham,3.4,1,101.0,19.53,100.3
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Rong Kwang::Phrae::Thailand,Rong Kwang,2.7,1,156.0,18.35,100.32
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,3.3,4,643.0,13.67,100.53
+us70006anm,5.7,mww,19.4452,101.2534,10.0,1574283837835,Udon Thani::Udon Thani::Thailand,Udon Thani,3.3,4,277.0,17.41,102.79
+us70006any,4.5,mb,19.3945,101.3767,10.0,1574284764395,Bangkok::Bangkok::Thailand,Bangkok,3.3,3,633.0,13.73,100.5
+us70006any,4.5,mb,19.3945,101.3767,10.0,1574284764395,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.7,6,260.0,18.8,98.98
+us70006any,4.5,mb,19.3945,101.3767,10.0,1574284764395,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.4,1,172.0,19.91,99.83
+us70006any,4.5,mb,19.3945,101.3767,10.0,1574284764395,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.7,1,178.0,20.15,99.87
+us70006any,4.5,mb,19.3945,101.3767,10.0,1574284764395,Nan::Nan::Thailand,Nan,2.2,3,93.0,18.78,100.77
+us70006any,4.5,mb,19.3945,101.3767,10.0,1574284764395,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,3.4,2,639.0,13.67,100.53
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Bangkok::Bangkok::Thailand,Bangkok,3.4,137,639.0,13.73,100.5
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Chaiyaphum::Chaiyaphum::Thailand,Chaiyaphum,3.1,1,410.0,15.8,102.04
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.8,36,260.0,18.8,98.98
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Hangdong::Chiang Mai::Thailand,Hangdong,2.0,2,270.0,18.69,98.92
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Maerim::Chiang Mai::Thailand,Maerim,2.2,1,261.0,18.91,98.94
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,2.1,5,248.0,18.74,99.12
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Sansai::Chiang Mai::Thailand,Sansai,2.1,2,251.0,18.85,99.05
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Chiang Khong::Chiang Rai::Thailand,Chiang Khong,2.6,4,136.0,20.28,100.4
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.9,12,168.0,19.91,99.83
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Mae Chan::Chiang Rai::Thailand,Mae Chan,3.0,8,174.0,20.15,99.87
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Mae Sai::Chiang Rai::Thailand,Mae Sai,2.2,1,188.0,20.43,99.88
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Pa Daet::Chiang Rai::Thailand,Pa Daet,3.8,1,142.0,19.5,100.0
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Khanu Woralaksaburi::Kamphaeng Phet::Thailand,Khanu Woralaksaburi,2.9,1,406.0,16.07,99.87
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Khon Kaen::Khon Kaen::Thailand,Khon Kaen,3.6,6,370.0,16.42,102.83
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Lampang::Lampang::Thailand,Lampang,2.7,2,236.0,18.29,99.48
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Mae Tha::Lamphun::Thailand,Mae Tha,3.8,1,258.0,18.46,99.14
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Loei::Loei::Thailand,Loei,2.7,2,221.0,17.49,101.73
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Nakhon Ratchasima::Nakhon Ratchasima::Thailand,Nakhon Ratchasima,3.3,1,499.0,15.0,102.1
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Chiang Klang::Nan::Thailand,Chiang Klang,3.4,4,54.0,19.3,100.87
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Nan::Nan::Thailand,Nan,3.8,3,97.0,18.78,100.77
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Na Klang::Nong Bua Lam Phu::Thailand,Na Klang,2.2,1,252.0,17.31,102.18
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Si Chiang Mai::Nong Khai::Thailand,Si Chiang Mai,4.9,3,210.0,17.96,102.59
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Bang Kruai::Nonthaburi::Thailand,Bang Kruai,3.1,2,632.0,13.81,100.45
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Pak Kret::Nonthaburi::Thailand,Pak Kret,3.1,9,621.0,13.9,100.51
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Thanyaburi::Pathum Thani::Thailand,Thanyaburi,2.5,2,605.0,14.02,100.71
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Chiang Kham::Phayao::Thailand,Chiang Kham,2.7,1,111.0,19.53,100.3
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Pong::Phayao::Thailand,Pong,3.4,1,117.0,19.17,100.28
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Phetchabun::Phetchabun::Thailand,Phetchabun,2.5,2,336.0,16.42,101.16
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Phitsanulok::Phitsanulok::Thailand,Phitsanulok,2.6,2,313.0,16.82,100.27
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Phrae::Phrae::Thailand,Phrae,2.7,1,191.0,18.15,100.16
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Bang Sao Thong::Samut Prakan::Thailand,Bang Sao Thong,1.0,1,642.0,13.67,100.82
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,3.2,20,646.0,13.67,100.53
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,3.4,4,651.0,13.61,100.61
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Ubon Ratchathani::Ubon Ratchathani::Thailand,Ubon Ratchathani,3.1,1,594.0,15.25,104.83
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Kumphawapi::Udon Thani::Thailand,Kumphawapi,3.8,1,308.0,17.13,102.97
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Udon Thani::Udon Thani::Thailand,Udon Thani,2.9,9,272.0,17.41,102.79
+us70006ara,6.2,mww,19.4533,101.3558,10.0,1574293843955,Uttaradit::Uttaradit::Thailand,Uttaradit,2.7,1,241.0,17.63,100.1
+us70006arz,4.4,mb,19.3955,101.3634,14.98,1574298883695,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.7,1,259.0,18.8,98.98
+us70006e6m,5.2,mww,23.1791,96.0354,10.0,1574951953828,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.4,1,570.0,18.8,98.98
+us70006ea0,4.4,mb,19.5821,101.261,10.0,1574985027570,Bangkok::Bangkok::Thailand,Bangkok,3.4,1,651.0,13.73,100.5
+us70008f3x,4.5,mb,7.969,92.5087,10.0,1585062031941,Bangkok::Bangkok::Thailand,Bangkok,3.1,1,1081.0,13.73,100.5
+us6000c04a,4.4,mb,23.3836,94.5477,90.39,1600451619631,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.0,2,662.0,20.15,99.87
+us6000c688,4.6,mb,25.643,94.7776,61.51,1602021774378,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,4,822.0,19.91,99.83
+us6000c688,4.6,mb,25.643,94.7776,61.51,1602021774378,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.0,3,804.0,20.15,99.87
+us6000c7ce,5.5,mww,24.6661,93.4997,53.0,1602351480765,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,7,838.0,19.91,99.83
+us6000c7ce,5.5,mww,24.6661,93.4997,53.0,1602351480765,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.0,1,824.0,20.15,99.87
+us6000ccf2,4.4,mb,23.1224,92.2965,44.64,1603509664311,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,1354.0,13.73,100.5
+us6000ccf2,4.4,mb,23.1224,92.2965,44.64,1603509664311,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,1,858.0,19.91,99.83
+us7000cbnb,4.4,mb,28.2351,104.7718,10.0,1604708609654,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,1,1068.0,19.91,99.83
+us7000cekv,5.1,mww,5.7913,95.5619,10.0,1605292387130,Phuket::Phuket::Thailand,Phuket,2.2,1,385.0,7.88,98.38
+us6000depg,4.7,mb,20.9738,97.8148,10.0,1612525667677,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.5,4,269.0,18.8,98.98
+us7000e40a,5.0,mb,6.6176,94.5648,10.0,1621316961978,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,1020.0,13.73,100.5
+us7000eja4,4.7,mb,19.6805,101.1637,10.0,1625640229878,Chiang Klang::Nan::Thailand,Chiang Klang,3.8,1,47.0,19.3,100.87
+us6000f051,5.5,mb,22.8638,95.9967,10.0,1627547967722,Bangkok::Bangkok::Thailand,Bangkok,2.0,4,1117.0,13.73,100.5
+us6000f051,5.5,mb,22.8638,95.9967,10.0,1627547967722,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,2,546.0,18.8,98.98
+us6000f1r4,6.1,mww,8.8809,94.0192,10.0,1627962158345,Phuket::Phuket::Thailand,Phuket,1.0,1,492.0,7.88,98.38
+us7000fpvn,4.3,mb,19.5799,101.3424,15.21,1635534209259,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.1,1,261.0,18.8,98.98
+us7000fpvn,4.3,mb,19.5799,101.3424,15.21,1635534209259,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,4.1,1,160.0,19.91,99.83
+us7000fq7h,4.6,mb,19.5449,101.2571,10.0,1635649495448,Nan::Nan::Thailand,Nan,4.3,1,100.0,18.78,100.77
+us7000fq7h,4.6,mb,19.5449,101.2571,10.0,1635649495448,Nong Khai::Nong Khai::Thailand,Nong Khai,3.4,1,240.0,17.88,102.74
+us7000fqt3,4.7,mb,0.2776,96.6946,10.0,1635847448027,Nong Phai::Phetchabun::Thailand,Nong Phai,2.0,1,1802.0,15.98,101.07
+us7000fx45,6.2,mww,22.8232,93.5061,43.0,1637883941752,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,1.0,1,732.0,19.91,99.83
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Bangkok::Bangkok::Thailand,Bangkok,3.2,4,651.0,13.73,100.5
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.4,5,259.0,18.8,98.98
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.9,2,160.0,19.91,99.83
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Khon Kaen::Khon Kaen::Thailand,Khon Kaen,3.1,1,383.0,16.42,102.83
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Loei::Loei::Thailand,Loei,3.1,1,233.0,17.49,101.73
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Chiang Klang::Nan::Thailand,Chiang Klang,3.9,2,55.0,19.3,100.87
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Nan::Nan::Thailand,Nan,2.0,1,104.0,18.78,100.77
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,2.2,1,662.0,13.61,100.61
+us6000gdng,5.5,mww,19.5613,101.3109,10.0,1639947975047,Udon Thani::Udon Thani::Thailand,Udon Thani,3.4,1,284.0,17.41,102.79
+us6000gf1y,5.7,mww,22.3699,101.6708,9.48,1640353402922,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.1,1,484.0,18.8,98.98
+us6000gf1y,5.7,mww,22.3699,101.6708,9.48,1640353402922,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,4.3,1,332.0,19.91,99.83
+us7000h0zn,4.4,mwr,21.3757,98.0041,10.0,1649549176892,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,4.3,1,250.0,19.91,99.83
+us7000h2lk,4.7,mb,27.94,100.6023,10.0,1650069138081,Maeai::Chiang Mai::Thailand,Maeai,2.0,1,885.0,20.03,99.32
+us7000h2pw,4.6,mb,27.9643,100.8872,10.0,1650125920213,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,1,898.0,19.91,99.83
+us7000h2pw,4.6,mb,27.9643,100.8872,10.0,1650125920213,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.0,2,871.0,20.15,99.87
+us6000hfgp,4.9,mb,13.9992,92.9511,10.0,1650599487747,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.3,1,982.0,19.91,99.83
+us7000h7dz,4.5,mb,26.0674,99.9874,10.0,1651785039270,Mae Sai::Chiang Rai::Thailand,Mae Sai,2.0,1,624.0,20.43,99.88
+us6000hlwe,4.3,mb,21.3045,98.5126,10.0,1652831401775,Maeai::Chiang Mai::Thailand,Maeai,5.8,1,164.0,20.03,99.32
+us6000hlwe,4.3,mb,21.3045,98.5126,10.0,1652831401775,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.0,1,190.0,20.15,99.87
+us7000hft8,4.2,mb,21.1306,99.9038,10.0,1654658790255,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.7,1,109.0,20.15,99.87
+us6000hyji,4.7,mb,21.1319,99.8911,10.0,1656528883331,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.1,1,275.0,18.8,98.98
+us6000hyji,4.7,mb,21.1319,99.8911,10.0,1656528883331,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.5,1,135.0,19.91,99.83
+us6000hyji,4.7,mb,21.1319,99.8911,10.0,1656528883331,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.5,1,109.0,20.15,99.87
+us6000hz6u,4.2,mb,27.1505,89.2837,10.0,1656700193402,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,1891.0,13.73,100.5
+us6000i32w,4.5,mb,24.1883,94.4481,76.459,1657995168028,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.0,1,1331.0,13.67,100.53
+us7000hsfx,4.9,mww,21.1024,99.8624,10.0,1658421609562,Maerim::Chiang Mai::Thailand,Maerim,3.1,1,261.0,18.91,98.94
+us7000hsfx,4.9,mww,21.1024,99.8624,10.0,1658421609562,Mae Sai::Chiang Rai::Thailand,Mae Sai,2.0,1,75.0,20.43,99.88
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.8,21,276.0,18.8,98.98
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Maeai::Chiang Mai::Thailand,Maeai,4.0,3,137.0,20.03,99.32
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Chiang Khong::Chiang Rai::Thailand,Chiang Khong,2.7,1,110.0,20.28,100.4
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.4,9,137.0,19.91,99.83
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Mae Chan::Chiang Rai::Thailand,Mae Chan,3.8,2,110.0,20.15,99.87
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Mae Sai::Chiang Rai::Thailand,Mae Sai,3.6,3,79.0,20.43,99.88
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Khanu Woralaksaburi::Kamphaeng Phet::Thailand,Khanu Woralaksaburi,3.8,1,562.0,16.07,99.87
+us7000hsg4,5.9,mww,21.1504,99.8777,5.0,1658423245226,Ban Pong::Ratchaburi::Thailand,Ban Pong,3.8,1,812.0,13.81,99.87
+us7000hsj0,4.9,mb,21.144,99.9004,10.0,1658442131413,Maeai::Chiang Mai::Thailand,Maeai,2.2,1,138.0,20.03,99.32
+us7000hsj0,4.9,mb,21.144,99.9004,10.0,1658442131413,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.8,1,137.0,19.91,99.83
+us7000hsj0,4.9,mb,21.144,99.9004,10.0,1658442131413,Mae Chan::Chiang Rai::Thailand,Mae Chan,3.8,1,110.0,20.15,99.87
+us6000i769,4.5,mb,21.1847,99.8918,10.0,1659369830639,Maerim::Chiang Mai::Thailand,Maerim,2.2,1,270.0,18.91,98.94
+us7000iaka,6.2,mww,3.8109,96.0514,42.181,1663966378398,Kathu::Phuket::Thailand,Kathu,2.2,1,526.0,7.92,98.35
+us7000iaka,6.2,mww,3.8109,96.0514,42.181,1663966378398,Phuket::Phuket::Thailand,Phuket,2.5,2,524.0,7.88,98.38
+us6000iu1q,4.6,mb,22.8755,95.9272,10.0,1665881533602,Mae Sot::Tak::Thailand,Mae Sot,2.0,1,736.0,16.71,98.57
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Satuk::Buri Ram::Thailand,Satuk,2.7,1,591.0,15.3,103.3
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.5,78,16.0,18.8,98.98
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Hangdong::Chiang Mai::Thailand,Hangdong,3.4,9,27.0,18.69,98.92
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Maerim::Chiang Mai::Thailand,Maerim,3.1,1,22.0,18.91,98.94
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Maetaeng::Chiang Mai::Thailand,Maetaeng,3.2,2,38.0,19.12,98.95
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,4.6,9,10.0,18.74,99.12
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Sansai::Chiang Mai::Thailand,Sansai,3.9,20,10.0,18.85,99.05
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Suwannaphum::Roi Et::Thailand,Suwannaphum,3.8,1,612.0,15.6,103.81
+us6000iuyr,4.2,mb,18.8243,99.1277,5.411,1666215393541,Si Sa Ket::Si Sa Ket::Thailand,Si Sa Ket,4.1,1,689.0,15.11,104.33
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Bangkok::Bangkok::Thailand,Bangkok,2.3,5,485.0,13.73,100.5
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Chon Buri::Chon Buri::Thailand,Chon Buri,2.7,1,548.0,13.4,101.0
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Kanchanaburi::Kanchanaburi::Thailand,Kanchanaburi,2.2,1,375.0,14.02,99.53
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Pak Kret::Nonthaburi::Thailand,Pak Kret,2.7,1,479.0,13.9,100.51
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Pathum Thani::Pathum Thani::Thailand,Pathum Thani,3.1,1,476.0,14.02,100.52
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,3.1,2,490.0,13.67,100.53
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,2.0,1,500.0,13.61,100.61
+us7000k9he,5.6,mww,15.2546,96.2895,13.518,1687138824074,Mae Sot::Tak::Thailand,Mae Sot,3.1,1,293.0,16.71,98.57
+us6000knpe,4.1,mb,16.2764,99.9211,11.004,1687972676123,Phichit::Phichit::Thailand,Phichit,4.9,1,50.0,16.44,100.35
+us6000knpe,4.1,mb,16.2764,99.9211,11.004,1687972676123,Phitsanulok::Phitsanulok::Thailand,Phitsanulok,4.1,1,71.0,16.82,100.27
+us6000kp8f,4.5,mb,21.0899,99.5285,10.0,1688143613102,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.2,1,134.0,19.91,99.83
+us6000lncw,4.2,mb,19.4394,98.3765,10.0,1699515019107,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.7,1,95.0,18.8,98.98
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Bangkok::Bangkok::Thailand,Bangkok,2.5,6,838.0,13.73,100.5
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.4,25,270.0,18.8,98.98
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Hangdong::Chiang Mai::Thailand,Hangdong,3.4,1,283.0,18.69,98.92
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Maerim::Chiang Mai::Thailand,Maerim,2.4,3,259.0,18.91,98.94
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Maetaeng::Chiang Mai::Thailand,Maetaeng,3.3,2,236.0,19.12,98.95
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,2.2,1,275.0,18.74,99.12
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Sansai::Chiang Mai::Thailand,Sansai,2.2,1,264.0,18.85,99.05
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,4.4,12,154.0,19.91,99.83
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Mae Chan::Chiang Rai::Thailand,Mae Chan,4.1,4,131.0,20.15,99.87
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Mae Sai::Chiang Rai::Thailand,Mae Sai,5.6,1,105.0,20.43,99.88
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Pa Daet::Chiang Rai::Thailand,Pa Daet,4.5,1,203.0,19.5,100.0
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Lampang::Lampang::Thailand,Lampang,2.7,1,324.0,18.29,99.48
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,3.0,2,260.0,19.27,97.93
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Nan::Nan::Thailand,Nan,2.7,1,309.0,18.78,100.77
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.0,1,845.0,13.67,100.53
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Satun::Satun::Thailand,Satun,2.2,1,1617.0,6.62,100.07
+us6000lp06,5.7,mww,21.217,99.3304,15.733,1700185031547,Si Sa Ket::Si Sa Ket::Thailand,Si Sa Ket,4.1,1,858.0,15.11,104.33
+us6000lp0v,4.5,mb,21.1488,99.3556,10.0,1700200940752,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,1,146.0,19.91,99.83
+us6000muqt,4.6,mb,25.5222,96.6471,10.0,1714337138172,Satun::Satun::Thailand,Satun,2.0,1,2123.0,6.62,100.07
+us6000ngfw,5.1,mww,14.7842,108.2285,8.078,1722141312576,Ubon Ratchathani::Ubon Ratchathani::Thailand,Ubon Ratchathani,2.5,1,369.0,15.25,104.83
+us6000pfbh,4.9,mb,19.5557,95.0613,85.383,1734976645649,Sanpatong::Chiang Mai::Thailand,Sanpatong,2.2,1,424.0,18.62,98.89
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sawankhalok::Sukhothai::Thailand,Sawankhalok,6.4,1,661.0,17.31,99.83
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Lom Sak::Phetchabun::Thailand,Lom Sak,6.0,1,804.0,16.78,101.25
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sam Chuk::Suphan Buri::Thailand,Sam Chuk,5.8,1,916.0,14.75,100.1
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pho Chai::Roi Et::Thailand,Pho Chai,5.7,1,1038.0,16.32,103.78
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Surat Thani::Surat Thani::Thailand,Surat Thani,5.4,1,1469.0,9.14,99.33
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chomthong::Chiang Mai::Thailand,Chomthong,5.4,1,489.0,18.43,98.68
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Mae Sot::Tak::Thailand,Mae Sot,5.2,10,648.0,16.71,98.57
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,5.2,124,476.0,18.8,98.98
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Long::Phrae::Thailand,Long,5.2,1,596.0,18.07,99.83
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Hangdong::Chiang Mai::Thailand,Hangdong,5.1,20,482.0,18.69,98.92
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Maerim::Chiang Mai::Thailand,Maerim,5.1,14,464.0,18.91,98.94
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sankamphaeng::Chiang Mai::Thailand,Sankamphaeng,5.1,5,491.0,18.74,99.12
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phitsanulok::Phitsanulok::Thailand,Phitsanulok,5.0,10,733.0,16.82,100.27
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Mae Hong Son::Mae Hong Son::Thailand,Mae Hong Son,5.0,7,367.0,19.27,97.93
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Maetaeng::Chiang Mai::Thailand,Maetaeng,4.9,3,448.0,19.12,98.95
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Ang Thong::Ang Thong::Thailand,Ang Thong,4.9,1,951.0,14.59,100.48
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sansai::Chiang Mai::Thailand,Sansai,4.9,17,477.0,18.85,99.05
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nakhon Thai::Phitsanulok::Thailand,Nakhon Thai,4.8,1,746.0,17.12,100.83
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Kamphaeng Phet::Kamphaeng Phet::Thailand,Kamphaeng Phet,4.8,1,719.0,16.47,99.52
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nakhon Pathom::Nakhon Pathom::Thailand,Nakhon Pathom,4.8,4,1006.0,13.82,100.06
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bangkok::Bangkok::Thailand,Bangkok,4.7,428,1036.0,13.73,100.5
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Mae Chan::Chiang Rai::Thailand,Mae Chan,4.7,1,457.0,20.15,99.87
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,4.6,102,1043.0,13.67,100.53
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pa Daet::Chiang Rai::Thailand,Pa Daet,4.6,3,506.0,19.5,100.0
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sukhothai::Sukhothai::Thailand,Sukhothai,4.6,1,683.0,17.01,99.75
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pak Kret::Nonthaburi::Thailand,Pak Kret,4.6,102,1020.0,13.9,100.51
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Kruai::Nonthaburi::Thailand,Bang Kruai,4.6,27,1025.0,13.81,100.45
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Lampang::Lampang::Thailand,Lampang,4.5,9,554.0,18.29,99.48
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Dok Kham Tai::Phayao::Thailand,Dok Kham Tai,4.5,1,526.0,19.17,99.98
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Rakam::Phitsanulok::Thailand,Bang Rakam,4.5,4,729.0,16.75,100.12
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Bo::Samut Prakan::Thailand,Bang Bo,4.5,5,1068.0,13.57,100.83
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phetchabun::Phetchabun::Thailand,Phetchabun,4.5,2,827.0,16.42,101.16
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chai Badan::Lop Buri::Thailand,Chai Badan,4.4,11,932.0,15.2,101.13
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pa Sang::Lamphun::Thailand,Pa Sang,4.4,4,497.0,18.52,98.94
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Uthai Thani::Uthai Thani::Thailand,Uthai Thani,4.3,1,851.0,15.38,100.03
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Uttaradit::Uttaradit::Thailand,Uttaradit,4.3,1,652.0,17.63,100.1
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nakhon Nayok::Nakhon Nayok::Thailand,Nakhon Nayok,4.3,1,1029.0,14.2,101.22
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Krathum Baen::Samut Sakhon::Thailand,Krathum Baen,4.3,11,1033.0,13.65,100.27
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,4.3,62,1053.0,13.61,100.61
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sanpatong::Chiang Mai::Thailand,Sanpatong,4.3,6,485.0,18.62,98.89
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Thanyaburi::Pathum Thani::Thailand,Thanyaburi,4.2,14,1018.0,14.02,100.71
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Khlong Luang::Pathum Thani::Thailand,Khlong Luang,4.1,23,1010.0,14.07,100.65
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Lamphun::Lamphun::Thailand,Lamphun,4.1,3,508.0,18.5,99.08
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nakhon Chaisi::Nakhon Pathom::Thailand,Nakhon Chaisi,4.1,6,1005.0,13.82,100.03
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Samut Sakhon::Samut Sakhon::Thailand,Samut Sakhon,4.1,9,1044.0,13.54,100.28
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Lam Luk Ka::Pathum Thani::Thailand,Lam Luk Ka,4.0,35,1029.0,13.93,100.75
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Yai::Nonthaburi::Thailand,Bang Yai,4.0,11,1021.0,13.85,100.43
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sam Phran::Nakhon Pathom::Thailand,Sam Phran,4.0,3,1023.0,13.72,100.22
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Ayutthaya::Phra Nakhon Si Ayutthaya::Thailand,Ayutthaya,4.0,7,978.0,14.36,100.57
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Pakong::Chachoengsao::Thailand,Bang Pakong,3.9,3,1079.0,13.55,101.0
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nakhon Sawan::Nakhon Sawan::Thailand,Nakhon Sawan,3.9,6,823.0,15.7,100.07
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Sao Thong::Samut Prakan::Thailand,Bang Sao Thong,3.9,24,1058.0,13.67,100.82
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pathum Thani::Pathum Thani::Thailand,Pathum Thani,3.8,16,1008.0,14.02,100.52
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nong Khae::Saraburi::Thailand,Nong Khae,3.8,2,997.0,14.33,100.87
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nonthaburi::Nonthaburi::Thailand,Nonthaburi,3.8,1,1013.0,13.8,100.18
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phayao::Phayao::Thailand,Phayao,3.8,2,520.0,19.17,99.91
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Samut Songkhram::Samut Songkhran::Thailand,Samut Songkhram,3.8,1,1043.0,13.42,100.0
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Tha Yang::Phetchaburi::Thailand,Tha Yang,3.8,1,1130.0,12.97,100.89
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Photharam::Ratchaburi::Thailand,Photharam,3.8,2,1011.0,13.68,99.85
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Kosum Phisai::Maha Sarakham::Thailand,Kosum Phisai,3.6,1,983.0,16.22,103.02
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chachoengsao::Chachoengsao::Thailand,Chachoengsao,3.6,3,1069.0,13.69,101.07
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,3.6,12,467.0,19.91,99.83
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nakhon Ratchasima::Nakhon Ratchasima::Thailand,Nakhon Ratchasima,3.6,7,1012.0,15.0,102.1
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Maeai::Chiang Mai::Thailand,Maeai,3.6,5,414.0,20.03,99.32
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Bo Thong::Nonthaburi::Thailand,Bang Bo Thong,3.6,9,1014.0,13.92,100.43
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phichit::Phichit::Thailand,Phichit,3.4,1,771.0,16.44,100.35
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Ban Pong::Ratchaburi::Thailand,Ban Pong,3.3,3,998.0,13.81,99.87
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phetchaburi::Phetchaburi::Thailand,Phetchaburi,3.3,3,1073.0,13.11,99.95
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Laplae::Uttaradit::Thailand,Laplae,3.3,2,645.0,17.65,100.03
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sing Buri::Sing Buri::Thailand,Sing Buri,3.3,3,918.0,14.89,100.4
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Suphan Buri::Suphan Buri::Thailand,Suphan Buri,3.2,3,945.0,14.47,100.13
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Mae Sai::Chiang Rai::Thailand,Mae Sai,3.2,3,445.0,20.43,99.88
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sam Roi Yot::Prachuap Khiri Khan::Thailand,Sam Roi Yot,3.1,1,1164.0,12.2,99.88
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Prachin Buri::Prachin Buri::Thailand,Prachin Buri,3.1,2,1052.0,14.05,101.38
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Kanchanaburi::Kanchanaburi::Thailand,Kanchanaburi,3.1,1,962.0,14.02,99.53
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Khao Yoi::Phetchaburi::Thailand,Khao Yoi,3.1,1,1056.0,13.23,99.83
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phrae::Phrae::Thailand,Phrae,3.1,3,614.0,18.15,100.16
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phimai::Nakhon Ratchasima::Thailand,Phimai,3.1,1,1022.0,15.22,102.5
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bang Len::Nakhon Pathom::Thailand,Bang Len,3.1,1,991.0,14.02,100.17
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Doembang Nangbuat::Suphan Buri::Thailand,Doembang Nangbuat,3.1,1,908.0,14.83,100.1
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nan::Nan::Thailand,Nan,3.1,1,618.0,18.78,100.77
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Ban Bung::Chon Buri::Thailand,Ban Bung,3.0,3,1129.0,13.04,101.0
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chumphon::Chumphon::Thailand,Chumphon,3.0,2,1319.0,10.51,99.19
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Khon Kaen::Khon Kaen::Thailand,Khon Kaen,3.0,6,953.0,16.42,102.83
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pattaya::Chon Buri::Thailand,Pattaya,2.9,7,1135.0,12.92,100.9
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Hat Yai::Songkhla::Thailand,Hat Yai,2.8,2,1731.0,7.0,100.47
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Ratchaburi::Ratchaburi::Thailand,Ratchaburi,2.8,4,1024.0,13.54,99.82
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Tha Bo::Nong Khai::Thailand,Tha Bo,2.7,1,834.0,17.85,102.58
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pho Thong::Ang Thong::Thailand,Pho Thong,2.7,1,940.0,14.67,100.42
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Song Phi Nong::Suphan Buri::Thailand,Song Phi Nong,2.7,1,975.0,14.12,100.04
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chaam::Phetchaburi::Thailand,Chaam,2.6,3,1105.0,12.8,99.97
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Udon Thani::Udon Thani::Thailand,Udon Thani,2.4,5,880.0,17.41,102.79
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chon Buri::Chon Buri::Thailand,Chon Buri,2.3,5,1094.0,13.4,101.0
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Chum Phae::Khon Kaen::Thailand,Chum Phae,2.2,1,887.0,16.54,102.11
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Rayong::Rayong::Thailand,Rayong,2.2,2,1178.0,12.68,101.28
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Si Satchanalai::Sukhothai::Thailand,Si Satchanalai,2.2,1,639.0,17.52,99.77
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Prachuap Khiri Khan::Prachuap Khiri Khan::Thailand,Prachuap Khiri Khan,2.1,2,1200.0,11.82,99.8
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Thap Than::Uthai Thani::Thailand,Thap Than,2.0,1,837.0,15.45,99.9
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Kathu::Phuket::Thailand,Kathu,2.0,2,1580.0,7.92,98.35
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nong Bua Lam Phu::Nong Bua Lam Phu::Thailand,Nong Bua Lam Phu,2.0,1,878.0,17.17,102.57
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Si Sa Ket::Si Sa Ket::Thailand,Si Sa Ket,2.0,1,1169.0,15.11,104.33
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Hua Hin::Prachuap Khiri Khan::Thailand,Hua Hin,2.0,8,1128.0,12.57,99.95
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nakhon Si Thammarat::Nakhon Si Thammarat::Thailand,Nakhon Si Thammarat,2.0,2,1567.0,8.4,99.97
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phuket::Phuket::Thailand,Phuket,2.0,3,1585.0,7.88,98.38
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Damnoen Saduak::Ratchaburi::Thailand,Damnoen Saduak,2.0,2,1030.0,13.52,99.93
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Krabi::Krabi::Thailand,Krabi,2.0,2,1577.0,8.05,98.91
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sa Kaeo::Sa Kaeo::Thailand,Sa Kaeo,2.0,1,1115.0,13.82,102.07
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Saraburi::Saraburi::Thailand,Saraburi,2.0,1,979.0,14.53,100.88
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Nam Som::Udon Thani::Thailand,Nam Som,1.0,1,805.0,17.77,102.19
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Trat::Trat::Thailand,Trat,1.0,1,1288.0,12.23,102.5
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Sakhon Nakhon::Sakon Nakhon::Thailand,Sakhon Nakhon,1.0,1,1014.0,17.17,104.15
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,That Phanom::Nakhon Phanom::Thailand,That Phanom,1.0,1,1079.0,16.95,104.73
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Wichian Buri::Phetchabun::Thailand,Wichian Buri,1.0,1,891.0,15.65,101.12
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Ban Dung::Udon Thani::Thailand,Ban Dung,1.0,1,902.0,17.7,103.25
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phon Charoen::Nong Khai::Thailand,Phon Charoen,1.0,1,875.0,18.03,103.17
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Pattani::Pattani::Thailand,Pattani,1.0,1,1770.0,6.87,101.24
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phangnga::Phangnga::Thailand,Phangnga,1.0,1,1526.0,8.45,98.53
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Bo Phloi::Kanchanaburi::Thailand,Bo Phloi,1.0,1,931.0,14.32,99.52
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Khao Wong::Kalasin::Thailand,Khao Wong,1.0,1,1039.0,16.7,104.1
+us7000pn9s,7.7,mww,22.011,95.9363,10.0,1743142852715,Phibun Mangsahan::Ubon Ratchathani::Thailand,Phibun Mangsahan,1.0,1,1235.0,15.23,105.23
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Bangkok::Bangkok::Thailand,Bangkok,4.4,22,1004.0,13.73,100.5
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Phanom Sarakham::Chachoengsao::Thailand,Phanom Sarakham,2.0,1,1048.0,13.75,101.35
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,4.9,6,449.0,18.8,98.98
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Chomthong::Chiang Mai::Thailand,Chomthong,3.4,1,459.0,18.43,98.68
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Maeai::Chiang Mai::Thailand,Maeai,2.2,1,394.0,20.03,99.32
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Sansai::Chiang Mai::Thailand,Sansai,5.2,3,450.0,18.85,99.05
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,4.2,1,448.0,19.91,99.83
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Mae Chan::Chiang Rai::Thailand,Mae Chan,2.7,1,440.0,20.15,99.87
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Chon Buri::Chon Buri::Thailand,Chon Buri,2.0,1,1062.0,13.4,101.0
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Si Racha::Chon Buri::Thailand,Si Racha,4.3,1,1081.0,13.16,100.93
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Kamphaeng Phet::Kamphaeng Phet::Thailand,Kamphaeng Phet,3.4,1,688.0,16.47,99.52
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Khon Kaen::Khon Kaen::Thailand,Khon Kaen,3.8,1,928.0,16.42,102.83
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Lampang::Lampang::Thailand,Lampang,4.1,1,526.0,18.29,99.48
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Lamphun::Lamphun::Thailand,Lamphun,3.7,2,480.0,18.5,99.08
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Sam Phran::Nakhon Pathom::Thailand,Sam Phran,4.1,1,991.0,13.72,100.22
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Nakhon Ratchasima::Nakhon Ratchasima::Thailand,Nakhon Ratchasima,3.4,2,984.0,15.0,102.1
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Bang Kruai::Nonthaburi::Thailand,Bang Kruai,4.2,3,993.0,13.81,100.45
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Bang Yai::Nonthaburi::Thailand,Bang Yai,2.2,1,989.0,13.85,100.43
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Pak Kret::Nonthaburi::Thailand,Pak Kret,3.8,2,988.0,13.9,100.51
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Lam Luk Ka::Pathum Thani::Thailand,Lam Luk Ka,3.7,3,998.0,13.93,100.75
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Pathum Thani::Pathum Thani::Thailand,Pathum Thani,4.5,1,977.0,14.02,100.52
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Phitsanulok::Phitsanulok::Thailand,Phitsanulok,3.8,1,704.0,16.82,100.27
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Bang Pa In::Phra Nakhon Si Ayutthaya::Thailand,Bang Pa In,4.1,1,960.0,14.23,100.58
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Long::Phrae::Thailand,Long,2.0,1,569.0,18.07,99.83
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Prachin Buri::Prachin Buri::Thailand,Prachin Buri,2.0,1,1022.0,14.05,101.38
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Pho Chai::Roi Et::Thailand,Pho Chai,4.6,1,1015.0,16.32,103.78
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Bang Bo::Samut Prakan::Thailand,Bang Bo,4.3,1,1036.0,13.57,100.83
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Bang Sao Thong::Samut Prakan::Thailand,Bang Sao Thong,2.9,2,1026.0,13.67,100.82
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,4.2,3,1011.0,13.67,100.53
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,4.7,3,1021.0,13.61,100.61
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Samut Sakhon::Samut Sakhon::Thailand,Samut Sakhon,4.1,1,1012.0,13.54,100.28
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Si Sa Ket::Si Sa Ket::Thailand,Si Sa Ket,2.0,1,1145.0,15.11,104.33
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Sukhothai::Sukhothai::Thailand,Sukhothai,5.4,1,653.0,17.01,99.75
+us7000pn9z,6.7,mww,21.6975,95.969,10.0,1743143524777,Ban Dung::Udon Thani::Thailand,Ban Dung,1.0,1,882.0,17.7,103.25
+us7000pnba,4.6,mb,22.7673,95.8531,10.0,1743147418799,Bangkok::Bangkok::Thailand,Bangkok,3.9,1,1114.0,13.73,100.5
+us7000pnba,4.6,mb,22.7673,95.8531,10.0,1743147418799,Pattaya::Chon Buri::Thailand,Pattaya,3.1,1,1214.0,12.92,100.9
+us7000pnba,4.6,mb,22.7673,95.8531,10.0,1743147418799,Nakhon Ratchasima::Nakhon Ratchasima::Thailand,Nakhon Ratchasima,1.0,1,1082.0,15.0,102.1
+us7000pnfz,4.5,mb,19.3628,96.207,10.0,1743155732962,Ubon Ratchathani::Ubon Ratchathani::Thailand,Ubon Ratchathani,1.0,1,1023.0,15.25,104.83
+us7000pnkj,5.1,mb,19.6858,96.0761,10.0,1743240048229,Bangkok::Bangkok::Thailand,Bangkok,3.3,2,810.0,13.73,100.5
+us7000pnkj,5.1,mb,19.6858,96.0761,10.0,1743240048229,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,3.2,6,320.0,18.8,98.98
+us7000pnkj,5.1,mb,19.6858,96.0761,10.0,1743240048229,Bang Yai::Nonthaburi::Thailand,Bang Yai,1.0,1,795.0,13.85,100.43
+us7000pnkj,5.1,mb,19.6858,96.0761,10.0,1743240048229,Kantang::Trang::Thailand,Kantang,1.0,1,1407.0,7.42,99.52
+us7000pnri,5.1,mb,5.5006,95.3597,10.0,1743303513125,Krabi::Krabi::Thailand,Krabi,1.0,1,483.0,8.05,98.91
+us7000pnsb,4.6,mwr,22.2219,95.9368,10.0,1743318481128,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,1056.0,13.73,100.5
+us7000pnsb,4.6,mwr,22.2219,95.9368,10.0,1743318481128,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,1,494.0,18.8,98.98
+us7000pnsb,4.6,mwr,22.2219,95.9368,10.0,1743318481128,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,3.4,1,1074.0,13.61,100.61
+us7000pp7z,4.7,mwr,22.0634,95.9636,10.0,1743505307444,Bangkok::Bangkok::Thailand,Bangkok,2.5,2,1039.0,13.73,100.5
+us7000pp7z,4.7,mwr,22.0634,95.9636,10.0,1743505307444,Bang Sao Thong::Samut Prakan::Thailand,Bang Sao Thong,2.0,2,1061.0,13.67,100.82
+us7000ppgb,4.9,mww,15.5172,95.6376,10.0,1743611232366,Bangkok::Bangkok::Thailand,Bangkok,3.1,1,562.0,13.73,100.5
+us7000ppgb,4.9,mww,15.5172,95.6376,10.0,1743611232366,Pak Kret::Nonthaburi::Thailand,Pak Kret,3.2,1,557.0,13.9,100.51
+us6000q5b0,4.7,mb,20.9582,96.0381,10.0,1744345768671,Mae Sot::Tak::Thailand,Mae Sot,1.0,1,540.0,16.71,98.57
+us6000q5ps,5.3,mww,21.2292,96.0897,10.0,1744511097717,Thanyaburi::Pathum Thani::Thailand,Thanyaburi,2.0,2,935.0,14.02,100.71
+us6000q5ps,5.3,mww,21.2292,96.0897,10.0,1744511097717,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,1.0,1,958.0,13.67,100.53
+us6000q5ps,5.3,mww,21.2292,96.0897,10.0,1744511097717,Mae Sot::Tak::Thailand,Mae Sot,1.0,1,562.0,16.71,98.57
+us6000q6pf,4.5,mb,22.0411,96.1069,10.0,1744871554457,Bangkok::Bangkok::Thailand,Bangkok,2.2,1,1030.0,13.73,100.5
+us7000pyjn,5.7,mww,3.7925,97.0065,85.754,1746953863494,Bangkok::Bangkok::Thailand,Bangkok,2.0,1,1164.0,13.73,100.5
+us7000pyjn,5.7,mww,3.7925,97.0065,85.754,1746953863494,Phuket::Phuket::Thailand,Phuket,3.4,1,480.0,7.88,98.38
+us6000qher,4.2,mb,19.1428,99.1609,10.0,1748848059126,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,5,43.0,18.8,98.98
+us6000qhzg,5.0,mww,26.3717,100.0201,10.0,1749069115417,Bangkok::Bangkok::Thailand,Bangkok,2.2,1,1395.0,13.73,100.5
+us7000q8wt,4.5,mb,9.3312,94.0146,14.446,1750938737398,Kathu::Phuket::Thailand,Kathu,1.0,1,502.0,7.92,98.35
+us7000qck7,4.5,mb,21.6642,99.7826,10.0,1752480396465,Chiang Rai::Chiang Rai::Thailand,Chiang Rai,2.0,1,194.0,19.91,99.83
+us7000qck7,4.5,mb,21.6642,99.7826,10.0,1752480396465,Mae Sai::Chiang Rai::Thailand,Mae Sai,1.0,1,137.0,20.43,99.88
+us7000qddu,5.1,mww,22.6707,95.9569,10.0,1752831003349,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,2,531.0,18.8,98.98
+us6000qvpp,6.4,mww,6.6907,93.0637,21.0,1753728110299,Phuket::Phuket::Thailand,Phuket,2.0,2,601.0,7.88,98.38
+us6000r2pe,4.6,mb,16.1249,96.5679,10.0,1755745086895,Bangkok::Bangkok::Thailand,Bangkok,2.0,4,499.0,13.73,100.5
+us6000r2pe,4.6,mb,16.1249,96.5679,10.0,1755745086895,Lam Luk Ka::Pathum Thani::Thailand,Lam Luk Ka,2.0,2,511.0,13.93,100.75
+us6000r2pe,4.6,mb,16.1249,96.5679,10.0,1755745086895,Samut Prakan::Samut Prakan::Thailand,Samut Prakan,1.0,1,516.0,13.61,100.61
+us7000qskp,4.7,mww,15.4223,96.3416,10.0,1756573531112,Bangkok::Bangkok::Thailand,Bangkok,2.0,3,487.0,13.73,100.5
+us7000qskp,4.7,mww,15.4223,96.3416,10.0,1756573531112,Phra Pradaeng::Samut Prakan::Thailand,Phra Pradaeng,2.2,1,492.0,13.67,100.53
+us7000qui1,4.6,mb,19.0137,96.264,10.0,1757215026030,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.0,1,277.0,18.8,98.98
+us6000reze,4.7,mww,14.904,108.1502,10.0,1759688925552,Warin Chamrap::Ubon Ratchathani::Thailand,Warin Chamrap,2.0,2,354.0,15.2,104.87
+us6000rmdj,5.4,mww,12.4989,93.7511,132.652,1762670311475,Ban Bung::Chon Buri::Thailand,Ban Bung,2.0,1,800.0,13.04,101.0
+us6000rpwk,5.3,mww,13.3595,95.8101,10.0,1763872762415,Ban Bung::Chon Buri::Thailand,Ban Bung,2.0,1,563.0,13.04,101.0
+us7000re2g,6.4,mww,2.7191,95.9543,17.0,1764219384368,Phangnga::Phangnga::Thailand,Phangnga,1.0,1,689.0,8.45,98.53
+us6000syd2,4.6,mb,11.0619,95.1269,10.0,1779010700742,Ban Bung::Chon Buri::Thailand,Ban Bung,1.0,1,675.0,13.04,101.0
+us6000syg0,5.2,mww,16.4177,96.3726,10.0,1779069924601,Chiang Mai::Chiang Mai::Thailand,Chiang Mai,2.4,2,384.0,18.8,98.98
+us6000syg0,5.2,mww,16.4177,96.3726,10.0,1779069924601,Pak Kret::Nonthaburi::Thailand,Pak Kret,2.2,1,531.0,13.9,100.51
+us6000syg0,5.2,mww,16.4177,96.3726,10.0,1779069924601,Bangkok::Bangkok::Thailand,Bangkok,2.0,4,540.0,13.73,100.5
+us6000syg0,5.2,mww,16.4177,96.3726,10.0,1779069924601,Ban Bung::Chon Buri::Thailand,Ban Bung,2.0,1,629.0,13.04,101.0
+us6000tkyk,6.9,mww,2.9863,98.9853,175.0,1786791291798,Phangnga::Phangnga::Thailand,Phangnga,3.4,1,631.0,8.45,98.53
+us6000tkyk,6.9,mww,2.9863,98.9853,175.0,1786791291798,Phuket::Phuket::Thailand,Phuket,2.5,1,572.0,7.88,98.38
+us6000tkyk,6.9,mww,2.9863,98.9853,175.0,1786791291798,Hat Yai::Songkhla::Thailand,Hat Yai,2.0,1,504.0,7.0,100.47

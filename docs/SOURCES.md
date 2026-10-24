@@ -40,6 +40,16 @@ Marks: ✅ live call answered as described · ⚠️ with a catch · 🔑 key ne
 
 TMD's warnings page (`tmd.go.th/warning-and-events/warnings`, ✅ 200), DDPM (`disaster.go.th`, ⚠️ 403 bot check to scripts), TMD earthquake watch (✅), Air4Thai (⚠️ TLS to scripts), ThaiWater (✅), FloodWatch point check (`flood.autobahn.bot/#p=lat,lon`, ✅), บ้านรอดไหม guides (`/hot /air /storm /flood /landslide /quake /pm25 /mask`, ✅ 200 each), LINE share (`line.me/R/share?text=`, ✅ 302).
 
+- **PCD's 7-day dust forecast** (since 0.4.x): six regional images, `https://air4thai.pcd.go.th/UpdateV2/forecastImage/forecast_img_{bkk,north,esan,centralwest,east,south}.png`
+  (all 200 on 24 Oct 2026 with the two intermediates of KI-002; also on `air4thai.com`); WRF-Chem on NSTDA's LANTA,
+  categories only, renewed mid-afternoon, no data feed, no published skill. The dust card links the visitor's region
+  (`assess.pcdForecastImage`; the grouping of provinces is this app's) and never parses it ([predict-air §1.4, §7.2](research/predict-air-2026-10-24.md)).
+
+- **The 2564 seismic-zone regulation** (Royal Gazette PDF): read once into `research/data/eq_zones_2564.json` and shipped
+  as a static table (`assess.SEISMIC_ZONE`); no call from the page.
+- **Google's Android Earthquake Alerts** (support.google.com/android/answer/9319337): the quake card says where to switch
+  them on; read 24 Oct 2026 (Thailand listed, M4.5+).
+
 ## 4. Tested and not used (yet)
 
 - **FloodWatch `/api/point`, `/api/stations`, `/api/geocode`**: ✅ answer, **no CORS** → [INTEGRATION.md](INTEGRATION.md).

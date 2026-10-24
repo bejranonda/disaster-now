@@ -113,6 +113,20 @@ With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the 
 - **The Bangkok term (since 0.2.0):** + 1.06 MMI in Bangkok, Samut Prakan, Nonthaburi and Pathum Thani, for quakes within 1,600 km (MODELS §5; `assess.BKK_MMI_TERM`, `quake.SITE_MAX_KM`). Elsewhere the equation is used as is (Thai-city bias 0.00).
 - **Its limit, on screen:** no site term outside greater Bangkok. The 28 Mar 2025 M7.7 Myanmar quake was 996 km from central Bangkok, where the equation gives MMI ≈ 3.6, yet a building under construction collapsed in Chatuchak (Thairath, 29 Mar 2025). Soft clay and tall buildings shake more; a point source understates a long rupture. Validation against "Did You Feel It?" is in [MODELS.md](MODELS.md).
 - **The lowest felt words need M5.5 or more** (`assess.FELT_WORDS_MIN_MAG`, since 0.4.0, U15). In the "Did You Feel It?" reports behind the words (`research/data/e4_dyfi_residuals.csv`, 1,776 rows), every event is M5.5 or larger, and even where the equation predicts under 1.0, half the reporters gave CDI 2 or more (n = 24; 1.0–1.5: 63 % of 73; 1.5–2.0: 65 % of 69; 2.0–2.5: 82 % of 199). So "ส่วนใหญ่ไม่รู้สึก แต่บางคนอาจรู้สึกได้ …" holds for big, far quakes and has no evidence for an M1.8 200 km away; a smaller quake gets the facts alone. This is a floor on what the words claim, never a "not felt".
+- **Early warning in Thailand** (24 Oct 2026): Google's Android Earthquake Alerts System lists Thailand
+  (https://support.google.com/android/answer/9319337, read 24 Oct 2026 by the research and again by the session):
+  "nearby earthquakes of magnitude 4.5 and above", on by default, Settings > Safety & emergency > Earthquake alerts,
+  "You may receive an alert before, during, or after shaking begins", "Not all earthquakes can be detected". TMD runs
+  no early-warning service found; DDPM's Cell Broadcast is a notification after the event, confirmed only by news
+  [unverified]. The quake card says where to switch Android's on (predict-earthquake §7).
+- **Thailand's seismic zones** ("กฎกระทรวงกำหนดการรับน้ำหนัก ความต้านทาน ความคงทนของอาคาร และพื้นดินที่รองรับอาคารในการ
+  ต้านทานแรงสั่นสะเทือนของแผ่นดินไหว พ.ศ. ๒๕๖๔", Royal Gazette vol. 138 part 16 ก pp. 13–14, 4 Mar 2021,
+  https://ratchakitcha.soc.go.th/documents/17159461.pdf, SHA-256 `67989bf6…416d838b`, clause 3, read 24 Oct 2026 from
+  the page images and cross-checked with the PDF's text layer): zone 3 "ในระดับสูง" 12 provinces, zone 2 "ในระดับปานกลาง"
+  17 (Bangkok, Phuket, Ranong among them), zone 1 "บริเวณหรือพื้นที่ที่ต้องเฝ้าระวัง" 14 (Songkhla, Surat Thani among
+  them); Khon Kaen, Udon Thani, Nakhon Ratchasima and Ubon are in none. `research/data/eq_zones_2564.json`;
+  `assess.SEISMIC_ZONE` equals it (a test). The place profile shows the province's zone, labelled "ความเสี่ยงระยะยาว ไม่ใช่การทำนาย".
+  The zone and the predicted felt rate rank the 15 study cities alike (Spearman +0.65, p 0.009).
 - **TMD's event colours** (Thai PBS, 15 Apr 2025, quoting TMD): < 2.5 green, 2.5–3.9 yellow, > 4.0 red, by magnitude only ⚠️.
 
 ## 11. A snapshot of the night it was built (24 Oct 2026, 02:00–03:30 Bangkok)

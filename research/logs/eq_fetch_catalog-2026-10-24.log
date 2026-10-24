@@ -1,0 +1,38 @@
+# research/eq_fetch_catalog.py
+# started 2026-10-24T08:44:44+00:00
+chunk 1973-01-01 .. 1990-01-01: count 2064
+   got 2064 rows
+chunk 1990-01-01 .. 2000-01-01: count 1677
+   got 1677 rows
+chunk 2000-01-01 .. 2004-12-01: count 1040
+   got 1040 rows
+chunk 2004-12-01 .. 2005-06-01: count 3878
+   got 3878 rows
+chunk 2005-06-01 .. 2010-01-01: count 3589
+   got 3589 rows
+chunk 2010-01-01 .. 2016-01-01: count 3213
+   got 3213 rows
+chunk 2016-01-01 .. 2021-01-01: count 1814
+   got 1814 rows
+chunk 2021-01-01 .. 2026-10-24T00:00:00: count 2443
+   got 2443 rows
+total 19718 events, 1973-02-10T04:25:29.700Z .. 2026-10-23T17:06:25.116Z
+magType counts:
+magType
+mb     17687
+mwc     1094
+mww      367
+mw       214
+mwb      207
+ms        92
+mwr       28
+ml        24
+md         3
+m          2
+net counts:
+net
+us           19690
+iscgemsup       20
+iscgem           5
+official         3
+wrote /root/disaster-now/research/data/eq_comcat/comcat_0-30N_88-110E_1973-2026_M4.csv.gz (808850 bytes)

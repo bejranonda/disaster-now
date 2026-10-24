@@ -1,0 +1,352 @@
+{
+ "era_start": "2004-12-26 04:21:29.810000+00:00",
+ "years": 21.82486216283875,
+ "cities": {
+  "Bangkok": {
+   "n_events": 54,
+   "n_cdi3": 11,
+   "n_cdi4": 2,
+   "n_pred3": 27,
+   "n_pred4": 6,
+   "share_cdi3_pred3": 0.2727272727272727,
+   "share_cdi3_pred25": 0.36363636363636365,
+   "median_resid": 0.5684889513851921,
+   "names": [
+    "Bang Bo Thong",
+    "Bang Kruai",
+    "Bang Yai",
+    "Bangkok",
+    "Pak Kret",
+    "Phra Pradaeng"
+   ]
+  },
+  "Chiang Mai": {
+   "n_events": 50,
+   "n_cdi3": 19,
+   "n_cdi4": 3,
+   "n_pred3": 15,
+   "n_pred4": 7,
+   "share_cdi3_pred3": 0.3684210526315789,
+   "share_cdi3_pred25": 0.47368421052631576,
+   "median_resid": 0.7028123497492097,
+   "names": [
+    "Chiang Mai",
+    "Hangdong",
+    "Maerim",
+    "Sankamphaeng",
+    "Sansai"
+   ]
+  },
+  "Chiang Rai": {
+   "n_events": 33,
+   "n_cdi3": 16,
+   "n_cdi4": 8,
+   "n_pred3": 30,
+   "n_pred4": 6,
+   "share_cdi3_pred3": 0.5625,
+   "share_cdi3_pred25": 0.625,
+   "median_resid": 0.5186268635224036,
+   "names": [
+    "Chiang Rai"
+   ]
+  },
+  "Mae Hong Son": {
+   "n_events": 8,
+   "n_cdi3": 5,
+   "n_cdi4": 2,
+   "n_pred3": 13,
+   "n_pred4": 4,
+   "share_cdi3_pred3": 0.8,
+   "share_cdi3_pred25": 1.0,
+   "median_resid": -0.288694466403113,
+   "names": [
+    "Mae Hong Son"
+   ]
+  },
+  "Mae Sot (Tak)": {
+   "n_events": 7,
+   "n_cdi3": 2,
+   "n_cdi4": 1,
+   "n_pred3": 8,
+   "n_pred4": 3,
+   "share_cdi3_pred3": 0.5,
+   "share_cdi3_pred25": 0.5,
+   "median_resid": 0.8438996695439356,
+   "names": [
+    "Mae Sot"
+   ]
+  },
+  "Kanchanaburi": {
+   "n_events": 3,
+   "n_cdi3": 2,
+   "n_cdi4": 0,
+   "n_pred3": 7,
+   "n_pred4": 2,
+   "share_cdi3_pred3": 1.0,
+   "share_cdi3_pred25": 1.0,
+   "median_resid": 0.012788423003880833,
+   "names": [
+    "Kanchanaburi"
+   ]
+  },
+  "Phuket": {
+   "n_events": 40,
+   "n_cdi3": 12,
+   "n_cdi4": 2,
+   "n_pred3": 16,
+   "n_pred4": 4,
+   "share_cdi3_pred3": 0.5833333333333334,
+   "share_cdi3_pred25": 0.6666666666666666,
+   "median_resid": 0.19328798667700187,
+   "names": [
+    "Kathu",
+    "Phuket"
+   ]
+  },
+  "Ranong": {
+   "n_events": 0,
+   "n_cdi3": 0,
+   "n_cdi4": 0,
+   "n_pred3": 11,
+   "n_pred4": 3,
+   "share_cdi3_pred3": NaN,
+   "share_cdi3_pred25": NaN,
+   "median_resid": NaN,
+   "names": []
+  },
+  "Khon Kaen": {
+   "n_events": 6,
+   "n_cdi3": 5,
+   "n_cdi4": 0,
+   "n_pred3": 7,
+   "n_pred4": 2,
+   "share_cdi3_pred3": 0.2,
+   "share_cdi3_pred25": 0.4,
+   "median_resid": 1.1140960121491434,
+   "names": [
+    "Khon Kaen"
+   ]
+  },
+  "Udon Thani": {
+   "n_events": 6,
+   "n_cdi3": 3,
+   "n_cdi4": 0,
+   "n_pred3": 8,
+   "n_pred4": 2,
+   "share_cdi3_pred3": 0.3333333333333333,
+   "share_cdi3_pred25": 0.3333333333333333,
+   "median_resid": 0.2637749567962093,
+   "names": [
+    "Udon Thani"
+   ]
+  },
+  "Nakhon Ratchasima": {
+   "n_events": 4,
+   "n_cdi3": 3,
+   "n_cdi4": 0,
+   "n_pred3": 7,
+   "n_pred4": 2,
+   "share_cdi3_pred3": 0.3333333333333333,
+   "share_cdi3_pred25": 0.3333333333333333,
+   "median_resid": 1.0431529291454622,
+   "names": [
+    "Nakhon Ratchasima"
+   ]
+  },
+  "Hat Yai (Songkhla)": {
+   "n_events": 6,
+   "n_cdi3": 2,
+   "n_cdi4": 0,
+   "n_pred3": 13,
+   "n_pred4": 4,
+   "share_cdi3_pred3": 0.5,
+   "share_cdi3_pred25": 0.5,
+   "median_resid": -0.4875954007207255,
+   "names": [
+    "Hat Yai"
+   ]
+  },
+  "Surat Thani": {
+   "n_events": 2,
+   "n_cdi3": 1,
+   "n_cdi4": 1,
+   "n_pred3": 11,
+   "n_pred4": 4,
+   "share_cdi3_pred3": 1.0,
+   "share_cdi3_pred25": 1.0,
+   "median_resid": 0.1051826523016004,
+   "names": [
+    "Surat Thani"
+   ]
+  },
+  "Ubon Ratchathani": {
+   "n_events": 4,
+   "n_cdi3": 1,
+   "n_cdi4": 0,
+   "n_pred3": 6,
+   "n_pred4": 2,
+   "share_cdi3_pred3": 0.0,
+   "share_cdi3_pred25": 0.0,
+   "median_resid": 1.2740102866545855,
+   "names": [
+    "Ubon Ratchathani",
+    "Warin Chamrap"
+   ]
+  },
+  "Nan": {
+   "n_events": 10,
+   "n_cdi3": 5,
+   "n_cdi4": 3,
+   "n_pred3": 11,
+   "n_pred4": 4,
+   "share_cdi3_pred3": 0.8,
+   "share_cdi3_pred25": 0.8,
+   "median_resid": -0.2718458116011373,
+   "names": [
+    "Nan"
+   ]
+  }
+ },
+ "pooled_M0-5.5": {
+  "n": 103,
+  "events": 82,
+  "mae": 1.4065596074031228,
+  "bias": 1.262564225907944
+ },
+ "pooled_M5.5-10": {
+  "n": 130,
+  "events": 49,
+  "mae": 0.8371608411828139,
+  "bias": -0.0772094622191976
+ },
+ "posthoc": {
+  "Bangkok": {
+   "pred3": 27,
+   "rep3": 11,
+   "rep3_r3": 7,
+   "pred3_m55": 27,
+   "rep3_m55": 6,
+   "rep3_m55_r3": 6
+  },
+  "Chiang Mai": {
+   "pred3": 15,
+   "rep3": 19,
+   "rep3_r3": 12,
+   "pred3_m55": 13,
+   "rep3_m55": 10,
+   "rep3_m55_r3": 9
+  },
+  "Chiang Rai": {
+   "pred3": 30,
+   "rep3": 16,
+   "rep3_r3": 8,
+   "pred3_m55": 17,
+   "rep3_m55": 10,
+   "rep3_m55_r3": 8
+  },
+  "Mae Hong Son": {
+   "pred3": 13,
+   "rep3": 5,
+   "rep3_r3": 3,
+   "pred3_m55": 13,
+   "rep3_m55": 5,
+   "rep3_m55_r3": 3
+  },
+  "Mae Sot (Tak)": {
+   "pred3": 8,
+   "rep3": 2,
+   "rep3_r3": 1,
+   "pred3_m55": 8,
+   "rep3_m55": 2,
+   "rep3_m55_r3": 1
+  },
+  "Kanchanaburi": {
+   "pred3": 7,
+   "rep3": 2,
+   "rep3_r3": 0,
+   "pred3_m55": 7,
+   "rep3_m55": 2,
+   "rep3_m55_r3": 0
+  },
+  "Phuket": {
+   "pred3": 16,
+   "rep3": 12,
+   "rep3_r3": 6,
+   "pred3_m55": 16,
+   "rep3_m55": 8,
+   "rep3_m55_r3": 3
+  },
+  "Ranong": {
+   "pred3": 11,
+   "rep3": 0,
+   "rep3_r3": 0,
+   "pred3_m55": 11,
+   "rep3_m55": 0,
+   "rep3_m55_r3": 0
+  },
+  "Khon Kaen": {
+   "pred3": 7,
+   "rep3": 5,
+   "rep3_r3": 2,
+   "pred3_m55": 7,
+   "rep3_m55": 5,
+   "rep3_m55_r3": 2
+  },
+  "Udon Thani": {
+   "pred3": 8,
+   "rep3": 3,
+   "rep3_r3": 2,
+   "pred3_m55": 8,
+   "rep3_m55": 3,
+   "rep3_m55_r3": 2
+  },
+  "Nakhon Ratchasima": {
+   "pred3": 7,
+   "rep3": 3,
+   "rep3_r3": 1,
+   "pred3_m55": 7,
+   "rep3_m55": 3,
+   "rep3_m55_r3": 1
+  },
+  "Hat Yai (Songkhla)": {
+   "pred3": 13,
+   "rep3": 2,
+   "rep3_r3": 1,
+   "pred3_m55": 13,
+   "rep3_m55": 2,
+   "rep3_m55_r3": 1
+  },
+  "Surat Thani": {
+   "pred3": 11,
+   "rep3": 1,
+   "rep3_r3": 0,
+   "pred3_m55": 11,
+   "rep3_m55": 1,
+   "rep3_m55_r3": 0
+  },
+  "Ubon Ratchathani": {
+   "pred3": 6,
+   "rep3": 1,
+   "rep3_r3": 0,
+   "pred3_m55": 6,
+   "rep3_m55": 1,
+   "rep3_m55_r3": 0
+  },
+  "Nan": {
+   "pred3": 11,
+   "rep3": 5,
+   "rep3_r3": 2,
+   "pred3_m55": 11,
+   "rep3_m55": 4,
+   "rep3_m55_r3": 2
+  }
+ },
+ "posthoc_total": {
+  "pred3": 190,
+  "rep3": 87,
+  "rep3_r3": 45,
+  "pred3_m55": 175,
+  "rep3_m55": 62,
+  "rep3_m55_r3": 38
+ }
+}
