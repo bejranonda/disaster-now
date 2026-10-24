@@ -203,6 +203,29 @@ The chance rule (§6) still lifts the tile when ≥ 20 % of members reach heavy 
   where the right river cell was found (4 of 8 gauges returned a side channel). Its licence says it "does not constitute
   in any way a flood warning". **Not for this page:** FloodWatch's to test (INTEGRATION §3).
 
+### 3.2 The Hat Yai flood of November 2025: what the page would have said
+
+[research/hatyai-flood-2025-hindcast.md](research/hatyai-flood-2025-hindcast.md): the page's own functions on ECMWF
+ensemble runs as issued (open data, 5.6 GB in byte ranges, scripts `research/hy_*.mjs`), Hat Yai's grid point, page
+viewed at 19:00.
+- **Hat Yai had 370.2 mm on 21 Nov** (TMD; the old record 219.4 mm in 2000) and 1,328.8 mm in November; X.44 in the
+  city peaked 2.82 m over its bank on 25 Nov; 142 deaths in Hat Yai (Ministry of Public Health, 2 Dec).
+- **First word above "ต่ำ":** "สูง" for 19 Nov, on the evening of 17 Nov: about 2 days before the first heavy day,
+  4 before water entered the city, 6 before X.44 overtopped. No earlier than the agencies (ONWR 13 Nov, TMD 14 and
+  16 Nov). From 19 Nov the tile was เตรียมตัว (the forecast's ceiling).
+- **Measured rain would have made it ทำทันที at about 23:00 on 19 Nov** (Hat Yai airport's record as a proxy for a
+  gauge), about 45 h before DDPM's first Extreme phone alert. Measurements before models is the path that worked.
+- **The size was never there:** from every run after 18 Nov, the 3 days that fell (426–654 mm) were 3.5–4.7× the
+  ensemble's median, above its 90th percentile; the chance of > 90 mm a day never passed 31 %. The late-November 2024
+  flood (Kho Hong 459 mm in 3 days) stayed "ต่ำ" until the rain had begun.
+- **No trigger beat the current pre-warning on a held-out season** (2023: current CSI 0.23; a 10 % chance of ≥ 150 mm in
+  72 h within ~40 km, chosen on 2024, 0.20). n is small (9 event runs, shared weather).
+- **Shipped (0.5.0):** a caution on the rain card when any day reads มีโอกาส or สูง ("ฝนหลายวันติดกันอาจหนักกว่าที่พยากรณ์มาก …
+  ราว 4 เท่า …"), and at เตรียมตัว or above, who alerts (DDPM's Cell Broadcast) and who orders an evacuation (the
+  municipality and the province), "เว็บนี้ไม่ส่งการแจ้งเตือน".
+- **Next:** a measured 3-day rain line and the collector's province files (the measured path to phones), FloodWatch's
+  upstream line (Sadao's X.173A is ~13 h above X.44 and outside this page's 20 km list).
+
 ## 4. Gusts
 
 No gust observations were available in the station records used, so **nothing is validated**. The card says "ยังไม่ได้ตรวจสอบความแม่นยำ".

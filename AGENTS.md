@@ -4,7 +4,7 @@
 
 **ภัยรอบบ้าน · Thai Risk** (code name `disaster-now`; ภัยรอบบ้าน ตอนนี้ / Disaster Now until 0.3.0) is one Thai web page: share GPS or search a place, and see every hazard at that point now and for the next 3 days, with the agency's own words, the source and time of every number, one sourced action and a link to what to do. Heat, PM2.5 and other pollution, UV, rain, wind and storms, river level and flash floods, landslides, earthquakes, fires. Static files (`public/`), no server, no framework, no runtime packages; a collector (`tools/collect.mjs`) for the feeds a phone can't read. It is the third app of the owner (`bejranonda`), beside FloodWatch (`flood2026-research`, water) and บ้านรอดไหม (`Hazard-huntz`, what to do), and must agree with both ([docs/INTEGRATION.md](docs/INTEGRATION.md)).
 
-**State (24 Oct 2026):** v0.4.0.
+**State (24 Oct 2026):** v0.5.0 (0.4.0's review and fixes, then 0.5.0's prediction research: [FRANK_FEEDBACK §8](docs/FRANK_FEEDBACK.md#8-prediction-research-24-oct-2026)).
 - Built, validated, and audited again in 0.4.0: an independent visitor audit, an output cross-check (139 of 144 numbers
   equal the sources) and a model check that found the heat line 3–4 °C hot in Nov–Feb (now C6 there, provisional;
   [docs/MODELS.md §1.1](docs/MODELS.md#11-the-model-check-of-24-oct-2026-and-what-040-changed)).
@@ -58,7 +58,7 @@
 
 - **Never invent a number, an endpoint or a safety line;** mark the unconfirmed **[unverified]**.
 - **The agency's word leads; the app's level is never milder than it;** the verdict is never milder than a tile; missing data is never calm; **a forecast alone tops out at เตรียมตัว**; an official warning lifts its tile.
-- **Measurements before models; ranges and chances, never countdowns; nothing forecasts earthquakes.**
+- **Measurements before models; ranges and chances, never countdowns; nothing predicts earthquakes** (and the page computes no earthquake chance of its own: aftershock chances had no skill here; the rule's wording is the owner's D11).
 - **The exact GPS fix never leaves the phone** (rounded to ~1 km for providers and links; no coordinates on screen for a GPS place); shared links carry a subdistrict code; no cookies, analytics or accounts; a server publishes files and keeps nothing about a person.
 - **Only validated forecast numbers, in validated words** (MODELS.md): never the raw heat index, never a rain amount as a forecast.
 - **Rivers as FloodWatch reads them; advice as บ้านรอดไหม words it.**

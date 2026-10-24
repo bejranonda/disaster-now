@@ -1,0 +1,85 @@
+
+===== 2026-10-24T09:28:10.368Z selftest
+  selftest 0p25 20251121 step 24 member 0: grid {"npts":1038240,"Ni":1440,"Nj":721,"La1":90,"Lo1":180,"La2":-90,"Lo2":179.75,"scan":0}; 224 points; partial == full: true; Kho Hong point 7,100.5 tp 111.43 mm
+  selftest 0p25 20251121 step 90 member 17: grid {"npts":1038240,"Ni":1440,"Nj":721,"La1":90,"Lo1":180,"La2":-90,"Lo2":179.75,"scan":0}; 224 points; partial == full: true; Kho Hong point 7,100.5 tp 190.92 mm
+  selftest 0p4-beta 20231201 step 42 member 33: grid {"npts":405900,"Ni":900,"Nj":451,"La1":90,"Lo1":180,"La2":-90,"Lo2":179.6,"scan":0}; 72 points; partial == full: true; Kho Hong point 6.8,100.4 tp 41.39 mm
+selftest: 9 requests, 8.0 MB
+
+===== 2026-10-24T09:28:27.989Z case 0p25 steps 12,18,36,42,66,90,114,138: 6 runs (2025-11-14..2025-11-19), 224 points, prior total 8 MB
+  2025-11-14 91392 values (58 s, 188 MB this call)
+  2025-11-15 91392 values (112 s, 376 MB this call)
+  2025-11-16 91392 values (161 s, 559 MB this call)
+  2025-11-17 91392 values (206 s, 742 MB this call)
+  2025-11-18 91392 values (252 s, 921 MB this call)
+  2025-11-19 91392 values (297 s, 1100 MB this call)
+done case: 2496 requests, 1100 MB this call, 1107 MB in all
+
+===== 2026-10-24T09:33:24.565Z case 0p25 steps 12,18,36,42,66,90: 5 runs (2025-11-20..2025-11-24), 224 points, prior total 1107 MB
+  2025-11-20 68544 values (43 s, 130 MB this call)
+  2025-11-21 68544 values (83 s, 257 MB this call)
+  2025-11-22 68544 values (120 s, 385 MB this call)
+  2025-11-23 68544 values (154 s, 513 MB this call)
+  2025-11-24 68544 values (188 s, 639 MB this call)
+done case: 1559 requests, 639 MB this call, 1746 MB in all
+
+===== 2026-10-24T11:48:51.924Z sample 0p25 steps 18,42,66,90: 16 runs (2024-11-01..2024-12-31), 224 points, prior total 1746 MB
+  2024-11-01 45696 values (45 s, 116 MB this call)
+  2024-11-05 45696 values (87 s, 225 MB this call)
+  2024-11-09 45696 values (115 s, 313 MB this call)
+  2024-11-13 45696 values (144 s, 407 MB this call)
+  2024-11-17 45696 values (174 s, 503 MB this call)
+  2024-11-21 45696 values (198 s, 591 MB this call)
+  2024-11-25 45696 values (222 s, 679 MB this call)
+  2024-11-29 45696 values (244 s, 765 MB this call)
+  2024-12-03 45696 values (267 s, 854 MB this call)
+  2024-12-07 45696 values (290 s, 946 MB this call)
+  2024-12-11 45696 values (313 s, 1035 MB this call)
+  2024-12-15 45696 values (336 s, 1125 MB this call)
+  2024-12-19 45696 values (360 s, 1212 MB this call)
+  2024-12-23 45696 values (382 s, 1303 MB this call)
+  2024-12-27 45696 values (404 s, 1393 MB this call)
+  2024-12-31 45696 values (427 s, 1481 MB this call)
+done sample: 3823 requests, 1481 MB this call, 3227 MB in all
+
+===== 2026-10-24T11:55:59.119Z sample 0p25 steps 18,42,66,90: 14 runs (2025-11-01..2025-12-31), 224 points, prior total 3227 MB
+  2025-11-01 45696 values (44 s, 110 MB this call)
+  2025-11-05 45696 values (79 s, 209 MB this call)
+  2025-11-09 45696 values (109 s, 299 MB this call)
+  2025-11-13 45696 values (136 s, 394 MB this call)
+  2025-11-25 45696 values (163 s, 478 MB this call)
+  2025-11-29 45696 values (187 s, 569 MB this call)
+  2025-12-03 45696 values (213 s, 664 MB this call)
+  2025-12-07 45696 values (237 s, 753 MB this call)
+  2025-12-11 45696 values (261 s, 847 MB this call)
+  2025-12-15 45696 values (285 s, 938 MB this call)
+  2025-12-19 45696 values (309 s, 1032 MB this call)
+  2025-12-23 45696 values (333 s, 1126 MB this call)
+  2025-12-27 45696 values (357 s, 1216 MB this call)
+  2025-12-31 45696 values (380 s, 1309 MB this call)
+done sample: 3114 requests, 1309 MB this call, 4536 MB in all
+
+===== 2026-10-24T12:02:21.213Z sample 0p4-beta steps 18,42,66,90: 16 runs (2023-11-01..2023-12-31), 72 points, prior total 4536 MB
+  2023-11-01 14688 values (30 s, 52 MB this call)
+  2023-11-05 14688 values (60 s, 105 MB this call)
+  2023-11-09 14688 values (89 s, 157 MB this call)
+  2023-11-13 14688 values (119 s, 208 MB this call)
+  2023-11-17 14688 values (146 s, 257 MB this call)
+  2023-11-21 14688 values (173 s, 308 MB this call)
+  2023-11-25 14688 values (200 s, 356 MB this call)
+  2023-11-29 14688 values (222 s, 398 MB this call)
+  2023-12-03 14688 values (243 s, 438 MB this call)
+  2023-12-07 14688 values (263 s, 477 MB this call)
+  2023-12-11 14688 values (283 s, 518 MB this call)
+  2023-12-15 14688 values (304 s, 557 MB this call)
+  2023-12-19 14688 values (324 s, 597 MB this call)
+  2023-12-23 14688 values (346 s, 637 MB this call)
+  2023-12-27 ERROR download budget 5200 MB reached (361 s, 668 MB this call)
+done sample: 4342 requests, 668 MB this call, 5204 MB in all
+
+===== 2026-10-24T12:08:38.307Z sample 0p25 steps 18,42,66,90: 4 runs (2024-11-22..2024-11-26), 224 points, prior total 5204 MB
+  2024-11-22 45696 values (28 s, 87 MB this call)
+  2024-11-23 45696 values (57 s, 176 MB this call)
+  2024-11-24 45696 values (84 s, 264 MB this call)
+  2024-11-26 45696 values (110 s, 352 MB this call)
+done sample: 832 requests, 352 MB this call, 5556 MB in all
+2026-10-24T12:19:12Z GCS listing: 20261023/00z/ifs/ -> 0p1/, 0p25/; 0p1/ -> enfo/ oper/ waef/ wave/; 20261018/00z/ifs/ -> 0p25/ only

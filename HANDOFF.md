@@ -1,6 +1,6 @@
 # Handoff
 
-**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.4.0, 24 Oct 2026.** Built, validated, audited three ways, and
+**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.5.0, 24 Oct 2026.** Built, validated, audited three ways, and
 running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused the deploy because the token lacks
 *Workers Scripts: Edit*. Not tried on real phones. Read this first, then [AGENTS.md](AGENTS.md).
 
@@ -20,11 +20,14 @@ running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused th
     ([review](docs/research/review-2026-10-24.md)).
 - **The host:** `autobahn-bot`, beside BrainPlatform (the owner's choice, D-045). The stack is up: web on 127.0.0.1:8090
   and the collector every 15 min. Air4Thai 173 stations; ThaiWater answering. KV namespace `disaster-now-live` created.
-- **Research in progress at this commit** (agents still running; results in a later commit): earthquakes, air quality
-  ([done](docs/research/predict-air-2026-10-24.md)), fire/rain/flood/storms/drought, and a hindcast of the Hat Yai
-  flood of late 2025. See FRANK_FEEDBACK §7.8.
+- **0.5.0, the prediction research** ([FRANK_FEEDBACK §8](docs/FRANK_FEEDBACK.md#8-prediction-research-24-oct-2026)):
+  five studies ([air](docs/research/predict-air-2026-10-24.md), [earthquakes](docs/research/predict-earthquake-2026-10-24.md),
+  [other hazards](docs/research/predict-hazards-2026-10-24.md), [Hat Yai 2025](docs/research/hatyai-flood-2025-hindcast.md),
+  [heat](docs/research/model-check-2026-10-24.md)). Shipped: a dust-day chance (Dec–Apr, provisional), PCD's forecast
+  link; earthquake wording, Android's alerts, the 2564 seismic zones, the Bangkok term on land only; a multi-day rain
+  caution and who alerts at เตรียมตัว+. Aftershock chances, ML, a 25 km rain chance and GloFAS did not earn a place.
 - **Checks, 24 Oct 2026 ≈ 09:30 UTC, on `autobahn-bot`:**
-  - `npm test` 82 of 82.
+  - `npm test` 89 of 89 at 0.5.0 (82 at 0.4.0).
   - The fixture walk passes every check: the table's box at 320 px, the evening, tap targets both ways, a stale
     collector, no coordinates on screen.
   - One live walk (16:21 Bangkok) passes.
@@ -42,9 +45,11 @@ running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused th
    `node tools/health.mjs --web https://risk.autobahn.bot/`.
 3. **A4:** an Android and an iPhone, from a LINE chat; tap 📍; send the link to a family group.
 4. **A5:** a native Thai review, from GLM's first reading.
-5. **Decisions:** D1 (heat orange most afternoons), D8 (the redesign), D9 (one palette for the family), D10, and
-   whether to keep C6 after it is scored (end of November).
-6. **A11, A8, B1–B4:** delete the old checkout on FloodWatch's server; GitHub default branch and releases; CORS on
+5. **Decisions:** D1 (heat orange most afternoons), D8 (the redesign), D9 (one palette for the family), D10, **D11
+   (the earthquake rule)**, and whether to keep C6 after it is scored (end of November).
+6. **Four emails to agencies** (C4, C6, C7, C8): ONWR's flood warnings, PCD's dust forecast as data, RFD's fire rating
+   and ONWR's drought index, DDPM's alert channels. And FloodWatch's replay of Hat Yai, Nov 2025 (B5).
+7. **A11, A8, B1–B4:** delete the old checkout on FloodWatch's server; GitHub default branch and releases; CORS on
    FloodWatch; a shared ThaiWater snapshot.
 
 ## 3. What an agent can do next ([docs/ROADMAP.md](docs/ROADMAP.md))
@@ -53,8 +58,8 @@ running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused th
   `docs/screens/` from the live site.
 - **Daily from the server:** `node research/archive_forecasts.mjs` (cron), so C6 and the PM2.5 chance can be scored as
   issued (MODELS §1.1).
-- **The research's ship verdicts** (FRANK_FEEDBACK §8 when written), e.g. the PM2.5 chance line (Dec–Apr) and PCD's
-  forecast image link.
+- **The measured path for floods** (KI-039): the collector's province rain and level files, a measured 3-day rain line,
+  FloodWatch's upstream line; then a 3-day rain chance only if Nov–Jan 2026–27 scores it.
 - **AI-ready:** KI-024 (Thai region names), KI-012 (landmarks), KI-033/D8 (the redesign, after the owner).
 
 ## 4. How to work here
@@ -101,5 +106,5 @@ running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused th
   | Known problems | [KNOWN_ISSUES](docs/KNOWN_ISSUES.md) |
   | This session's audits | [review](docs/research/review-2026-10-24.md), [visitor](docs/research/visitor-audit-2026-10-24.md), [output](docs/research/output-crosscheck-2026-10-24.md), [model check](docs/research/model-check-2026-10-24.md) |
   | The server and Cloudflare | [SERVER](docs/SERVER.md), [CLOUDFLARE](docs/CLOUDFLARE.md) |
-  | Decisions D-001 … D-049 | [research/HISTORY](docs/research/HISTORY.md) |
+  | Decisions D-001 … D-052 | [research/HISTORY](docs/research/HISTORY.md) |
   | Frank feedback | [FRANK_FEEDBACK](docs/FRANK_FEEDBACK.md) |

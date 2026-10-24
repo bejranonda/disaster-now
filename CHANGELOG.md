@@ -2,7 +2,20 @@
 
 ## Unreleased
 
-**From the prediction research** ([predict-air](docs/research/predict-air-2026-10-24.md)):
+## 0.5.0 (24 Oct 2026, not deployed): what the prediction research and the Hat Yai hindcast found
+
+Five studies asked whether the page could forecast, or give a risk for, each hazard at a point, by learning from data,
+history, existing forecasts and theory (the owner's question), and what would have warned Hat Yai in Nov 2025. Most
+answers are "the current method holds" or "not yet"; what ships is what beat its baselines on data it never saw, or
+is an official source quoted as it stands.
+
+**The Hat Yai flood of Nov 2025** ([hindcast](docs/research/hatyai-flood-2025-hindcast.md), MODELS §3.2): the page
+would have said "สูง" two days ahead and reached ทำทันที from measured rain ~45 h before DDPM's first Extreme alert, but
+never conveyed the size (3 days fell at 3.5–4.7× the forecast median). Ships: a caution on the rain card when heavy
+rain is possible on any day, and, at เตรียมตัว or above, who alerts and who orders an evacuation ("เว็บนี้ไม่ส่งการแจ้งเตือน").
+KI-039; FloodWatch's upstream line and a replay of the event (B5).
+
+**Air pollution** ([predict-air](docs/research/predict-air-2026-10-24.md)):
 - **The chance of a dust day,** Dec–Apr, tomorrow and the day after, from a PCD station only: "พรุ่งนี้
   โอกาสที่ฝุ่นเฉลี่ยทั้งวันจะถึงระดับ “เริ่มมีผลกระทบต่อสุขภาพ” ราว 40%" (lognormal dressing of the damped ratio, σ 0.343 / 0.380;
   Brier skill +0.10 to +0.24 vs persistence on disjoint stations); provisional (KI-038). The dust pre-warning carries it.
@@ -17,7 +30,7 @@
 - **Fire, rain, floods, drought** ([predict-hazards](docs/research/predict-hazards-2026-10-24.md)): nothing ships. The
   rain words hold on 76 stations; a "within 25 km" chance doesn't earn new words; fire weather has signal but must be
   re-tested on the forecast the page could read (GWIS); GloFAS is FloodWatch's; drought waits for an agency feed.
-- Tests: 88.
+- Tests: 89; the version is 0.5.0 in `package.json`, `package-lock.json`, `main.js`, `sw.js` and `index.html`.
 
 ## 0.4.0 (24 Oct 2026, not deployed): ภัยรอบบ้าน · Thai Risk, one grading for every forecast view, the cool-season heat fix
 

@@ -223,8 +223,7 @@ Then: the host's facts into HANDOFF §4; A5's review changes; KI-025's table wor
    well as forecasts, and for what the world already does, which is where the honest answers are: aftershock
    probabilities exist and are operational in the US, New Zealand and Italy; earthquake prediction does not; air
    quality is mostly a question of whether a Thai agency already publishes a forecast the page should quote. The answers
-   go into a §8 when the research ends (four studies were still running at this commit: earthquakes, air quality,
-   other hazards, and the Hat Yai flood of late 2025). Two frank notes on that message: it pastes
+   are in [§8](#8-prediction-research-24-oct-2026). Two frank notes on that message: it pastes
    the same validation block a fourth time today (it adds nothing the first message didn't say), and it arrived while
    the go-live was waiting on a model check. Research and a release in one session work, but say which comes first.
 
@@ -261,3 +260,53 @@ Priority: <1. … 2. … 3. …>. Out of scope: <…>.
 Decided: <name, decisions D-…>. Open for me: <questions you want answered rather than guessed>.
 Record: docs as AGENTS.md §4; frank feedback in FRANK_FEEDBACK §N; commit and push to <branch>.
 ```
+
+## 8. Prediction research (24 Oct 2026)
+
+You asked whether the page can forecast, or give a risk for, each hazard at a point "by learning from data, history,
+existing forecasts and theories around the world", and how to warn enough for a flood like Hat Yai's. Five studies ran
+on the server, each against the protocol (choose on earlier data, score on later data and other places, always against
+persistence or the base rate). The short, frank answers:
+
+| Hazard | Can it be forecast at a point? | What shipped (0.5.0) | What didn't, and why |
+|---|---|---|---|
+| Heat | yes, 1–2 days, corrected | C6 for Nov–Feb; the inputs as fitted | the line in the cool season (worse than raw) |
+| PM2.5 | yes, 1–2 days, modestly (ties persistence in the north) | a chance of a "เริ่มมีผลกระทบ" day, Dec–Apr; PCD's own forecast image | fires and weather as extra predictors (tiny gains), machine learning (worse) |
+| Earthquakes | **no** (nobody can); aftershock chances had no skill here | the words "เมื่อไร ที่ไหน แรงแค่ไหน", Android's alerts, the 2564 legal zones, the Bangkok term on land only | an aftershock chance of our own; per-place felt counts |
+| Rain, floods | rain words hold; size is beyond the model | a multi-day caution; who alerts and who orders | a 25 km chance, a 3-day chance (not better on a held-out season), GloFAS (FloodWatch's) |
+| Fire, drought | fire weather: signal, untested on what the page could read | nothing | FWI until a season of GWIS is archived; drought until an agency feed |
+
+### To you, frankly
+
+1. **"Learn from data" mostly confirmed what the page already does.** The strongest predictors tested were the
+   simplest: yesterday's hotspot count, the latest measured dust, a gauge's rain. Gradient boosting lost again
+   (PM2.5, 24–46 % worse at one station). That is not a failure of the research; it is the answer. Spend effort on
+   **measurements reaching phones** (the collector's province files, a 3-day measured rain line, FloodWatch's
+   upstream line), not on cleverer models.
+2. **Hat Yai was not a failure of forecasting tools, and a page like this can't fix what failed.** Every agency warned
+   days ahead; nobody conveyed the size, the city's flag stayed green past its own red rule, and the evacuation order
+   came after the river had overtopped. The page's honest job is narrower: say the size can be far bigger than the
+   forecast, show measured water early, and point to who orders and who alerts. It now does the first and the last.
+   The middle needs the collector and FloodWatch (KI-039).
+3. **The earthquake rule needs your decision (D11).** "Nothing forecasts earthquakes" is right about prediction and
+   wrong about aftershocks, which agencies elsewhere forecast. The research's proposal keeps the page from computing
+   any chance of its own (it had no skill here) while allowing words and links. Decide it; don't let it drift.
+4. **Ask agencies for data, not agents for models.** PCD has a 7-day dust forecast, as pictures; ONWR has flood
+   warnings, unreachable; RFD has a fire-danger rating, with no licence; GISTDA's drought index needs a key. Four
+   emails (C4, C6, C7, C8) would do more for the page than any study this session ran.
+5. **Your prompts this time:** the research request was good, and the PNSN link you added mid-way made the earthquake
+   report clearer (four categories, one per page line). The Hat Yai question was the best of the day: a real event
+   with a real cost turns "validate the model" into something checkable. Ask more questions like it ("would the page
+   have warned for X?"). The validation block was pasted again in full; one line would do.
+
+### Frank about my own part
+
+- **Five research agents and a 5.6 GB hindcast on a host that runs another production app** is a lot. I capped
+  memory, downloads and priority, logged every Open-Meteo call, kept ThaiWater out, and checked BrainPlatform's web
+  while they ran (200 in 13 ms). It held, but the next heavy study should run where nothing else lives.
+- **The usage limit cut three studies mid-way**; they resumed from saved work, and their results arrived after 0.4.0
+  was committed, so they ship as 0.5.0. Committing between phases is what kept nothing from being lost.
+- **I shipped two research recommendations as code** (the dust chance, provisional; the multi-day caution and the
+  official-channels line) and held back everything that needs your decision (the earthquake rule, the redesign, the
+  family palette). Revert any of them if you disagree; each has its own test.
+

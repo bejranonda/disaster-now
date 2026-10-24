@@ -1,0 +1,128 @@
+{
+ "about": "Points for the Hat Yai flood hindcast (research/hy_*.mjs, 2026-10-24). Stations: TMD synoptic/agromet stations with daily rain in NOAA NCEI GHCNh or GHCN-Daily (coordinates as those catalogues list them). Box: every native grid point inside it is kept (the U-Taphao basin and its neighbourhood, and the lower south for the false-alarm sample).",
+ "stations": [
+  {
+   "id": "48571",
+   "name": "Kho Hong agromet (Hat Yai, PSU)",
+   "lat": 7.0,
+   "lon": 100.5,
+   "ghcnh": "THM00048571"
+  },
+  {
+   "id": "48569",
+   "name": "Hat Yai airport",
+   "lat": 6.917,
+   "lon": 100.433,
+   "ghcnd": "TH000048569",
+   "ghcnh": "THU048569-1"
+  },
+  {
+   "id": "48574",
+   "name": "Sadao (upper U-Taphao basin)",
+   "lat": 6.8,
+   "lon": 100.3833,
+   "ghcnh": "THM00048574"
+  },
+  {
+   "id": "48568",
+   "name": "Songkhla",
+   "lat": 7.2,
+   "lon": 100.617,
+   "ghcnd": "TH000048568",
+   "ghcnh": "THU00048568"
+  },
+  {
+   "id": "48560",
+   "name": "Phatthalung agromet",
+   "lat": 7.5833,
+   "lon": 100.1667,
+   "ghcnh": "THM00048560"
+  },
+  {
+   "id": "48581",
+   "name": "Yala agromet",
+   "lat": 6.5167,
+   "lon": 101.2833,
+   "ghcnh": "THM00048581"
+  },
+  {
+   "id": "48583",
+   "name": "Narathiwat",
+   "lat": 6.43,
+   "lon": 101.83,
+   "ghcnh": "THU00048583"
+  },
+  {
+   "id": "48552",
+   "name": "Nakhon Si Thammarat",
+   "lat": 8.533,
+   "lon": 99.95,
+   "ghcnd": "TH000048552",
+   "ghcnh": "THU00048552"
+  },
+  {
+   "id": "48554",
+   "name": "Nakhon Si Thammarat agromet",
+   "lat": 8.3592,
+   "lon": 100.0594,
+   "ghcnh": "THM00048554"
+  },
+  {
+   "id": "48567",
+   "name": "Trang",
+   "lat": 7.517,
+   "lon": 99.617,
+   "ghcnd": "TH000048567",
+   "ghcnh": "THU00048567"
+  },
+  {
+   "id": "48551",
+   "name": "Surat Thani",
+   "lat": 9.117,
+   "lon": 99.15,
+   "ghcnd": "TH000048551"
+  },
+  {
+   "id": "48555",
+   "name": "Surat Thani agromet",
+   "lat": 9.1,
+   "lon": 99.6333,
+   "ghcnh": "THM00048555"
+  }
+ ],
+ "box": {
+  "lat0": 5.75,
+  "lat1": 9.5,
+  "lon0": 99.0,
+  "lon1": 102.25
+ },
+ "basin": {
+  "about": "U-Taphao basin approximated by the 0.25 deg grid points whose cells overlap it (the basin runs from the Sankalakhiri range at the Malaysian border, ~6.5 N, north through Hat Yai to Songkhla Lake, ~7.15 N, between ~100.25 and 100.6 E; outline not read from a shapefile: [unverified] approximation)",
+  "points": [
+   [
+    6.5,
+    100.25
+   ],
+   [
+    6.5,
+    100.5
+   ],
+   [
+    6.75,
+    100.25
+   ],
+   [
+    6.75,
+    100.5
+   ],
+   [
+    7.0,
+    100.25
+   ],
+   [
+    7.0,
+    100.5
+   ]
+  ]
+ }
+}

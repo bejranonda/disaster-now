@@ -470,3 +470,21 @@ test("predict-earthquake: the province's seismic zone, as the 2564 regulation wo
   assert.match(line(18.79, 98.99, "en"), /zone 3: .*\(long-term hazard, not a prediction\)$/);
   assert.doesNotMatch(line(16.43, 102.83), /ปลอดภัย/);
 });
+
+// ---------- the Hat Yai flood hindcast (docs/research/hatyai-flood-2025-hindcast.md) ----------
+
+test("Hat Yai hindcast §4: a multi-day caution when heavy rain is possible; who alerts and orders at เตรียมตัว or above", () => {
+  // the Bangkok fixture: heavy rain "ต่ำ" every day, no warning → neither line
+  const calm = card(assess(full(at(13.7563, 100.5018)), "th"), "rain");
+  assert.ok(!calm.lines.some((l) => /ฝนหลายวันติดกัน|Cell Broadcast/.test(l)));
+  // the same ensemble with every member's rain ×25: heavy rain possible → the caution, once
+  const wet = jx("ens_bkk.json");
+  for (const k of Object.keys(wet.hourly)) if (k.startsWith("precipitation")) wet.hourly[k] = wet.hourly[k].map((v) => (v == null ? v : v * 25));
+  const r = card(assess(full(at(13.7563, 100.5018), { ens: wet }), "th"), "rain");
+  assert.equal(r.lines.filter((l) => l.startsWith("ฝนหลายวันติดกันอาจหนักกว่าที่พยากรณ์มาก")).length, 1);
+  // Hat Yai under TMD's Severe heavy-rain warning: the rain card at เตรียมตัว or above says who alerts
+  for (const lang of ["th", "en"]) {
+    const hy = card(assess(full(at(7.0086, 100.4747), { warnings: { items: [parseCap(fx("tmd_cap_item.xml"))] } }), lang), "rain");
+    assert.ok(hy.level >= 2 && hy.lines.some((l) => (lang === "en" ? /This page sends no alerts$/ : /เว็บนี้ไม่ส่งการแจ้งเตือน$/).test(l)), hy.lines.join(" | "));
+  }
+});

@@ -64,7 +64,12 @@ From [SERVER.md §6](SERVER.md#6-what-to-build-on-the-server-next):
    เริ่มมีผลกระทบต่อสุขภาพ ราว 40%", lognormal dressing of the damped ratio (σ 0.343 / 0.380), PCD station input only.
    Provisional, like the damped ratio. And a link to PCD's 7-day forecast image.
 3. **Score C6 and the PM2.5 chance as issued** from `research/archive_forecasts.mjs` (daily cron): end of November, March.
-4. **The other prediction studies' verdicts** (earthquakes, fire/rain/flood, the Hat Yai hindcast): when they report.
+4. ✅ **The prediction studies** (0.5.0): see CHANGELOG 0.5.0 and FRANK_FEEDBACK §8.
+5. **The measured path for floods** (KI-039, the Hat Yai hindcast): the collector's province rain and level files
+   (SERVER §6.4), a measured 3-day rain line, FloodWatch's upstream line (B5). *Done when* a replay of 19–26 Nov 2025
+   shows the page at ทำทันที from measurements before the first Extreme phone alert.
+6. **Archive for the next tests:** GWIS fire danger and PCD's forecast images from December; HII's flash-flood list
+   daily; then the fire-weather line and a 3-day rain chance can be scored as issued.
 
 ## v0.6: forecasts ([MODELS.md §7](MODELS.md#7-what-is-still-to-test))
 

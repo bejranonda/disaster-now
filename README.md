@@ -2,7 +2,7 @@
 
 **One page that shows every hazard at a point in Thailand, now and for the next 3 days** (code name `disaster-now`). Tap 📍 (or search a subdistrict, a road, a place) and see, for that point: rain, river level and flash floods, PM2.5 dust and other pollution, heat, UV, wind and storms, landslides, earthquakes and fires, each in the agency's own words with its source and time, one sourced action, and a link to what to do.
 
-> v0.3.0 · 24 Oct 2026 · **built, validated, audited, ready for Cloudflare at `risk.autobahn.bot`, moving to a server of its own; not deployed, not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
+> v0.5.0 · 24 Oct 2026 · **built, validated, audited three ways, its prediction research done; the collector runs on `autobahn-bot`; not deployed (the Cloudflare token lacks *Workers Scripts: Edit*), not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
 
 <img src="docs/screens/report-390.png" width="260" alt="The report for Bangkok's old town at 390 px, in Thai"> <img src="docs/screens/report-en-390.png" width="260" alt="Phuket in English under TMD's heavy-rain warning"> <img src="docs/screens/warning-en-390.png" width="260" alt="TMD's warning in GLM's checked English, labelled as a machine translation">
 

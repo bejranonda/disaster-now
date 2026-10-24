@@ -3,7 +3,7 @@
 // Pure: same inputs → same words, so tests can check the page against the sources (test/assess.test.mjs).
 
 import { band, scale, roundTo, HAZARDS, RIVER_WORDS } from "./levels.js";
-import { buildOutlook, prewarnings, windowLevel, chanceText, chanceWord } from "./outlook.js";
+import { buildOutlook, prewarnings, windowLevel, chanceText, chanceWord, RAIN_WORD_CUTS } from "./outlook.js";
 import { parseGistda, parseAir4Thai, nearestStation, buildAir } from "./airq.js";
 import { nearRain, nearGauges, parseFlashFlood, parseFloodWatchPoint, FW_LEVEL, areaIndex, waterWord, POLDER_PROVINCES } from "./water.js";
 import { parseEmsc, parseUsgs, mergeQuakes, quakesForPoint, tsunamiWatch } from "./quake.js";
@@ -286,6 +286,13 @@ export function assess(b, lang = "th", ipe = null) {
     // the validation's honest number (MODELS.md §3): at a single station, heavy rain 1–2 days ahead is mostly missed
     if (ens) c.note = L("ฝนหนักเฉพาะจุดพยากรณ์ล่วงหน้าได้ไม่แม่น: ปี 2026 แบบจำลองจับวันฝนหนักที่สถานีได้ราว 1 ใน 8 ดูประกาศกรมอุตุฯ ประกอบ",
       "Heavy rain at one place is hard to forecast: in 2026 the model caught about 1 in 8 heavy-rain days at stations; check TMD's warnings too");
+    // When heavy rain is possible on any day, say how far off the size can be: in the Hat Yai flood of Nov 2025 every
+    // run from 18 Nov put the 3 days that fell at 3.5–4.7× its middle estimate, above its 90th percentile
+    // (docs/research/hatyai-flood-2025-hindcast.md §2); no tested trigger did better on a held-out season (§3).
+    if (ens && ens.days.some((d) => d.rain24.chance[2] >= RAIN_WORD_CUTS[0])) {
+      c.lines.push(L("ฝนหลายวันติดกันอาจหนักกว่าที่พยากรณ์มาก: น้ำท่วมหาดใหญ่ พ.ย. 2568 ฝนจริง 3 วันราว 4 เท่าของค่ากลางที่แบบจำลองคาด ติดตามประกาศกรมอุตุฯ และระดับน้ำ",
+        "Rain over several days can be far heavier than forecast: in the Hat Yai flood of November 2025, three days brought about four times the model's middle estimate. Follow TMD's notices and the river levels"));
+    }
     cards.push(c);
   }
 
@@ -544,6 +551,14 @@ export function assess(b, lang = "th", ipe = null) {
     c.lines.unshift(L(`ประกาศกรมอุตุฯ: ${w.headline || w.event}${until ? ` (ถึง ${until})` : ""}`,
       `TMD notice: ${(w.en?.checked && w.en.headline) || w.event || w.headline}${until ? ` (until ${until})` : ""}`));
     c.official = true;
+  }
+  // At เตรียมตัว or above, rain and flood say who alerts and who orders an evacuation: in Hat Yai the flags, Cell
+  // Broadcast and the governor's order did, a page someone has to open doesn't (hatyai-flood-2025-hindcast §4)
+  for (const c of cards) {
+    if ((c.id === "rain" || c.id === "flood") && c.level >= 2) {
+      c.lines.push(L("ข้อความเตือนภัยบนมือถือ (Cell Broadcast) มาจาก ปภ. คำสั่งอพยพมาจากเทศบาลและจังหวัด · เว็บนี้ไม่ส่งการแจ้งเตือน",
+        "Phone alerts (Cell Broadcast) come from DDPM; evacuation orders come from your municipality and province. This page sends no alerts"));
+    }
   }
   for (const c of cards) if (c.level >= 0 && !c.word) c.word = word(scale(c.level));
   const graded = cards.filter((c) => c.level >= 0);

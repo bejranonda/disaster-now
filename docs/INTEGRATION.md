@@ -58,7 +58,14 @@ The owner has three apps that touch the same people on the same bad day. Built s
      page would need to verify a "within 25 km" rain chance and Thai antecedent-rain landslide thresholds, without one
      more ThaiWater call.
    - **Keep dated archives** of HII's flash-flood list and ONWR's notices, so both can be scored later.
-7. **One AI pattern for the family.** FloodWatch's `ai.run` (budget, breaker, `reasoning_effort: "low"`, content-only
+7. **From the Hat Yai hindcast** ([hatyai-flood-2025-hindcast §5](research/hatyai-flood-2025-hindcast.md)):
+   FloodWatch already carries the U-Taphao chain (X.173A and SLA003 at Sadao, X.90 and SLA002, X.44, X.174, ONE037);
+   its links put Sadao about 13 h above X.44. **FloodWatch should own an "upstream" line** for a point (which gauge
+   rises first, and roughly when its water arrives) that this page then shows: the page's own 20 km list for Hat Yai
+   never reaches Sadao. Its 24-h forecast at X.44 had skill 0.17; at 48–72 h it fell back to persistence. Replay the
+   event from its database (OWNER_ACTIONS B5). And one official-channels block, the same words in all three apps
+   (who alerts: DDPM's Cell Broadcast; who orders an evacuation: the municipality and the province).
+8. **One AI pattern for the family.** FloodWatch's `ai.run` (budget, breaker, `reasoning_effort: "low"`, content-only
    answers, checks before showing) is the right shape. This app's `tools/glm.mjs` and `tools/translate.mjs` follow it
    in Node. If the two apps grow more AI uses, share the checker ideas (numbers, places, verdict words, region words),
    not the code. FloodWatch's KI-373…375 are the lessons.

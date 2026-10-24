@@ -222,6 +222,8 @@ forecasts), and the Hat Yai flood of late 2025.
 | 10 | The owner chooses C6 for Nov–Feb; 13:00/16:00 and `elevation=nan`; JS equals the research code to 4 decimals | tests |
 | 11 | Stale collector files treated as missing (S12); one live walk at 16:21 Bangkok passes | smoke |
 | 12 | `cf:deploy` **refused** (403, no Workers Scripts: Edit); nothing created; `env-check --probe` now tests it (S13) | wrangler log, probe |
+| 13 | 0.4.0 committed and pushed (`d1bcf47`); the usage limit stopped three studies, which resumed from saved work | git |
+| 14 | The air, earthquake, hazards and Hat Yai studies report; the dust chance, the earthquake lines and zones, the Bangkok term's domain, the multi-day caution and the official-channels line ship; 89 tests | [FRANK_FEEDBACK §8](../FRANK_FEEDBACK.md#8-prediction-research-24-oct-2026) |
 
 ### Decisions
 
@@ -233,3 +235,6 @@ forecasts), and the Hat Yai flood of late 2025.
 | D-047 | **One grading for every view of a forecast** (`assess.fcLevel`), and a correction only inside its fitted domain | the table and pre-warnings were red beside an orange tile; an evening became "danger heat" | GUIDELINES 3b, 3e |
 | D-048 | **A province or district found by name opens its seat's subdistrict** | Chiang Mai's centre was a mountain 40 km from town | KNOWLEDGE §7 |
 | D-049 | **Collector files older than 2 h are missing** | KV keeps the last upload; an empty stale list reads as calm | `sources.liveFresh` |
+| D-050 | **A dust-day chance, Dec–Apr, from a station, provisional** | it beat climatology and persistence on disjoint stations in two seasons; it adds words, not levels | MODELS §2.1, KI-038 |
+| D-051 | **No earthquake chance of our own; the law's zones, Android's alerts and the prediction wording ship; the Bangkok term on land only** | aftershock chances had no skill over the base rate here; the zones are the law's words; the term was fitted on crustal quakes | MODELS §5.1, OWNER_ACTIONS D11 |
+| D-052 | **After Hat Yai: say the size can be far bigger, and who alerts and orders; build the measured path** | the forecast was 3.5–4.7× short; no tested trigger did better; measured rain would have led the Extreme alert by ~45 h | MODELS §3.2, KI-039 |

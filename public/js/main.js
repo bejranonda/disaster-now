@@ -10,7 +10,7 @@ import { scale } from "./levels.js";
 import { dayName } from "./assess.js";
 import { IPE } from "./ipe.js";
 
-export const VERSION = "0.4.0";
+export const VERSION = "0.5.0";
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LV = (l) => (l == null || l < 0 ? "none" : scale(l).key);

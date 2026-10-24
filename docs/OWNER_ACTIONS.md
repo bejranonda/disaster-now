@@ -27,6 +27,7 @@ Things only the owner can decide or do. Each has why, the steps and how to check
 | B1 | FloodWatch: **CORS on `/api/point`** for this site's origin | the flood tile would show FloodWatch's own answer with BMA's canals (this app sees 8 ThaiWater gauges in Bangkok; FloodWatch had 33 near the old town); then set `"floodwatchPoint": true` in `public/config.json` |
 | B2 | FloodWatch: **CORS on `/api/geocode`** | Nominatim's 1-request-a-second limit is for the whole app; FloodWatch already throttles and caches to it; then `"geocoder": "floodwatch"` |
 | B3 | FloodWatch: **reconsider the river rule** | C.12 read "ใกล้ล้นตลิ่ง" with 1.31 m of freeboard (92 % of bed-to-bank); change both apps together |
+| B5 | FloodWatch: **replay 19–26 Nov 2025 for X.173A, X.90, X.44, X.174** from its database (its public API keeps 35 days): when each gauge crossed 70 %, 90 % and its bank, and what `change24` and `bank_chance24` said the day before; then an **upstream line** ("น้ำจากสะเดาจะถึงหาดใหญ่ในราว 13 ชม.") this page can show | the Hat Yai hindcast's measured path ([§5](research/hatyai-flood-2025-hindcast.md)) |
 | B4 | บ้านรอดไหม: **link to this app** instead of building its N28 "around my home" | one codebase for live data |
 
 ## C. Data permissions and keys
@@ -39,6 +40,7 @@ Things only the owner can decide or do. Each has why, the steps and how to check
 | C4 | **Ask ONWR** whether its flood-warning tiles may be used, and their heat-index unit and colours | ONWR's tiles give the official area flood warning today to +3 days ([research/sources gap 2](research/sources-2026-10-23.md#gap-2-flood-seen-by-satellite-flood-today)) |
 | C5 | **A note to the PCD** about Air4Thai's missing intermediate certificate | it breaks every script and some browsers (Hazard-huntz docs/09 §3) |
 | C6 | **Ask the PCD for its 7-day dust forecast as data** (per province and day, with its category) | today it is six images; as data, a PCD forecast of "เริ่มกระทบสุขภาพ" would lift that day in the 3-day table, as a TMD warning lifts a tile (the agency's word leads; [predict-air §7.2](research/predict-air-2026-10-24.md)) |
+| C8 | **Ask DDPM whether LINE ALERT is still its channel** (the page's "warnings unknown" line points to it; no evidence it was used in Hat Yai, Nov 2025) and for a public page on its Cell Broadcast | the official-channels line must name what really reaches phones |
 | C7 | **Ask ONWR and the Royal Forest Department** for feeds and reuse terms: ONWR's flood warnings and drought index, RFD's fire-danger rating (TFDRS) | the page quotes agencies before models; both are official and unlicensed or unreachable today ([predict-hazards](research/predict-hazards-2026-10-24.md)) |
 
 ## D. Decisions

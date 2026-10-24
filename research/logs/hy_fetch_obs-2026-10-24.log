@@ -1,0 +1,45 @@
+===== 2026-10-24T09:28:36Z GHCN-Daily by station (NOAA NCEI)
+https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/TH000048569.csv 200 2179558
+https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/TH000048568.csv 200 3471378
+https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/TH000048552.csv 200 3401854
+https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/TH000048567.csv 200 3056852
+https://www.ncei.noaa.gov/data/global-historical-climatology-network-daily/access/TH000048551.csv 200 3193947
+===== 2026-10-24T09:29:10Z GHCNh by year (NOAA NCEI)
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THU048569-1_2023.psv 200 13642619
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THU00048568_2023.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THU00048583_2023.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THU00048567_2023.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THU00048552_2023.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THM00048571_2023.psv 200 2363889
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THM00048574_2023.psv 200 2352966
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THM00048581_2023.psv 200 2345528
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THM00048560_2023.psv 200 2413808
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2023/psv/GHCNh_THM00048554_2023.psv 200 2371088
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2024/psv/GHCNh_THU048569-1_2024.psv 200 13863128
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2024/psv/GHCNh_THU00048568_2024.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2024/psv/GHCNh_THU00048583_2024.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2024/psv/GHCNh_THU00048567_2024.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2024/psv/GHCNh_THU00048552_2024.psv 404 262
+GHCNh_THM00048571_2024.psv reused (heat study's download)
+GHCNh_THM00048574_2024.psv reused (heat study's download)
+GHCNh_THM00048581_2024.psv reused (heat study's download)
+GHCNh_THM00048560_2024.psv reused (heat study's download)
+GHCNh_THM00048554_2024.psv reused (heat study's download)
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2025/psv/GHCNh_THU048569-1_2025.psv 200 14038854
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2025/psv/GHCNh_THU00048568_2025.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2025/psv/GHCNh_THU00048583_2025.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2025/psv/GHCNh_THU00048567_2025.psv 404 262
+https://www.ncei.noaa.gov/oa/global-historical-climatology-network/hourly/access/by-year/2025/psv/GHCNh_THU00048552_2025.psv 404 262
+GHCNh_THM00048571_2025.psv reused (heat study's download)
+GHCNh_THM00048574_2025.psv reused (heat study's download)
+GHCNh_THM00048581_2025.psv reused (heat study's download)
+GHCNh_THM00048560_2025.psv reused (heat study's download)
+GHCNh_THM00048554_2025.psv reused (heat study's download)
+===== 2026-10-24T11:52:02Z FloodWatch (the owner's app) station histories, /api/stations/<code>?days=400
+https://flood.autobahn.bot/api/stations/X.44?days=400 422 141
+===== 2026-10-24 (record of earlier probes, ~12:00Z) FloodWatch (the owner's app, https://flood.autobahn.bot), looking for a station-history endpoint; robots.txt: "User-agent: * / Content-Signal: search=yes,ai-train=no,use=reference / Allow: /"
+  /api/station/X.44 404 · /api/history/X.44 404 · /api/stations/X.44/history 404 "unknown station" · /api/station?code=X.44 404 · /api/ 404 · /robots.txt 200
+  /api/stations/{X.90,SLA002,TNG003,ridhydro_X.44}/history 404 "unknown station" · /api/stations/X.44?days=60/history 422 (days must be an integer)
+  /api/stations/X.44?days=3 200 (16 KB: station, feedback7d, observations [time, level_msl, discharge], forecast)
+  /api/stations/X.44?days=400 422 "Input should be less than or equal to 35": the public API serves 35 days, so Nov 2025 is out of its reach
+  (the station record says history_since 2025-09-30T18:00:00+00:00: FloodWatch's own store covers the event)

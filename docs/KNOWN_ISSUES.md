@@ -246,6 +246,16 @@ report with its time (SERVER §6.3).
 **Next:** OWNER_ACTIONS A9: a token scoped to `autobahn.bot` and the Workers permissions, a KV-only `CF_KV_TOKEN`, then
 `docker compose up -d` (the collector reads `.env` at start) and revoke the broad one.
 
+### KI-039 A multi-day flood rain looks like "สูง", never like its size (high; Hat Yai hindcast)
+- In the Hat Yai flood of Nov 2025 the page would have said "สูง" two days ahead and reached ทำทันที from measured rain
+  ~45 h before DDPM's first Extreme alert, but every forecast put the 3 days at a quarter of what fell; a 3-day or
+  neighbourhood chance did no better on a held-out season.
+- The page measures rain over 24 h only; the upstream gauge that rose first (Sadao, X.173A) is outside its 20 km list.
+- **Since 0.5.0:** the rain card's caution about multi-day rain, and who alerts and who orders at เตรียมตัว or above.
+- **Next:** a measured 3-day rain line (the collector keeps 07:00 snapshots); the collector's province rain and level
+  files, so the measured path reaches phones without each calling ThaiWater (KI-029); FloodWatch's upstream line
+  (INTEGRATION §3.7); a 3-day chance only after Nov–Jan 2026–27 is scored.
+
 ### KI-038 The dust chance is provisional, and over-warns at its low end (low)
 - Shown 20 % → 8 % happened (disjoint stations, two dust seasons); it inherits the damped ratio's post-hoc status, and
   every CAMS-based score is an upper bound (Open-Meteo stitches short leads).
