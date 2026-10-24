@@ -198,3 +198,38 @@ Run on FloodWatch's server for the last time, at the owner's word:
 | D-041 | **New tokens, issued for this project, never copied; the old one left to FloodWatch until checked** | the old token came from FloodWatch's `.env`, and FloodWatch may deploy with it | OWNER_ACTIONS A9 |
 | D-042 | **A preflight that fails on FloodWatch's host** | a check beats a reminder: the docs already said "FloodWatch's server", and the stack still ran there | `tools/preflight.mjs` |
 | D-043 | **`main` fast-forwarded to the work branch and pushed; the checkout's deletion left to the owner** (the agent's was blocked) | the owner: "merge and push to remote, then clean up the project in this server" | OWNER_ACTIONS A8, A13 |
+
+## 8. The new host, the name and the model check (24 Oct 2026, ≈ 07:40–09:40 UTC, 0.4.0)
+
+The owner moved the project to `autobahn-bot` with a new Cloudflare token and asked for a full review: the name, UI/UX
+as a visitor, output and model cross-validation, integration, frank feedback. Mid-session they added deep research on
+predicting earthquakes, pollution and other disasters, PNSN's four categories (prediction, early warning, probabilities,
+forecasts), and the Hat Yai flood of late 2025.
+
+### Timeline
+
+| # | What | Evidence |
+|---|---|---|
+| 1 | `npm run preflight`: no ❌; the host also runs BrainPlatform's production; `.env` 644 → 600 | its output |
+| 2 | 61 tests, 29 fixture checks pass; Cloudflare token valid but KV 401; the owner adds KV | `env-check --probe` |
+| 3 | The owner answers three questions: run the collector here, deploy at the end, the name ภัยรอบบ้าน · Thai Risk | the session |
+| 4 | `cf:setup` creates the KV namespace; `docker compose up`: Air4Thai 173 stations | collector log |
+| 5 | Baseline live walk; three independent agents start (visitor UX, output cross-check, model check) | their reports |
+| 6 | The session's own review: S1–S11 (forecast colours, the 320 px table, the evening heat false alarm S6 …) | [review](review-2026-10-24.md) |
+| 7 | Visitor audit U1–U25 and output cross-check X1–X19 fixed or recorded; 139 of 144 numbers equal the sources | their reports |
+| 8 | Four research agents start (earthquakes, air quality, other hazards, the Hat Yai hindcast) | `research/eq_*`, `aq_*`, `hz_*`, `hy_*` |
+| 9 | The model check: the heat line is 3–4 °C hot in Nov–Feb, worse than raw; the page's inputs differ from the fit | [model check](model-check-2026-10-24.md) |
+| 10 | The owner chooses C6 for Nov–Feb; 13:00/16:00 and `elevation=nan`; JS equals the research code to 4 decimals | tests |
+| 11 | Stale collector files treated as missing (S12); one live walk at 16:21 Bangkok passes | smoke |
+| 12 | `cf:deploy` **refused** (403, no Workers Scripts: Edit); nothing created; `env-check --probe` now tests it (S13) | wrangler log, probe |
+
+### Decisions
+
+| ID | Decision | Why | Where |
+|---|---|---|---|
+| D-044 | **The name ภัยรอบบ้าน · Thai Risk** (the owner, from the session's options) | "Thai Risk" alone reads as a country-risk rating and, beside ThaiWater, as official; "Disaster Now" said "disaster" on a calm day; the Thai name fits 320 px | OWNER_ACTIONS A2 |
+| D-045 | **The collector on `autobahn-bot`, beside BrainPlatform** (the owner); D-040 amended to "never FloodWatch's server; another app's only with the owner's yes and no shared sources, `.env` or tunnel" | BrainPlatform calls none of this app's sources; the rule's reasons were FloodWatch's | GUIDELINES §8 |
+| D-046 | **Heat: C6 for Nov–Feb, provisional; the page computes the fitted predictor (13:00/16:00, grid height)** (the owner chose C6 over "keep and reword") | the line was worse than raw in the cool season; C5, pre-registered, failed its safety rule | MODELS §1.1, KI-037 |
+| D-047 | **One grading for every view of a forecast** (`assess.fcLevel`), and a correction only inside its fitted domain | the table and pre-warnings were red beside an orange tile; an evening became "danger heat" | GUIDELINES 3b, 3e |
+| D-048 | **A province or district found by name opens its seat's subdistrict** | Chiang Mai's centre was a mountain 40 km from town | KNOWLEDGE §7 |
+| D-049 | **Collector files older than 2 h are missing** | KV keeps the last upload; an empty stale list reads as calm | `sources.liveFresh` |

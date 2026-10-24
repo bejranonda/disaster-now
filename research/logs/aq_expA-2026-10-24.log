@@ -1,0 +1,1556 @@
+
+===== run 2026-10-24T08:55:48+00:00 : research/aq_expA.py =====
+rows (station × day × lead, Dec–Apr): 24595; seasons {'S3': 6278, 'S2': 6272, 'S4': 6183, 'S1': 5862}
+  S1 lead 1: n=1965, obs>37.5 51.7 %, obs>75 18.2 %; north 65.8 % / 33.0 %
+  S2 lead 1: n=2096, obs>37.5 41.1 %, obs>75 9.6 %; north 54.5 % / 16.9 %
+  S3 lead 1: n=2095, obs>37.5 35.1 %, obs>75 4.7 %; north 42.1 % / 7.5 %
+  S4 lead 1: n=2064, obs>37.5 26.2 %, obs>75 8.5 %; north 31.6 % / 16.9 %
+
+## Choosing: fit S1, score S2, sample A (Brier score; lower is better)
+  lead 1 T>37.5: n=902 base rate 0.402  damp_dress=0.0697  damp_emp=0.0685  damp_het=0.0696  damp_logit=0.0730  pl_logit=0.0823  pers_dress=0.0857  pers_logit=0.0865  clim=0.1455
+  lead 1 T>75.0: n=902 base rate 0.099  damp_dress=0.0376  damp_emp=0.0379  damp_het=0.0375  damp_logit=0.0363  pl_logit=0.0376  pers_dress=0.0410  pers_logit=0.0405  clim=0.0640
+  lead 2 T>37.5: n=899 base rate 0.403  damp_dress=0.0937  damp_emp=0.0892  damp_het=0.0935  damp_logit=0.1004  pl_logit=0.1103  pers_dress=0.1219  pers_logit=0.1242  clim=0.1456
+  lead 2 T>75.0: n=899 base rate 0.099  damp_dress=0.0514  damp_emp=0.0515  damp_het=0.0509  damp_logit=0.0468  pl_logit=0.0498  pers_dress=0.0580  pers_logit=0.0563  clim=0.0642
+  mean Brier over leads 1–2 and both thresholds: damp_dress 0.0631, damp_emp 0.0618, damp_het 0.0629, damp_logit 0.0641, pl_logit 0.0700, pers_dress 0.0766, pers_logit 0.0769, clim 0.1048
+  → chosen candidate: damp_emp; persistence reference: pers_dress; primary (pre-registered): damp_dress
+  fitted lead 1 T>37.5: damp_dress mu=+0.002 sd=0.241; damp_het mu=+0.002 a=-1.426 b=+0.006; pl_logit coef=[-25.012176237990943, 6.8892703077969015, 2.012502850237574]
+  fitted lead 1 T>75.0: damp_dress mu=+0.002 sd=0.241; damp_het mu=+0.002 a=-1.426 b=+0.006; pl_logit coef=[-34.05073455188011, 7.800754477403569, 2.2001949066643567]
+  fitted lead 2 T>37.5: damp_dress mu=+0.003 sd=0.343; damp_het mu=+0.003 a=-1.069 b=-0.001; pl_logit coef=[-16.830161146785084, 4.629123001482642, 1.8287969897105456]
+  fitted lead 2 T>75.0: damp_dress mu=+0.003 sd=0.343; damp_het mu=+0.003 a=-1.069 b=-0.001; pl_logit coef=[-24.005001439845884, 5.441718479908405, 1.9730070302471987]
+  fitted lead 3 T>37.5: damp_dress mu=+0.004 sd=0.379; damp_het mu=+0.008 a=-0.972 b=+0.021; pl_logit coef=[-15.265350204755668, 4.197929141854489, 2.090286002746596]
+  fitted lead 3 T>75.0: damp_dress mu=+0.004 sd=0.379; damp_het mu=+0.008 a=-0.972 b=+0.021; pl_logit coef=[-20.56369867715819, 4.630471855520354, 2.0003908372594723]
+
+## A-S3 (later season, fit stations)
+ lead 1 T>37.5: n=895 events=320 (35.8 %)  Brier damp_dress=0.0871 damp_emp=0.0867 damp_het=0.0871 damp_logit=0.0874 pl_logit=0.0886 pers_dress=0.1003 pers_logit=0.1003 clim=0.1822
+    BSS_damp_dress_vs_clim           +0.522 [+0.453, +0.582]
+    BSS_damp_dress_vs_pers_dress     +0.131 [+0.075, +0.185]
+    BSS_damp_emp_vs_clim             +0.524 [+0.451, +0.587]
+    BSS_damp_emp_vs_pers_dress       +0.135 [+0.073, +0.195]
+    BSS_damp_logit_vs_clim           +0.520 [+0.452, +0.579]
+    BSS_damp_logit_vs_pers_dress     +0.129 [+0.073, +0.181]
+    BSS_pers_dress_vs_clim           +0.450 [+0.379, +0.515]
+    BSS_pl_logit_vs_clim             +0.514 [+0.447, +0.574]
+    BSS_pl_logit_vs_pers_dress       +0.116 [+0.081, +0.151]
+    AUC damp_dress=0.949 damp_emp=0.949 damp_het=0.949 damp_logit=0.949 pl_logit=0.947 pers_dress=0.934 pers_logit=0.934 clim=0.794
+    reliability damp_emp: 0-10%: n=396 p=0.02 obs=0.02; 10-20%: n=60 p=0.14 obs=0.08; 20-30%: n=44 p=0.25 obs=0.30; 30-40%: n=40 p=0.35 obs=0.35; 40-50%: n=39 p=0.45 obs=0.41; 50-60%: n=32 p=0.55 obs=0.62; 60-70%: n=29 p=0.64 obs=0.48; 70-80%: n=38 p=0.75 obs=0.79; 80-90%: n=71 p=0.86 obs=0.80; 90-100%: n=146 p=0.96 obs=0.97
+    as the page would show it (damp_emp): 10% n=434 obs=0.02; 20% n=46 obs=0.24; 30% n=38 obs=0.32; 40% n=41 obs=0.37; 50% n=36 obs=0.47; 60% n=38 obs=0.58; 70% n=27 obs=0.67; 80% n=43 obs=0.77; 90% n=192 obs=0.95
+    reliability pers_dress: 0-10%: n=356 p=0.02 obs=0.01; 10-20%: n=79 p=0.14 obs=0.15; 20-30%: n=43 p=0.25 obs=0.21; 30-40%: n=58 p=0.35 obs=0.41; 40-50%: n=36 p=0.45 obs=0.36; 50-60%: n=51 p=0.55 obs=0.55; 60-70%: n=43 p=0.65 obs=0.58; 70-80%: n=54 p=0.76 obs=0.80; 80-90%: n=46 p=0.85 obs=0.87; 90-100%: n=129 p=0.97 obs=0.94
+ lead 1 T>75.0: n=895 events=31 (3.5 %)  Brier damp_dress=0.0191 damp_emp=0.0189 damp_het=0.0191 damp_logit=0.0184 pl_logit=0.0179 pers_dress=0.0205 pers_logit=0.0194 clim=0.0414
+    BSS_damp_dress_vs_clim           +0.538 [+0.439, +0.644]
+    BSS_damp_dress_vs_pers_dress     +0.067 [-0.027, +0.157]
+    BSS_damp_emp_vs_clim             +0.542 [+0.436, +0.653]
+    BSS_damp_emp_vs_pers_dress       +0.076 [-0.023, +0.175]
+    BSS_damp_logit_vs_clim           +0.555 [+0.454, +0.668]
+    BSS_damp_logit_vs_pers_dress     +0.101 [-0.032, +0.237]
+    BSS_pers_dress_vs_clim           +0.505 [+0.390, +0.618]
+    BSS_pl_logit_vs_clim             +0.566 [+0.463, +0.677]
+    BSS_pl_logit_vs_pers_dress       +0.124 [+0.027, +0.239]
+    AUC damp_dress=0.984 damp_emp=0.984 damp_het=0.984 damp_logit=0.984 pl_logit=0.984 pers_dress=0.980 pers_logit=0.980 clim=0.880
+    reliability damp_emp: 0-10%: n=810 p=0.01 obs=0.00; 10-20%: n=23 p=0.15 obs=0.09; 20-30%: n=15 p=0.24 obs=0.20; 30-40%: n=9 p=0.35 obs=0.44; 40-50%: n=9 p=0.43 obs=0.33; 50-60%: n=5 p=0.55 obs=0.40; 60-70%: n=2 p=0.60 obs=0.50; 70-80%: n=8 p=0.75 obs=0.62; 80-90%: n=9 p=0.86 obs=0.78; 90-100%: n=5 p=0.93 obs=0.60
+    as the page would show it (damp_emp): 10% n=822 obs=0.00; 20% n=21 obs=0.10; 30% n=9 obs=0.44; 40% n=12 obs=0.33; 50% n=6 obs=0.50; 60% n=3 obs=0.33; 70% n=3 obs=0.33; 80% n=9 obs=0.78; 90% n=10 obs=0.70
+    reliability pers_dress: 0-10%: n=786 p=0.01 obs=0.00; 10-20%: n=33 p=0.14 obs=0.06; 20-30%: n=25 p=0.25 obs=0.28; 30-40%: n=12 p=0.35 obs=0.17; 40-50%: n=8 p=0.44 obs=0.00; 50-60%: n=7 p=0.57 obs=0.57; 60-70%: n=8 p=0.64 obs=0.62; 70-80%: n=9 p=0.76 obs=0.67; 80-90%: n=4 p=0.83 obs=0.75; 90-100%: n=3 p=0.94 obs=0.67
+ lead 2 T>37.5: n=894 events=320 (35.8 %)  Brier damp_dress=0.1248 damp_emp=0.1256 damp_het=0.1248 damp_logit=0.1249 pl_logit=0.1289 pers_dress=0.1576 pers_logit=0.1552 clim=0.1818
+    BSS_damp_dress_vs_clim           +0.313 [+0.224, +0.391]
+    BSS_damp_dress_vs_pers_dress     +0.208 [+0.156, +0.257]
+    BSS_damp_emp_vs_clim             +0.309 [+0.214, +0.393]
+    BSS_damp_emp_vs_pers_dress       +0.203 [+0.145, +0.260]
+    BSS_damp_logit_vs_clim           +0.313 [+0.225, +0.388]
+    BSS_damp_logit_vs_pers_dress     +0.208 [+0.158, +0.255]
+    BSS_pers_dress_vs_clim           +0.133 [+0.027, +0.225]
+    BSS_pl_logit_vs_clim             +0.291 [+0.201, +0.368]
+    BSS_pl_logit_vs_pers_dress       +0.182 [+0.146, +0.218]
+    AUC damp_dress=0.896 damp_emp=0.896 damp_het=0.896 damp_logit=0.896 pl_logit=0.890 pers_dress=0.844 pers_logit=0.844 clim=0.794
+    reliability damp_emp: 0-10%: n=334 p=0.02 obs=0.04; 10-20%: n=81 p=0.15 obs=0.19; 20-30%: n=61 p=0.24 obs=0.23; 30-40%: n=53 p=0.35 obs=0.40; 40-50%: n=39 p=0.44 obs=0.31; 50-60%: n=47 p=0.55 obs=0.55; 60-70%: n=43 p=0.66 obs=0.58; 70-80%: n=64 p=0.75 obs=0.73; 80-90%: n=58 p=0.86 obs=0.78; 90-100%: n=114 p=0.95 obs=0.89
+    as the page would show it (damp_emp): 10% n=375 obs=0.05; 20% n=75 obs=0.19; 30% n=50 obs=0.32; 40% n=51 obs=0.43; 50% n=43 obs=0.47; 60% n=40 obs=0.50; 70% n=53 obs=0.64; 80% n=62 obs=0.74; 90% n=145 obs=0.89
+    reliability pers_dress: 0-10%: n=284 p=0.02 obs=0.04; 10-20%: n=81 p=0.15 obs=0.23; 20-30%: n=80 p=0.24 obs=0.28; 30-40%: n=66 p=0.35 obs=0.33; 40-50%: n=60 p=0.44 obs=0.47; 50-60%: n=68 p=0.55 obs=0.57; 60-70%: n=64 p=0.65 obs=0.50; 70-80%: n=57 p=0.75 obs=0.67; 80-90%: n=54 p=0.85 obs=0.78; 90-100%: n=80 p=0.96 obs=0.82
+ lead 2 T>75.0: n=894 events=31 (3.5 %)  Brier damp_dress=0.0313 damp_emp=0.0312 damp_het=0.0313 damp_logit=0.0279 pl_logit=0.0269 pers_dress=0.0322 pers_logit=0.0280 clim=0.0413
+    BSS_damp_dress_vs_clim           +0.242 [+0.079, +0.397]
+    BSS_damp_dress_vs_pers_dress     +0.027 [-0.072, +0.128]
+    BSS_damp_emp_vs_clim             +0.244 [+0.068, +0.419]
+    BSS_damp_emp_vs_pers_dress       +0.030 [-0.081, +0.151]
+    BSS_damp_logit_vs_clim           +0.323 [+0.172, +0.493]
+    BSS_damp_logit_vs_pers_dress     +0.131 [-0.010, +0.290]
+    BSS_pers_dress_vs_clim           +0.221 [+0.038, +0.386]
+    BSS_pl_logit_vs_clim             +0.347 [+0.199, +0.512]
+    BSS_pl_logit_vs_pers_dress       +0.162 [+0.051, +0.299]
+    AUC damp_dress=0.939 damp_emp=0.939 damp_het=0.939 damp_logit=0.939 pl_logit=0.939 pers_dress=0.915 pers_logit=0.915 clim=0.880
+    reliability damp_emp: 0-10%: n=767 p=0.01 obs=0.01; 10-20%: n=50 p=0.14 obs=0.10; 20-30%: n=28 p=0.24 obs=0.11; 30-40%: n=10 p=0.36 obs=0.40; 40-50%: n=9 p=0.45 obs=0.33; 50-60%: n=9 p=0.56 obs=0.33; 60-70%: n=10 p=0.66 obs=0.40; 70-80%: n=5 p=0.75 obs=0.40; 80-90%: n=3 p=0.86 obs=0.00; 90-100%: n=3 p=0.93 obs=0.67
+    as the page would show it (damp_emp): 10% n=799 obs=0.01; 20% n=36 obs=0.17; 30% n=14 obs=0.21; 40% n=11 obs=0.36; 50% n=7 obs=0.43; 60% n=9 obs=0.33; 70% n=9 obs=0.33; 80% n=4 obs=0.25; 90% n=5 obs=0.40
+    reliability pers_dress: 0-10%: n=725 p=0.02 obs=0.01; 10-20%: n=66 p=0.14 obs=0.03; 20-30%: n=31 p=0.24 obs=0.03; 30-40%: n=29 p=0.34 obs=0.28; 40-50%: n=13 p=0.45 obs=0.08; 50-60%: n=11 p=0.56 obs=0.27; 60-70%: n=9 p=0.66 obs=0.56; 70-80%: n=7 p=0.74 obs=0.57; 80-90%: n=3 p=0.87 obs=0.33
+ lead 3 T>37.5: n=893 events=319 (35.7 %)  Brier damp_dress=0.1376 damp_emp=0.1382 damp_het=0.1377 damp_logit=0.1371 pl_logit=0.1392 pers_dress=0.1851 pers_logit=0.1806 clim=0.1819
+    BSS_damp_dress_vs_clim           +0.243 [+0.152, +0.321]
+    BSS_damp_dress_vs_pers_dress     +0.257 [+0.210, +0.299]
+    BSS_damp_emp_vs_clim             +0.240 [+0.141, +0.323]
+    BSS_damp_emp_vs_pers_dress       +0.253 [+0.201, +0.302]
+    BSS_damp_logit_vs_clim           +0.246 [+0.156, +0.322]
+    BSS_damp_logit_vs_pers_dress     +0.259 [+0.213, +0.301]
+    BSS_pers_dress_vs_clim           -0.018 [-0.131, +0.078]
+    BSS_pl_logit_vs_clim             +0.234 [+0.144, +0.311]
+    BSS_pl_logit_vs_pers_dress       +0.248 [+0.206, +0.287]
+    AUC damp_dress=0.875 damp_emp=0.875 damp_het=0.875 damp_logit=0.875 pl_logit=0.871 pers_dress=0.790 pers_logit=0.790 clim=0.795
+    reliability damp_emp: 0-10%: n=310 p=0.03 obs=0.05; 10-20%: n=89 p=0.15 obs=0.19; 20-30%: n=68 p=0.25 obs=0.18; 30-40%: n=49 p=0.35 obs=0.43; 40-50%: n=66 p=0.45 obs=0.42; 50-60%: n=47 p=0.55 obs=0.53; 60-70%: n=47 p=0.65 obs=0.55; 70-80%: n=52 p=0.76 obs=0.67; 80-90%: n=55 p=0.85 obs=0.80; 90-100%: n=110 p=0.95 obs=0.87
+    as the page would show it (damp_emp): 10% n=357 obs=0.08; 20% n=71 obs=0.15; 30% n=61 obs=0.25; 40% n=63 obs=0.40; 50% n=50 obs=0.50; 60% n=54 obs=0.54; 70% n=40 obs=0.65; 80% n=55 obs=0.71; 90% n=142 obs=0.86
+    reliability pers_dress: 0-10%: n=254 p=0.03 obs=0.07; 10-20%: n=89 p=0.15 obs=0.22; 20-30%: n=86 p=0.25 obs=0.30; 30-40%: n=73 p=0.36 obs=0.33; 40-50%: n=67 p=0.45 obs=0.49; 50-60%: n=76 p=0.55 obs=0.51; 60-70%: n=74 p=0.65 obs=0.55; 70-80%: n=58 p=0.75 obs=0.55; 80-90%: n=55 p=0.85 obs=0.73; 90-100%: n=61 p=0.95 obs=0.74
+ lead 3 T>75.0: n=893 events=32 (3.6 %)  Brier damp_dress=0.0380 damp_emp=0.0377 damp_het=0.0382 damp_logit=0.0331 pl_logit=0.0324 pers_dress=0.0395 pers_logit=0.0334 clim=0.0417
+    BSS_damp_dress_vs_clim           +0.090 [-0.123, +0.291]
+    BSS_damp_dress_vs_pers_dress     +0.040 [-0.061, +0.155]
+    BSS_damp_emp_vs_clim             +0.096 [-0.131, +0.314]
+    BSS_damp_emp_vs_pers_dress       +0.046 [-0.070, +0.184]
+    BSS_damp_logit_vs_clim           +0.208 [+0.017, +0.416]
+    BSS_damp_logit_vs_pers_dress     +0.164 [+0.018, +0.332]
+    BSS_pers_dress_vs_clim           +0.052 [-0.171, +0.255]
+    BSS_pl_logit_vs_clim             +0.225 [+0.037, +0.430]
+    BSS_pl_logit_vs_pers_dress       +0.182 [+0.056, +0.341]
+    AUC damp_dress=0.892 damp_emp=0.891 damp_het=0.892 damp_logit=0.892 pl_logit=0.894 pers_dress=0.864 pers_logit=0.864 clim=0.881
+    reliability damp_emp: 0-10%: n=744 p=0.02 obs=0.01; 10-20%: n=66 p=0.14 obs=0.12; 20-30%: n=31 p=0.26 obs=0.19; 30-40%: n=15 p=0.34 obs=0.27; 40-50%: n=11 p=0.44 obs=0.18; 50-60%: n=5 p=0.53 obs=0.20; 60-70%: n=5 p=0.64 obs=0.20; 70-80%: n=8 p=0.73 obs=0.38; 80-90%: n=3 p=0.84 obs=0.33; 90-100%: n=5 p=0.93 obs=0.20
+    as the page would show it (damp_emp): 10% n=780 obs=0.01; 20% n=41 obs=0.22; 30% n=29 obs=0.17; 40% n=14 obs=0.29; 50% n=7 obs=0.14; 60% n=5 obs=0.20; 70% n=7 obs=0.43; 80% n=4 obs=0.00; 90% n=6 obs=0.33
+    reliability pers_dress: 0-10%: n=677 p=0.02 obs=0.01; 10-20%: n=98 p=0.14 obs=0.04; 20-30%: n=41 p=0.25 obs=0.10; 30-40%: n=30 p=0.35 obs=0.20; 40-50%: n=16 p=0.44 obs=0.06; 50-60%: n=14 p=0.56 obs=0.29; 60-70%: n=10 p=0.66 obs=0.40; 70-80%: n=4 p=0.72 obs=0.50; 80-90%: n=3 p=0.84 obs=0.00
+
+## B-S3 (later season, disjoint stations)
+ lead 1 T>37.5: n=1200 events=416 (34.7 %)  Brier damp_dress=0.0760 damp_emp=0.0764 damp_het=0.0761 damp_logit=0.0761 pl_logit=0.0782 pers_dress=0.0901 pers_logit=0.0897 clim=0.1830
+    BSS_damp_dress_vs_clim           +0.584 [+0.529, +0.638]
+    BSS_damp_dress_vs_pers_dress     +0.156 [+0.105, +0.206]
+    BSS_damp_emp_vs_clim             +0.583 [+0.524, +0.639]
+    BSS_damp_emp_vs_pers_dress       +0.152 [+0.098, +0.208]
+    BSS_damp_logit_vs_clim           +0.584 [+0.530, +0.637]
+    BSS_damp_logit_vs_pers_dress     +0.155 [+0.105, +0.205]
+    BSS_pers_dress_vs_clim           +0.508 [+0.447, +0.566]
+    BSS_pl_logit_vs_clim             +0.573 [+0.517, +0.627]
+    BSS_pl_logit_vs_pers_dress       +0.132 [+0.098, +0.166]
+    AUC damp_dress=0.960 damp_emp=0.960 damp_het=0.960 damp_logit=0.960 pl_logit=0.957 pers_dress=0.943 pers_logit=0.943 clim=0.792
+    reliability damp_emp: 0-10%: n=582 p=0.01 obs=0.02; 10-20%: n=74 p=0.15 obs=0.15; 20-30%: n=41 p=0.25 obs=0.37; 30-40%: n=39 p=0.35 obs=0.31; 40-50%: n=35 p=0.45 obs=0.43; 50-60%: n=39 p=0.55 obs=0.38; 60-70%: n=35 p=0.65 obs=0.46; 70-80%: n=44 p=0.75 obs=0.80; 80-90%: n=83 p=0.86 obs=0.82; 90-100%: n=228 p=0.97 obs=0.96
+    as the page would show it (damp_emp): 10% n=622 obs=0.02; 20% n=54 obs=0.28; 30% n=44 obs=0.36; 40% n=34 obs=0.32; 50% n=39 obs=0.36; 60% n=40 obs=0.47; 70% n=38 obs=0.66; 80% n=46 obs=0.78; 90% n=283 obs=0.95
+    reliability pers_dress: 0-10%: n=534 p=0.01 obs=0.02; 10-20%: n=78 p=0.15 obs=0.13; 20-30%: n=67 p=0.25 obs=0.27; 30-40%: n=53 p=0.35 obs=0.28; 40-50%: n=51 p=0.45 obs=0.41; 50-60%: n=33 p=0.55 obs=0.48; 60-70%: n=55 p=0.65 obs=0.58; 70-80%: n=63 p=0.75 obs=0.76; 80-90%: n=62 p=0.85 obs=0.87; 90-100%: n=204 p=0.98 obs=0.94
+ lead 1 T>75.0: n=1200 events=67 (5.6 %)  Brier damp_dress=0.0215 damp_emp=0.0211 damp_het=0.0215 damp_logit=0.0202 pl_logit=0.0195 pers_dress=0.0233 pers_logit=0.0214 clim=0.0526
+    BSS_damp_dress_vs_clim           +0.591 [+0.465, +0.698]
+    BSS_damp_dress_vs_pers_dress     +0.075 [-0.040, +0.184]
+    BSS_damp_emp_vs_clim             +0.599 [+0.468, +0.712]
+    BSS_damp_emp_vs_pers_dress       +0.094 [-0.031, +0.221]
+    BSS_damp_logit_vs_clim           +0.615 [+0.496, +0.722]
+    BSS_damp_logit_vs_pers_dress     +0.130 [+0.018, +0.247]
+    BSS_pers_dress_vs_clim           +0.557 [+0.442, +0.662]
+    BSS_pl_logit_vs_clim             +0.629 [+0.517, +0.733]
+    BSS_pl_logit_vs_pers_dress       +0.162 [+0.079, +0.259]
+    AUC damp_dress=0.986 damp_emp=0.985 damp_het=0.986 damp_logit=0.986 pl_logit=0.986 pers_dress=0.983 pers_logit=0.983 clim=0.906
+    reliability damp_emp: 0-10%: n=1051 p=0.01 obs=0.00; 10-20%: n=35 p=0.14 obs=0.00; 20-30%: n=12 p=0.24 obs=0.00; 30-40%: n=14 p=0.36 obs=0.43; 40-50%: n=10 p=0.45 obs=0.40; 50-60%: n=10 p=0.52 obs=0.60; 60-70%: n=8 p=0.65 obs=0.38; 70-80%: n=17 p=0.74 obs=0.59; 80-90%: n=11 p=0.85 obs=0.73; 90-100%: n=32 p=0.97 obs=0.88
+    as the page would show it (damp_emp): 10% n=1074 obs=0.00; 20% n=19 obs=0.00; 30% n=10 obs=0.20; 40% n=14 obs=0.43; 50% n=14 obs=0.50; 60% n=5 obs=0.60; 70% n=13 obs=0.62; 80% n=12 obs=0.50; 90% n=39 obs=0.85
+    reliability pers_dress: 0-10%: n=1016 p=0.01 obs=0.00; 10-20%: n=44 p=0.14 obs=0.05; 20-30%: n=27 p=0.26 obs=0.11; 30-40%: n=26 p=0.35 obs=0.27; 40-50%: n=18 p=0.46 obs=0.22; 50-60%: n=13 p=0.55 obs=0.23; 60-70%: n=9 p=0.66 obs=0.67; 70-80%: n=7 p=0.74 obs=0.57; 80-90%: n=8 p=0.84 obs=0.88; 90-100%: n=32 p=0.96 obs=0.91
+ lead 2 T>37.5: n=1198 events=416 (34.7 %)  Brier damp_dress=0.1094 damp_emp=0.1104 damp_het=0.1094 damp_logit=0.1092 pl_logit=0.1140 pers_dress=0.1434 pers_logit=0.1411 clim=0.1833
+    BSS_damp_dress_vs_clim           +0.403 [+0.333, +0.470]
+    BSS_damp_dress_vs_pers_dress     +0.237 [+0.189, +0.283]
+    BSS_damp_emp_vs_clim             +0.397 [+0.322, +0.470]
+    BSS_damp_emp_vs_pers_dress       +0.230 [+0.176, +0.281]
+    BSS_damp_logit_vs_clim           +0.404 [+0.337, +0.469]
+    BSS_damp_logit_vs_pers_dress     +0.239 [+0.193, +0.282]
+    BSS_pers_dress_vs_clim           +0.218 [+0.132, +0.298]
+    BSS_pl_logit_vs_clim             +0.378 [+0.308, +0.446]
+    BSS_pl_logit_vs_pers_dress       +0.205 [+0.170, +0.239]
+    AUC damp_dress=0.919 damp_emp=0.919 damp_het=0.919 damp_logit=0.919 pl_logit=0.911 pers_dress=0.868 pers_logit=0.868 clim=0.792
+    reliability damp_emp: 0-10%: n=504 p=0.02 obs=0.03; 10-20%: n=78 p=0.15 obs=0.15; 20-30%: n=73 p=0.25 obs=0.25; 30-40%: n=63 p=0.35 obs=0.40; 40-50%: n=44 p=0.45 obs=0.39; 50-60%: n=60 p=0.55 obs=0.45; 60-70%: n=58 p=0.65 obs=0.59; 70-80%: n=50 p=0.75 obs=0.70; 80-90%: n=85 p=0.85 obs=0.75; 90-100%: n=183 p=0.96 obs=0.93
+    as the page would show it (damp_emp): 10% n=544 obs=0.04; 20% n=79 obs=0.19; 30% n=63 obs=0.35; 40% n=54 obs=0.33; 50% n=52 obs=0.52; 60% n=56 obs=0.45; 70% n=62 obs=0.61; 80% n=60 obs=0.73; 90% n=228 obs=0.90
+    reliability pers_dress: 0-10%: n=453 p=0.02 obs=0.05; 10-20%: n=86 p=0.14 obs=0.22; 20-30%: n=91 p=0.25 obs=0.21; 30-40%: n=79 p=0.35 obs=0.35; 40-50%: n=70 p=0.45 obs=0.39; 50-60%: n=59 p=0.56 obs=0.56; 60-70%: n=74 p=0.65 obs=0.62; 70-80%: n=72 p=0.75 obs=0.71; 80-90%: n=69 p=0.85 obs=0.71; 90-100%: n=145 p=0.97 obs=0.83
+ lead 2 T>75.0: n=1198 events=68 (5.7 %)  Brier damp_dress=0.0339 damp_emp=0.0335 damp_het=0.0339 damp_logit=0.0316 pl_logit=0.0307 pers_dress=0.0379 pers_logit=0.0337 clim=0.0521
+    BSS_damp_dress_vs_clim           +0.349 [+0.181, +0.493]
+    BSS_damp_dress_vs_pers_dress     +0.105 [-0.016, +0.215]
+    BSS_damp_emp_vs_clim             +0.358 [+0.176, +0.516]
+    BSS_damp_emp_vs_pers_dress       +0.117 [-0.016, +0.239]
+    BSS_damp_logit_vs_clim           +0.395 [+0.227, +0.540]
+    BSS_damp_logit_vs_pers_dress     +0.167 [+0.040, +0.294]
+    BSS_pers_dress_vs_clim           +0.273 [+0.094, +0.429]
+    BSS_pl_logit_vs_clim             +0.412 [+0.254, +0.554]
+    BSS_pl_logit_vs_pers_dress       +0.191 [+0.091, +0.293]
+    AUC damp_dress=0.963 damp_emp=0.963 damp_het=0.963 damp_logit=0.963 pl_logit=0.961 pers_dress=0.946 pers_logit=0.946 clim=0.908
+    reliability damp_emp: 0-10%: n=1002 p=0.01 obs=0.00; 10-20%: n=61 p=0.15 obs=0.07; 20-30%: n=29 p=0.24 obs=0.10; 30-40%: n=23 p=0.34 obs=0.39; 40-50%: n=8 p=0.46 obs=0.62; 50-60%: n=16 p=0.56 obs=0.44; 60-70%: n=13 p=0.65 obs=0.46; 70-80%: n=9 p=0.73 obs=0.67; 80-90%: n=12 p=0.85 obs=0.50; 90-100%: n=25 p=0.96 obs=0.72
+    as the page would show it (damp_emp): 10% n=1030 obs=0.01; 20% n=54 obs=0.06; 30% n=22 obs=0.23; 40% n=11 obs=0.64; 50% n=12 obs=0.58; 60% n=16 obs=0.31; 70% n=13 obs=0.54; 80% n=9 obs=0.78; 90% n=31 obs=0.65
+    reliability pers_dress: 0-10%: n=939 p=0.01 obs=0.01; 10-20%: n=81 p=0.14 obs=0.04; 20-30%: n=41 p=0.23 obs=0.07; 30-40%: n=37 p=0.35 obs=0.22; 40-50%: n=31 p=0.45 obs=0.26; 50-60%: n=16 p=0.54 obs=0.44; 60-70%: n=13 p=0.66 obs=0.31; 70-80%: n=7 p=0.76 obs=0.29; 80-90%: n=15 p=0.84 obs=0.60; 90-100%: n=18 p=0.96 obs=0.94
+ lead 3 T>37.5: n=1198 events=416 (34.7 %)  Brier damp_dress=0.1243 damp_emp=0.1258 damp_het=0.1244 damp_logit=0.1237 pl_logit=0.1266 pers_dress=0.1752 pers_logit=0.1705 clim=0.1833
+    BSS_damp_dress_vs_clim           +0.322 [+0.242, +0.395]
+    BSS_damp_dress_vs_pers_dress     +0.290 [+0.246, +0.335]
+    BSS_damp_emp_vs_clim             +0.314 [+0.228, +0.392]
+    BSS_damp_emp_vs_pers_dress       +0.282 [+0.231, +0.331]
+    BSS_damp_logit_vs_clim           +0.325 [+0.247, +0.397]
+    BSS_damp_logit_vs_pers_dress     +0.294 [+0.250, +0.337]
+    BSS_pers_dress_vs_clim           +0.044 [-0.055, +0.136]
+    BSS_pl_logit_vs_clim             +0.309 [+0.230, +0.383]
+    BSS_pl_logit_vs_pers_dress       +0.278 [+0.237, +0.317]
+    AUC damp_dress=0.897 damp_emp=0.897 damp_het=0.897 damp_logit=0.897 pl_logit=0.892 pers_dress=0.813 pers_logit=0.813 clim=0.792
+    reliability damp_emp: 0-10%: n=462 p=0.02 obs=0.03; 10-20%: n=106 p=0.15 obs=0.17; 20-30%: n=66 p=0.25 obs=0.26; 30-40%: n=73 p=0.35 obs=0.33; 40-50%: n=74 p=0.45 obs=0.45; 50-60%: n=52 p=0.55 obs=0.58; 60-70%: n=50 p=0.65 obs=0.58; 70-80%: n=74 p=0.76 obs=0.59; 80-90%: n=74 p=0.86 obs=0.77; 90-100%: n=167 p=0.96 obs=0.89
+    as the page would show it (damp_emp): 10% n=518 obs=0.05; 20% n=86 obs=0.19; 30% n=65 obs=0.31; 40% n=73 obs=0.41; 50% n=65 obs=0.49; 60% n=51 obs=0.55; 70% n=57 obs=0.58; 80% n=76 obs=0.70; 90% n=207 obs=0.87
+    reliability pers_dress: 0-10%: n=416 p=0.03 obs=0.07; 10-20%: n=104 p=0.15 obs=0.23; 20-30%: n=85 p=0.25 obs=0.33; 30-40%: n=91 p=0.35 obs=0.34; 40-50%: n=83 p=0.45 obs=0.43; 50-60%: n=69 p=0.56 obs=0.52; 60-70%: n=84 p=0.65 obs=0.63; 70-80%: n=72 p=0.75 obs=0.60; 80-90%: n=65 p=0.85 obs=0.58; 90-100%: n=129 p=0.96 obs=0.76
+ lead 3 T>75.0: n=1198 events=68 (5.7 %)  Brier damp_dress=0.0395 damp_emp=0.0389 damp_het=0.0397 damp_logit=0.0353 pl_logit=0.0345 pers_dress=0.0448 pers_logit=0.0382 clim=0.0521
+    BSS_damp_dress_vs_clim           +0.243 [+0.048, +0.404]
+    BSS_damp_dress_vs_pers_dress     +0.118 [+0.008, +0.221]
+    BSS_damp_emp_vs_clim             +0.254 [+0.054, +0.422]
+    BSS_damp_emp_vs_pers_dress       +0.132 [+0.014, +0.245]
+    BSS_damp_logit_vs_clim           +0.322 [+0.144, +0.483]
+    BSS_damp_logit_vs_pers_dress     +0.210 [+0.083, +0.334]
+    BSS_pers_dress_vs_clim           +0.142 [-0.071, +0.315]
+    BSS_pl_logit_vs_clim             +0.338 [+0.162, +0.494]
+    BSS_pl_logit_vs_pers_dress       +0.229 [+0.118, +0.344]
+    AUC damp_dress=0.934 damp_emp=0.934 damp_het=0.934 damp_logit=0.934 pl_logit=0.934 pers_dress=0.909 pers_logit=0.909 clim=0.908
+    reliability damp_emp: 0-10%: n=977 p=0.02 obs=0.01; 10-20%: n=78 p=0.14 obs=0.06; 20-30%: n=36 p=0.23 obs=0.11; 30-40%: n=20 p=0.34 obs=0.30; 40-50%: n=15 p=0.44 obs=0.33; 50-60%: n=18 p=0.53 obs=0.39; 60-70%: n=10 p=0.64 obs=0.30; 70-80%: n=8 p=0.74 obs=0.50; 80-90%: n=15 p=0.84 obs=0.53; 90-100%: n=21 p=0.96 obs=0.76
+    as the page would show it (damp_emp): 10% n=1028 obs=0.01; 20% n=53 obs=0.15; 30% n=23 obs=0.17; 40% n=14 obs=0.43; 50% n=22 obs=0.18; 60% n=9 obs=0.44; 70% n=11 obs=0.45; 80% n=12 obs=0.58; 90% n=26 obs=0.73
+    reliability pers_dress: 0-10%: n=884 p=0.02 obs=0.01; 10-20%: n=119 p=0.14 obs=0.04; 20-30%: n=53 p=0.25 obs=0.08; 30-40%: n=36 p=0.36 obs=0.17; 40-50%: n=37 p=0.45 obs=0.22; 50-60%: n=16 p=0.54 obs=0.38; 60-70%: n=13 p=0.64 obs=0.15; 70-80%: n=14 p=0.76 obs=0.43; 80-90%: n=13 p=0.85 obs=0.77; 90-100%: n=13 p=0.97 obs=0.85
+
+## B-S4 (newest season, disjoint stations)
+ lead 1 T>37.5: n=1169 events=306 (26.2 %)  Brier damp_dress=0.0432 damp_emp=0.0421 damp_het=0.0432 damp_logit=0.0433 pl_logit=0.0422 pers_dress=0.0477 pers_logit=0.0474 clim=0.1786
+    BSS_damp_dress_vs_clim           +0.758 [+0.710, +0.799]
+    BSS_damp_dress_vs_pers_dress     +0.096 [+0.025, +0.162]
+    BSS_damp_emp_vs_clim             +0.764 [+0.714, +0.806]
+    BSS_damp_emp_vs_pers_dress       +0.118 [+0.040, +0.193]
+    BSS_damp_logit_vs_clim           +0.758 [+0.710, +0.798]
+    BSS_damp_logit_vs_pers_dress     +0.093 [+0.023, +0.159]
+    BSS_pers_dress_vs_clim           +0.733 [+0.679, +0.780]
+    BSS_pl_logit_vs_clim             +0.764 [+0.716, +0.804]
+    BSS_pl_logit_vs_pers_dress       +0.116 [+0.072, +0.159]
+    AUC damp_dress=0.987 damp_emp=0.987 damp_het=0.987 damp_logit=0.987 pl_logit=0.987 pers_dress=0.983 pers_logit=0.983 clim=0.817
+    reliability damp_emp: 0-10%: n=684 p=0.02 obs=0.00; 10-20%: n=68 p=0.15 obs=0.03; 20-30%: n=32 p=0.24 obs=0.22; 30-40%: n=31 p=0.34 obs=0.19; 40-50%: n=38 p=0.46 obs=0.34; 50-60%: n=18 p=0.54 obs=0.50; 60-70%: n=23 p=0.65 obs=0.43; 70-80%: n=28 p=0.74 obs=0.75; 80-90%: n=34 p=0.85 obs=0.79; 90-100%: n=213 p=0.98 obs=0.99
+    as the page would show it (damp_emp): 10% n=722 obs=0.00; 20% n=48 obs=0.15; 30% n=34 obs=0.18; 40% n=26 obs=0.23; 50% n=32 obs=0.44; 60% n=19 obs=0.47; 70% n=31 obs=0.58; 80% n=27 obs=0.74; 90% n=230 obs=0.98
+    reliability pers_dress: 0-10%: n=639 p=0.02 obs=0.00; 10-20%: n=79 p=0.15 obs=0.01; 20-30%: n=57 p=0.24 obs=0.11; 30-40%: n=48 p=0.35 obs=0.17; 40-50%: n=38 p=0.45 obs=0.55; 50-60%: n=29 p=0.55 obs=0.62; 60-70%: n=19 p=0.64 obs=0.42; 70-80%: n=26 p=0.75 obs=0.62; 80-90%: n=33 p=0.86 obs=0.82; 90-100%: n=201 p=0.98 obs=0.99
+ lead 1 T>75.0: n=1169 events=98 (8.4 %)  Brier damp_dress=0.0149 damp_emp=0.0142 damp_het=0.0149 damp_logit=0.0137 pl_logit=0.0138 pers_dress=0.0181 pers_logit=0.0171 clim=0.0707
+    BSS_damp_dress_vs_clim           +0.790 [+0.709, +0.854]
+    BSS_damp_dress_vs_pers_dress     +0.178 [+0.089, +0.262]
+    BSS_damp_emp_vs_clim             +0.800 [+0.716, +0.865]
+    BSS_damp_emp_vs_pers_dress       +0.217 [+0.113, +0.324]
+    BSS_damp_logit_vs_clim           +0.806 [+0.735, +0.864]
+    BSS_damp_logit_vs_pers_dress     +0.241 [+0.144, +0.335]
+    BSS_pers_dress_vs_clim           +0.744 [+0.653, +0.817]
+    BSS_pl_logit_vs_clim             +0.805 [+0.729, +0.866]
+    BSS_pl_logit_vs_pers_dress       +0.236 [+0.159, +0.318]
+    AUC damp_dress=0.996 damp_emp=0.996 damp_het=0.996 damp_logit=0.996 pl_logit=0.995 pers_dress=0.993 pers_logit=0.993 clim=0.901
+    reliability damp_emp: 0-10%: n=1001 p=0.00 obs=0.00; 10-20%: n=28 p=0.15 obs=0.00; 20-30%: n=19 p=0.24 obs=0.16; 30-40%: n=9 p=0.35 obs=0.11; 40-50%: n=12 p=0.45 obs=0.33; 50-60%: n=4 p=0.56 obs=0.25; 60-70%: n=8 p=0.66 obs=0.88; 70-80%: n=9 p=0.76 obs=0.44; 80-90%: n=13 p=0.87 obs=0.92; 90-100%: n=66 p=0.96 obs=0.98
+    as the page would show it (damp_emp): 10% n=1018 obs=0.00; 20% n=22 obs=0.09; 30% n=14 obs=0.07; 40% n=8 obs=0.50; 50% n=9 obs=0.22; 60% n=5 obs=0.60; 70% n=8 obs=0.62; 80% n=8 obs=0.62; 90% n=77 obs=0.97
+    reliability pers_dress: 0-10%: n=984 p=0.00 obs=0.00; 10-20%: n=32 p=0.15 obs=0.03; 20-30%: n=21 p=0.24 obs=0.05; 30-40%: n=16 p=0.34 obs=0.38; 40-50%: n=17 p=0.46 obs=0.24; 50-60%: n=7 p=0.54 obs=0.43; 60-70%: n=14 p=0.65 obs=0.57; 70-80%: n=8 p=0.73 obs=0.88; 80-90%: n=20 p=0.86 obs=0.95; 90-100%: n=50 p=0.97 obs=0.96
+ lead 2 T>37.5: n=1168 events=305 (26.1 %)  Brier damp_dress=0.0600 damp_emp=0.0573 damp_het=0.0600 damp_logit=0.0606 pl_logit=0.0597 pers_dress=0.0733 pers_logit=0.0734 clim=0.1778
+    BSS_damp_dress_vs_clim           +0.662 [+0.603, +0.714]
+    BSS_damp_dress_vs_pers_dress     +0.181 [+0.106, +0.246]
+    BSS_damp_emp_vs_clim             +0.678 [+0.615, +0.731]
+    BSS_damp_emp_vs_pers_dress       +0.218 [+0.137, +0.291]
+    BSS_damp_logit_vs_clim           +0.659 [+0.601, +0.710]
+    BSS_damp_logit_vs_pers_dress     +0.173 [+0.100, +0.235]
+    BSS_pers_dress_vs_clim           +0.588 [+0.513, +0.653]
+    BSS_pl_logit_vs_clim             +0.664 [+0.604, +0.716]
+    BSS_pl_logit_vs_pers_dress       +0.185 [+0.133, +0.234]
+    AUC damp_dress=0.976 damp_emp=0.976 damp_het=0.976 damp_logit=0.976 pl_logit=0.975 pers_dress=0.956 pers_logit=0.956 clim=0.819
+    reliability damp_emp: 0-10%: n=575 p=0.02 obs=0.00; 10-20%: n=121 p=0.14 obs=0.03; 20-30%: n=66 p=0.24 obs=0.11; 30-40%: n=42 p=0.34 obs=0.24; 40-50%: n=35 p=0.45 obs=0.31; 50-60%: n=34 p=0.55 obs=0.44; 60-70%: n=32 p=0.65 obs=0.53; 70-80%: n=28 p=0.74 obs=0.61; 80-90%: n=48 p=0.85 obs=0.83; 90-100%: n=187 p=0.97 obs=0.97
+    as the page would show it (damp_emp): 10% n=643 obs=0.01; 20% n=100 obs=0.06; 30% n=44 obs=0.20; 40% n=35 obs=0.20; 50% n=32 obs=0.44; 60% n=36 obs=0.44; 70% n=35 obs=0.57; 80% n=29 obs=0.76; 90% n=214 obs=0.96
+    reliability pers_dress: 0-10%: n=506 p=0.02 obs=0.01; 10-20%: n=147 p=0.15 obs=0.04; 20-30%: n=83 p=0.25 obs=0.08; 30-40%: n=63 p=0.35 obs=0.22; 40-50%: n=60 p=0.45 obs=0.47; 50-60%: n=40 p=0.55 obs=0.40; 60-70%: n=26 p=0.65 obs=0.38; 70-80%: n=35 p=0.75 obs=0.63; 80-90%: n=51 p=0.86 obs=0.82; 90-100%: n=157 p=0.98 obs=0.98
+ lead 2 T>75.0: n=1168 events=98 (8.4 %)  Brier damp_dress=0.0226 damp_emp=0.0216 damp_het=0.0226 damp_logit=0.0202 pl_logit=0.0202 pers_dress=0.0285 pers_logit=0.0264 clim=0.0707
+    BSS_damp_dress_vs_clim           +0.680 [+0.564, +0.769]
+    BSS_damp_dress_vs_pers_dress     +0.205 [+0.099, +0.309]
+    BSS_damp_emp_vs_clim             +0.694 [+0.576, +0.785]
+    BSS_damp_emp_vs_pers_dress       +0.241 [+0.123, +0.364]
+    BSS_damp_logit_vs_clim           +0.714 [+0.620, +0.788]
+    BSS_damp_logit_vs_pers_dress     +0.289 [+0.175, +0.395]
+    BSS_pers_dress_vs_clim           +0.597 [+0.463, +0.700]
+    BSS_pl_logit_vs_clim             +0.714 [+0.618, +0.791]
+    BSS_pl_logit_vs_pers_dress       +0.291 [+0.205, +0.377]
+    AUC damp_dress=0.988 damp_emp=0.988 damp_het=0.988 damp_logit=0.988 pl_logit=0.988 pers_dress=0.981 pers_logit=0.981 clim=0.901
+    reliability damp_emp: 0-10%: n=969 p=0.01 obs=0.00; 10-20%: n=46 p=0.14 obs=0.04; 20-30%: n=19 p=0.24 obs=0.16; 30-40%: n=19 p=0.33 obs=0.05; 40-50%: n=14 p=0.45 obs=0.29; 50-60%: n=6 p=0.54 obs=0.50; 60-70%: n=7 p=0.63 obs=0.14; 70-80%: n=10 p=0.76 obs=0.70; 80-90%: n=24 p=0.85 obs=0.83; 90-100%: n=54 p=0.95 obs=0.98
+    as the page would show it (damp_emp): 10% n=994 obs=0.00; 20% n=33 obs=0.12; 30% n=21 obs=0.10; 40% n=13 obs=0.23; 50% n=8 obs=0.25; 60% n=9 obs=0.33; 70% n=7 obs=0.43; 80% n=17 obs=0.88; 90% n=66 obs=0.94
+    reliability pers_dress: 0-10%: n=937 p=0.01 obs=0.00; 10-20%: n=48 p=0.14 obs=0.10; 20-30%: n=37 p=0.25 obs=0.08; 30-40%: n=26 p=0.35 obs=0.23; 40-50%: n=21 p=0.46 obs=0.19; 50-60%: n=14 p=0.56 obs=0.43; 60-70%: n=14 p=0.64 obs=0.57; 70-80%: n=15 p=0.76 obs=0.80; 80-90%: n=21 p=0.84 obs=0.86; 90-100%: n=35 p=0.95 obs=0.97
+ lead 3 T>37.5: n=1164 events=303 (26.0 %)  Brier damp_dress=0.0703 damp_emp=0.0678 damp_het=0.0706 damp_logit=0.0699 pl_logit=0.0699 pers_dress=0.0913 pers_logit=0.0905 clim=0.1776
+    BSS_damp_dress_vs_clim           +0.604 [+0.536, +0.663]
+    BSS_damp_dress_vs_pers_dress     +0.230 [+0.162, +0.288]
+    BSS_damp_emp_vs_clim             +0.618 [+0.545, +0.681]
+    BSS_damp_emp_vs_pers_dress       +0.257 [+0.184, +0.324]
+    BSS_damp_logit_vs_clim           +0.606 [+0.538, +0.666]
+    BSS_damp_logit_vs_pers_dress     +0.234 [+0.171, +0.291]
+    BSS_pers_dress_vs_clim           +0.486 [+0.395, +0.565]
+    BSS_pl_logit_vs_clim             +0.606 [+0.537, +0.667]
+    BSS_pl_logit_vs_pers_dress       +0.234 [+0.175, +0.286]
+    AUC damp_dress=0.965 damp_emp=0.965 damp_het=0.965 damp_logit=0.965 pl_logit=0.964 pers_dress=0.928 pers_logit=0.928 clim=0.820
+    reliability damp_emp: 0-10%: n=537 p=0.03 obs=0.01; 10-20%: n=135 p=0.15 obs=0.07; 20-30%: n=82 p=0.25 obs=0.06; 30-40%: n=43 p=0.35 obs=0.28; 40-50%: n=48 p=0.45 obs=0.35; 50-60%: n=38 p=0.55 obs=0.37; 60-70%: n=28 p=0.65 obs=0.50; 70-80%: n=25 p=0.74 obs=0.64; 80-90%: n=47 p=0.86 obs=0.79; 90-100%: n=181 p=0.96 obs=0.97
+    as the page would show it (damp_emp): 10% n=611 obs=0.01; 20% n=108 obs=0.11; 30% n=59 obs=0.12; 40% n=44 obs=0.39; 50% n=42 obs=0.29; 60% n=33 obs=0.42; 70% n=29 obs=0.72; 80% n=23 obs=0.61; 90% n=215 obs=0.93
+    reliability pers_dress: 0-10%: n=445 p=0.03 obs=0.02; 10-20%: n=158 p=0.15 obs=0.08; 20-30%: n=104 p=0.24 obs=0.10; 30-40%: n=80 p=0.35 obs=0.15; 40-50%: n=67 p=0.45 obs=0.43; 50-60%: n=43 p=0.55 obs=0.33; 60-70%: n=33 p=0.65 obs=0.36; 70-80%: n=41 p=0.75 obs=0.59; 80-90%: n=55 p=0.86 obs=0.82; 90-100%: n=138 p=0.97 obs=0.98
+ lead 3 T>75.0: n=1164 events=98 (8.4 %)  Brier damp_dress=0.0265 damp_emp=0.0253 damp_het=0.0267 damp_logit=0.0243 pl_logit=0.0245 pers_dress=0.0342 pers_logit=0.0320 clim=0.0709
+    BSS_damp_dress_vs_clim           +0.627 [+0.504, +0.720]
+    BSS_damp_dress_vs_pers_dress     +0.225 [+0.142, +0.307]
+    BSS_damp_emp_vs_clim             +0.644 [+0.523, +0.739]
+    BSS_damp_emp_vs_pers_dress       +0.261 [+0.168, +0.358]
+    BSS_damp_logit_vs_clim           +0.657 [+0.560, +0.740]
+    BSS_damp_logit_vs_pers_dress     +0.289 [+0.175, +0.399]
+    BSS_pers_dress_vs_clim           +0.518 [+0.371, +0.632]
+    BSS_pl_logit_vs_clim             +0.655 [+0.554, +0.742]
+    BSS_pl_logit_vs_pers_dress       +0.284 [+0.187, +0.384]
+    AUC damp_dress=0.982 damp_emp=0.982 damp_het=0.982 damp_logit=0.982 pl_logit=0.982 pers_dress=0.972 pers_logit=0.972 clim=0.901
+    reliability damp_emp: 0-10%: n=945 p=0.01 obs=0.00; 10-20%: n=61 p=0.15 obs=0.08; 20-30%: n=35 p=0.25 obs=0.11; 30-40%: n=11 p=0.34 obs=0.18; 40-50%: n=13 p=0.44 obs=0.23; 50-60%: n=7 p=0.56 obs=0.29; 60-70%: n=8 p=0.63 obs=0.38; 70-80%: n=9 p=0.77 obs=0.44; 80-90%: n=25 p=0.86 obs=0.92; 90-100%: n=50 p=0.95 obs=0.96
+    as the page would show it (damp_emp): 10% n=980 obs=0.01; 20% n=41 obs=0.12; 30% n=27 obs=0.15; 40% n=11 obs=0.36; 50% n=8 obs=0.25; 60% n=10 obs=0.20; 70% n=6 obs=0.17; 80% n=15 obs=0.87; 90% n=66 obs=0.94
+    reliability pers_dress: 0-10%: n=915 p=0.01 obs=0.01; 10-20%: n=54 p=0.15 obs=0.00; 20-30%: n=40 p=0.25 obs=0.15; 30-40%: n=31 p=0.35 obs=0.13; 40-50%: n=25 p=0.46 obs=0.32; 50-60%: n=14 p=0.56 obs=0.50; 60-70%: n=15 p=0.63 obs=0.53; 70-80%: n=25 p=0.76 obs=0.72; 80-90%: n=17 p=0.86 obs=0.94; 90-100%: n=28 p=0.94 obs=0.89
+
+## A-S4 (newest season, fit stations)
+ lead 1 T>37.5: n=895 events=234 (26.1 %)  Brier damp_dress=0.0589 damp_emp=0.0573 damp_het=0.0589 damp_logit=0.0588 pl_logit=0.0595 pers_dress=0.0697 pers_logit=0.0689 clim=0.1895
+    BSS_damp_dress_vs_clim           +0.689 [+0.634, +0.740]
+    BSS_damp_dress_vs_pers_dress     +0.156 [+0.107, +0.206]
+    BSS_damp_emp_vs_clim             +0.698 [+0.639, +0.750]
+    BSS_damp_emp_vs_pers_dress       +0.179 [+0.123, +0.237]
+    BSS_damp_logit_vs_clim           +0.690 [+0.635, +0.740]
+    BSS_damp_logit_vs_pers_dress     +0.157 [+0.108, +0.206]
+    BSS_pers_dress_vs_clim           +0.632 [+0.566, +0.693]
+    BSS_pl_logit_vs_clim             +0.686 [+0.629, +0.740]
+    BSS_pl_logit_vs_pers_dress       +0.147 [+0.114, +0.182]
+    AUC damp_dress=0.974 damp_emp=0.974 damp_het=0.974 damp_logit=0.974 pl_logit=0.973 pers_dress=0.962 pers_logit=0.962 clim=0.811
+    reliability damp_emp: 0-10%: n=453 p=0.02 obs=0.00; 10-20%: n=97 p=0.15 obs=0.08; 20-30%: n=46 p=0.24 obs=0.07; 30-40%: n=28 p=0.34 obs=0.25; 40-50%: n=30 p=0.45 obs=0.47; 50-60%: n=18 p=0.56 obs=0.44; 60-70%: n=19 p=0.65 obs=0.53; 70-80%: n=26 p=0.75 obs=0.58; 80-90%: n=29 p=0.85 obs=0.76; 90-100%: n=149 p=0.98 obs=0.98
+    as the page would show it (damp_emp): 10% n=511 obs=0.01; 20% n=68 obs=0.10; 30% n=32 obs=0.12; 40% n=24 obs=0.38; 50% n=26 obs=0.38; 60% n=20 obs=0.55; 70% n=24 obs=0.58; 80% n=25 obs=0.64; 90% n=165 obs=0.96
+    reliability pers_dress: 0-10%: n=405 p=0.02 obs=0.01; 10-20%: n=103 p=0.14 obs=0.07; 20-30%: n=80 p=0.25 obs=0.06; 30-40%: n=31 p=0.35 obs=0.19; 40-50%: n=41 p=0.46 obs=0.66; 50-60%: n=23 p=0.54 obs=0.43; 60-70%: n=22 p=0.65 obs=0.36; 70-80%: n=20 p=0.74 obs=0.55; 80-90%: n=31 p=0.85 obs=0.74; 90-100%: n=139 p=0.99 obs=0.96
+ lead 1 T>75.0: n=895 events=78 (8.7 %)  Brier damp_dress=0.0138 damp_emp=0.0135 damp_het=0.0138 damp_logit=0.0135 pl_logit=0.0134 pers_dress=0.0166 pers_logit=0.0161 clim=0.0587
+    BSS_damp_dress_vs_clim           +0.764 [+0.683, +0.833]
+    BSS_damp_dress_vs_pers_dress     +0.166 [-0.000, +0.285]
+    BSS_damp_emp_vs_clim             +0.769 [+0.685, +0.841]
+    BSS_damp_emp_vs_pers_dress       +0.183 [+0.017, +0.313]
+    BSS_damp_logit_vs_clim           +0.770 [+0.700, +0.835]
+    BSS_damp_logit_vs_pers_dress     +0.188 [+0.032, +0.310]
+    BSS_pers_dress_vs_clim           +0.717 [+0.619, +0.807]
+    BSS_pl_logit_vs_clim             +0.772 [+0.695, +0.843]
+    BSS_pl_logit_vs_pers_dress       +0.193 [+0.094, +0.284]
+    AUC damp_dress=0.997 damp_emp=0.997 damp_het=0.997 damp_logit=0.997 pl_logit=0.997 pers_dress=0.995 pers_logit=0.995 clim=0.914
+    reliability damp_emp: 0-10%: n=778 p=0.00 obs=0.00; 10-20%: n=11 p=0.13 obs=0.09; 20-30%: n=8 p=0.26 obs=0.12; 30-40%: n=9 p=0.35 obs=0.33; 40-50%: n=11 p=0.45 obs=0.36; 50-60%: n=5 p=0.53 obs=0.20; 60-70%: n=3 p=0.65 obs=1.00; 70-80%: n=6 p=0.74 obs=0.50; 80-90%: n=14 p=0.86 obs=0.86; 90-100%: n=50 p=0.96 obs=1.00
+    as the page would show it (damp_emp): 10% n=789 obs=0.00; 20% n=4 obs=0.25; 30% n=9 obs=0.11; 40% n=12 obs=0.42; 50% n=6 obs=0.33; 60% n=3 obs=0.33; 70% n=6 obs=0.83; 80% n=6 obs=0.50; 90% n=60 obs=0.98
+    reliability pers_dress: 0-10%: n=764 p=0.00 obs=0.00; 10-20%: n=21 p=0.14 obs=0.05; 20-30%: n=9 p=0.26 obs=0.22; 30-40%: n=11 p=0.37 obs=0.09; 40-50%: n=10 p=0.46 obs=0.30; 50-60%: n=9 p=0.54 obs=0.67; 60-70%: n=7 p=0.65 obs=0.57; 70-80%: n=12 p=0.75 obs=0.83; 80-90%: n=15 p=0.85 obs=0.87; 90-100%: n=37 p=0.97 obs=1.00
+ lead 2 T>37.5: n=894 events=234 (26.2 %)  Brier damp_dress=0.0817 damp_emp=0.0784 damp_het=0.0817 damp_logit=0.0817 pl_logit=0.0818 pers_dress=0.1031 pers_logit=0.1015 clim=0.1897
+    BSS_damp_dress_vs_clim           +0.569 [+0.499, +0.629]
+    BSS_damp_dress_vs_pers_dress     +0.207 [+0.146, +0.264]
+    BSS_damp_emp_vs_clim             +0.587 [+0.512, +0.650]
+    BSS_damp_emp_vs_pers_dress       +0.239 [+0.173, +0.306]
+    BSS_damp_logit_vs_clim           +0.569 [+0.499, +0.629]
+    BSS_damp_logit_vs_pers_dress     +0.207 [+0.148, +0.262]
+    BSS_pers_dress_vs_clim           +0.457 [+0.371, +0.535]
+    BSS_pl_logit_vs_clim             +0.569 [+0.499, +0.631]
+    BSS_pl_logit_vs_pers_dress       +0.206 [+0.165, +0.247]
+    AUC damp_dress=0.952 damp_emp=0.952 damp_het=0.952 damp_logit=0.952 pl_logit=0.948 pers_dress=0.913 pers_logit=0.913 clim=0.811
+    reliability damp_emp: 0-10%: n=354 p=0.03 obs=0.01; 10-20%: n=118 p=0.15 obs=0.03; 20-30%: n=79 p=0.24 obs=0.13; 30-40%: n=61 p=0.35 obs=0.16; 40-50%: n=30 p=0.44 obs=0.33; 50-60%: n=36 p=0.55 obs=0.39; 60-70%: n=25 p=0.65 obs=0.64; 70-80%: n=26 p=0.75 obs=0.46; 80-90%: n=37 p=0.87 obs=0.76; 90-100%: n=128 p=0.97 obs=0.98
+    as the page would show it (damp_emp): 10% n=418 obs=0.01; 20% n=104 obs=0.10; 30% n=58 obs=0.14; 40% n=49 obs=0.20; 50% n=30 obs=0.37; 60% n=30 obs=0.53; 70% n=29 obs=0.52; 80% n=23 obs=0.65; 90% n=153 obs=0.94
+    reliability pers_dress: 0-10%: n=281 p=0.03 obs=0.03; 10-20%: n=140 p=0.15 obs=0.06; 20-30%: n=105 p=0.25 obs=0.10; 30-40%: n=77 p=0.34 obs=0.17; 40-50%: n=53 p=0.46 obs=0.43; 50-60%: n=35 p=0.55 obs=0.43; 60-70%: n=28 p=0.65 obs=0.39; 70-80%: n=28 p=0.75 obs=0.46; 80-90%: n=33 p=0.85 obs=0.64; 90-100%: n=114 p=0.98 obs=0.97
+ lead 2 T>75.0: n=894 events=78 (8.7 %)  Brier damp_dress=0.0201 damp_emp=0.0190 damp_het=0.0201 damp_logit=0.0196 pl_logit=0.0189 pers_dress=0.0256 pers_logit=0.0247 clim=0.0587
+    BSS_damp_dress_vs_clim           +0.658 [+0.541, +0.755]
+    BSS_damp_dress_vs_pers_dress     +0.217 [+0.061, +0.347]
+    BSS_damp_emp_vs_clim             +0.676 [+0.555, +0.778]
+    BSS_damp_emp_vs_pers_dress       +0.258 [+0.093, +0.405]
+    BSS_damp_logit_vs_clim           +0.667 [+0.564, +0.759]
+    BSS_damp_logit_vs_pers_dress     +0.237 [+0.084, +0.374]
+    BSS_pers_dress_vs_clim           +0.563 [+0.432, +0.680]
+    BSS_pl_logit_vs_clim             +0.678 [+0.578, +0.769]
+    BSS_pl_logit_vs_pers_dress       +0.263 [+0.151, +0.374]
+    AUC damp_dress=0.990 damp_emp=0.990 damp_het=0.990 damp_logit=0.990 pl_logit=0.990 pers_dress=0.982 pers_logit=0.982 clim=0.914
+    reliability damp_emp: 0-10%: n=755 p=0.01 obs=0.00; 10-20%: n=32 p=0.14 obs=0.06; 20-30%: n=8 p=0.25 obs=0.00; 30-40%: n=13 p=0.35 obs=0.23; 40-50%: n=8 p=0.46 obs=0.38; 50-60%: n=4 p=0.58 obs=0.50; 60-70%: n=8 p=0.66 obs=0.50; 70-80%: n=10 p=0.76 obs=0.80; 80-90%: n=16 p=0.85 obs=0.81; 90-100%: n=40 p=0.95 obs=1.00
+    as the page would show it (damp_emp): 10% n=773 obs=0.01; 20% n=19 obs=0.05; 30% n=11 obs=0.00; 40% n=8 obs=0.50; 50% n=5 obs=0.40; 60% n=7 obs=0.43; 70% n=10 obs=0.60; 80% n=13 obs=0.85; 90% n=48 obs=0.98
+    reliability pers_dress: 0-10%: n=729 p=0.01 obs=0.01; 10-20%: n=38 p=0.14 obs=0.03; 20-30%: n=19 p=0.24 obs=0.00; 30-40%: n=9 p=0.35 obs=0.22; 40-50%: n=18 p=0.44 obs=0.28; 50-60%: n=13 p=0.54 obs=0.62; 60-70%: n=13 p=0.66 obs=0.69; 70-80%: n=14 p=0.75 obs=0.79; 80-90%: n=18 p=0.85 obs=0.83; 90-100%: n=23 p=0.95 obs=1.00
+ lead 3 T>37.5: n=893 events=234 (26.2 %)  Brier damp_dress=0.0913 damp_emp=0.0872 damp_het=0.0917 damp_logit=0.0900 pl_logit=0.0904 pers_dress=0.1225 pers_logit=0.1198 clim=0.1899
+    BSS_damp_dress_vs_clim           +0.519 [+0.447, +0.582]
+    BSS_damp_dress_vs_pers_dress     +0.254 [+0.192, +0.313]
+    BSS_damp_emp_vs_clim             +0.541 [+0.466, +0.609]
+    BSS_damp_emp_vs_pers_dress       +0.288 [+0.222, +0.355]
+    BSS_damp_logit_vs_clim           +0.526 [+0.455, +0.588]
+    BSS_damp_logit_vs_pers_dress     +0.265 [+0.204, +0.321]
+    BSS_pers_dress_vs_clim           +0.355 [+0.259, +0.442]
+    BSS_pl_logit_vs_clim             +0.524 [+0.453, +0.586]
+    BSS_pl_logit_vs_pers_dress       +0.262 [+0.208, +0.314]
+    AUC damp_dress=0.943 damp_emp=0.943 damp_het=0.943 damp_logit=0.943 pl_logit=0.941 pers_dress=0.875 pers_logit=0.875 clim=0.811
+    reliability damp_emp: 0-10%: n=315 p=0.03 obs=0.02; 10-20%: n=135 p=0.15 obs=0.03; 20-30%: n=98 p=0.25 obs=0.07; 30-40%: n=44 p=0.35 obs=0.20; 40-50%: n=39 p=0.46 obs=0.23; 50-60%: n=43 p=0.55 obs=0.49; 60-70%: n=32 p=0.64 obs=0.56; 70-80%: n=25 p=0.75 obs=0.68; 80-90%: n=30 p=0.85 obs=0.63; 90-100%: n=132 p=0.97 obs=0.94
+    as the page would show it (damp_emp): 10% n=385 obs=0.02; 20% n=108 obs=0.06; 30% n=80 obs=0.12; 40% n=37 obs=0.19; 50% n=37 obs=0.35; 60% n=45 obs=0.47; 70% n=29 obs=0.72; 80% n=25 obs=0.72; 90% n=147 obs=0.90
+    reliability pers_dress: 0-10%: n=230 p=0.04 obs=0.04; 10-20%: n=142 p=0.15 obs=0.06; 20-30%: n=129 p=0.25 obs=0.12; 30-40%: n=96 p=0.35 obs=0.19; 40-50%: n=55 p=0.46 obs=0.40; 50-60%: n=42 p=0.54 obs=0.24; 60-70%: n=29 p=0.65 obs=0.45; 70-80%: n=36 p=0.75 obs=0.47; 80-90%: n=26 p=0.85 obs=0.65; 90-100%: n=108 p=0.97 obs=0.94
+ lead 3 T>75.0: n=893 events=79 (8.8 %)  Brier damp_dress=0.0242 damp_emp=0.0230 damp_het=0.0244 damp_logit=0.0239 pl_logit=0.0231 pers_dress=0.0305 pers_logit=0.0292 clim=0.0591
+    BSS_damp_dress_vs_clim           +0.590 [+0.457, +0.708]
+    BSS_damp_dress_vs_pers_dress     +0.207 [+0.059, +0.339]
+    BSS_damp_emp_vs_clim             +0.611 [+0.472, +0.734]
+    BSS_damp_emp_vs_pers_dress       +0.246 [+0.085, +0.397]
+    BSS_damp_logit_vs_clim           +0.595 [+0.470, +0.705]
+    BSS_damp_logit_vs_pers_dress     +0.216 [+0.058, +0.370]
+    BSS_pers_dress_vs_clim           +0.484 [+0.333, +0.618]
+    BSS_pl_logit_vs_clim             +0.609 [+0.487, +0.717]
+    BSS_pl_logit_vs_pers_dress       +0.242 [+0.114, +0.371]
+    AUC damp_dress=0.986 damp_emp=0.986 damp_het=0.986 damp_logit=0.986 pl_logit=0.986 pers_dress=0.969 pers_logit=0.969 clim=0.915
+    reliability damp_emp: 0-10%: n=742 p=0.01 obs=0.01; 10-20%: n=31 p=0.14 obs=0.00; 20-30%: n=25 p=0.24 obs=0.16; 30-40%: n=11 p=0.34 obs=0.27; 40-50%: n=7 p=0.44 obs=0.29; 50-60%: n=9 p=0.54 obs=0.44; 60-70%: n=5 p=0.67 obs=0.80; 70-80%: n=7 p=0.73 obs=0.71; 80-90%: n=19 p=0.85 obs=0.79; 90-100%: n=37 p=0.95 obs=1.00
+    as the page would show it (damp_emp): 10% n=761 obs=0.01; 20% n=26 obs=0.04; 30% n=18 obs=0.33; 40% n=9 obs=0.11; 50% n=8 obs=0.38; 60% n=3 obs=0.67; 70% n=10 obs=0.70; 80% n=11 obs=0.82; 90% n=47 obs=0.96
+    reliability pers_dress: 0-10%: n=712 p=0.01 obs=0.01; 10-20%: n=46 p=0.15 obs=0.00; 20-30%: n=23 p=0.25 obs=0.04; 30-40%: n=12 p=0.35 obs=0.17; 40-50%: n=19 p=0.45 obs=0.26; 50-60%: n=14 p=0.55 obs=0.50; 60-70%: n=14 p=0.66 obs=0.71; 70-80%: n=21 p=0.76 obs=0.71; 80-90%: n=15 p=0.86 obs=1.00; 90-100%: n=17 p=0.94 obs=1.00
+
+## B-S1S2 (fit seasons, disjoint stations)
+ lead 1 T>37.5: n=2368 events=1094 (46.2 %)  Brier damp_dress=0.0723 damp_emp=0.0718 damp_het=0.0723 damp_logit=0.0726 pl_logit=0.0735 pers_dress=0.0830 pers_logit=0.0831 clim=0.1420
+    BSS_damp_dress_vs_clim           +0.491 [+0.443, +0.534]
+    BSS_damp_dress_vs_pers_dress     +0.129 [+0.080, +0.178]
+    BSS_damp_emp_vs_clim             +0.495 [+0.443, +0.541]
+    BSS_damp_emp_vs_pers_dress       +0.136 [+0.083, +0.188]
+    BSS_damp_logit_vs_clim           +0.489 [+0.442, +0.532]
+    BSS_damp_logit_vs_pers_dress     +0.126 [+0.077, +0.174]
+    BSS_pers_dress_vs_clim           +0.415 [+0.367, +0.461]
+    BSS_pl_logit_vs_clim             +0.483 [+0.437, +0.526]
+    BSS_pl_logit_vs_pers_dress       +0.116 [+0.079, +0.151]
+    AUC damp_dress=0.964 damp_emp=0.964 damp_het=0.964 damp_logit=0.964 pl_logit=0.964 pers_dress=0.955 pers_logit=0.955 clim=0.883
+    reliability damp_emp: 0-10%: n=921 p=0.02 obs=0.02; 10-20%: n=122 p=0.14 obs=0.20; 20-30%: n=84 p=0.25 obs=0.18; 30-40%: n=71 p=0.34 obs=0.39; 40-50%: n=74 p=0.44 obs=0.42; 50-60%: n=64 p=0.56 obs=0.42; 60-70%: n=54 p=0.63 obs=0.74; 70-80%: n=81 p=0.75 obs=0.78; 80-90%: n=149 p=0.86 obs=0.82; 90-100%: n=748 p=0.98 obs=0.97
+    as the page would show it (damp_emp): 10% n=990 obs=0.03; 20% n=98 obs=0.21; 30% n=78 obs=0.24; 40% n=79 obs=0.44; 50% n=55 obs=0.36; 60% n=75 obs=0.61; 70% n=55 obs=0.75; 80% n=95 obs=0.84; 90% n=843 obs=0.95
+    reliability pers_dress: 0-10%: n=798 p=0.02 obs=0.02; 10-20%: n=163 p=0.15 obs=0.12; 20-30%: n=101 p=0.25 obs=0.15; 30-40%: n=120 p=0.35 obs=0.33; 40-50%: n=94 p=0.46 obs=0.52; 50-60%: n=77 p=0.54 obs=0.56; 60-70%: n=93 p=0.64 obs=0.67; 70-80%: n=103 p=0.75 obs=0.74; 80-90%: n=136 p=0.85 obs=0.83; 90-100%: n=683 p=0.98 obs=0.97
+ lead 1 T>75.0: n=2368 events=323 (13.6 %)  Brier damp_dress=0.0380 damp_emp=0.0378 damp_het=0.0380 damp_logit=0.0365 pl_logit=0.0348 pers_dress=0.0385 pers_logit=0.0379 clim=0.0824
+    BSS_damp_dress_vs_clim           +0.539 [+0.468, +0.598]
+    BSS_damp_dress_vs_pers_dress     +0.012 [-0.061, +0.080]
+    BSS_damp_emp_vs_clim             +0.541 [+0.468, +0.604]
+    BSS_damp_emp_vs_pers_dress       +0.018 [-0.056, +0.089]
+    BSS_damp_logit_vs_clim           +0.558 [+0.492, +0.614]
+    BSS_damp_logit_vs_pers_dress     +0.053 [-0.015, +0.122]
+    BSS_pers_dress_vs_clim           +0.533 [+0.471, +0.588]
+    BSS_pl_logit_vs_clim             +0.577 [+0.519, +0.630]
+    BSS_pl_logit_vs_pers_dress       +0.095 [+0.049, +0.145]
+    AUC damp_dress=0.981 damp_emp=0.980 damp_het=0.981 damp_logit=0.981 pl_logit=0.982 pers_dress=0.979 pers_logit=0.979 clim=0.906
+    reliability damp_emp: 0-10%: n=1796 p=0.01 obs=0.00; 10-20%: n=79 p=0.15 obs=0.10; 20-30%: n=62 p=0.24 obs=0.18; 30-40%: n=39 p=0.35 obs=0.28; 40-50%: n=40 p=0.45 obs=0.30; 50-60%: n=42 p=0.55 obs=0.38; 60-70%: n=31 p=0.65 obs=0.45; 70-80%: n=43 p=0.74 obs=0.63; 80-90%: n=54 p=0.86 obs=0.85; 90-100%: n=182 p=0.97 obs=0.93
+    as the page would show it (damp_emp): 10% n=1838 obs=0.00; 20% n=74 obs=0.14; 30% n=45 obs=0.27; 40% n=43 obs=0.30; 50% n=34 obs=0.41; 60% n=41 obs=0.32; 70% n=43 obs=0.58; 80% n=32 obs=0.81; 90% n=218 obs=0.92
+    reliability pers_dress: 0-10%: n=1756 p=0.01 obs=0.00; 10-20%: n=105 p=0.14 obs=0.08; 20-30%: n=72 p=0.24 obs=0.19; 30-40%: n=62 p=0.35 obs=0.23; 40-50%: n=44 p=0.45 obs=0.48; 50-60%: n=52 p=0.55 obs=0.44; 60-70%: n=49 p=0.65 obs=0.63; 70-80%: n=43 p=0.76 obs=0.77; 80-90%: n=37 p=0.85 obs=0.84; 90-100%: n=148 p=0.97 obs=0.96
+ lead 2 T>37.5: n=2359 events=1089 (46.2 %)  Brier damp_dress=0.1004 damp_emp=0.0996 damp_het=0.1004 damp_logit=0.1012 pl_logit=0.1024 pers_dress=0.1216 pers_logit=0.1217 clim=0.1422
+    BSS_damp_dress_vs_clim           +0.294 [+0.235, +0.351]
+    BSS_damp_dress_vs_pers_dress     +0.174 [+0.124, +0.224]
+    BSS_damp_emp_vs_clim             +0.300 [+0.236, +0.359]
+    BSS_damp_emp_vs_pers_dress       +0.181 [+0.128, +0.233]
+    BSS_damp_logit_vs_clim           +0.288 [+0.229, +0.344]
+    BSS_damp_logit_vs_pers_dress     +0.168 [+0.117, +0.217]
+    BSS_pers_dress_vs_clim           +0.145 [+0.079, +0.206]
+    BSS_pl_logit_vs_clim             +0.280 [+0.221, +0.335]
+    BSS_pl_logit_vs_pers_dress       +0.158 [+0.118, +0.197]
+    AUC damp_dress=0.932 damp_emp=0.932 damp_het=0.932 damp_logit=0.932 pl_logit=0.931 pers_dress=0.907 pers_logit=0.907 clim=0.882
+    reliability damp_emp: 0-10%: n=751 p=0.03 obs=0.04; 10-20%: n=198 p=0.15 obs=0.10; 20-30%: n=139 p=0.24 obs=0.30; 30-40%: n=98 p=0.35 obs=0.41; 40-50%: n=90 p=0.45 obs=0.37; 50-60%: n=100 p=0.55 obs=0.52; 60-70%: n=68 p=0.65 obs=0.65; 70-80%: n=92 p=0.76 obs=0.74; 80-90%: n=171 p=0.86 obs=0.86; 90-100%: n=652 p=0.97 obs=0.94
+    as the page would show it (damp_emp): 10% n=860 obs=0.04; 20% n=180 obs=0.22; 30% n=96 obs=0.35; 40% n=96 obs=0.40; 50% n=96 obs=0.46; 60% n=83 obs=0.57; 70% n=74 obs=0.74; 80% n=133 obs=0.78; 90% n=741 obs=0.94
+    reliability pers_dress: 0-10%: n=583 p=0.03 obs=0.04; 10-20%: n=226 p=0.14 obs=0.11; 20-30%: n=169 p=0.24 obs=0.19; 30-40%: n=156 p=0.35 obs=0.37; 40-50%: n=141 p=0.46 obs=0.48; 50-60%: n=115 p=0.55 obs=0.57; 60-70%: n=133 p=0.65 obs=0.59; 70-80%: n=137 p=0.75 obs=0.77; 80-90%: n=182 p=0.85 obs=0.83; 90-100%: n=517 p=0.97 obs=0.93
+ lead 2 T>75.0: n=2359 events=323 (13.7 %)  Brier damp_dress=0.0571 damp_emp=0.0568 damp_het=0.0570 damp_logit=0.0541 pl_logit=0.0517 pers_dress=0.0582 pers_logit=0.0566 clim=0.0827
+    BSS_damp_dress_vs_clim           +0.310 [+0.215, +0.397]
+    BSS_damp_dress_vs_pers_dress     +0.020 [-0.068, +0.096]
+    BSS_damp_emp_vs_clim             +0.313 [+0.214, +0.404]
+    BSS_damp_emp_vs_pers_dress       +0.025 [-0.064, +0.105]
+    BSS_damp_logit_vs_clim           +0.346 [+0.262, +0.424]
+    BSS_damp_logit_vs_pers_dress     +0.071 [-0.012, +0.146]
+    BSS_pers_dress_vs_clim           +0.296 [+0.217, +0.369]
+    BSS_pl_logit_vs_clim             +0.375 [+0.301, +0.447]
+    BSS_pl_logit_vs_pers_dress       +0.113 [+0.052, +0.169]
+    AUC damp_dress=0.960 damp_emp=0.960 damp_het=0.960 damp_logit=0.960 pl_logit=0.962 pers_dress=0.951 pers_logit=0.951 clim=0.905
+    reliability damp_emp: 0-10%: n=1675 p=0.01 obs=0.01; 10-20%: n=123 p=0.14 obs=0.07; 20-30%: n=83 p=0.24 obs=0.19; 30-40%: n=60 p=0.35 obs=0.30; 40-50%: n=49 p=0.45 obs=0.27; 50-60%: n=54 p=0.55 obs=0.46; 60-70%: n=45 p=0.65 obs=0.47; 70-80%: n=45 p=0.75 obs=0.62; 80-90%: n=63 p=0.85 obs=0.76; 90-100%: n=162 p=0.96 obs=0.82
+    as the page would show it (damp_emp): 10% n=1750 obs=0.01; 20% n=101 obs=0.15; 30% n=53 obs=0.17; 40% n=65 obs=0.34; 50% n=47 obs=0.32; 60% n=52 obs=0.42; 70% n=45 obs=0.58; 80% n=48 obs=0.67; 90% n=198 obs=0.83
+    reliability pers_dress: 0-10%: n=1571 p=0.01 obs=0.01; 10-20%: n=197 p=0.15 obs=0.07; 20-30%: n=105 p=0.24 obs=0.16; 30-40%: n=91 p=0.35 obs=0.26; 40-50%: n=70 p=0.45 obs=0.46; 50-60%: n=71 p=0.55 obs=0.42; 60-70%: n=53 p=0.65 obs=0.58; 70-80%: n=47 p=0.74 obs=0.62; 80-90%: n=57 p=0.86 obs=0.81; 90-100%: n=97 p=0.97 obs=0.91
+ lead 3 T>37.5: n=2354 events=1085 (46.1 %)  Brier damp_dress=0.1135 damp_emp=0.1133 damp_het=0.1134 damp_logit=0.1139 pl_logit=0.1143 pers_dress=0.1414 pers_logit=0.1411 clim=0.1420
+    BSS_damp_dress_vs_clim           +0.201 [+0.137, +0.264]
+    BSS_damp_dress_vs_pers_dress     +0.198 [+0.152, +0.243]
+    BSS_damp_emp_vs_clim             +0.202 [+0.135, +0.270]
+    BSS_damp_emp_vs_pers_dress       +0.199 [+0.151, +0.247]
+    BSS_damp_logit_vs_clim           +0.198 [+0.136, +0.260]
+    BSS_damp_logit_vs_pers_dress     +0.195 [+0.150, +0.239]
+    BSS_pers_dress_vs_clim           +0.004 [-0.067, +0.072]
+    BSS_pl_logit_vs_clim             +0.195 [+0.133, +0.258]
+    BSS_pl_logit_vs_pers_dress       +0.192 [+0.150, +0.233]
+    AUC damp_dress=0.916 damp_emp=0.916 damp_het=0.916 damp_logit=0.916 pl_logit=0.916 pers_dress=0.877 pers_logit=0.877 clim=0.882
+    reliability damp_emp: 0-10%: n=660 p=0.03 obs=0.03; 10-20%: n=260 p=0.14 obs=0.13; 20-30%: n=153 p=0.24 obs=0.29; 30-40%: n=118 p=0.35 obs=0.42; 40-50%: n=104 p=0.45 obs=0.48; 50-60%: n=83 p=0.55 obs=0.57; 60-70%: n=104 p=0.65 obs=0.62; 70-80%: n=77 p=0.76 obs=0.74; 80-90%: n=162 p=0.86 obs=0.81; 90-100%: n=633 p=0.97 obs=0.93
+    as the page would show it (damp_emp): 10% n=818 obs=0.05; 20% n=199 obs=0.20; 30% n=125 obs=0.37; 40% n=108 obs=0.49; 50% n=89 obs=0.47; 60% n=92 obs=0.61; 70% n=78 obs=0.69; 80% n=111 obs=0.77; 90% n=734 obs=0.91
+    reliability pers_dress: 0-10%: n=484 p=0.04 obs=0.06; 10-20%: n=270 p=0.15 obs=0.16; 20-30%: n=184 p=0.25 obs=0.16; 30-40%: n=161 p=0.35 obs=0.37; 40-50%: n=179 p=0.45 obs=0.48; 50-60%: n=141 p=0.55 obs=0.56; 60-70%: n=134 p=0.65 obs=0.59; 70-80%: n=157 p=0.75 obs=0.73; 80-90%: n=191 p=0.85 obs=0.83; 90-100%: n=453 p=0.97 obs=0.91
+ lead 3 T>75.0: n=2354 events=322 (13.7 %)  Brier damp_dress=0.0664 damp_emp=0.0661 damp_het=0.0666 damp_logit=0.0623 pl_logit=0.0612 pers_dress=0.0706 pers_logit=0.0675 clim=0.0825
+    BSS_damp_dress_vs_clim           +0.195 [+0.089, +0.291]
+    BSS_damp_dress_vs_pers_dress     +0.059 [-0.021, +0.132]
+    BSS_damp_emp_vs_clim             +0.198 [+0.086, +0.298]
+    BSS_damp_emp_vs_pers_dress       +0.063 [-0.020, +0.139]
+    BSS_damp_logit_vs_clim           +0.245 [+0.157, +0.328]
+    BSS_damp_logit_vs_pers_dress     +0.117 [+0.037, +0.189]
+    BSS_pers_dress_vs_clim           +0.145 [+0.047, +0.230]
+    BSS_pl_logit_vs_clim             +0.258 [+0.175, +0.337]
+    BSS_pl_logit_vs_pers_dress       +0.132 [+0.064, +0.195]
+    AUC damp_dress=0.944 damp_emp=0.944 damp_het=0.944 damp_logit=0.944 pl_logit=0.945 pers_dress=0.926 pers_logit=0.926 clim=0.906
+    reliability damp_emp: 0-10%: n=1598 p=0.02 obs=0.01; 10-20%: n=183 p=0.14 obs=0.11; 20-30%: n=86 p=0.24 obs=0.14; 30-40%: n=76 p=0.34 obs=0.20; 40-50%: n=51 p=0.45 obs=0.33; 50-60%: n=49 p=0.55 obs=0.51; 60-70%: n=53 p=0.65 obs=0.38; 70-80%: n=46 p=0.75 obs=0.67; 80-90%: n=52 p=0.86 obs=0.71; 90-100%: n=160 p=0.96 obs=0.78
+    as the page would show it (damp_emp): 10% n=1715 obs=0.02; 20% n=111 obs=0.12; 30% n=91 obs=0.16; 40% n=55 obs=0.31; 50% n=41 obs=0.37; 60% n=57 obs=0.44; 70% n=47 obs=0.47; 80% n=49 obs=0.76; 90% n=188 obs=0.78
+    reliability pers_dress: 0-10%: n=1480 p=0.02 obs=0.01; 10-20%: n=229 p=0.15 obs=0.06; 20-30%: n=136 p=0.24 obs=0.16; 30-40%: n=104 p=0.35 obs=0.30; 40-50%: n=82 p=0.45 obs=0.34; 50-60%: n=76 p=0.55 obs=0.42; 60-70%: n=62 p=0.65 obs=0.60; 70-80%: n=43 p=0.74 obs=0.56; 80-90%: n=61 p=0.85 obs=0.70; 90-100%: n=81 p=0.97 obs=0.86
+
+## north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae)
+ lead 1 T>37.5: n=1172 events=440 (37.5 %)  Brier damp_dress=0.0647 damp_emp=0.0640 damp_het=0.0647 damp_logit=0.0646 pl_logit=0.0630 pers_dress=0.0673 pers_logit=0.0671 clim=0.2173
+    BSS_damp_dress_vs_clim           +0.702 [+0.653, +0.745]
+    BSS_damp_dress_vs_pers_dress     +0.040 [-0.019, +0.093]
+    BSS_damp_emp_vs_clim             +0.706 [+0.654, +0.750]
+    BSS_damp_emp_vs_pers_dress       +0.050 [-0.015, +0.110]
+    BSS_damp_logit_vs_clim           +0.703 [+0.653, +0.745]
+    BSS_damp_logit_vs_pers_dress     +0.040 [-0.017, +0.093]
+    BSS_pers_dress_vs_clim           +0.690 [+0.639, +0.735]
+    BSS_pl_logit_vs_clim             +0.710 [+0.662, +0.752]
+    BSS_pl_logit_vs_pers_dress       +0.064 [+0.028, +0.098]
+    AUC damp_dress=0.974 damp_emp=0.974 damp_het=0.974 damp_logit=0.974 pl_logit=0.974 pers_dress=0.971 pers_logit=0.971 clim=0.763
+    reliability damp_emp: 0-10%: n=521 p=0.02 obs=0.01; 10-20%: n=69 p=0.15 obs=0.09; 20-30%: n=39 p=0.25 obs=0.23; 30-40%: n=36 p=0.35 obs=0.22; 40-50%: n=46 p=0.45 obs=0.39; 50-60%: n=34 p=0.55 obs=0.50; 60-70%: n=33 p=0.65 obs=0.39; 70-80%: n=41 p=0.75 obs=0.78; 80-90%: n=64 p=0.86 obs=0.83; 90-100%: n=289 p=0.98 obs=0.97
+    as the page would show it (damp_emp): 10% n=557 obs=0.01; 20% n=51 obs=0.18; 30% n=39 obs=0.21; 40% n=42 obs=0.31; 50% n=38 obs=0.45; 60% n=33 obs=0.45; 70% n=40 obs=0.60; 80% n=41 obs=0.78; 90% n=331 obs=0.96
+    reliability pers_dress: 0-10%: n=482 p=0.02 obs=0.01; 10-20%: n=69 p=0.15 obs=0.03; 20-30%: n=71 p=0.25 obs=0.17; 30-40%: n=53 p=0.35 obs=0.21; 40-50%: n=55 p=0.45 obs=0.49; 50-60%: n=34 p=0.54 obs=0.59; 60-70%: n=37 p=0.64 obs=0.49; 70-80%: n=55 p=0.76 obs=0.78; 80-90%: n=56 p=0.85 obs=0.88; 90-100%: n=260 p=0.99 obs=0.98
+ lead 1 T>75.0: n=1172 events=149 (12.7 %)  Brier damp_dress=0.0257 damp_emp=0.0249 damp_het=0.0257 damp_logit=0.0255 pl_logit=0.0246 pers_dress=0.0277 pers_logit=0.0273 clim=0.1096
+    BSS_damp_dress_vs_clim           +0.765 [+0.693, +0.827]
+    BSS_damp_dress_vs_pers_dress     +0.071 [-0.010, +0.156]
+    BSS_damp_emp_vs_clim             +0.773 [+0.698, +0.835]
+    BSS_damp_emp_vs_pers_dress       +0.100 [+0.006, +0.203]
+    BSS_damp_logit_vs_clim           +0.767 [+0.697, +0.828]
+    BSS_damp_logit_vs_pers_dress     +0.079 [-0.010, +0.176]
+    BSS_pers_dress_vs_clim           +0.747 [+0.679, +0.808]
+    BSS_pl_logit_vs_clim             +0.775 [+0.707, +0.834]
+    BSS_pl_logit_vs_pers_dress       +0.110 [+0.043, +0.184]
+    AUC damp_dress=0.990 damp_emp=0.989 damp_het=0.990 damp_logit=0.990 pl_logit=0.990 pers_dress=0.988 pers_logit=0.988 clim=0.834
+    reliability damp_emp: 0-10%: n=944 p=0.01 obs=0.00; 10-20%: n=27 p=0.14 obs=0.00; 20-30%: n=14 p=0.25 obs=0.07; 30-40%: n=14 p=0.35 obs=0.36; 40-50%: n=14 p=0.44 obs=0.36; 50-60%: n=12 p=0.53 obs=0.50; 60-70%: n=14 p=0.65 obs=0.64; 70-80%: n=18 p=0.75 obs=0.72; 80-90%: n=22 p=0.87 obs=0.86; 90-100%: n=93 p=0.96 obs=0.95
+    as the page would show it (damp_emp): 10% n=961 obs=0.00; 20% n=16 obs=0.00; 30% n=15 obs=0.20; 40% n=16 obs=0.44; 50% n=15 obs=0.40; 60% n=8 obs=0.62; 70% n=17 obs=0.76; 80% n=13 obs=0.69; 90% n=111 obs=0.93
+    reliability pers_dress: 0-10%: n=926 p=0.01 obs=0.00; 10-20%: n=33 p=0.14 obs=0.00; 20-30%: n=16 p=0.26 obs=0.19; 30-40%: n=25 p=0.35 obs=0.36; 40-50%: n=21 p=0.46 obs=0.33; 50-60%: n=17 p=0.55 obs=0.35; 60-70%: n=17 p=0.64 obs=0.71; 70-80%: n=13 p=0.73 obs=0.85; 80-90%: n=28 p=0.85 obs=0.93; 90-100%: n=76 p=0.97 obs=0.95
+ lead 2 T>37.5: n=1172 events=440 (37.5 %)  Brier damp_dress=0.0943 damp_emp=0.0947 damp_het=0.0943 damp_logit=0.0941 pl_logit=0.0938 pers_dress=0.1063 pers_logit=0.1057 clim=0.2167
+    BSS_damp_dress_vs_clim           +0.565 [+0.499, +0.622]
+    BSS_damp_dress_vs_pers_dress     +0.112 [+0.061, +0.159]
+    BSS_damp_emp_vs_clim             +0.563 [+0.494, +0.624]
+    BSS_damp_emp_vs_pers_dress       +0.109 [+0.052, +0.160]
+    BSS_damp_logit_vs_clim           +0.566 [+0.501, +0.622]
+    BSS_damp_logit_vs_pers_dress     +0.115 [+0.065, +0.160]
+    BSS_pers_dress_vs_clim           +0.510 [+0.436, +0.575]
+    BSS_pl_logit_vs_clim             +0.567 [+0.504, +0.624]
+    BSS_pl_logit_vs_pers_dress       +0.117 [+0.084, +0.149]
+    AUC damp_dress=0.944 damp_emp=0.944 damp_het=0.944 damp_logit=0.944 pl_logit=0.944 pers_dress=0.927 pers_logit=0.927 clim=0.764
+    reliability damp_emp: 0-10%: n=436 p=0.02 obs=0.01; 10-20%: n=97 p=0.15 obs=0.08; 20-30%: n=67 p=0.24 obs=0.21; 30-40%: n=49 p=0.34 obs=0.35; 40-50%: n=42 p=0.45 obs=0.40; 50-60%: n=52 p=0.56 obs=0.42; 60-70%: n=59 p=0.65 obs=0.54; 70-80%: n=45 p=0.75 obs=0.67; 80-90%: n=65 p=0.85 obs=0.71; 90-100%: n=260 p=0.97 obs=0.95
+    as the page would show it (damp_emp): 10% n=488 obs=0.02; 20% n=90 obs=0.12; 30% n=49 obs=0.33; 40% n=46 obs=0.28; 50% n=38 obs=0.58; 60% n=58 obs=0.41; 70% n=62 obs=0.60; 80% n=47 obs=0.68; 90% n=294 obs=0.93
+    reliability pers_dress: 0-10%: n=381 p=0.02 obs=0.03; 10-20%: n=109 p=0.14 obs=0.06; 20-30%: n=83 p=0.25 obs=0.11; 30-40%: n=79 p=0.35 obs=0.29; 40-50%: n=76 p=0.45 obs=0.46; 50-60%: n=54 p=0.55 obs=0.52; 60-70%: n=53 p=0.65 obs=0.62; 70-80%: n=67 p=0.75 obs=0.73; 80-90%: n=53 p=0.85 obs=0.74; 90-100%: n=217 p=0.98 obs=0.94
+ lead 2 T>75.0: n=1172 events=150 (12.8 %)  Brier damp_dress=0.0416 damp_emp=0.0415 damp_het=0.0416 damp_logit=0.0415 pl_logit=0.0399 pers_dress=0.0456 pers_logit=0.0446 clim=0.1090
+    BSS_damp_dress_vs_clim           +0.618 [+0.518, +0.709]
+    BSS_damp_dress_vs_pers_dress     +0.086 [-0.008, +0.179]
+    BSS_damp_emp_vs_clim             +0.620 [+0.510, +0.717]
+    BSS_damp_emp_vs_pers_dress       +0.090 [-0.016, +0.199]
+    BSS_damp_logit_vs_clim           +0.619 [+0.520, +0.709]
+    BSS_damp_logit_vs_pers_dress     +0.089 [-0.015, +0.197]
+    BSS_pers_dress_vs_clim           +0.582 [+0.484, +0.671]
+    BSS_pl_logit_vs_clim             +0.634 [+0.538, +0.722]
+    BSS_pl_logit_vs_pers_dress       +0.123 [+0.046, +0.208]
+    AUC damp_dress=0.972 damp_emp=0.972 damp_het=0.972 damp_logit=0.972 pl_logit=0.973 pers_dress=0.966 pers_logit=0.966 clim=0.836
+    reliability damp_emp: 0-10%: n=899 p=0.01 obs=0.01; 10-20%: n=59 p=0.15 obs=0.07; 20-30%: n=26 p=0.24 obs=0.19; 30-40%: n=21 p=0.34 obs=0.43; 40-50%: n=11 p=0.45 obs=0.64; 50-60%: n=16 p=0.57 obs=0.38; 60-70%: n=15 p=0.64 obs=0.47; 70-80%: n=17 p=0.75 obs=0.76; 80-90%: n=33 p=0.85 obs=0.73; 90-100%: n=75 p=0.96 obs=0.91
+    as the page would show it (damp_emp): 10% n=929 obs=0.01; 20% n=44 obs=0.09; 30% n=23 obs=0.26; 40% n=14 obs=0.71; 50% n=8 obs=0.38; 60% n=24 obs=0.33; 70% n=14 obs=0.71; 80% n=25 obs=0.84; 90% n=91 obs=0.86
+    reliability pers_dress: 0-10%: n=864 p=0.01 obs=0.01; 10-20%: n=67 p=0.14 obs=0.07; 20-30%: n=29 p=0.23 obs=0.10; 30-40%: n=29 p=0.35 obs=0.38; 40-50%: n=32 p=0.46 obs=0.34; 50-60%: n=26 p=0.55 obs=0.50; 60-70%: n=20 p=0.65 obs=0.55; 70-80%: n=22 p=0.76 obs=0.64; 80-90%: n=32 p=0.84 obs=0.81; 90-100%: n=51 p=0.96 obs=0.96
+ lead 3 T>37.5: n=1169 events=439 (37.6 %)  Brier damp_dress=0.1086 damp_emp=0.1093 damp_het=0.1088 damp_logit=0.1077 pl_logit=0.1082 pers_dress=0.1304 pers_logit=0.1284 clim=0.2168
+    BSS_damp_dress_vs_clim           +0.499 [+0.423, +0.564]
+    BSS_damp_dress_vs_pers_dress     +0.167 [+0.117, +0.214]
+    BSS_damp_emp_vs_clim             +0.496 [+0.417, +0.566]
+    BSS_damp_emp_vs_pers_dress       +0.162 [+0.105, +0.216]
+    BSS_damp_logit_vs_clim           +0.503 [+0.429, +0.568]
+    BSS_damp_logit_vs_pers_dress     +0.174 [+0.126, +0.219]
+    BSS_pers_dress_vs_clim           +0.398 [+0.312, +0.477]
+    BSS_pl_logit_vs_clim             +0.501 [+0.426, +0.566]
+    BSS_pl_logit_vs_pers_dress       +0.170 [+0.127, +0.211]
+    AUC damp_dress=0.926 damp_emp=0.926 damp_het=0.926 damp_logit=0.926 pl_logit=0.925 pers_dress=0.893 pers_logit=0.893 clim=0.765
+    reliability damp_emp: 0-10%: n=401 p=0.02 obs=0.02; 10-20%: n=120 p=0.15 obs=0.11; 20-30%: n=58 p=0.24 obs=0.21; 30-40%: n=60 p=0.35 obs=0.30; 40-50%: n=67 p=0.46 obs=0.39; 50-60%: n=53 p=0.54 obs=0.49; 60-70%: n=44 p=0.65 obs=0.55; 70-80%: n=52 p=0.76 obs=0.58; 80-90%: n=66 p=0.85 obs=0.73; 90-100%: n=248 p=0.97 obs=0.94
+    as the page would show it (damp_emp): 10% n=469 obs=0.03; 20% n=85 obs=0.14; 30% n=58 obs=0.22; 40% n=56 obs=0.45; 50% n=65 obs=0.40; 60% n=49 obs=0.53; 70% n=41 obs=0.54; 80% n=62 obs=0.69; 90% n=284 obs=0.90
+    reliability pers_dress: 0-10%: n=338 p=0.02 obs=0.04; 10-20%: n=124 p=0.15 obs=0.11; 20-30%: n=80 p=0.25 obs=0.17; 30-40%: n=96 p=0.35 obs=0.24; 40-50%: n=85 p=0.45 obs=0.48; 50-60%: n=62 p=0.55 obs=0.47; 60-70%: n=68 p=0.66 obs=0.63; 70-80%: n=62 p=0.75 obs=0.65; 80-90%: n=47 p=0.85 obs=0.62; 90-100%: n=207 p=0.97 obs=0.92
+ lead 3 T>75.0: n=1169 events=150 (12.8 %)  Brier damp_dress=0.0500 damp_emp=0.0500 damp_het=0.0501 damp_logit=0.0490 pl_logit=0.0480 pers_dress=0.0552 pers_logit=0.0535 clim=0.1093
+    BSS_damp_dress_vs_clim           +0.543 [+0.434, +0.642]
+    BSS_damp_dress_vs_pers_dress     +0.095 [+0.006, +0.177]
+    BSS_damp_emp_vs_clim             +0.543 [+0.429, +0.648]
+    BSS_damp_emp_vs_pers_dress       +0.094 [+0.000, +0.188]
+    BSS_damp_logit_vs_clim           +0.552 [+0.445, +0.649]
+    BSS_damp_logit_vs_pers_dress     +0.113 [+0.004, +0.218]
+    BSS_pers_dress_vs_clim           +0.495 [+0.386, +0.598]
+    BSS_pl_logit_vs_clim             +0.560 [+0.454, +0.657]
+    BSS_pl_logit_vs_pers_dress       +0.130 [+0.037, +0.223]
+    AUC damp_dress=0.957 damp_emp=0.957 damp_het=0.957 damp_logit=0.957 pl_logit=0.958 pers_dress=0.946 pers_logit=0.946 clim=0.835
+    reliability damp_emp: 0-10%: n=874 p=0.02 obs=0.01; 10-20%: n=74 p=0.14 obs=0.14; 20-30%: n=34 p=0.24 obs=0.18; 30-40%: n=17 p=0.34 obs=0.29; 40-50%: n=18 p=0.44 obs=0.39; 50-60%: n=17 p=0.54 obs=0.47; 60-70%: n=15 p=0.64 obs=0.40; 70-80%: n=14 p=0.76 obs=0.43; 80-90%: n=37 p=0.85 obs=0.78; 90-100%: n=69 p=0.95 obs=0.90
+    as the page would show it (damp_emp): 10% n=916 obs=0.01; 20% n=56 obs=0.20; 30% n=20 obs=0.30; 40% n=16 obs=0.50; 50% n=20 obs=0.25; 60% n=14 obs=0.43; 70% n=14 obs=0.36; 80% n=24 obs=0.75; 90% n=89 obs=0.88
+    reliability pers_dress: 0-10%: n=812 p=0.02 obs=0.01; 10-20%: n=103 p=0.14 obs=0.04; 20-30%: n=39 p=0.25 obs=0.15; 30-40%: n=26 p=0.36 obs=0.35; 40-50%: n=38 p=0.45 obs=0.37; 50-60%: n=26 p=0.55 obs=0.46; 60-70%: n=21 p=0.64 obs=0.43; 70-80%: n=37 p=0.75 obs=0.65; 80-90%: n=27 p=0.86 obs=0.93; 90-100%: n=40 p=0.95 obs=0.88
+
+## north-A-S3S4 (Chiang Mai, Lampang, Phayao)
+ lead 1 T>37.5: n=897 events=324 (36.1 %)  Brier damp_dress=0.0719 damp_emp=0.0696 damp_het=0.0719 damp_logit=0.0718 pl_logit=0.0708 pers_dress=0.0783 pers_logit=0.0778 clim=0.2217
+    BSS_damp_dress_vs_clim           +0.676 [+0.621, +0.724]
+    BSS_damp_dress_vs_pers_dress     +0.083 [+0.031, +0.129]
+    BSS_damp_emp_vs_clim             +0.686 [+0.628, +0.735]
+    BSS_damp_emp_vs_pers_dress       +0.111 [+0.056, +0.164]
+    BSS_damp_logit_vs_clim           +0.676 [+0.621, +0.724]
+    BSS_damp_logit_vs_pers_dress     +0.084 [+0.033, +0.129]
+    BSS_pers_dress_vs_clim           +0.647 [+0.590, +0.698]
+    BSS_pl_logit_vs_clim             +0.681 [+0.625, +0.728]
+    BSS_pl_logit_vs_pers_dress       +0.096 [+0.064, +0.126]
+    AUC damp_dress=0.965 damp_emp=0.965 damp_het=0.965 damp_logit=0.965 pl_logit=0.966 pers_dress=0.959 pers_logit=0.959 clim=0.792
+    reliability damp_emp: 0-10%: n=358 p=0.03 obs=0.02; 10-20%: n=84 p=0.14 obs=0.02; 20-30%: n=46 p=0.25 obs=0.17; 30-40%: n=42 p=0.34 obs=0.24; 40-50%: n=42 p=0.46 obs=0.36; 50-60%: n=20 p=0.56 obs=0.60; 60-70%: n=23 p=0.64 obs=0.43; 70-80%: n=33 p=0.75 obs=0.70; 80-90%: n=51 p=0.86 obs=0.86; 90-100%: n=198 p=0.98 obs=0.98
+    as the page would show it (damp_emp): 10% n=409 obs=0.02; 20% n=58 obs=0.10; 30% n=44 obs=0.18; 40% n=35 obs=0.23; 50% n=34 obs=0.44; 60% n=27 obs=0.52; 70% n=25 obs=0.64; 80% n=32 obs=0.81; 90% n=233 obs=0.96
+    reliability pers_dress: 0-10%: n=294 p=0.03 obs=0.01; 10-20%: n=111 p=0.14 obs=0.06; 20-30%: n=76 p=0.25 obs=0.09; 30-40%: n=47 p=0.34 obs=0.26; 40-50%: n=43 p=0.45 obs=0.47; 50-60%: n=39 p=0.55 obs=0.59; 60-70%: n=29 p=0.65 obs=0.41; 70-80%: n=35 p=0.75 obs=0.71; 80-90%: n=37 p=0.85 obs=0.86; 90-100%: n=186 p=0.99 obs=0.98
+ lead 1 T>75.0: n=897 events=103 (11.5 %)  Brier damp_dress=0.0262 damp_emp=0.0264 damp_het=0.0263 damp_logit=0.0269 pl_logit=0.0264 pers_dress=0.0294 pers_logit=0.0295 clim=0.0931
+    BSS_damp_dress_vs_clim           +0.718 [+0.647, +0.785]
+    BSS_damp_dress_vs_pers_dress     +0.107 [+0.002, +0.197]
+    BSS_damp_emp_vs_clim             +0.716 [+0.641, +0.787]
+    BSS_damp_emp_vs_pers_dress       +0.102 [-0.010, +0.201]
+    BSS_damp_logit_vs_clim           +0.711 [+0.640, +0.779]
+    BSS_damp_logit_vs_pers_dress     +0.083 [-0.042, +0.192]
+    BSS_pers_dress_vs_clim           +0.684 [+0.600, +0.761]
+    BSS_pl_logit_vs_clim             +0.716 [+0.643, +0.785]
+    BSS_pl_logit_vs_pers_dress       +0.100 [+0.016, +0.180]
+    AUC damp_dress=0.990 damp_emp=0.990 damp_het=0.990 damp_logit=0.990 pl_logit=0.990 pers_dress=0.987 pers_logit=0.987 clim=0.814
+    reliability damp_emp: 0-10%: n=733 p=0.01 obs=0.00; 10-20%: n=22 p=0.14 obs=0.14; 20-30%: n=13 p=0.24 obs=0.31; 30-40%: n=14 p=0.34 obs=0.43; 40-50%: n=17 p=0.45 obs=0.41; 50-60%: n=5 p=0.54 obs=0.40; 60-70%: n=5 p=0.63 obs=0.80; 70-80%: n=12 p=0.74 obs=0.58; 80-90%: n=21 p=0.86 obs=0.81; 90-100%: n=55 p=0.96 obs=0.96
+    as the page would show it (damp_emp): 10% n=747 obs=0.00; 20% n=17 obs=0.18; 30% n=12 obs=0.42; 40% n=18 obs=0.44; 50% n=9 obs=0.44; 60% n=4 obs=0.50; 70% n=8 obs=0.62; 80% n=13 obs=0.69; 90% n=69 obs=0.94
+    reliability pers_dress: 0-10%: n=725 p=0.01 obs=0.00; 10-20%: n=22 p=0.15 obs=0.09; 20-30%: n=20 p=0.25 obs=0.45; 30-40%: n=11 p=0.36 obs=0.09; 40-50%: n=14 p=0.45 obs=0.21; 50-60%: n=15 p=0.55 obs=0.67; 60-70%: n=12 p=0.64 obs=0.67; 70-80%: n=20 p=0.75 obs=0.75; 80-90%: n=18 p=0.85 obs=0.83; 90-100%: n=40 p=0.97 obs=0.97
+ lead 2 T>37.5: n=896 events=323 (36.0 %)  Brier damp_dress=0.1079 damp_emp=0.1057 damp_het=0.1079 damp_logit=0.1076 pl_logit=0.1067 pers_dress=0.1221 pers_logit=0.1211 clim=0.2219
+    BSS_damp_dress_vs_clim           +0.514 [+0.434, +0.582]
+    BSS_damp_dress_vs_pers_dress     +0.116 [+0.060, +0.165]
+    BSS_damp_emp_vs_clim             +0.523 [+0.441, +0.595]
+    BSS_damp_emp_vs_pers_dress       +0.134 [+0.073, +0.189]
+    BSS_damp_logit_vs_clim           +0.515 [+0.436, +0.582]
+    BSS_damp_logit_vs_pers_dress     +0.119 [+0.066, +0.166]
+    BSS_pers_dress_vs_clim           +0.450 [+0.366, +0.521]
+    BSS_pl_logit_vs_clim             +0.519 [+0.442, +0.586]
+    BSS_pl_logit_vs_pers_dress       +0.127 [+0.089, +0.161]
+    AUC damp_dress=0.924 damp_emp=0.924 damp_het=0.924 damp_logit=0.924 pl_logit=0.923 pers_dress=0.901 pers_logit=0.901 clim=0.792
+    reliability damp_emp: 0-10%: n=255 p=0.04 obs=0.04; 10-20%: n=124 p=0.15 obs=0.07; 20-30%: n=74 p=0.24 obs=0.18; 30-40%: n=65 p=0.34 obs=0.18; 40-50%: n=35 p=0.45 obs=0.23; 50-60%: n=43 p=0.55 obs=0.51; 60-70%: n=32 p=0.65 obs=0.59; 70-80%: n=44 p=0.75 obs=0.68; 80-90%: n=47 p=0.86 obs=0.68; 90-100%: n=177 p=0.97 obs=0.95
+    as the page would show it (damp_emp): 10% n=320 obs=0.03; 20% n=100 obs=0.14; 30% n=69 obs=0.20; 40% n=46 obs=0.17; 50% n=39 obs=0.41; 60% n=36 obs=0.50; 70% n=41 obs=0.63; 80% n=42 obs=0.67; 90% n=203 obs=0.93
+    reliability pers_dress: 0-10%: n=174 p=0.04 obs=0.04; 10-20%: n=138 p=0.15 obs=0.07; 20-30%: n=113 p=0.24 obs=0.10; 30-40%: n=85 p=0.34 obs=0.21; 40-50%: n=59 p=0.45 obs=0.49; 50-60%: n=52 p=0.54 obs=0.58; 60-70%: n=44 p=0.65 obs=0.41; 70-80%: n=42 p=0.75 obs=0.64; 80-90%: n=35 p=0.85 obs=0.74; 90-100%: n=154 p=0.98 obs=0.95
+ lead 2 T>75.0: n=896 events=103 (11.5 %)  Brier damp_dress=0.0411 damp_emp=0.0415 damp_het=0.0411 damp_logit=0.0409 pl_logit=0.0394 pers_dress=0.0455 pers_logit=0.0444 clim=0.0931
+    BSS_damp_dress_vs_clim           +0.558 [+0.451, +0.660]
+    BSS_damp_dress_vs_pers_dress     +0.097 [-0.011, +0.199]
+    BSS_damp_emp_vs_clim             +0.554 [+0.436, +0.664]
+    BSS_damp_emp_vs_pers_dress       +0.088 [-0.034, +0.205]
+    BSS_damp_logit_vs_clim           +0.561 [+0.457, +0.666]
+    BSS_damp_logit_vs_pers_dress     +0.102 [-0.028, +0.227]
+    BSS_pers_dress_vs_clim           +0.511 [+0.397, +0.619]
+    BSS_pl_logit_vs_clim             +0.576 [+0.473, +0.678]
+    BSS_pl_logit_vs_pers_dress       +0.134 [+0.039, +0.233]
+    AUC damp_dress=0.970 damp_emp=0.970 damp_het=0.970 damp_logit=0.970 pl_logit=0.970 pers_dress=0.957 pers_logit=0.957 clim=0.814
+    reliability damp_emp: 0-10%: n=708 p=0.01 obs=0.01; 10-20%: n=38 p=0.15 obs=0.18; 20-30%: n=20 p=0.24 obs=0.10; 30-40%: n=17 p=0.36 obs=0.41; 40-50%: n=12 p=0.46 obs=0.33; 50-60%: n=11 p=0.57 obs=0.45; 60-70%: n=13 p=0.66 obs=0.46; 70-80%: n=15 p=0.75 obs=0.67; 80-90%: n=19 p=0.86 obs=0.68; 90-100%: n=43 p=0.95 obs=0.98
+    as the page would show it (damp_emp): 10% n=728 obs=0.01; 20% n=33 obs=0.18; 30% n=12 obs=0.25; 40% n=15 obs=0.47; 50% n=10 obs=0.40; 60% n=12 obs=0.42; 70% n=16 obs=0.50; 80% n=17 obs=0.71; 90% n=53 obs=0.92
+    reliability pers_dress: 0-10%: n=681 p=0.01 obs=0.01; 10-20%: n=46 p=0.14 obs=0.02; 20-30%: n=23 p=0.25 obs=0.04; 30-40%: n=21 p=0.34 obs=0.43; 40-50%: n=20 p=0.45 obs=0.25; 50-60%: n=21 p=0.55 obs=0.48; 60-70%: n=21 p=0.66 obs=0.67; 70-80%: n=19 p=0.75 obs=0.74; 80-90%: n=21 p=0.85 obs=0.76; 90-100%: n=23 p=0.95 obs=1.00
+ lead 3 T>37.5: n=895 events=323 (36.1 %)  Brier damp_dress=0.1279 damp_emp=0.1263 damp_het=0.1283 damp_logit=0.1262 pl_logit=0.1263 pers_dress=0.1505 pers_logit=0.1479 clim=0.2221
+    BSS_damp_dress_vs_clim           +0.424 [+0.334, +0.498]
+    BSS_damp_dress_vs_pers_dress     +0.150 [+0.097, +0.196]
+    BSS_damp_emp_vs_clim             +0.431 [+0.338, +0.511]
+    BSS_damp_emp_vs_pers_dress       +0.161 [+0.104, +0.213]
+    BSS_damp_logit_vs_clim           +0.432 [+0.344, +0.505]
+    BSS_damp_logit_vs_pers_dress     +0.162 [+0.110, +0.206]
+    BSS_pers_dress_vs_clim           +0.322 [+0.225, +0.408]
+    BSS_pl_logit_vs_clim             +0.431 [+0.344, +0.505]
+    BSS_pl_logit_vs_pers_dress       +0.161 [+0.115, +0.201]
+    AUC damp_dress=0.893 damp_emp=0.893 damp_het=0.893 damp_logit=0.893 pl_logit=0.892 pers_dress=0.853 pers_logit=0.853 clim=0.792
+    reliability damp_emp: 0-10%: n=219 p=0.04 obs=0.06; 10-20%: n=145 p=0.15 obs=0.09; 20-30%: n=80 p=0.25 obs=0.09; 30-40%: n=53 p=0.35 obs=0.28; 40-50%: n=60 p=0.45 obs=0.33; 50-60%: n=44 p=0.56 obs=0.43; 60-70%: n=35 p=0.65 obs=0.60; 70-80%: n=36 p=0.75 obs=0.64; 80-90%: n=47 p=0.85 obs=0.70; 90-100%: n=176 p=0.96 obs=0.90
+    as the page would show it (damp_emp): 10% n=295 obs=0.07; 20% n=104 obs=0.09; 30% n=67 obs=0.15; 40% n=64 obs=0.25; 50% n=42 obs=0.43; 60% n=48 obs=0.44; 70% n=37 obs=0.73; 80% n=37 obs=0.59; 90% n=201 obs=0.89
+    reliability pers_dress: 0-10%: n=135 p=0.04 obs=0.10; 10-20%: n=133 p=0.15 obs=0.08; 20-30%: n=131 p=0.25 obs=0.11; 30-40%: n=101 p=0.35 obs=0.27; 40-50%: n=65 p=0.45 obs=0.42; 50-60%: n=59 p=0.54 obs=0.46; 60-70%: n=49 p=0.65 obs=0.57; 70-80%: n=46 p=0.75 obs=0.50; 80-90%: n=35 p=0.86 obs=0.77; 90-100%: n=141 p=0.97 obs=0.89
+ lead 3 T>75.0: n=895 events=105 (11.7 %)  Brier damp_dress=0.0497 damp_emp=0.0503 damp_het=0.0498 damp_logit=0.0493 pl_logit=0.0479 pers_dress=0.0543 pers_logit=0.0522 clim=0.0939
+    BSS_damp_dress_vs_clim           +0.470 [+0.342, +0.593]
+    BSS_damp_dress_vs_pers_dress     +0.084 [-0.023, +0.192]
+    BSS_damp_emp_vs_clim             +0.464 [+0.323, +0.597]
+    BSS_damp_emp_vs_pers_dress       +0.073 [-0.045, +0.198]
+    BSS_damp_logit_vs_clim           +0.475 [+0.351, +0.601]
+    BSS_damp_logit_vs_pers_dress     +0.092 [-0.041, +0.224]
+    BSS_pers_dress_vs_clim           +0.422 [+0.289, +0.541]
+    BSS_pl_logit_vs_clim             +0.490 [+0.367, +0.613]
+    BSS_pl_logit_vs_pers_dress       +0.117 [+0.010, +0.231]
+    AUC damp_dress=0.950 damp_emp=0.950 damp_het=0.950 damp_logit=0.950 pl_logit=0.949 pers_dress=0.928 pers_logit=0.928 clim=0.815
+    reliability damp_emp: 0-10%: n=687 p=0.02 obs=0.01; 10-20%: n=50 p=0.14 obs=0.12; 20-30%: n=32 p=0.25 obs=0.28; 30-40%: n=19 p=0.34 obs=0.37; 40-50%: n=10 p=0.45 obs=0.20; 50-60%: n=10 p=0.54 obs=0.50; 60-70%: n=8 p=0.66 obs=0.50; 70-80%: n=15 p=0.73 obs=0.53; 80-90%: n=22 p=0.85 obs=0.73; 90-100%: n=42 p=0.95 obs=0.90
+    as the page would show it (damp_emp): 10% n=717 obs=0.02; 20% n=34 obs=0.21; 30% n=31 obs=0.35; 40% n=12 obs=0.25; 50% n=11 obs=0.36; 60% n=5 obs=0.40; 70% n=17 obs=0.59; 80% n=15 obs=0.60; 90% n=53 obs=0.89
+    reliability pers_dress: 0-10%: n=646 p=0.02 obs=0.02; 10-20%: n=71 p=0.14 obs=0.03; 20-30%: n=26 p=0.25 obs=0.12; 30-40%: n=26 p=0.35 obs=0.31; 40-50%: n=20 p=0.45 obs=0.25; 50-60%: n=25 p=0.55 obs=0.40; 60-70%: n=22 p=0.66 obs=0.64; 70-80%: n=24 p=0.75 obs=0.71; 80-90%: n=18 p=0.86 obs=0.83; 90-100%: n=17 p=0.94 obs=1.00
+
+## Oct-2026 quiet (e3 stations, 20 Sep–22 Oct)
+ lead 1 T>37.5: n=328 events=1 (0.3 %)  Brier damp_dress=0.0037 damp_emp=0.0035 damp_het=0.0037 damp_logit=0.0038 pl_logit=0.0036 pers_dress=0.0056 pers_logit=0.0054 clim=0.0048
+    BSS_damp_dress_vs_clim           +0.235 [-0.049, +0.683]
+    BSS_damp_dress_vs_pers_dress     +0.338 [-0.027, +0.681]
+    BSS_damp_emp_vs_clim             +0.286 [+0.096, +0.840]
+    BSS_damp_emp_vs_pers_dress       +0.381 [+0.185, +0.835]
+    BSS_damp_logit_vs_clim           +0.216 [-0.116, +0.603]
+    BSS_damp_logit_vs_pers_dress     +0.321 [-0.122, +0.610]
+    BSS_pers_dress_vs_clim           -0.155 [-0.811, +0.418]
+    BSS_pl_logit_vs_clim             +0.257 [+0.101, +0.756]
+    BSS_pl_logit_vs_pers_dress       +0.356 [+0.202, +0.762]
+    AUC damp_dress=0.969 damp_emp=0.969 damp_het=0.969 damp_logit=0.969 pl_logit=0.979 pers_dress=0.939 pers_logit=0.939 clim=0.034
+    reliability damp_emp: 0-10%: n=324 p=0.01 obs=0.00; 10-20%: n=3 p=0.16 obs=0.00; 30-40%: n=1 p=0.33 obs=0.00
+    as the page would show it (damp_emp): 10% n=325 obs=0.00; 20% n=2 obs=0.00; 30% n=1 obs=0.00
+    reliability pers_dress: 0-10%: n=317 p=0.00 obs=0.00; 10-20%: n=7 p=0.14 obs=0.00; 30-40%: n=1 p=0.32 obs=0.00; 40-50%: n=2 p=0.42 obs=0.00; 50-60%: n=1 p=0.53 obs=0.00
+ lead 1 T>75.0: n=328 events=0 (0.0 %)  Brier damp_dress=0.0000 damp_emp=0.0000 damp_het=0.0000 damp_logit=0.0000 pl_logit=0.0000 pers_dress=0.0000 pers_logit=0.0000 clim=0.0000
+    BSS_damp_dress_vs_clim           +1.000 [+1.000, +1.000]
+    BSS_damp_dress_vs_pers_dress     +0.977 [+0.687, +0.999]
+    BSS_damp_emp_vs_clim             +0.875 [+0.848, +0.900]
+    BSS_damp_emp_vs_pers_dress       -25.928 [-314.578, -10.492]
+    BSS_damp_logit_vs_clim           +0.998 [+0.996, +0.999]
+    BSS_damp_logit_vs_pers_dress     +0.576 [-4.368, +0.863]
+    BSS_pers_dress_vs_clim           +0.995 [+0.989, +1.000]
+    BSS_pl_logit_vs_clim             +0.999 [+0.998, +1.000]
+    BSS_pl_logit_vs_pers_dress       +0.786 [-1.199, +0.879]
+    reliability damp_emp: 0-10%: n=328 p=0.00 obs=0.00
+    as the page would show it (damp_emp): 10% n=328 obs=0.00
+    reliability pers_dress: 0-10%: n=328 p=0.00 obs=0.00
+ lead 2 T>37.5: n=327 events=1 (0.3 %)  Brier damp_dress=0.0062 damp_emp=0.0050 damp_het=0.0062 damp_logit=0.0070 pl_logit=0.0056 pers_dress=0.0079 pers_logit=0.0087 clim=0.0048
+    BSS_damp_dress_vs_clim           -0.285 [-2.494, +0.132]
+    BSS_damp_dress_vs_pers_dress     +0.210 [-0.412, +0.465]
+    BSS_damp_emp_vs_clim             -0.035 [-1.604, +0.294]
+    BSS_damp_emp_vs_pers_dress       +0.363 [-0.085, +0.674]
+    BSS_damp_logit_vs_clim           -0.453 [-3.045, +0.033]
+    BSS_damp_logit_vs_pers_dress     +0.107 [-0.655, +0.370]
+    BSS_pers_dress_vs_clim           -0.626 [-3.101, -0.095]
+    BSS_pl_logit_vs_clim             -0.164 [-1.505, +0.104]
+    BSS_pl_logit_vs_pers_dress       +0.284 [-0.053, +0.549]
+    AUC damp_dress=0.979 damp_emp=0.979 damp_het=0.979 damp_logit=0.979 pl_logit=0.929 pers_dress=0.433 pers_logit=0.433 clim=0.034
+    reliability damp_emp: 0-10%: n=312 p=0.01 obs=0.00; 10-20%: n=10 p=0.17 obs=0.10; 20-30%: n=4 p=0.21 obs=0.00; 60-70%: n=1 p=0.60 obs=0.00
+    as the page would show it (damp_emp): 10% n=314 obs=0.00; 20% n=12 obs=0.08; 60% n=1 obs=0.00
+    reliability pers_dress: 0-10%: n=299 p=0.01 obs=0.00; 10-20%: n=19 p=0.13 obs=0.00; 20-30%: n=5 p=0.23 obs=0.00; 30-40%: n=1 p=0.37 obs=0.00; 40-50%: n=2 p=0.45 obs=0.00; 50-60%: n=1 p=0.53 obs=0.00
+ lead 2 T>75.0: n=327 events=0 (0.0 %)  Brier damp_dress=0.0000 damp_emp=0.0000 damp_het=0.0000 damp_logit=0.0000 pl_logit=0.0000 pers_dress=0.0000 pers_logit=0.0000 clim=0.0000
+    BSS_damp_dress_vs_clim           +0.683 [+0.125, +0.973]
+    BSS_damp_dress_vs_pers_dress     +0.396 [-5.051, +0.960]
+    BSS_damp_emp_vs_clim             -0.172 [-0.414, +0.020]
+    BSS_damp_emp_vs_pers_dress       -1.235 [-19.072, +0.027]
+    BSS_damp_logit_vs_clim           +0.814 [+0.611, +0.934]
+    BSS_damp_logit_vs_pers_dress     +0.644 [-2.488, +0.906]
+    BSS_pers_dress_vs_clim           +0.476 [-0.222, +0.944]
+    BSS_pl_logit_vs_clim             +0.938 [+0.879, +0.977]
+    BSS_pl_logit_vs_pers_dress       +0.882 [-0.067, +0.961]
+    reliability damp_emp: 0-10%: n=327 p=0.00 obs=0.00
+    as the page would show it (damp_emp): 10% n=327 obs=0.00
+    reliability pers_dress: 0-10%: n=327 p=0.00 obs=0.00
+ lead 3 T>37.5: n=326 events=1 (0.3 %)  Brier damp_dress=0.0095 damp_emp=0.0070 damp_het=0.0096 damp_logit=0.0098 pl_logit=0.0082 pers_dress=0.0096 pers_logit=0.0111 clim=0.0049
+    BSS_damp_dress_vs_clim           -0.958 [-5.404, -0.048]
+    BSS_damp_dress_vs_pers_dress     +0.006 [-0.625, +0.278]
+    BSS_damp_emp_vs_clim             -0.433 [-3.474, +0.191]
+    BSS_damp_emp_vs_pers_dress       +0.273 [-0.111, +0.447]
+    BSS_damp_logit_vs_clim           -1.016 [-5.604, -0.101]
+    BSS_damp_logit_vs_pers_dress     -0.023 [-0.671, +0.246]
+    BSS_pers_dress_vs_clim           -0.970 [-4.556, -0.273]
+    BSS_pl_logit_vs_clim             -0.693 [-4.252, +0.015]
+    BSS_pl_logit_vs_pers_dress       +0.141 [-0.281, +0.321]
+    AUC damp_dress=0.991 damp_emp=0.991 damp_het=0.991 damp_logit=0.991 pl_logit=0.991 pers_dress=0.717 pers_logit=0.717 clim=0.034
+    reliability damp_emp: 0-10%: n=285 p=0.02 obs=0.00; 10-20%: n=29 p=0.14 obs=0.00; 20-30%: n=6 p=0.24 obs=0.00; 30-40%: n=3 p=0.35 obs=0.33; 40-50%: n=3 p=0.44 obs=0.00
+    as the page would show it (damp_emp): 10% n=308 obs=0.00; 20% n=10 obs=0.00; 30% n=3 obs=0.00; 40% n=5 obs=0.20
+    reliability pers_dress: 0-10%: n=286 p=0.02 obs=0.00; 10-20%: n=29 p=0.15 obs=0.00; 20-30%: n=7 p=0.26 obs=0.00; 30-40%: n=1 p=0.39 obs=0.00; 40-50%: n=2 p=0.46 obs=0.00; 50-60%: n=1 p=0.53 obs=0.00
+ lead 3 T>75.0: n=326 events=0 (0.0 %)  Brier damp_dress=0.0000 damp_emp=0.0000 damp_het=0.0000 damp_logit=0.0000 pl_logit=0.0000 pers_dress=0.0000 pers_logit=0.0000 clim=0.0000
+    BSS_damp_dress_vs_clim           -0.030 [-0.614, +0.505]
+    BSS_damp_dress_vs_pers_dress     +0.466 [-0.912, +0.708]
+    BSS_damp_emp_vs_clim             -0.904 [-1.486, -0.363]
+    BSS_damp_emp_vs_pers_dress       +0.014 [-3.380, +0.484]
+    BSS_damp_logit_vs_clim           +0.210 [-0.106, +0.509]
+    BSS_damp_logit_vs_pers_dress     +0.591 [-0.707, +0.783]
+    BSS_pers_dress_vs_clim           -0.930 [-3.058, +0.626]
+    BSS_pl_logit_vs_clim             +0.611 [+0.422, +0.775]
+    BSS_pl_logit_vs_pers_dress       +0.799 [+0.275, +0.871]
+    reliability damp_emp: 0-10%: n=326 p=0.00 obs=0.00
+    as the page would show it (damp_emp): 10% n=326 obs=0.00
+    reliability pers_dress: 0-10%: n=326 p=0.00 obs=0.00
+
+wrote /root/disaster-now/research/out/aq_expA_results.json
+
+===== run 2026-10-24T09:00:24+00:00 : research/aq_expA.py =====
+rows (station × day × lead, Dec–Apr): 24595; seasons {'S3': 6278, 'S2': 6272, 'S4': 6183, 'S1': 5862}
+  S1 lead 1: n=1965, obs>37.5 51.7 %, obs>75 18.2 %; north 65.8 % / 33.0 %
+  S2 lead 1: n=2096, obs>37.5 41.1 %, obs>75 9.6 %; north 54.5 % / 16.9 %
+  S3 lead 1: n=2095, obs>37.5 35.1 %, obs>75 4.7 %; north 42.1 % / 7.5 %
+  S4 lead 1: n=2064, obs>37.5 26.2 %, obs>75 8.5 %; north 31.6 % / 16.9 %
+
+## Choosing: fit S1, score S2, sample A (Brier score; lower is better)
+  lead 1 T>37.5: n=902 base rate 0.402  damp_dress=0.0697  damp_emp=0.0685  damp_het=0.0696  damp_logit=0.0730  pl_logit=0.0823  pers_dress=0.0857  pers_logit=0.0865  clim=0.1455
+  lead 1 T>75.0: n=902 base rate 0.099  damp_dress=0.0376  damp_emp=0.0379  damp_het=0.0375  damp_logit=0.0363  pl_logit=0.0376  pers_dress=0.0410  pers_logit=0.0405  clim=0.0640
+  lead 2 T>37.5: n=899 base rate 0.403  damp_dress=0.0937  damp_emp=0.0892  damp_het=0.0935  damp_logit=0.1004  pl_logit=0.1103  pers_dress=0.1219  pers_logit=0.1242  clim=0.1456
+  lead 2 T>75.0: n=899 base rate 0.099  damp_dress=0.0514  damp_emp=0.0515  damp_het=0.0509  damp_logit=0.0468  pl_logit=0.0498  pers_dress=0.0580  pers_logit=0.0563  clim=0.0642
+  mean Brier over leads 1–2 and both thresholds: damp_dress 0.0631, damp_emp 0.0618, damp_het 0.0629, damp_logit 0.0641, pl_logit 0.0700, pers_dress 0.0766, pers_logit 0.0769, clim 0.1048
+  → chosen candidate: damp_emp; persistence reference: pers_dress; primary (pre-registered): damp_dress
+  fitted lead 1 T>37.5: damp_dress mu=+0.002 sd=0.241; damp_het mu=+0.002 a=-1.426 b=+0.006; pl_logit coef=[-25.012176237990943, 6.8892703077969015, 2.012502850237574]
+  fitted lead 1 T>75.0: damp_dress mu=+0.002 sd=0.241; damp_het mu=+0.002 a=-1.426 b=+0.006; pl_logit coef=[-34.05073455188011, 7.800754477403569, 2.2001949066643567]
+  fitted lead 2 T>37.5: damp_dress mu=+0.003 sd=0.343; damp_het mu=+0.003 a=-1.069 b=-0.001; pl_logit coef=[-16.830161146785084, 4.629123001482642, 1.8287969897105456]
+  fitted lead 2 T>75.0: damp_dress mu=+0.003 sd=0.343; damp_het mu=+0.003 a=-1.069 b=-0.001; pl_logit coef=[-24.005001439845884, 5.441718479908405, 1.9730070302471987]
+  fitted lead 3 T>37.5: damp_dress mu=+0.004 sd=0.379; damp_het mu=+0.008 a=-0.972 b=+0.021; pl_logit coef=[-15.265350204755668, 4.197929141854489, 2.090286002746596]
+  fitted lead 3 T>75.0: damp_dress mu=+0.004 sd=0.379; damp_het mu=+0.008 a=-0.972 b=+0.021; pl_logit coef=[-20.56369867715819, 4.630471855520354, 2.0003908372594723]
+
+## A-S3 (later season, fit stations)
+ lead 1 T>37.5: n=895 events=320 (35.8 %)  Brier damp_dress=0.0871 damp_emp=0.0867 damp_het=0.0871 damp_logit=0.0874 pl_logit=0.0886 pers_dress=0.1003 pers_logit=0.1003 clim=0.1822
+    BSS_damp_dress_vs_clim           +0.522 [+0.453, +0.582]
+    BSS_damp_dress_vs_pers_dress     +0.131 [+0.075, +0.185]
+    BSS_damp_emp_vs_clim             +0.524 [+0.451, +0.587]
+    BSS_damp_emp_vs_pers_dress       +0.135 [+0.073, +0.195]
+    BSS_damp_logit_vs_clim           +0.520 [+0.452, +0.579]
+    BSS_damp_logit_vs_pers_dress     +0.129 [+0.073, +0.181]
+    BSS_pers_dress_vs_clim           +0.450 [+0.379, +0.515]
+    BSS_pl_logit_vs_clim             +0.514 [+0.447, +0.574]
+    BSS_pl_logit_vs_pers_dress       +0.116 [+0.081, +0.151]
+    AUC damp_dress=0.949 damp_emp=0.949 damp_het=0.949 damp_logit=0.949 pl_logit=0.947 pers_dress=0.934 pers_logit=0.934 clim=0.794
+    reliability damp_emp: 0-10%: n=396 p=0.02 obs=0.02; 10-20%: n=60 p=0.14 obs=0.08; 20-30%: n=44 p=0.25 obs=0.30; 30-40%: n=40 p=0.35 obs=0.35; 40-50%: n=39 p=0.45 obs=0.41; 50-60%: n=32 p=0.55 obs=0.62; 60-70%: n=29 p=0.64 obs=0.48; 70-80%: n=38 p=0.75 obs=0.79; 80-90%: n=71 p=0.86 obs=0.80; 90-100%: n=146 p=0.96 obs=0.97
+    as the page would show it (damp_emp): 10% n=434 obs=0.02; 20% n=46 obs=0.24; 30% n=38 obs=0.32; 40% n=41 obs=0.37; 50% n=36 obs=0.47; 60% n=38 obs=0.58; 70% n=27 obs=0.67; 80% n=43 obs=0.77; 90% n=192 obs=0.95
+    as the page would show it (damp_dress): 10% n=402 obs=0.02; 20% n=54 obs=0.09; 30% n=56 obs=0.32; 40% n=47 obs=0.34; 50% n=45 obs=0.53; 60% n=44 obs=0.55; 70% n=35 obs=0.83; 80% n=56 obs=0.77; 90% n=156 obs=0.97
+    reliability pers_dress: 0-10%: n=356 p=0.02 obs=0.01; 10-20%: n=79 p=0.14 obs=0.15; 20-30%: n=43 p=0.25 obs=0.21; 30-40%: n=58 p=0.35 obs=0.41; 40-50%: n=36 p=0.45 obs=0.36; 50-60%: n=51 p=0.55 obs=0.55; 60-70%: n=43 p=0.65 obs=0.58; 70-80%: n=54 p=0.76 obs=0.80; 80-90%: n=46 p=0.85 obs=0.87; 90-100%: n=129 p=0.97 obs=0.94
+ lead 1 T>75.0: n=895 events=31 (3.5 %)  Brier damp_dress=0.0191 damp_emp=0.0189 damp_het=0.0191 damp_logit=0.0184 pl_logit=0.0179 pers_dress=0.0205 pers_logit=0.0194 clim=0.0414
+    BSS_damp_dress_vs_clim           +0.538 [+0.439, +0.644]
+    BSS_damp_dress_vs_pers_dress     +0.067 [-0.027, +0.157]
+    BSS_damp_emp_vs_clim             +0.542 [+0.436, +0.653]
+    BSS_damp_emp_vs_pers_dress       +0.076 [-0.023, +0.175]
+    BSS_damp_logit_vs_clim           +0.555 [+0.454, +0.668]
+    BSS_damp_logit_vs_pers_dress     +0.101 [-0.032, +0.237]
+    BSS_pers_dress_vs_clim           +0.505 [+0.390, +0.618]
+    BSS_pl_logit_vs_clim             +0.566 [+0.463, +0.677]
+    BSS_pl_logit_vs_pers_dress       +0.124 [+0.027, +0.239]
+    AUC damp_dress=0.984 damp_emp=0.984 damp_het=0.984 damp_logit=0.984 pl_logit=0.984 pers_dress=0.980 pers_logit=0.980 clim=0.880
+    reliability damp_emp: 0-10%: n=810 p=0.01 obs=0.00; 10-20%: n=23 p=0.15 obs=0.09; 20-30%: n=15 p=0.24 obs=0.20; 30-40%: n=9 p=0.35 obs=0.44; 40-50%: n=9 p=0.43 obs=0.33; 50-60%: n=5 p=0.55 obs=0.40; 60-70%: n=2 p=0.60 obs=0.50; 70-80%: n=8 p=0.75 obs=0.62; 80-90%: n=9 p=0.86 obs=0.78; 90-100%: n=5 p=0.93 obs=0.60
+    as the page would show it (damp_emp): 10% n=822 obs=0.00; 20% n=21 obs=0.10; 30% n=9 obs=0.44; 40% n=12 obs=0.33; 50% n=6 obs=0.50; 60% n=3 obs=0.33; 70% n=3 obs=0.33; 80% n=9 obs=0.78; 90% n=10 obs=0.70
+    as the page would show it (damp_dress): 10% n=810 obs=0.00; 20% n=23 obs=0.09; 30% n=18 obs=0.28; 40% n=13 obs=0.31; 50% n=6 obs=0.50; 60% n=3 obs=0.33; 70% n=8 obs=0.62; 80% n=9 obs=0.78; 90% n=5 obs=0.60
+    reliability pers_dress: 0-10%: n=786 p=0.01 obs=0.00; 10-20%: n=33 p=0.14 obs=0.06; 20-30%: n=25 p=0.25 obs=0.28; 30-40%: n=12 p=0.35 obs=0.17; 40-50%: n=8 p=0.44 obs=0.00; 50-60%: n=7 p=0.57 obs=0.57; 60-70%: n=8 p=0.64 obs=0.62; 70-80%: n=9 p=0.76 obs=0.67; 80-90%: n=4 p=0.83 obs=0.75; 90-100%: n=3 p=0.94 obs=0.67
+ lead 2 T>37.5: n=894 events=320 (35.8 %)  Brier damp_dress=0.1248 damp_emp=0.1256 damp_het=0.1248 damp_logit=0.1249 pl_logit=0.1289 pers_dress=0.1576 pers_logit=0.1552 clim=0.1818
+    BSS_damp_dress_vs_clim           +0.313 [+0.224, +0.391]
+    BSS_damp_dress_vs_pers_dress     +0.208 [+0.156, +0.257]
+    BSS_damp_emp_vs_clim             +0.309 [+0.214, +0.393]
+    BSS_damp_emp_vs_pers_dress       +0.203 [+0.145, +0.260]
+    BSS_damp_logit_vs_clim           +0.313 [+0.225, +0.388]
+    BSS_damp_logit_vs_pers_dress     +0.208 [+0.158, +0.255]
+    BSS_pers_dress_vs_clim           +0.133 [+0.027, +0.225]
+    BSS_pl_logit_vs_clim             +0.291 [+0.201, +0.368]
+    BSS_pl_logit_vs_pers_dress       +0.182 [+0.146, +0.218]
+    AUC damp_dress=0.896 damp_emp=0.896 damp_het=0.896 damp_logit=0.896 pl_logit=0.890 pers_dress=0.844 pers_logit=0.844 clim=0.794
+    reliability damp_emp: 0-10%: n=334 p=0.02 obs=0.04; 10-20%: n=81 p=0.15 obs=0.19; 20-30%: n=61 p=0.24 obs=0.23; 30-40%: n=53 p=0.35 obs=0.40; 40-50%: n=39 p=0.44 obs=0.31; 50-60%: n=47 p=0.55 obs=0.55; 60-70%: n=43 p=0.66 obs=0.58; 70-80%: n=64 p=0.75 obs=0.73; 80-90%: n=58 p=0.86 obs=0.78; 90-100%: n=114 p=0.95 obs=0.89
+    as the page would show it (damp_emp): 10% n=375 obs=0.05; 20% n=75 obs=0.19; 30% n=50 obs=0.32; 40% n=51 obs=0.43; 50% n=43 obs=0.47; 60% n=40 obs=0.50; 70% n=53 obs=0.64; 80% n=62 obs=0.74; 90% n=145 obs=0.89
+    as the page would show it (damp_dress): 10% n=337 obs=0.04; 20% n=77 obs=0.18; 30% n=66 obs=0.24; 40% n=70 obs=0.40; 50% n=56 obs=0.48; 60% n=58 obs=0.59; 70% n=65 obs=0.69; 80% n=50 obs=0.80; 90% n=115 obs=0.90
+    reliability pers_dress: 0-10%: n=284 p=0.02 obs=0.04; 10-20%: n=81 p=0.15 obs=0.23; 20-30%: n=80 p=0.24 obs=0.28; 30-40%: n=66 p=0.35 obs=0.33; 40-50%: n=60 p=0.44 obs=0.47; 50-60%: n=68 p=0.55 obs=0.57; 60-70%: n=64 p=0.65 obs=0.50; 70-80%: n=57 p=0.75 obs=0.67; 80-90%: n=54 p=0.85 obs=0.78; 90-100%: n=80 p=0.96 obs=0.82
+ lead 2 T>75.0: n=894 events=31 (3.5 %)  Brier damp_dress=0.0313 damp_emp=0.0312 damp_het=0.0313 damp_logit=0.0279 pl_logit=0.0269 pers_dress=0.0322 pers_logit=0.0280 clim=0.0413
+    BSS_damp_dress_vs_clim           +0.242 [+0.079, +0.397]
+    BSS_damp_dress_vs_pers_dress     +0.027 [-0.072, +0.128]
+    BSS_damp_emp_vs_clim             +0.244 [+0.068, +0.419]
+    BSS_damp_emp_vs_pers_dress       +0.030 [-0.081, +0.151]
+    BSS_damp_logit_vs_clim           +0.323 [+0.172, +0.493]
+    BSS_damp_logit_vs_pers_dress     +0.131 [-0.010, +0.290]
+    BSS_pers_dress_vs_clim           +0.221 [+0.038, +0.386]
+    BSS_pl_logit_vs_clim             +0.347 [+0.199, +0.512]
+    BSS_pl_logit_vs_pers_dress       +0.162 [+0.051, +0.299]
+    AUC damp_dress=0.939 damp_emp=0.939 damp_het=0.939 damp_logit=0.939 pl_logit=0.939 pers_dress=0.915 pers_logit=0.915 clim=0.880
+    reliability damp_emp: 0-10%: n=767 p=0.01 obs=0.01; 10-20%: n=50 p=0.14 obs=0.10; 20-30%: n=28 p=0.24 obs=0.11; 30-40%: n=10 p=0.36 obs=0.40; 40-50%: n=9 p=0.45 obs=0.33; 50-60%: n=9 p=0.56 obs=0.33; 60-70%: n=10 p=0.66 obs=0.40; 70-80%: n=5 p=0.75 obs=0.40; 80-90%: n=3 p=0.86 obs=0.00; 90-100%: n=3 p=0.93 obs=0.67
+    as the page would show it (damp_emp): 10% n=799 obs=0.01; 20% n=36 obs=0.17; 30% n=14 obs=0.21; 40% n=11 obs=0.36; 50% n=7 obs=0.43; 60% n=9 obs=0.33; 70% n=9 obs=0.33; 80% n=4 obs=0.25; 90% n=5 obs=0.40
+    as the page would show it (damp_dress): 10% n=772 obs=0.01; 20% n=45 obs=0.11; 30% n=28 obs=0.11; 40% n=15 obs=0.40; 50% n=9 obs=0.44; 60% n=14 obs=0.29; 70% n=5 obs=0.40; 80% n=3 obs=0.00; 90% n=3 obs=0.67
+    reliability pers_dress: 0-10%: n=725 p=0.02 obs=0.01; 10-20%: n=66 p=0.14 obs=0.03; 20-30%: n=31 p=0.24 obs=0.03; 30-40%: n=29 p=0.34 obs=0.28; 40-50%: n=13 p=0.45 obs=0.08; 50-60%: n=11 p=0.56 obs=0.27; 60-70%: n=9 p=0.66 obs=0.56; 70-80%: n=7 p=0.74 obs=0.57; 80-90%: n=3 p=0.87 obs=0.33
+ lead 3 T>37.5: n=893 events=319 (35.7 %)  Brier damp_dress=0.1376 damp_emp=0.1382 damp_het=0.1377 damp_logit=0.1371 pl_logit=0.1392 pers_dress=0.1851 pers_logit=0.1806 clim=0.1819
+    BSS_damp_dress_vs_clim           +0.243 [+0.152, +0.321]
+    BSS_damp_dress_vs_pers_dress     +0.257 [+0.210, +0.299]
+    BSS_damp_emp_vs_clim             +0.240 [+0.141, +0.323]
+    BSS_damp_emp_vs_pers_dress       +0.253 [+0.201, +0.302]
+    BSS_damp_logit_vs_clim           +0.246 [+0.156, +0.322]
+    BSS_damp_logit_vs_pers_dress     +0.259 [+0.213, +0.301]
+    BSS_pers_dress_vs_clim           -0.018 [-0.131, +0.078]
+    BSS_pl_logit_vs_clim             +0.234 [+0.144, +0.311]
+    BSS_pl_logit_vs_pers_dress       +0.248 [+0.206, +0.287]
+    AUC damp_dress=0.875 damp_emp=0.875 damp_het=0.875 damp_logit=0.875 pl_logit=0.871 pers_dress=0.790 pers_logit=0.790 clim=0.795
+    reliability damp_emp: 0-10%: n=310 p=0.03 obs=0.05; 10-20%: n=89 p=0.15 obs=0.19; 20-30%: n=68 p=0.25 obs=0.18; 30-40%: n=49 p=0.35 obs=0.43; 40-50%: n=66 p=0.45 obs=0.42; 50-60%: n=47 p=0.55 obs=0.53; 60-70%: n=47 p=0.65 obs=0.55; 70-80%: n=52 p=0.76 obs=0.67; 80-90%: n=55 p=0.85 obs=0.80; 90-100%: n=110 p=0.95 obs=0.87
+    as the page would show it (damp_emp): 10% n=357 obs=0.08; 20% n=71 obs=0.15; 30% n=61 obs=0.25; 40% n=63 obs=0.40; 50% n=50 obs=0.50; 60% n=54 obs=0.54; 70% n=40 obs=0.65; 80% n=55 obs=0.71; 90% n=142 obs=0.86
+    as the page would show it (damp_dress): 10% n=324 obs=0.06; 20% n=71 obs=0.15; 30% n=72 obs=0.19; 40% n=72 obs=0.42; 50% n=71 obs=0.45; 60% n=66 obs=0.58; 70% n=60 obs=0.65; 80% n=56 obs=0.84; 90% n=101 obs=0.88
+    reliability pers_dress: 0-10%: n=254 p=0.03 obs=0.07; 10-20%: n=89 p=0.15 obs=0.22; 20-30%: n=86 p=0.25 obs=0.30; 30-40%: n=73 p=0.36 obs=0.33; 40-50%: n=67 p=0.45 obs=0.49; 50-60%: n=76 p=0.55 obs=0.51; 60-70%: n=74 p=0.65 obs=0.55; 70-80%: n=58 p=0.75 obs=0.55; 80-90%: n=55 p=0.85 obs=0.73; 90-100%: n=61 p=0.95 obs=0.74
+ lead 3 T>75.0: n=893 events=32 (3.6 %)  Brier damp_dress=0.0380 damp_emp=0.0377 damp_het=0.0382 damp_logit=0.0331 pl_logit=0.0324 pers_dress=0.0395 pers_logit=0.0334 clim=0.0417
+    BSS_damp_dress_vs_clim           +0.090 [-0.123, +0.291]
+    BSS_damp_dress_vs_pers_dress     +0.040 [-0.061, +0.155]
+    BSS_damp_emp_vs_clim             +0.096 [-0.131, +0.314]
+    BSS_damp_emp_vs_pers_dress       +0.046 [-0.070, +0.184]
+    BSS_damp_logit_vs_clim           +0.208 [+0.017, +0.416]
+    BSS_damp_logit_vs_pers_dress     +0.164 [+0.018, +0.332]
+    BSS_pers_dress_vs_clim           +0.052 [-0.171, +0.255]
+    BSS_pl_logit_vs_clim             +0.225 [+0.037, +0.430]
+    BSS_pl_logit_vs_pers_dress       +0.182 [+0.056, +0.341]
+    AUC damp_dress=0.892 damp_emp=0.891 damp_het=0.892 damp_logit=0.892 pl_logit=0.894 pers_dress=0.864 pers_logit=0.864 clim=0.881
+    reliability damp_emp: 0-10%: n=744 p=0.02 obs=0.01; 10-20%: n=66 p=0.14 obs=0.12; 20-30%: n=31 p=0.26 obs=0.19; 30-40%: n=15 p=0.34 obs=0.27; 40-50%: n=11 p=0.44 obs=0.18; 50-60%: n=5 p=0.53 obs=0.20; 60-70%: n=5 p=0.64 obs=0.20; 70-80%: n=8 p=0.73 obs=0.38; 80-90%: n=3 p=0.84 obs=0.33; 90-100%: n=5 p=0.93 obs=0.20
+    as the page would show it (damp_emp): 10% n=780 obs=0.01; 20% n=41 obs=0.22; 30% n=29 obs=0.17; 40% n=14 obs=0.29; 50% n=7 obs=0.14; 60% n=5 obs=0.20; 70% n=7 obs=0.43; 80% n=4 obs=0.00; 90% n=6 obs=0.33
+    as the page would show it (damp_dress): 10% n=756 obs=0.01; 20% n=52 obs=0.13; 30% n=33 obs=0.18; 40% n=19 obs=0.32; 50% n=11 obs=0.09; 60% n=6 obs=0.17; 70% n=9 obs=0.33; 80% n=3 obs=0.33; 90% n=4 obs=0.25
+    reliability pers_dress: 0-10%: n=677 p=0.02 obs=0.01; 10-20%: n=98 p=0.14 obs=0.04; 20-30%: n=41 p=0.25 obs=0.10; 30-40%: n=30 p=0.35 obs=0.20; 40-50%: n=16 p=0.44 obs=0.06; 50-60%: n=14 p=0.56 obs=0.29; 60-70%: n=10 p=0.66 obs=0.40; 70-80%: n=4 p=0.72 obs=0.50; 80-90%: n=3 p=0.84 obs=0.00
+
+## B-S3 (later season, disjoint stations)
+ lead 1 T>37.5: n=1200 events=416 (34.7 %)  Brier damp_dress=0.0760 damp_emp=0.0764 damp_het=0.0761 damp_logit=0.0761 pl_logit=0.0782 pers_dress=0.0901 pers_logit=0.0897 clim=0.1830
+    BSS_damp_dress_vs_clim           +0.584 [+0.529, +0.638]
+    BSS_damp_dress_vs_pers_dress     +0.156 [+0.105, +0.206]
+    BSS_damp_emp_vs_clim             +0.583 [+0.524, +0.639]
+    BSS_damp_emp_vs_pers_dress       +0.152 [+0.098, +0.208]
+    BSS_damp_logit_vs_clim           +0.584 [+0.530, +0.637]
+    BSS_damp_logit_vs_pers_dress     +0.155 [+0.105, +0.205]
+    BSS_pers_dress_vs_clim           +0.508 [+0.447, +0.566]
+    BSS_pl_logit_vs_clim             +0.573 [+0.517, +0.627]
+    BSS_pl_logit_vs_pers_dress       +0.132 [+0.098, +0.166]
+    AUC damp_dress=0.960 damp_emp=0.960 damp_het=0.960 damp_logit=0.960 pl_logit=0.957 pers_dress=0.943 pers_logit=0.943 clim=0.792
+    reliability damp_emp: 0-10%: n=582 p=0.01 obs=0.02; 10-20%: n=74 p=0.15 obs=0.15; 20-30%: n=41 p=0.25 obs=0.37; 30-40%: n=39 p=0.35 obs=0.31; 40-50%: n=35 p=0.45 obs=0.43; 50-60%: n=39 p=0.55 obs=0.38; 60-70%: n=35 p=0.65 obs=0.46; 70-80%: n=44 p=0.75 obs=0.80; 80-90%: n=83 p=0.86 obs=0.82; 90-100%: n=228 p=0.97 obs=0.96
+    as the page would show it (damp_emp): 10% n=622 obs=0.02; 20% n=54 obs=0.28; 30% n=44 obs=0.36; 40% n=34 obs=0.32; 50% n=39 obs=0.36; 60% n=40 obs=0.47; 70% n=38 obs=0.66; 80% n=46 obs=0.78; 90% n=283 obs=0.95
+    as the page would show it (damp_dress): 10% n=585 obs=0.02; 20% n=71 obs=0.15; 30% n=52 obs=0.35; 40% n=46 obs=0.35; 50% n=54 obs=0.41; 60% n=41 obs=0.49; 70% n=51 obs=0.73; 80% n=66 obs=0.88; 90% n=234 obs=0.96
+    reliability pers_dress: 0-10%: n=534 p=0.01 obs=0.02; 10-20%: n=78 p=0.15 obs=0.13; 20-30%: n=67 p=0.25 obs=0.27; 30-40%: n=53 p=0.35 obs=0.28; 40-50%: n=51 p=0.45 obs=0.41; 50-60%: n=33 p=0.55 obs=0.48; 60-70%: n=55 p=0.65 obs=0.58; 70-80%: n=63 p=0.75 obs=0.76; 80-90%: n=62 p=0.85 obs=0.87; 90-100%: n=204 p=0.98 obs=0.94
+ lead 1 T>75.0: n=1200 events=67 (5.6 %)  Brier damp_dress=0.0215 damp_emp=0.0211 damp_het=0.0215 damp_logit=0.0202 pl_logit=0.0195 pers_dress=0.0233 pers_logit=0.0214 clim=0.0526
+    BSS_damp_dress_vs_clim           +0.591 [+0.465, +0.698]
+    BSS_damp_dress_vs_pers_dress     +0.075 [-0.040, +0.184]
+    BSS_damp_emp_vs_clim             +0.599 [+0.468, +0.712]
+    BSS_damp_emp_vs_pers_dress       +0.094 [-0.031, +0.221]
+    BSS_damp_logit_vs_clim           +0.615 [+0.496, +0.722]
+    BSS_damp_logit_vs_pers_dress     +0.130 [+0.018, +0.247]
+    BSS_pers_dress_vs_clim           +0.557 [+0.442, +0.662]
+    BSS_pl_logit_vs_clim             +0.629 [+0.517, +0.733]
+    BSS_pl_logit_vs_pers_dress       +0.162 [+0.079, +0.259]
+    AUC damp_dress=0.986 damp_emp=0.985 damp_het=0.986 damp_logit=0.986 pl_logit=0.986 pers_dress=0.983 pers_logit=0.983 clim=0.906
+    reliability damp_emp: 0-10%: n=1051 p=0.01 obs=0.00; 10-20%: n=35 p=0.14 obs=0.00; 20-30%: n=12 p=0.24 obs=0.00; 30-40%: n=14 p=0.36 obs=0.43; 40-50%: n=10 p=0.45 obs=0.40; 50-60%: n=10 p=0.52 obs=0.60; 60-70%: n=8 p=0.65 obs=0.38; 70-80%: n=17 p=0.74 obs=0.59; 80-90%: n=11 p=0.85 obs=0.73; 90-100%: n=32 p=0.97 obs=0.88
+    as the page would show it (damp_emp): 10% n=1074 obs=0.00; 20% n=19 obs=0.00; 30% n=10 obs=0.20; 40% n=14 obs=0.43; 50% n=14 obs=0.50; 60% n=5 obs=0.60; 70% n=13 obs=0.62; 80% n=12 obs=0.50; 90% n=39 obs=0.85
+    as the page would show it (damp_dress): 10% n=1058 obs=0.00; 20% n=27 obs=0.00; 30% n=16 obs=0.06; 40% n=16 obs=0.44; 50% n=14 obs=0.50; 60% n=12 obs=0.50; 70% n=16 obs=0.56; 80% n=8 obs=0.75; 90% n=33 obs=0.88
+    reliability pers_dress: 0-10%: n=1016 p=0.01 obs=0.00; 10-20%: n=44 p=0.14 obs=0.05; 20-30%: n=27 p=0.26 obs=0.11; 30-40%: n=26 p=0.35 obs=0.27; 40-50%: n=18 p=0.46 obs=0.22; 50-60%: n=13 p=0.55 obs=0.23; 60-70%: n=9 p=0.66 obs=0.67; 70-80%: n=7 p=0.74 obs=0.57; 80-90%: n=8 p=0.84 obs=0.88; 90-100%: n=32 p=0.96 obs=0.91
+ lead 2 T>37.5: n=1198 events=416 (34.7 %)  Brier damp_dress=0.1094 damp_emp=0.1104 damp_het=0.1094 damp_logit=0.1092 pl_logit=0.1140 pers_dress=0.1434 pers_logit=0.1411 clim=0.1833
+    BSS_damp_dress_vs_clim           +0.403 [+0.333, +0.470]
+    BSS_damp_dress_vs_pers_dress     +0.237 [+0.189, +0.283]
+    BSS_damp_emp_vs_clim             +0.397 [+0.322, +0.470]
+    BSS_damp_emp_vs_pers_dress       +0.230 [+0.176, +0.281]
+    BSS_damp_logit_vs_clim           +0.404 [+0.337, +0.469]
+    BSS_damp_logit_vs_pers_dress     +0.239 [+0.193, +0.282]
+    BSS_pers_dress_vs_clim           +0.218 [+0.132, +0.298]
+    BSS_pl_logit_vs_clim             +0.378 [+0.308, +0.446]
+    BSS_pl_logit_vs_pers_dress       +0.205 [+0.170, +0.239]
+    AUC damp_dress=0.919 damp_emp=0.919 damp_het=0.919 damp_logit=0.919 pl_logit=0.911 pers_dress=0.868 pers_logit=0.868 clim=0.792
+    reliability damp_emp: 0-10%: n=504 p=0.02 obs=0.03; 10-20%: n=78 p=0.15 obs=0.15; 20-30%: n=73 p=0.25 obs=0.25; 30-40%: n=63 p=0.35 obs=0.40; 40-50%: n=44 p=0.45 obs=0.39; 50-60%: n=60 p=0.55 obs=0.45; 60-70%: n=58 p=0.65 obs=0.59; 70-80%: n=50 p=0.75 obs=0.70; 80-90%: n=85 p=0.85 obs=0.75; 90-100%: n=183 p=0.96 obs=0.93
+    as the page would show it (damp_emp): 10% n=544 obs=0.04; 20% n=79 obs=0.19; 30% n=63 obs=0.35; 40% n=54 obs=0.33; 50% n=52 obs=0.52; 60% n=56 obs=0.45; 70% n=62 obs=0.61; 80% n=60 obs=0.73; 90% n=228 obs=0.90
+    as the page would show it (damp_dress): 10% n=506 obs=0.03; 20% n=76 obs=0.16; 30% n=77 obs=0.26; 40% n=78 obs=0.38; 50% n=72 obs=0.49; 60% n=75 obs=0.53; 70% n=66 obs=0.67; 80% n=61 obs=0.79; 90% n=187 obs=0.93
+    reliability pers_dress: 0-10%: n=453 p=0.02 obs=0.05; 10-20%: n=86 p=0.14 obs=0.22; 20-30%: n=91 p=0.25 obs=0.21; 30-40%: n=79 p=0.35 obs=0.35; 40-50%: n=70 p=0.45 obs=0.39; 50-60%: n=59 p=0.56 obs=0.56; 60-70%: n=74 p=0.65 obs=0.62; 70-80%: n=72 p=0.75 obs=0.71; 80-90%: n=69 p=0.85 obs=0.71; 90-100%: n=145 p=0.97 obs=0.83
+ lead 2 T>75.0: n=1198 events=68 (5.7 %)  Brier damp_dress=0.0339 damp_emp=0.0335 damp_het=0.0339 damp_logit=0.0316 pl_logit=0.0307 pers_dress=0.0379 pers_logit=0.0337 clim=0.0521
+    BSS_damp_dress_vs_clim           +0.349 [+0.181, +0.493]
+    BSS_damp_dress_vs_pers_dress     +0.105 [-0.016, +0.215]
+    BSS_damp_emp_vs_clim             +0.358 [+0.176, +0.516]
+    BSS_damp_emp_vs_pers_dress       +0.117 [-0.016, +0.239]
+    BSS_damp_logit_vs_clim           +0.395 [+0.227, +0.540]
+    BSS_damp_logit_vs_pers_dress     +0.167 [+0.040, +0.294]
+    BSS_pers_dress_vs_clim           +0.273 [+0.094, +0.429]
+    BSS_pl_logit_vs_clim             +0.412 [+0.254, +0.554]
+    BSS_pl_logit_vs_pers_dress       +0.191 [+0.091, +0.293]
+    AUC damp_dress=0.963 damp_emp=0.963 damp_het=0.963 damp_logit=0.963 pl_logit=0.961 pers_dress=0.946 pers_logit=0.946 clim=0.908
+    reliability damp_emp: 0-10%: n=1002 p=0.01 obs=0.00; 10-20%: n=61 p=0.15 obs=0.07; 20-30%: n=29 p=0.24 obs=0.10; 30-40%: n=23 p=0.34 obs=0.39; 40-50%: n=8 p=0.46 obs=0.62; 50-60%: n=16 p=0.56 obs=0.44; 60-70%: n=13 p=0.65 obs=0.46; 70-80%: n=9 p=0.73 obs=0.67; 80-90%: n=12 p=0.85 obs=0.50; 90-100%: n=25 p=0.96 obs=0.72
+    as the page would show it (damp_emp): 10% n=1030 obs=0.01; 20% n=54 obs=0.06; 30% n=22 obs=0.23; 40% n=11 obs=0.64; 50% n=12 obs=0.58; 60% n=16 obs=0.31; 70% n=13 obs=0.54; 80% n=9 obs=0.78; 90% n=31 obs=0.65
+    as the page would show it (damp_dress): 10% n=1005 obs=0.00; 20% n=58 obs=0.07; 30% n=32 obs=0.09; 40% n=22 obs=0.50; 50% n=16 obs=0.50; 60% n=21 obs=0.43; 70% n=9 obs=0.78; 80% n=10 obs=0.40; 90% n=25 obs=0.72
+    reliability pers_dress: 0-10%: n=939 p=0.01 obs=0.01; 10-20%: n=81 p=0.14 obs=0.04; 20-30%: n=41 p=0.23 obs=0.07; 30-40%: n=37 p=0.35 obs=0.22; 40-50%: n=31 p=0.45 obs=0.26; 50-60%: n=16 p=0.54 obs=0.44; 60-70%: n=13 p=0.66 obs=0.31; 70-80%: n=7 p=0.76 obs=0.29; 80-90%: n=15 p=0.84 obs=0.60; 90-100%: n=18 p=0.96 obs=0.94
+ lead 3 T>37.5: n=1198 events=416 (34.7 %)  Brier damp_dress=0.1243 damp_emp=0.1258 damp_het=0.1244 damp_logit=0.1237 pl_logit=0.1266 pers_dress=0.1752 pers_logit=0.1705 clim=0.1833
+    BSS_damp_dress_vs_clim           +0.322 [+0.242, +0.395]
+    BSS_damp_dress_vs_pers_dress     +0.290 [+0.246, +0.335]
+    BSS_damp_emp_vs_clim             +0.314 [+0.228, +0.392]
+    BSS_damp_emp_vs_pers_dress       +0.282 [+0.231, +0.331]
+    BSS_damp_logit_vs_clim           +0.325 [+0.247, +0.397]
+    BSS_damp_logit_vs_pers_dress     +0.294 [+0.250, +0.337]
+    BSS_pers_dress_vs_clim           +0.044 [-0.055, +0.136]
+    BSS_pl_logit_vs_clim             +0.309 [+0.230, +0.383]
+    BSS_pl_logit_vs_pers_dress       +0.278 [+0.237, +0.317]
+    AUC damp_dress=0.897 damp_emp=0.897 damp_het=0.897 damp_logit=0.897 pl_logit=0.892 pers_dress=0.813 pers_logit=0.813 clim=0.792
+    reliability damp_emp: 0-10%: n=462 p=0.02 obs=0.03; 10-20%: n=106 p=0.15 obs=0.17; 20-30%: n=66 p=0.25 obs=0.26; 30-40%: n=73 p=0.35 obs=0.33; 40-50%: n=74 p=0.45 obs=0.45; 50-60%: n=52 p=0.55 obs=0.58; 60-70%: n=50 p=0.65 obs=0.58; 70-80%: n=74 p=0.76 obs=0.59; 80-90%: n=74 p=0.86 obs=0.77; 90-100%: n=167 p=0.96 obs=0.89
+    as the page would show it (damp_emp): 10% n=518 obs=0.05; 20% n=86 obs=0.19; 30% n=65 obs=0.31; 40% n=73 obs=0.41; 50% n=65 obs=0.49; 60% n=51 obs=0.55; 70% n=57 obs=0.58; 80% n=76 obs=0.70; 90% n=207 obs=0.87
+    as the page would show it (damp_dress): 10% n=477 obs=0.03; 20% n=91 obs=0.19; 30% n=66 obs=0.26; 40% n=87 obs=0.34; 50% n=97 obs=0.52; 60% n=65 obs=0.55; 70% n=84 obs=0.63; 80% n=69 obs=0.75; 90% n=162 obs=0.90
+    reliability pers_dress: 0-10%: n=416 p=0.03 obs=0.07; 10-20%: n=104 p=0.15 obs=0.23; 20-30%: n=85 p=0.25 obs=0.33; 30-40%: n=91 p=0.35 obs=0.34; 40-50%: n=83 p=0.45 obs=0.43; 50-60%: n=69 p=0.56 obs=0.52; 60-70%: n=84 p=0.65 obs=0.63; 70-80%: n=72 p=0.75 obs=0.60; 80-90%: n=65 p=0.85 obs=0.58; 90-100%: n=129 p=0.96 obs=0.76
+ lead 3 T>75.0: n=1198 events=68 (5.7 %)  Brier damp_dress=0.0395 damp_emp=0.0389 damp_het=0.0397 damp_logit=0.0353 pl_logit=0.0345 pers_dress=0.0448 pers_logit=0.0382 clim=0.0521
+    BSS_damp_dress_vs_clim           +0.243 [+0.048, +0.404]
+    BSS_damp_dress_vs_pers_dress     +0.118 [+0.008, +0.221]
+    BSS_damp_emp_vs_clim             +0.254 [+0.054, +0.422]
+    BSS_damp_emp_vs_pers_dress       +0.132 [+0.014, +0.245]
+    BSS_damp_logit_vs_clim           +0.322 [+0.144, +0.483]
+    BSS_damp_logit_vs_pers_dress     +0.210 [+0.083, +0.334]
+    BSS_pers_dress_vs_clim           +0.142 [-0.071, +0.315]
+    BSS_pl_logit_vs_clim             +0.338 [+0.162, +0.494]
+    BSS_pl_logit_vs_pers_dress       +0.229 [+0.118, +0.344]
+    AUC damp_dress=0.934 damp_emp=0.934 damp_het=0.934 damp_logit=0.934 pl_logit=0.934 pers_dress=0.909 pers_logit=0.909 clim=0.908
+    reliability damp_emp: 0-10%: n=977 p=0.02 obs=0.01; 10-20%: n=78 p=0.14 obs=0.06; 20-30%: n=36 p=0.23 obs=0.11; 30-40%: n=20 p=0.34 obs=0.30; 40-50%: n=15 p=0.44 obs=0.33; 50-60%: n=18 p=0.53 obs=0.39; 60-70%: n=10 p=0.64 obs=0.30; 70-80%: n=8 p=0.74 obs=0.50; 80-90%: n=15 p=0.84 obs=0.53; 90-100%: n=21 p=0.96 obs=0.76
+    as the page would show it (damp_emp): 10% n=1028 obs=0.01; 20% n=53 obs=0.15; 30% n=23 obs=0.17; 40% n=14 obs=0.43; 50% n=22 obs=0.18; 60% n=9 obs=0.44; 70% n=11 obs=0.45; 80% n=12 obs=0.58; 90% n=26 obs=0.73
+    as the page would show it (damp_dress): 10% n=995 obs=0.01; 20% n=59 obs=0.05; 30% n=37 obs=0.14; 40% n=26 obs=0.35; 50% n=24 obs=0.25; 60% n=13 obs=0.46; 70% n=14 obs=0.64; 80% n=10 obs=0.40; 90% n=20 obs=0.75
+    reliability pers_dress: 0-10%: n=884 p=0.02 obs=0.01; 10-20%: n=119 p=0.14 obs=0.04; 20-30%: n=53 p=0.25 obs=0.08; 30-40%: n=36 p=0.36 obs=0.17; 40-50%: n=37 p=0.45 obs=0.22; 50-60%: n=16 p=0.54 obs=0.38; 60-70%: n=13 p=0.64 obs=0.15; 70-80%: n=14 p=0.76 obs=0.43; 80-90%: n=13 p=0.85 obs=0.77; 90-100%: n=13 p=0.97 obs=0.85
+
+## B-S4 (newest season, disjoint stations)
+ lead 1 T>37.5: n=1169 events=306 (26.2 %)  Brier damp_dress=0.0432 damp_emp=0.0421 damp_het=0.0432 damp_logit=0.0433 pl_logit=0.0422 pers_dress=0.0477 pers_logit=0.0474 clim=0.1786
+    BSS_damp_dress_vs_clim           +0.758 [+0.710, +0.799]
+    BSS_damp_dress_vs_pers_dress     +0.096 [+0.025, +0.162]
+    BSS_damp_emp_vs_clim             +0.764 [+0.714, +0.806]
+    BSS_damp_emp_vs_pers_dress       +0.118 [+0.040, +0.193]
+    BSS_damp_logit_vs_clim           +0.758 [+0.710, +0.798]
+    BSS_damp_logit_vs_pers_dress     +0.093 [+0.023, +0.159]
+    BSS_pers_dress_vs_clim           +0.733 [+0.679, +0.780]
+    BSS_pl_logit_vs_clim             +0.764 [+0.716, +0.804]
+    BSS_pl_logit_vs_pers_dress       +0.116 [+0.072, +0.159]
+    AUC damp_dress=0.987 damp_emp=0.987 damp_het=0.987 damp_logit=0.987 pl_logit=0.987 pers_dress=0.983 pers_logit=0.983 clim=0.817
+    reliability damp_emp: 0-10%: n=684 p=0.02 obs=0.00; 10-20%: n=68 p=0.15 obs=0.03; 20-30%: n=32 p=0.24 obs=0.22; 30-40%: n=31 p=0.34 obs=0.19; 40-50%: n=38 p=0.46 obs=0.34; 50-60%: n=18 p=0.54 obs=0.50; 60-70%: n=23 p=0.65 obs=0.43; 70-80%: n=28 p=0.74 obs=0.75; 80-90%: n=34 p=0.85 obs=0.79; 90-100%: n=213 p=0.98 obs=0.99
+    as the page would show it (damp_emp): 10% n=722 obs=0.00; 20% n=48 obs=0.15; 30% n=34 obs=0.18; 40% n=26 obs=0.23; 50% n=32 obs=0.44; 60% n=19 obs=0.47; 70% n=31 obs=0.58; 80% n=27 obs=0.74; 90% n=230 obs=0.98
+    as the page would show it (damp_dress): 10% n=690 obs=0.00; 20% n=62 obs=0.03; 30% n=41 obs=0.24; 40% n=37 obs=0.19; 50% n=39 obs=0.44; 60% n=31 obs=0.48; 70% n=26 obs=0.73; 80% n=26 obs=0.81; 90% n=217 obs=0.99
+    reliability pers_dress: 0-10%: n=639 p=0.02 obs=0.00; 10-20%: n=79 p=0.15 obs=0.01; 20-30%: n=57 p=0.24 obs=0.11; 30-40%: n=48 p=0.35 obs=0.17; 40-50%: n=38 p=0.45 obs=0.55; 50-60%: n=29 p=0.55 obs=0.62; 60-70%: n=19 p=0.64 obs=0.42; 70-80%: n=26 p=0.75 obs=0.62; 80-90%: n=33 p=0.86 obs=0.82; 90-100%: n=201 p=0.98 obs=0.99
+ lead 1 T>75.0: n=1169 events=98 (8.4 %)  Brier damp_dress=0.0149 damp_emp=0.0142 damp_het=0.0149 damp_logit=0.0137 pl_logit=0.0138 pers_dress=0.0181 pers_logit=0.0171 clim=0.0707
+    BSS_damp_dress_vs_clim           +0.790 [+0.709, +0.854]
+    BSS_damp_dress_vs_pers_dress     +0.178 [+0.089, +0.262]
+    BSS_damp_emp_vs_clim             +0.800 [+0.716, +0.865]
+    BSS_damp_emp_vs_pers_dress       +0.217 [+0.113, +0.324]
+    BSS_damp_logit_vs_clim           +0.806 [+0.735, +0.864]
+    BSS_damp_logit_vs_pers_dress     +0.241 [+0.144, +0.335]
+    BSS_pers_dress_vs_clim           +0.744 [+0.653, +0.817]
+    BSS_pl_logit_vs_clim             +0.805 [+0.729, +0.866]
+    BSS_pl_logit_vs_pers_dress       +0.236 [+0.159, +0.318]
+    AUC damp_dress=0.996 damp_emp=0.996 damp_het=0.996 damp_logit=0.996 pl_logit=0.995 pers_dress=0.993 pers_logit=0.993 clim=0.901
+    reliability damp_emp: 0-10%: n=1001 p=0.00 obs=0.00; 10-20%: n=28 p=0.15 obs=0.00; 20-30%: n=19 p=0.24 obs=0.16; 30-40%: n=9 p=0.35 obs=0.11; 40-50%: n=12 p=0.45 obs=0.33; 50-60%: n=4 p=0.56 obs=0.25; 60-70%: n=8 p=0.66 obs=0.88; 70-80%: n=9 p=0.76 obs=0.44; 80-90%: n=13 p=0.87 obs=0.92; 90-100%: n=66 p=0.96 obs=0.98
+    as the page would show it (damp_emp): 10% n=1018 obs=0.00; 20% n=22 obs=0.09; 30% n=14 obs=0.07; 40% n=8 obs=0.50; 50% n=9 obs=0.22; 60% n=5 obs=0.60; 70% n=8 obs=0.62; 80% n=8 obs=0.62; 90% n=77 obs=0.97
+    as the page would show it (damp_dress): 10% n=1003 obs=0.00; 20% n=26 obs=0.00; 30% n=19 obs=0.16; 40% n=14 obs=0.29; 50% n=9 obs=0.22; 60% n=12 obs=0.58; 70% n=8 obs=0.62; 80% n=11 obs=0.91; 90% n=67 obs=0.99
+    reliability pers_dress: 0-10%: n=984 p=0.00 obs=0.00; 10-20%: n=32 p=0.15 obs=0.03; 20-30%: n=21 p=0.24 obs=0.05; 30-40%: n=16 p=0.34 obs=0.38; 40-50%: n=17 p=0.46 obs=0.24; 50-60%: n=7 p=0.54 obs=0.43; 60-70%: n=14 p=0.65 obs=0.57; 70-80%: n=8 p=0.73 obs=0.88; 80-90%: n=20 p=0.86 obs=0.95; 90-100%: n=50 p=0.97 obs=0.96
+ lead 2 T>37.5: n=1168 events=305 (26.1 %)  Brier damp_dress=0.0600 damp_emp=0.0573 damp_het=0.0600 damp_logit=0.0606 pl_logit=0.0597 pers_dress=0.0733 pers_logit=0.0734 clim=0.1778
+    BSS_damp_dress_vs_clim           +0.662 [+0.603, +0.714]
+    BSS_damp_dress_vs_pers_dress     +0.181 [+0.106, +0.246]
+    BSS_damp_emp_vs_clim             +0.678 [+0.615, +0.731]
+    BSS_damp_emp_vs_pers_dress       +0.218 [+0.137, +0.291]
+    BSS_damp_logit_vs_clim           +0.659 [+0.601, +0.710]
+    BSS_damp_logit_vs_pers_dress     +0.173 [+0.100, +0.235]
+    BSS_pers_dress_vs_clim           +0.588 [+0.513, +0.653]
+    BSS_pl_logit_vs_clim             +0.664 [+0.604, +0.716]
+    BSS_pl_logit_vs_pers_dress       +0.185 [+0.133, +0.234]
+    AUC damp_dress=0.976 damp_emp=0.976 damp_het=0.976 damp_logit=0.976 pl_logit=0.975 pers_dress=0.956 pers_logit=0.956 clim=0.819
+    reliability damp_emp: 0-10%: n=575 p=0.02 obs=0.00; 10-20%: n=121 p=0.14 obs=0.03; 20-30%: n=66 p=0.24 obs=0.11; 30-40%: n=42 p=0.34 obs=0.24; 40-50%: n=35 p=0.45 obs=0.31; 50-60%: n=34 p=0.55 obs=0.44; 60-70%: n=32 p=0.65 obs=0.53; 70-80%: n=28 p=0.74 obs=0.61; 80-90%: n=48 p=0.85 obs=0.83; 90-100%: n=187 p=0.97 obs=0.97
+    as the page would show it (damp_emp): 10% n=643 obs=0.01; 20% n=100 obs=0.06; 30% n=44 obs=0.20; 40% n=35 obs=0.20; 50% n=32 obs=0.44; 60% n=36 obs=0.44; 70% n=35 obs=0.57; 80% n=29 obs=0.76; 90% n=214 obs=0.96
+    as the page would show it (damp_dress): 10% n=584 obs=0.01; 20% n=112 obs=0.03; 30% n=72 obs=0.12; 40% n=50 obs=0.22; 50% n=49 obs=0.45; 60% n=42 obs=0.45; 70% n=33 obs=0.73; 80% n=35 obs=0.83; 90% n=191 obs=0.97
+    reliability pers_dress: 0-10%: n=506 p=0.02 obs=0.01; 10-20%: n=147 p=0.15 obs=0.04; 20-30%: n=83 p=0.25 obs=0.08; 30-40%: n=63 p=0.35 obs=0.22; 40-50%: n=60 p=0.45 obs=0.47; 50-60%: n=40 p=0.55 obs=0.40; 60-70%: n=26 p=0.65 obs=0.38; 70-80%: n=35 p=0.75 obs=0.63; 80-90%: n=51 p=0.86 obs=0.82; 90-100%: n=157 p=0.98 obs=0.98
+ lead 2 T>75.0: n=1168 events=98 (8.4 %)  Brier damp_dress=0.0226 damp_emp=0.0216 damp_het=0.0226 damp_logit=0.0202 pl_logit=0.0202 pers_dress=0.0285 pers_logit=0.0264 clim=0.0707
+    BSS_damp_dress_vs_clim           +0.680 [+0.564, +0.769]
+    BSS_damp_dress_vs_pers_dress     +0.205 [+0.099, +0.309]
+    BSS_damp_emp_vs_clim             +0.694 [+0.576, +0.785]
+    BSS_damp_emp_vs_pers_dress       +0.241 [+0.123, +0.364]
+    BSS_damp_logit_vs_clim           +0.714 [+0.620, +0.788]
+    BSS_damp_logit_vs_pers_dress     +0.289 [+0.175, +0.395]
+    BSS_pers_dress_vs_clim           +0.597 [+0.463, +0.700]
+    BSS_pl_logit_vs_clim             +0.714 [+0.618, +0.791]
+    BSS_pl_logit_vs_pers_dress       +0.291 [+0.205, +0.377]
+    AUC damp_dress=0.988 damp_emp=0.988 damp_het=0.988 damp_logit=0.988 pl_logit=0.988 pers_dress=0.981 pers_logit=0.981 clim=0.901
+    reliability damp_emp: 0-10%: n=969 p=0.01 obs=0.00; 10-20%: n=46 p=0.14 obs=0.04; 20-30%: n=19 p=0.24 obs=0.16; 30-40%: n=19 p=0.33 obs=0.05; 40-50%: n=14 p=0.45 obs=0.29; 50-60%: n=6 p=0.54 obs=0.50; 60-70%: n=7 p=0.63 obs=0.14; 70-80%: n=10 p=0.76 obs=0.70; 80-90%: n=24 p=0.85 obs=0.83; 90-100%: n=54 p=0.95 obs=0.98
+    as the page would show it (damp_emp): 10% n=994 obs=0.00; 20% n=33 obs=0.12; 30% n=21 obs=0.10; 40% n=13 obs=0.23; 50% n=8 obs=0.25; 60% n=9 obs=0.33; 70% n=7 obs=0.43; 80% n=17 obs=0.88; 90% n=66 obs=0.94
+    as the page would show it (damp_dress): 10% n=973 obs=0.00; 20% n=42 obs=0.05; 30% n=25 obs=0.12; 40% n=20 obs=0.20; 50% n=12 obs=0.25; 60% n=8 obs=0.25; 70% n=14 obs=0.71; 80% n=19 obs=0.89; 90% n=55 obs=0.96
+    reliability pers_dress: 0-10%: n=937 p=0.01 obs=0.00; 10-20%: n=48 p=0.14 obs=0.10; 20-30%: n=37 p=0.25 obs=0.08; 30-40%: n=26 p=0.35 obs=0.23; 40-50%: n=21 p=0.46 obs=0.19; 50-60%: n=14 p=0.56 obs=0.43; 60-70%: n=14 p=0.64 obs=0.57; 70-80%: n=15 p=0.76 obs=0.80; 80-90%: n=21 p=0.84 obs=0.86; 90-100%: n=35 p=0.95 obs=0.97
+ lead 3 T>37.5: n=1164 events=303 (26.0 %)  Brier damp_dress=0.0703 damp_emp=0.0678 damp_het=0.0706 damp_logit=0.0699 pl_logit=0.0699 pers_dress=0.0913 pers_logit=0.0905 clim=0.1776
+    BSS_damp_dress_vs_clim           +0.604 [+0.536, +0.663]
+    BSS_damp_dress_vs_pers_dress     +0.230 [+0.162, +0.288]
+    BSS_damp_emp_vs_clim             +0.618 [+0.545, +0.681]
+    BSS_damp_emp_vs_pers_dress       +0.257 [+0.184, +0.324]
+    BSS_damp_logit_vs_clim           +0.606 [+0.538, +0.666]
+    BSS_damp_logit_vs_pers_dress     +0.234 [+0.171, +0.291]
+    BSS_pers_dress_vs_clim           +0.486 [+0.395, +0.565]
+    BSS_pl_logit_vs_clim             +0.606 [+0.537, +0.667]
+    BSS_pl_logit_vs_pers_dress       +0.234 [+0.175, +0.286]
+    AUC damp_dress=0.965 damp_emp=0.965 damp_het=0.965 damp_logit=0.965 pl_logit=0.964 pers_dress=0.928 pers_logit=0.928 clim=0.820
+    reliability damp_emp: 0-10%: n=537 p=0.03 obs=0.01; 10-20%: n=135 p=0.15 obs=0.07; 20-30%: n=82 p=0.25 obs=0.06; 30-40%: n=43 p=0.35 obs=0.28; 40-50%: n=48 p=0.45 obs=0.35; 50-60%: n=38 p=0.55 obs=0.37; 60-70%: n=28 p=0.65 obs=0.50; 70-80%: n=25 p=0.74 obs=0.64; 80-90%: n=47 p=0.86 obs=0.79; 90-100%: n=181 p=0.96 obs=0.97
+    as the page would show it (damp_emp): 10% n=611 obs=0.01; 20% n=108 obs=0.11; 30% n=59 obs=0.12; 40% n=44 obs=0.39; 50% n=42 obs=0.29; 60% n=33 obs=0.42; 70% n=29 obs=0.72; 80% n=23 obs=0.61; 90% n=215 obs=0.93
+    as the page would show it (damp_dress): 10% n=560 obs=0.01; 20% n=105 obs=0.09; 30% n=89 obs=0.06; 40% n=57 obs=0.33; 50% n=62 obs=0.32; 60% n=39 obs=0.49; 70% n=29 obs=0.66; 80% n=46 obs=0.78; 90% n=177 obs=0.97
+    reliability pers_dress: 0-10%: n=445 p=0.03 obs=0.02; 10-20%: n=158 p=0.15 obs=0.08; 20-30%: n=104 p=0.24 obs=0.10; 30-40%: n=80 p=0.35 obs=0.15; 40-50%: n=67 p=0.45 obs=0.43; 50-60%: n=43 p=0.55 obs=0.33; 60-70%: n=33 p=0.65 obs=0.36; 70-80%: n=41 p=0.75 obs=0.59; 80-90%: n=55 p=0.86 obs=0.82; 90-100%: n=138 p=0.97 obs=0.98
+ lead 3 T>75.0: n=1164 events=98 (8.4 %)  Brier damp_dress=0.0265 damp_emp=0.0253 damp_het=0.0267 damp_logit=0.0243 pl_logit=0.0245 pers_dress=0.0342 pers_logit=0.0320 clim=0.0709
+    BSS_damp_dress_vs_clim           +0.627 [+0.504, +0.720]
+    BSS_damp_dress_vs_pers_dress     +0.225 [+0.142, +0.307]
+    BSS_damp_emp_vs_clim             +0.644 [+0.523, +0.739]
+    BSS_damp_emp_vs_pers_dress       +0.261 [+0.168, +0.358]
+    BSS_damp_logit_vs_clim           +0.657 [+0.560, +0.740]
+    BSS_damp_logit_vs_pers_dress     +0.289 [+0.175, +0.399]
+    BSS_pers_dress_vs_clim           +0.518 [+0.371, +0.632]
+    BSS_pl_logit_vs_clim             +0.655 [+0.554, +0.742]
+    BSS_pl_logit_vs_pers_dress       +0.284 [+0.187, +0.384]
+    AUC damp_dress=0.982 damp_emp=0.982 damp_het=0.982 damp_logit=0.982 pl_logit=0.982 pers_dress=0.972 pers_logit=0.972 clim=0.901
+    reliability damp_emp: 0-10%: n=945 p=0.01 obs=0.00; 10-20%: n=61 p=0.15 obs=0.08; 20-30%: n=35 p=0.25 obs=0.11; 30-40%: n=11 p=0.34 obs=0.18; 40-50%: n=13 p=0.44 obs=0.23; 50-60%: n=7 p=0.56 obs=0.29; 60-70%: n=8 p=0.63 obs=0.38; 70-80%: n=9 p=0.77 obs=0.44; 80-90%: n=25 p=0.86 obs=0.92; 90-100%: n=50 p=0.95 obs=0.96
+    as the page would show it (damp_emp): 10% n=980 obs=0.01; 20% n=41 obs=0.12; 30% n=27 obs=0.15; 40% n=11 obs=0.36; 50% n=8 obs=0.25; 60% n=10 obs=0.20; 70% n=6 obs=0.17; 80% n=15 obs=0.87; 90% n=66 obs=0.94
+    as the page would show it (damp_dress): 10% n=953 obs=0.00; 20% n=53 obs=0.09; 30% n=35 obs=0.11; 40% n=16 obs=0.25; 50% n=11 obs=0.27; 60% n=12 obs=0.25; 70% n=13 obs=0.62; 80% n=24 obs=0.92; 90% n=47 obs=0.96
+    reliability pers_dress: 0-10%: n=915 p=0.01 obs=0.01; 10-20%: n=54 p=0.15 obs=0.00; 20-30%: n=40 p=0.25 obs=0.15; 30-40%: n=31 p=0.35 obs=0.13; 40-50%: n=25 p=0.46 obs=0.32; 50-60%: n=14 p=0.56 obs=0.50; 60-70%: n=15 p=0.63 obs=0.53; 70-80%: n=25 p=0.76 obs=0.72; 80-90%: n=17 p=0.86 obs=0.94; 90-100%: n=28 p=0.94 obs=0.89
+
+## A-S4 (newest season, fit stations)
+ lead 1 T>37.5: n=895 events=234 (26.1 %)  Brier damp_dress=0.0589 damp_emp=0.0573 damp_het=0.0589 damp_logit=0.0588 pl_logit=0.0595 pers_dress=0.0697 pers_logit=0.0689 clim=0.1895
+    BSS_damp_dress_vs_clim           +0.689 [+0.634, +0.740]
+    BSS_damp_dress_vs_pers_dress     +0.156 [+0.107, +0.206]
+    BSS_damp_emp_vs_clim             +0.698 [+0.639, +0.750]
+    BSS_damp_emp_vs_pers_dress       +0.179 [+0.123, +0.237]
+    BSS_damp_logit_vs_clim           +0.690 [+0.635, +0.740]
+    BSS_damp_logit_vs_pers_dress     +0.157 [+0.108, +0.206]
+    BSS_pers_dress_vs_clim           +0.632 [+0.566, +0.693]
+    BSS_pl_logit_vs_clim             +0.686 [+0.629, +0.740]
+    BSS_pl_logit_vs_pers_dress       +0.147 [+0.114, +0.182]
+    AUC damp_dress=0.974 damp_emp=0.974 damp_het=0.974 damp_logit=0.974 pl_logit=0.973 pers_dress=0.962 pers_logit=0.962 clim=0.811
+    reliability damp_emp: 0-10%: n=453 p=0.02 obs=0.00; 10-20%: n=97 p=0.15 obs=0.08; 20-30%: n=46 p=0.24 obs=0.07; 30-40%: n=28 p=0.34 obs=0.25; 40-50%: n=30 p=0.45 obs=0.47; 50-60%: n=18 p=0.56 obs=0.44; 60-70%: n=19 p=0.65 obs=0.53; 70-80%: n=26 p=0.75 obs=0.58; 80-90%: n=29 p=0.85 obs=0.76; 90-100%: n=149 p=0.98 obs=0.98
+    as the page would show it (damp_emp): 10% n=511 obs=0.01; 20% n=68 obs=0.10; 30% n=32 obs=0.12; 40% n=24 obs=0.38; 50% n=26 obs=0.38; 60% n=20 obs=0.55; 70% n=24 obs=0.58; 80% n=25 obs=0.64; 90% n=165 obs=0.96
+    as the page would show it (damp_dress): 10% n=458 obs=0.00; 20% n=92 obs=0.09; 30% n=54 obs=0.09; 40% n=32 obs=0.34; 50% n=35 obs=0.46; 60% n=22 obs=0.50; 70% n=28 obs=0.57; 80% n=22 obs=0.82; 90% n=152 obs=0.97
+    reliability pers_dress: 0-10%: n=405 p=0.02 obs=0.01; 10-20%: n=103 p=0.14 obs=0.07; 20-30%: n=80 p=0.25 obs=0.06; 30-40%: n=31 p=0.35 obs=0.19; 40-50%: n=41 p=0.46 obs=0.66; 50-60%: n=23 p=0.54 obs=0.43; 60-70%: n=22 p=0.65 obs=0.36; 70-80%: n=20 p=0.74 obs=0.55; 80-90%: n=31 p=0.85 obs=0.74; 90-100%: n=139 p=0.99 obs=0.96
+ lead 1 T>75.0: n=895 events=78 (8.7 %)  Brier damp_dress=0.0138 damp_emp=0.0135 damp_het=0.0138 damp_logit=0.0135 pl_logit=0.0134 pers_dress=0.0166 pers_logit=0.0161 clim=0.0587
+    BSS_damp_dress_vs_clim           +0.764 [+0.683, +0.833]
+    BSS_damp_dress_vs_pers_dress     +0.166 [-0.000, +0.285]
+    BSS_damp_emp_vs_clim             +0.769 [+0.685, +0.841]
+    BSS_damp_emp_vs_pers_dress       +0.183 [+0.017, +0.313]
+    BSS_damp_logit_vs_clim           +0.770 [+0.700, +0.835]
+    BSS_damp_logit_vs_pers_dress     +0.188 [+0.032, +0.310]
+    BSS_pers_dress_vs_clim           +0.717 [+0.619, +0.807]
+    BSS_pl_logit_vs_clim             +0.772 [+0.695, +0.843]
+    BSS_pl_logit_vs_pers_dress       +0.193 [+0.094, +0.284]
+    AUC damp_dress=0.997 damp_emp=0.997 damp_het=0.997 damp_logit=0.997 pl_logit=0.997 pers_dress=0.995 pers_logit=0.995 clim=0.914
+    reliability damp_emp: 0-10%: n=778 p=0.00 obs=0.00; 10-20%: n=11 p=0.13 obs=0.09; 20-30%: n=8 p=0.26 obs=0.12; 30-40%: n=9 p=0.35 obs=0.33; 40-50%: n=11 p=0.45 obs=0.36; 50-60%: n=5 p=0.53 obs=0.20; 60-70%: n=3 p=0.65 obs=1.00; 70-80%: n=6 p=0.74 obs=0.50; 80-90%: n=14 p=0.86 obs=0.86; 90-100%: n=50 p=0.96 obs=1.00
+    as the page would show it (damp_emp): 10% n=789 obs=0.00; 20% n=4 obs=0.25; 30% n=9 obs=0.11; 40% n=12 obs=0.42; 50% n=6 obs=0.33; 60% n=3 obs=0.33; 70% n=6 obs=0.83; 80% n=6 obs=0.50; 90% n=60 obs=0.98
+    as the page would show it (damp_dress): 10% n=778 obs=0.00; 20% n=11 obs=0.09; 30% n=11 obs=0.18; 40% n=14 obs=0.36; 50% n=8 obs=0.25; 60% n=4 obs=0.75; 70% n=5 obs=0.60; 80% n=13 obs=0.85; 90% n=51 obs=1.00
+    reliability pers_dress: 0-10%: n=764 p=0.00 obs=0.00; 10-20%: n=21 p=0.14 obs=0.05; 20-30%: n=9 p=0.26 obs=0.22; 30-40%: n=11 p=0.37 obs=0.09; 40-50%: n=10 p=0.46 obs=0.30; 50-60%: n=9 p=0.54 obs=0.67; 60-70%: n=7 p=0.65 obs=0.57; 70-80%: n=12 p=0.75 obs=0.83; 80-90%: n=15 p=0.85 obs=0.87; 90-100%: n=37 p=0.97 obs=1.00
+ lead 2 T>37.5: n=894 events=234 (26.2 %)  Brier damp_dress=0.0817 damp_emp=0.0784 damp_het=0.0817 damp_logit=0.0817 pl_logit=0.0818 pers_dress=0.1031 pers_logit=0.1015 clim=0.1897
+    BSS_damp_dress_vs_clim           +0.569 [+0.499, +0.629]
+    BSS_damp_dress_vs_pers_dress     +0.207 [+0.146, +0.264]
+    BSS_damp_emp_vs_clim             +0.587 [+0.512, +0.650]
+    BSS_damp_emp_vs_pers_dress       +0.239 [+0.173, +0.306]
+    BSS_damp_logit_vs_clim           +0.569 [+0.499, +0.629]
+    BSS_damp_logit_vs_pers_dress     +0.207 [+0.148, +0.262]
+    BSS_pers_dress_vs_clim           +0.457 [+0.371, +0.535]
+    BSS_pl_logit_vs_clim             +0.569 [+0.499, +0.631]
+    BSS_pl_logit_vs_pers_dress       +0.206 [+0.165, +0.247]
+    AUC damp_dress=0.952 damp_emp=0.952 damp_het=0.952 damp_logit=0.952 pl_logit=0.948 pers_dress=0.913 pers_logit=0.913 clim=0.811
+    reliability damp_emp: 0-10%: n=354 p=0.03 obs=0.01; 10-20%: n=118 p=0.15 obs=0.03; 20-30%: n=79 p=0.24 obs=0.13; 30-40%: n=61 p=0.35 obs=0.16; 40-50%: n=30 p=0.44 obs=0.33; 50-60%: n=36 p=0.55 obs=0.39; 60-70%: n=25 p=0.65 obs=0.64; 70-80%: n=26 p=0.75 obs=0.46; 80-90%: n=37 p=0.87 obs=0.76; 90-100%: n=128 p=0.97 obs=0.98
+    as the page would show it (damp_emp): 10% n=418 obs=0.01; 20% n=104 obs=0.10; 30% n=58 obs=0.14; 40% n=49 obs=0.20; 50% n=30 obs=0.37; 60% n=30 obs=0.53; 70% n=29 obs=0.52; 80% n=23 obs=0.65; 90% n=153 obs=0.94
+    as the page would show it (damp_dress): 10% n=358 obs=0.01; 20% n=113 obs=0.04; 30% n=88 obs=0.12; 40% n=67 obs=0.21; 50% n=47 obs=0.38; 60% n=35 obs=0.54; 70% n=23 obs=0.52; 80% n=33 obs=0.76; 90% n=130 obs=0.98
+    reliability pers_dress: 0-10%: n=281 p=0.03 obs=0.03; 10-20%: n=140 p=0.15 obs=0.06; 20-30%: n=105 p=0.25 obs=0.10; 30-40%: n=77 p=0.34 obs=0.17; 40-50%: n=53 p=0.46 obs=0.43; 50-60%: n=35 p=0.55 obs=0.43; 60-70%: n=28 p=0.65 obs=0.39; 70-80%: n=28 p=0.75 obs=0.46; 80-90%: n=33 p=0.85 obs=0.64; 90-100%: n=114 p=0.98 obs=0.97
+ lead 2 T>75.0: n=894 events=78 (8.7 %)  Brier damp_dress=0.0201 damp_emp=0.0190 damp_het=0.0201 damp_logit=0.0196 pl_logit=0.0189 pers_dress=0.0256 pers_logit=0.0247 clim=0.0587
+    BSS_damp_dress_vs_clim           +0.658 [+0.541, +0.755]
+    BSS_damp_dress_vs_pers_dress     +0.217 [+0.061, +0.347]
+    BSS_damp_emp_vs_clim             +0.676 [+0.555, +0.778]
+    BSS_damp_emp_vs_pers_dress       +0.258 [+0.093, +0.405]
+    BSS_damp_logit_vs_clim           +0.667 [+0.564, +0.759]
+    BSS_damp_logit_vs_pers_dress     +0.237 [+0.084, +0.374]
+    BSS_pers_dress_vs_clim           +0.563 [+0.432, +0.680]
+    BSS_pl_logit_vs_clim             +0.678 [+0.578, +0.769]
+    BSS_pl_logit_vs_pers_dress       +0.263 [+0.151, +0.374]
+    AUC damp_dress=0.990 damp_emp=0.990 damp_het=0.990 damp_logit=0.990 pl_logit=0.990 pers_dress=0.982 pers_logit=0.982 clim=0.914
+    reliability damp_emp: 0-10%: n=755 p=0.01 obs=0.00; 10-20%: n=32 p=0.14 obs=0.06; 20-30%: n=8 p=0.25 obs=0.00; 30-40%: n=13 p=0.35 obs=0.23; 40-50%: n=8 p=0.46 obs=0.38; 50-60%: n=4 p=0.58 obs=0.50; 60-70%: n=8 p=0.66 obs=0.50; 70-80%: n=10 p=0.76 obs=0.80; 80-90%: n=16 p=0.85 obs=0.81; 90-100%: n=40 p=0.95 obs=1.00
+    as the page would show it (damp_emp): 10% n=773 obs=0.01; 20% n=19 obs=0.05; 30% n=11 obs=0.00; 40% n=8 obs=0.50; 50% n=5 obs=0.40; 60% n=7 obs=0.43; 70% n=10 obs=0.60; 80% n=13 obs=0.85; 90% n=48 obs=0.98
+    as the page would show it (damp_dress): 10% n=756 obs=0.00; 20% n=31 obs=0.06; 30% n=9 obs=0.00; 40% n=15 obs=0.27; 50% n=6 obs=0.33; 60% n=11 obs=0.55; 70% n=11 obs=0.73; 80% n=15 obs=0.87; 90% n=40 obs=1.00
+    reliability pers_dress: 0-10%: n=729 p=0.01 obs=0.01; 10-20%: n=38 p=0.14 obs=0.03; 20-30%: n=19 p=0.24 obs=0.00; 30-40%: n=9 p=0.35 obs=0.22; 40-50%: n=18 p=0.44 obs=0.28; 50-60%: n=13 p=0.54 obs=0.62; 60-70%: n=13 p=0.66 obs=0.69; 70-80%: n=14 p=0.75 obs=0.79; 80-90%: n=18 p=0.85 obs=0.83; 90-100%: n=23 p=0.95 obs=1.00
+ lead 3 T>37.5: n=893 events=234 (26.2 %)  Brier damp_dress=0.0913 damp_emp=0.0872 damp_het=0.0917 damp_logit=0.0900 pl_logit=0.0904 pers_dress=0.1225 pers_logit=0.1198 clim=0.1899
+    BSS_damp_dress_vs_clim           +0.519 [+0.447, +0.582]
+    BSS_damp_dress_vs_pers_dress     +0.254 [+0.192, +0.313]
+    BSS_damp_emp_vs_clim             +0.541 [+0.466, +0.609]
+    BSS_damp_emp_vs_pers_dress       +0.288 [+0.222, +0.355]
+    BSS_damp_logit_vs_clim           +0.526 [+0.455, +0.588]
+    BSS_damp_logit_vs_pers_dress     +0.265 [+0.204, +0.321]
+    BSS_pers_dress_vs_clim           +0.355 [+0.259, +0.442]
+    BSS_pl_logit_vs_clim             +0.524 [+0.453, +0.586]
+    BSS_pl_logit_vs_pers_dress       +0.262 [+0.208, +0.314]
+    AUC damp_dress=0.943 damp_emp=0.943 damp_het=0.943 damp_logit=0.943 pl_logit=0.941 pers_dress=0.875 pers_logit=0.875 clim=0.811
+    reliability damp_emp: 0-10%: n=315 p=0.03 obs=0.02; 10-20%: n=135 p=0.15 obs=0.03; 20-30%: n=98 p=0.25 obs=0.07; 30-40%: n=44 p=0.35 obs=0.20; 40-50%: n=39 p=0.46 obs=0.23; 50-60%: n=43 p=0.55 obs=0.49; 60-70%: n=32 p=0.64 obs=0.56; 70-80%: n=25 p=0.75 obs=0.68; 80-90%: n=30 p=0.85 obs=0.63; 90-100%: n=132 p=0.97 obs=0.94
+    as the page would show it (damp_emp): 10% n=385 obs=0.02; 20% n=108 obs=0.06; 30% n=80 obs=0.12; 40% n=37 obs=0.19; 50% n=37 obs=0.35; 60% n=45 obs=0.47; 70% n=29 obs=0.72; 80% n=25 obs=0.72; 90% n=147 obs=0.90
+    as the page would show it (damp_dress): 10% n=329 obs=0.02; 20% n=116 obs=0.03; 30% n=103 obs=0.07; 40% n=52 obs=0.19; 50% n=57 obs=0.32; 60% n=49 obs=0.59; 70% n=30 obs=0.70; 80% n=27 obs=0.59; 90% n=130 obs=0.95
+    reliability pers_dress: 0-10%: n=230 p=0.04 obs=0.04; 10-20%: n=142 p=0.15 obs=0.06; 20-30%: n=129 p=0.25 obs=0.12; 30-40%: n=96 p=0.35 obs=0.19; 40-50%: n=55 p=0.46 obs=0.40; 50-60%: n=42 p=0.54 obs=0.24; 60-70%: n=29 p=0.65 obs=0.45; 70-80%: n=36 p=0.75 obs=0.47; 80-90%: n=26 p=0.85 obs=0.65; 90-100%: n=108 p=0.97 obs=0.94
+ lead 3 T>75.0: n=893 events=79 (8.8 %)  Brier damp_dress=0.0242 damp_emp=0.0230 damp_het=0.0244 damp_logit=0.0239 pl_logit=0.0231 pers_dress=0.0305 pers_logit=0.0292 clim=0.0591
+    BSS_damp_dress_vs_clim           +0.590 [+0.457, +0.708]
+    BSS_damp_dress_vs_pers_dress     +0.207 [+0.059, +0.339]
+    BSS_damp_emp_vs_clim             +0.611 [+0.472, +0.734]
+    BSS_damp_emp_vs_pers_dress       +0.246 [+0.085, +0.397]
+    BSS_damp_logit_vs_clim           +0.595 [+0.470, +0.705]
+    BSS_damp_logit_vs_pers_dress     +0.216 [+0.058, +0.370]
+    BSS_pers_dress_vs_clim           +0.484 [+0.333, +0.618]
+    BSS_pl_logit_vs_clim             +0.609 [+0.487, +0.717]
+    BSS_pl_logit_vs_pers_dress       +0.242 [+0.114, +0.371]
+    AUC damp_dress=0.986 damp_emp=0.986 damp_het=0.986 damp_logit=0.986 pl_logit=0.986 pers_dress=0.969 pers_logit=0.969 clim=0.915
+    reliability damp_emp: 0-10%: n=742 p=0.01 obs=0.01; 10-20%: n=31 p=0.14 obs=0.00; 20-30%: n=25 p=0.24 obs=0.16; 30-40%: n=11 p=0.34 obs=0.27; 40-50%: n=7 p=0.44 obs=0.29; 50-60%: n=9 p=0.54 obs=0.44; 60-70%: n=5 p=0.67 obs=0.80; 70-80%: n=7 p=0.73 obs=0.71; 80-90%: n=19 p=0.85 obs=0.79; 90-100%: n=37 p=0.95 obs=1.00
+    as the page would show it (damp_emp): 10% n=761 obs=0.01; 20% n=26 obs=0.04; 30% n=18 obs=0.33; 40% n=9 obs=0.11; 50% n=8 obs=0.38; 60% n=3 obs=0.67; 70% n=10 obs=0.70; 80% n=11 obs=0.82; 90% n=47 obs=0.96
+    as the page would show it (damp_dress): 10% n=746 obs=0.01; 20% n=25 obs=0.00; 30% n=27 obs=0.15; 40% n=13 obs=0.23; 50% n=14 obs=0.43; 60% n=5 obs=0.80; 70% n=9 obs=0.67; 80% n=18 obs=0.83; 90% n=36 obs=1.00
+    reliability pers_dress: 0-10%: n=712 p=0.01 obs=0.01; 10-20%: n=46 p=0.15 obs=0.00; 20-30%: n=23 p=0.25 obs=0.04; 30-40%: n=12 p=0.35 obs=0.17; 40-50%: n=19 p=0.45 obs=0.26; 50-60%: n=14 p=0.55 obs=0.50; 60-70%: n=14 p=0.66 obs=0.71; 70-80%: n=21 p=0.76 obs=0.71; 80-90%: n=15 p=0.86 obs=1.00; 90-100%: n=17 p=0.94 obs=1.00
+
+## B-S1S2 (fit seasons, disjoint stations)
+ lead 1 T>37.5: n=2368 events=1094 (46.2 %)  Brier damp_dress=0.0723 damp_emp=0.0718 damp_het=0.0723 damp_logit=0.0726 pl_logit=0.0735 pers_dress=0.0830 pers_logit=0.0831 clim=0.1420
+    BSS_damp_dress_vs_clim           +0.491 [+0.443, +0.534]
+    BSS_damp_dress_vs_pers_dress     +0.129 [+0.080, +0.178]
+    BSS_damp_emp_vs_clim             +0.495 [+0.443, +0.541]
+    BSS_damp_emp_vs_pers_dress       +0.136 [+0.083, +0.188]
+    BSS_damp_logit_vs_clim           +0.489 [+0.442, +0.532]
+    BSS_damp_logit_vs_pers_dress     +0.126 [+0.077, +0.174]
+    BSS_pers_dress_vs_clim           +0.415 [+0.367, +0.461]
+    BSS_pl_logit_vs_clim             +0.483 [+0.437, +0.526]
+    BSS_pl_logit_vs_pers_dress       +0.116 [+0.079, +0.151]
+    AUC damp_dress=0.964 damp_emp=0.964 damp_het=0.964 damp_logit=0.964 pl_logit=0.964 pers_dress=0.955 pers_logit=0.955 clim=0.883
+    reliability damp_emp: 0-10%: n=921 p=0.02 obs=0.02; 10-20%: n=122 p=0.14 obs=0.20; 20-30%: n=84 p=0.25 obs=0.18; 30-40%: n=71 p=0.34 obs=0.39; 40-50%: n=74 p=0.44 obs=0.42; 50-60%: n=64 p=0.56 obs=0.42; 60-70%: n=54 p=0.63 obs=0.74; 70-80%: n=81 p=0.75 obs=0.78; 80-90%: n=149 p=0.86 obs=0.82; 90-100%: n=748 p=0.98 obs=0.97
+    as the page would show it (damp_emp): 10% n=990 obs=0.03; 20% n=98 obs=0.21; 30% n=78 obs=0.24; 40% n=79 obs=0.44; 50% n=55 obs=0.36; 60% n=75 obs=0.61; 70% n=55 obs=0.75; 80% n=95 obs=0.84; 90% n=843 obs=0.95
+    as the page would show it (damp_dress): 10% n=936 obs=0.02; 20% n=107 obs=0.18; 30% n=104 obs=0.20; 40% n=99 obs=0.42; 50% n=79 obs=0.38; 60% n=77 obs=0.74; 70% n=78 obs=0.81; 80% n=127 obs=0.80; 90% n=761 obs=0.97
+    reliability pers_dress: 0-10%: n=798 p=0.02 obs=0.02; 10-20%: n=163 p=0.15 obs=0.12; 20-30%: n=101 p=0.25 obs=0.15; 30-40%: n=120 p=0.35 obs=0.33; 40-50%: n=94 p=0.46 obs=0.52; 50-60%: n=77 p=0.54 obs=0.56; 60-70%: n=93 p=0.64 obs=0.67; 70-80%: n=103 p=0.75 obs=0.74; 80-90%: n=136 p=0.85 obs=0.83; 90-100%: n=683 p=0.98 obs=0.97
+ lead 1 T>75.0: n=2368 events=323 (13.6 %)  Brier damp_dress=0.0380 damp_emp=0.0378 damp_het=0.0380 damp_logit=0.0365 pl_logit=0.0348 pers_dress=0.0385 pers_logit=0.0379 clim=0.0824
+    BSS_damp_dress_vs_clim           +0.539 [+0.468, +0.598]
+    BSS_damp_dress_vs_pers_dress     +0.012 [-0.061, +0.080]
+    BSS_damp_emp_vs_clim             +0.541 [+0.468, +0.604]
+    BSS_damp_emp_vs_pers_dress       +0.018 [-0.056, +0.089]
+    BSS_damp_logit_vs_clim           +0.558 [+0.492, +0.614]
+    BSS_damp_logit_vs_pers_dress     +0.053 [-0.015, +0.122]
+    BSS_pers_dress_vs_clim           +0.533 [+0.471, +0.588]
+    BSS_pl_logit_vs_clim             +0.577 [+0.519, +0.630]
+    BSS_pl_logit_vs_pers_dress       +0.095 [+0.049, +0.145]
+    AUC damp_dress=0.981 damp_emp=0.980 damp_het=0.981 damp_logit=0.981 pl_logit=0.982 pers_dress=0.979 pers_logit=0.979 clim=0.906
+    reliability damp_emp: 0-10%: n=1796 p=0.01 obs=0.00; 10-20%: n=79 p=0.15 obs=0.10; 20-30%: n=62 p=0.24 obs=0.18; 30-40%: n=39 p=0.35 obs=0.28; 40-50%: n=40 p=0.45 obs=0.30; 50-60%: n=42 p=0.55 obs=0.38; 60-70%: n=31 p=0.65 obs=0.45; 70-80%: n=43 p=0.74 obs=0.63; 80-90%: n=54 p=0.86 obs=0.85; 90-100%: n=182 p=0.97 obs=0.93
+    as the page would show it (damp_emp): 10% n=1838 obs=0.00; 20% n=74 obs=0.14; 30% n=45 obs=0.27; 40% n=43 obs=0.30; 50% n=34 obs=0.41; 60% n=41 obs=0.32; 70% n=43 obs=0.58; 80% n=32 obs=0.81; 90% n=218 obs=0.92
+    as the page would show it (damp_dress): 10% n=1800 obs=0.00; 20% n=75 obs=0.11; 30% n=69 obs=0.19; 40% n=56 obs=0.27; 50% n=50 obs=0.38; 60% n=52 obs=0.44; 70% n=35 obs=0.74; 80% n=43 obs=0.84; 90% n=188 obs=0.93
+    reliability pers_dress: 0-10%: n=1756 p=0.01 obs=0.00; 10-20%: n=105 p=0.14 obs=0.08; 20-30%: n=72 p=0.24 obs=0.19; 30-40%: n=62 p=0.35 obs=0.23; 40-50%: n=44 p=0.45 obs=0.48; 50-60%: n=52 p=0.55 obs=0.44; 60-70%: n=49 p=0.65 obs=0.63; 70-80%: n=43 p=0.76 obs=0.77; 80-90%: n=37 p=0.85 obs=0.84; 90-100%: n=148 p=0.97 obs=0.96
+ lead 2 T>37.5: n=2359 events=1089 (46.2 %)  Brier damp_dress=0.1004 damp_emp=0.0996 damp_het=0.1004 damp_logit=0.1012 pl_logit=0.1024 pers_dress=0.1216 pers_logit=0.1217 clim=0.1422
+    BSS_damp_dress_vs_clim           +0.294 [+0.235, +0.351]
+    BSS_damp_dress_vs_pers_dress     +0.174 [+0.124, +0.224]
+    BSS_damp_emp_vs_clim             +0.300 [+0.236, +0.359]
+    BSS_damp_emp_vs_pers_dress       +0.181 [+0.128, +0.233]
+    BSS_damp_logit_vs_clim           +0.288 [+0.229, +0.344]
+    BSS_damp_logit_vs_pers_dress     +0.168 [+0.117, +0.217]
+    BSS_pers_dress_vs_clim           +0.145 [+0.079, +0.206]
+    BSS_pl_logit_vs_clim             +0.280 [+0.221, +0.335]
+    BSS_pl_logit_vs_pers_dress       +0.158 [+0.118, +0.197]
+    AUC damp_dress=0.932 damp_emp=0.932 damp_het=0.932 damp_logit=0.932 pl_logit=0.931 pers_dress=0.907 pers_logit=0.907 clim=0.882
+    reliability damp_emp: 0-10%: n=751 p=0.03 obs=0.04; 10-20%: n=198 p=0.15 obs=0.10; 20-30%: n=139 p=0.24 obs=0.30; 30-40%: n=98 p=0.35 obs=0.41; 40-50%: n=90 p=0.45 obs=0.37; 50-60%: n=100 p=0.55 obs=0.52; 60-70%: n=68 p=0.65 obs=0.65; 70-80%: n=92 p=0.76 obs=0.74; 80-90%: n=171 p=0.86 obs=0.86; 90-100%: n=652 p=0.97 obs=0.94
+    as the page would show it (damp_emp): 10% n=860 obs=0.04; 20% n=180 obs=0.22; 30% n=96 obs=0.35; 40% n=96 obs=0.40; 50% n=96 obs=0.46; 60% n=83 obs=0.57; 70% n=74 obs=0.74; 80% n=133 obs=0.78; 90% n=741 obs=0.94
+    as the page would show it (damp_dress): 10% n=765 obs=0.04; 20% n=181 obs=0.09; 30% n=145 obs=0.31; 40% n=133 obs=0.39; 50% n=130 obs=0.47; 60% n=98 obs=0.63; 70% n=101 obs=0.74; 80% n=143 obs=0.85; 90% n=663 obs=0.94
+    reliability pers_dress: 0-10%: n=583 p=0.03 obs=0.04; 10-20%: n=226 p=0.14 obs=0.11; 20-30%: n=169 p=0.24 obs=0.19; 30-40%: n=156 p=0.35 obs=0.37; 40-50%: n=141 p=0.46 obs=0.48; 50-60%: n=115 p=0.55 obs=0.57; 60-70%: n=133 p=0.65 obs=0.59; 70-80%: n=137 p=0.75 obs=0.77; 80-90%: n=182 p=0.85 obs=0.83; 90-100%: n=517 p=0.97 obs=0.93
+ lead 2 T>75.0: n=2359 events=323 (13.7 %)  Brier damp_dress=0.0571 damp_emp=0.0568 damp_het=0.0570 damp_logit=0.0541 pl_logit=0.0517 pers_dress=0.0582 pers_logit=0.0566 clim=0.0827
+    BSS_damp_dress_vs_clim           +0.310 [+0.215, +0.397]
+    BSS_damp_dress_vs_pers_dress     +0.020 [-0.068, +0.096]
+    BSS_damp_emp_vs_clim             +0.313 [+0.214, +0.404]
+    BSS_damp_emp_vs_pers_dress       +0.025 [-0.064, +0.105]
+    BSS_damp_logit_vs_clim           +0.346 [+0.262, +0.424]
+    BSS_damp_logit_vs_pers_dress     +0.071 [-0.012, +0.146]
+    BSS_pers_dress_vs_clim           +0.296 [+0.217, +0.369]
+    BSS_pl_logit_vs_clim             +0.375 [+0.301, +0.447]
+    BSS_pl_logit_vs_pers_dress       +0.113 [+0.052, +0.169]
+    AUC damp_dress=0.960 damp_emp=0.960 damp_het=0.960 damp_logit=0.960 pl_logit=0.962 pers_dress=0.951 pers_logit=0.951 clim=0.905
+    reliability damp_emp: 0-10%: n=1675 p=0.01 obs=0.01; 10-20%: n=123 p=0.14 obs=0.07; 20-30%: n=83 p=0.24 obs=0.19; 30-40%: n=60 p=0.35 obs=0.30; 40-50%: n=49 p=0.45 obs=0.27; 50-60%: n=54 p=0.55 obs=0.46; 60-70%: n=45 p=0.65 obs=0.47; 70-80%: n=45 p=0.75 obs=0.62; 80-90%: n=63 p=0.85 obs=0.76; 90-100%: n=162 p=0.96 obs=0.82
+    as the page would show it (damp_emp): 10% n=1750 obs=0.01; 20% n=101 obs=0.15; 30% n=53 obs=0.17; 40% n=65 obs=0.34; 50% n=47 obs=0.32; 60% n=52 obs=0.42; 70% n=45 obs=0.58; 80% n=48 obs=0.67; 90% n=198 obs=0.83
+    as the page would show it (damp_dress): 10% n=1686 obs=0.01; 20% n=111 obs=0.07; 30% n=89 obs=0.20; 40% n=76 obs=0.29; 50% n=71 obs=0.38; 60% n=60 obs=0.48; 70% n=49 obs=0.63; 80% n=53 obs=0.75; 90% n=164 obs=0.82
+    reliability pers_dress: 0-10%: n=1571 p=0.01 obs=0.01; 10-20%: n=197 p=0.15 obs=0.07; 20-30%: n=105 p=0.24 obs=0.16; 30-40%: n=91 p=0.35 obs=0.26; 40-50%: n=70 p=0.45 obs=0.46; 50-60%: n=71 p=0.55 obs=0.42; 60-70%: n=53 p=0.65 obs=0.58; 70-80%: n=47 p=0.74 obs=0.62; 80-90%: n=57 p=0.86 obs=0.81; 90-100%: n=97 p=0.97 obs=0.91
+ lead 3 T>37.5: n=2354 events=1085 (46.1 %)  Brier damp_dress=0.1135 damp_emp=0.1133 damp_het=0.1134 damp_logit=0.1139 pl_logit=0.1143 pers_dress=0.1414 pers_logit=0.1411 clim=0.1420
+    BSS_damp_dress_vs_clim           +0.201 [+0.137, +0.264]
+    BSS_damp_dress_vs_pers_dress     +0.198 [+0.152, +0.243]
+    BSS_damp_emp_vs_clim             +0.202 [+0.135, +0.270]
+    BSS_damp_emp_vs_pers_dress       +0.199 [+0.151, +0.247]
+    BSS_damp_logit_vs_clim           +0.198 [+0.136, +0.260]
+    BSS_damp_logit_vs_pers_dress     +0.195 [+0.150, +0.239]
+    BSS_pers_dress_vs_clim           +0.004 [-0.067, +0.072]
+    BSS_pl_logit_vs_clim             +0.195 [+0.133, +0.258]
+    BSS_pl_logit_vs_pers_dress       +0.192 [+0.150, +0.233]
+    AUC damp_dress=0.916 damp_emp=0.916 damp_het=0.916 damp_logit=0.916 pl_logit=0.916 pers_dress=0.877 pers_logit=0.877 clim=0.882
+    reliability damp_emp: 0-10%: n=660 p=0.03 obs=0.03; 10-20%: n=260 p=0.14 obs=0.13; 20-30%: n=153 p=0.24 obs=0.29; 30-40%: n=118 p=0.35 obs=0.42; 40-50%: n=104 p=0.45 obs=0.48; 50-60%: n=83 p=0.55 obs=0.57; 60-70%: n=104 p=0.65 obs=0.62; 70-80%: n=77 p=0.76 obs=0.74; 80-90%: n=162 p=0.86 obs=0.81; 90-100%: n=633 p=0.97 obs=0.93
+    as the page would show it (damp_emp): 10% n=818 obs=0.05; 20% n=199 obs=0.20; 30% n=125 obs=0.37; 40% n=108 obs=0.49; 50% n=89 obs=0.47; 60% n=92 obs=0.61; 70% n=78 obs=0.69; 80% n=111 obs=0.77; 90% n=734 obs=0.91
+    as the page would show it (damp_dress): 10% n=704 obs=0.03; 20% n=208 obs=0.15; 30% n=162 obs=0.27; 40% n=148 obs=0.44; 50% n=131 obs=0.47; 60% n=129 obs=0.66; 70% n=101 obs=0.73; 80% n=153 obs=0.82; 90% n=618 obs=0.93
+    reliability pers_dress: 0-10%: n=484 p=0.04 obs=0.06; 10-20%: n=270 p=0.15 obs=0.16; 20-30%: n=184 p=0.25 obs=0.16; 30-40%: n=161 p=0.35 obs=0.37; 40-50%: n=179 p=0.45 obs=0.48; 50-60%: n=141 p=0.55 obs=0.56; 60-70%: n=134 p=0.65 obs=0.59; 70-80%: n=157 p=0.75 obs=0.73; 80-90%: n=191 p=0.85 obs=0.83; 90-100%: n=453 p=0.97 obs=0.91
+ lead 3 T>75.0: n=2354 events=322 (13.7 %)  Brier damp_dress=0.0664 damp_emp=0.0661 damp_het=0.0666 damp_logit=0.0623 pl_logit=0.0612 pers_dress=0.0706 pers_logit=0.0675 clim=0.0825
+    BSS_damp_dress_vs_clim           +0.195 [+0.089, +0.291]
+    BSS_damp_dress_vs_pers_dress     +0.059 [-0.021, +0.132]
+    BSS_damp_emp_vs_clim             +0.198 [+0.086, +0.298]
+    BSS_damp_emp_vs_pers_dress       +0.063 [-0.020, +0.139]
+    BSS_damp_logit_vs_clim           +0.245 [+0.157, +0.328]
+    BSS_damp_logit_vs_pers_dress     +0.117 [+0.037, +0.189]
+    BSS_pers_dress_vs_clim           +0.145 [+0.047, +0.230]
+    BSS_pl_logit_vs_clim             +0.258 [+0.175, +0.337]
+    BSS_pl_logit_vs_pers_dress       +0.132 [+0.064, +0.195]
+    AUC damp_dress=0.944 damp_emp=0.944 damp_het=0.944 damp_logit=0.944 pl_logit=0.945 pers_dress=0.926 pers_logit=0.926 clim=0.906
+    reliability damp_emp: 0-10%: n=1598 p=0.02 obs=0.01; 10-20%: n=183 p=0.14 obs=0.11; 20-30%: n=86 p=0.24 obs=0.14; 30-40%: n=76 p=0.34 obs=0.20; 40-50%: n=51 p=0.45 obs=0.33; 50-60%: n=49 p=0.55 obs=0.51; 60-70%: n=53 p=0.65 obs=0.38; 70-80%: n=46 p=0.75 obs=0.67; 80-90%: n=52 p=0.86 obs=0.71; 90-100%: n=160 p=0.96 obs=0.78
+    as the page would show it (damp_emp): 10% n=1715 obs=0.02; 20% n=111 obs=0.12; 30% n=91 obs=0.16; 40% n=55 obs=0.31; 50% n=41 obs=0.37; 60% n=57 obs=0.44; 70% n=47 obs=0.47; 80% n=49 obs=0.76; 90% n=188 obs=0.78
+    as the page would show it (damp_dress): 10% n=1626 obs=0.01; 20% n=151 obs=0.11; 30% n=90 obs=0.16; 40% n=92 obs=0.20; 50% n=66 obs=0.44; 60% n=71 obs=0.42; 70% n=53 obs=0.68; 80% n=57 obs=0.72; 90% n=148 obs=0.78
+    reliability pers_dress: 0-10%: n=1480 p=0.02 obs=0.01; 10-20%: n=229 p=0.15 obs=0.06; 20-30%: n=136 p=0.24 obs=0.16; 30-40%: n=104 p=0.35 obs=0.30; 40-50%: n=82 p=0.45 obs=0.34; 50-60%: n=76 p=0.55 obs=0.42; 60-70%: n=62 p=0.65 obs=0.60; 70-80%: n=43 p=0.74 obs=0.56; 80-90%: n=61 p=0.85 obs=0.70; 90-100%: n=81 p=0.97 obs=0.86
+
+## north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae)
+ lead 1 T>37.5: n=1172 events=440 (37.5 %)  Brier damp_dress=0.0647 damp_emp=0.0640 damp_het=0.0647 damp_logit=0.0646 pl_logit=0.0630 pers_dress=0.0673 pers_logit=0.0671 clim=0.2173
+    BSS_damp_dress_vs_clim           +0.702 [+0.653, +0.745]
+    BSS_damp_dress_vs_pers_dress     +0.040 [-0.019, +0.093]
+    BSS_damp_emp_vs_clim             +0.706 [+0.654, +0.750]
+    BSS_damp_emp_vs_pers_dress       +0.050 [-0.015, +0.110]
+    BSS_damp_logit_vs_clim           +0.703 [+0.653, +0.745]
+    BSS_damp_logit_vs_pers_dress     +0.040 [-0.017, +0.093]
+    BSS_pers_dress_vs_clim           +0.690 [+0.639, +0.735]
+    BSS_pl_logit_vs_clim             +0.710 [+0.662, +0.752]
+    BSS_pl_logit_vs_pers_dress       +0.064 [+0.028, +0.098]
+    AUC damp_dress=0.974 damp_emp=0.974 damp_het=0.974 damp_logit=0.974 pl_logit=0.974 pers_dress=0.971 pers_logit=0.971 clim=0.763
+    reliability damp_emp: 0-10%: n=521 p=0.02 obs=0.01; 10-20%: n=69 p=0.15 obs=0.09; 20-30%: n=39 p=0.25 obs=0.23; 30-40%: n=36 p=0.35 obs=0.22; 40-50%: n=46 p=0.45 obs=0.39; 50-60%: n=34 p=0.55 obs=0.50; 60-70%: n=33 p=0.65 obs=0.39; 70-80%: n=41 p=0.75 obs=0.78; 80-90%: n=64 p=0.86 obs=0.83; 90-100%: n=289 p=0.98 obs=0.97
+    as the page would show it (damp_emp): 10% n=557 obs=0.01; 20% n=51 obs=0.18; 30% n=39 obs=0.21; 40% n=42 obs=0.31; 50% n=38 obs=0.45; 60% n=33 obs=0.45; 70% n=40 obs=0.60; 80% n=41 obs=0.78; 90% n=331 obs=0.96
+    as the page would show it (damp_dress): 10% n=527 obs=0.01; 20% n=63 obs=0.10; 30% n=47 obs=0.21; 40% n=52 obs=0.29; 50% n=52 obs=0.48; 60% n=44 obs=0.45; 70% n=41 obs=0.71; 80% n=52 obs=0.90; 90% n=294 obs=0.97
+    reliability pers_dress: 0-10%: n=482 p=0.02 obs=0.01; 10-20%: n=69 p=0.15 obs=0.03; 20-30%: n=71 p=0.25 obs=0.17; 30-40%: n=53 p=0.35 obs=0.21; 40-50%: n=55 p=0.45 obs=0.49; 50-60%: n=34 p=0.54 obs=0.59; 60-70%: n=37 p=0.64 obs=0.49; 70-80%: n=55 p=0.76 obs=0.78; 80-90%: n=56 p=0.85 obs=0.88; 90-100%: n=260 p=0.99 obs=0.98
+ lead 1 T>75.0: n=1172 events=149 (12.7 %)  Brier damp_dress=0.0257 damp_emp=0.0249 damp_het=0.0257 damp_logit=0.0255 pl_logit=0.0246 pers_dress=0.0277 pers_logit=0.0273 clim=0.1096
+    BSS_damp_dress_vs_clim           +0.765 [+0.693, +0.827]
+    BSS_damp_dress_vs_pers_dress     +0.071 [-0.010, +0.156]
+    BSS_damp_emp_vs_clim             +0.773 [+0.698, +0.835]
+    BSS_damp_emp_vs_pers_dress       +0.100 [+0.006, +0.203]
+    BSS_damp_logit_vs_clim           +0.767 [+0.697, +0.828]
+    BSS_damp_logit_vs_pers_dress     +0.079 [-0.010, +0.176]
+    BSS_pers_dress_vs_clim           +0.747 [+0.679, +0.808]
+    BSS_pl_logit_vs_clim             +0.775 [+0.707, +0.834]
+    BSS_pl_logit_vs_pers_dress       +0.110 [+0.043, +0.184]
+    AUC damp_dress=0.990 damp_emp=0.989 damp_het=0.990 damp_logit=0.990 pl_logit=0.990 pers_dress=0.988 pers_logit=0.988 clim=0.834
+    reliability damp_emp: 0-10%: n=944 p=0.01 obs=0.00; 10-20%: n=27 p=0.14 obs=0.00; 20-30%: n=14 p=0.25 obs=0.07; 30-40%: n=14 p=0.35 obs=0.36; 40-50%: n=14 p=0.44 obs=0.36; 50-60%: n=12 p=0.53 obs=0.50; 60-70%: n=14 p=0.65 obs=0.64; 70-80%: n=18 p=0.75 obs=0.72; 80-90%: n=22 p=0.87 obs=0.86; 90-100%: n=93 p=0.96 obs=0.95
+    as the page would show it (damp_emp): 10% n=961 obs=0.00; 20% n=16 obs=0.00; 30% n=15 obs=0.20; 40% n=16 obs=0.44; 50% n=15 obs=0.40; 60% n=8 obs=0.62; 70% n=17 obs=0.76; 80% n=13 obs=0.69; 90% n=111 obs=0.93
+    as the page would show it (damp_dress): 10% n=948 obs=0.00; 20% n=23 obs=0.00; 30% n=17 obs=0.12; 40% n=20 obs=0.40; 50% n=15 obs=0.40; 60% n=19 obs=0.63; 70% n=16 obs=0.75; 80% n=19 obs=0.84; 90% n=95 obs=0.95
+    reliability pers_dress: 0-10%: n=926 p=0.01 obs=0.00; 10-20%: n=33 p=0.14 obs=0.00; 20-30%: n=16 p=0.26 obs=0.19; 30-40%: n=25 p=0.35 obs=0.36; 40-50%: n=21 p=0.46 obs=0.33; 50-60%: n=17 p=0.55 obs=0.35; 60-70%: n=17 p=0.64 obs=0.71; 70-80%: n=13 p=0.73 obs=0.85; 80-90%: n=28 p=0.85 obs=0.93; 90-100%: n=76 p=0.97 obs=0.95
+ lead 2 T>37.5: n=1172 events=440 (37.5 %)  Brier damp_dress=0.0943 damp_emp=0.0947 damp_het=0.0943 damp_logit=0.0941 pl_logit=0.0938 pers_dress=0.1063 pers_logit=0.1057 clim=0.2167
+    BSS_damp_dress_vs_clim           +0.565 [+0.499, +0.622]
+    BSS_damp_dress_vs_pers_dress     +0.112 [+0.061, +0.159]
+    BSS_damp_emp_vs_clim             +0.563 [+0.494, +0.624]
+    BSS_damp_emp_vs_pers_dress       +0.109 [+0.052, +0.160]
+    BSS_damp_logit_vs_clim           +0.566 [+0.501, +0.622]
+    BSS_damp_logit_vs_pers_dress     +0.115 [+0.065, +0.160]
+    BSS_pers_dress_vs_clim           +0.510 [+0.436, +0.575]
+    BSS_pl_logit_vs_clim             +0.567 [+0.504, +0.624]
+    BSS_pl_logit_vs_pers_dress       +0.117 [+0.084, +0.149]
+    AUC damp_dress=0.944 damp_emp=0.944 damp_het=0.944 damp_logit=0.944 pl_logit=0.944 pers_dress=0.927 pers_logit=0.927 clim=0.764
+    reliability damp_emp: 0-10%: n=436 p=0.02 obs=0.01; 10-20%: n=97 p=0.15 obs=0.08; 20-30%: n=67 p=0.24 obs=0.21; 30-40%: n=49 p=0.34 obs=0.35; 40-50%: n=42 p=0.45 obs=0.40; 50-60%: n=52 p=0.56 obs=0.42; 60-70%: n=59 p=0.65 obs=0.54; 70-80%: n=45 p=0.75 obs=0.67; 80-90%: n=65 p=0.85 obs=0.71; 90-100%: n=260 p=0.97 obs=0.95
+    as the page would show it (damp_emp): 10% n=488 obs=0.02; 20% n=90 obs=0.12; 30% n=49 obs=0.33; 40% n=46 obs=0.28; 50% n=38 obs=0.58; 60% n=58 obs=0.41; 70% n=62 obs=0.60; 80% n=47 obs=0.68; 90% n=294 obs=0.93
+    as the page would show it (damp_dress): 10% n=441 obs=0.02; 20% n=92 obs=0.08; 30% n=73 obs=0.22; 40% n=62 obs=0.34; 50% n=63 obs=0.49; 60% n=75 obs=0.48; 70% n=53 obs=0.64; 80% n=49 obs=0.78; 90% n=264 obs=0.95
+    reliability pers_dress: 0-10%: n=381 p=0.02 obs=0.03; 10-20%: n=109 p=0.14 obs=0.06; 20-30%: n=83 p=0.25 obs=0.11; 30-40%: n=79 p=0.35 obs=0.29; 40-50%: n=76 p=0.45 obs=0.46; 50-60%: n=54 p=0.55 obs=0.52; 60-70%: n=53 p=0.65 obs=0.62; 70-80%: n=67 p=0.75 obs=0.73; 80-90%: n=53 p=0.85 obs=0.74; 90-100%: n=217 p=0.98 obs=0.94
+ lead 2 T>75.0: n=1172 events=150 (12.8 %)  Brier damp_dress=0.0416 damp_emp=0.0415 damp_het=0.0416 damp_logit=0.0415 pl_logit=0.0399 pers_dress=0.0456 pers_logit=0.0446 clim=0.1090
+    BSS_damp_dress_vs_clim           +0.618 [+0.518, +0.709]
+    BSS_damp_dress_vs_pers_dress     +0.086 [-0.008, +0.179]
+    BSS_damp_emp_vs_clim             +0.620 [+0.510, +0.717]
+    BSS_damp_emp_vs_pers_dress       +0.090 [-0.016, +0.199]
+    BSS_damp_logit_vs_clim           +0.619 [+0.520, +0.709]
+    BSS_damp_logit_vs_pers_dress     +0.089 [-0.015, +0.197]
+    BSS_pers_dress_vs_clim           +0.582 [+0.484, +0.671]
+    BSS_pl_logit_vs_clim             +0.634 [+0.538, +0.722]
+    BSS_pl_logit_vs_pers_dress       +0.123 [+0.046, +0.208]
+    AUC damp_dress=0.972 damp_emp=0.972 damp_het=0.972 damp_logit=0.972 pl_logit=0.973 pers_dress=0.966 pers_logit=0.966 clim=0.836
+    reliability damp_emp: 0-10%: n=899 p=0.01 obs=0.01; 10-20%: n=59 p=0.15 obs=0.07; 20-30%: n=26 p=0.24 obs=0.19; 30-40%: n=21 p=0.34 obs=0.43; 40-50%: n=11 p=0.45 obs=0.64; 50-60%: n=16 p=0.57 obs=0.38; 60-70%: n=15 p=0.64 obs=0.47; 70-80%: n=17 p=0.75 obs=0.76; 80-90%: n=33 p=0.85 obs=0.73; 90-100%: n=75 p=0.96 obs=0.91
+    as the page would show it (damp_emp): 10% n=929 obs=0.01; 20% n=44 obs=0.09; 30% n=23 obs=0.26; 40% n=14 obs=0.71; 50% n=8 obs=0.38; 60% n=24 obs=0.33; 70% n=14 obs=0.71; 80% n=25 obs=0.84; 90% n=91 obs=0.86
+    as the page would show it (damp_dress): 10% n=902 obs=0.01; 20% n=56 obs=0.07; 30% n=28 obs=0.18; 40% n=24 obs=0.58; 50% n=15 obs=0.33; 60% n=24 obs=0.46; 70% n=20 obs=0.80; 80% n=27 obs=0.74; 90% n=76 obs=0.89
+    reliability pers_dress: 0-10%: n=864 p=0.01 obs=0.01; 10-20%: n=67 p=0.14 obs=0.07; 20-30%: n=29 p=0.23 obs=0.10; 30-40%: n=29 p=0.35 obs=0.38; 40-50%: n=32 p=0.46 obs=0.34; 50-60%: n=26 p=0.55 obs=0.50; 60-70%: n=20 p=0.65 obs=0.55; 70-80%: n=22 p=0.76 obs=0.64; 80-90%: n=32 p=0.84 obs=0.81; 90-100%: n=51 p=0.96 obs=0.96
+ lead 3 T>37.5: n=1169 events=439 (37.6 %)  Brier damp_dress=0.1086 damp_emp=0.1093 damp_het=0.1088 damp_logit=0.1077 pl_logit=0.1082 pers_dress=0.1304 pers_logit=0.1284 clim=0.2168
+    BSS_damp_dress_vs_clim           +0.499 [+0.423, +0.564]
+    BSS_damp_dress_vs_pers_dress     +0.167 [+0.117, +0.214]
+    BSS_damp_emp_vs_clim             +0.496 [+0.417, +0.566]
+    BSS_damp_emp_vs_pers_dress       +0.162 [+0.105, +0.216]
+    BSS_damp_logit_vs_clim           +0.503 [+0.429, +0.568]
+    BSS_damp_logit_vs_pers_dress     +0.174 [+0.126, +0.219]
+    BSS_pers_dress_vs_clim           +0.398 [+0.312, +0.477]
+    BSS_pl_logit_vs_clim             +0.501 [+0.426, +0.566]
+    BSS_pl_logit_vs_pers_dress       +0.170 [+0.127, +0.211]
+    AUC damp_dress=0.926 damp_emp=0.926 damp_het=0.926 damp_logit=0.926 pl_logit=0.925 pers_dress=0.893 pers_logit=0.893 clim=0.765
+    reliability damp_emp: 0-10%: n=401 p=0.02 obs=0.02; 10-20%: n=120 p=0.15 obs=0.11; 20-30%: n=58 p=0.24 obs=0.21; 30-40%: n=60 p=0.35 obs=0.30; 40-50%: n=67 p=0.46 obs=0.39; 50-60%: n=53 p=0.54 obs=0.49; 60-70%: n=44 p=0.65 obs=0.55; 70-80%: n=52 p=0.76 obs=0.58; 80-90%: n=66 p=0.85 obs=0.73; 90-100%: n=248 p=0.97 obs=0.94
+    as the page would show it (damp_emp): 10% n=469 obs=0.03; 20% n=85 obs=0.14; 30% n=58 obs=0.22; 40% n=56 obs=0.45; 50% n=65 obs=0.40; 60% n=49 obs=0.53; 70% n=41 obs=0.54; 80% n=62 obs=0.69; 90% n=284 obs=0.90
+    as the page would show it (damp_dress): 10% n=417 obs=0.03; 20% n=100 obs=0.11; 30% n=62 obs=0.19; 40% n=71 obs=0.32; 50% n=98 obs=0.44; 60% n=55 obs=0.51; 70% n=62 obs=0.63; 80% n=63 obs=0.70; 90% n=241 obs=0.94
+    reliability pers_dress: 0-10%: n=338 p=0.02 obs=0.04; 10-20%: n=124 p=0.15 obs=0.11; 20-30%: n=80 p=0.25 obs=0.17; 30-40%: n=96 p=0.35 obs=0.24; 40-50%: n=85 p=0.45 obs=0.48; 50-60%: n=62 p=0.55 obs=0.47; 60-70%: n=68 p=0.66 obs=0.63; 70-80%: n=62 p=0.75 obs=0.65; 80-90%: n=47 p=0.85 obs=0.62; 90-100%: n=207 p=0.97 obs=0.92
+ lead 3 T>75.0: n=1169 events=150 (12.8 %)  Brier damp_dress=0.0500 damp_emp=0.0500 damp_het=0.0501 damp_logit=0.0490 pl_logit=0.0480 pers_dress=0.0552 pers_logit=0.0535 clim=0.1093
+    BSS_damp_dress_vs_clim           +0.543 [+0.434, +0.642]
+    BSS_damp_dress_vs_pers_dress     +0.095 [+0.006, +0.177]
+    BSS_damp_emp_vs_clim             +0.543 [+0.429, +0.648]
+    BSS_damp_emp_vs_pers_dress       +0.094 [+0.000, +0.188]
+    BSS_damp_logit_vs_clim           +0.552 [+0.445, +0.649]
+    BSS_damp_logit_vs_pers_dress     +0.113 [+0.004, +0.218]
+    BSS_pers_dress_vs_clim           +0.495 [+0.386, +0.598]
+    BSS_pl_logit_vs_clim             +0.560 [+0.454, +0.657]
+    BSS_pl_logit_vs_pers_dress       +0.130 [+0.037, +0.223]
+    AUC damp_dress=0.957 damp_emp=0.957 damp_het=0.957 damp_logit=0.957 pl_logit=0.958 pers_dress=0.946 pers_logit=0.946 clim=0.835
+    reliability damp_emp: 0-10%: n=874 p=0.02 obs=0.01; 10-20%: n=74 p=0.14 obs=0.14; 20-30%: n=34 p=0.24 obs=0.18; 30-40%: n=17 p=0.34 obs=0.29; 40-50%: n=18 p=0.44 obs=0.39; 50-60%: n=17 p=0.54 obs=0.47; 60-70%: n=15 p=0.64 obs=0.40; 70-80%: n=14 p=0.76 obs=0.43; 80-90%: n=37 p=0.85 obs=0.78; 90-100%: n=69 p=0.95 obs=0.90
+    as the page would show it (damp_emp): 10% n=916 obs=0.01; 20% n=56 obs=0.20; 30% n=20 obs=0.30; 40% n=16 obs=0.50; 50% n=20 obs=0.25; 60% n=14 obs=0.43; 70% n=14 obs=0.36; 80% n=24 obs=0.75; 90% n=89 obs=0.88
+    as the page would show it (damp_dress): 10% n=890 obs=0.01; 20% n=57 obs=0.14; 30% n=35 obs=0.20; 40% n=24 obs=0.38; 50% n=23 obs=0.35; 60% n=20 obs=0.45; 70% n=23 obs=0.61; 80% n=32 obs=0.78; 90% n=65 obs=0.89
+    reliability pers_dress: 0-10%: n=812 p=0.02 obs=0.01; 10-20%: n=103 p=0.14 obs=0.04; 20-30%: n=39 p=0.25 obs=0.15; 30-40%: n=26 p=0.36 obs=0.35; 40-50%: n=38 p=0.45 obs=0.37; 50-60%: n=26 p=0.55 obs=0.46; 60-70%: n=21 p=0.64 obs=0.43; 70-80%: n=37 p=0.75 obs=0.65; 80-90%: n=27 p=0.86 obs=0.93; 90-100%: n=40 p=0.95 obs=0.88
+
+## north-A-S3S4 (Chiang Mai, Lampang, Phayao)
+ lead 1 T>37.5: n=897 events=324 (36.1 %)  Brier damp_dress=0.0719 damp_emp=0.0696 damp_het=0.0719 damp_logit=0.0718 pl_logit=0.0708 pers_dress=0.0783 pers_logit=0.0778 clim=0.2217
+    BSS_damp_dress_vs_clim           +0.676 [+0.621, +0.724]
+    BSS_damp_dress_vs_pers_dress     +0.083 [+0.031, +0.129]
+    BSS_damp_emp_vs_clim             +0.686 [+0.628, +0.735]
+    BSS_damp_emp_vs_pers_dress       +0.111 [+0.056, +0.164]
+    BSS_damp_logit_vs_clim           +0.676 [+0.621, +0.724]
+    BSS_damp_logit_vs_pers_dress     +0.084 [+0.033, +0.129]
+    BSS_pers_dress_vs_clim           +0.647 [+0.590, +0.698]
+    BSS_pl_logit_vs_clim             +0.681 [+0.625, +0.728]
+    BSS_pl_logit_vs_pers_dress       +0.096 [+0.064, +0.126]
+    AUC damp_dress=0.965 damp_emp=0.965 damp_het=0.965 damp_logit=0.965 pl_logit=0.966 pers_dress=0.959 pers_logit=0.959 clim=0.792
+    reliability damp_emp: 0-10%: n=358 p=0.03 obs=0.02; 10-20%: n=84 p=0.14 obs=0.02; 20-30%: n=46 p=0.25 obs=0.17; 30-40%: n=42 p=0.34 obs=0.24; 40-50%: n=42 p=0.46 obs=0.36; 50-60%: n=20 p=0.56 obs=0.60; 60-70%: n=23 p=0.64 obs=0.43; 70-80%: n=33 p=0.75 obs=0.70; 80-90%: n=51 p=0.86 obs=0.86; 90-100%: n=198 p=0.98 obs=0.98
+    as the page would show it (damp_emp): 10% n=409 obs=0.02; 20% n=58 obs=0.10; 30% n=44 obs=0.18; 40% n=35 obs=0.23; 50% n=34 obs=0.44; 60% n=27 obs=0.52; 70% n=25 obs=0.64; 80% n=32 obs=0.81; 90% n=233 obs=0.96
+    as the page would show it (damp_dress): 10% n=367 obs=0.02; 20% n=75 obs=0.03; 30% n=62 obs=0.21; 40% n=43 obs=0.21; 50% n=42 obs=0.50; 60% n=30 obs=0.47; 70% n=32 obs=0.75; 80% n=39 obs=0.85; 90% n=207 obs=0.98
+    reliability pers_dress: 0-10%: n=294 p=0.03 obs=0.01; 10-20%: n=111 p=0.14 obs=0.06; 20-30%: n=76 p=0.25 obs=0.09; 30-40%: n=47 p=0.34 obs=0.26; 40-50%: n=43 p=0.45 obs=0.47; 50-60%: n=39 p=0.55 obs=0.59; 60-70%: n=29 p=0.65 obs=0.41; 70-80%: n=35 p=0.75 obs=0.71; 80-90%: n=37 p=0.85 obs=0.86; 90-100%: n=186 p=0.99 obs=0.98
+ lead 1 T>75.0: n=897 events=103 (11.5 %)  Brier damp_dress=0.0262 damp_emp=0.0264 damp_het=0.0263 damp_logit=0.0269 pl_logit=0.0264 pers_dress=0.0294 pers_logit=0.0295 clim=0.0931
+    BSS_damp_dress_vs_clim           +0.718 [+0.647, +0.785]
+    BSS_damp_dress_vs_pers_dress     +0.107 [+0.002, +0.197]
+    BSS_damp_emp_vs_clim             +0.716 [+0.641, +0.787]
+    BSS_damp_emp_vs_pers_dress       +0.102 [-0.010, +0.201]
+    BSS_damp_logit_vs_clim           +0.711 [+0.640, +0.779]
+    BSS_damp_logit_vs_pers_dress     +0.083 [-0.042, +0.192]
+    BSS_pers_dress_vs_clim           +0.684 [+0.600, +0.761]
+    BSS_pl_logit_vs_clim             +0.716 [+0.643, +0.785]
+    BSS_pl_logit_vs_pers_dress       +0.100 [+0.016, +0.180]
+    AUC damp_dress=0.990 damp_emp=0.990 damp_het=0.990 damp_logit=0.990 pl_logit=0.990 pers_dress=0.987 pers_logit=0.987 clim=0.814
+    reliability damp_emp: 0-10%: n=733 p=0.01 obs=0.00; 10-20%: n=22 p=0.14 obs=0.14; 20-30%: n=13 p=0.24 obs=0.31; 30-40%: n=14 p=0.34 obs=0.43; 40-50%: n=17 p=0.45 obs=0.41; 50-60%: n=5 p=0.54 obs=0.40; 60-70%: n=5 p=0.63 obs=0.80; 70-80%: n=12 p=0.74 obs=0.58; 80-90%: n=21 p=0.86 obs=0.81; 90-100%: n=55 p=0.96 obs=0.96
+    as the page would show it (damp_emp): 10% n=747 obs=0.00; 20% n=17 obs=0.18; 30% n=12 obs=0.42; 40% n=18 obs=0.44; 50% n=9 obs=0.44; 60% n=4 obs=0.50; 70% n=8 obs=0.62; 80% n=13 obs=0.69; 90% n=69 obs=0.94
+    as the page would show it (damp_dress): 10% n=733 obs=0.00; 20% n=22 obs=0.14; 30% n=18 obs=0.39; 40% n=21 obs=0.38; 50% n=10 obs=0.40; 60% n=6 obs=0.67; 70% n=11 obs=0.64; 80% n=20 obs=0.80; 90% n=56 obs=0.96
+    reliability pers_dress: 0-10%: n=725 p=0.01 obs=0.00; 10-20%: n=22 p=0.15 obs=0.09; 20-30%: n=20 p=0.25 obs=0.45; 30-40%: n=11 p=0.36 obs=0.09; 40-50%: n=14 p=0.45 obs=0.21; 50-60%: n=15 p=0.55 obs=0.67; 60-70%: n=12 p=0.64 obs=0.67; 70-80%: n=20 p=0.75 obs=0.75; 80-90%: n=18 p=0.85 obs=0.83; 90-100%: n=40 p=0.97 obs=0.97
+ lead 2 T>37.5: n=896 events=323 (36.0 %)  Brier damp_dress=0.1079 damp_emp=0.1057 damp_het=0.1079 damp_logit=0.1076 pl_logit=0.1067 pers_dress=0.1221 pers_logit=0.1211 clim=0.2219
+    BSS_damp_dress_vs_clim           +0.514 [+0.434, +0.582]
+    BSS_damp_dress_vs_pers_dress     +0.116 [+0.060, +0.165]
+    BSS_damp_emp_vs_clim             +0.523 [+0.441, +0.595]
+    BSS_damp_emp_vs_pers_dress       +0.134 [+0.073, +0.189]
+    BSS_damp_logit_vs_clim           +0.515 [+0.436, +0.582]
+    BSS_damp_logit_vs_pers_dress     +0.119 [+0.066, +0.166]
+    BSS_pers_dress_vs_clim           +0.450 [+0.366, +0.521]
+    BSS_pl_logit_vs_clim             +0.519 [+0.442, +0.586]
+    BSS_pl_logit_vs_pers_dress       +0.127 [+0.089, +0.161]
+    AUC damp_dress=0.924 damp_emp=0.924 damp_het=0.924 damp_logit=0.924 pl_logit=0.923 pers_dress=0.901 pers_logit=0.901 clim=0.792
+    reliability damp_emp: 0-10%: n=255 p=0.04 obs=0.04; 10-20%: n=124 p=0.15 obs=0.07; 20-30%: n=74 p=0.24 obs=0.18; 30-40%: n=65 p=0.34 obs=0.18; 40-50%: n=35 p=0.45 obs=0.23; 50-60%: n=43 p=0.55 obs=0.51; 60-70%: n=32 p=0.65 obs=0.59; 70-80%: n=44 p=0.75 obs=0.68; 80-90%: n=47 p=0.86 obs=0.68; 90-100%: n=177 p=0.97 obs=0.95
+    as the page would show it (damp_emp): 10% n=320 obs=0.03; 20% n=100 obs=0.14; 30% n=69 obs=0.20; 40% n=46 obs=0.17; 50% n=39 obs=0.41; 60% n=36 obs=0.50; 70% n=41 obs=0.63; 80% n=42 obs=0.67; 90% n=203 obs=0.93
+    as the page would show it (damp_dress): 10% n=260 obs=0.03; 20% n=118 obs=0.07; 30% n=84 obs=0.18; 40% n=72 obs=0.19; 50% n=52 obs=0.46; 60% n=50 obs=0.54; 70% n=43 obs=0.67; 80% n=39 obs=0.72; 90% n=178 obs=0.95
+    reliability pers_dress: 0-10%: n=174 p=0.04 obs=0.04; 10-20%: n=138 p=0.15 obs=0.07; 20-30%: n=113 p=0.24 obs=0.10; 30-40%: n=85 p=0.34 obs=0.21; 40-50%: n=59 p=0.45 obs=0.49; 50-60%: n=52 p=0.54 obs=0.58; 60-70%: n=44 p=0.65 obs=0.41; 70-80%: n=42 p=0.75 obs=0.64; 80-90%: n=35 p=0.85 obs=0.74; 90-100%: n=154 p=0.98 obs=0.95
+ lead 2 T>75.0: n=896 events=103 (11.5 %)  Brier damp_dress=0.0411 damp_emp=0.0415 damp_het=0.0411 damp_logit=0.0409 pl_logit=0.0394 pers_dress=0.0455 pers_logit=0.0444 clim=0.0931
+    BSS_damp_dress_vs_clim           +0.558 [+0.451, +0.660]
+    BSS_damp_dress_vs_pers_dress     +0.097 [-0.011, +0.199]
+    BSS_damp_emp_vs_clim             +0.554 [+0.436, +0.664]
+    BSS_damp_emp_vs_pers_dress       +0.088 [-0.034, +0.205]
+    BSS_damp_logit_vs_clim           +0.561 [+0.457, +0.666]
+    BSS_damp_logit_vs_pers_dress     +0.102 [-0.028, +0.227]
+    BSS_pers_dress_vs_clim           +0.511 [+0.397, +0.619]
+    BSS_pl_logit_vs_clim             +0.576 [+0.473, +0.678]
+    BSS_pl_logit_vs_pers_dress       +0.134 [+0.039, +0.233]
+    AUC damp_dress=0.970 damp_emp=0.970 damp_het=0.970 damp_logit=0.970 pl_logit=0.970 pers_dress=0.957 pers_logit=0.957 clim=0.814
+    reliability damp_emp: 0-10%: n=708 p=0.01 obs=0.01; 10-20%: n=38 p=0.15 obs=0.18; 20-30%: n=20 p=0.24 obs=0.10; 30-40%: n=17 p=0.36 obs=0.41; 40-50%: n=12 p=0.46 obs=0.33; 50-60%: n=11 p=0.57 obs=0.45; 60-70%: n=13 p=0.66 obs=0.46; 70-80%: n=15 p=0.75 obs=0.67; 80-90%: n=19 p=0.86 obs=0.68; 90-100%: n=43 p=0.95 obs=0.98
+    as the page would show it (damp_emp): 10% n=728 obs=0.01; 20% n=33 obs=0.18; 30% n=12 obs=0.25; 40% n=15 obs=0.47; 50% n=10 obs=0.40; 60% n=12 obs=0.42; 70% n=16 obs=0.50; 80% n=17 obs=0.71; 90% n=53 obs=0.92
+    as the page would show it (damp_dress): 10% n=711 obs=0.01; 20% n=35 obs=0.20; 30% n=21 obs=0.10; 40% n=21 obs=0.43; 50% n=13 obs=0.38; 60% n=18 obs=0.44; 70% n=16 obs=0.62; 80% n=18 obs=0.72; 90% n=43 obs=0.98
+    reliability pers_dress: 0-10%: n=681 p=0.01 obs=0.01; 10-20%: n=46 p=0.14 obs=0.02; 20-30%: n=23 p=0.25 obs=0.04; 30-40%: n=21 p=0.34 obs=0.43; 40-50%: n=20 p=0.45 obs=0.25; 50-60%: n=21 p=0.55 obs=0.48; 60-70%: n=21 p=0.66 obs=0.67; 70-80%: n=19 p=0.75 obs=0.74; 80-90%: n=21 p=0.85 obs=0.76; 90-100%: n=23 p=0.95 obs=1.00
+ lead 3 T>37.5: n=895 events=323 (36.1 %)  Brier damp_dress=0.1279 damp_emp=0.1263 damp_het=0.1283 damp_logit=0.1262 pl_logit=0.1263 pers_dress=0.1505 pers_logit=0.1479 clim=0.2221
+    BSS_damp_dress_vs_clim           +0.424 [+0.334, +0.498]
+    BSS_damp_dress_vs_pers_dress     +0.150 [+0.097, +0.196]
+    BSS_damp_emp_vs_clim             +0.431 [+0.338, +0.511]
+    BSS_damp_emp_vs_pers_dress       +0.161 [+0.104, +0.213]
+    BSS_damp_logit_vs_clim           +0.432 [+0.344, +0.505]
+    BSS_damp_logit_vs_pers_dress     +0.162 [+0.110, +0.206]
+    BSS_pers_dress_vs_clim           +0.322 [+0.225, +0.408]
+    BSS_pl_logit_vs_clim             +0.431 [+0.344, +0.505]
+    BSS_pl_logit_vs_pers_dress       +0.161 [+0.115, +0.201]
+    AUC damp_dress=0.893 damp_emp=0.893 damp_het=0.893 damp_logit=0.893 pl_logit=0.892 pers_dress=0.853 pers_logit=0.853 clim=0.792
+    reliability damp_emp: 0-10%: n=219 p=0.04 obs=0.06; 10-20%: n=145 p=0.15 obs=0.09; 20-30%: n=80 p=0.25 obs=0.09; 30-40%: n=53 p=0.35 obs=0.28; 40-50%: n=60 p=0.45 obs=0.33; 50-60%: n=44 p=0.56 obs=0.43; 60-70%: n=35 p=0.65 obs=0.60; 70-80%: n=36 p=0.75 obs=0.64; 80-90%: n=47 p=0.85 obs=0.70; 90-100%: n=176 p=0.96 obs=0.90
+    as the page would show it (damp_emp): 10% n=295 obs=0.07; 20% n=104 obs=0.09; 30% n=67 obs=0.15; 40% n=64 obs=0.25; 50% n=42 obs=0.43; 60% n=48 obs=0.44; 70% n=37 obs=0.73; 80% n=37 obs=0.59; 90% n=201 obs=0.89
+    as the page would show it (damp_dress): 10% n=235 obs=0.07; 20% n=122 obs=0.07; 30% n=87 obs=0.10; 40% n=74 obs=0.30; 50% n=64 obs=0.36; 60% n=54 obs=0.56; 70% n=44 obs=0.59; 80% n=44 obs=0.75; 90% n=171 obs=0.91
+    reliability pers_dress: 0-10%: n=135 p=0.04 obs=0.10; 10-20%: n=133 p=0.15 obs=0.08; 20-30%: n=131 p=0.25 obs=0.11; 30-40%: n=101 p=0.35 obs=0.27; 40-50%: n=65 p=0.45 obs=0.42; 50-60%: n=59 p=0.54 obs=0.46; 60-70%: n=49 p=0.65 obs=0.57; 70-80%: n=46 p=0.75 obs=0.50; 80-90%: n=35 p=0.86 obs=0.77; 90-100%: n=141 p=0.97 obs=0.89
+ lead 3 T>75.0: n=895 events=105 (11.7 %)  Brier damp_dress=0.0497 damp_emp=0.0503 damp_het=0.0498 damp_logit=0.0493 pl_logit=0.0479 pers_dress=0.0543 pers_logit=0.0522 clim=0.0939
+    BSS_damp_dress_vs_clim           +0.470 [+0.342, +0.593]
+    BSS_damp_dress_vs_pers_dress     +0.084 [-0.023, +0.192]
+    BSS_damp_emp_vs_clim             +0.464 [+0.323, +0.597]
+    BSS_damp_emp_vs_pers_dress       +0.073 [-0.045, +0.198]
+    BSS_damp_logit_vs_clim           +0.475 [+0.351, +0.601]
+    BSS_damp_logit_vs_pers_dress     +0.092 [-0.041, +0.224]
+    BSS_pers_dress_vs_clim           +0.422 [+0.289, +0.541]
+    BSS_pl_logit_vs_clim             +0.490 [+0.367, +0.613]
+    BSS_pl_logit_vs_pers_dress       +0.117 [+0.010, +0.231]
+    AUC damp_dress=0.950 damp_emp=0.950 damp_het=0.950 damp_logit=0.950 pl_logit=0.949 pers_dress=0.928 pers_logit=0.928 clim=0.815
+    reliability damp_emp: 0-10%: n=687 p=0.02 obs=0.01; 10-20%: n=50 p=0.14 obs=0.12; 20-30%: n=32 p=0.25 obs=0.28; 30-40%: n=19 p=0.34 obs=0.37; 40-50%: n=10 p=0.45 obs=0.20; 50-60%: n=10 p=0.54 obs=0.50; 60-70%: n=8 p=0.66 obs=0.50; 70-80%: n=15 p=0.73 obs=0.53; 80-90%: n=22 p=0.85 obs=0.73; 90-100%: n=42 p=0.95 obs=0.90
+    as the page would show it (damp_emp): 10% n=717 obs=0.02; 20% n=34 obs=0.21; 30% n=31 obs=0.35; 40% n=12 obs=0.25; 50% n=11 obs=0.36; 60% n=5 obs=0.40; 70% n=17 obs=0.59; 80% n=15 obs=0.60; 90% n=53 obs=0.89
+    as the page would show it (damp_dress): 10% n=697 obs=0.02; 20% n=39 obs=0.13; 30% n=33 obs=0.27; 40% n=21 obs=0.33; 50% n=17 obs=0.41; 60% n=9 obs=0.44; 70% n=18 obs=0.50; 80% n=21 obs=0.76; 90% n=40 obs=0.93
+    reliability pers_dress: 0-10%: n=646 p=0.02 obs=0.02; 10-20%: n=71 p=0.14 obs=0.03; 20-30%: n=26 p=0.25 obs=0.12; 30-40%: n=26 p=0.35 obs=0.31; 40-50%: n=20 p=0.45 obs=0.25; 50-60%: n=25 p=0.55 obs=0.40; 60-70%: n=22 p=0.66 obs=0.64; 70-80%: n=24 p=0.75 obs=0.71; 80-90%: n=18 p=0.86 obs=0.83; 90-100%: n=17 p=0.94 obs=1.00
+
+## B-S3S4 pooled (disjoint stations, both later seasons)
+ lead 1 T>37.5: n=2369 events=722 (30.5 %)  Brier damp_dress=0.0598 damp_emp=0.0595 damp_het=0.0598 damp_logit=0.0599 pl_logit=0.0604 pers_dress=0.0692 pers_logit=0.0689 clim=0.1808
+    BSS_damp_dress_vs_clim           +0.669 [+0.630, +0.707]
+    BSS_damp_dress_vs_pers_dress     +0.135 [+0.095, +0.175]
+    BSS_damp_emp_vs_clim             +0.671 [+0.630, +0.711]
+    BSS_damp_emp_vs_pers_dress       +0.141 [+0.097, +0.186]
+    BSS_damp_logit_vs_clim           +0.669 [+0.630, +0.706]
+    BSS_damp_logit_vs_pers_dress     +0.134 [+0.095, +0.173]
+    BSS_pers_dress_vs_clim           +0.617 [+0.574, +0.659]
+    BSS_pl_logit_vs_clim             +0.666 [+0.628, +0.703]
+    BSS_pl_logit_vs_pers_dress       +0.127 [+0.100, +0.154]
+    AUC damp_dress=0.974 damp_emp=0.974 damp_het=0.974 damp_logit=0.974 pl_logit=0.972 pers_dress=0.963 pers_logit=0.963 clim=0.801
+    reliability damp_emp: 0-10%: n=1266 p=0.02 obs=0.01; 10-20%: n=142 p=0.15 obs=0.09; 20-30%: n=73 p=0.25 obs=0.30; 30-40%: n=70 p=0.34 obs=0.26; 40-50%: n=73 p=0.46 obs=0.38; 50-60%: n=57 p=0.54 obs=0.42; 60-70%: n=58 p=0.65 obs=0.45; 70-80%: n=72 p=0.74 obs=0.78; 80-90%: n=117 p=0.86 obs=0.81; 90-100%: n=441 p=0.97 obs=0.98
+    as the page would show it (damp_emp): 10% n=1344 obs=0.01; 20% n=102 obs=0.22; 30% n=78 obs=0.28; 40% n=60 obs=0.28; 50% n=71 obs=0.39; 60% n=59 obs=0.47; 70% n=69 obs=0.62; 80% n=73 obs=0.77; 90% n=513 obs=0.96
+    as the page would show it (damp_dress): 10% n=1275 obs=0.01; 20% n=133 obs=0.10; 30% n=93 obs=0.30; 40% n=83 obs=0.28; 50% n=93 obs=0.42; 60% n=72 obs=0.49; 70% n=77 obs=0.73; 80% n=92 obs=0.86; 90% n=451 obs=0.97
+    reliability pers_dress: 0-10%: n=1173 p=0.01 obs=0.01; 10-20%: n=157 p=0.15 obs=0.07; 20-30%: n=124 p=0.25 obs=0.19; 30-40%: n=101 p=0.35 obs=0.23; 40-50%: n=89 p=0.45 obs=0.47; 50-60%: n=62 p=0.55 obs=0.55; 60-70%: n=74 p=0.64 obs=0.54; 70-80%: n=89 p=0.75 obs=0.72; 80-90%: n=95 p=0.85 obs=0.85; 90-100%: n=405 p=0.98 obs=0.96
+ lead 1 T>75.0: n=2369 events=165 (7.0 %)  Brier damp_dress=0.0182 damp_emp=0.0177 damp_het=0.0183 damp_logit=0.0170 pl_logit=0.0167 pers_dress=0.0207 pers_logit=0.0193 clim=0.0615
+    BSS_damp_dress_vs_clim           +0.704 [+0.633, +0.762]
+    BSS_damp_dress_vs_pers_dress     +0.119 [+0.044, +0.193]
+    BSS_damp_emp_vs_clim             +0.713 [+0.639, +0.773]
+    BSS_damp_emp_vs_pers_dress       +0.147 [+0.061, +0.231]
+    BSS_damp_logit_vs_clim           +0.723 [+0.654, +0.780]
+    BSS_damp_logit_vs_pers_dress     +0.178 [+0.098, +0.255]
+    BSS_pers_dress_vs_clim           +0.663 [+0.592, +0.723]
+    BSS_pl_logit_vs_clim             +0.729 [+0.660, +0.785]
+    BSS_pl_logit_vs_pers_dress       +0.194 [+0.135, +0.256]
+    AUC damp_dress=0.992 damp_emp=0.992 damp_het=0.992 damp_logit=0.992 pl_logit=0.992 pers_dress=0.989 pers_logit=0.989 clim=0.902
+    reliability damp_emp: 0-10%: n=2052 p=0.01 obs=0.00; 10-20%: n=63 p=0.14 obs=0.00; 20-30%: n=31 p=0.24 obs=0.10; 30-40%: n=23 p=0.36 obs=0.30; 40-50%: n=22 p=0.45 obs=0.36; 50-60%: n=14 p=0.53 obs=0.50; 60-70%: n=16 p=0.65 obs=0.62; 70-80%: n=26 p=0.75 obs=0.54; 80-90%: n=24 p=0.86 obs=0.83; 90-100%: n=98 p=0.96 obs=0.95
+    as the page would show it (damp_emp): 10% n=2092 obs=0.00; 20% n=41 obs=0.05; 30% n=24 obs=0.12; 40% n=22 obs=0.45; 50% n=23 obs=0.39; 60% n=10 obs=0.60; 70% n=21 obs=0.62; 80% n=20 obs=0.55; 90% n=116 obs=0.93
+    as the page would show it (damp_dress): 10% n=2061 obs=0.00; 20% n=53 obs=0.00; 30% n=35 obs=0.11; 40% n=30 obs=0.37; 50% n=23 obs=0.39; 60% n=24 obs=0.54; 70% n=24 obs=0.58; 80% n=19 obs=0.84; 90% n=100 obs=0.95
+    reliability pers_dress: 0-10%: n=2000 p=0.01 obs=0.00; 10-20%: n=76 p=0.14 obs=0.04; 20-30%: n=48 p=0.25 obs=0.08; 30-40%: n=42 p=0.34 obs=0.31; 40-50%: n=35 p=0.46 obs=0.23; 50-60%: n=20 p=0.55 obs=0.30; 60-70%: n=23 p=0.65 obs=0.61; 70-80%: n=15 p=0.73 obs=0.73; 80-90%: n=28 p=0.85 obs=0.93; 90-100%: n=82 p=0.97 obs=0.94
+ lead 2 T>37.5: n=2366 events=721 (30.5 %)  Brier damp_dress=0.0850 damp_emp=0.0842 damp_het=0.0850 damp_logit=0.0852 pl_logit=0.0872 pers_dress=0.1088 pers_logit=0.1077 clim=0.1806
+    BSS_damp_dress_vs_clim           +0.529 [+0.480, +0.575]
+    BSS_damp_dress_vs_pers_dress     +0.219 [+0.178, +0.257]
+    BSS_damp_emp_vs_clim             +0.534 [+0.482, +0.582]
+    BSS_damp_emp_vs_pers_dress       +0.226 [+0.182, +0.268]
+    BSS_damp_logit_vs_clim           +0.528 [+0.480, +0.573]
+    BSS_damp_logit_vs_pers_dress     +0.217 [+0.177, +0.253]
+    BSS_pers_dress_vs_clim           +0.397 [+0.335, +0.457]
+    BSS_pl_logit_vs_clim             +0.517 [+0.468, +0.564]
+    BSS_pl_logit_vs_pers_dress       +0.198 [+0.169, +0.226]
+    AUC damp_dress=0.948 damp_emp=0.948 damp_het=0.948 damp_logit=0.948 pl_logit=0.943 pers_dress=0.912 pers_logit=0.912 clim=0.802
+    reliability damp_emp: 0-10%: n=1079 p=0.02 obs=0.01; 10-20%: n=199 p=0.15 obs=0.08; 20-30%: n=139 p=0.24 obs=0.18; 30-40%: n=105 p=0.35 obs=0.33; 40-50%: n=79 p=0.45 obs=0.35; 50-60%: n=94 p=0.55 obs=0.45; 60-70%: n=90 p=0.65 obs=0.57; 70-80%: n=78 p=0.74 obs=0.67; 80-90%: n=133 p=0.85 obs=0.78; 90-100%: n=370 p=0.97 obs=0.95
+    as the page would show it (damp_emp): 10% n=1187 obs=0.02; 20% n=179 obs=0.12; 30% n=107 obs=0.29; 40% n=89 obs=0.28; 50% n=84 obs=0.49; 60% n=92 obs=0.45; 70% n=97 obs=0.60; 80% n=89 obs=0.74; 90% n=442 obs=0.93
+    as the page would show it (damp_dress): 10% n=1090 obs=0.02; 20% n=188 obs=0.08; 30% n=149 obs=0.19; 40% n=128 obs=0.32; 50% n=121 obs=0.47; 60% n=117 obs=0.50; 70% n=99 obs=0.69; 80% n=96 obs=0.80; 90% n=378 obs=0.95
+    reliability pers_dress: 0-10%: n=959 p=0.02 obs=0.03; 10-20%: n=233 p=0.15 obs=0.11; 20-30%: n=174 p=0.25 obs=0.15; 30-40%: n=142 p=0.35 obs=0.30; 40-50%: n=130 p=0.45 obs=0.42; 50-60%: n=99 p=0.55 obs=0.49; 60-70%: n=100 p=0.65 obs=0.56; 70-80%: n=107 p=0.75 obs=0.68; 80-90%: n=120 p=0.85 obs=0.76; 90-100%: n=302 p=0.97 obs=0.91
+ lead 2 T>75.0: n=2366 events=166 (7.0 %)  Brier damp_dress=0.0283 damp_emp=0.0276 damp_het=0.0283 damp_logit=0.0260 pl_logit=0.0255 pers_dress=0.0332 pers_logit=0.0301 clim=0.0613
+    BSS_damp_dress_vs_clim           +0.537 [+0.439, +0.622]
+    BSS_damp_dress_vs_pers_dress     +0.147 [+0.068, +0.228]
+    BSS_damp_emp_vs_clim             +0.549 [+0.450, +0.640]
+    BSS_damp_emp_vs_pers_dress       +0.169 [+0.082, +0.261]
+    BSS_damp_logit_vs_clim           +0.576 [+0.488, +0.658]
+    BSS_damp_logit_vs_pers_dress     +0.219 [+0.135, +0.304]
+    BSS_pers_dress_vs_clim           +0.458 [+0.352, +0.550]
+    BSS_pl_logit_vs_clim             +0.584 [+0.494, +0.665]
+    BSS_pl_logit_vs_pers_dress       +0.233 [+0.170, +0.302]
+    AUC damp_dress=0.978 damp_emp=0.978 damp_het=0.978 damp_logit=0.978 pl_logit=0.978 pers_dress=0.968 pers_logit=0.968 clim=0.903
+    reliability damp_emp: 0-10%: n=1971 p=0.01 obs=0.00; 10-20%: n=107 p=0.15 obs=0.06; 20-30%: n=48 p=0.24 obs=0.12; 30-40%: n=42 p=0.34 obs=0.24; 40-50%: n=22 p=0.45 obs=0.41; 50-60%: n=22 p=0.56 obs=0.45; 60-70%: n=20 p=0.64 obs=0.35; 70-80%: n=19 p=0.75 obs=0.68; 80-90%: n=36 p=0.85 obs=0.72; 90-100%: n=79 p=0.96 obs=0.90
+    as the page would show it (damp_emp): 10% n=2024 obs=0.01; 20% n=87 obs=0.08; 30% n=43 obs=0.16; 40% n=24 obs=0.42; 50% n=20 obs=0.45; 60% n=25 obs=0.32; 70% n=20 obs=0.50; 80% n=26 obs=0.85; 90% n=97 obs=0.85
+    as the page would show it (damp_dress): 10% n=1978 obs=0.00; 20% n=100 obs=0.06; 30% n=57 obs=0.11; 40% n=42 obs=0.36; 50% n=28 obs=0.39; 60% n=29 obs=0.38; 70% n=23 obs=0.74; 80% n=29 obs=0.72; 90% n=80 obs=0.89
+    reliability pers_dress: 0-10%: n=1876 p=0.01 obs=0.00; 10-20%: n=129 p=0.14 obs=0.06; 20-30%: n=78 p=0.24 obs=0.08; 30-40%: n=63 p=0.35 obs=0.22; 40-50%: n=52 p=0.45 obs=0.23; 50-60%: n=30 p=0.55 obs=0.43; 60-70%: n=27 p=0.65 obs=0.44; 70-80%: n=22 p=0.76 obs=0.64; 80-90%: n=36 p=0.84 obs=0.75; 90-100%: n=53 p=0.96 obs=0.96
+ lead 3 T>37.5: n=2362 events=719 (30.4 %)  Brier damp_dress=0.0977 damp_emp=0.0972 damp_het=0.0979 damp_logit=0.0972 pl_logit=0.0987 pers_dress=0.1339 pers_logit=0.1311 clim=0.1805
+    BSS_damp_dress_vs_clim           +0.459 [+0.405, +0.511]
+    BSS_damp_dress_vs_pers_dress     +0.270 [+0.232, +0.307]
+    BSS_damp_emp_vs_clim             +0.461 [+0.405, +0.517]
+    BSS_damp_emp_vs_pers_dress       +0.274 [+0.231, +0.314]
+    BSS_damp_logit_vs_clim           +0.461 [+0.410, +0.513]
+    BSS_damp_logit_vs_pers_dress     +0.274 [+0.236, +0.310]
+    BSS_pers_dress_vs_clim           +0.258 [+0.187, +0.327]
+    BSS_pl_logit_vs_clim             +0.453 [+0.399, +0.506]
+    BSS_pl_logit_vs_pers_dress       +0.263 [+0.228, +0.296]
+    AUC damp_dress=0.932 damp_emp=0.932 damp_het=0.932 damp_logit=0.932 pl_logit=0.929 pers_dress=0.871 pers_logit=0.871 clim=0.802
+    reliability damp_emp: 0-10%: n=999 p=0.02 obs=0.02; 10-20%: n=241 p=0.15 obs=0.12; 20-30%: n=148 p=0.25 obs=0.15; 30-40%: n=116 p=0.35 obs=0.31; 40-50%: n=122 p=0.45 obs=0.41; 50-60%: n=90 p=0.55 obs=0.49; 60-70%: n=78 p=0.65 obs=0.55; 70-80%: n=99 p=0.75 obs=0.61; 80-90%: n=121 p=0.86 obs=0.78; 90-100%: n=348 p=0.96 obs=0.93
+    as the page would show it (damp_emp): 10% n=1129 obs=0.03; 20% n=194 obs=0.14; 30% n=124 obs=0.22; 40% n=117 obs=0.40; 50% n=107 obs=0.41; 60% n=84 obs=0.50; 70% n=86 obs=0.63; 80% n=99 obs=0.68; 90% n=422 obs=0.90
+    as the page would show it (damp_dress): 10% n=1037 obs=0.02; 20% n=196 obs=0.13; 30% n=155 obs=0.14; 40% n=144 obs=0.34; 50% n=159 obs=0.44; 60% n=104 obs=0.53; 70% n=113 obs=0.64; 80% n=115 obs=0.77; 90% n=339 obs=0.94
+    reliability pers_dress: 0-10%: n=861 p=0.03 obs=0.05; 10-20%: n=262 p=0.15 obs=0.14; 20-30%: n=189 p=0.25 obs=0.20; 30-40%: n=171 p=0.35 obs=0.25; 40-50%: n=150 p=0.45 obs=0.43; 50-60%: n=112 p=0.55 obs=0.45; 60-70%: n=117 p=0.65 obs=0.56; 70-80%: n=113 p=0.75 obs=0.59; 80-90%: n=120 p=0.85 obs=0.69; 90-100%: n=267 p=0.97 obs=0.87
+ lead 3 T>75.0: n=2362 events=166 (7.0 %)  Brier damp_dress=0.0331 damp_emp=0.0322 damp_het=0.0333 damp_logit=0.0299 pl_logit=0.0296 pers_dress=0.0395 pers_logit=0.0352 clim=0.0614
+    BSS_damp_dress_vs_clim           +0.461 [+0.355, +0.556]
+    BSS_damp_dress_vs_pers_dress     +0.164 [+0.091, +0.234]
+    BSS_damp_emp_vs_clim             +0.476 [+0.364, +0.573]
+    BSS_damp_emp_vs_pers_dress       +0.187 [+0.107, +0.264]
+    BSS_damp_logit_vs_clim           +0.513 [+0.415, +0.598]
+    BSS_damp_logit_vs_pers_dress     +0.244 [+0.161, +0.326]
+    BSS_pers_dress_vs_clim           +0.356 [+0.239, +0.459]
+    BSS_pl_logit_vs_clim             +0.518 [+0.421, +0.605]
+    BSS_pl_logit_vs_pers_dress       +0.252 [+0.178, +0.325]
+    AUC damp_dress=0.964 damp_emp=0.964 damp_het=0.964 damp_logit=0.964 pl_logit=0.964 pers_dress=0.948 pers_logit=0.948 clim=0.903
+    reliability damp_emp: 0-10%: n=1922 p=0.01 obs=0.01; 10-20%: n=139 p=0.14 obs=0.07; 20-30%: n=71 p=0.24 obs=0.11; 30-40%: n=31 p=0.34 obs=0.26; 40-50%: n=28 p=0.44 obs=0.29; 50-60%: n=25 p=0.54 obs=0.36; 60-70%: n=18 p=0.64 obs=0.33; 70-80%: n=17 p=0.75 obs=0.47; 80-90%: n=40 p=0.85 obs=0.78; 90-100%: n=71 p=0.95 obs=0.90
+    as the page would show it (damp_emp): 10% n=2008 obs=0.01; 20% n=94 obs=0.14; 30% n=50 obs=0.16; 40% n=25 obs=0.40; 50% n=30 obs=0.20; 60% n=19 obs=0.32; 70% n=17 obs=0.35; 80% n=27 obs=0.74; 90% n=92 obs=0.88
+    as the page would show it (damp_dress): 10% n=1948 obs=0.01; 20% n=112 obs=0.07; 30% n=72 obs=0.12; 40% n=42 obs=0.31; 50% n=35 obs=0.26; 60% n=25 obs=0.36; 70% n=27 obs=0.63; 80% n=34 obs=0.76; 90% n=67 obs=0.90
+    reliability pers_dress: 0-10%: n=1799 p=0.01 obs=0.01; 10-20%: n=173 p=0.14 obs=0.03; 20-30%: n=93 p=0.25 obs=0.11; 30-40%: n=67 p=0.35 obs=0.15; 40-50%: n=62 p=0.45 obs=0.26; 50-60%: n=30 p=0.55 obs=0.43; 60-70%: n=28 p=0.64 obs=0.36; 70-80%: n=39 p=0.76 obs=0.62; 80-90%: n=30 p=0.86 obs=0.87; 90-100%: n=41 p=0.95 obs=0.88
+
+## Oct-2026 quiet (e3 stations, 20 Sep–22 Oct)
+ lead 1 T>37.5: n=328 events=1 (0.3 %)  Brier damp_dress=0.0037 damp_emp=0.0035 damp_het=0.0037 damp_logit=0.0038 pl_logit=0.0036 pers_dress=0.0056 pers_logit=0.0054 clim=0.0048
+    BSS_damp_dress_vs_clim           +0.235 [-0.049, +0.683]
+    BSS_damp_dress_vs_pers_dress     +0.338 [-0.027, +0.681]
+    BSS_damp_emp_vs_clim             +0.286 [+0.096, +0.840]
+    BSS_damp_emp_vs_pers_dress       +0.381 [+0.185, +0.835]
+    BSS_damp_logit_vs_clim           +0.216 [-0.116, +0.603]
+    BSS_damp_logit_vs_pers_dress     +0.321 [-0.122, +0.610]
+    BSS_pers_dress_vs_clim           -0.155 [-0.811, +0.418]
+    BSS_pl_logit_vs_clim             +0.257 [+0.101, +0.756]
+    BSS_pl_logit_vs_pers_dress       +0.356 [+0.202, +0.762]
+    AUC damp_dress=0.969 damp_emp=0.969 damp_het=0.969 damp_logit=0.969 pl_logit=0.979 pers_dress=0.939 pers_logit=0.939 clim=0.034
+    reliability damp_emp: 0-10%: n=324 p=0.01 obs=0.00; 10-20%: n=3 p=0.16 obs=0.00; 30-40%: n=1 p=0.33 obs=0.00
+    as the page would show it (damp_emp): 10% n=325 obs=0.00; 20% n=2 obs=0.00; 30% n=1 obs=0.00
+    as the page would show it (damp_dress): 10% n=324 obs=0.00; 20% n=3 obs=0.00; 40% n=1 obs=0.00
+    reliability pers_dress: 0-10%: n=317 p=0.00 obs=0.00; 10-20%: n=7 p=0.14 obs=0.00; 30-40%: n=1 p=0.32 obs=0.00; 40-50%: n=2 p=0.42 obs=0.00; 50-60%: n=1 p=0.53 obs=0.00
+ lead 1 T>75.0: n=328 events=0 (0.0 %)  Brier damp_dress=0.0000 damp_emp=0.0000 damp_het=0.0000 damp_logit=0.0000 pl_logit=0.0000 pers_dress=0.0000 pers_logit=0.0000 clim=0.0000
+    BSS_damp_dress_vs_clim           +1.000 [+1.000, +1.000]
+    BSS_damp_dress_vs_pers_dress     +0.977 [+0.687, +0.999]
+    BSS_damp_emp_vs_clim             +0.875 [+0.848, +0.900]
+    BSS_damp_emp_vs_pers_dress       -25.928 [-314.578, -10.492]
+    BSS_damp_logit_vs_clim           +0.998 [+0.996, +0.999]
+    BSS_damp_logit_vs_pers_dress     +0.576 [-4.368, +0.863]
+    BSS_pers_dress_vs_clim           +0.995 [+0.989, +1.000]
+    BSS_pl_logit_vs_clim             +0.999 [+0.998, +1.000]
+    BSS_pl_logit_vs_pers_dress       +0.786 [-1.199, +0.879]
+    reliability damp_emp: 0-10%: n=328 p=0.00 obs=0.00
+    as the page would show it (damp_emp): 10% n=328 obs=0.00
+    as the page would show it (damp_dress): 10% n=328 obs=0.00
+    reliability pers_dress: 0-10%: n=328 p=0.00 obs=0.00
+ lead 2 T>37.5: n=327 events=1 (0.3 %)  Brier damp_dress=0.0062 damp_emp=0.0050 damp_het=0.0062 damp_logit=0.0070 pl_logit=0.0056 pers_dress=0.0079 pers_logit=0.0087 clim=0.0048
+    BSS_damp_dress_vs_clim           -0.285 [-2.494, +0.132]
+    BSS_damp_dress_vs_pers_dress     +0.210 [-0.412, +0.465]
+    BSS_damp_emp_vs_clim             -0.035 [-1.604, +0.294]
+    BSS_damp_emp_vs_pers_dress       +0.363 [-0.085, +0.674]
+    BSS_damp_logit_vs_clim           -0.453 [-3.045, +0.033]
+    BSS_damp_logit_vs_pers_dress     +0.107 [-0.655, +0.370]
+    BSS_pers_dress_vs_clim           -0.626 [-3.101, -0.095]
+    BSS_pl_logit_vs_clim             -0.164 [-1.505, +0.104]
+    BSS_pl_logit_vs_pers_dress       +0.284 [-0.053, +0.549]
+    AUC damp_dress=0.979 damp_emp=0.979 damp_het=0.979 damp_logit=0.979 pl_logit=0.929 pers_dress=0.433 pers_logit=0.433 clim=0.034
+    reliability damp_emp: 0-10%: n=312 p=0.01 obs=0.00; 10-20%: n=10 p=0.17 obs=0.10; 20-30%: n=4 p=0.21 obs=0.00; 60-70%: n=1 p=0.60 obs=0.00
+    as the page would show it (damp_emp): 10% n=314 obs=0.00; 20% n=12 obs=0.08; 60% n=1 obs=0.00
+    as the page would show it (damp_dress): 10% n=312 obs=0.00; 20% n=8 obs=0.12; 30% n=6 obs=0.00; 60% n=1 obs=0.00
+    reliability pers_dress: 0-10%: n=299 p=0.01 obs=0.00; 10-20%: n=19 p=0.13 obs=0.00; 20-30%: n=5 p=0.23 obs=0.00; 30-40%: n=1 p=0.37 obs=0.00; 40-50%: n=2 p=0.45 obs=0.00; 50-60%: n=1 p=0.53 obs=0.00
+ lead 2 T>75.0: n=327 events=0 (0.0 %)  Brier damp_dress=0.0000 damp_emp=0.0000 damp_het=0.0000 damp_logit=0.0000 pl_logit=0.0000 pers_dress=0.0000 pers_logit=0.0000 clim=0.0000
+    BSS_damp_dress_vs_clim           +0.683 [+0.125, +0.973]
+    BSS_damp_dress_vs_pers_dress     +0.396 [-5.051, +0.960]
+    BSS_damp_emp_vs_clim             -0.172 [-0.414, +0.020]
+    BSS_damp_emp_vs_pers_dress       -1.235 [-19.072, +0.027]
+    BSS_damp_logit_vs_clim           +0.814 [+0.611, +0.934]
+    BSS_damp_logit_vs_pers_dress     +0.644 [-2.488, +0.906]
+    BSS_pers_dress_vs_clim           +0.476 [-0.222, +0.944]
+    BSS_pl_logit_vs_clim             +0.938 [+0.879, +0.977]
+    BSS_pl_logit_vs_pers_dress       +0.882 [-0.067, +0.961]
+    reliability damp_emp: 0-10%: n=327 p=0.00 obs=0.00
+    as the page would show it (damp_emp): 10% n=327 obs=0.00
+    as the page would show it (damp_dress): 10% n=327 obs=0.00
+    reliability pers_dress: 0-10%: n=327 p=0.00 obs=0.00
+ lead 3 T>37.5: n=326 events=1 (0.3 %)  Brier damp_dress=0.0095 damp_emp=0.0070 damp_het=0.0096 damp_logit=0.0098 pl_logit=0.0082 pers_dress=0.0096 pers_logit=0.0111 clim=0.0049
+    BSS_damp_dress_vs_clim           -0.958 [-5.404, -0.048]
+    BSS_damp_dress_vs_pers_dress     +0.006 [-0.625, +0.278]
+    BSS_damp_emp_vs_clim             -0.433 [-3.474, +0.191]
+    BSS_damp_emp_vs_pers_dress       +0.273 [-0.111, +0.447]
+    BSS_damp_logit_vs_clim           -1.016 [-5.604, -0.101]
+    BSS_damp_logit_vs_pers_dress     -0.023 [-0.671, +0.246]
+    BSS_pers_dress_vs_clim           -0.970 [-4.556, -0.273]
+    BSS_pl_logit_vs_clim             -0.693 [-4.252, +0.015]
+    BSS_pl_logit_vs_pers_dress       +0.141 [-0.281, +0.321]
+    AUC damp_dress=0.991 damp_emp=0.991 damp_het=0.991 damp_logit=0.991 pl_logit=0.991 pers_dress=0.717 pers_logit=0.717 clim=0.034
+    reliability damp_emp: 0-10%: n=285 p=0.02 obs=0.00; 10-20%: n=29 p=0.14 obs=0.00; 20-30%: n=6 p=0.24 obs=0.00; 30-40%: n=3 p=0.35 obs=0.33; 40-50%: n=3 p=0.44 obs=0.00
+    as the page would show it (damp_emp): 10% n=308 obs=0.00; 20% n=10 obs=0.00; 30% n=3 obs=0.00; 40% n=5 obs=0.20
+    as the page would show it (damp_dress): 10% n=291 obs=0.00; 20% n=22 obs=0.00; 30% n=7 obs=0.00; 40% n=4 obs=0.25; 50% n=2 obs=0.00
+    reliability pers_dress: 0-10%: n=286 p=0.02 obs=0.00; 10-20%: n=29 p=0.15 obs=0.00; 20-30%: n=7 p=0.26 obs=0.00; 30-40%: n=1 p=0.39 obs=0.00; 40-50%: n=2 p=0.46 obs=0.00; 50-60%: n=1 p=0.53 obs=0.00
+ lead 3 T>75.0: n=326 events=0 (0.0 %)  Brier damp_dress=0.0000 damp_emp=0.0000 damp_het=0.0000 damp_logit=0.0000 pl_logit=0.0000 pers_dress=0.0000 pers_logit=0.0000 clim=0.0000
+    BSS_damp_dress_vs_clim           -0.030 [-0.614, +0.505]
+    BSS_damp_dress_vs_pers_dress     +0.466 [-0.912, +0.708]
+    BSS_damp_emp_vs_clim             -0.904 [-1.486, -0.363]
+    BSS_damp_emp_vs_pers_dress       +0.014 [-3.380, +0.484]
+    BSS_damp_logit_vs_clim           +0.210 [-0.106, +0.509]
+    BSS_damp_logit_vs_pers_dress     +0.591 [-0.707, +0.783]
+    BSS_pers_dress_vs_clim           -0.930 [-3.058, +0.626]
+    BSS_pl_logit_vs_clim             +0.611 [+0.422, +0.775]
+    BSS_pl_logit_vs_pers_dress       +0.799 [+0.275, +0.871]
+    reliability damp_emp: 0-10%: n=326 p=0.00 obs=0.00
+    as the page would show it (damp_emp): 10% n=326 obs=0.00
+    as the page would show it (damp_dress): 10% n=326 obs=0.00
+    reliability pers_dress: 0-10%: n=326 p=0.00 obs=0.00
+
+wrote /root/disaster-now/research/out/aq_expA_results.json

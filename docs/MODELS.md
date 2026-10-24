@@ -13,7 +13,7 @@ The forecasts the page shows, the corrections it applies and the skill each one 
 
 | What the page shows | Method | Verdict | Tested skill (data the fit never saw) |
 |---|---|---|---|
-| 🌡️ Heat index, today to day 3 | ECMWF ensemble (51 members), NWS heat index per member, **corrected per member** and **dressed** | ship, corrected only | raw ran about **5 °C low** (MAE 4.7–5.1 °C; days at 42 °C or more were caught 0–6 % of the time). Corrected: MAE **2.4 °C**, ≥ 42 °C POD 0.65–0.86, FAR 0.34–0.37; 0 of 18 stations made worse; the 10–90 % range held **82 %** (target 80) |
+| 🌡️ Heat index, today to day 3 | ECMWF ensemble (51 members), NWS heat index per member at **13:00 and 16:00** (grid-cell height), **corrected per member** and **dressed**; **Mar–Oct the line** (C0), **Nov–Feb C6** (corrected T and Td, provisional, post-hoc; since 0.4.0) | ship, corrected only | raw ran **3–5 °C low**. **Mar–Oct, the line, on 53 disjoint stations (2025–26): MAE 2.55 °C, bias +0.95** (+0.9 to +1.9 in the North, Northeast and Central), false อันตราย on 19–31 % of days there (FAR ≥ 42 0.43–0.46). **Nov–Feb the line was 3–4 °C hot and worse than raw** (MAE 3.56 vs 3.07; worse at 39 of 78 stations); **C6 there: MAE 1.53**, danger days 7 of 29 (the line 8); on the ensemble, false "เตือนภัย likely" 9 % of days (the line 43 %). [Model check 2026-10-24](research/model-check-2026-10-24.md) |
 | 😷 PM2.5, days 1–3 | latest measured 24-h mean × (CAMS change)^β, the **damped ratio** (post-hoc) | ship (provisional) | day 1 MAE 4.3–6.6 µg/m³ vs persistence 5.2–7.3, raw CAMS 11.8–16.7 (Mar–Apr 2026); best or near best on every test; colour right on about 3 days in 4 |
 | 🌧️ Heavy rain | ensemble chance of > 35 mm in 24 h, **as three words only** | words only, no amounts | at a point, heavy rain 1–2 days ahead is mostly missed (HRES POD 0.04–0.13); ensemble Brier skill −0.08 to +0.12; heavy rain fell on 2–6 % of the days the ensemble gave 0 % |
 | 💨 Gusts | ensemble gusts | shown, labelled **not validated** | no gust observations were available |
@@ -56,6 +56,56 @@ Persistence is better still, but the app has no observed maximum at most points 
 - TMD's own heat-index formula is **[unverified]** (KI-004).
 
 **What it does to the page:** with the correction, Bangkok's October afternoons read 42–44 °C, "อันตราย". Observed Bangkok October days reach ≥ 42 °C on 48 % of days, April days on 95 % (`research/out/e1e2_results.json`). The level is capped at เตรียมตัว for a forecast alone (§6, KI-005).
+
+### 1.1 The model check of 24 Oct 2026, and what 0.4.0 changed
+
+[research/model-check-2026-10-24.md](research/model-check-2026-10-24.md): 962 ECMWF HRES runs as issued (Mar 2024–Oct
+2026), 31 winter ENS runs, 90,481 station-day pairs at 18 fit stations, **53 new disjoint stations** (C) and 8 airports
+(D). Every number below comes from its scripts (`research/heat_*.py`, logs `research/logs/*-2026-10-24.log`).
+
+**What this section's first version got wrong or overstated:**
+1. "0 of 18 stations made worse" and "MAE 2.4 °C" hold for Mar–Oct at the 18 fit stations. **On 53 disjoint stations in
+   Mar–Oct the line's MAE is 2.55 °C with a warm bias of +0.95 °C; in Nov–Feb it is 3.56 °C, worse than raw (3.07),
+   at 39 of 78 stations.** The ensemble's 10–90 % range held 35–61 % of observations in the cool season (target 80).
+2. "FAR 0.34–0.37" for ≥ 42 °C: over all stations in Mar–Oct it is 0.43–0.46.
+3. "Open-Meteo's members equal the GRIB values within 0.074 °C" is true at flat Bangkok only: Open-Meteo shifts T by a
+   fixed lapse-rate amount per point (Surat Thani +1.27 °C, Chiang Rai +0.45, Phuket −0.29). **Since 0.4.0 the page
+   asks for `elevation=nan`** (the grid cell's own height, what the line was fitted on).
+4. The line was fitted on each forecast's max of 13:00 and 16:00; the page took the max over every hour (+0.41 °C on
+   average, up to 8.3 °C on showery days). **Since 0.4.0 the page uses 13:00 and 16:00** (`outlook.PREDICTOR_HOURS`), and a
+   window holding neither has no heat number (the evening case, KI-F28).
+5. "About 5 °C low" raw was about 3 °C at eight airports on 23–24 Oct (airports read 0.2–2.6 °C cooler than the TMD
+   station nearby). "48 % of Bangkok October days ≥ 42" is 46 % on the files of 24 Oct; November's is 7 %.
+
+**Why the line fails in the cool season:** the model's afternoon T and Td errors are similar in every season (T −0.7 to
+−2.2 °C, Td −0.6 to −1.8 °C), but the heat index magnifies them by about 4.5 °C on a humid hot day and 2 °C on a dry
+cool one. A line in heat-index space adds +5 to +7 °C all year: right for April, 3–5 °C too much for December.
+
+**The pre-registered fix failed; a post-hoc one ships provisionally (D-046):**
+- Pre-registered (fit Oct 2024–Sep 2025 on A+B; score Oct 2025–Oct 2026; confirm on C and D): **C5**, a Nov–Feb refit
+  of the line (HI = 0.560 + 1.0896·HI_raw). MAE 1.60 vs 3.56 on C, but ≥ 42 °C hits fell from 8 to 1 of 29: it failed
+  the safety rule and **does not ship**.
+- Post-hoc (its form fixed before scoring): **C6**, correct the inputs, not the index: T + 1.658, Td + 1.491 (Magnus
+  17.625 / 243.04), the NWS heat index at 13:00/16:00, max, + 0.898 °C (day 1, residual SD 2.86; day 2 +1.651, +1.429,
+  +0.889, SD 2.93).
+
+  | Disjoint stations C | the line (C0) MAE (bias) | C6 MAE (bias) | ≥ 42 hits C0 / C6 | false ≥ 33, C0 / C6 |
+  |---|---|---|---|---|
+  | Nov–Feb, later year (3,658) | 3.56 (+3.37) | **1.53 (+0.38)** | 8 / 7 of 29 | 42 % / 11 % |
+  | Nov–Feb, earlier year (4,813) | 3.45 (+3.23) | 1.56 (+0.39) | 32 / 22 of 74 | 36 % / 8 % |
+  | Mar–Oct, later year (7,669) | 2.55 (+0.95) | 2.54 (+0.37) | 2,311 / 2,105 of 3,009 | 3 % / 2 % |
+
+  On the winter ensemble (31 runs, 952 disjoint station-days): C6 MAE 1.48 vs the line's 3.48, range held 95 % vs
+  56 %, false "เตือนภัย likely" 9 % vs 43 % of days (North 9 % vs 51 %, Northeast 7 % vs 56 %).
+- **The owner chose C6 for Nov–Feb only** (24 Oct 2026): the cool season, where the line is worse than raw. Mar–Oct
+  keeps the line, which catches more ≥ 42 °C days (POD 0.77 vs 0.70) at the cost of false alarms. The card says
+  "สูตรปรับแก้ชั่วคราว" in the cool season.
+- **Pre-registered now:** score C0 against C6 as issued, from `research/archive_forecasts.mjs` (run daily), at the end of
+  November 2026 and again in March 2027. If C6 loses on MAE or on danger-day hits, revert it.
+
+**A spot check, not a validation (8 airports, 23–24 Oct 2026):** the corrected forecast was too hot on 15 of 16
+airport-days and one band too high at 4 of 8 airports each day; the observations fell inside the dressed 10–90 % range
+at 8 of 8.
 
 ## 2. PM2.5
 
@@ -159,10 +209,10 @@ Tracked as ROADMAP v0.6:
 4. Gusts against any station records that carry them.
 5. The reliability of the ensemble chances behind the chance rule.
 6. The quake words after the next felt event.
-7. **The heat correction by region and season** (added 0.3.0): one national fit (HI = 10.4 + 0.86·HI_raw) turned
-   Chiang Mai's late-October raw 35.4 °C into "เตือนภัย 41 °C". It was validated on held-out stations, but not per
-   region or for the northern cool season. Score the fit's residuals by region and month before trusting "เตือนภัย"
-   in the north from November.
+7. ~~**The heat correction by region and season**~~ **done 24 Oct 2026** (§1.1): the line fails in Nov–Feb; C6 ships
+   there provisionally. **Still open:** C6 as issued (end of November, March), a cool-season dressing SD (C6's range
+   holds 92–98 %, too wide), day 3, the deterministic fallback, and whether a hot-season form beats the line without
+   losing danger days.
 8. **Province warning vs point chance** (added 0.3.0): on 24 Oct the ensemble said "low" in all 11 provinces under
    TMD's Severe heavy-rain notice ([research/crosscheck-live](research/crosscheck-live-2026-10-23.md)). Archive the
    notices with the app's chance for each warned province (SERVER §6.6), then score both against the next day's gauges:

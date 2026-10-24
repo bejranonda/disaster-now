@@ -1,0 +1,201 @@
+{
+ "protocol": "Experiment B, as issued: does the weather correction (damped_met, post-hoc in aq_expB.py) still help when the\ntarget day's weather is a FORECAST, as the page would have it, instead of ERA5? (predict-air-2026-10-24.md \u00a75)\n\nRun:  <venv>/bin/python -I research/aq_expB_asissued.py     (after aq_data.py and aq_expB.py)\nWrites research/logs/aq_expB_asissued-2026-10-24.log and research/out/aq_expB_asissued.json.\n\n- Forecasts: Open-Meteo's previous-runs API, ECMWF IFS 0.25 (models=ecmwf_ifs025). For the target day d the\n  \"_previous_day2\" values (the run about two days before each hour: for lead 2, issued at 00:00 of d-1, every hour\n  of d comes from a run made before the issue); for the last observed day d-k the latest run's own values (its first\n  hours, the closest thing to an analysis that the page could read). Lead 1 uses the same, older, forecast\n  (conservative). Daily features as in aq_data.py: rain sum, mean 10-m and 100-m wind, mean humidity, mean surface\n  pressure, temperature range.\n- The correction is the one fitted in aq_expB.py on ERA5 (sample A, S1+S2), applied unchanged to forecast inputs.\n- Test: sample B (disjoint stations), S4 (Dec 2025\u2013Apr 2026, the newest season), leads 1 and 2; the same rows scored\n  with ERA5 inputs (the perfect-prognosis upper bound) and with forecast inputs, against the damped ratio.\n",
+ "tests": {
+  "B-S4 lead1": {
+   "n": 1169,
+   "persist": {
+    "n": 1169,
+    "mae": 5.201283147989735,
+    "bias": 0.014798973481608186,
+    "band": 0.7467921300256629,
+    ">37.5": {
+     "events": 306,
+     "POD": 0.8725490196078431,
+     "FAR": 0.12745098039215685,
+     "CSI": 0.7739130434782608
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.8673469387755102,
+     "FAR": 0.1326530612244898,
+     "CSI": 0.7657657657657657
+    }
+   },
+   "damped": {
+    "n": 1169,
+    "mae": 4.726799258524486,
+    "bias": 0.19498769837485713,
+    "band": 0.7639007698887939,
+    ">37.5": {
+     "events": 306,
+     "POD": 0.8954248366013072,
+     "FAR": 0.1189710610932476,
+     "CSI": 0.7988338192419825
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.8979591836734694,
+     "FAR": 0.1111111111111111,
+     "CSI": 0.8073394495412844
+    }
+   },
+   "damped_met_era5": {
+    "n": 1169,
+    "mae": 4.685267622281205,
+    "bias": 0.2894908559117592,
+    "band": 0.7647562018819504,
+    ">37.5": {
+     "events": 306,
+     "POD": 0.8986928104575164,
+     "FAR": 0.13793103448275862,
+     "CSI": 0.7857142857142857
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.9081632653061225,
+     "FAR": 0.1188118811881188,
+     "CSI": 0.8090909090909091
+    }
+   },
+   "damped_met_forecast": {
+    "n": 1169,
+    "mae": 4.695090951665265,
+    "bias": 0.6088198240838003,
+    "band": 0.7647562018819504,
+    ">37.5": {
+     "events": 306,
+     "POD": 0.9150326797385621,
+     "FAR": 0.14893617021276595,
+     "CSI": 0.7887323943661971
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.9183673469387755,
+     "FAR": 0.1262135922330097,
+     "CSI": 0.8108108108108109
+    }
+   },
+   "dMAE_damped_met_era5_vs_damped": [
+    -0.041531636243280316,
+    -0.10715069524525515,
+    0.023045403754393488
+   ],
+   "stations_worse_damped_met_era5": [],
+   "dMAE_damped_met_forecast_vs_damped": [
+    -0.03170830685922092,
+    -0.11163364424909065,
+    0.04688745003294227
+   ],
+   "stations_worse_damped_met_forecast": [
+    "41t(+6%)"
+   ],
+   "feature_corr_fc_vs_era5": {
+    "rain": 0.7440123313064734,
+    "rain_prev": 0.726265535278962,
+    "d_ws": 0.7514351616198015,
+    "d_ws100": 0.7451435881182302,
+    "d_rh": 0.6011895406975508,
+    "d_sp": 0.9287902786292965,
+    "d_dtr": 0.62519313061133
+   }
+  },
+  "B-S4 lead2": {
+   "n": 1168,
+   "persist": {
+    "n": 1168,
+    "mae": 8.065154109589042,
+    "bias": 0.026797945205479387,
+    "band": 0.6438356164383562,
+    ">37.5": {
+     "events": 305,
+     "POD": 0.7934426229508197,
+     "FAR": 0.20915032679738563,
+     "CSI": 0.6558265582655827
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.7959183673469388,
+     "FAR": 0.20408163265306123,
+     "CSI": 0.6610169491525424
+    }
+   },
+   "damped": {
+    "n": 1168,
+    "mae": 6.570669702469889,
+    "bias": 0.5133464728418969,
+    "band": 0.6866438356164384,
+    ">37.5": {
+     "events": 305,
+     "POD": 0.8852459016393442,
+     "FAR": 0.16923076923076924,
+     "CSI": 0.75
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.8469387755102041,
+     "FAR": 0.16161616161616163,
+     "CSI": 0.7280701754385965
+    }
+   },
+   "damped_met_era5": {
+    "n": 1168,
+    "mae": 6.324558220871145,
+    "bias": 0.5183557206755479,
+    "band": 0.6952054794520548,
+    ">37.5": {
+     "events": 305,
+     "POD": 0.8754098360655738,
+     "FAR": 0.16300940438871472,
+     "CSI": 0.7478991596638656
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.8571428571428571,
+     "FAR": 0.16831683168316833,
+     "CSI": 0.7304347826086957
+    }
+   },
+   "damped_met_forecast": {
+    "n": 1168,
+    "mae": 6.3071672357854265,
+    "bias": 0.8646939254897363,
+    "band": 0.7011986301369864,
+    ">37.5": {
+     "events": 305,
+     "POD": 0.898360655737705,
+     "FAR": 0.16717325227963525,
+     "CSI": 0.7611111111111111
+    },
+    ">75.0": {
+     "events": 98,
+     "POD": 0.8571428571428571,
+     "FAR": 0.16,
+     "CSI": 0.7368421052631579
+    }
+   },
+   "dMAE_damped_met_era5_vs_damped": [
+    -0.2461114815987438,
+    -0.3620960272598676,
+    -0.13428145776577288
+   ],
+   "stations_worse_damped_met_era5": [],
+   "dMAE_damped_met_forecast_vs_damped": [
+    -0.2635024666844626,
+    -0.403582214483769,
+    -0.12091752906471502
+   ],
+   "stations_worse_damped_met_forecast": [
+    "41t(+7%)"
+   ],
+   "feature_corr_fc_vs_era5": {
+    "rain": 0.7440369053561446,
+    "rain_prev": 0.7345373705427599,
+    "d_ws": 0.8337333907407671,
+    "d_ws100": 0.8272060350406392,
+    "d_rh": 0.739530476715357,
+    "d_sp": 0.9712047548511691,
+    "d_dtr": 0.7392236078529308
+   }
+  }
+ }
+}

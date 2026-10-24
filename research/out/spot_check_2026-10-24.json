@@ -1,0 +1,751 @@
+{
+ "made": "2026-10-24T09:06:06.061Z",
+ "inputs": {
+  "metarFile": "research/data/spot-2026-10-24/metar-0906Z.json",
+  "prevFile": "research/data/spot-2026-10-24/previous_runs_ecmwf_ifs025.json",
+  "rawDir": "research/data/spot-2026-10-24/ens_raw"
+ },
+ "heat": {
+  "lead1": {
+   "a": 10.375,
+   "b": 0.8647,
+   "sd": 2.95
+  },
+  "lead2": {
+   "a": 11.689,
+   "b": 0.826,
+   "sd": 3.01
+  },
+  "source": "research/out/e1e2_results.json (fit 2025 sample A; tested 2026 and held-out stations)"
+ },
+ "rows": [
+  {
+   "date": "2026-10-23",
+   "icao": "VTBD",
+   "name": "Bangkok Don Mueang",
+   "region": "Central",
+   "obs": {
+    "reports": 30,
+    "onHour": 15,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 43.3,
+    "himaxAll": 43.3,
+    "at": "14:00 35/25",
+    "tmax": 35,
+    "rounding": {
+     "mean": 43.3,
+     "p10": 42.6,
+     "p90": 44.1
+    }
+   },
+   "hres": {
+    "grid": "14,100.5",
+    "day0": {
+     "raw": 39.5,
+     "raw1316": 39.5,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 40.7,
+     "raw1316": 40.5,
+     "corrected": 45.5
+    },
+    "day2": {
+     "raw": 39.6,
+     "raw1316": 39.5,
+     "corrected": 44.4
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-23",
+   "icao": "VTBS",
+   "name": "Bangkok Suvarnabhumi",
+   "region": "Central",
+   "obs": {
+    "reports": 30,
+    "onHour": 15,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 40.7,
+    "himaxAll": 40.7,
+    "at": "09:00 32/26",
+    "tmax": 34,
+    "rounding": {
+     "mean": 40.9,
+     "p10": 40.4,
+     "p90": 41.6
+    }
+   },
+   "hres": {
+    "grid": "13.75,100.75",
+    "day0": {
+     "raw": 39.4,
+     "raw1316": 39.2,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 39.7,
+     "raw1316": 39.7,
+     "corrected": 44.7
+    },
+    "day2": {
+     "raw": 40,
+     "raw1316": 40,
+     "corrected": 44.8
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-23",
+   "icao": "VTCC",
+   "name": "Chiang Mai",
+   "region": "North",
+   "obs": {
+    "reports": 29,
+    "onHour": 14,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 38.3,
+    "himaxAll": 38.6,
+    "at": "14:00 34/22",
+    "tmax": 34,
+    "rounding": {
+     "mean": 38.6,
+     "p10": 38.1,
+     "p90": 39
+    }
+   },
+   "hres": {
+    "grid": "18.75,99",
+    "day0": {
+     "raw": 35.9,
+     "raw1316": 35.9,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 36,
+     "raw1316": 35.8,
+     "corrected": 41.5
+    },
+    "day2": {
+     "raw": 36.6,
+     "raw1316": 36.5,
+     "corrected": 41.9
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-23",
+   "icao": "VTCT",
+   "name": "Chiang Rai",
+   "region": "North",
+   "obs": {
+    "reports": 14,
+    "onHour": 14,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 38.1,
+    "himaxAll": 38.1,
+    "at": "15:00 33/23",
+    "tmax": 33,
+    "rounding": {
+     "mean": 38.3,
+     "p10": 37.8,
+     "p90": 38.9
+    }
+   },
+   "hres": {
+    "grid": "20,100",
+    "day0": {
+     "raw": 35.1,
+     "raw1316": 35.1,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 35.8,
+     "raw1316": 35.7,
+     "corrected": 41.3
+    },
+    "day2": {
+     "raw": 35.9,
+     "raw1316": 35.4,
+     "corrected": 41.3
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-23",
+   "icao": "VTSP",
+   "name": "Phuket",
+   "region": "South",
+   "obs": {
+    "reports": 30,
+    "onHour": 15,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 39.1,
+    "himaxAll": 40.7,
+    "at": "10:00 31/26",
+    "tmax": 31,
+    "rounding": {
+     "mean": 39.4,
+     "p10": 38.7,
+     "p90": 40.1
+    }
+   },
+   "hres": {
+    "grid": "8,98.25",
+    "day0": {
+     "raw": 35,
+     "raw1316": 35,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 32.3,
+     "raw1316": 32.3,
+     "corrected": 38.3
+    },
+    "day2": {
+     "raw": 33.5,
+     "raw1316": 31.7,
+     "corrected": 39.3
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-23",
+   "icao": "VTSS",
+   "name": "Hat Yai",
+   "region": "South",
+   "obs": {
+    "reports": 29,
+    "onHour": 14,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 39.2,
+    "himaxAll": 39.3,
+    "at": "12:00 32/25",
+    "tmax": 32,
+    "rounding": {
+     "mean": 39.2,
+     "p10": 38.5,
+     "p90": 40
+    }
+   },
+   "hres": {
+    "grid": "7,100.5",
+    "day0": {
+     "raw": 38.4,
+     "raw1316": 38.1,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 36.5,
+     "raw1316": 33.2,
+     "corrected": 42
+    },
+    "day2": {
+     "raw": 38.3,
+     "raw1316": 38,
+     "corrected": 43.3
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-23",
+   "icao": "VTUD",
+   "name": "Udon Thani",
+   "region": "Northeast",
+   "obs": {
+    "reports": 13,
+    "onHour": 13,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 40.6,
+    "himaxAll": 40.6,
+    "at": "14:00 35/23",
+    "tmax": 35,
+    "rounding": {
+     "mean": 40.7,
+     "p10": 40.1,
+     "p90": 41.3
+    }
+   },
+   "hres": {
+    "grid": "17.5,102.75",
+    "day0": {
+     "raw": 37.7,
+     "raw1316": 37.6,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 37.2,
+     "raw1316": 37,
+     "corrected": 42.5
+    },
+    "day2": {
+     "raw": 37.3,
+     "raw1316": 37.1,
+     "corrected": 42.5
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-23",
+   "icao": "VTUU",
+   "name": "Ubon Ratchathani",
+   "region": "Northeast",
+   "obs": {
+    "reports": 14,
+    "onHour": 14,
+    "afternoonHours": 7,
+    "complete": true,
+    "himax": 40.6,
+    "himaxAll": 40.6,
+    "at": "14:00 34/24",
+    "tmax": 34,
+    "rounding": {
+     "mean": 40.6,
+     "p10": 39.9,
+     "p90": 41.3
+    }
+   },
+   "hres": {
+    "grid": "15.25,104.75",
+    "day0": {
+     "raw": 36.3,
+     "raw1316": 35.9,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 36.7,
+     "raw1316": 36.6,
+     "corrected": 42.1
+    },
+    "day2": {
+     "raw": 36.6,
+     "raw1316": 36.5,
+     "corrected": 41.9
+    }
+   },
+   "ens": null
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTBD",
+   "name": "Bangkok Don Mueang",
+   "region": "Central",
+   "obs": {
+    "reports": 33,
+    "onHour": 17,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 42,
+    "himaxAll": 43.3,
+    "at": "13:00 34/25",
+    "tmax": 34,
+    "rounding": {
+     "mean": 42,
+     "p10": 41.4,
+     "p90": 42.7
+    }
+   },
+   "hres": {
+    "grid": "14,100.5",
+    "day0": {
+     "raw": 40.4,
+     "raw1316": 40.4,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 38,
+     "raw1316": 38,
+     "corrected": 43.2
+    },
+    "day2": {
+     "raw": 40.5,
+     "raw1316": 40.5,
+     "corrected": 45.2
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "14,100.5",
+    "rawP50": 39.4,
+    "raw1316P50": 39.3,
+    "allHoursMinus1316": 0,
+    "corP50": 44.5,
+    "corP10": 40.5,
+    "corP90": 48.2,
+    "pDanger42": 0.8,
+    "pWarning33": 1
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTBS",
+   "name": "Bangkok Suvarnabhumi",
+   "region": "Central",
+   "obs": {
+    "reports": 33,
+    "onHour": 17,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 40.6,
+    "himaxAll": 40.6,
+    "at": "12:00 33/25",
+    "tmax": 34,
+    "rounding": {
+     "mean": 40.9,
+     "p10": 40.3,
+     "p90": 41.5
+    }
+   },
+   "hres": {
+    "grid": "13.75,100.75",
+    "day0": {
+     "raw": 38.9,
+     "raw1316": 38.9,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 37.1,
+     "raw1316": 37.1,
+     "corrected": 42.5
+    },
+    "day2": {
+     "raw": 40.7,
+     "raw1316": 40.7,
+     "corrected": 45.3
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "13.75,100.75",
+    "rawP50": 39.1,
+    "raw1316P50": 39,
+    "allHoursMinus1316": 0,
+    "corP50": 44.2,
+    "corP10": 40.3,
+    "corP90": 48.2,
+    "pDanger42": 0.8,
+    "pWarning33": 1
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTCC",
+   "name": "Chiang Mai",
+   "region": "North",
+   "obs": {
+    "reports": 33,
+    "onHour": 17,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 39.4,
+    "himaxAll": 39.5,
+    "at": "13:00 34/23",
+    "tmax": 35,
+    "rounding": {
+     "mean": 39.6,
+     "p10": 39.1,
+     "p90": 40.2
+    }
+   },
+   "hres": {
+    "grid": "18.75,99",
+    "day0": {
+     "raw": 36.1,
+     "raw1316": 36.1,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 36.1,
+     "raw1316": 36.1,
+     "corrected": 41.6
+    },
+    "day2": {
+     "raw": 37.7,
+     "raw1316": 37.7,
+     "corrected": 42.8
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "18.75,99",
+    "rawP50": 36.1,
+    "raw1316P50": 36,
+    "allHoursMinus1316": 0,
+    "corP50": 41.6,
+    "corP10": 37.7,
+    "corP90": 45.4,
+    "pDanger42": 0.4,
+    "pWarning33": 1
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTCT",
+   "name": "Chiang Rai",
+   "region": "North",
+   "obs": {
+    "reports": 17,
+    "onHour": 17,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 37.9,
+    "himaxAll": 37.9,
+    "at": "12:00 32/24",
+    "tmax": 33,
+    "rounding": {
+     "mean": 37.9,
+     "p10": 37.3,
+     "p90": 38.6
+    }
+   },
+   "hres": {
+    "grid": "20,100",
+    "day0": {
+     "raw": 35.7,
+     "raw1316": 35.7,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 36.1,
+     "raw1316": 35.8,
+     "corrected": 41.6
+    },
+    "day2": {
+     "raw": 36.2,
+     "raw1316": 36.2,
+     "corrected": 41.6
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "20,100",
+    "rawP50": 36,
+    "raw1316P50": 35.9,
+    "allHoursMinus1316": 0.1,
+    "corP50": 41.5,
+    "corP10": 37.7,
+    "corP90": 45.3,
+    "pDanger42": 0.4,
+    "pWarning33": 1
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTSP",
+   "name": "Phuket",
+   "region": "South",
+   "obs": {
+    "reports": 33,
+    "onHour": 17,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 37.4,
+    "himaxAll": 38.8,
+    "at": "15:00 30/26",
+    "tmax": 30,
+    "rounding": {
+     "mean": 38.3,
+     "p10": 37.8,
+     "p90": 38.7
+    }
+   },
+   "hres": {
+    "grid": "8,98.25",
+    "day0": {
+     "raw": 32.4,
+     "raw1316": 31.4,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 32.1,
+     "raw1316": 31.2,
+     "corrected": 38.1
+    },
+    "day2": {
+     "raw": 32.3,
+     "raw1316": 32.1,
+     "corrected": 38.3
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "8,98.25",
+    "rawP50": 32.7,
+    "raw1316P50": 31.6,
+    "allHoursMinus1316": 1,
+    "corP50": 38.7,
+    "corP10": 34.7,
+    "corP90": 42.5,
+    "pDanger42": 0.1,
+    "pWarning33": 1
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTSS",
+   "name": "Hat Yai",
+   "region": "South",
+   "obs": {
+    "reports": 33,
+    "onHour": 17,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 40.6,
+    "himaxAll": 40.6,
+    "at": "11:00 33/25",
+    "tmax": 33,
+    "rounding": {
+     "mean": 40.6,
+     "p10": 39.9,
+     "p90": 41.4
+    }
+   },
+   "hres": {
+    "grid": "7,100.5",
+    "day0": {
+     "raw": 37.4,
+     "raw1316": 37.4,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 37.6,
+     "raw1316": 37.6,
+     "corrected": 42.9
+    },
+    "day2": {
+     "raw": 36.3,
+     "raw1316": 36.3,
+     "corrected": 41.7
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "7,100.5",
+    "rawP50": 36.8,
+    "raw1316P50": 36.6,
+    "allHoursMinus1316": 0,
+    "corP50": 42.2,
+    "corP10": 37.7,
+    "corP90": 46.1,
+    "pDanger42": 0.5,
+    "pWarning33": 1
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTUD",
+   "name": "Udon Thani",
+   "region": "Northeast",
+   "obs": {
+    "reports": 12,
+    "onHour": 12,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 41.9,
+    "himaxAll": 41.9,
+    "at": "15:00 36/23",
+    "tmax": 36,
+    "rounding": {
+     "mean": 42.2,
+     "p10": 41.7,
+     "p90": 42.8
+    }
+   },
+   "hres": {
+    "grid": "17.5,102.75",
+    "day0": {
+     "raw": 37.7,
+     "raw1316": 37.6,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 37.5,
+     "raw1316": 37.4,
+     "corrected": 42.8
+    },
+    "day2": {
+     "raw": 38,
+     "raw1316": 37.9,
+     "corrected": 43.1
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "17.5,102.75",
+    "rawP50": 37.8,
+    "raw1316P50": 37.5,
+    "allHoursMinus1316": 0.1,
+    "corP50": 43,
+    "corP10": 39.1,
+    "corP90": 46.7,
+    "pDanger42": 0.6,
+    "pWarning33": 1
+   }
+  },
+  {
+   "date": "2026-10-24",
+   "icao": "VTUU",
+   "name": "Ubon Ratchathani",
+   "region": "Northeast",
+   "obs": {
+    "reports": 17,
+    "onHour": 17,
+    "afternoonHours": 6,
+    "complete": true,
+    "himax": 40.6,
+    "himaxAll": 40.6,
+    "at": "12:00 33/25",
+    "tmax": 34,
+    "rounding": {
+     "mean": 41.2,
+     "p10": 40.8,
+     "p90": 41.7
+    }
+   },
+   "hres": {
+    "grid": "15.25,104.75",
+    "day0": {
+     "raw": 37,
+     "raw1316": 37,
+     "corrected": null
+    },
+    "day1": {
+     "raw": 37.5,
+     "raw1316": 37.5,
+     "corrected": 42.8
+    },
+    "day2": {
+     "raw": 37.9,
+     "raw1316": 37.9,
+     "corrected": 43
+    }
+   },
+   "ens": {
+    "members": 51,
+    "grid": "15.25,104.75",
+    "rawP50": 37,
+    "raw1316P50": 36.9,
+    "allHoursMinus1316": 0,
+    "corP50": 42.4,
+    "corP10": 38.6,
+    "corP90": 46.3,
+    "pDanger42": 0.6,
+    "pWarning33": 1
+   }
+  }
+ ]
+}

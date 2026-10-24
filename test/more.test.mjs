@@ -18,7 +18,7 @@ const TAMBON = JSON.parse(readFileSync(new URL("../public/data/tambon.json", imp
 const NOW = Date.parse("2026-10-23T19:50:00Z");
 
 test("local search: provinces and districts first, prefixes stripped, several words narrow", () => {
-  assert.equal(hitLabel(localSearch(TAMBON, "เชียงใหม่")[0]), "จังหวัดเชียงใหม่");
+  assert.equal(hitLabel(localSearch(TAMBON, "เชียงใหม่")[0]), "จังหวัดเชียงใหม่ (ตัวเมือง)");
   assert.equal(localSearch(TAMBON, "จ.เชียงใหม่")[0].kind, "p");
   const bk = localSearch(TAMBON, "บางกะปิ");
   assert.equal(bk[0].kind, "a"); // the district before its subdistricts
@@ -26,7 +26,7 @@ test("local search: provinces and districts first, prefixes stripped, several wo
   const two = localSearch(TAMBON, "ในเมือง ขอนแก่น");
   assert.ok(two.length && two.every((h) => /ขอนแก่น/.test(hitLabel(h))), JSON.stringify(two.map((h) => hitLabel(h))));
   assert.equal(localSearch(TAMBON, "ก").length, 0);
-  assert.equal(hitLabel(localSearch(TAMBON, "chiang mai")[0], "en"), "Chiang Mai (province)");
+  assert.equal(hitLabel(localSearch(TAMBON, "chiang mai")[0], "en"), "Chiang Mai, town centre");
   assert.equal(norm(" ลาด พร้าว "), "ลาดพร้าว");
 });
 

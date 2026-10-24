@@ -49,7 +49,8 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 - **Rain in three words** at the validation's cut points: below 10 % "ต่ำ", 10–40 % "มีโอกาส", 40 % and more "สูง" (`outlook.RAIN_WORD_CUTS`); no forecast amount on screen (MODELS §3).
 - **Storm lines only within 1,500 km** (`assess.STORM_SHOW_KM`; the cross-check: lines at 2,100–7,500 km were noise).
 - **A quake gets a line** within 300 km or at a predicted MMI of 2.5 or more (`quake.quakesForPoint`).
-- **Heat numbers are floored** for display (41.6 shows 41, "เตือนภัย"), so a number never reads past its band (V26); the window is named ("บ่ายนี้" before 16:00 Bangkok, then "บ่ายพรุ่งนี้").
+- **Heat numbers are floored** for display after the band's own rounding to 0.1 (41.6 shows 41, "เตือนภัย"; 41.978 rounds to 42.0 and shows 42, "อันตราย"), so a number never reads past its band nor below it (V26, X3; `assess.heatNum`), in the tile, the card's days and the 3-day table alike (0.3.0's table rounded, S2).
+- **Heat is said as "รู้สึกเหมือน 43 °C" / "feels like"** (U3): a bare number reads as the air temperature, several degrees lower. The window is named, and the number is that window's: today's afternoon before 16:00 Bangkok ("บ่ายนี้"), then tomorrow's ("บ่ายพรุ่งนี้") (U25). A window with no hour from 12:00 to 15:59 has no heat number (`outlook.hasAfternoon`, S6): the correction (MODELS §1) is for afternoon daily maxima.
 - **PM2.5 days 2–3 show the band word with "อาจเปลี่ยน",** not a number (their tested miss is 6–11 µg/m³).
 
 ## 4. Time and data rules, per source
@@ -85,6 +86,7 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 
 - **HDX COD-AB Thailand** (xlsx, 1,850,520 bytes, sha256 `7d23fca9…e529f0`, HDX metadata 26 Jan 2026): 77 provinces, 928 districts, 7,425 subdistricts with DOPA codes and centres; GISTDA's `tb_idn` and the DMR's `TB_CODE` use the same codes. `data/tambon.json` 514 KB, 158 KB gzip. Only 5,838 of 7,425 subdistrict names are unique (UX scout), so a hit always shows district and province.
 - **FloodWatch's search pattern** (its `geocode.py`, D-032): instant local matches; "🔎 ค้นหาสถานที่" only on Enter or a tap; ซ. → ซอย, ถ. → ถนน, พหล → พหลโยธิน; "name + number" also tried as "ซอย…" (live: "ลาดพร้าว 71" alone finds a place on ถนนลาดพร้าว, "ซอยลาดพร้าว 71" the soi); exact names first; queries never logged.
+- **A province or district found by name opens its seat** (since 0.4.0, U2): the province's subdistrict `pv0101` (all 77 exist, each the capital's town subdistrict: ศรีภูมิ, ตลาดใหญ่, ในเมือง …) and the district's `dddd01` (914 of 928 exist; the other 14, renumbered, open their lowest code). The centres used before were up to 40.3 km from town: Chiang Mai's sat at 994 m near ต.แม่วิน, Ubon's 29.5 km away, Khon Kaen's 19.4 km (visitor audit U2, from `tambon.json`).
 - **Geocoder terms:** Nominatim: at most 1 request a second **for the whole application**, no autocomplete, attribution, switchable without a software update. Photon: fair use, throttled when heavy, `lang=th` refused (default names are Thai). Both CORS `*`.
 
 ## 8. Privacy and the law
@@ -110,6 +112,7 @@ With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the 
 - **Allen, Wald & Worden (2012), hypocentral form:** MMI = 2.085 + 1.428·M − 1.402·ln√(R² + Rm²) + 0.078·ln(R/50) [R > 50 km], Rm = −0.209 + 2.042·e^(M−5); σ = 0.82 + 0.37/(1 + (R/22.9)²). Copied from OpenQuake 3.26.2 `allen_2012_ipe.py` by two researchers independently (thresholds §8.4; `research/e4_quake_ipe.py`). Unit-tested against the table in thresholds §8.4 (e.g. M7.7 at 1,000 km → 3.6).
 - **The Bangkok term (since 0.2.0):** + 1.06 MMI in Bangkok, Samut Prakan, Nonthaburi and Pathum Thani, for quakes within 1,600 km (MODELS §5; `assess.BKK_MMI_TERM`, `quake.SITE_MAX_KM`). Elsewhere the equation is used as is (Thai-city bias 0.00).
 - **Its limit, on screen:** no site term outside greater Bangkok. The 28 Mar 2025 M7.7 Myanmar quake was 996 km from central Bangkok, where the equation gives MMI ≈ 3.6, yet a building under construction collapsed in Chatuchak (Thairath, 29 Mar 2025). Soft clay and tall buildings shake more; a point source understates a long rupture. Validation against "Did You Feel It?" is in [MODELS.md](MODELS.md).
+- **The lowest felt words need M5.5 or more** (`assess.FELT_WORDS_MIN_MAG`, since 0.4.0, U15). In the "Did You Feel It?" reports behind the words (`research/data/e4_dyfi_residuals.csv`, 1,776 rows), every event is M5.5 or larger, and even where the equation predicts under 1.0, half the reporters gave CDI 2 or more (n = 24; 1.0–1.5: 63 % of 73; 1.5–2.0: 65 % of 69; 2.0–2.5: 82 % of 199). So "ส่วนใหญ่ไม่รู้สึก แต่บางคนอาจรู้สึกได้ …" holds for big, far quakes and has no evidence for an M1.8 200 km away; a smaller quake gets the facts alone. This is a floor on what the words claim, never a "not felt".
 - **TMD's event colours** (Thai PBS, 15 Apr 2025, quoting TMD): < 2.5 green, 2.5–3.9 yellow, > 4.0 red, by magnitude only ⚠️.
 
 ## 11. A snapshot of the night it was built (24 Oct 2026, 02:00–03:30 Bangkok)
@@ -140,3 +143,28 @@ With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the 
   (the collector writes at most 6 keys a run, 576 a day at 15 min). [CLOUDFLARE.md §1](CLOUDFLARE.md#1-the-recommendation-frankly).
 - **Small-phone layout:** at 360 × 640 with a LINE user agent the verdict ends at 504 px (was 642). The 3-day table
   starts 1,529–2,267 px down at 390 px (was 5,865–6,574).
+
+## 13. 0.4.0: the new host and the audits (24 Oct 2026, 07:40–09:00 UTC)
+
+- **The host `autobahn-bot`** (also BrainPlatform's production): Node 24.14.0, Docker 29.4.0; Chromium at
+  `/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome`. **Air4Thai: 173 stations** at the collector's first
+  run (07:50 UTC); **ThaiWater answered** every call from it during the session's walks and audits (the output audit counted 25 of its
+  own, none 429; the visitor audit asked about six provinces, none 429).
+- **The Cloudflare token** (owner, 24 Oct): valid, zone `autobahn.bot` visible, Workers readable; Workers KV answered
+  HTTP 401 until the owner added *Workers KV Storage: Edit*. Its scope is *All zones across all accounts* (OWNER_ACTIONS A9).
+- **wrangler's "Read N files"** is the raw directory listing (directories included), before `.assetsignore`; with
+  `WRANGLER_LOG=debug`, `data/live/*`, `_headers` and `.assetsignore` are listed as "Ignoring asset" (wrangler 4.148.0,
+  `buildAssetManifest`). 0.3.0's "32 files" was that count.
+- **The output cross-check** ([research/output-crosscheck-2026-10-24.md](research/output-crosscheck-2026-10-24.md)):
+  139 of 144 numbers at six points equal an independent recomputation from the sources; the 5 others were the table's
+  rounding (S2, fixed). Air4Thai 173 of 173 stations equal; gauge statuses 737 of 742 equal FloodWatch's (the 5 were
+  newer readings); GISTDA's estimate ran **1.39×** the PCD stations (KI-009; 1.31× on 24 Oct 02:00); FloodWatch still
+  sends no CORS on `/api/point`, `/api/stations`, `/api/geocode` (OPTIONS 405).
+- **Contrast** (WCAG formula, `#rrggbb` pairs): white on LINE green `#06C755` 2.26:1, `#14202b` on it 7.32:1 (now
+  used); `#2F6FB0` on `#e3eef9` 4.44:1, `#24599a` on it 6.01:1 (now the level-0 words and dots).
+- **TMD's warnings page**, the "full notice" link since 0.4.0: `https://www.tmd.go.th/warning-and-events/warnings` and
+  `/en/warning-and-events/warnings`, both 200 text/html (08:2x UTC). A CAP item's `<web>` is TMD's daily-forecast page,
+  and its link the raw XML.
+- **บ้านรอดไหม's English guides** `/en/hot`, `/en/air`, `/en/mask`, `/en/flood`, `/en/storm`, `/en/landslide`,
+  `/en/quake`, `/en/pm25`: all 200 (08:3x UTC); the English page links to them since 0.4.0 (X10).
+

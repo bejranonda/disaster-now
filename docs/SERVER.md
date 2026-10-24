@@ -1,4 +1,4 @@
-# Running and developing Disaster Now on a server
+# Running and developing ภัยรอบบ้าน · Thai Risk (`disaster-now`) on a server
 
 Everything needed to put the collector (and a local copy of the page) on **a server of its own**, run it there, and keep
 building on it. It follows the pattern of FloodWatch's server (docker compose, the app on localhost only), but **never on
@@ -7,8 +7,9 @@ runs the collector, which uploads its files to Workers KV, and a local copy of t
 
 **The move (24 Oct 2026):**
 - 0.3.0's stack was set up on FloodWatch's production server by mistake.
-- The owner is moving it to a dedicated server for risk, with a new Cloudflare token.
-- The runbook for the new server is [§2](#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
+- It now runs on **`autobahn-bot`**, which also runs BrainPlatform, by the owner's choice (D-045;
+  [§2.5](#25-autobahn-bot-as-set-up-24-oct-2026)).
+- The runbook is [§2](#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
 - Nothing of this app runs on FloodWatch's server any more ([§2.4](#24-floodwatchs-server-cleaned-up-24-oct-2026)).
 
 **Tested on 23 Oct 2026** in a cloud session with Docker 29 and compose v2:
@@ -63,8 +64,9 @@ The page itself still has **no server logic**:
 
 ### 2.1 What the server needs
 
-- **Its own machine and IP, not another app's production server.** ThaiWater's and Open-Meteo's limits are per IP
-  (KI-029, KI-011). `npm run preflight` fails on a host that runs FloodWatch's containers.
+- **Never FloodWatch's machine; another app's only with the owner's yes** (D-045), and only if that app calls none of
+  this app's sources and shares no `.env` or tunnel. ThaiWater's and Open-Meteo's limits are per IP (KI-029, KI-011).
+  `npm run preflight` fails on a host that runs FloodWatch's containers and warns about any other app's.
 - **Software:**
   - Linux (Ubuntu or Debian), git, Docker with the compose v2 plugin.
   - Node 22 is recommended. Node 20 works too, and then `npm run cf:deploy` runs wrangler in Docker.
@@ -95,10 +97,10 @@ held a Cloudflare token taken from FloodWatch's `.env`; it is being replaced. De
 git clone https://github.com/bejranonda/disaster-now.git /srv/disaster-now && cd /srv/disaster-now
 cp .env.example .env && chmod 600 .env       # §2.2: new values only
 npm run preflight                            # 1. ❌ until the host and .env are right
-npm ci && npm test                           # 2. 61 unit tests
+npm ci && npm test                           # 2. 82 unit tests (0.4.0)
 npx playwright@1.56.1 install --with-deps chromium                # 3. the same version as playwright-core
-CHROME_PATH=<the chrome it installed under ~/.cache/ms-playwright> npm run smoke   # 29 checks
-npm run env:check -- --probe                 # 4. token valid, zone visible, Workers and KV readable, GLM answers
+CHROME_PATH=<the chrome it installed under ~/.cache/ms-playwright> npm run smoke   # "all checks passed"
+npm run env:check -- --probe                 # 4. token valid, zone visible, KV readable, "Workers deploy: allowed", GLM answers
 npm run cf:setup                             # 5. KV namespace "disaster-now-live", its id into wrangler.jsonc and .env
 git commit -m "chore: the KV namespace id" wrangler.jsonc   #    the id is not a secret
 docker compose up -d --build && docker compose ps            # 6. both healthy after about a minute
@@ -141,6 +143,24 @@ After pushing everything to GitHub, the session that wrote this:
   - the Chromium in `/root/.cache/ms-playwright` (installed in May 2026, before this project).
 - **The old Cloudflare token** came from FloodWatch's `.env`, so FloodWatch may still use it. Check FloodWatch's
   deploys before you revoke it (OWNER_ACTIONS A9).
+
+### 2.5 `autobahn-bot`, as set up (24 Oct 2026)
+
+| Step | Result |
+|---|---|
+| `npm run preflight` | no ❌; ⚠️ BrainPlatform's seven `deploy-*` containers (left alone), `.env` 644 (made 600), `CF_KV_TOKEN` empty, the placeholder KV id (fixed by `cf:setup`) |
+| Node, Docker, Chromium | 24.14.0; 29.4.0 with compose; `/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome` |
+| `npm test`, `npm run smoke` | 61/61 and 29/29 on arrival; 82/82 and every check at the 0.4.0 commit |
+| `npm run cf:setup` | KV namespace `disaster-now-live` created, id in `wrangler.jsonc` and `.env` |
+| `docker compose up -d --build` | both healthy; 127.0.0.1:8090 only; the collector's first run 5 of 5 files in 14 s, **Air4Thai 173 stations**, GLM 1 call for the live warning |
+| ThaiWater | answered every call of the session's walks and audits (no 429) |
+| `npm run cf:deploy` | dry run ✓; the deploy **refused** (403: the token lacks *Workers Scripts: Edit*), nothing created |
+| KV uploads | not yet: `CF_KV_TOKEN` empty, and the compose file passes only that token to the collector |
+| BrainPlatform | untouched; its web answered 200 in 13 ms with the session's research agents running (`nice -n 19`) |
+
+**Next on this host:** after the owner's token (A9): `npm run cf:deploy`, then `docker compose up -d` (the collector
+reads `CF_KV_TOKEN` at start), then `node tools/health.mjs --web https://risk.autobahn.bot/`; and a daily cron for
+`node research/archive_forecasts.mjs` (the as-issued scoring of C6 and the PM2.5 chance, MODELS §1.1).
 
 ## 3. Going public
 

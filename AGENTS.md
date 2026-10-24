@@ -2,16 +2,17 @@
 
 ## 1. The project in brief
 
-**ภัยรอบบ้าน ตอนนี้ (Disaster Now)** is one Thai web page: share GPS or search a place, and see every hazard at that point now and for the next 3 days, with the agency's own words, the source and time of every number, one sourced action and a link to what to do. Heat, PM2.5 and other pollution, UV, rain, wind and storms, river level and flash floods, landslides, earthquakes, fires. Static files (`public/`), no server, no framework, no runtime packages; a collector (`tools/collect.mjs`) for the feeds a phone can't read. It is the third app of the owner (`bejranonda`), beside FloodWatch (`flood2026-research`, water) and บ้านรอดไหม (`Hazard-huntz`, what to do), and must agree with both ([docs/INTEGRATION.md](docs/INTEGRATION.md)).
+**ภัยรอบบ้าน · Thai Risk** (code name `disaster-now`; ภัยรอบบ้าน ตอนนี้ / Disaster Now until 0.3.0) is one Thai web page: share GPS or search a place, and see every hazard at that point now and for the next 3 days, with the agency's own words, the source and time of every number, one sourced action and a link to what to do. Heat, PM2.5 and other pollution, UV, rain, wind and storms, river level and flash floods, landslides, earthquakes, fires. Static files (`public/`), no server, no framework, no runtime packages; a collector (`tools/collect.mjs`) for the feeds a phone can't read. It is the third app of the owner (`bejranonda`), beside FloodWatch (`flood2026-research`, water) and บ้านรอดไหม (`Hazard-huntz`, what to do), and must agree with both ([docs/INTEGRATION.md](docs/INTEGRATION.md)).
 
-**State (24 Oct 2026):** v0.3.0.
-- Built, validated (heat corrected, PM2.5 damped, rain words, felt words; [docs/MODELS.md](docs/MODELS.md)) and audited by three independent agents.
-- Ready for Cloudflare at `risk.autobahn.bot`: Workers static assets + KV, tested locally ([docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)).
-- GLM translates TMD's warnings for the English page, checked ([docs/AI.md](docs/AI.md)).
-- **Moving to a server of its own** (24 Oct 2026): 0.3.0's stack ran on FloodWatch's production server by mistake.
-  Its Docker leftovers were removed (the owner deletes the old checkout, A11), the owner is setting up a dedicated one for risk with new Cloudflare tokens,
-  and `npm run preflight` checks the host ([docs/SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)).
-- **Not deployed** and **not tested on real phones**. See [HANDOFF.md](HANDOFF.md).
+**State (24 Oct 2026):** v0.4.0.
+- Built, validated, and audited again in 0.4.0: an independent visitor audit, an output cross-check (139 of 144 numbers
+  equal the sources) and a model check that found the heat line 3–4 °C hot in Nov–Feb (now C6 there, provisional;
+  [docs/MODELS.md §1.1](docs/MODELS.md#11-the-model-check-of-24-oct-2026-and-what-040-changed)).
+- **The collector runs on `autobahn-bot`**, beside BrainPlatform's production stack (the owner's choice, D-045): never
+  touch its `deploy-*` containers.
+- **Not deployed:** `npm run cf:deploy` was refused because the token lacks *Workers Scripts: Edit* (OWNER_ACTIONS A9).
+  Everything else for `risk.autobahn.bot` is ready ([docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)).
+- **Not tested on real phones.** See [HANDOFF.md](HANDOFF.md).
 
 ## 2. Read in this order
 
@@ -26,7 +27,7 @@
 | Command | What it does |
 |---|---|
 | `npm test` | unit tests on saved live responses (`test/fixtures`, 23 Oct 2026) |
-| `CHROME_PATH=/opt/pw-browsers/chromium npm run smoke` | the visitor walk in headless Chromium on the fixtures, clock pinned to 23 Oct 2026 19:50 UTC (390, 360 × 640 in LINE and 320 px, Thai and English, search, saved places, a slow warnings feed, the English warning, every source down) |
+| `CHROME_PATH=<chromium> npm run smoke` | the visitor walk in headless Chromium on the fixtures, clock pinned to 23 Oct 2026 19:50 UTC, plus an 18:30 page (390, 360 × 640 in LINE and 320 px, Thai and English, search, saved places, a slow warnings feed, the English warning, a stale collector, every source down). `<chromium>`: `/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome` on `autobahn-bot`, `/opt/pw-browsers/chromium` in a cloud session |
 | `npm run smoke -- --live` | the same walk on the real sources, printing every card |
 | `npm run smoke -- --screens <dir>` | also saves screenshots |
 | `npm run serve` | the page on http://127.0.0.1:8787/ |
@@ -36,10 +37,11 @@
 | `docker compose up -d --build` | the page on 127.0.0.1:8090 and the collector every 15 min ([docs/SERVER.md](docs/SERVER.md)) |
 | `node tools/health.mjs --web URL` / `--live DIR` | health of the page / the collector's files (exit 0 or 1) |
 | `npm run preflight` | is this host ready for the stack and the deploy? Fails on FloodWatch's server, without `.env` or a deploy token, or with KV ids that differ; read-only, prints no values |
-| `node tools/env-check.mjs [--probe]` | which `.env` variables are set (never their values); `--probe` tests the Cloudflare token and GLM |
+| `node tools/env-check.mjs [--probe]` | which `.env` variables are set (never their values); `--probe` tests the Cloudflare token (including whether it may deploy) and GLM |
 | `npm run cf:setup` / `npm run cf:deploy [-- --dry-run]` | create the KV namespace and write its id / deploy to Cloudflare with the pinned wrangler (Docker on Node < 22) |
 | `npm run ai:review-copy` | GLM's first reading of the Thai copy → `docs/research/copy-review-glm-<date>.md` (a reviewer's prompt, never applied unread) |
 | `CHROME_PATH=… node tools/make-images.mjs` | re-render `og.png` and the PNG icons (after a rename) |
+| `node research/archive_forecasts.mjs` | save the page's own forecast for 12 points (once a day; for scoring C6 and the PM2.5 chance as issued) |
 | `node research/crosscheck_live.mjs <live dir> [--fw URL]` | the live cross-check: gauges vs FloodWatch, TMD warnings vs the ensemble, TMD vs EMSC quakes, GISTDA vs PCD |
 | `node tools/collect.mjs --every 900` | the collector as a loop (at least 600 s) |
 | `python3 tools/build_tambon.py <xlsx>` | rebuild `public/data/tambon.json` from HDX COD-AB |
@@ -63,7 +65,8 @@
 - **Honest User-Agent, never faster than a source updates, no evasion of blocks or bot checks.**
 - **No secrets in git;** keys only in `.env` (one scoped token per job), passed only to the service that needs it, in headers, never printed. **Never copy another project's `.env`; never run FloodWatch's tunnel token here.**
 - **AI (GLM) only off the visitor's path:** it translates or reviews public text; rules write every level, number and advice; what the page shows from it is checked and labelled (GUIDELINES §10).
-- **One server per app:** never run this stack on FloodWatch's (or another app's) production server; `npm run preflight` first on any host. **Never loop live calls:** ThaiWater rate-limits per IP (KI-029).
+- **Never on FloodWatch's server; another app's host only with the owner's yes** (D-045: `autobahn-bot` beside BrainPlatform is allowed; never touch its containers); `npm run preflight` first on any host. **Never loop live calls:** ThaiWater rate-limits per IP (KI-029).
+- **One grading for every view of a forecast** (`assess.fcLevel`); **a correction only inside the domain it was fitted on**; **walk the clock** (the evening too); **a stale collector is missing, never calm** (GUIDELINES 3b, 3e, §6).
 
 ## 6. How the owner works
 

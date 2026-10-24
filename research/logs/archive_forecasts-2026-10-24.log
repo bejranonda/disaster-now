@@ -1,0 +1,28 @@
+===== node research/archive_forecasts.mjs --raw <scratch>/models/archive_raw — 2026-10-24T08:05:00Z
+archive 2026-10-24T08:05:00.963Z → /root/disaster-now/research/archive/2026-10-24; ensemble run 2026-10-23T18:00:00.000Z, CAMS run 2026-10-23T12:00:00.000Z; Air4Thai: collector file 14 min old
+VTBD   tomorrow heat p50 44.4 (raw 39.34), heavy-rain chance 0 | CAMS tomorrow 12.95 µg/m³
+VTBS   tomorrow heat p50 44.1 (raw 39), heavy-rain chance 0 | CAMS tomorrow 8.72 µg/m³
+VTCC   tomorrow heat p50 42.05 (raw 36.63), heavy-rain chance 0 | CAMS tomorrow 11.16 µg/m³
+VTCT   tomorrow heat p50 42.31 (raw 36.93), heavy-rain chance 0 | CAMS tomorrow 11.36 µg/m³
+VTSP   tomorrow heat p50 37.26 (raw 31.09), heavy-rain chance 0.12 | CAMS tomorrow 1.56 µg/m³
+VTSS   tomorrow heat p50 39.76 (raw 33.99), heavy-rain chance 0.16 | CAMS tomorrow 2.07 µg/m³
+VTUD   tomorrow heat p50 43.01 (raw 37.74), heavy-rain chance 0 | CAMS tomorrow 6.99 µg/m³
+VTUU   tomorrow heat p50 42.96 (raw 37.69), heavy-rain chance 0 | CAMS tomorrow 8.45 µg/m³
+48455  tomorrow heat p50 43.68 (raw 38.51), heavy-rain chance 0 | CAMS tomorrow 8.21 µg/m³
+48384  tomorrow heat p50 43.18 (raw 37.94), heavy-rain chance 0 | CAMS tomorrow 10.27 µg/m³
+48333  tomorrow heat p50 42.87 (raw 37.57), heavy-rain chance 0 | CAMS tomorrow 9.03 µg/m³
+48555  tomorrow heat p50 41.05 (raw 35.48), heavy-rain chance 0 | CAMS tomorrow 1.54 µg/m³
+METAR: 400 reports
+===== node research/archive_recompute_pm25.mjs research/archive/2026-10-24 <scratch>/models/archive_raw — 2026-10-24T08:49:43Z
+48333  anchor none → PCD station 67t 9.09 km, 21.6 µg/m³ at 2026-10-24T14:00; outlook 10-24 19.98, 10-25 21.39, 10-26 20.37
+48384  anchor none → PCD station 46t 12.62 km, 23.1 µg/m³ at 2026-10-24T14:00; outlook 10-24 23.44, 10-25 24.14, 10-26 24.65
+48455  anchor none → PCD station bkp119t 0.37 km, 23.8 µg/m³ at 2026-10-24T14:00; outlook 10-24 15.7, 10-25 13.46, 10-26 17.43
+48555  anchor none → none; outlook 10-24 2.42 (raw), 10-25 1.54 (raw), 10-26 1.22 (raw)
+VTBD   anchor none → PCD station bkp74t 1.31 km, 24.4 µg/m³ at 2026-10-24T14:00; outlook 10-24 17.01, 10-25 11.63, 10-26 11.64
+VTBS   anchor none → PCD station bkp128t 4.07 km, 21.9 µg/m³ at 2026-10-24T14:00; outlook 10-24 14.17, 10-25 10.63, 10-26 12.49
+VTCC   anchor none → PCD station 36t 3.89 km, 16.7 µg/m³ at 2026-10-24T14:00; outlook 10-24 15.99, 10-25 15.18, 10-26 19.74
+VTCT   anchor none → PCD station 57t 7.83 km, 15 µg/m³ at 2026-10-24T14:00; outlook 10-24 13.9, 10-25 14.31, 10-26 13.76
+VTSP   anchor none → none; outlook 10-24 2.08 (raw), 10-25 1.56 (raw), 10-26 1.46 (raw)
+VTSS   anchor none → PCD station 44t 13.99 km, 10.9 µg/m³ at 2026-10-24T14:00; outlook 10-24 8.19, 10-25 6.44, 10-26 6.87
+VTUD   anchor none → PCD station 91t 3.22 km, 15.3 µg/m³ at 2026-10-24T14:00; outlook 10-24 15.88, 10-25 15.34, 10-26 16.62
+VTUU   anchor none → PCD station 83t 2.63 km, 12.3 µg/m³ at 2026-10-24T14:00; outlook 10-24 14.2, 10-25 12.14, 10-26 12.09

@@ -125,3 +125,25 @@ The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_hea
   - Then remove only what this project created there (checked by image layer, so no FloodWatch image loses its base).
   - Record the host-specific results as the host's: Air4Thai's 173 stations and ThaiWater's 429 are measured again on
     the new server.
+
+## 10. Three audits and a model check on the new host (24 Oct 2026, 0.4.0)
+
+- **Independent reads, not anchored on the builder's.** Three agents got the code and the rules but not the session's
+  own findings: a visitor audit (five personas, 360 × 640 in LINE, 390, 320 with ก+, Thai and English; at most 8 page
+  loads), an output cross-check (every number recomputed from the sources at six points), and a model check (the heat
+  correction by region and season on 90,481 station-days). They found the same top problem the session had (one
+  forecast in three colours), and many it hadn't (the province search, the CAP references, the cool season).
+- **The model check's protocol was pre-registered** before scoring (fit Oct 2024–Sep 2025, score Oct 2025–Oct 2026,
+  confirm on 53 new stations and 8 airports). Its winner failed the safety rule and didn't ship; the post-hoc C6 shipped
+  only for the season where the current line was worse than raw, by the owner's choice, labelled provisional, with an
+  as-issued re-test pre-registered (MODELS §1.1).
+- **Compute what was validated.** The check compared the page's inputs with the fit's: the hours (13:00/16:00 vs every
+  hour) and Open-Meteo's elevation downscaling differed. The page now asks for exactly what was fitted, and a unit test
+  checks the JavaScript against the research code's value to four decimals.
+- **Walk the clock.** The fixture walk's 02:50 clock hid the evening false alarm (S6) for two releases; the walk now has
+  an 18:30 page, and layout probes measure the elements that overflow instead of guessing.
+- **Research on a shared production host:** venvs in the scratchpad, `nice -n 19`, memory and download caps, no
+  ThaiWater calls, an Open-Meteo budget per agent logged in `research/logs/openmeteo-calls-2026-10-24.log`;
+  BrainPlatform's web was checked while they ran.
+- **A permission denied is reported, not routed around:** the refused deploy became an owner action and a probe that
+  tests the permission read-only.

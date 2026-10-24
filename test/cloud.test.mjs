@@ -116,9 +116,11 @@ test("KV upload: settings, body, one bulk PUT with the token in a header", async
 
 test("cf-setup patches wrangler.jsonc and .env without touching the rest", () => {
   const w = readFileSync(new URL("../wrangler.jsonc", import.meta.url), "utf8");
+  // the committed id: the placeholder before `npm run cf:setup`, the real namespace's after (both are fine)
+  const id0 = w.match(/"binding":\s*"LIVE",\s*"id":\s*"([0-9a-f]*)"/)[1];
   const p = patchWrangler(w, "abcdef0123456789abcdef0123456789");
   assert.match(p, /"binding": "LIVE", "id": "abcdef0123456789abcdef0123456789"/);
-  assert.equal(p.replace("abcdef0123456789abcdef0123456789", "00000000000000000000000000000000"), w);
+  assert.equal(p.replace("abcdef0123456789abcdef0123456789", id0), w);
   assert.equal(patchEnv("A=1\nCF_KV_NAMESPACE_ID=\nB=2\n", "CF_KV_NAMESPACE_ID", "x"), "A=1\nCF_KV_NAMESPACE_ID=x\nB=2\n");
   assert.equal(patchEnv("A=1", "K", "v"), "A=1\nK=v\n");
 });

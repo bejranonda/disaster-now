@@ -1,0 +1,12 @@
+What the current line adds (a + b·HI − HI), day 1: {25: 6.99, 30: 6.32, 35: 5.64, 40: 4.96, 45: 4.29}
+Heat-index change from the same input errors (T +1.66, Td +1.49 °C; the C6 day-1 terms):
+  T 33.0, Td 25.0 (humid hot afternoon, April-like): HI 40.6 → 45.3  (+4.7)
+  T 35.0, Td 24.0 (hot, humid): HI 41.9 → 46.3  (+4.4)
+  T 31.0, Td 17.0 (dry cool-season afternoon): HI 31.4 → 33.9  (+2.5)
+  T 29.0, Td 14.0 (dry December afternoon, north): HI 28.6 → 30.5  (+1.9)
+Nov–Feb day-1 MAE / bias by region: {'North': (3.76, 3.64), 'Northeast': (4.08, 3.99), 'Central': (3.74, 3.66), 'East': (2.81, 2.47), 'South': (2.57, 1.62), 'ALL': (3.6, 3.36)}
+stations in the per-station Nov–Feb table: 78
+day 1 C0, later C Nov–Feb: forecasts >= 33 on 3153/3658 = 0.862 of days; observed >= 33 on 1624/3658 = 0.444; POD 0.994
+day 1 C5, later C Nov–Feb: forecasts >= 33 on 1815/3658 = 0.496 of days; observed >= 33 on 1624/3658 = 0.444; POD 0.868
+day 2 C0, later C Nov–Feb: forecasts >= 33 on 3251/3658 = 0.889 of days; observed >= 33 on 1624/3658 = 0.444; POD 0.996
+day 2 C5, later C Nov–Feb: forecasts >= 33 on 1749/3658 = 0.478 of days; observed >= 33 on 1624/3658 = 0.444; POD 0.854

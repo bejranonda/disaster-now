@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Is this host ready to run Disaster Now and deploy it? (docs/SERVER.md §2). Read-only: it starts no container, calls
+// Is this host ready to run ภัยรอบบ้าน · Thai Risk (disaster-now) and deploy it? (docs/SERVER.md §2). Read-only: it starts no container, calls
 // no API and prints no value from .env (names and states only).
 //   node tools/preflight.mjs        (npm run preflight)   one line per check; exit 1 if any check fails
 // The first check is whether another app already runs here: 0.3.0's stack was set up on FloodWatch's production
@@ -69,7 +69,7 @@ export function gather(root = new URL("../", import.meta.url)) {
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   const results = assess(gather());
-  console.log("preflight: is this host ready for Disaster Now? (docs/SERVER.md §2)");
+  console.log("preflight: is this host ready for ภัยรอบบ้าน · Thai Risk (disaster-now)? (docs/SERVER.md §2)");
   for (const r of results) console.log(`  ${r.level === "ok" ? "✅" : r.level === "warn" ? "⚠️ " : "❌"} ${r.msg}`);
   const fails = results.filter((r) => r.level === "fail").length;
   console.log(fails ? `${fails} check(s) failed` : "ready: npm test → npm run cf:setup → docker compose up -d --build → npm run cf:deploy (docs/SERVER.md §2)");

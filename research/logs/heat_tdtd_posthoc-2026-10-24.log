@@ -1,0 +1,134 @@
+
+===== POST-HOC C6 run 2026-10-24T08:27:05+00:00: 90481 station-day-leads =====
+
+day 1: fitted on 3838 rows (A+B, 2024-10-01..2025-09-30): dT +1.658 °C, dTd +1.491 °C (n=7664 hours), c +0.898 °C; residual SD 2.86
+  [later, A+B | all months] n=3914
+    C0 MAE 2.67 bias +1.24 | ≥33 POD 1.00 false 12% | ≥42 897/1177 false 12.7% (named: 1095/1177)
+    C5 MAE 2.17 bias +0.36 | ≥33 POD 0.98 false 4% | ≥42 896/1177 false 12.7%
+    C6 MAE 2.12 bias +0.02 | ≥33 POD 0.97 false 4% | ≥42 846/1177 false 10.6% (named as possible: 1060/1177)
+  [later, A+B | Nov–Feb] n=1113
+    C0 MAE 3.38 bias +3.06 | ≥33 POD 0.99 false 38% | ≥42 2/11 false 0.3% (named: 11/11)
+    C5 MAE 1.61 bias -0.03 | ≥33 POD 0.86 false 9% | ≥42 1/11 false 0.0%
+    C6 MAE 1.49 bias +0.16 | ≥33 POD 0.87 false 9% | ≥42 1/11 false 0.0% (named as possible: 11/11)
+  [later, A+B | Mar–Oct] n=2801
+    C0 MAE 2.39 bias +0.51 | ≥33 POD 1.00 false 2% | ≥42 895/1166 false 17.7% (named: 1084/1166)
+    C5 MAE 2.39 bias +0.51 | ≥33 POD 1.00 false 2% | ≥42 895/1166 false 17.7%
+    C6 MAE 2.37 bias -0.04 | ≥33 POD 0.99 false 1% | ≥42 845/1166 false 14.9% (named as possible: 1049/1166)
+  [later, A+B | 1–15 Nov + Feb] n=247
+    C0 MAE 2.52 bias +1.78 | ≥33 POD 0.99 false 22% | ≥42 2/11 false 1.2% (named: 11/11)
+    C5 MAE 1.96 bias -0.92 | ≥33 POD 0.87 false 7% | ≥42 1/11 false 0.0%
+    C6 MAE 1.71 bias -0.37 | ≥33 POD 0.88 false 7% | ≥42 1/11 false 0.0% (named as possible: 11/11)
+  [later, C (disjoint) | all months] n=11327
+    C0 MAE 2.88 bias +1.73 | ≥33 POD 1.00 false 15% | ≥42 2319/3038 false 14.4% (named: 2850/3038)
+    C5 MAE 2.24 bias +0.71 | ≥33 POD 0.97 false 5% | ≥42 2312/3038 false 14.2%
+    C6 MAE 2.21 bias +0.37 | ≥33 POD 0.97 false 5% | ≥42 2112/3038 false 12.3% (named as possible: 2758/3038)
+  [later, C (disjoint) | Nov–Feb] n=3658
+    C0 MAE 3.56 bias +3.37 | ≥33 POD 0.99 false 42% | ≥42 8/29 false 0.5% (named: 22/29)
+    C5 MAE 1.60 bias +0.21 | ≥33 POD 0.87 false 11% | ≥42 1/29 false 0.1%
+    C6 MAE 1.53 bias +0.38 | ≥33 POD 0.89 false 11% | ≥42 7/29 false 0.3% (named as possible: 18/29)
+  [later, C (disjoint) | Mar–Oct] n=7669
+    C0 MAE 2.55 bias +0.95 | ≥33 POD 1.00 false 3% | ≥42 2311/3009 false 21.0% (named: 2828/3009)
+    C5 MAE 2.55 bias +0.95 | ≥33 POD 1.00 false 3% | ≥42 2311/3009 false 21.0%
+    C6 MAE 2.54 bias +0.37 | ≥33 POD 0.99 false 2% | ≥42 2105/3009 false 18.0% (named as possible: 2740/3009)
+  [later, C (disjoint) | 1–15 Nov + Feb] n=814
+    C0 MAE 2.95 bias +2.48 | ≥33 POD 0.99 false 25% | ≥42 8/27 false 2.3% (named: 21/27)
+    C5 MAE 1.82 bias -0.20 | ≥33 POD 0.91 false 9% | ≥42 1/27 false 0.5%
+    C6 MAE 1.78 bias +0.26 | ≥33 POD 0.93 false 10% | ≥42 7/27 false 1.4% (named as possible: 18/27)
+  [earlier, C (disjoint) | all months] n=16980
+    C0 MAE 2.72 bias +1.59 | ≥33 POD 1.00 false 12% | ≥42 3890/5034 false 15.7% (named: 4711/5034)
+    C5 MAE 2.20 bias +0.74 | ≥33 POD 0.98 false 4% | ≥42 3873/5034 false 15.4%
+    C6 MAE 2.18 bias +0.49 | ≥33 POD 0.98 false 4% | ≥42 3702/5034 false 13.5% (named as possible: 4549/5034)
+  [earlier, C (disjoint) | Nov–Feb] n=4813
+    C0 MAE 3.45 bias +3.23 | ≥33 POD 1.00 false 36% | ≥42 32/74 false 1.4% (named: 58/74)
+    C5 MAE 1.62 bias +0.24 | ≥33 POD 0.91 false 9% | ≥42 15/74 false 0.2%
+    C6 MAE 1.56 bias +0.39 | ≥33 POD 0.92 false 8% | ≥42 22/74 false 0.6% (named as possible: 53/74)
+  [earlier, C (disjoint) | Mar–Oct] n=12167
+    C0 MAE 2.43 bias +0.94 | ≥33 POD 1.00 false 3% | ≥42 3858/4960 false 21.4% (named: 4653/4960)
+    C5 MAE 2.43 bias +0.94 | ≥33 POD 1.00 false 3% | ≥42 3858/4960 false 21.4%
+    C6 MAE 2.43 bias +0.53 | ≥33 POD 0.99 false 2% | ≥42 3680/4960 false 18.6% (named as possible: 4496/4960)
+  [earlier, C (disjoint) | 1–15 Nov + Feb] n=1718
+    C0 MAE 2.88 bias +2.49 | ≥33 POD 1.00 false 21% | ≥42 22/51 false 2.2% (named: 41/51)
+    C5 MAE 1.71 bias -0.13 | ≥33 POD 0.94 false 8% | ≥42 8/51 false 0.4%
+    C6 MAE 1.67 bias +0.16 | ≥33 POD 0.95 false 8% | ≥42 13/51 false 0.9% (named as possible: 38/51)
+  [later, D airports | all months] n=3104
+    C0 MAE 3.42 bias +3.17 | ≥33 POD 1.00 false 17% | ≥42 180/226 false 23.8% (named: 217/226)
+    C5 MAE 2.64 bias +2.25 | ≥33 POD 0.99 false 8% | ≥42 180/226 false 23.1%
+    C6 MAE 2.41 bias +1.99 | ≥33 POD 1.00 false 7% | ≥42 172/226 false 20.7% (named as possible: 212/226)
+  [later, D airports | Nov–Feb] n=960
+    C0 MAE 4.28 bias +4.19 | ≥33 POD 1.00 false 42% | ≥42 0/1 false 3.4% (named: 1/1)
+    C5 MAE 1.74 bias +1.20 | ≥33 POD 0.97 false 14% | ≥42 0/1 false 1.4%
+    C6 MAE 1.92 bias +1.64 | ≥33 POD 0.99 false 15% | ≥42 0/1 false 2.4% (named as possible: 1/1)
+  [later, D airports | Mar–Oct] n=2144
+    C0 MAE 3.04 bias +2.72 | ≥33 POD 1.00 false 5% | ≥42 180/225 false 32.9% (named: 216/225)
+    C5 MAE 3.04 bias +2.72 | ≥33 POD 1.00 false 5% | ≥42 180/225 false 32.9%
+    C6 MAE 2.64 bias +2.15 | ≥33 POD 1.00 false 4% | ≥42 172/225 false 28.9% (named as possible: 211/225)
+  [later, D airports | 1–15 Nov + Feb] n=344
+    C0 MAE 3.73 bias +3.57 | ≥33 POD 1.00 false 29% | ≥42 0/1 false 9.6% (named: 1/1)
+    C5 MAE 1.84 bias +1.08 | ≥33 POD 0.97 false 12% | ≥42 0/1 false 3.8%
+    C6 MAE 2.14 bias +1.74 | ≥33 POD 0.99 false 15% | ≥42 0/1 false 6.7% (named as possible: 1/1)
+
+day 2: fitted on 3838 rows (A+B, 2024-10-01..2025-09-30): dT +1.651 °C, dTd +1.429 °C (n=7664 hours), c +0.889 °C; residual SD 2.93
+  [later, A+B | all months] n=3914
+    C0 MAE 2.72 bias +1.19 | ≥33 POD 1.00 false 13% | ≥42 866/1177 false 12.3% (named: 1097/1177)
+    C5 MAE 2.19 bias +0.25 | ≥33 POD 0.97 false 4% | ≥42 865/1177 false 12.2%
+    C6 MAE 2.14 bias -0.08 | ≥33 POD 0.97 false 4% | ≥42 830/1177 false 10.1% (named as possible: 1047/1177)
+  [later, A+B | Nov–Feb] n=1113
+    C0 MAE 3.50 bias +3.19 | ≥33 POD 0.99 false 39% | ≥42 1/11 false 0.2% (named: 11/11)
+    C5 MAE 1.65 bias -0.11 | ≥33 POD 0.85 false 9% | ≥42 0/11 false 0.0%
+    C6 MAE 1.50 bias +0.07 | ≥33 POD 0.86 false 9% | ≥42 1/11 false 0.1% (named as possible: 9/11)
+  [later, A+B | Mar–Oct] n=2801
+    C0 MAE 2.41 bias +0.39 | ≥33 POD 1.00 false 2% | ≥42 865/1166 false 17.1% (named: 1086/1166)
+    C5 MAE 2.41 bias +0.39 | ≥33 POD 1.00 false 2% | ≥42 865/1166 false 17.1%
+    C6 MAE 2.40 bias -0.13 | ≥33 POD 0.99 false 1% | ≥42 829/1166 false 14.0% (named as possible: 1038/1166)
+  [later, A+B | 1–15 Nov + Feb] n=247
+    C0 MAE 2.63 bias +1.93 | ≥33 POD 0.99 false 23% | ≥42 1/11 false 0.8% (named: 11/11)
+    C5 MAE 1.99 bias -0.92 | ≥33 POD 0.89 false 8% | ≥42 0/11 false 0.0%
+    C6 MAE 1.75 bias -0.35 | ≥33 POD 0.89 false 8% | ≥42 1/11 false 0.4% (named as possible: 9/11)
+  [later, C (disjoint) | all months] n=11327
+    C0 MAE 2.90 bias +1.67 | ≥33 POD 1.00 false 16% | ≥42 2230/3038 false 13.6% (named: 2828/3038)
+    C5 MAE 2.23 bias +0.58 | ≥33 POD 0.97 false 5% | ≥42 2228/3038 false 13.5%
+    C6 MAE 2.21 bias +0.24 | ≥33 POD 0.97 false 5% | ≥42 2045/3038 false 11.7% (named as possible: 2723/3038)
+  [later, C (disjoint) | Nov–Feb] n=3658
+    C0 MAE 3.68 bias +3.49 | ≥33 POD 1.00 false 45% | ≥42 2/29 false 0.3% (named: 21/29)
+    C5 MAE 1.59 bias +0.10 | ≥33 POD 0.85 false 10% | ≥42 0/29 false 0.0%
+    C6 MAE 1.50 bias +0.27 | ≥33 POD 0.88 false 10% | ≥42 2/29 false 0.2% (named as possible: 16/29)
+  [later, C (disjoint) | Mar–Oct] n=7669
+    C0 MAE 2.54 bias +0.80 | ≥33 POD 1.00 false 3% | ≥42 2228/3009 false 19.9% (named: 2807/3009)
+    C5 MAE 2.54 bias +0.80 | ≥33 POD 1.00 false 3% | ≥42 2228/3009 false 19.9%
+    C6 MAE 2.55 bias +0.23 | ≥33 POD 0.99 false 2% | ≥42 2043/3009 false 17.2% (named as possible: 2707/3009)
+  [later, C (disjoint) | 1–15 Nov + Feb] n=814
+    C0 MAE 2.97 bias +2.54 | ≥33 POD 0.99 false 26% | ≥42 2/27 false 1.4% (named: 20/27)
+    C5 MAE 1.80 bias -0.32 | ≥33 POD 0.91 false 9% | ≥42 0/27 false 0.1%
+    C6 MAE 1.75 bias +0.17 | ≥33 POD 0.92 false 8% | ≥42 2/27 false 0.7% (named as possible: 16/27)
+  [earlier, C (disjoint) | all months] n=16979
+    C0 MAE 2.80 bias +1.64 | ≥33 POD 1.00 false 13% | ≥42 3844/5034 false 15.9% (named: 4723/5034)
+    C5 MAE 2.23 bias +0.74 | ≥33 POD 0.98 false 5% | ≥42 3828/5034 false 15.5%
+    C6 MAE 2.24 bias +0.52 | ≥33 POD 0.98 false 4% | ≥42 3717/5034 false 14.1% (named as possible: 4554/5034)
+  [earlier, C (disjoint) | Nov–Feb] n=4813
+    C0 MAE 3.66 bias +3.45 | ≥33 POD 1.00 false 39% | ≥42 29/74 false 1.9% (named: 59/74)
+    C5 MAE 1.64 bias +0.29 | ≥33 POD 0.91 false 9% | ≥42 13/74 false 0.2%
+    C6 MAE 1.59 bias +0.44 | ≥33 POD 0.92 false 8% | ≥42 20/74 false 0.8% (named as possible: 49/74)
+  [earlier, C (disjoint) | Mar–Oct] n=12166
+    C0 MAE 2.46 bias +0.92 | ≥33 POD 1.00 false 3% | ≥42 3815/4960 false 21.5% (named: 4664/4960)
+    C5 MAE 2.46 bias +0.92 | ≥33 POD 1.00 false 3% | ≥42 3815/4960 false 21.5%
+    C6 MAE 2.50 bias +0.56 | ≥33 POD 0.99 false 2% | ≥42 3697/4960 false 19.3% (named as possible: 4505/4960)
+  [earlier, C (disjoint) | 1–15 Nov + Feb] n=1718
+    C0 MAE 3.00 bias +2.65 | ≥33 POD 1.00 false 22% | ≥42 17/51 false 3.0% (named: 42/51)
+    C5 MAE 1.70 bias -0.11 | ≥33 POD 0.94 false 9% | ≥42 7/51 false 0.3%
+    C6 MAE 1.67 bias +0.19 | ≥33 POD 0.95 false 9% | ≥42 10/51 false 1.0% (named as possible: 34/51)
+  [later, D airports | all months] n=3104
+    C0 MAE 3.41 bias +3.12 | ≥33 POD 1.00 false 17% | ≥42 182/226 false 22.9% (named: 210/226)
+    C5 MAE 2.60 bias +2.12 | ≥33 POD 0.99 false 8% | ≥42 182/226 false 22.1%
+    C6 MAE 2.37 bias +1.86 | ≥33 POD 1.00 false 7% | ≥42 174/226 false 20.2% (named as possible: 207/226)
+  [later, D airports | Nov–Feb] n=960
+    C0 MAE 4.34 bias +4.23 | ≥33 POD 1.00 false 44% | ≥42 0/1 false 3.2% (named: 1/1)
+    C5 MAE 1.72 bias +1.01 | ≥33 POD 0.95 false 13% | ≥42 0/1 false 0.7%
+    C6 MAE 1.84 bias +1.46 | ≥33 POD 0.98 false 14% | ≥42 0/1 false 2.3% (named as possible: 1/1)
+  [later, D airports | Mar–Oct] n=2144
+    C0 MAE 2.99 bias +2.62 | ≥33 POD 1.00 false 6% | ≥42 182/225 false 31.7% (named: 209/225)
+    C5 MAE 2.99 bias +2.62 | ≥33 POD 1.00 false 6% | ≥42 182/225 false 31.7%
+    C6 MAE 2.61 bias +2.04 | ≥33 POD 1.00 false 4% | ≥42 174/225 false 28.2% (named as possible: 206/225)
+  [later, D airports | 1–15 Nov + Feb] n=344
+    C0 MAE 3.66 bias +3.48 | ≥33 POD 1.00 false 28% | ≥42 0/1 false 9.0% (named: 1/1)
+    C5 MAE 1.84 bias +0.81 | ≥33 POD 0.96 false 12% | ≥42 0/1 false 2.0%
+    C6 MAE 2.05 bias +1.52 | ≥33 POD 0.98 false 13% | ≥42 0/1 false 6.4% (named as possible: 1/1)

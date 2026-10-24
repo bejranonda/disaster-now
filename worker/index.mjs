@@ -1,4 +1,4 @@
-// Disaster Now on Cloudflare Workers (docs/CLOUDFLARE.md). The page is static assets served from Cloudflare's edge
+// ภัยรอบบ้าน · Thai Risk (code name disaster-now) on Cloudflare Workers (docs/CLOUDFLARE.md). The page is static assets served from Cloudflare's edge
 // (`public/`, with `public/_headers`); this Worker runs ONLY for /data/live/* (wrangler.jsonc → run_worker_first) and
 // serves the collector's files from Workers KV, where the collector on the server uploads them (tools/publish-live.mjs).
 // So the page keeps working from the edge if the server is down; the live files then simply grow old, and the page

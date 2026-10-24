@@ -7,7 +7,7 @@ Severity:
 - **medium:** a gap or a wrong detail.
 - **low:** polish.
 
-The audits of 23 Oct 2026 use their own IDs: M1–M5 and H1–H4 from the [output cross-check](research/output-crosscheck-2026-10-23.md), V1–V41 from the [visitor audit](research/visitor-audit-2026-10-23.md). An issue below names the findings it carries.
+The audits of 23 Oct 2026 use their own IDs: M1–M5 and H1–H4 from the [output cross-check](research/output-crosscheck-2026-10-23.md), V1–V41 from the [visitor audit](research/visitor-audit-2026-10-23.md). Those of 24 Oct 2026: S1–S11 from the session's [review](research/review-2026-10-24.md), U1–U25 from the [visitor audit](research/visitor-audit-2026-10-24.md), X1–X19 from the [output cross-check](research/output-crosscheck-2026-10-24.md). An issue below names the findings it carries.
 
 ## Open
 
@@ -32,9 +32,11 @@ Checked only in headless Chromium (23 Oct 2026).
 - **Since 0.3.0:** from FloodWatch's server (Germany), the collector read **173 stations** at 21:43 and 22:04 UTC on
   23 Oct. That meets A6's "170 or more", so the 503s belonged to the build session's cloud host. With the collector
   running, the page reads Air4Thai from `data/live/` and doesn't depend on the browser accepting the chain.
-- That result is that host's. The collector moves to the risk server, so A6 is open again until it is measured there.
+- That result is that host's. **From `autobahn-bot` (24 Oct 2026, 07:50 UTC) the collector read 173 stations too**: A6
+  is met, and the page reads Air4Thai from the collector's files wherever they are served.
 
-**Next:** run the collector on the risk server (A12, A6). **The chain's fix belongs to the PCD** (OWNER_ACTIONS C5).
+**Next:** **the chain's fix belongs to the PCD** (OWNER_ACTIONS C5). Browsers that refuse the chain matter only where the
+page has no collector files (KI-036).
 
 ### KI-003 Without the collector, four feeds are missing (medium)
 TMD's warnings, TMD's quake list, TMD's storm tracks and NASA FIRMS hotspots need the collector. Since 0.2.0, the page without it:
@@ -54,6 +56,10 @@ TMD's warnings, TMD's quake list, TMD's storm tracks and NASA FIRMS hotspots nee
 - **What that means:** Bangkok's October afternoons now read 42–44 °C, "อันตราย". Observed Bangkok October days reach 42 °C or more on 48 % of days, and April days on 95 % (station data, `research/out/e1e2_results.json`).
 - **What 0.2.0 does:** a forecast alone stops at เตรียมตัว (`MODEL_MAX`, V1). The tile says "บ่ายนี้" (V6), and the pre-warnings list "ร้อนระดับอันตราย" on such days.
 - **The risk:** the verdict is orange on most days at most places, which may teach people to ignore orange.
+- **Part of it is the correction's own warm bias** (model check, 24 Oct 2026): on 53 stations it never saw, the
+  year-round line read +0.95 °C hot in Mar–Oct (+0.9 to +1.9 in the North, Northeast and Central), with false อันตราย on
+  19–31 % of days there; in Nov–Feb it read 3–4 °C hot. 0.4.0 fixes the input (13:00/16:00, grid height) and uses C6
+  in Nov–Feb (KI-037); the hot season keeps the line, which catches more danger days.
 
 **Next:** the owner's D1, and count the orange-verdict days in the first month.
 
@@ -74,10 +80,14 @@ ThaiWater gives 8 gauges for Bangkok. FloodWatch's point check counted 33 near t
 - The card's line "ต่ำกว่าตลิ่ง 131 ซม. · ใกล้ล้นตลิ่ง (แม่น้ำนอกแนวคัน ไม่ใช้ตัดสินจุดนี้)" reassures, alarms and dismisses itself at once.
 - The app copies FloodWatch's rule for consistency.
 
-**Fix in both apps together** (INTEGRATION §3.4). Meanwhile: drop the status word when freeboard is 1 m or more, and name the tile's gauge.
+**Fix in both apps together** (INTEGRATION §3.4).
+**Since 0.4.0 (the interim, S10):** the tile's gauge comes first and says "ตัวเลขบนป้ายน้ำท่วม"; a river that doesn't judge
+the point (Bangkok and its neighbours) loses its status word with 1 m or more to spare (test "KI-008/V17"). Where a
+river does judge the point, FloodWatch's word stays, because the tile's colour comes from it: that part waits for B3.
 
 ### KI-009 GISTDA's PM2.5 estimate ran 1.3× the PCD's stations (medium)
-- On 24 Oct 02:00 it was a median 1.31× across 60 provinces (KNOWLEDGE §5); one snapshot.
+- On 24 Oct 02:00 it was a median 1.31× across 60 provinces (KNOWLEDGE §5); at 08:00 UTC the output cross-check
+  measured 1.39× (KNOWLEDGE §13). Two snapshots, the same direction.
 - It is used only where no PCD station reported within 15 km and 3 h, labelled "ค่าประมาณ". Since 0.2.0 a late station's last reading is shown beside it (V9).
 - It can still raise the verdict to orange alone. Should it? That is the owner's call (D5).
 
@@ -140,6 +150,8 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
 - `npm run smoke` pins the clock to 23 Oct 2026 19:50 UTC: a dry, calm night.
 - `test/audit.test.mjs` covers a warning, a stale station, failed sources and a big quake. Even so, the walk has no rainy, smoky or quake fixtures.
 - `--live` checks today's sources but not a bad day.
+- Since 0.4.0 the walk also opens an 18:30 page on the same fixtures (the clock blind spot behind KI-F28), but it is
+  still one day's data.
 - The visitor audit's states (`dust3`, `wet`, `warning`, `stale`) are in its scratch scripts (not committed).
 
 ### KI-021 The Thai copy hasn't been read by a native reviewer (medium; V33)
@@ -156,19 +168,11 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
 
 **Fix:** map regions to Thai country names, as TMD's rows have them.
 
-### KI-025 The 3-day table's cells are colour only (medium; V13)
-- **Fixed in 0.3.0:** it sits above the cards (Phuket at 390 px: from 6,574 to 2,267 px down). Its rain row is named
-  "โอกาสฝนหนัก", and the note no longer calls the cell the day's total. A day under a TMD warning reads "📢 เตือนภัย".
-- **Open:** heat, PM2.5, UV and gust cells have no meter and no word; "วันนี้" means the rest of today.
-
-**Fix:**
-- Add dots and band words.
-- Name the first column by the time of day ("คืนนี้" after 15:00).
-- Put the quake footnote under it.
 
 ### KI-027 Polish from the visitor audit (low; V18, V28, V29, V31, V32, V34, V35, V37–V40)
 - **V18:** "other pollution" with model values reads as no data.
-- **V28:** tap targets under 44 px wide: ↻, and the hotline links 1182, 1784, 1669, 199.
+- ~~**V28:** tap targets under 44 px wide: ↻, and the hotline links 1182, 1784, 1669, 199.~~ Fixed in 0.4.0 (S9; the walk
+  now measures width too).
 - **V29:** sizes are px from an 18 px root, so the phone's text setting is ignored. Meters and tags are under 14 px.
 - **V31, V32:** line breaks split a number from its unit and "ไม่" from its word, and the search placeholder is cut off.
 - **V34:** two or three names per hazard and four words for "no data".
@@ -177,7 +181,8 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
 - **V38:** "hotspot(s)"-style plurals are fixed; names in capitals remain.
 - **V39:** the welcome screen is empty; it could show the in-force TMD notices.
 - **V40:** there is no automatic retry after a timeout.
-- **0.3.0 visitor walk:** at 320 px with ก+ the brand wraps ("ภัยรอบบ้าน ตอน/นี้") in the header; gust, PM2.5 and
+- **0.3.0 visitor walk:** ~~at 320 px with ก+ the brand wraps ("ภัยรอบบ้าน ตอน/นี้") in the header~~ (fixed by the
+  rename, 0.4.0); gust, PM2.5 and
   dust-word cells in the 3-day table break inside a word ("ดี/มาก"). Fixed in 0.3.0: a number and its unit no longer
   wrap apart (°C, µg/m³ joined by a no-break space), and the chips' "Heat:Warning" has its space back.
 
@@ -188,6 +193,8 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
   carrier puts many phones behind one address (as KI-011).
 - **Since 24 Oct 2026** the stack moves to a server of its own (D-040), so its tests no longer spend FloodWatch's quota.
   The limit itself stays: the risk server's IP can be limited too.
+
+- **From `autobahn-bot` (24 Oct 2026)** every ThaiWater call of the session's walks and two audits answered (no 429).
 
 **Next:**
 - On the risk server, one live walk and one cross-check per change, not loops (GUIDELINES §8).
@@ -212,23 +219,98 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
 one tap away, the level and times set by rules only. **Next:** a bilingual reader checks the first ten live
 translations (OWNER_ACTIONS A5), and a phrase table for TMD's fixed instructions.
 
-### KI-032 No server of its own yet; the go-live waits for it and for new tokens (medium)
-- 0.3.0's stack was set up on FloodWatch's production server by mistake (23 Oct 2026). The owner is moving it to a
-  dedicated server for risk and replacing the Cloudflare token, which came from FloodWatch's `.env` (24 Oct).
-- **Done before leaving FloodWatch's server:**
-  - everything was pushed to `main` and the work branch;
-  - this app's Docker volume and images were removed (SERVER §2.4);
-  - **not done:** the checkout with both `.env` files, blocked by Claude Code's safety check on deleting the
-    agent's working directory: the owner's `rm -rf /root/disaster-now` (A11);
-  - FloodWatch's containers, `.env` and tunnel were left untouched.
-- **Unknown until the risk server exists:** its Node version, its Chromium path, and whether Air4Thai (A6) and
-  ThaiWater answer it.
-- **The guard:** `npm run preflight` fails on a host that runs FloodWatch's containers, and warns on any other app's
-  containers or a `.env` with names this project doesn't read. Tests: `test/cloud.test.mjs` "preflight".
 
-**Next:** [OWNER_ACTIONS A11, A12, A9, A10](OWNER_ACTIONS.md#a-to-go-live), runbook [SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
+### KI-033 The page draws each hazard up to six ways (medium; U-series, D8)
+- The verdict, the tile, the pre-warnings, the 3-day table, the card and the card's day chips each show the same
+  forecast. 0.3.0's contradictions (S1, U1, U4, U6, U16, U25, X1–X6) all lived in the gaps between them.
+- 0.4.0 makes them agree (`assess.fcLevel`, one window per label, the warning override on chips too) and tests it, but
+  the page is still 7,700–10,500 px long at 390 px.
+- **Next:** the owner's D8 (drop the chips, fold the pre-warnings into the table, cards open in place), as one release
+  with its own visitor audit.
+
+### KI-034 The family's colours differ for the same word (low; X17, D9)
+FloodWatch's watch and critical colours and บ้านรอดไหม's heat and dust colours differ from this page's (INTEGRATION §5,
+corrected on 24 Oct: it had said they matched). **Next:** the owner's D9.
+
+### KI-035 HII's flash-flood report is shown without its time (low; X16)
+The card says "รายงานล่าสุดของ สสน." with no time (the file's `Last-Modified` was 14:43 Bangkok on 24 Oct). A browser
+can't read that header from another origin unless HII exposes it. **Next:** the collector reads it and publishes the
+report with its time (SERVER §6.3).
+
+### KI-036 The Cloudflare token is broader than this app, and the collector has no KV token (medium; A9)
+- The token in `.env` (24 Oct 2026) covers *All zones across all accounts* with Zone Settings, Page Rules, Firewall and
+  DNS: Edit, plus Workers AI, Pages and R2. A leak would reach every zone the owner has, on a host that runs another app.
+- `CF_KV_TOKEN` is empty: the collector can't upload to KV, so the Worker's `/data/live/*` serves what was uploaded by
+  hand, or nothing (the warning, fire and storm tiles then say they couldn't load).
+
+**Next:** OWNER_ACTIONS A9: a token scoped to `autobahn.bot` and the Workers permissions, a KV-only `CF_KV_TOKEN`, then
+`docker compose up -d` (the collector reads `.env` at start) and revoke the broad one.
+
+### KI-037 The cool season's heat correction is provisional and post-hoc (medium; D-046)
+- From November to February the page uses C6 (corrected T and Td, then the heat index; MODELS §1.1). It beat the
+  year-round line on disjoint stations in two winters (MAE 1.53–1.56 vs 3.45–3.56 °C) and kept danger days (7 vs 8 of
+  29), but its form was chosen after the pre-registered test (C5) failed its safety rule.
+- Its dressing SD is the all-season one, so its 10–90 % range is too wide in winter (held 92–98 %).
+- **Next:** run `research/archive_forecasts.mjs` daily from the server; score C0 vs C6 as issued at the end of November
+  and in March (pre-registered in MODELS §1.1). Revert if C6 loses on MAE or danger-day hits.
 
 ## Fixed
+
+### KI-F37 The page didn't compute what the heat line was fitted on (0.4.0; model check §4.1–4.2)
+It took each member's max over every hour (+0.41 °C on average, up to 8.3 °C on showery days) and Open-Meteo's
+elevation-downscaled temperature (Surat Thani +1.27 °C, up to +4.6 °C of heat index); the line was fitted on GRIB values
+at 13:00 and 16:00. The page now asks for `elevation=nan` and uses 13:00/16:00 (`outlook.PREDICTOR_HOURS`). Tests
+"model check §4.1", "§4.2"; the JavaScript reproduces the research code's C6 value to four decimals.
+
+### KI-F27 One forecast in three colours and two numbers (0.4.0; S1, S2, U1, X1, X4)
+- **The defect:** the verdict and the tile capped a heat forecast at เตรียมตัว (orange), while the 3-day table, the
+  card's day chips and the pre-warnings showed it red (ทำทันที's colour), at 5 of 6 points on 24 Oct. The table rounded
+  the heat number where the card floored it (10 of 18 cells 1 °C apart), and a band edge put "41 °C" under "อันตราย" (X3).
+- **The fix:** `assess.fcLevel` grades a forecast window for every view; pre-warnings take a forecast's colour (`tone`)
+  and keep the agency's band in words; one display rounding (`assess.heatNum`). Tests "S1", "S2", "X3".
+
+### KI-F28 An evening's heat read as a 30 % chance of "อันตราย" (0.4.0; S6)
+From 16:00 the "today" window holds no afternoon, and the daily-maximum correction lifted an evening's raw 34.9 °C to
+40.5 °C (31 % ≥ 42 °C at 18:00). Such a window now has no heat summary (`outlook.hasAfternoon`). Test "S6"; the walk's
+18:30 page.
+
+### KI-F29 The 3-day table's colour-only cells, its hidden days and its "today" (0.4.0; was KI-025; S3, S4, S5, U6, U7, U16)
+- Every cell has dots and, for screen readers, the level's word. Visible words were not added: they don't fit three
+  days at 320 px with ก+.
+- At 320 px with ก+ the table showed only "วันนี้" (row names didn't wrap); it fits now (smoke check on the table's box).
+- The first column is "คืนนี้" from 18:00; UV's is the rest of today like every row; the note says dust is expected,
+  not measured, and today's dust chip says "คาด".
+- **Not done (from KI-025):** the quake footnote under the table.
+
+### KI-F30 A province search opened a point 40 km from its town (0.4.0; U2, U20)
+Province and district hits open their seat's subdistrict by code (`places.hitPlace`; KNOWLEDGE §7), share `#t=`, and are
+labelled in the page's language. Test "U2/U20".
+
+### KI-F31 Words that said more, or less, than the data (0.4.0; U3, U5, U8, U9, U14, U15, U21, U24, X13, X14)
+Heat "รู้สึกเหมือน"; the heat band as "ระดับ…" in the verdict; the rain tile's word from the gauge only when the gauge
+raised it; today's quakes counted; "ใกล้หมู่บ้านเสี่ยง"; the lowest felt words from M5.5; no "about under 10%"; GDACS's
+failure said; AQI sub-indices named; the estimate-based dust outlook says so. Tests "U3/U25", "U5", "U8/U15", "U9",
+"U14/U21/U24".
+
+### KI-F32 Coordinates on screen for a GPS or saved place (0.4.0; U17, X7)
+The footer and a reopened "บ้าน" showed "13.76, 100.5". Now only a place found on OpenStreetMap shows its rounded point;
+the footer says "ปัดเศษราว 1 กม.". Smoke check "no coordinates on screen for a GPS place".
+
+### KI-F33 Access: narrow targets, low contrast, a chatty live region (0.4.0; V28, S9, U11, U18, U19, U22, U23)
+44 × 44 targets both ways (↻, hotlines, the warning's toggles); the LINE button 7.3:1 and level-0 words 6.0:1; a focus
+ring in the link colour; two undefined CSS variables; the verdict's live region is busy until settled and rewritten only
+when it changes.
+
+### KI-F34 A notice TMD had updated or cancelled stayed on the page (0.4.0; X8, latent)
+The collector reads CAP `<references>` and drops what an Update or Cancel replaces (`collect.inForce`). Test "X8".
+
+### KI-F35 Links: TMD's raw XML and Thai guides on the English page (0.4.0; U10, X10, X15)
+"ประกาศฉบับเต็ม" opens TMD's warnings page in the page's language; the English page links to บ้านรอดไหม's `/en/` guides.
+Test "X10".
+
+### KI-F36 No server of its own yet (0.4.0; was KI-032)
+The collector runs on `autobahn-bot` since 24 Oct 2026 (D-045), with Air4Thai's 173 stations and ThaiWater answering.
+The Cloudflare side is KI-036 and KI-001.
 
 ### KI-F23 The verdict was below the fold on small phones (0.3.0; was KI-022, V5)
 With a place open, the finder folds to one "🔎 ดูที่อื่น" row and the four buttons sit under the verdict. At 360 × 640

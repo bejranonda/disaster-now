@@ -115,9 +115,9 @@ export function dailyMax(aq, v, nowMs) {
   const h = aq.hourly;
   const i0 = nowIndex(h.time, aq.utc_offset_seconds || 0, nowMs);
   if (i0 < 0) return [];
-  // a whole calendar day for UV: today's peak may already be past, but it is still today's peak
-  const start = h.time.findIndex((t) => t.slice(0, 10) === h.time[i0].slice(0, 10));
-  return dayWindows(h.time, start).map((d) => {
+  // the rest of today, like every other column of the table: 0.3.0 kept the whole calendar day, so at 15:00 the
+  // table said "10" beside a tile that said "UV 2, low" about a noon that had passed (visitor audit U16)
+  return dayWindows(h.time, i0).map((d) => {
     const vals = h[v].slice(d.i0, d.i1).filter((x) => x != null);
     return { date: d.date, max: vals.length ? Math.max(...vals) : null };
   });

@@ -12,29 +12,40 @@ export function norm(s) {
 const strip = (s) => String(s || "").trim().replace(PREFIX, "");
 
 let index = null;
-/** Build the search index once: subdistricts, districts (centre = mean of their subdistricts) and provinces. */
+/** Build the search index once: subdistricts, districts and provinces. A district or province opens at its seat, a
+ *  subdistrict (`seat`): the district's xx01 (its lowest code where xx01 no longer exists, 14 of 928) and the
+ *  province's pv0101, the capital's town subdistrict (ศรีภูมิ, ตลาดใหญ่, ในเมือง …). The geographic centre it used before
+ *  put "เชียงใหม่" on a mountain 40 km from the city, at 994 m (visitor audit U2). */
 export function buildIndex(data) {
   if (index && index.data === data) return index;
   const rows = [];
-  const dist = new Map();
+  const byCode = new Map();
+  const first = new Map(); // district → its lowest subdistrict code
   for (const t of data.t) {
     const p = describe(data, t);
     rows.push({ kind: "t", key: norm(t[1]) + "|" + norm(t[2]), name: p, lat: t[3], lon: t[4], code: t[0] });
+    byCode.set(t[0], t);
     const a = Math.floor(t[0] / 100);
-    const d = dist.get(a) || { n: 0, lat: 0, lon: 0, p };
-    d.n++; d.lat += t[3]; d.lon += t[4];
-    dist.set(a, d);
+    if (!first.has(a) || t[0] < first.get(a)) first.set(a, t[0]);
   }
-  for (const [code, d] of dist) {
+  const seatOf = (code) => byCode.get(code);
+  for (const [code, low] of first) {
     const [th, en] = data.a[String(code)];
-    rows.push({ kind: "a", key: norm(th) + "|" + norm(en), name: d.p, lat: d.lat / d.n, lon: d.lon / d.n, code });
+    const s = seatOf(code * 100 + 1) || seatOf(low);
+    rows.push({ kind: "a", key: norm(th) + "|" + norm(en), name: describe(data, s), lat: s[3], lon: s[4], code, seat: s[0] });
   }
   for (const [code, v] of Object.entries(data.p)) {
-    rows.push({ kind: "p", key: norm(v[0]) + "|" + norm(v[1]), name: { province: { th: v[0], en: v[1] }, pv: +code }, lat: v[2], lon: v[3], code: +code });
+    const low = Math.min(...[...first.values()].filter((c) => Math.floor(c / 10000) === +code));
+    const s = seatOf(+code * 10000 + 101) || seatOf(low);
+    rows.push({ kind: "p", key: norm(v[0]) + "|" + norm(v[1]), name: { province: { th: v[0], en: v[1] }, pv: +code }, lat: s[3], lon: s[4], code: +code, seat: s[0] });
   }
   index = { data, rows };
   return index;
 }
+
+/** What choosing a hit opens: always a subdistrict by its code, so the header is drawn in the page's language and a
+ *  shared link carries `#t=` (U2, U20). */
+export const hitPlace = (h) => ({ lat: h.lat, lon: h.lon, name: "", source: "tambon", code: h.kind === "t" ? h.code : h.seat });
 
 /** Local matches for what was typed: whole words first ("บางกะปิ" before "บางกะปิใต้"), provinces and districts
  *  before subdistricts, at most `limit`. Several words narrow down: "บางรัก กรุงเทพ". */
@@ -62,11 +73,11 @@ export function hitLabel(r, lang = "th") {
   const n = r.name;
   const bkk = n.pv === 10;
   if (lang === "en") {
-    if (r.kind === "p") return `${n.province.en} (province)`;
+    if (r.kind === "p") return `${n.province.en}, town centre`;
     if (r.kind === "a") return `${n.amphoe.en}, ${n.province.en}`;
     return `${n.tambon.en}, ${n.amphoe.en}, ${n.province.en}`;
   }
-  if (r.kind === "p") return `จังหวัด${n.province.th}`;
+  if (r.kind === "p") return `จังหวัด${n.province.th} (ตัวเมือง)`;
   if (r.kind === "a") return `${bkk ? "เขต" : "อ."}${n.amphoe.th} ${bkk ? "" : "จ."}${n.province.th}`;
   return `${bkk ? "แขวง" : "ต."}${n.tambon.th} ${bkk ? "เขต" : "อ."}${n.amphoe.th} ${bkk ? "" : "จ."}${n.province.th}`;
 }

@@ -1,0 +1,20 @@
+Nov–Feb: current line worse than raw beyond chance at 39 of 78 stations; raw worse than the line at 24
+  worse at: 48304 +64%, 48310 +35%, 48334 +84%, 48351 +45%, 48357 +237%, 48358 +269%, 48360 +51%, 48374 +194%, 48377 +36%, 48380 +13%, 48382 +24%, 48383 +84%, 48387 +610%, 48390 +22%, 48403 +100%, 48404 +99%, 48410 +67%, 48413 +46%, 48416 +57%, 48418 +49%, 48425 +175%, 48426 +71%, 48427 +186%, 48432 +28%, 48433 +109%, 48435 +319%, 48437 +363%, 48451 +109%, 48453 +204%, 48474 +34%, 48478 +52%, 48479 +65%, VTBD +331%, VTBS +289%, VTCC +133%, VTCT +154%, VTSS +30%, VTUD +134%, VTUU +140%
+Mar–Oct: current line worse than raw beyond chance at 8 of 79 stations; raw worse than the line at 64
+
+VTCC         16–31 Oct 2024: n=16, obs mean 36.9, raw error -3.3, corrected error +2.6, false ≥33 on 0, false ≥42 on 2, obs ≥42 on 0
+VTCC         16–31 Oct 2025: n=16, obs mean 34.4, raw error -1.8, corrected error +4.1, false ≥33 on 3, false ≥42 on 0, obs ≥42 on 0
+VTCC         16–31 Oct 2026: n= 8, obs mean 37.9, raw error -2.9, corrected error +2.7, false ≥33 on 0, false ≥42 on 0, obs ≥42 on 0
+VTCT         16–31 Oct 2024: n=16, obs mean 35.5, raw error -2.9, corrected error +3.1, false ≥33 on 2, false ≥42 on 0, obs ≥42 on 0
+VTCT         16–31 Oct 2025: n=16, obs mean 33.1, raw error -2.5, corrected error +3.7, false ≥33 on 7, false ≥42 on 0, obs ≥42 on 0
+VTCT         16–31 Oct 2026: n= 8, obs mean 37.3, raw error -3.3, corrected error +2.5, false ≥33 on 0, false ≥42 on 0, obs ≥42 on 0
+THM00048304  16–31 Oct 2025: n= 3, obs mean 31.3, raw error -2.9, corrected error +3.6, false ≥33 on 3, false ≥42 on 0, obs ≥42 on 0
+THM00048304  16–31 Oct 2026: n= 1, obs mean 36.1, raw error -2.2, corrected error +3.6, false ≥33 on 0, false ≥42 on 0, obs ≥42 on 0
+THM00048334  16–31 Oct 2025: n=14, obs mean 34.4, raw error -3.3, corrected error +2.9, false ≥33 on 4, false ≥42 on 0, obs ≥42 on 0
+THM00048334  16–31 Oct 2026: n= 6, obs mean 37.4, raw error -3.8, corrected error +2.0, false ≥33 on 0, false ≥42 on 0, obs ≥42 on 0
+THM00048310  16–31 Oct 2024: n=10, obs mean 37.8, raw error -5.2, corrected error +0.8, false ≥33 on 0, false ≥42 on 0, obs ≥42 on 0
+THM00048310  16–31 Oct 2025: n=10, obs mean 34.0, raw error -2.7, corrected error +3.5, false ≥33 on 4, false ≥42 on 0, obs ≥42 on 0
+THM00048310  16–31 Oct 2026: n= 3, obs mean 39.4, raw error -4.6, corrected error +1.1, false ≥33 on 0, false ≥42 on 0, obs ≥42 on 0
+THM00048351  16–31 Oct 2024: n= 7, obs mean 40.2, raw error -2.9, corrected error +2.5, false ≥33 on 0, false ≥42 on 3, obs ≥42 on 1
+THM00048351  16–31 Oct 2025: n=14, obs mean 37.8, raw error -2.9, corrected error +2.8, false ≥33 on 0, false ≥42 on 3, obs ≥42 on 0
+THM00048351  16–31 Oct 2026: n= 6, obs mean 41.8, raw error -3.4, corrected error +1.8, false ≥33 on 0, false ≥42 on 4, obs ≥42 on 2

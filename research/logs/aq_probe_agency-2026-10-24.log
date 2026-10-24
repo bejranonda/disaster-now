@@ -1,0 +1,36 @@
+
+===== run 2026-10-24T09:16:24+00:00 : research/aq_probe_agency.py =====
+## PCD (Air4Thai) 7-day dust forecast images
+  https://air4thai.pcd.go.th/UpdateV2/forecastImage/forecast_img_bkk.png: 200 image/png 388774 bytes, last-modified Sat, 24 Oct 2026 08:34:57 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_north.png: 200 image/png 331528 bytes, last-modified Sat, 24 Oct 2026 08:35:09 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_esan.png: 200 image/png 347049 bytes, last-modified Sat, 24 Oct 2026 08:35:45 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_centralwest.png: 200 image/png 338128 bytes, last-modified Sat, 24 Oct 2026 08:36:08 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_east.png: 200 image/png 338132 bytes, last-modified Sat, 24 Oct 2026 08:35:55 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_south.png: 200 image/png 328805 bytes, last-modified Sat, 24 Oct 2026 08:35:21 GMT, access-control-allow-origin None
+
+## Air4Thai station JSON: the 'forecast' field
+  173 stations; 'forecast' present at 173, non-empty at 0; example []
+
+## TMD ventilation-rate forecast by province
+  https://ozone.tmd.go.th/PM2.5/weather/Map/VRATE/daily/vruv_provinces.json: 200 application/json 229083 bytes, last-modified Sat, 24 Oct 2026 06:22:14 GMT, access-control-allow-origin None
+  top-level keys: ['generated_utc', 'generated_local', 'source', 'variable', 'base_valid_time_utc', 'start_date_local', 'adm1_geojson', 'thai_points_geojson', 'province_name_style', 'province_alias_applied', 'mapping_method', 'mask_method']
+  first item: "2026-10-24T06:20:59Z"
+
+===== run 2026-10-24T09:17:18+00:00 : research/aq_probe_agency.py =====
+## PCD (Air4Thai) 7-day dust forecast images
+  https://air4thai.pcd.go.th/UpdateV2/forecastImage/forecast_img_bkk.png: 200 image/png 388774 bytes, last-modified Sat, 24 Oct 2026 08:34:57 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_north.png: 200 image/png 331528 bytes, last-modified Sat, 24 Oct 2026 08:35:09 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_esan.png: 200 image/png 347049 bytes, last-modified Sat, 24 Oct 2026 08:35:45 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_centralwest.png: 200 image/png 338128 bytes, last-modified Sat, 24 Oct 2026 08:36:08 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_east.png: 200 image/png 338132 bytes, last-modified Sat, 24 Oct 2026 08:35:55 GMT, access-control-allow-origin None
+  https://air4thai.com/UpdateV2/forecastImage/forecast_img_south.png: 200 image/png 328805 bytes, last-modified Sat, 24 Oct 2026 08:35:21 GMT, access-control-allow-origin None
+
+## Air4Thai station JSON: the 'forecast' field
+  173 stations; 'forecast' present at 173, non-empty at 0; example []
+
+## TMD ventilation-rate forecast by province
+  https://ozone.tmd.go.th/PM2.5/weather/Map/VRATE/daily/vruv_provinces.json: 200 application/json 229083 bytes, last-modified Sat, 24 Oct 2026 06:22:14 GMT, access-control-allow-origin None
+  top-level keys: ['generated_utc', 'generated_local', 'source', 'variable', 'base_valid_time_utc', 'start_date_local', 'adm1_geojson', 'thai_points_geojson', 'province_name_style', 'province_alias_applied', 'mapping_method', 'mask_method', 'thresholds_tmd', 'coords', 'summaries', 'daily_rank', 'days']
+  source GFS_TH_DAILYMEAN, variable VRATE_daily_mean, generated 2026-10-24T13:20:59+0700, thresholds {"poor_lt": 2000.0, "fair_range": [2000.0, 4000.0], "good_range": [4000.0, 8000.0], "very_good_range": [8000.0, 16000.0], "excellent_ge": 16000.0, "units": "m^2/s"}
+  days: 10 (d00 2026-10-24, d01 2026-10-25, d02 2026-10-26, d03 2026-10-27, d04 2026-10-28, d05 2026-10-29, d06 2026-10-30, d07 2026-10-31, d08 2026-11-01, d09 2026-11-02); provinces per day 77
+  e.g. Chiang Mai, first day: {"name_th": "เชียงใหม่", "pro_code": "50", "vrate_mean": 385.96, "class": "poor", "class_th": "ไม่ดี"}

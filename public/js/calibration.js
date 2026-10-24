@@ -11,7 +11,29 @@ export const HEAT = {
   lead1: { a: 10.375, b: 0.8647, sd: 2.95 }, // today and tomorrow (fit: day-1 forecasts, 30–33 h)
   lead2: { a: 11.689, b: 0.826, sd: 3.01 }, // the day after (fit: day-2 forecasts, 54–57 h)
   source: "research/out/e1e2_results.json (fit 2025 sample A; tested 2026 and held-out stations)",
+  /** Nov–Feb only, PROVISIONAL and post-hoc (the owner's choice, 24 Oct 2026, D-046; "C6" in
+   *  docs/research/model-check-2026-10-24.md §1.7–1.8): the line above runs 3–4 °C hot in the cool season, worse than
+   *  no correction (disjoint stations, Nov–Feb: MAE 3.56 vs raw 3.07 °C), because the heat index magnifies the model's
+   *  T and Td errors in humid heat and barely in dry cool air. C6 corrects the inputs instead: T' = T + dT,
+   *  Td' = Td + dTd, the NWS heat index at 13:00 and 16:00, max, + c. Fitted Oct 2024–Sep 2025 (samples A+B); on the
+   *  disjoint stations in Nov–Feb: MAE 1.53 °C, danger days 7 of 29 (the line: 8); on the ensemble, false "เตือนภัย
+   *  likely" 9 % of days (the line: 43 %), range held 95 %. Score it as issued at the end of November and in March
+   *  (research/archive_forecasts.mjs), and drop it if it loses. */
+  cool: {
+    months: [11, 12, 1, 2],
+    lead1: { dT: 1.658, dTd: 1.491, c: 0.898, sd: 2.86 },
+    lead2: { dT: 1.651, dTd: 1.429, c: 0.889, sd: 2.93 },
+    source: "research/heat_tdtd_posthoc.py, research/logs/heat_tdtd_posthoc-2026-10-24.log",
+  },
 };
+
+// Magnus, as the model check found Open-Meteo's RH treatment (17.625, 243.04; mean difference −0.02 %)
+const MA = 17.625;
+const MB = 243.04;
+/** Dew point (°C) from air temperature (°C) and relative humidity (%). */
+export const dewPoint = (t, rh) => { const g = Math.log(Math.max(rh, 0.1) / 100) + (MA * t) / (MB + t); return (MB * g) / (MA - g); };
+/** Relative humidity (%) from air temperature and dew point (°C), clipped to 0–100. */
+export const rhFrom = (t, td) => Math.max(0, Math.min(100, 100 * Math.exp((MA * td) / (MB + td) - (MA * t) / (MB + t))));
 
 /** PM2.5, daily mean: "damped persistence" — the latest measured 24-h mean scaled by CAMS's own predicted change,
  *  damped: forecast = measured × (CAMS(day) ÷ CAMS(past 24 h))^β. β fitted Dec 2025–Feb 2026 (sample A stations).

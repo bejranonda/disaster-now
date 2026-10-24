@@ -17,4 +17,4 @@
 | [OWNER_ACTIONS.md](OWNER_ACTIONS.md) | what needs the owner |
 | [ROADMAP.md](ROADMAP.md) | what comes next |
 | [FRANK_FEEDBACK.md](FRANK_FEEDBACK.md) | honest feedback, and a better prompt |
-| [research/](research/) | the full research records of 23 Oct 2026, the live cross-check and GLM's copy review |
+| [research/](research/) | the full research records of 23 Oct 2026, the live cross-check and GLM's copy review; and of 24 Oct 2026: the session's [review](research/review-2026-10-24.md), the [visitor audit](research/visitor-audit-2026-10-24.md), the [output cross-check](research/output-crosscheck-2026-10-24.md), the [model check](research/model-check-2026-10-24.md), [predicting air pollution](research/predict-air-2026-10-24.md) (the other prediction studies and the Hat Yai hindcast follow in a later commit) |

@@ -1,15 +1,16 @@
 # Guidelines: the rules for this app
 
-Rules for anyone (person or AI) changing Disaster Now. Most come from the owner's two other apps, FloodWatch (`flood2026-research`) and บ้านรอดไหม (`Hazard-huntz`), whose rules were learned from real users and real mistakes; the source of each is named. Where a rule is this app's own choice, it says so.
+Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai Risk (code name `disaster-now`). Most come from the owner's two other apps, FloodWatch (`flood2026-research`) and บ้านรอดไหม (`Hazard-huntz`), whose rules were learned from real users and real mistakes; the source of each is named. Where a rule is this app's own choice, it says so.
 
 ## 1. Non-negotiables
 
 1. **Never invent a number, an endpoint, a field or a safety line.** Every cut point in `public/js/levels.js`, every advice line in `public/js/actions.js` and every endpoint in `public/js/sources.js` has a source in [KNOWLEDGE.md](KNOWLEDGE.md) (a live call with date and host, or a document with its URL and the date read). Anything not confirmed is marked **[unverified]** in the docs. (FloodWatch's evidence rule; Hazard-huntz rule 1.)
 2. **The agency's own word leads every tile, and the app's level is never milder than that word.** PCD's "เริ่มมีผลกระทบต่อสุขภาพ" stays on the PM2.5 tile; TMD's warning is quoted, never re-graded. (UX scout §5a; a Swiss study found inconsistent warnings lower action.)
 3. **Measurements before models.** A PCD station within 15 km beats GISTDA's estimate; a rain gauge within 10 km and 3 h beats the model; every model value carries the "แบบจำลอง" tag. (FloodWatch's habit; KNOWLEDGE §5.)
-3b. **A forecast alone tops out at "เตรียมตัว".** "ทำทันที" needs a measurement or an agency's warning (`assess.MODEL_MAX`; the visitor audit found "act now" on most October nights for the next afternoon's heat). The tile keeps the agency's word for the value, and names the window ("บ่ายนี้").
+3b. **A forecast alone tops out at "เตรียมตัว", in every view.** "ทำทันที" needs a measurement or an agency's warning (`assess.MODEL_MAX`; the visitor audit found "act now" on most October nights for the next afternoon's heat). The tile keeps the agency's word for the value, and names the window ("บ่ายนี้"). **One function grades a forecast window** (`assess.fcLevel`) for the tile, the card's day chips and the 3-day table, and a pre-warning takes a forecast's colour (`tone`) while its words keep the agency's band: in 0.3.0 the table and the pre-warnings were red beside an orange tile (review S1, visitor audit U1).
 3c. **An official warning lifts its hazard's tile** (`events.capHazard`), leads the verdict over model-only tiles of the same level, and is listed first among the pre-warnings; "nothing unusual" is never said beside it.
 3d. **Only validated numbers, in validated words.** Raw model heat is never shown (it reads 5 °C low); rain is three chance words, never a forecast amount; gusts say "ยังไม่ได้ตรวจสอบความแม่นยำ"; quakes use the validated felt words and never "ไม่รู้สึก" or a damage word (MODELS.md).
+3e. **A correction is used only inside the domain it was fitted on.** The heat correction was fitted on afternoon daily maxima, so a window with no afternoon left (from 16:00) gets no heat number at all (`outlook.hasAfternoon`; review S6: an evening became "danger heat, 30 %"). The lowest felt words rest on reports from M5.5 and larger, so a smaller quake gets the facts alone (`assess.FELT_WORDS_MIN_MAG`, U15).
 4. **Ranges and chances, never countdowns.** "พรุ่งนี้ โอกาส 40%", never "ฝนจะตกใน 2 ชม. 15 นาที". Chances are rounded to tens and never 0 or 100 % (51 ensemble members can't be certain). (FloodWatch D-005.)
 5. **One scale for every hazard, named by what to do:** ยังไม่น่าห่วง · ติดตามไว้ · เตรียมตัว · ทำทันที, with a 4-dot meter so colour is never the only signal, and a hatched grey "ไม่มีข้อมูล". Never "ปลอดภัย". (UX scout §5a.)
 6. **The chance rule** (this app's own choice, `levels.js → CHANCE`): a window's level is the highest level at least half the ensemble members reach; if "เตรียมตัว" or worse is only *possible* (≥ 20 % of members), the window is at least "ติดตามไว้". Change it only with a reliability test (MODELS.md).
@@ -23,7 +24,8 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **The exact GPS fix never leaves the phone,** not even through a screenshot or a link: providers and links (FloodWatch's too) get it rounded to 2 decimals (~1.1 km), as FloodWatch rounds before its reverse lookup (`geo.rounded`), and a GPS place shows no coordinates on screen.
 - **The subdistrict comes from the phone** (nearest of 7,425 centres in `data/tambon.json`), not from a reverse-geocoding call.
 - **Search text leaves the phone only when the person presses search,** to Photon or Nominatim, and the button says so ("คำที่พิมพ์จะส่งไปค้นที่นั่น"). Never per keystroke (Nominatim forbids autocomplete).
-- **Shared links carry a subdistrict code (`#t=100103`) for a GPS fix or a saved place,** never the coordinates of a home; a searched public place may keep its rounded point (`#p=`). (UX scout §4c.6.)
+- **Shared links carry a subdistrict code (`#t=100103`) for a GPS fix, a saved place, or a subdistrict, district or province found by name** (a district or province opens its seat's subdistrict, review U2), never the coordinates of a home; a place found on OpenStreetMap may keep its rounded point (`#p=`). (UX scout §4c.6.)
+- **Coordinates appear on screen only for a place found on OpenStreetMap,** never for a GPS fix or a saved place, not even rounded (the footer says "ปัดเศษราว 1 กม."; U17).
 - **Saved places stay in `localStorage`,** five at most. This site has no server, no cookies, no analytics and no accounts. Anything per-person on a future server waits for a Thai lawyer (Hazard-huntz docs/09 §7, PDPA).
 - **The static host must allow geolocation:** `Permissions-Policy: geolocation=(self)`. Don't copy Hazard-huntz's `_headers`, which sends `geolocation=()`.
 
@@ -34,7 +36,7 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **Never faster than the source updates;** the page caches each answer in `sessionStorage` for the source's cadence (`SOURCES[*].ttl`).
 - **No evasion:** no bot-challenge solving, no proxy rotation, no geo-block workaround. A Thai-only host waits for a host in Thailand (Hazard-huntz docs/09 §5).
 - **Each source's time rule is written in code with a test** (KNOWLEDGE §4): GISTDA's "Z" is Bangkok time; HII has no offset; TMD's CAP list `pubDate` is 7 h early (take the item's times); TMD's storm `time` is UTC without an offset; TMD's quake RSS description is Bangkok time in CE.
-- **Show the age:** "⏱ N ชม.ก่อน" when a reading is over an hour old; readings older than about three times their cadence are dropped (PCD stations 3 h, gauges 6 h, rain 3 h).
+- **Show the age:** "⏱ N ชม.ก่อน" when a reading is over an hour old; readings older than about three times their cadence are dropped (PCD stations 3 h, gauges 3 h as FloodWatch's `STALE_MIN` of 180 min, rain 3 h; the docs said 6 h for gauges until 0.4.0, X19).
 - **Never mix agencies' levels** (FloodWatch KI-217): each gauge is judged only against its own bank; BMA's canals by BMA's thresholds (only FloodWatch has them).
 - **Credit every source on its card** and in "ข้อมูลมาจากไหน".
 
@@ -54,7 +56,8 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 
 ## 6. Layout and testing
 
-- **Phones first:** checked at 320 × 568 and 390 × 844, with ก+ (larger text), in light and dark mode; no horizontal scroll; every tap target ≥ 44 px (the smoke test measures it).
+- **Phones first:** checked at 320 × 568 and 390 × 844, with ก+ (larger text), in light and dark mode; no horizontal scroll, **of the page or of the 3-day table inside its box** (0.3.0 hid tomorrow at 320 px with ก+, review S5); every tap target ≥ 44 px **wide and tall** (the smoke test measures both since 0.4.0; it measured height only and missed V28); text at 4.5:1 or more (U18).
+- **Walk the clock.** The fixture walk pins 02:50 in Bangkok, when every window still holds an afternoon. A change to anything with a day or a window is also walked in the evening (`npm run smoke` has an 18:30 page since 0.4.0) and read at noon: the evening's false "danger heat" (S6) lived from 0.2.0 to 0.4.0 because nobody looked after 16:00.
 - **Fixed tile order** (`assess.ORDER`): people learn where their tile is.
 - **Before a change is done:** `npm test` (unit tests on saved live responses) and `CHROME_PATH=/opt/pw-browsers/chromium npm run smoke` (the visitor walk on fixtures, the clock pinned to 23 Oct 2026 19:50 UTC); for source or wording changes also `npm run smoke -- --live` and read its output as a visitor would.
 - **A new source gets:** a fixture saved from a live call, a parser with a unit test (including its missing-value codes and its time rule), a row in [SOURCES.md](SOURCES.md), and its credit line.
@@ -81,15 +84,19 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **Keys:** only in `.env` (git-ignored, mode 600), one scoped token per job, passed by docker-compose.yml to the one
   service that needs it, sent in headers, never printed (`tools/env-check.mjs` shows states, not values). **Never copy
   another project's `.env`**, and never run another site's tunnel token here.
-- **One server per app (D-040):** the stack runs on the risk server, never on FloodWatch's production machine or
-  another app's. Sharing one means sharing an IP's rate limits (KI-029), Docker and disk, and `.env` files drift
-  between projects. Run `npm run preflight` before the first `docker compose up` on any host; it fails where
-  FloodWatch runs.
+- **Never on FloodWatch's server; a shared host only with the owner's yes (D-040, amended by D-045):** the stack never
+  runs on FloodWatch's production machine: it shares this app's sources (ThaiWater's per-IP limit, KI-029), its
+  `.env` was copied once, and its tunnel token must never run here. Another app's host is allowed when the owner says
+  so and that app calls none of this app's sources, shares no `.env` and no tunnel: since 24 Oct 2026 the collector
+  runs on `autobahn-bot` beside BrainPlatform, bound to 127.0.0.1, read-only, non-root, never touching its
+  containers. Run `npm run preflight` before the first `docker compose up` on any host; it fails where FloodWatch runs
+  and warns about any other app's containers.
 - **Re-issue, don't copy (D-041):**
   - A new server gets a fresh `.env` from `.env.example`, with tokens made for this project.
   - A changed token goes into `.env` only; nothing in git changes.
   - An old token that another app may use is revoked only after checking that app.
-- **Live calls:** one live walk and one cross-check per change, never loops (ThaiWater limits per IP, KI-029).
+- **Live calls:** one live walk and one cross-check per change, never loops (ThaiWater limits per IP, KI-029). Layout
+  probes block ThaiWater (`page.route(/thaiwater/, …)`): they don't need it.
 
 ## 9. Git
 

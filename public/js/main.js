@@ -2,18 +2,20 @@
 // the cards as each answer arrives. All judgement is in assess.js; this file only fetches and draws.
 
 import { inThailand, nearestTambon, placeLabel, rounded } from "./geo.js";
-import { get, urls, SOURCES } from "./sources.js";
+import { get, urls, SOURCES, liveFresh } from "./sources.js";
 import { assess, timeText, localOf } from "./assess.js";
-import { localSearch, hitLabel, osmSearch, loadPlaces, savePlace, removePlace } from "./places.js";
+import { localSearch, hitLabel, hitPlace, osmSearch, loadPlaces, savePlace, removePlace } from "./places.js";
 import { STR, makeT, PRE_WHAT, PRE_ICON } from "./i18n.js";
 import { scale } from "./levels.js";
 import { dayName } from "./assess.js";
 import { IPE } from "./ipe.js";
 
-export const VERSION = "0.3.0";
+export const VERSION = "0.4.0";
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LV = (l) => (l == null || l < 0 ? "none" : scale(l).key);
+const TMD_WARNINGS = "https://www.tmd.go.th/warning-and-events/warnings"; // 200, text/html (24 Oct 2026)
+const TMD_WARNINGS_EN = "https://www.tmd.go.th/en/warning-and-events/warnings";
 
 let lang = "th";
 try { lang = new URLSearchParams(location.search).get("lang") || localStorage.getItem("dn:lang") || "th"; } catch { /* storage blocked */ }
@@ -22,6 +24,7 @@ let t = makeT(lang);
 let tambon = null;
 let current = null; // {lat, lon, name, source, place}
 let bundle = null;
+let lastVerdict = null; // the verdict's last HTML: the live region is rewritten only when it changes (U11)
 let loadSeq = 0;
 let lastLoad = 0;
 
@@ -33,7 +36,7 @@ function applyStatic() {
   document.querySelectorAll("[data-t-title]").forEach((el) => { el.title = t(el.dataset.tTitle); el.setAttribute("aria-label", t(el.dataset.tTitle)); });
   $("#lang").textContent = lang === "en" ? "ไทย" : "EN";
   $("#lang").lang = lang === "en" ? "th" : "en";
-  document.title = `${t("brand")}${lang === "en" ? "" : " · Disaster Now"}`;
+  document.title = `${t("brand")}${lang === "en" ? "" : " · Thai Risk"}`;
   $("#ver").textContent = `v${VERSION}`;
   $("#about").innerHTML = aboutHtml();
 }
@@ -168,7 +171,10 @@ async function jmaStorms() {
  *  Without them, Air4Thai is read from its CORS mirror (its certificate chain is broken: KNOWN_ISSUES KI-002). */
 async function liveFiles(u) {
   const idx = await get("live", u.live("index.json"));
-  const files = idx.ok ? idx.data.files || {} : {};
+  // files from a collector that stopped are missing, not calm (S12): KV keeps the last upload forever
+  const fresh = idx.ok && liveFresh(idx.data, bundle.now);
+  if (idx.ok && !fresh) bundle.errors.live = "stale";
+  const files = fresh ? idx.data.files || {} : {};
   const want = { warnings: "warnings.json", hotspots: "hotspots.json", tmdQuakes: "tmd_quakes.json", storms: "storms.json", a4t: "air4thai.json" };
   await Promise.all(Object.entries(want).map(async ([k, f]) => {
     if (!files[f]) return;
@@ -195,10 +201,14 @@ function renderPlace() {
   // GPS: the subdistrict is the headline, "my location" the subtitle; a named place keeps its name on top
   const named = p.source !== "gps" && p.name && p.name !== label ? p.name : "";
   const r2 = rounded(p.lat, p.lon);
-  $("#place-name").textContent = named || label || `${r2.lat}, ${r2.lon}`;
+  const xy = `${r2.lat.toFixed(2)}, ${r2.lon.toFixed(2)}`;
+  // U17 (GUIDELINES §2): coordinates only for a searched public place, never for a GPS fix or a saved place (a "บ้าน"
+  // screenshot travels in family groups), nor for a subdistrict, whose name says where it is
+  const showXY = p.source === "search";
+  $("#place-name").textContent = named || label || (showXY ? xy : "");
   const acc = p.source === "gps" && p.acc ? ` (±${p.acc < 1000 ? `${Math.round(p.acc)} ${lang === "en" ? "m" : "ม."}` : `${(p.acc / 1000).toFixed(1)} ${lang === "en" ? "km" : "กม."}`})` : "";
   $("#place-sub").innerHTML = esc([p.source === "gps" ? `📍 ${t("gpsLabel")}${acc}` : "", named ? `${t("nearT")} ${label}` : "",
-    p.source === "gps" ? "" : `${r2.lat}, ${r2.lon}`].filter(Boolean).join(" · "))
+    showXY ? xy : ""].filter(Boolean).join(" · "))
     + (p.source === "gps" ? ` · <button type="button" class="linkbtn" id="notthis">${esc(t("notThis"))}</button>` : "");
   $("#notthis")?.addEventListener("click", () => { openFinder(); say(t("pickYourself")); });
   const saved = loadPlaces().some((x) => Math.abs(x.lat - p.lat) < 0.001 && Math.abs(x.lon - p.lon) < 0.001);
@@ -222,7 +232,10 @@ function render(first) {
   const chip = (i) => `<a class="vchip lv-${LV(i.level)}" href="#card-${i.id}">${i.icon} ${esc(i.short)}: <b>${esc(i.word)}</b></a>`;
   const head = v.worst ? `${v.worst.icon} ${esc(v.worst.short)}: ${esc(v.worst.word)}${v.worst.value ? ` · ${esc(v.worst.value)}` : ""}`
     : v.warning ? `📢 ${esc(lang === "en" ? (v.warning.en?.checked ? v.warning.en.headline : v.warning.event) : v.warning.headline || v.warning.event)}` : v.level === 0 ? esc(t(v.complete ? "allQuiet" : "quietSoFar")) : "";
-  if (settled) vEl.innerHTML = first && v.level < 0 ? `<div class="vtitle">${esc(t("loading"))}</div>`
+  // U11: the verdict is an aria-live region; it was rewritten 12 times in 14 s on one load. It is busy (silent) until
+  // settled, and rewritten only when its text changes
+  vEl.setAttribute("aria-busy", settled ? "false" : "true");
+  const vHtml = !settled ? null : first && v.level < 0 ? `<div class="vtitle">${esc(t("loading"))}</div>`
     : `<div class="vtop"><span class="meter" aria-hidden="true">${meter(v.level)}</span><span class="vname">${esc(v.name)}</span></div>`
       + (head ? `<div class="vhead">${head}</div>` : "")
       + (v.action ? `<div class="vact">👉 ${esc(v.action.text)} <span class="muted small">(${esc(v.action.src.map((x) => x.kind === "official" ? t("official") : t("news")).filter((x, i, a) => a.indexOf(x) === i).join(", "))})</span></div>` : "")
@@ -230,11 +243,13 @@ function render(first) {
       + (v.action?.baby ? `<div class="vact baby">👶 ${esc(v.action.baby.text)}</div>` : "")
       + (v.others.length ? `<div class="vchips"><span class="muted small">${esc(t("alsoL"))}</span>${v.others.map(chip).join("")}</div>` : "")
       + (v.missing.length ? `<div class="vmiss">${esc(t("missing"))} ${esc(v.missing.join(", "))}</div>` : "");
+  if (vHtml != null && vHtml !== lastVerdict) { vEl.innerHTML = vHtml; lastVerdict = vHtml; }
+  else if (vHtml == null) lastVerdict = null;
   // tiles: every hazard at a glance, in a fixed order
   $("#tiles").innerHTML = r.cards.map((c) => `<a class="tile lv-${LV(c.level)}" href="#card-${c.id}">
       <span class="tt"><span aria-hidden="true">${c.icon}</span> ${esc(c.short)}</span>
       <span class="tw">${esc(c.level < 0 ? (c.error ? t("failed") : t("noData")) : c.word || "")}</span>
-      ${c.value ? `<span class="tv">${esc(c.value)}</span>` : ""}
+      ${c.value && c.level >= 0 ? `<span class="tv">${esc(c.value)}</span>` : ""}
       <span class="meter" aria-label="${esc(c.level < 0 ? t("noData") : scale(c.level)[lang])}">${meter(c.level)}</span></a>`).join("");
   // official warnings
   const when = (iso) => (iso && !Number.isNaN(Date.parse(iso)) ? timeText(localOf(Date.parse(iso)), bundle.now, lang) : "");
@@ -247,7 +262,8 @@ function render(first) {
       + `${(en ? en.instruction : w.instruction) ? `<p>${esc(en ? en.instruction : w.instruction)}</p>` : ""}`
       + `${(en ? en.description : w.description) ? `<details><summary>${esc(t(en ? "readNoticeEn" : "readNotice"))}</summary><p class="small">${esc(en ? en.description : w.description)}</p></details>` : ""}`
       + (en ? `<p class="small muted mt">🤖 ${esc(t("machineTr"))}</p><details lang="th"><summary>${esc(t("thaiOriginal"))}</summary><p class="small">${esc([w.headline, w.instruction, w.description].filter(Boolean).join("\n\n"))}</p></details>` : "")
-      + `${w.link || w.web ? `<a class="how" href="${esc(w.link || w.web)}" target="_blank" rel="noopener">${esc(t("fullNotice"))} →</a>` : ""}</div>`;
+      // TMD's warnings page in the page's language: the CAP item's link is a raw XML file (visitor audit U10)
+      + `<a class="how" href="${esc(lang === "en" ? TMD_WARNINGS_EN : TMD_WARNINGS)}" target="_blank" rel="noopener">${esc(t("fullNotice"))} →</a></div>`;
   }).join("")
     + (bundle.warnings || !bundle.liveDone ? "" : `<div class="warn lv-none">${esc(t("warnUnknown"))}</div>`);
   // pre-warnings
@@ -257,9 +273,9 @@ function render(first) {
   $("#pre").innerHTML = official + (pre.length ? pre.map((x) => {
     const what = PRE_WHAT[x.hazard][x.level][lang];
     const date = x.date || r.outlook[x.day]?.date;
-    const day = date ? dayName(x.day, date, lang) : "";
+    const day = date ? dayName(x.day, date, lang, bundle.now) : "";
     const key = x.chance != null ? "preItem" : "preItemNoP";
-    return `<li class="lv-${LV(x.level)}">${esc(t(key, { icon: PRE_ICON[x.hazard], what, day, p: x.chance != null ? chancePct(x.chance) : "" }))}</li>`;
+    return `<li class="lv-${LV(x.tone ?? x.level)}">${esc(t(key, { icon: PRE_ICON[x.hazard], what, day, p: x.chance != null ? chancePct(x.chance) : "" }))}</li>`;
   }).join("") : official ? "" : `<li class="lv-ok">${esc(t("preNone"))}</li>`);
   // detail cards in the same fixed order as the tiles
   $("#cards").innerHTML = r.cards.map(cardHtml).join("");
@@ -269,7 +285,8 @@ function render(first) {
   $("#profile-wrap").hidden = !r.profile.length;
   $("#profile").innerHTML = r.profile.map((p) => `<li><span aria-hidden="true">${p.icon}</span> ${esc(p.text)}</li>`).join("");
   const rp = rounded(current.lat, current.lon);
-  $("#updated").textContent = t("updated", { t: new Date(bundle.now).toLocaleTimeString(lang === "en" ? "en-GB" : "th-TH", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }), m: r.members || "–", p: `${rp.lat}, ${rp.lon}` });
+  $("#updated").textContent = t("updated", { t: new Date(bundle.now).toLocaleTimeString(lang === "en" ? "en-GB" : "th-TH", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }), m: r.members || "–",
+    p: current.source === "search" ? `${rp.lat.toFixed(2)}, ${rp.lon.toFixed(2)}` : t("roundedKm") }); // U17
 }
 
 /** ●●○○: the level counted in dots, so it reads without colour; dashes for no data. */
@@ -283,7 +300,7 @@ function cardHtml(c) {
   const days = c.days ? `<div class="days">${c.days.map((d) => `<span class="day lv-${LV(d.level)}"><b>${esc(d.name)}</b> ${esc(d.text)}${d.sub ? `<small>${esc(d.sub)}</small>` : ""}</span>`).join("")}</div>` : "";
   const age = (s) => (s.ageH != null && s.ageH >= 1 ? ` <span class="old">⏱ ${esc(t("hoursOld", { h: Math.round(s.ageH) }))}</span>` : "");
   const src = c.src.length ? `<div class="src">${esc(t("source"))}: ${c.src.map((s) => `${esc(s.name)}${s.time ? ` · ${esc(s.time)}` : ""}${age(s)}${s.model ? ` <span class="tag">${esc(t("model"))}</span>` : ""}`).join(" | ")}</div>` : "";
-  const links = [c.link && `<a class="how" href="${esc(c.link.href)}${lang === "en" ? "" : ""}" target="_blank" rel="noopener">${esc(c.link.text)} →</a>`,
+  const links = [c.link && `<a class="how" href="${esc(c.link.href)}" target="_blank" rel="noopener">${esc(c.link.text)} →</a>`,
     c.more && `<a class="how" href="${esc(c.more.href)}" target="_blank" rel="noopener">${esc(c.more.text)} →</a>`].filter(Boolean).join("");
   return `<article class="card lv-${lv}" id="card-${c.id}">
     <header><span class="ic" aria-hidden="true">${c.icon}</span><h3>${esc(c.title)}</h3><span class="pill lv-${lv}">${esc(word || "")}<span class="meter" aria-hidden="true">${meter(c.level)}</span></span></header>
@@ -310,7 +327,9 @@ function errWord(e) {
 
 function outlookHtml(rows) {
   // the row's name says what a rain cell is ("โอกาสฝนหนัก"); the cell had "ฝนหนัก" twice under its word before 0.3.0
-  const cell = (x) => (x ? `<td class="lv-${LV(x.level)}">${esc(x.text)}</td>` : "<td class='lv-none'>–</td>");
+  // dots under every value, and the level's word for screen readers: colour is never the only signal (KI-025)
+  const cell = (x) => (x ? `<td class="lv-${LV(x.level)}">${esc(x.text)}<small class="meter" aria-hidden="true">${meter(x.level)}</small>`
+    + `${x.level >= 0 ? `<span class="sr-only"> (${esc(scale(x.level)[lang])})</span>` : ""}</td>` : "<td class='lv-none'>–</td>");
   return `<table class="outlook"><thead><tr><th></th>${rows.map((r) => `<th>${esc(r.name)}</th>`).join("")}</tr></thead><tbody>
     <tr><th>${esc(t("rowHeat"))}</th>${rows.map((r) => cell(r.heat)).join("")}</tr>
     <tr><th>${esc(t("rowRain"))}</th>${rows.map((r) => cell(r.rain)).join("")}</tr>
@@ -342,7 +361,7 @@ async function onInput() {
     + `<li><button type="button" class="hit osm" id="osm">${esc(t("osmBtn", { q }))}</button><div id="osm-res"></div></li>`;
   ul.querySelectorAll(".hit[data-i]").forEach((b) => b.addEventListener("click", () => {
     const h = hits[+b.dataset.i];
-    choose(h.kind === "t" ? { lat: h.lat, lon: h.lon, name: "", source: "tambon", code: h.code } : { lat: h.lat, lon: h.lon, name: hitLabel(h, lang), source: "search" });
+    choose(hitPlace(h));
   }));
   $("#osm").addEventListener("click", () => osm(q));
 }
@@ -383,8 +402,7 @@ $("#search").addEventListener("submit", async (e) => {
   const hits = localSearch(tambon, q, 1);
   // an exact subdistrict/district/province name goes straight there; anything else asks OpenStreetMap
   if (hits.length && hits[0].key.split("|").includes(q.replace(/\s/g, "").toLowerCase().replace(/^(ตำบล|ต\.|อำเภอ|อ\.|จังหวัด|จ\.|แขวง|เขต)/, ""))) {
-    const h = hits[0];
-    choose(h.kind === "t" ? { lat: h.lat, lon: h.lon, name: "", source: "tambon", code: h.code } : { lat: h.lat, lon: h.lon, name: hitLabel(h, lang), source: "search" });
+    choose(hitPlace(hits[0]));
   } else osm(q);
 });
 $("#refresh").addEventListener("click", () => { try { Object.keys(sessionStorage).filter((k) => k.startsWith("dn:")).forEach((k) => sessionStorage.removeItem(k)); } catch { /* ignore */ } if (current) load(); });

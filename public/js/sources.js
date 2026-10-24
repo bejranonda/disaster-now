@@ -42,6 +42,13 @@ export const SOURCES = {
     credit: { th: "ตัวเก็บข้อมูลของเว็บนี้", en: "this site's collector" } },
 };
 
+/** The collector runs every 15 min; its files older than this are treated as missing. KV keeps the last upload while the
+ *  server is down, and a stale empty warnings or hotspot list would read as "no warning", "no fire": calm from missing
+ *  data (GUIDELINES rule 7; review 24 Oct 2026, S12). */
+export const LIVE_MAX_AGE_H = 2;
+export const liveFresh = (index, nowMs) => Boolean(index && index.generated
+  && nowMs - Date.parse(index.generated) <= LIVE_MAX_AGE_H * 3.6e6 && Date.parse(index.generated) <= nowMs + 6e5);
+
 const qs = (o) => Object.entries(o).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&");
 
 function cacheGet(key, ttlMin) {
@@ -86,7 +93,9 @@ export function urls(lat, lon, { pv, tambon, nowMs = Date.now() } = {}) {
   return {
     ens: `${SOURCES.ens.url}?${qs({ latitude: p.lat, longitude: p.lon,
       hourly: "temperature_2m,relative_humidity_2m,precipitation,wind_gusts_10m", models: "ecmwf_ifs025",
-      forecast_days: 4, timezone: "Asia/Bangkok" })}`,
+      // the grid cell's own height, as the heat correction was fitted (GRIB values): Open-Meteo's default lapse-rate
+      // downscaling moved T by up to +1.27 °C (Surat Thani), the heat index up to +4.6 °C (model check §4.2)
+      elevation: "nan", forecast_days: 4, timezone: "Asia/Bangkok" })}`,
     aq: `${SOURCES.aq.url}?${qs({ latitude: p.lat, longitude: p.lon,
       hourly: "pm2_5,pm10,ozone,nitrogen_dioxide,sulphur_dioxide,carbon_monoxide,uv_index,dust",
       past_days: 1, forecast_days: 4, timezone: "Asia/Bangkok" })}`,

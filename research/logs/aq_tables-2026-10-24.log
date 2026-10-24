@@ -1,0 +1,481 @@
+
+===== run 2026-10-24T09:12:49+00:00 : research/aq_tables.py =====
+## Exp A: Brier and Brier skill (damp_dress = damped ratio dressed with a lognormal error; reference persistence = pers_dress); chosen on S2: damp_emp
+| Test set | Lead | Event | n | base rate | Brier clim | Brier persistence | Brier damped (page-rounded) | BSS vs clim | BSS vs persistence |
+|---|---|---|---|---|---|---|---|---|---|
+| A-S3 (later season, fit stations) | 1 | > 37.5 | 895 | 35.8 % | 0.1822 | 0.1003 | 0.0871 (0.0916) | +0.52 [+0.45, +0.58] | +0.13 [+0.07, +0.18] |
+| A-S3 (later season, fit stations) | 1 | > 75.0 | 895 | 3.5 % | 0.0414 | 0.0205 | 0.0191 (0.0280) | +0.54 [+0.44, +0.64] | +0.07 [-0.03, +0.16] |
+| A-S3 (later season, fit stations) | 2 | > 37.5 | 894 | 35.8 % | 0.1818 | 0.1576 | 0.1248 (0.1287) | +0.31 [+0.22, +0.39] | +0.21 [+0.16, +0.26] |
+| A-S3 (later season, fit stations) | 2 | > 75.0 | 894 | 3.5 % | 0.0413 | 0.0322 | 0.0313 (0.0388) | +0.24 [+0.08, +0.40] | +0.03 [-0.07, +0.13] |
+| B-S3 (later season, disjoint stations) | 1 | > 37.5 | 1200 | 34.7 % | 0.1830 | 0.0901 | 0.0760 (0.0803) | +0.58 [+0.53, +0.64] | +0.16 [+0.11, +0.21] |
+| B-S3 (later season, disjoint stations) | 1 | > 75.0 | 1200 | 5.6 % | 0.0526 | 0.0233 | 0.0215 (0.0291) | +0.59 [+0.46, +0.70] | +0.08 [-0.04, +0.18] |
+| B-S3 (later season, disjoint stations) | 2 | > 37.5 | 1198 | 34.7 % | 0.1833 | 0.1434 | 0.1094 (0.1127) | +0.40 [+0.33, +0.47] | +0.24 [+0.19, +0.28] |
+| B-S3 (later season, disjoint stations) | 2 | > 75.0 | 1198 | 5.7 % | 0.0521 | 0.0379 | 0.0339 (0.0409) | +0.35 [+0.18, +0.49] | +0.10 [-0.02, +0.21] |
+| B-S4 (newest season, disjoint stations) | 1 | > 37.5 | 1169 | 26.2 % | 0.1786 | 0.0477 | 0.0432 (0.0497) | +0.76 [+0.71, +0.80] | +0.10 [+0.02, +0.16] |
+| B-S4 (newest season, disjoint stations) | 1 | > 75.0 | 1169 | 8.4 % | 0.0707 | 0.0181 | 0.0149 (0.0235) | +0.79 [+0.71, +0.85] | +0.18 [+0.09, +0.26] |
+| B-S4 (newest season, disjoint stations) | 2 | > 37.5 | 1168 | 26.1 % | 0.1778 | 0.0733 | 0.0600 (0.0656) | +0.66 [+0.60, +0.71] | +0.18 [+0.11, +0.25] |
+| B-S4 (newest season, disjoint stations) | 2 | > 75.0 | 1168 | 8.4 % | 0.0707 | 0.0285 | 0.0226 (0.0306) | +0.68 [+0.56, +0.77] | +0.21 [+0.10, +0.31] |
+| A-S4 (newest season, fit stations) | 1 | > 37.5 | 895 | 26.1 % | 0.1895 | 0.0697 | 0.0589 (0.0646) | +0.69 [+0.63, +0.74] | +0.16 [+0.11, +0.21] |
+| A-S4 (newest season, fit stations) | 1 | > 75.0 | 895 | 8.7 % | 0.0587 | 0.0166 | 0.0138 (0.0225) | +0.76 [+0.68, +0.83] | +0.17 [-0.00, +0.29] |
+| A-S4 (newest season, fit stations) | 2 | > 37.5 | 894 | 26.2 % | 0.1897 | 0.1031 | 0.0817 (0.0854) | +0.57 [+0.50, +0.63] | +0.21 [+0.15, +0.26] |
+| A-S4 (newest season, fit stations) | 2 | > 75.0 | 894 | 8.7 % | 0.0587 | 0.0256 | 0.0201 (0.0280) | +0.66 [+0.54, +0.76] | +0.22 [+0.06, +0.35] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 37.5 | 2368 | 46.2 % | 0.1420 | 0.0830 | 0.0723 (0.0766) | +0.49 [+0.44, +0.53] | +0.13 [+0.08, +0.18] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 75.0 | 2368 | 13.6 % | 0.0824 | 0.0385 | 0.0380 (0.0452) | +0.54 [+0.47, +0.60] | +0.01 [-0.06, +0.08] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 37.5 | 2359 | 46.2 % | 0.1422 | 0.1216 | 0.1004 (0.1033) | +0.29 [+0.23, +0.35] | +0.17 [+0.12, +0.22] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 75.0 | 2359 | 13.7 % | 0.0827 | 0.0582 | 0.0571 (0.0628) | +0.31 [+0.21, +0.40] | +0.02 [-0.07, +0.10] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 37.5 | 1172 | 37.5 % | 0.2173 | 0.0673 | 0.0647 (0.0699) | +0.70 [+0.65, +0.74] | +0.04 [-0.02, +0.09] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 75.0 | 1172 | 12.7 % | 0.1096 | 0.0277 | 0.0257 (0.0330) | +0.77 [+0.69, +0.83] | +0.07 [-0.01, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 37.5 | 1172 | 37.5 % | 0.2167 | 0.1063 | 0.0943 (0.0984) | +0.56 [+0.50, +0.62] | +0.11 [+0.06, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 75.0 | 1172 | 12.8 % | 0.1090 | 0.0456 | 0.0416 (0.0482) | +0.62 [+0.52, +0.71] | +0.09 [-0.01, +0.18] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 37.5 | 897 | 36.1 % | 0.2217 | 0.0783 | 0.0719 (0.0757) | +0.68 [+0.62, +0.72] | +0.08 [+0.03, +0.13] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 75.0 | 897 | 11.5 % | 0.0931 | 0.0294 | 0.0262 (0.0348) | +0.72 [+0.65, +0.78] | +0.11 [+0.00, +0.20] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 37.5 | 896 | 36.0 % | 0.2219 | 0.1221 | 0.1079 (0.1109) | +0.51 [+0.43, +0.58] | +0.12 [+0.06, +0.17] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 75.0 | 896 | 11.5 % | 0.0931 | 0.0455 | 0.0411 (0.0481) | +0.56 [+0.45, +0.66] | +0.10 [-0.01, +0.20] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 37.5 | 2369 | 30.5 % | 0.1808 | 0.0692 | 0.0598 (0.0652) | +0.67 [+0.63, +0.71] | +0.14 [+0.10, +0.17] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 75.0 | 2369 | 7.0 % | 0.0615 | 0.0207 | 0.0182 (0.0263) | +0.70 [+0.63, +0.76] | +0.12 [+0.04, +0.19] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 37.5 | 2366 | 30.5 % | 0.1806 | 0.1088 | 0.0850 (0.0894) | +0.53 [+0.48, +0.58] | +0.22 [+0.18, +0.26] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 75.0 | 2366 | 7.0 % | 0.0613 | 0.0332 | 0.0283 (0.0358) | +0.54 [+0.44, +0.62] | +0.15 [+0.07, +0.23] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 37.5 | 328 | 0.3 % | 0.0048 | 0.0056 | 0.0037 (0.0132) | +0.23 [-0.05, +0.68] | +0.34 [-0.03, +0.68] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 75.0 | 328 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +1.00 [+1.00, +1.00] | +0.98 [+0.69, +1.00] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 37.5 | 327 | 0.3 % | 0.0048 | 0.0079 | 0.0062 (0.0151) | -0.28 [-2.49, +0.13] | +0.21 [-0.41, +0.47] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 75.0 | 327 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +0.68 [+0.13, +0.97] | +0.40 [-5.05, +0.96] |
+
+## Exp A: reliability as the page would show it (damp_dress, rounded to tens, kept within 10–90 %)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|37.5: 10% → 1 % (n 1275); 20% → 10 % (n 133); 30% → 30 % (n 93); 40% → 28 % (n 83); 50% → 42 % (n 93); 60% → 49 % (n 72); 70% → 73 % (n 77); 80% → 86 % (n 92); 90% → 97 % (n 451)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|37.5: 10% → 2 % (n 1090); 20% → 8 % (n 188); 30% → 19 % (n 149); 40% → 32 % (n 128); 50% → 47 % (n 121); 60% → 50 % (n 117); 70% → 69 % (n 99); 80% → 80 % (n 96); 90% → 95 % (n 378)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|75.0: 10% → 0 % (n 2061); 20% → 0 % (n 53); 30% → 11 % (n 35); 40% → 37 % (n 30); 50% → 39 % (n 23); 60% → 54 % (n 24); 70% → 58 % (n 24); 80% → 84 % (n 19); 90% → 95 % (n 100)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|75.0: 10% → 0 % (n 1978); 20% → 6 % (n 100); 30% → 11 % (n 57); 40% → 36 % (n 42); 50% → 39 % (n 28); 60% → 38 % (n 29); 70% → 74 % (n 23); 80% → 72 % (n 29); 90% → 89 % (n 80)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|37.5: 10% → 1 % (n 527); 20% → 10 % (n 63); 30% → 21 % (n 47); 40% → 29 % (n 52); 50% → 48 % (n 52); 60% → 45 % (n 44); 70% → 71 % (n 41); 80% → 90 % (n 52); 90% → 97 % (n 294)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|37.5: 10% → 2 % (n 441); 20% → 8 % (n 92); 30% → 22 % (n 73); 40% → 34 % (n 62); 50% → 49 % (n 63); 60% → 48 % (n 75); 70% → 64 % (n 53); 80% → 78 % (n 49); 90% → 95 % (n 264)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|75.0: 10% → 0 % (n 948); 20% → 0 % (n 23); 30% → 12 % (n 17); 40% → 40 % (n 20); 50% → 40 % (n 15); 60% → 63 % (n 19); 70% → 75 % (n 16); 80% → 84 % (n 19); 90% → 95 % (n 95)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|75.0: 10% → 1 % (n 902); 20% → 7 % (n 56); 30% → 18 % (n 28); 40% → 58 % (n 24); 50% → 33 % (n 15); 60% → 46 % (n 24); 70% → 80 % (n 20); 80% → 74 % (n 27); 90% → 89 % (n 76)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|37.5: 10% → 2 % (n 367); 20% → 3 % (n 75); 30% → 21 % (n 62); 40% → 21 % (n 43); 50% → 50 % (n 42); 60% → 47 % (n 30); 70% → 75 % (n 32); 80% → 85 % (n 39); 90% → 98 % (n 207)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|37.5: 10% → 3 % (n 260); 20% → 7 % (n 118); 30% → 18 % (n 84); 40% → 19 % (n 72); 50% → 46 % (n 52); 60% → 54 % (n 50); 70% → 67 % (n 43); 80% → 72 % (n 39); 90% → 95 % (n 178)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|75.0: 10% → 0 % (n 733); 20% → 14 % (n 22); 30% → 39 % (n 18); 40% → 38 % (n 21); 50% → 40 % (n 10); 60% → 67 % (n 6); 70% → 64 % (n 11); 80% → 80 % (n 20); 90% → 96 % (n 56)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|75.0: 10% → 1 % (n 711); 20% → 20 % (n 35); 30% → 10 % (n 21); 40% → 43 % (n 21); 50% → 38 % (n 13); 60% → 44 % (n 18); 70% → 62 % (n 16); 80% → 72 % (n 18); 90% → 98 % (n 43)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|37.5: 10% → 0 % (n 324); 20% → 0 % (n 3); 40% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|37.5: 10% → 0 % (n 312); 20% → 12 % (n 8); 30% → 0 % (n 6); 60% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|75.0: 10% → 0 % (n 328)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|75.0: 10% → 0 % (n 327)
+
+## Exp A: fitted dressing (sample A, S1+S2)
+
+===== run 2026-10-24T09:13:02+00:00 : research/aq_tables.py =====
+## Exp A: Brier and Brier skill (damp_dress = damped ratio dressed with a lognormal error; reference persistence = pers_dress); chosen on S2: damp_emp
+| Test set | Lead | Event | n | base rate | Brier clim | Brier persistence | Brier damped (page-rounded) | BSS vs clim | BSS vs persistence |
+|---|---|---|---|---|---|---|---|---|---|
+| A-S3 (later season, fit stations) | 1 | > 37.5 | 895 | 35.8 % | 0.1822 | 0.1003 | 0.0871 (0.0916) | +0.52 [+0.45, +0.58] | +0.13 [+0.07, +0.18] |
+| A-S3 (later season, fit stations) | 1 | > 75.0 | 895 | 3.5 % | 0.0414 | 0.0205 | 0.0191 (0.0280) | +0.54 [+0.44, +0.64] | +0.07 [-0.03, +0.16] |
+| A-S3 (later season, fit stations) | 2 | > 37.5 | 894 | 35.8 % | 0.1818 | 0.1576 | 0.1248 (0.1287) | +0.31 [+0.22, +0.39] | +0.21 [+0.16, +0.26] |
+| A-S3 (later season, fit stations) | 2 | > 75.0 | 894 | 3.5 % | 0.0413 | 0.0322 | 0.0313 (0.0388) | +0.24 [+0.08, +0.40] | +0.03 [-0.07, +0.13] |
+| B-S3 (later season, disjoint stations) | 1 | > 37.5 | 1200 | 34.7 % | 0.1830 | 0.0901 | 0.0760 (0.0803) | +0.58 [+0.53, +0.64] | +0.16 [+0.11, +0.21] |
+| B-S3 (later season, disjoint stations) | 1 | > 75.0 | 1200 | 5.6 % | 0.0526 | 0.0233 | 0.0215 (0.0291) | +0.59 [+0.46, +0.70] | +0.08 [-0.04, +0.18] |
+| B-S3 (later season, disjoint stations) | 2 | > 37.5 | 1198 | 34.7 % | 0.1833 | 0.1434 | 0.1094 (0.1127) | +0.40 [+0.33, +0.47] | +0.24 [+0.19, +0.28] |
+| B-S3 (later season, disjoint stations) | 2 | > 75.0 | 1198 | 5.7 % | 0.0521 | 0.0379 | 0.0339 (0.0409) | +0.35 [+0.18, +0.49] | +0.10 [-0.02, +0.21] |
+| B-S4 (newest season, disjoint stations) | 1 | > 37.5 | 1169 | 26.2 % | 0.1786 | 0.0477 | 0.0432 (0.0497) | +0.76 [+0.71, +0.80] | +0.10 [+0.02, +0.16] |
+| B-S4 (newest season, disjoint stations) | 1 | > 75.0 | 1169 | 8.4 % | 0.0707 | 0.0181 | 0.0149 (0.0235) | +0.79 [+0.71, +0.85] | +0.18 [+0.09, +0.26] |
+| B-S4 (newest season, disjoint stations) | 2 | > 37.5 | 1168 | 26.1 % | 0.1778 | 0.0733 | 0.0600 (0.0656) | +0.66 [+0.60, +0.71] | +0.18 [+0.11, +0.25] |
+| B-S4 (newest season, disjoint stations) | 2 | > 75.0 | 1168 | 8.4 % | 0.0707 | 0.0285 | 0.0226 (0.0306) | +0.68 [+0.56, +0.77] | +0.21 [+0.10, +0.31] |
+| A-S4 (newest season, fit stations) | 1 | > 37.5 | 895 | 26.1 % | 0.1895 | 0.0697 | 0.0589 (0.0646) | +0.69 [+0.63, +0.74] | +0.16 [+0.11, +0.21] |
+| A-S4 (newest season, fit stations) | 1 | > 75.0 | 895 | 8.7 % | 0.0587 | 0.0166 | 0.0138 (0.0225) | +0.76 [+0.68, +0.83] | +0.17 [-0.00, +0.29] |
+| A-S4 (newest season, fit stations) | 2 | > 37.5 | 894 | 26.2 % | 0.1897 | 0.1031 | 0.0817 (0.0854) | +0.57 [+0.50, +0.63] | +0.21 [+0.15, +0.26] |
+| A-S4 (newest season, fit stations) | 2 | > 75.0 | 894 | 8.7 % | 0.0587 | 0.0256 | 0.0201 (0.0280) | +0.66 [+0.54, +0.76] | +0.22 [+0.06, +0.35] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 37.5 | 2368 | 46.2 % | 0.1420 | 0.0830 | 0.0723 (0.0766) | +0.49 [+0.44, +0.53] | +0.13 [+0.08, +0.18] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 75.0 | 2368 | 13.6 % | 0.0824 | 0.0385 | 0.0380 (0.0452) | +0.54 [+0.47, +0.60] | +0.01 [-0.06, +0.08] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 37.5 | 2359 | 46.2 % | 0.1422 | 0.1216 | 0.1004 (0.1033) | +0.29 [+0.23, +0.35] | +0.17 [+0.12, +0.22] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 75.0 | 2359 | 13.7 % | 0.0827 | 0.0582 | 0.0571 (0.0628) | +0.31 [+0.21, +0.40] | +0.02 [-0.07, +0.10] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 37.5 | 1172 | 37.5 % | 0.2173 | 0.0673 | 0.0647 (0.0699) | +0.70 [+0.65, +0.74] | +0.04 [-0.02, +0.09] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 75.0 | 1172 | 12.7 % | 0.1096 | 0.0277 | 0.0257 (0.0330) | +0.77 [+0.69, +0.83] | +0.07 [-0.01, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 37.5 | 1172 | 37.5 % | 0.2167 | 0.1063 | 0.0943 (0.0984) | +0.56 [+0.50, +0.62] | +0.11 [+0.06, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 75.0 | 1172 | 12.8 % | 0.1090 | 0.0456 | 0.0416 (0.0482) | +0.62 [+0.52, +0.71] | +0.09 [-0.01, +0.18] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 37.5 | 897 | 36.1 % | 0.2217 | 0.0783 | 0.0719 (0.0757) | +0.68 [+0.62, +0.72] | +0.08 [+0.03, +0.13] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 75.0 | 897 | 11.5 % | 0.0931 | 0.0294 | 0.0262 (0.0348) | +0.72 [+0.65, +0.78] | +0.11 [+0.00, +0.20] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 37.5 | 896 | 36.0 % | 0.2219 | 0.1221 | 0.1079 (0.1109) | +0.51 [+0.43, +0.58] | +0.12 [+0.06, +0.17] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 75.0 | 896 | 11.5 % | 0.0931 | 0.0455 | 0.0411 (0.0481) | +0.56 [+0.45, +0.66] | +0.10 [-0.01, +0.20] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 37.5 | 2369 | 30.5 % | 0.1808 | 0.0692 | 0.0598 (0.0652) | +0.67 [+0.63, +0.71] | +0.14 [+0.10, +0.17] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 75.0 | 2369 | 7.0 % | 0.0615 | 0.0207 | 0.0182 (0.0263) | +0.70 [+0.63, +0.76] | +0.12 [+0.04, +0.19] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 37.5 | 2366 | 30.5 % | 0.1806 | 0.1088 | 0.0850 (0.0894) | +0.53 [+0.48, +0.58] | +0.22 [+0.18, +0.26] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 75.0 | 2366 | 7.0 % | 0.0613 | 0.0332 | 0.0283 (0.0358) | +0.54 [+0.44, +0.62] | +0.15 [+0.07, +0.23] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 37.5 | 328 | 0.3 % | 0.0048 | 0.0056 | 0.0037 (0.0132) | +0.23 [-0.05, +0.68] | +0.34 [-0.03, +0.68] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 75.0 | 328 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +1.00 [+1.00, +1.00] | +0.98 [+0.69, +1.00] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 37.5 | 327 | 0.3 % | 0.0048 | 0.0079 | 0.0062 (0.0151) | -0.28 [-2.49, +0.13] | +0.21 [-0.41, +0.47] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 75.0 | 327 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +0.68 [+0.13, +0.97] | +0.40 [-5.05, +0.96] |
+
+## Exp A: reliability as the page would show it (damp_dress, rounded to tens, kept within 10–90 %)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|37.5: 10% → 1 % (n 1275); 20% → 10 % (n 133); 30% → 30 % (n 93); 40% → 28 % (n 83); 50% → 42 % (n 93); 60% → 49 % (n 72); 70% → 73 % (n 77); 80% → 86 % (n 92); 90% → 97 % (n 451)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|37.5: 10% → 2 % (n 1090); 20% → 8 % (n 188); 30% → 19 % (n 149); 40% → 32 % (n 128); 50% → 47 % (n 121); 60% → 50 % (n 117); 70% → 69 % (n 99); 80% → 80 % (n 96); 90% → 95 % (n 378)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|75.0: 10% → 0 % (n 2061); 20% → 0 % (n 53); 30% → 11 % (n 35); 40% → 37 % (n 30); 50% → 39 % (n 23); 60% → 54 % (n 24); 70% → 58 % (n 24); 80% → 84 % (n 19); 90% → 95 % (n 100)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|75.0: 10% → 0 % (n 1978); 20% → 6 % (n 100); 30% → 11 % (n 57); 40% → 36 % (n 42); 50% → 39 % (n 28); 60% → 38 % (n 29); 70% → 74 % (n 23); 80% → 72 % (n 29); 90% → 89 % (n 80)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|37.5: 10% → 1 % (n 527); 20% → 10 % (n 63); 30% → 21 % (n 47); 40% → 29 % (n 52); 50% → 48 % (n 52); 60% → 45 % (n 44); 70% → 71 % (n 41); 80% → 90 % (n 52); 90% → 97 % (n 294)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|37.5: 10% → 2 % (n 441); 20% → 8 % (n 92); 30% → 22 % (n 73); 40% → 34 % (n 62); 50% → 49 % (n 63); 60% → 48 % (n 75); 70% → 64 % (n 53); 80% → 78 % (n 49); 90% → 95 % (n 264)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|75.0: 10% → 0 % (n 948); 20% → 0 % (n 23); 30% → 12 % (n 17); 40% → 40 % (n 20); 50% → 40 % (n 15); 60% → 63 % (n 19); 70% → 75 % (n 16); 80% → 84 % (n 19); 90% → 95 % (n 95)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|75.0: 10% → 1 % (n 902); 20% → 7 % (n 56); 30% → 18 % (n 28); 40% → 58 % (n 24); 50% → 33 % (n 15); 60% → 46 % (n 24); 70% → 80 % (n 20); 80% → 74 % (n 27); 90% → 89 % (n 76)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|37.5: 10% → 2 % (n 367); 20% → 3 % (n 75); 30% → 21 % (n 62); 40% → 21 % (n 43); 50% → 50 % (n 42); 60% → 47 % (n 30); 70% → 75 % (n 32); 80% → 85 % (n 39); 90% → 98 % (n 207)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|37.5: 10% → 3 % (n 260); 20% → 7 % (n 118); 30% → 18 % (n 84); 40% → 19 % (n 72); 50% → 46 % (n 52); 60% → 54 % (n 50); 70% → 67 % (n 43); 80% → 72 % (n 39); 90% → 95 % (n 178)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|75.0: 10% → 0 % (n 733); 20% → 14 % (n 22); 30% → 39 % (n 18); 40% → 38 % (n 21); 50% → 40 % (n 10); 60% → 67 % (n 6); 70% → 64 % (n 11); 80% → 80 % (n 20); 90% → 96 % (n 56)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|75.0: 10% → 1 % (n 711); 20% → 20 % (n 35); 30% → 10 % (n 21); 40% → 43 % (n 21); 50% → 38 % (n 13); 60% → 44 % (n 18); 70% → 62 % (n 16); 80% → 72 % (n 18); 90% → 98 % (n 43)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|37.5: 10% → 0 % (n 324); 20% → 0 % (n 3); 40% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|37.5: 10% → 0 % (n 312); 20% → 12 % (n 8); 30% → 0 % (n 6); 60% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|75.0: 10% → 0 % (n 328)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|75.0: 10% → 0 % (n 327)
+
+## Exp A: fitted dressing (sample A, S1+S2)
+- lead 1: mu = +0.0017, sd = 0.2406
+- lead 2: mu = +0.0029, sd = 0.3433
+- lead 3: mu = +0.0041, sd = 0.3795
+
+## Exp B: MAE µg/m³ (n); Δ vs damped with 90 % interval
+| Test set | Lead | n | clim | raw_cams | persist | damped | damped_met | damped_fire | ridge_stat | ridge_met | ridge_fire | ridge_all | qr_all | gbm_all |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A-S3 (later season, fit stations) | 1 | 890 | 11.58 | 11.26 | 5.75 | 5.14 | 4.93 | 5.04 | 4.91 | 4.60 | 4.92 | 4.60 | 4.70 | 4.66 |
+| A-S3 (later season, fit stations) | 2 | 888 | 11.59 | 11.29 | 9.04 | 7.46 | 6.87 | 7.37 | 7.28 | 6.52 | 7.33 | 6.57 | 6.48 | 6.82 |
+| B-S3 (later season, disjoint stations) | 1 | 1197 | 14.74 | 14.60 | 6.80 | 5.94 | 5.54 | 5.83 | 5.75 | 5.24 | 5.65 | 5.19 | 5.31 | 5.46 |
+| B-S3 (later season, disjoint stations) | 2 | 1195 | 14.75 | 14.63 | 10.78 | 8.66 | 7.68 | 8.59 | 8.53 | 7.30 | 8.46 | 7.27 | 7.19 | 7.90 |
+| B-S4 (newest season, disjoint stations; no fire data) | 1 | 1166 | 17.00 | 13.06 | 5.21 | 4.73 | 4.69 | – | 4.72 | 4.61 | – | – | – | – |
+| B-S4 (newest season, disjoint stations; no fire data) | 2 | 1163 | 17.00 | 13.06 | 8.08 | 6.58 | 6.33 | – | 6.96 | 6.54 | – | – | – | – |
+| A-S4 (newest season, fit stations; no fire data) | 1 | 892 | 14.57 | 12.93 | 5.27 | 4.63 | 4.56 | – | 4.61 | 4.48 | – | – | – | – |
+| A-S4 (newest season, fit stations; no fire data) | 2 | 891 | 14.63 | 12.96 | 7.84 | 6.37 | 6.19 | – | 6.41 | 6.16 | – | – | – | – |
+| north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | 601 | 18.73 | 18.83 | 7.12 | 7.01 | 6.47 | 6.71 | 6.56 | 6.02 | 6.34 | 5.88 | 6.11 | 6.18 |
+| north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | 601 | 18.72 | 18.85 | 11.47 | 10.68 | 9.21 | 10.52 | 9.98 | 8.64 | 9.93 | 8.58 | 8.58 | 9.33 |
+| north-B-S4 | 1 | 568 | 25.13 | 18.61 | 6.05 | 5.89 | 5.86 | – | 5.88 | 5.73 | – | – | – | – |
+| north-B-S4 | 2 | 566 | 25.16 | 18.63 | 9.57 | 8.40 | 8.05 | – | 8.94 | 8.39 | – | – | – | – |
+| north-A-S3 (Chiang Mai, Lampang, Phayao) | 1 | 443 | 14.25 | 13.47 | 6.23 | 6.11 | 5.89 | 5.94 | 5.70 | 5.53 | 5.71 | 5.52 | 5.69 | 5.43 |
+| north-A-S3 (Chiang Mai, Lampang, Phayao) | 2 | 441 | 14.30 | 13.50 | 10.03 | 9.31 | 8.58 | 9.15 | 8.78 | 8.34 | 8.87 | 8.36 | 8.17 | 8.50 |
+
+### Δ MAE vs damped [90 %] and stations made worse
+- A-S3 (later season, fit stations) lead 1: persist +0.62 [+0.36, +0.89] worse at 35t(+11%), 46t(+16%), 50t(+52%); damped_met -0.21 [-0.32, -0.10]; damped_fire -0.09 [-0.15, -0.04]; ridge_met -0.53 [-0.72, -0.34]; ridge_fire -0.22 [-0.39, -0.06]; ridge_all -0.53 [-0.72, -0.34]; gbm_all -0.47 [-0.65, -0.31]
+- A-S3 (later season, fit stations) lead 2: persist +1.58 [+1.13, +2.06] worse at 35t(+16%), 44t(+17%), 46t(+27%), 50t(+80%); damped_met -0.59 [-0.83, -0.36] worse at 44t(+5%); damped_fire -0.09 [-0.14, -0.03]; ridge_met -0.94 [-1.31, -0.58]; ridge_fire -0.13 [-0.44, +0.20]; ridge_all -0.89 [-1.27, -0.52]; gbm_all -0.64 [-1.02, -0.27]
+- B-S3 (later season, disjoint stations) lead 1: persist +0.86 [+0.57, +1.13] worse at 05t(+40%), 41t(+22%), 42t(+26%), 83t(+37%); damped_met -0.40 [-0.51, -0.29]; damped_fire -0.12 [-0.19, -0.06] worse at 42t(+14%); ridge_met -0.70 [-0.91, -0.51]; ridge_fire -0.29 [-0.51, -0.10]; ridge_all -0.76 [-0.99, -0.55] worse at 42t(+14%); gbm_all -0.48 [-0.69, -0.28] worse at 42t(+24%)
+- B-S3 (later season, disjoint stations) lead 2: persist +2.12 [+1.60, +2.64] worse at 05t(+64%), 41t(+49%), 42t(+39%), 83t(+50%); damped_met -0.99 [-1.20, -0.78] worse at 42t(+9%); damped_fire -0.08 [-0.17, +0.01] worse at 42t(+5%); ridge_met -1.36 [-1.78, -0.96] worse at 42t(+14%); ridge_fire -0.20 [-0.60, +0.17]; ridge_all -1.40 [-1.83, -0.97] worse at 42t(+18%); gbm_all -0.76 [-1.20, -0.33] worse at 42t(+33%)
+- B-S4 (newest season, disjoint stations; no fire data) lead 1: persist +0.48 [+0.22, +0.72] worse at 05t(+44%), 83t(+29%); damped_met -0.04 [-0.11, +0.02]; ridge_met -0.13 [-0.34, +0.08] worse at 05t(+7%)
+- B-S4 (newest season, disjoint stations; no fire data) lead 2: persist +1.50 [+1.04, +1.95] worse at 05t(+72%), 57t(+14%), 67t(+20%), 69t(+17%), 83t(+51%); damped_met -0.25 [-0.37, -0.13]; ridge_met -0.03 [-0.49, +0.38] worse at 05t(+8%)
+- A-S4 (newest season, fit stations; no fire data) lead 1: persist +0.63 [+0.39, +0.89] worse at 35t(+20%), 46t(+19%), 50t(+45%); damped_met -0.07 [-0.14, +0.01]; ridge_met -0.15 [-0.35, +0.06] worse at 35t(+11%)
+- A-S4 (newest season, fit stations; no fire data) lead 2: persist +1.47 [+1.07, +1.90] worse at 35t(+19%), 37t(+17%), 46t(+37%), 50t(+71%); damped_met -0.18 [-0.33, -0.03]; ridge_met -0.21 [-0.65, +0.21]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 1: persist +0.11 [-0.22, +0.46]; damped_met -0.54 [-0.73, -0.36]; damped_fire -0.30 [-0.40, -0.20]; ridge_met -0.99 [-1.33, -0.65]; ridge_fire -0.67 [-1.03, -0.33]; ridge_all -1.13 [-1.51, -0.76]; gbm_all -0.83 [-1.17, -0.49]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 2: persist +0.79 [+0.07, +1.51]; damped_met -1.47 [-1.83, -1.14]; damped_fire -0.16 [-0.34, +0.02]; ridge_met -2.04 [-2.74, -1.32]; ridge_fire -0.75 [-1.40, -0.09]; ridge_all -2.10 [-2.85, -1.36]; gbm_all -1.35 [-2.11, -0.62]
+- north-B-S4 lead 1: persist +0.16 [-0.23, +0.54]; damped_met -0.04 [-0.15, +0.08]; ridge_met -0.17 [-0.58, +0.24]
+- north-B-S4 lead 2: persist +1.17 [+0.43, +1.94] worse at 67t(+20%), 69t(+17%); damped_met -0.35 [-0.54, -0.16]; ridge_met -0.01 [-0.83, +0.82]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 1: persist +0.13 [-0.23, +0.46] worse at 35t(+11%); damped_met -0.22 [-0.40, -0.04]; damped_fire -0.17 [-0.25, -0.09]; ridge_met -0.58 [-0.90, -0.26]; ridge_fire -0.40 [-0.65, -0.14]; ridge_all -0.59 [-0.92, -0.27]; gbm_all -0.67 [-0.97, -0.39]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 2: persist +0.72 [+0.12, +1.29] worse at 35t(+16%); damped_met -0.73 [-1.14, -0.31]; damped_fire -0.17 [-0.27, -0.07]; ridge_met -0.98 [-1.64, -0.32]; ridge_fire -0.44 [-0.93, +0.08]; ridge_all -0.95 [-1.62, -0.28]; gbm_all -0.81 [-1.49, -0.11]
+
+### What each source adds (paired Δ MAE [90 %])
+- A-S3 (later season, fit stations) lead 1: ridge_fire_over_ridge_stat +0.01 [-0.06, +0.09]; ridge_all_over_ridge_met +0.00 [-0.05, +0.05]; ridge_met_over_ridge_stat -0.30 [-0.45, -0.16]; ridge_metblh_over_ridge_met +0.28 [+0.15, +0.41]; ridge_stat_over_damped -0.23 [-0.37, -0.09]; damped_met_over_damped -0.21 [-0.32, -0.10]; damped_fire_over_damped -0.09 [-0.15, -0.04]
+- A-S3 (later season, fit stations) lead 2: ridge_fire_over_ridge_stat +0.05 [-0.05, +0.17]; ridge_all_over_ridge_met +0.05 [-0.04, +0.14]; ridge_met_over_ridge_stat -0.76 [-1.06, -0.48]; ridge_metblh_over_ridge_met +0.75 [+0.53, +0.99]; ridge_stat_over_damped -0.18 [-0.46, +0.10]; damped_met_over_damped -0.59 [-0.83, -0.36]; damped_fire_over_damped -0.09 [-0.14, -0.03]
+- B-S3 (later season, disjoint stations) lead 1: ridge_fire_over_ridge_stat -0.10 [-0.20, -0.01]; ridge_all_over_ridge_met -0.06 [-0.13, +0.01]; ridge_met_over_ridge_stat -0.51 [-0.65, -0.37]; ridge_metblh_over_ridge_met +0.47 [+0.34, +0.60]; ridge_stat_over_damped -0.19 [-0.35, -0.04]; damped_met_over_damped -0.40 [-0.51, -0.29]; damped_fire_over_damped -0.12 [-0.19, -0.06]
+- B-S3 (later season, disjoint stations) lead 2: ridge_fire_over_ridge_stat -0.07 [-0.21, +0.06]; ridge_all_over_ridge_met -0.04 [-0.17, +0.07]; ridge_met_over_ridge_stat -1.23 [-1.49, -0.98]; ridge_metblh_over_ridge_met +1.13 [+0.87, +1.39]; ridge_stat_over_damped -0.13 [-0.49, +0.21]; damped_met_over_damped -0.99 [-1.20, -0.78]; damped_fire_over_damped -0.08 [-0.17, +0.01]
+- B-S4 (newest season, disjoint stations; no fire data) lead 1: ridge_met_over_ridge_stat -0.12 [-0.21, -0.02]; ridge_metblh_over_ridge_met +0.00 [-0.13, +0.14]; ridge_stat_over_damped -0.01 [-0.21, +0.18]; damped_met_over_damped -0.04 [-0.11, +0.02]
+- B-S4 (newest season, disjoint stations; no fire data) lead 2: ridge_met_over_ridge_stat -0.42 [-0.58, -0.26]; ridge_metblh_over_ridge_met +0.13 [-0.15, +0.40]; ridge_stat_over_damped +0.38 [-0.06, +0.82]; damped_met_over_damped -0.25 [-0.37, -0.13]
+- A-S4 (newest season, fit stations; no fire data) lead 1: ridge_met_over_ridge_stat -0.12 [-0.24, -0.01]; ridge_metblh_over_ridge_met +0.11 [-0.02, +0.25]; ridge_stat_over_damped -0.02 [-0.22, +0.19]; damped_met_over_damped -0.07 [-0.14, +0.01]
+- A-S4 (newest season, fit stations; no fire data) lead 2: ridge_met_over_ridge_stat -0.25 [-0.42, -0.06]; ridge_metblh_over_ridge_met +0.26 [+0.01, +0.52]; ridge_stat_over_damped +0.04 [-0.41, +0.47]; damped_met_over_damped -0.18 [-0.33, -0.03]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 1: ridge_fire_over_ridge_stat -0.21 [-0.39, -0.05]; ridge_all_over_ridge_met -0.14 [-0.26, -0.02]; ridge_met_over_ridge_stat -0.53 [-0.77, -0.31]; ridge_metblh_over_ridge_met +0.25 [+0.07, +0.42]; ridge_stat_over_damped -0.46 [-0.72, -0.18]; damped_met_over_damped -0.54 [-0.73, -0.36]; damped_fire_over_damped -0.30 [-0.40, -0.20]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 2: ridge_fire_over_ridge_stat -0.05 [-0.29, +0.20]; ridge_all_over_ridge_met -0.06 [-0.29, +0.15]; ridge_met_over_ridge_stat -1.34 [-1.76, -0.95]; ridge_metblh_over_ridge_met +0.85 [+0.44, +1.28]; ridge_stat_over_damped -0.70 [-1.30, -0.09]; damped_met_over_damped -1.47 [-1.83, -1.14]; damped_fire_over_damped -0.16 [-0.34, +0.02]
+- north-B-S4 lead 1: ridge_met_over_ridge_stat -0.15 [-0.32, +0.01]; ridge_metblh_over_ridge_met -0.21 [-0.43, +0.04]; ridge_stat_over_damped -0.01 [-0.41, +0.40]; damped_met_over_damped -0.04 [-0.15, +0.08]
+- north-B-S4 lead 2: ridge_met_over_ridge_stat -0.55 [-0.80, -0.30]; ridge_metblh_over_ridge_met -0.29 [-0.79, +0.22]; ridge_stat_over_damped +0.54 [-0.27, +1.41]; damped_met_over_damped -0.35 [-0.54, -0.16]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 1: ridge_fire_over_ridge_stat +0.01 [-0.11, +0.13]; ridge_all_over_ridge_met -0.01 [-0.09, +0.07]; ridge_met_over_ridge_stat -0.17 [-0.40, +0.06]; ridge_metblh_over_ridge_met +0.14 [-0.05, +0.32]; ridge_stat_over_damped -0.41 [-0.61, -0.19]; damped_met_over_damped -0.22 [-0.40, -0.04]; damped_fire_over_damped -0.17 [-0.25, -0.09]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 2: ridge_fire_over_ridge_stat +0.10 [-0.08, +0.28]; ridge_all_over_ridge_met +0.02 [-0.12, +0.16]; ridge_met_over_ridge_stat -0.44 [-0.92, +0.01]; ridge_metblh_over_ridge_met +0.53 [+0.17, +0.87]; ridge_stat_over_damped -0.54 [-0.96, -0.10]; damped_met_over_damped -0.73 [-1.14, -0.31]; damped_fire_over_damped -0.17 [-0.27, -0.07]
+
+## Exp B as issued (B-S4): damped_met with forecast weather
+- B-S4 lead1: n 1169; MAE persist 5.20, damped 4.73, with ERA5 4.69 (-0.04 [-0.11, +0.02]), with forecasts 4.70 (-0.03 [-0.11, +0.05]); band agreement damped 76.4 % → 76.5 %; worse at ['41t(+6%)']
+- B-S4 lead2: n 1168; MAE persist 8.07, damped 6.57, with ERA5 6.32 (-0.25 [-0.36, -0.13]), with forecasts 6.31 (-0.26 [-0.40, -0.12]); band agreement damped 68.7 % → 70.1 %; worse at ['41t(+7%)']
+
+## Exp C
+- PM10 > 120: 2.01 % of 151808 station-days at 96 stations (Dec–Apr 4.27 %); PM2.5 <= 37.5 on 168 of 3021 such days
+- PM10 lead1: n 904 at ['57t', '58t', '83t']: MAE cams 28.13, persist 10.04, damped 8.41; bias cams -26.82, persist +0.04, damped +0.16
+- PM10 lead2: n 904 at ['57t', '58t', '83t']: MAE cams 28.16, persist 15.40, damped 11.86; bias cams -26.85, persist +0.04, damped +0.51
+- O3 (26 Jul–23 Oct 2026, 3 stations): 250 station-days, max 93 ppb, 7 days > 70 ppb
+- O3 lead1: n 245: MAE cams 19.2, persist 6.8, damped 6.5 ppb; bias cams +18.3, persist -0.4, damped -0.2
+- O3 lead2: n 242: MAE cams 19.4, persist 8.2, damped 7.0 ppb; bias cams +18.5, persist -0.6, damped -0.3
+
+===== run 2026-10-24T09:13:42+00:00 : research/aq_tables.py =====
+## Exp A: Brier and Brier skill (damp_dress = damped ratio dressed with a lognormal error; reference persistence = pers_dress); chosen on S2: damp_emp
+| Test set | Lead | Event | n | base rate | Brier clim | Brier persistence | Brier damped (page-rounded) | BSS vs clim | BSS vs persistence |
+|---|---|---|---|---|---|---|---|---|---|
+| A-S3 (later season, fit stations) | 1 | > 37.5 | 895 | 35.8 % | 0.1822 | 0.1003 | 0.0871 (0.0916) | +0.52 [+0.45, +0.58] | +0.13 [+0.07, +0.18] |
+| A-S3 (later season, fit stations) | 1 | > 75.0 | 895 | 3.5 % | 0.0414 | 0.0205 | 0.0191 (0.0280) | +0.54 [+0.44, +0.64] | +0.07 [-0.03, +0.16] |
+| A-S3 (later season, fit stations) | 2 | > 37.5 | 894 | 35.8 % | 0.1818 | 0.1576 | 0.1248 (0.1287) | +0.31 [+0.22, +0.39] | +0.21 [+0.16, +0.26] |
+| A-S3 (later season, fit stations) | 2 | > 75.0 | 894 | 3.5 % | 0.0413 | 0.0322 | 0.0313 (0.0388) | +0.24 [+0.08, +0.40] | +0.03 [-0.07, +0.13] |
+| B-S3 (later season, disjoint stations) | 1 | > 37.5 | 1200 | 34.7 % | 0.1830 | 0.0901 | 0.0760 (0.0803) | +0.58 [+0.53, +0.64] | +0.16 [+0.11, +0.21] |
+| B-S3 (later season, disjoint stations) | 1 | > 75.0 | 1200 | 5.6 % | 0.0526 | 0.0233 | 0.0215 (0.0291) | +0.59 [+0.46, +0.70] | +0.08 [-0.04, +0.18] |
+| B-S3 (later season, disjoint stations) | 2 | > 37.5 | 1198 | 34.7 % | 0.1833 | 0.1434 | 0.1094 (0.1127) | +0.40 [+0.33, +0.47] | +0.24 [+0.19, +0.28] |
+| B-S3 (later season, disjoint stations) | 2 | > 75.0 | 1198 | 5.7 % | 0.0521 | 0.0379 | 0.0339 (0.0409) | +0.35 [+0.18, +0.49] | +0.10 [-0.02, +0.21] |
+| B-S4 (newest season, disjoint stations) | 1 | > 37.5 | 1169 | 26.2 % | 0.1786 | 0.0477 | 0.0432 (0.0497) | +0.76 [+0.71, +0.80] | +0.10 [+0.02, +0.16] |
+| B-S4 (newest season, disjoint stations) | 1 | > 75.0 | 1169 | 8.4 % | 0.0707 | 0.0181 | 0.0149 (0.0235) | +0.79 [+0.71, +0.85] | +0.18 [+0.09, +0.26] |
+| B-S4 (newest season, disjoint stations) | 2 | > 37.5 | 1168 | 26.1 % | 0.1778 | 0.0733 | 0.0600 (0.0656) | +0.66 [+0.60, +0.71] | +0.18 [+0.11, +0.25] |
+| B-S4 (newest season, disjoint stations) | 2 | > 75.0 | 1168 | 8.4 % | 0.0707 | 0.0285 | 0.0226 (0.0306) | +0.68 [+0.56, +0.77] | +0.21 [+0.10, +0.31] |
+| A-S4 (newest season, fit stations) | 1 | > 37.5 | 895 | 26.1 % | 0.1895 | 0.0697 | 0.0589 (0.0646) | +0.69 [+0.63, +0.74] | +0.16 [+0.11, +0.21] |
+| A-S4 (newest season, fit stations) | 1 | > 75.0 | 895 | 8.7 % | 0.0587 | 0.0166 | 0.0138 (0.0225) | +0.76 [+0.68, +0.83] | +0.17 [-0.00, +0.29] |
+| A-S4 (newest season, fit stations) | 2 | > 37.5 | 894 | 26.2 % | 0.1897 | 0.1031 | 0.0817 (0.0854) | +0.57 [+0.50, +0.63] | +0.21 [+0.15, +0.26] |
+| A-S4 (newest season, fit stations) | 2 | > 75.0 | 894 | 8.7 % | 0.0587 | 0.0256 | 0.0201 (0.0280) | +0.66 [+0.54, +0.76] | +0.22 [+0.06, +0.35] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 37.5 | 2368 | 46.2 % | 0.1420 | 0.0830 | 0.0723 (0.0766) | +0.49 [+0.44, +0.53] | +0.13 [+0.08, +0.18] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 75.0 | 2368 | 13.6 % | 0.0824 | 0.0385 | 0.0380 (0.0452) | +0.54 [+0.47, +0.60] | +0.01 [-0.06, +0.08] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 37.5 | 2359 | 46.2 % | 0.1422 | 0.1216 | 0.1004 (0.1033) | +0.29 [+0.23, +0.35] | +0.17 [+0.12, +0.22] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 75.0 | 2359 | 13.7 % | 0.0827 | 0.0582 | 0.0571 (0.0628) | +0.31 [+0.21, +0.40] | +0.02 [-0.07, +0.10] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 37.5 | 1172 | 37.5 % | 0.2173 | 0.0673 | 0.0647 (0.0699) | +0.70 [+0.65, +0.74] | +0.04 [-0.02, +0.09] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 75.0 | 1172 | 12.7 % | 0.1096 | 0.0277 | 0.0257 (0.0330) | +0.77 [+0.69, +0.83] | +0.07 [-0.01, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 37.5 | 1172 | 37.5 % | 0.2167 | 0.1063 | 0.0943 (0.0984) | +0.56 [+0.50, +0.62] | +0.11 [+0.06, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 75.0 | 1172 | 12.8 % | 0.1090 | 0.0456 | 0.0416 (0.0482) | +0.62 [+0.52, +0.71] | +0.09 [-0.01, +0.18] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 37.5 | 897 | 36.1 % | 0.2217 | 0.0783 | 0.0719 (0.0757) | +0.68 [+0.62, +0.72] | +0.08 [+0.03, +0.13] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 75.0 | 897 | 11.5 % | 0.0931 | 0.0294 | 0.0262 (0.0348) | +0.72 [+0.65, +0.78] | +0.11 [+0.00, +0.20] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 37.5 | 896 | 36.0 % | 0.2219 | 0.1221 | 0.1079 (0.1109) | +0.51 [+0.43, +0.58] | +0.12 [+0.06, +0.17] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 75.0 | 896 | 11.5 % | 0.0931 | 0.0455 | 0.0411 (0.0481) | +0.56 [+0.45, +0.66] | +0.10 [-0.01, +0.20] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 37.5 | 2369 | 30.5 % | 0.1808 | 0.0692 | 0.0598 (0.0652) | +0.67 [+0.63, +0.71] | +0.14 [+0.10, +0.17] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 75.0 | 2369 | 7.0 % | 0.0615 | 0.0207 | 0.0182 (0.0263) | +0.70 [+0.63, +0.76] | +0.12 [+0.04, +0.19] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 37.5 | 2366 | 30.5 % | 0.1806 | 0.1088 | 0.0850 (0.0894) | +0.53 [+0.48, +0.58] | +0.22 [+0.18, +0.26] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 75.0 | 2366 | 7.0 % | 0.0613 | 0.0332 | 0.0283 (0.0358) | +0.54 [+0.44, +0.62] | +0.15 [+0.07, +0.23] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 37.5 | 328 | 0.3 % | 0.0048 | 0.0056 | 0.0037 (0.0132) | +0.23 [-0.05, +0.68] | +0.34 [-0.03, +0.68] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 75.0 | 328 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +1.00 [+1.00, +1.00] | +0.98 [+0.69, +1.00] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 37.5 | 327 | 0.3 % | 0.0048 | 0.0079 | 0.0062 (0.0151) | -0.28 [-2.49, +0.13] | +0.21 [-0.41, +0.47] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 75.0 | 327 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +0.68 [+0.13, +0.97] | +0.40 [-5.05, +0.96] |
+
+## Exp A: reliability as the page would show it (damp_dress, rounded to tens, kept within 10–90 %)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|37.5: 10% → 1 % (n 1275); 20% → 10 % (n 133); 30% → 30 % (n 93); 40% → 28 % (n 83); 50% → 42 % (n 93); 60% → 49 % (n 72); 70% → 73 % (n 77); 80% → 86 % (n 92); 90% → 97 % (n 451)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|37.5: 10% → 2 % (n 1090); 20% → 8 % (n 188); 30% → 19 % (n 149); 40% → 32 % (n 128); 50% → 47 % (n 121); 60% → 50 % (n 117); 70% → 69 % (n 99); 80% → 80 % (n 96); 90% → 95 % (n 378)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|75.0: 10% → 0 % (n 2061); 20% → 0 % (n 53); 30% → 11 % (n 35); 40% → 37 % (n 30); 50% → 39 % (n 23); 60% → 54 % (n 24); 70% → 58 % (n 24); 80% → 84 % (n 19); 90% → 95 % (n 100)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|75.0: 10% → 0 % (n 1978); 20% → 6 % (n 100); 30% → 11 % (n 57); 40% → 36 % (n 42); 50% → 39 % (n 28); 60% → 38 % (n 29); 70% → 74 % (n 23); 80% → 72 % (n 29); 90% → 89 % (n 80)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|37.5: 10% → 1 % (n 527); 20% → 10 % (n 63); 30% → 21 % (n 47); 40% → 29 % (n 52); 50% → 48 % (n 52); 60% → 45 % (n 44); 70% → 71 % (n 41); 80% → 90 % (n 52); 90% → 97 % (n 294)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|37.5: 10% → 2 % (n 441); 20% → 8 % (n 92); 30% → 22 % (n 73); 40% → 34 % (n 62); 50% → 49 % (n 63); 60% → 48 % (n 75); 70% → 64 % (n 53); 80% → 78 % (n 49); 90% → 95 % (n 264)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|75.0: 10% → 0 % (n 948); 20% → 0 % (n 23); 30% → 12 % (n 17); 40% → 40 % (n 20); 50% → 40 % (n 15); 60% → 63 % (n 19); 70% → 75 % (n 16); 80% → 84 % (n 19); 90% → 95 % (n 95)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|75.0: 10% → 1 % (n 902); 20% → 7 % (n 56); 30% → 18 % (n 28); 40% → 58 % (n 24); 50% → 33 % (n 15); 60% → 46 % (n 24); 70% → 80 % (n 20); 80% → 74 % (n 27); 90% → 89 % (n 76)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|37.5: 10% → 2 % (n 367); 20% → 3 % (n 75); 30% → 21 % (n 62); 40% → 21 % (n 43); 50% → 50 % (n 42); 60% → 47 % (n 30); 70% → 75 % (n 32); 80% → 85 % (n 39); 90% → 98 % (n 207)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|37.5: 10% → 3 % (n 260); 20% → 7 % (n 118); 30% → 18 % (n 84); 40% → 19 % (n 72); 50% → 46 % (n 52); 60% → 54 % (n 50); 70% → 67 % (n 43); 80% → 72 % (n 39); 90% → 95 % (n 178)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|75.0: 10% → 0 % (n 733); 20% → 14 % (n 22); 30% → 39 % (n 18); 40% → 38 % (n 21); 50% → 40 % (n 10); 60% → 67 % (n 6); 70% → 64 % (n 11); 80% → 80 % (n 20); 90% → 96 % (n 56)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|75.0: 10% → 1 % (n 711); 20% → 20 % (n 35); 30% → 10 % (n 21); 40% → 43 % (n 21); 50% → 38 % (n 13); 60% → 44 % (n 18); 70% → 62 % (n 16); 80% → 72 % (n 18); 90% → 98 % (n 43)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|37.5: 10% → 0 % (n 324); 20% → 0 % (n 3); 40% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|37.5: 10% → 0 % (n 312); 20% → 12 % (n 8); 30% → 0 % (n 6); 60% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|75.0: 10% → 0 % (n 328)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|75.0: 10% → 0 % (n 327)
+
+## Exp A: fitted dressing (sample A, S1+S2)
+- lead 1: mu = +0.0017, sd = 0.2406
+- lead 2: mu = +0.0029, sd = 0.3433
+- lead 3: mu = +0.0041, sd = 0.3795
+
+## Exp A: the chance for a damped forecast f (mu = 0; sd per day as fitted), before rounding
+| f µg/m³ | today > 37.5 | tomorrow > 37.5 | day after > 37.5 | today > 75 | tomorrow > 75 | day after > 75 |
+|---|---|---|---|---|---|---|
+| 15 | 0 % | 0 % | 1 % | 0 % | 0 % | 0 % |
+| 20 | 0 % | 3 % | 5 % | 0 % | 0 % | 0 % |
+| 25 | 5 % | 12 % | 14 % | 0 % | 0 % | 0 % |
+| 28 | 11 % | 20 % | 22 % | 0 % | 0 % | 0 % |
+| 30 | 18 % | 26 % | 28 % | 0 % | 0 % | 1 % |
+| 33 | 30 % | 35 % | 37 % | 0 % | 1 % | 2 % |
+| 37.5 | 50 % | 50 % | 50 % | 0 % | 2 % | 3 % |
+| 42 | 68 % | 63 % | 62 % | 1 % | 5 % | 6 % |
+| 50 | 88 % | 80 % | 78 % | 5 % | 12 % | 14 % |
+| 60 | 97 % | 91 % | 89 % | 18 % | 26 % | 28 % |
+| 75 | 100 % | 98 % | 97 % | 50 % | 50 % | 50 % |
+| 90 | 100 % | 99 % | 99 % | 78 % | 70 % | 68 % |
+| 110 | 100 % | 100 % | 100 % | 94 % | 87 % | 84 % |
+- f at which the chance of > 37.5 reaches 5 %: day 1 55.7, day 2 66.0, day 3 70.0; of > 75: day 1 111.4, day 2 131.9, day 3 140.0
+- f at which the chance of > 37.5 reaches 20 %: day 1 45.9, day 2 50.1, day 3 51.6; of > 75: day 1 91.8, day 2 100.1, day 3 103.2
+- f at which the chance of > 37.5 reaches 50 %: day 1 37.5, day 2 37.5, day 3 37.5; of > 75: day 1 75.0, day 2 75.0, day 3 75.0
+- f at which the chance of > 37.5 reaches 95 %: day 1 25.2, day 2 21.3, day 3 20.1; of > 75: day 1 50.5, day 2 42.6, day 3 40.2
+
+## Exp B: MAE µg/m³ (n); Δ vs damped with 90 % interval
+| Test set | Lead | n | clim | raw_cams | persist | damped | damped_met | damped_fire | ridge_stat | ridge_met | ridge_fire | ridge_all | qr_all | gbm_all |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A-S3 (later season, fit stations) | 1 | 890 | 11.58 | 11.26 | 5.75 | 5.14 | 4.93 | 5.04 | 4.91 | 4.60 | 4.92 | 4.60 | 4.70 | 4.66 |
+| A-S3 (later season, fit stations) | 2 | 888 | 11.59 | 11.29 | 9.04 | 7.46 | 6.87 | 7.37 | 7.28 | 6.52 | 7.33 | 6.57 | 6.48 | 6.82 |
+| B-S3 (later season, disjoint stations) | 1 | 1197 | 14.74 | 14.60 | 6.80 | 5.94 | 5.54 | 5.83 | 5.75 | 5.24 | 5.65 | 5.19 | 5.31 | 5.46 |
+| B-S3 (later season, disjoint stations) | 2 | 1195 | 14.75 | 14.63 | 10.78 | 8.66 | 7.68 | 8.59 | 8.53 | 7.30 | 8.46 | 7.27 | 7.19 | 7.90 |
+| B-S4 (newest season, disjoint stations; no fire data) | 1 | 1166 | 17.00 | 13.06 | 5.21 | 4.73 | 4.69 | – | 4.72 | 4.61 | – | – | – | – |
+| B-S4 (newest season, disjoint stations; no fire data) | 2 | 1163 | 17.00 | 13.06 | 8.08 | 6.58 | 6.33 | – | 6.96 | 6.54 | – | – | – | – |
+| A-S4 (newest season, fit stations; no fire data) | 1 | 892 | 14.57 | 12.93 | 5.27 | 4.63 | 4.56 | – | 4.61 | 4.48 | – | – | – | – |
+| A-S4 (newest season, fit stations; no fire data) | 2 | 891 | 14.63 | 12.96 | 7.84 | 6.37 | 6.19 | – | 6.41 | 6.16 | – | – | – | – |
+| north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | 601 | 18.73 | 18.83 | 7.12 | 7.01 | 6.47 | 6.71 | 6.56 | 6.02 | 6.34 | 5.88 | 6.11 | 6.18 |
+| north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | 601 | 18.72 | 18.85 | 11.47 | 10.68 | 9.21 | 10.52 | 9.98 | 8.64 | 9.93 | 8.58 | 8.58 | 9.33 |
+| north-B-S4 | 1 | 568 | 25.13 | 18.61 | 6.05 | 5.89 | 5.86 | – | 5.88 | 5.73 | – | – | – | – |
+| north-B-S4 | 2 | 566 | 25.16 | 18.63 | 9.57 | 8.40 | 8.05 | – | 8.94 | 8.39 | – | – | – | – |
+| north-A-S3 (Chiang Mai, Lampang, Phayao) | 1 | 443 | 14.25 | 13.47 | 6.23 | 6.11 | 5.89 | 5.94 | 5.70 | 5.53 | 5.71 | 5.52 | 5.69 | 5.43 |
+| north-A-S3 (Chiang Mai, Lampang, Phayao) | 2 | 441 | 14.30 | 13.50 | 10.03 | 9.31 | 8.58 | 9.15 | 8.78 | 8.34 | 8.87 | 8.36 | 8.17 | 8.50 |
+
+### Δ MAE vs damped [90 %] and stations made worse
+- A-S3 (later season, fit stations) lead 1: persist +0.62 [+0.36, +0.89] worse at 35t(+11%), 46t(+16%), 50t(+52%); damped_met -0.21 [-0.32, -0.10]; damped_fire -0.09 [-0.15, -0.04]; ridge_met -0.53 [-0.72, -0.34]; ridge_fire -0.22 [-0.39, -0.06]; ridge_all -0.53 [-0.72, -0.34]; gbm_all -0.47 [-0.65, -0.31]
+- A-S3 (later season, fit stations) lead 2: persist +1.58 [+1.13, +2.06] worse at 35t(+16%), 44t(+17%), 46t(+27%), 50t(+80%); damped_met -0.59 [-0.83, -0.36] worse at 44t(+5%); damped_fire -0.09 [-0.14, -0.03]; ridge_met -0.94 [-1.31, -0.58]; ridge_fire -0.13 [-0.44, +0.20]; ridge_all -0.89 [-1.27, -0.52]; gbm_all -0.64 [-1.02, -0.27]
+- B-S3 (later season, disjoint stations) lead 1: persist +0.86 [+0.57, +1.13] worse at 05t(+40%), 41t(+22%), 42t(+26%), 83t(+37%); damped_met -0.40 [-0.51, -0.29]; damped_fire -0.12 [-0.19, -0.06] worse at 42t(+14%); ridge_met -0.70 [-0.91, -0.51]; ridge_fire -0.29 [-0.51, -0.10]; ridge_all -0.76 [-0.99, -0.55] worse at 42t(+14%); gbm_all -0.48 [-0.69, -0.28] worse at 42t(+24%)
+- B-S3 (later season, disjoint stations) lead 2: persist +2.12 [+1.60, +2.64] worse at 05t(+64%), 41t(+49%), 42t(+39%), 83t(+50%); damped_met -0.99 [-1.20, -0.78] worse at 42t(+9%); damped_fire -0.08 [-0.17, +0.01] worse at 42t(+5%); ridge_met -1.36 [-1.78, -0.96] worse at 42t(+14%); ridge_fire -0.20 [-0.60, +0.17]; ridge_all -1.40 [-1.83, -0.97] worse at 42t(+18%); gbm_all -0.76 [-1.20, -0.33] worse at 42t(+33%)
+- B-S4 (newest season, disjoint stations; no fire data) lead 1: persist +0.48 [+0.22, +0.72] worse at 05t(+44%), 83t(+29%); damped_met -0.04 [-0.11, +0.02]; ridge_met -0.13 [-0.34, +0.08] worse at 05t(+7%)
+- B-S4 (newest season, disjoint stations; no fire data) lead 2: persist +1.50 [+1.04, +1.95] worse at 05t(+72%), 57t(+14%), 67t(+20%), 69t(+17%), 83t(+51%); damped_met -0.25 [-0.37, -0.13]; ridge_met -0.03 [-0.49, +0.38] worse at 05t(+8%)
+- A-S4 (newest season, fit stations; no fire data) lead 1: persist +0.63 [+0.39, +0.89] worse at 35t(+20%), 46t(+19%), 50t(+45%); damped_met -0.07 [-0.14, +0.01]; ridge_met -0.15 [-0.35, +0.06] worse at 35t(+11%)
+- A-S4 (newest season, fit stations; no fire data) lead 2: persist +1.47 [+1.07, +1.90] worse at 35t(+19%), 37t(+17%), 46t(+37%), 50t(+71%); damped_met -0.18 [-0.33, -0.03]; ridge_met -0.21 [-0.65, +0.21]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 1: persist +0.11 [-0.22, +0.46]; damped_met -0.54 [-0.73, -0.36]; damped_fire -0.30 [-0.40, -0.20]; ridge_met -0.99 [-1.33, -0.65]; ridge_fire -0.67 [-1.03, -0.33]; ridge_all -1.13 [-1.51, -0.76]; gbm_all -0.83 [-1.17, -0.49]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 2: persist +0.79 [+0.07, +1.51]; damped_met -1.47 [-1.83, -1.14]; damped_fire -0.16 [-0.34, +0.02]; ridge_met -2.04 [-2.74, -1.32]; ridge_fire -0.75 [-1.40, -0.09]; ridge_all -2.10 [-2.85, -1.36]; gbm_all -1.35 [-2.11, -0.62]
+- north-B-S4 lead 1: persist +0.16 [-0.23, +0.54]; damped_met -0.04 [-0.15, +0.08]; ridge_met -0.17 [-0.58, +0.24]
+- north-B-S4 lead 2: persist +1.17 [+0.43, +1.94] worse at 67t(+20%), 69t(+17%); damped_met -0.35 [-0.54, -0.16]; ridge_met -0.01 [-0.83, +0.82]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 1: persist +0.13 [-0.23, +0.46] worse at 35t(+11%); damped_met -0.22 [-0.40, -0.04]; damped_fire -0.17 [-0.25, -0.09]; ridge_met -0.58 [-0.90, -0.26]; ridge_fire -0.40 [-0.65, -0.14]; ridge_all -0.59 [-0.92, -0.27]; gbm_all -0.67 [-0.97, -0.39]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 2: persist +0.72 [+0.12, +1.29] worse at 35t(+16%); damped_met -0.73 [-1.14, -0.31]; damped_fire -0.17 [-0.27, -0.07]; ridge_met -0.98 [-1.64, -0.32]; ridge_fire -0.44 [-0.93, +0.08]; ridge_all -0.95 [-1.62, -0.28]; gbm_all -0.81 [-1.49, -0.11]
+
+### What each source adds (paired Δ MAE [90 %])
+- A-S3 (later season, fit stations) lead 1: ridge_fire_over_ridge_stat +0.01 [-0.06, +0.09]; ridge_all_over_ridge_met +0.00 [-0.05, +0.05]; ridge_met_over_ridge_stat -0.30 [-0.45, -0.16]; ridge_metblh_over_ridge_met +0.28 [+0.15, +0.41]; ridge_stat_over_damped -0.23 [-0.37, -0.09]; damped_met_over_damped -0.21 [-0.32, -0.10]; damped_fire_over_damped -0.09 [-0.15, -0.04]
+- A-S3 (later season, fit stations) lead 2: ridge_fire_over_ridge_stat +0.05 [-0.05, +0.17]; ridge_all_over_ridge_met +0.05 [-0.04, +0.14]; ridge_met_over_ridge_stat -0.76 [-1.06, -0.48]; ridge_metblh_over_ridge_met +0.75 [+0.53, +0.99]; ridge_stat_over_damped -0.18 [-0.46, +0.10]; damped_met_over_damped -0.59 [-0.83, -0.36]; damped_fire_over_damped -0.09 [-0.14, -0.03]
+- B-S3 (later season, disjoint stations) lead 1: ridge_fire_over_ridge_stat -0.10 [-0.20, -0.01]; ridge_all_over_ridge_met -0.06 [-0.13, +0.01]; ridge_met_over_ridge_stat -0.51 [-0.65, -0.37]; ridge_metblh_over_ridge_met +0.47 [+0.34, +0.60]; ridge_stat_over_damped -0.19 [-0.35, -0.04]; damped_met_over_damped -0.40 [-0.51, -0.29]; damped_fire_over_damped -0.12 [-0.19, -0.06]
+- B-S3 (later season, disjoint stations) lead 2: ridge_fire_over_ridge_stat -0.07 [-0.21, +0.06]; ridge_all_over_ridge_met -0.04 [-0.17, +0.07]; ridge_met_over_ridge_stat -1.23 [-1.49, -0.98]; ridge_metblh_over_ridge_met +1.13 [+0.87, +1.39]; ridge_stat_over_damped -0.13 [-0.49, +0.21]; damped_met_over_damped -0.99 [-1.20, -0.78]; damped_fire_over_damped -0.08 [-0.17, +0.01]
+- B-S4 (newest season, disjoint stations; no fire data) lead 1: ridge_met_over_ridge_stat -0.12 [-0.21, -0.02]; ridge_metblh_over_ridge_met +0.00 [-0.13, +0.14]; ridge_stat_over_damped -0.01 [-0.21, +0.18]; damped_met_over_damped -0.04 [-0.11, +0.02]
+- B-S4 (newest season, disjoint stations; no fire data) lead 2: ridge_met_over_ridge_stat -0.42 [-0.58, -0.26]; ridge_metblh_over_ridge_met +0.13 [-0.15, +0.40]; ridge_stat_over_damped +0.38 [-0.06, +0.82]; damped_met_over_damped -0.25 [-0.37, -0.13]
+- A-S4 (newest season, fit stations; no fire data) lead 1: ridge_met_over_ridge_stat -0.12 [-0.24, -0.01]; ridge_metblh_over_ridge_met +0.11 [-0.02, +0.25]; ridge_stat_over_damped -0.02 [-0.22, +0.19]; damped_met_over_damped -0.07 [-0.14, +0.01]
+- A-S4 (newest season, fit stations; no fire data) lead 2: ridge_met_over_ridge_stat -0.25 [-0.42, -0.06]; ridge_metblh_over_ridge_met +0.26 [+0.01, +0.52]; ridge_stat_over_damped +0.04 [-0.41, +0.47]; damped_met_over_damped -0.18 [-0.33, -0.03]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 1: ridge_fire_over_ridge_stat -0.21 [-0.39, -0.05]; ridge_all_over_ridge_met -0.14 [-0.26, -0.02]; ridge_met_over_ridge_stat -0.53 [-0.77, -0.31]; ridge_metblh_over_ridge_met +0.25 [+0.07, +0.42]; ridge_stat_over_damped -0.46 [-0.72, -0.18]; damped_met_over_damped -0.54 [-0.73, -0.36]; damped_fire_over_damped -0.30 [-0.40, -0.20]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 2: ridge_fire_over_ridge_stat -0.05 [-0.29, +0.20]; ridge_all_over_ridge_met -0.06 [-0.29, +0.15]; ridge_met_over_ridge_stat -1.34 [-1.76, -0.95]; ridge_metblh_over_ridge_met +0.85 [+0.44, +1.28]; ridge_stat_over_damped -0.70 [-1.30, -0.09]; damped_met_over_damped -1.47 [-1.83, -1.14]; damped_fire_over_damped -0.16 [-0.34, +0.02]
+- north-B-S4 lead 1: ridge_met_over_ridge_stat -0.15 [-0.32, +0.01]; ridge_metblh_over_ridge_met -0.21 [-0.43, +0.04]; ridge_stat_over_damped -0.01 [-0.41, +0.40]; damped_met_over_damped -0.04 [-0.15, +0.08]
+- north-B-S4 lead 2: ridge_met_over_ridge_stat -0.55 [-0.80, -0.30]; ridge_metblh_over_ridge_met -0.29 [-0.79, +0.22]; ridge_stat_over_damped +0.54 [-0.27, +1.41]; damped_met_over_damped -0.35 [-0.54, -0.16]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 1: ridge_fire_over_ridge_stat +0.01 [-0.11, +0.13]; ridge_all_over_ridge_met -0.01 [-0.09, +0.07]; ridge_met_over_ridge_stat -0.17 [-0.40, +0.06]; ridge_metblh_over_ridge_met +0.14 [-0.05, +0.32]; ridge_stat_over_damped -0.41 [-0.61, -0.19]; damped_met_over_damped -0.22 [-0.40, -0.04]; damped_fire_over_damped -0.17 [-0.25, -0.09]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 2: ridge_fire_over_ridge_stat +0.10 [-0.08, +0.28]; ridge_all_over_ridge_met +0.02 [-0.12, +0.16]; ridge_met_over_ridge_stat -0.44 [-0.92, +0.01]; ridge_metblh_over_ridge_met +0.53 [+0.17, +0.87]; ridge_stat_over_damped -0.54 [-0.96, -0.10]; damped_met_over_damped -0.73 [-1.14, -0.31]; damped_fire_over_damped -0.17 [-0.27, -0.07]
+
+## Exp B as issued (B-S4): damped_met with forecast weather
+- B-S4 lead1: n 1169; MAE persist 5.20, damped 4.73, with ERA5 4.69 (-0.04 [-0.11, +0.02]), with forecasts 4.70 (-0.03 [-0.11, +0.05]); band agreement damped 76.4 % → 76.5 %; worse at ['41t(+6%)']
+- B-S4 lead2: n 1168; MAE persist 8.07, damped 6.57, with ERA5 6.32 (-0.25 [-0.36, -0.13]), with forecasts 6.31 (-0.26 [-0.40, -0.12]); band agreement damped 68.7 % → 70.1 %; worse at ['41t(+7%)']
+
+## Exp C
+- PM10 > 120: 2.01 % of 151808 station-days at 96 stations (Dec–Apr 4.27 %); PM2.5 <= 37.5 on 168 of 3021 such days
+- PM10 lead1: n 904 at ['57t', '58t', '83t']: MAE cams 28.13, persist 10.04, damped 8.41; bias cams -26.82, persist +0.04, damped +0.16
+- PM10 lead2: n 904 at ['57t', '58t', '83t']: MAE cams 28.16, persist 15.40, damped 11.86; bias cams -26.85, persist +0.04, damped +0.51
+- O3 (26 Jul–23 Oct 2026, 3 stations): 250 station-days, max 93 ppb, 7 days > 70 ppb
+- O3 lead1: n 245: MAE cams 19.2, persist 6.8, damped 6.5 ppb; bias cams +18.3, persist -0.4, damped -0.2
+- O3 lead2: n 242: MAE cams 19.4, persist 8.2, damped 7.0 ppb; bias cams +18.5, persist -0.6, damped -0.3
+
+===== run 2026-10-24T09:13:54+00:00 : research/aq_tables.py =====
+## Exp A: Brier and Brier skill (damp_dress = damped ratio dressed with a lognormal error; reference persistence = pers_dress); chosen on S2: damp_emp
+| Test set | Lead | Event | n | base rate | Brier clim | Brier persistence | Brier damped (page-rounded) | BSS vs clim | BSS vs persistence |
+|---|---|---|---|---|---|---|---|---|---|
+| A-S3 (later season, fit stations) | 1 | > 37.5 | 895 | 35.8 % | 0.1822 | 0.1003 | 0.0871 (0.0916) | +0.52 [+0.45, +0.58] | +0.13 [+0.07, +0.18] |
+| A-S3 (later season, fit stations) | 1 | > 75.0 | 895 | 3.5 % | 0.0414 | 0.0205 | 0.0191 (0.0280) | +0.54 [+0.44, +0.64] | +0.07 [-0.03, +0.16] |
+| A-S3 (later season, fit stations) | 2 | > 37.5 | 894 | 35.8 % | 0.1818 | 0.1576 | 0.1248 (0.1287) | +0.31 [+0.22, +0.39] | +0.21 [+0.16, +0.26] |
+| A-S3 (later season, fit stations) | 2 | > 75.0 | 894 | 3.5 % | 0.0413 | 0.0322 | 0.0313 (0.0388) | +0.24 [+0.08, +0.40] | +0.03 [-0.07, +0.13] |
+| B-S3 (later season, disjoint stations) | 1 | > 37.5 | 1200 | 34.7 % | 0.1830 | 0.0901 | 0.0760 (0.0803) | +0.58 [+0.53, +0.64] | +0.16 [+0.11, +0.21] |
+| B-S3 (later season, disjoint stations) | 1 | > 75.0 | 1200 | 5.6 % | 0.0526 | 0.0233 | 0.0215 (0.0291) | +0.59 [+0.46, +0.70] | +0.08 [-0.04, +0.18] |
+| B-S3 (later season, disjoint stations) | 2 | > 37.5 | 1198 | 34.7 % | 0.1833 | 0.1434 | 0.1094 (0.1127) | +0.40 [+0.33, +0.47] | +0.24 [+0.19, +0.28] |
+| B-S3 (later season, disjoint stations) | 2 | > 75.0 | 1198 | 5.7 % | 0.0521 | 0.0379 | 0.0339 (0.0409) | +0.35 [+0.18, +0.49] | +0.10 [-0.02, +0.21] |
+| B-S4 (newest season, disjoint stations) | 1 | > 37.5 | 1169 | 26.2 % | 0.1786 | 0.0477 | 0.0432 (0.0497) | +0.76 [+0.71, +0.80] | +0.10 [+0.02, +0.16] |
+| B-S4 (newest season, disjoint stations) | 1 | > 75.0 | 1169 | 8.4 % | 0.0707 | 0.0181 | 0.0149 (0.0235) | +0.79 [+0.71, +0.85] | +0.18 [+0.09, +0.26] |
+| B-S4 (newest season, disjoint stations) | 2 | > 37.5 | 1168 | 26.1 % | 0.1778 | 0.0733 | 0.0600 (0.0656) | +0.66 [+0.60, +0.71] | +0.18 [+0.11, +0.25] |
+| B-S4 (newest season, disjoint stations) | 2 | > 75.0 | 1168 | 8.4 % | 0.0707 | 0.0285 | 0.0226 (0.0306) | +0.68 [+0.56, +0.77] | +0.21 [+0.10, +0.31] |
+| A-S4 (newest season, fit stations) | 1 | > 37.5 | 895 | 26.1 % | 0.1895 | 0.0697 | 0.0589 (0.0646) | +0.69 [+0.63, +0.74] | +0.16 [+0.11, +0.21] |
+| A-S4 (newest season, fit stations) | 1 | > 75.0 | 895 | 8.7 % | 0.0587 | 0.0166 | 0.0138 (0.0225) | +0.76 [+0.68, +0.83] | +0.17 [-0.00, +0.29] |
+| A-S4 (newest season, fit stations) | 2 | > 37.5 | 894 | 26.2 % | 0.1897 | 0.1031 | 0.0817 (0.0854) | +0.57 [+0.50, +0.63] | +0.21 [+0.15, +0.26] |
+| A-S4 (newest season, fit stations) | 2 | > 75.0 | 894 | 8.7 % | 0.0587 | 0.0256 | 0.0201 (0.0280) | +0.66 [+0.54, +0.76] | +0.22 [+0.06, +0.35] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 37.5 | 2368 | 46.2 % | 0.1420 | 0.0830 | 0.0723 (0.0766) | +0.49 [+0.44, +0.53] | +0.13 [+0.08, +0.18] |
+| B-S1S2 (fit seasons, disjoint stations) | 1 | > 75.0 | 2368 | 13.6 % | 0.0824 | 0.0385 | 0.0380 (0.0452) | +0.54 [+0.47, +0.60] | +0.01 [-0.06, +0.08] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 37.5 | 2359 | 46.2 % | 0.1422 | 0.1216 | 0.1004 (0.1033) | +0.29 [+0.23, +0.35] | +0.17 [+0.12, +0.22] |
+| B-S1S2 (fit seasons, disjoint stations) | 2 | > 75.0 | 2359 | 13.7 % | 0.0827 | 0.0582 | 0.0571 (0.0628) | +0.31 [+0.21, +0.40] | +0.02 [-0.07, +0.10] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 37.5 | 1172 | 37.5 % | 0.2173 | 0.0673 | 0.0647 (0.0699) | +0.70 [+0.65, +0.74] | +0.04 [-0.02, +0.09] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | > 75.0 | 1172 | 12.7 % | 0.1096 | 0.0277 | 0.0257 (0.0330) | +0.77 [+0.69, +0.83] | +0.07 [-0.01, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 37.5 | 1172 | 37.5 % | 0.2167 | 0.1063 | 0.0943 (0.0984) | +0.56 [+0.50, +0.62] | +0.11 [+0.06, +0.16] |
+| north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | > 75.0 | 1172 | 12.8 % | 0.1090 | 0.0456 | 0.0416 (0.0482) | +0.62 [+0.52, +0.71] | +0.09 [-0.01, +0.18] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 37.5 | 897 | 36.1 % | 0.2217 | 0.0783 | 0.0719 (0.0757) | +0.68 [+0.62, +0.72] | +0.08 [+0.03, +0.13] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 1 | > 75.0 | 897 | 11.5 % | 0.0931 | 0.0294 | 0.0262 (0.0348) | +0.72 [+0.65, +0.78] | +0.11 [+0.00, +0.20] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 37.5 | 896 | 36.0 % | 0.2219 | 0.1221 | 0.1079 (0.1109) | +0.51 [+0.43, +0.58] | +0.12 [+0.06, +0.17] |
+| north-A-S3S4 (Chiang Mai, Lampang, Phayao) | 2 | > 75.0 | 896 | 11.5 % | 0.0931 | 0.0455 | 0.0411 (0.0481) | +0.56 [+0.45, +0.66] | +0.10 [-0.01, +0.20] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 37.5 | 2369 | 30.5 % | 0.1808 | 0.0692 | 0.0598 (0.0652) | +0.67 [+0.63, +0.71] | +0.14 [+0.10, +0.17] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 1 | > 75.0 | 2369 | 7.0 % | 0.0615 | 0.0207 | 0.0182 (0.0263) | +0.70 [+0.63, +0.76] | +0.12 [+0.04, +0.19] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 37.5 | 2366 | 30.5 % | 0.1806 | 0.1088 | 0.0850 (0.0894) | +0.53 [+0.48, +0.58] | +0.22 [+0.18, +0.26] |
+| B-S3S4 pooled (disjoint stations, both later seasons) | 2 | > 75.0 | 2366 | 7.0 % | 0.0613 | 0.0332 | 0.0283 (0.0358) | +0.54 [+0.44, +0.62] | +0.15 [+0.07, +0.23] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 37.5 | 328 | 0.3 % | 0.0048 | 0.0056 | 0.0037 (0.0132) | +0.23 [-0.05, +0.68] | +0.34 [-0.03, +0.68] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 1 | > 75.0 | 328 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +1.00 [+1.00, +1.00] | +0.98 [+0.69, +1.00] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 37.5 | 327 | 0.3 % | 0.0048 | 0.0079 | 0.0062 (0.0151) | -0.28 [-2.49, +0.13] | +0.21 [-0.41, +0.47] |
+| Oct-2026 quiet (e3 stations, 20 Sep–22 Oct) | 2 | > 75.0 | 327 | 0.0 % | 0.0000 | 0.0000 | 0.0000 (0.0100) | +0.68 [+0.13, +0.97] | +0.40 [-5.05, +0.96] |
+
+## Exp A: reliability as the page would show it (damp_dress, rounded to tens, kept within 10–90 %)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|37.5: 10% → 1 % (n 1275); 20% → 10 % (n 133); 30% → 30 % (n 93); 40% → 28 % (n 83); 50% → 42 % (n 93); 60% → 49 % (n 72); 70% → 73 % (n 77); 80% → 86 % (n 92); 90% → 97 % (n 451)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|37.5: 10% → 2 % (n 1090); 20% → 8 % (n 188); 30% → 19 % (n 149); 40% → 32 % (n 128); 50% → 47 % (n 121); 60% → 50 % (n 117); 70% → 69 % (n 99); 80% → 80 % (n 96); 90% → 95 % (n 378)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead1|75.0: 10% → 0 % (n 2061); 20% → 0 % (n 53); 30% → 11 % (n 35); 40% → 37 % (n 30); 50% → 39 % (n 23); 60% → 54 % (n 24); 70% → 58 % (n 24); 80% → 84 % (n 19); 90% → 95 % (n 100)
+- B-S3S4 pooled (disjoint stations, both later seasons), lead2|75.0: 10% → 0 % (n 1978); 20% → 6 % (n 100); 30% → 11 % (n 57); 40% → 36 % (n 42); 50% → 39 % (n 28); 60% → 38 % (n 29); 70% → 74 % (n 23); 80% → 72 % (n 29); 90% → 89 % (n 80)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|37.5: 10% → 1 % (n 527); 20% → 10 % (n 63); 30% → 21 % (n 47); 40% → 29 % (n 52); 50% → 48 % (n 52); 60% → 45 % (n 44); 70% → 71 % (n 41); 80% → 90 % (n 52); 90% → 97 % (n 294)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|37.5: 10% → 2 % (n 441); 20% → 8 % (n 92); 30% → 22 % (n 73); 40% → 34 % (n 62); 50% → 49 % (n 63); 60% → 48 % (n 75); 70% → 64 % (n 53); 80% → 78 % (n 49); 90% → 95 % (n 264)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead1|75.0: 10% → 0 % (n 948); 20% → 0 % (n 23); 30% → 12 % (n 17); 40% → 40 % (n 20); 50% → 40 % (n 15); 60% → 63 % (n 19); 70% → 75 % (n 16); 80% → 84 % (n 19); 90% → 95 % (n 95)
+- north-B-S3S4 (Chiang Rai, Nan, Mae Hong Son, Phrae), lead2|75.0: 10% → 1 % (n 902); 20% → 7 % (n 56); 30% → 18 % (n 28); 40% → 58 % (n 24); 50% → 33 % (n 15); 60% → 46 % (n 24); 70% → 80 % (n 20); 80% → 74 % (n 27); 90% → 89 % (n 76)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|37.5: 10% → 2 % (n 367); 20% → 3 % (n 75); 30% → 21 % (n 62); 40% → 21 % (n 43); 50% → 50 % (n 42); 60% → 47 % (n 30); 70% → 75 % (n 32); 80% → 85 % (n 39); 90% → 98 % (n 207)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|37.5: 10% → 3 % (n 260); 20% → 7 % (n 118); 30% → 18 % (n 84); 40% → 19 % (n 72); 50% → 46 % (n 52); 60% → 54 % (n 50); 70% → 67 % (n 43); 80% → 72 % (n 39); 90% → 95 % (n 178)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead1|75.0: 10% → 0 % (n 733); 20% → 14 % (n 22); 30% → 39 % (n 18); 40% → 38 % (n 21); 50% → 40 % (n 10); 60% → 67 % (n 6); 70% → 64 % (n 11); 80% → 80 % (n 20); 90% → 96 % (n 56)
+- north-A-S3S4 (Chiang Mai, Lampang, Phayao), lead2|75.0: 10% → 1 % (n 711); 20% → 20 % (n 35); 30% → 10 % (n 21); 40% → 43 % (n 21); 50% → 38 % (n 13); 60% → 44 % (n 18); 70% → 62 % (n 16); 80% → 72 % (n 18); 90% → 98 % (n 43)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|37.5: 10% → 0 % (n 324); 20% → 0 % (n 3); 40% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|37.5: 10% → 0 % (n 312); 20% → 12 % (n 8); 30% → 0 % (n 6); 60% → 0 % (n 1)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead1|75.0: 10% → 0 % (n 328)
+- Oct-2026 quiet (e3 stations, 20 Sep–22 Oct), lead2|75.0: 10% → 0 % (n 327)
+
+## Exp A: fitted dressing (sample A, S1+S2)
+- lead 1: mu = +0.0017, sd = 0.2406
+- lead 2: mu = +0.0029, sd = 0.3433
+- lead 3: mu = +0.0041, sd = 0.3795
+
+## Exp A: the chance for a damped forecast f (mu = 0; sd per day as fitted), before rounding
+| f µg/m³ | today > 37.5 | tomorrow > 37.5 | day after > 37.5 | today > 75 | tomorrow > 75 | day after > 75 |
+|---|---|---|---|---|---|---|
+| 15 | 0 % | 0 % | 1 % | 0 % | 0 % | 0 % |
+| 20 | 0 % | 3 % | 5 % | 0 % | 0 % | 0 % |
+| 25 | 5 % | 12 % | 14 % | 0 % | 0 % | 0 % |
+| 28 | 11 % | 20 % | 22 % | 0 % | 0 % | 0 % |
+| 30 | 18 % | 26 % | 28 % | 0 % | 0 % | 1 % |
+| 33 | 30 % | 35 % | 37 % | 0 % | 1 % | 2 % |
+| 37.5 | 50 % | 50 % | 50 % | 0 % | 2 % | 3 % |
+| 42 | 68 % | 63 % | 62 % | 1 % | 5 % | 6 % |
+| 50 | 88 % | 80 % | 78 % | 5 % | 12 % | 14 % |
+| 60 | 97 % | 91 % | 89 % | 18 % | 26 % | 28 % |
+| 75 | 100 % | 98 % | 97 % | 50 % | 50 % | 50 % |
+| 90 | 100 % | 99 % | 99 % | 78 % | 70 % | 68 % |
+| 110 | 100 % | 100 % | 100 % | 94 % | 87 % | 84 % |
+- f at which the chance of > 37.5 reaches 5 %: day 1 25.2, day 2 21.3, day 3 20.1; of > 75: day 1 50.5, day 2 42.6, day 3 40.2
+- f at which the chance of > 37.5 reaches 20 %: day 1 30.6, day 2 28.1, day 3 27.2; of > 75: day 1 61.3, day 2 56.2, day 3 54.5
+- f at which the chance of > 37.5 reaches 50 %: day 1 37.5, day 2 37.5, day 3 37.5; of > 75: day 1 75.0, day 2 75.0, day 3 75.0
+- f at which the chance of > 37.5 reaches 95 %: day 1 55.7, day 2 66.0, day 3 70.0; of > 75: day 1 111.4, day 2 131.9, day 3 140.0
+
+## Exp B: MAE µg/m³ (n); Δ vs damped with 90 % interval
+| Test set | Lead | n | clim | raw_cams | persist | damped | damped_met | damped_fire | ridge_stat | ridge_met | ridge_fire | ridge_all | qr_all | gbm_all |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| A-S3 (later season, fit stations) | 1 | 890 | 11.58 | 11.26 | 5.75 | 5.14 | 4.93 | 5.04 | 4.91 | 4.60 | 4.92 | 4.60 | 4.70 | 4.66 |
+| A-S3 (later season, fit stations) | 2 | 888 | 11.59 | 11.29 | 9.04 | 7.46 | 6.87 | 7.37 | 7.28 | 6.52 | 7.33 | 6.57 | 6.48 | 6.82 |
+| B-S3 (later season, disjoint stations) | 1 | 1197 | 14.74 | 14.60 | 6.80 | 5.94 | 5.54 | 5.83 | 5.75 | 5.24 | 5.65 | 5.19 | 5.31 | 5.46 |
+| B-S3 (later season, disjoint stations) | 2 | 1195 | 14.75 | 14.63 | 10.78 | 8.66 | 7.68 | 8.59 | 8.53 | 7.30 | 8.46 | 7.27 | 7.19 | 7.90 |
+| B-S4 (newest season, disjoint stations; no fire data) | 1 | 1166 | 17.00 | 13.06 | 5.21 | 4.73 | 4.69 | – | 4.72 | 4.61 | – | – | – | – |
+| B-S4 (newest season, disjoint stations; no fire data) | 2 | 1163 | 17.00 | 13.06 | 8.08 | 6.58 | 6.33 | – | 6.96 | 6.54 | – | – | – | – |
+| A-S4 (newest season, fit stations; no fire data) | 1 | 892 | 14.57 | 12.93 | 5.27 | 4.63 | 4.56 | – | 4.61 | 4.48 | – | – | – | – |
+| A-S4 (newest season, fit stations; no fire data) | 2 | 891 | 14.63 | 12.96 | 7.84 | 6.37 | 6.19 | – | 6.41 | 6.16 | – | – | – | – |
+| north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 1 | 601 | 18.73 | 18.83 | 7.12 | 7.01 | 6.47 | 6.71 | 6.56 | 6.02 | 6.34 | 5.88 | 6.11 | 6.18 |
+| north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) | 2 | 601 | 18.72 | 18.85 | 11.47 | 10.68 | 9.21 | 10.52 | 9.98 | 8.64 | 9.93 | 8.58 | 8.58 | 9.33 |
+| north-B-S4 | 1 | 568 | 25.13 | 18.61 | 6.05 | 5.89 | 5.86 | – | 5.88 | 5.73 | – | – | – | – |
+| north-B-S4 | 2 | 566 | 25.16 | 18.63 | 9.57 | 8.40 | 8.05 | – | 8.94 | 8.39 | – | – | – | – |
+| north-A-S3 (Chiang Mai, Lampang, Phayao) | 1 | 443 | 14.25 | 13.47 | 6.23 | 6.11 | 5.89 | 5.94 | 5.70 | 5.53 | 5.71 | 5.52 | 5.69 | 5.43 |
+| north-A-S3 (Chiang Mai, Lampang, Phayao) | 2 | 441 | 14.30 | 13.50 | 10.03 | 9.31 | 8.58 | 9.15 | 8.78 | 8.34 | 8.87 | 8.36 | 8.17 | 8.50 |
+
+### Δ MAE vs damped [90 %] and stations made worse
+- A-S3 (later season, fit stations) lead 1: persist +0.62 [+0.36, +0.89] worse at 35t(+11%), 46t(+16%), 50t(+52%); damped_met -0.21 [-0.32, -0.10]; damped_fire -0.09 [-0.15, -0.04]; ridge_met -0.53 [-0.72, -0.34]; ridge_fire -0.22 [-0.39, -0.06]; ridge_all -0.53 [-0.72, -0.34]; gbm_all -0.47 [-0.65, -0.31]
+- A-S3 (later season, fit stations) lead 2: persist +1.58 [+1.13, +2.06] worse at 35t(+16%), 44t(+17%), 46t(+27%), 50t(+80%); damped_met -0.59 [-0.83, -0.36] worse at 44t(+5%); damped_fire -0.09 [-0.14, -0.03]; ridge_met -0.94 [-1.31, -0.58]; ridge_fire -0.13 [-0.44, +0.20]; ridge_all -0.89 [-1.27, -0.52]; gbm_all -0.64 [-1.02, -0.27]
+- B-S3 (later season, disjoint stations) lead 1: persist +0.86 [+0.57, +1.13] worse at 05t(+40%), 41t(+22%), 42t(+26%), 83t(+37%); damped_met -0.40 [-0.51, -0.29]; damped_fire -0.12 [-0.19, -0.06] worse at 42t(+14%); ridge_met -0.70 [-0.91, -0.51]; ridge_fire -0.29 [-0.51, -0.10]; ridge_all -0.76 [-0.99, -0.55] worse at 42t(+14%); gbm_all -0.48 [-0.69, -0.28] worse at 42t(+24%)
+- B-S3 (later season, disjoint stations) lead 2: persist +2.12 [+1.60, +2.64] worse at 05t(+64%), 41t(+49%), 42t(+39%), 83t(+50%); damped_met -0.99 [-1.20, -0.78] worse at 42t(+9%); damped_fire -0.08 [-0.17, +0.01] worse at 42t(+5%); ridge_met -1.36 [-1.78, -0.96] worse at 42t(+14%); ridge_fire -0.20 [-0.60, +0.17]; ridge_all -1.40 [-1.83, -0.97] worse at 42t(+18%); gbm_all -0.76 [-1.20, -0.33] worse at 42t(+33%)
+- B-S4 (newest season, disjoint stations; no fire data) lead 1: persist +0.48 [+0.22, +0.72] worse at 05t(+44%), 83t(+29%); damped_met -0.04 [-0.11, +0.02]; ridge_met -0.13 [-0.34, +0.08] worse at 05t(+7%)
+- B-S4 (newest season, disjoint stations; no fire data) lead 2: persist +1.50 [+1.04, +1.95] worse at 05t(+72%), 57t(+14%), 67t(+20%), 69t(+17%), 83t(+51%); damped_met -0.25 [-0.37, -0.13]; ridge_met -0.03 [-0.49, +0.38] worse at 05t(+8%)
+- A-S4 (newest season, fit stations; no fire data) lead 1: persist +0.63 [+0.39, +0.89] worse at 35t(+20%), 46t(+19%), 50t(+45%); damped_met -0.07 [-0.14, +0.01]; ridge_met -0.15 [-0.35, +0.06] worse at 35t(+11%)
+- A-S4 (newest season, fit stations; no fire data) lead 2: persist +1.47 [+1.07, +1.90] worse at 35t(+19%), 37t(+17%), 46t(+37%), 50t(+71%); damped_met -0.18 [-0.33, -0.03]; ridge_met -0.21 [-0.65, +0.21]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 1: persist +0.11 [-0.22, +0.46]; damped_met -0.54 [-0.73, -0.36]; damped_fire -0.30 [-0.40, -0.20]; ridge_met -0.99 [-1.33, -0.65]; ridge_fire -0.67 [-1.03, -0.33]; ridge_all -1.13 [-1.51, -0.76]; gbm_all -0.83 [-1.17, -0.49]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 2: persist +0.79 [+0.07, +1.51]; damped_met -1.47 [-1.83, -1.14]; damped_fire -0.16 [-0.34, +0.02]; ridge_met -2.04 [-2.74, -1.32]; ridge_fire -0.75 [-1.40, -0.09]; ridge_all -2.10 [-2.85, -1.36]; gbm_all -1.35 [-2.11, -0.62]
+- north-B-S4 lead 1: persist +0.16 [-0.23, +0.54]; damped_met -0.04 [-0.15, +0.08]; ridge_met -0.17 [-0.58, +0.24]
+- north-B-S4 lead 2: persist +1.17 [+0.43, +1.94] worse at 67t(+20%), 69t(+17%); damped_met -0.35 [-0.54, -0.16]; ridge_met -0.01 [-0.83, +0.82]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 1: persist +0.13 [-0.23, +0.46] worse at 35t(+11%); damped_met -0.22 [-0.40, -0.04]; damped_fire -0.17 [-0.25, -0.09]; ridge_met -0.58 [-0.90, -0.26]; ridge_fire -0.40 [-0.65, -0.14]; ridge_all -0.59 [-0.92, -0.27]; gbm_all -0.67 [-0.97, -0.39]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 2: persist +0.72 [+0.12, +1.29] worse at 35t(+16%); damped_met -0.73 [-1.14, -0.31]; damped_fire -0.17 [-0.27, -0.07]; ridge_met -0.98 [-1.64, -0.32]; ridge_fire -0.44 [-0.93, +0.08]; ridge_all -0.95 [-1.62, -0.28]; gbm_all -0.81 [-1.49, -0.11]
+
+### What each source adds (paired Δ MAE [90 %])
+- A-S3 (later season, fit stations) lead 1: ridge_fire_over_ridge_stat +0.01 [-0.06, +0.09]; ridge_all_over_ridge_met +0.00 [-0.05, +0.05]; ridge_met_over_ridge_stat -0.30 [-0.45, -0.16]; ridge_metblh_over_ridge_met +0.28 [+0.15, +0.41]; ridge_stat_over_damped -0.23 [-0.37, -0.09]; damped_met_over_damped -0.21 [-0.32, -0.10]; damped_fire_over_damped -0.09 [-0.15, -0.04]
+- A-S3 (later season, fit stations) lead 2: ridge_fire_over_ridge_stat +0.05 [-0.05, +0.17]; ridge_all_over_ridge_met +0.05 [-0.04, +0.14]; ridge_met_over_ridge_stat -0.76 [-1.06, -0.48]; ridge_metblh_over_ridge_met +0.75 [+0.53, +0.99]; ridge_stat_over_damped -0.18 [-0.46, +0.10]; damped_met_over_damped -0.59 [-0.83, -0.36]; damped_fire_over_damped -0.09 [-0.14, -0.03]
+- B-S3 (later season, disjoint stations) lead 1: ridge_fire_over_ridge_stat -0.10 [-0.20, -0.01]; ridge_all_over_ridge_met -0.06 [-0.13, +0.01]; ridge_met_over_ridge_stat -0.51 [-0.65, -0.37]; ridge_metblh_over_ridge_met +0.47 [+0.34, +0.60]; ridge_stat_over_damped -0.19 [-0.35, -0.04]; damped_met_over_damped -0.40 [-0.51, -0.29]; damped_fire_over_damped -0.12 [-0.19, -0.06]
+- B-S3 (later season, disjoint stations) lead 2: ridge_fire_over_ridge_stat -0.07 [-0.21, +0.06]; ridge_all_over_ridge_met -0.04 [-0.17, +0.07]; ridge_met_over_ridge_stat -1.23 [-1.49, -0.98]; ridge_metblh_over_ridge_met +1.13 [+0.87, +1.39]; ridge_stat_over_damped -0.13 [-0.49, +0.21]; damped_met_over_damped -0.99 [-1.20, -0.78]; damped_fire_over_damped -0.08 [-0.17, +0.01]
+- B-S4 (newest season, disjoint stations; no fire data) lead 1: ridge_met_over_ridge_stat -0.12 [-0.21, -0.02]; ridge_metblh_over_ridge_met +0.00 [-0.13, +0.14]; ridge_stat_over_damped -0.01 [-0.21, +0.18]; damped_met_over_damped -0.04 [-0.11, +0.02]
+- B-S4 (newest season, disjoint stations; no fire data) lead 2: ridge_met_over_ridge_stat -0.42 [-0.58, -0.26]; ridge_metblh_over_ridge_met +0.13 [-0.15, +0.40]; ridge_stat_over_damped +0.38 [-0.06, +0.82]; damped_met_over_damped -0.25 [-0.37, -0.13]
+- A-S4 (newest season, fit stations; no fire data) lead 1: ridge_met_over_ridge_stat -0.12 [-0.24, -0.01]; ridge_metblh_over_ridge_met +0.11 [-0.02, +0.25]; ridge_stat_over_damped -0.02 [-0.22, +0.19]; damped_met_over_damped -0.07 [-0.14, +0.01]
+- A-S4 (newest season, fit stations; no fire data) lead 2: ridge_met_over_ridge_stat -0.25 [-0.42, -0.06]; ridge_metblh_over_ridge_met +0.26 [+0.01, +0.52]; ridge_stat_over_damped +0.04 [-0.41, +0.47]; damped_met_over_damped -0.18 [-0.33, -0.03]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 1: ridge_fire_over_ridge_stat -0.21 [-0.39, -0.05]; ridge_all_over_ridge_met -0.14 [-0.26, -0.02]; ridge_met_over_ridge_stat -0.53 [-0.77, -0.31]; ridge_metblh_over_ridge_met +0.25 [+0.07, +0.42]; ridge_stat_over_damped -0.46 [-0.72, -0.18]; damped_met_over_damped -0.54 [-0.73, -0.36]; damped_fire_over_damped -0.30 [-0.40, -0.20]
+- north-B-S3 (Chiang Rai, Nan, Mae Hong Son, Phrae) lead 2: ridge_fire_over_ridge_stat -0.05 [-0.29, +0.20]; ridge_all_over_ridge_met -0.06 [-0.29, +0.15]; ridge_met_over_ridge_stat -1.34 [-1.76, -0.95]; ridge_metblh_over_ridge_met +0.85 [+0.44, +1.28]; ridge_stat_over_damped -0.70 [-1.30, -0.09]; damped_met_over_damped -1.47 [-1.83, -1.14]; damped_fire_over_damped -0.16 [-0.34, +0.02]
+- north-B-S4 lead 1: ridge_met_over_ridge_stat -0.15 [-0.32, +0.01]; ridge_metblh_over_ridge_met -0.21 [-0.43, +0.04]; ridge_stat_over_damped -0.01 [-0.41, +0.40]; damped_met_over_damped -0.04 [-0.15, +0.08]
+- north-B-S4 lead 2: ridge_met_over_ridge_stat -0.55 [-0.80, -0.30]; ridge_metblh_over_ridge_met -0.29 [-0.79, +0.22]; ridge_stat_over_damped +0.54 [-0.27, +1.41]; damped_met_over_damped -0.35 [-0.54, -0.16]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 1: ridge_fire_over_ridge_stat +0.01 [-0.11, +0.13]; ridge_all_over_ridge_met -0.01 [-0.09, +0.07]; ridge_met_over_ridge_stat -0.17 [-0.40, +0.06]; ridge_metblh_over_ridge_met +0.14 [-0.05, +0.32]; ridge_stat_over_damped -0.41 [-0.61, -0.19]; damped_met_over_damped -0.22 [-0.40, -0.04]; damped_fire_over_damped -0.17 [-0.25, -0.09]
+- north-A-S3 (Chiang Mai, Lampang, Phayao) lead 2: ridge_fire_over_ridge_stat +0.10 [-0.08, +0.28]; ridge_all_over_ridge_met +0.02 [-0.12, +0.16]; ridge_met_over_ridge_stat -0.44 [-0.92, +0.01]; ridge_metblh_over_ridge_met +0.53 [+0.17, +0.87]; ridge_stat_over_damped -0.54 [-0.96, -0.10]; damped_met_over_damped -0.73 [-1.14, -0.31]; damped_fire_over_damped -0.17 [-0.27, -0.07]
+
+## Exp B as issued (B-S4): damped_met with forecast weather
+- B-S4 lead1: n 1169; MAE persist 5.20, damped 4.73, with ERA5 4.69 (-0.04 [-0.11, +0.02]), with forecasts 4.70 (-0.03 [-0.11, +0.05]); band agreement damped 76.4 % → 76.5 %; worse at ['41t(+6%)']
+- B-S4 lead2: n 1168; MAE persist 8.07, damped 6.57, with ERA5 6.32 (-0.25 [-0.36, -0.13]), with forecasts 6.31 (-0.26 [-0.40, -0.12]); band agreement damped 68.7 % → 70.1 %; worse at ['41t(+7%)']
+
+## Exp C
+- PM10 > 120: 2.01 % of 151808 station-days at 96 stations (Dec–Apr 4.27 %); PM2.5 <= 37.5 on 168 of 3021 such days
+- PM10 lead1: n 904 at ['57t', '58t', '83t']: MAE cams 28.13, persist 10.04, damped 8.41; bias cams -26.82, persist +0.04, damped +0.16
+- PM10 lead2: n 904 at ['57t', '58t', '83t']: MAE cams 28.16, persist 15.40, damped 11.86; bias cams -26.85, persist +0.04, damped +0.51
+- O3 (26 Jul–23 Oct 2026, 3 stations): 250 station-days, max 93 ppb, 7 days > 70 ppb
+- O3 lead1: n 245: MAE cams 19.2, persist 6.8, damped 6.5 ppb; bias cams +18.3, persist -0.4, damped -0.2
+- O3 lead2: n 242: MAE cams 19.4, persist 8.2, damped 7.0 ppb; bias cams +18.5, persist -0.6, damped -0.3

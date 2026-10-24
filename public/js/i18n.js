@@ -2,7 +2,7 @@
 // Every key has th and en; test/i18n.test.mjs checks that and that every data-t in index.html exists here.
 
 export const STR = {
-  brand: { th: "ภัยรอบบ้าน ตอนนี้", en: "Disaster Now" },
+  brand: { th: "ภัยรอบบ้าน", en: "Thai Risk" },
   bigger: { th: "ตัวหนังสือใหญ่ขึ้น", en: "Larger text" },
   finderH: { th: "เลือกจุดที่จะดู", en: "Choose a place" },
   gps: { th: "ใช้ตำแหน่งของฉันตอนนี้", en: "Use my location now" },
@@ -21,7 +21,7 @@ export const STR = {
   refresh: { th: "อัปเดต", en: "Refresh" },
   preH: { th: "⏰ เตือนล่วงหน้า 3 วัน", en: "⏰ Heads-up for the next 3 days" },
   outlookH: { th: "3 วันข้างหน้า", en: "The next 3 days" },
-  outlookNote: { th: "ตัวเลขกลางของแบบจำลอง 51 ชุด สีบอกระดับ ฝนคือโอกาสฝนหนัก (เกิน 35 มม.) ในวันนั้น ฝุ่นคือค่าเฉลี่ยทั้งวัน 📢 คือวันที่มีประกาศเตือนภัยของกรมอุตุฯ", en: "The middle of the model's 51 runs; colour shows the level; rain is the chance of heavy rain (over 35 mm) that day; dust is the day's mean; 📢 marks a day under a TMD warning" },
+  outlookNote: { th: "ค่ากลางจากแบบจำลอง 51 ชุด สีและจุดบอกระดับ ช่องแรกนับเฉพาะช่วงที่เหลือของวันนี้ ความร้อนคือค่าสูงสุดช่วงบ่าย (หลัง 16:00 จึงไม่มีของวันนี้) ฝนคือโอกาสฝนหนัก (เกิน 35 มม.) ในวันนั้น ฝุ่นคือค่าเฉลี่ยที่คาดไว้ ไม่ใช่ค่าวัด 📢 คือวันที่มีประกาศเตือนภัยของกรมอุตุฯ", en: "The middle of the model's 51 runs; colour and dots show the level; the first column is the rest of today; heat is the afternoon peak (so after 16:00 today's is blank); rain is the chance of heavy rain (over 35 mm) that day; dust is the expected mean, not a measurement; 📢 marks a day under a TMD warning" },
   profileH: { th: "ข้อมูลพื้นที่ (ระยะยาว)", en: "About this place (long term)" },
   officialH: { th: "ประกาศเตือนภัยทางการ", en: "Official warnings" },
   officialP: { th: "เว็บนี้สรุปข้อมูลเปิด ไม่ใช่ประกาศเตือนภัย ฟังประกาศจากหน่วยงาน:", en: "This page summarises open data; it is not a warning service. Follow the agencies:" },
@@ -33,8 +33,8 @@ export const STR = {
   lEmergency: { th: "เจ็บป่วยฉุกเฉิน", en: "Medical emergency" },
   lFire: { th: "ไฟไหม้", en: "Fire" },
   aboutH: { th: "ข้อมูลมาจากไหน · ความเป็นส่วนตัว", en: "Where the data comes from · privacy" },
-  footer: { th: "ภัยรอบบ้าน ตอนนี้ · โครงการทดลอง ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ",
-    en: "Disaster Now · an experiment; data can be wrong or late; always check with the agencies" },
+  footer: { th: "ภัยรอบบ้าน · Thai Risk · โครงการทดลองอิสระ ไม่ใช่เว็บของหน่วยงานรัฐ ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ",
+    en: "Thai Risk · ภัยรอบบ้าน · an independent experiment, not a government site; data can be wrong or late; always check with the agencies" },
   // messages
   locating: { th: "กำลังหาตำแหน่ง…", en: "Finding your location…" },
   geoDenied: { th: "ไม่ได้รับอนุญาตให้ใช้ตำแหน่ง เปิดสิทธิ์ตำแหน่งในเบราว์เซอร์ หรือพิมพ์ค้นหาแทน", en: "Location permission was refused. Allow it in the browser, or search instead." },
@@ -50,6 +50,7 @@ export const STR = {
   nearT: { th: "ใกล้", en: "Near" },
   gpsLabel: { th: "ตำแหน่งของฉัน", en: "My location" },
   updated: { th: "อัปเดต {t} · แบบจำลอง {m} ชุด · จุดที่ส่งให้แหล่งข้อมูล {p}", en: "Updated {t} · {m} model runs · point sent to providers {p}" },
+  roundedKm: { th: "ปัดเศษราว 1 กม.", en: "rounded to about 1 km" },
   namePrompt: { th: "ตั้งชื่อที่นี่ (เช่น บ้าน บ้านแม่ ที่ทำงาน)", en: "Name this place (e.g. home, mum's, work)" },
   copied: { th: "คัดลอกลิงก์แล้ว", en: "Link copied" },
   shareText: { th: "ภัยรอบบ้านที่ {n} ({d}):{v}", en: "Hazards at {n} ({d}):{v}" },
@@ -83,7 +84,7 @@ export const STR = {
   tilesH: { th: "ทุกเรื่องที่จุดนี้", en: "Every hazard here" },
   missing: { th: "ยังไม่มีข้อมูล:", en: "No data yet:" },
   tableDay: { th: "", en: "" },
-  rowHeat: { th: "🌡️ ความร้อน °C", en: "🌡️ Heat °C" },
+  rowHeat: { th: "🌡️ ร้อนที่รู้สึก °C", en: "🌡️ Feels like °C" },
   rowRain: { th: "🌧️ โอกาสฝนหนัก", en: "🌧️ Heavy-rain chance" },
   rowPm: { th: "😷 ฝุ่น PM2.5", en: "😷 PM2.5" },
   rowUv: { th: "☀️ UV สูงสุด", en: "☀️ UV peak" },

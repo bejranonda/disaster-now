@@ -1,0 +1,14 @@
+===== node research/predictor_hours_check.mjs research/archive/2026-10-24 — 2026-10-24T08:14:48Z
+48333  2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.00, max 0.42, share > 0.1 °C 20 % | 2026-10-26: median 0.00, max 4.27, share > 0.1 °C 27 %
+48384  2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.00, max 1.20, share > 0.1 °C 29 % | 2026-10-26: median 0.13, max 1.08, share > 0.1 °C 55 %
+48455  2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.00, max 1.03, share > 0.1 °C 31 % | 2026-10-26: median 0.05, max 3.23, share > 0.1 °C 39 %
+48555  2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.82, max 8.25, share > 0.1 °C 76 % | 2026-10-26: median 0.71, max 5.19, share > 0.1 °C 75 %
+VTBD   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.05, max 0.54, share > 0.1 °C 31 % | 2026-10-26: median 0.00, max 3.51, share > 0.1 °C 35 %
+VTBS   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.00, max 1.66, share > 0.1 °C 31 % | 2026-10-26: median 0.01, max 3.60, share > 0.1 °C 43 %
+VTCC   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.14, max 0.44, share > 0.1 °C 61 % | 2026-10-26: median 0.00, max 2.99, share > 0.1 °C 41 %
+VTCT   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.17, max 0.45, share > 0.1 °C 78 % | 2026-10-26: median 0.11, max 6.77, share > 0.1 °C 51 %
+VTSP   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.11, max 3.94, share > 0.1 °C 51 % | 2026-10-26: median 0.21, max 3.67, share > 0.1 °C 63 %
+VTSS   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.44, max 6.96, share > 0.1 °C 59 % | 2026-10-26: median 0.00, max 5.03, share > 0.1 °C 43 %
+VTUD   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.09, max 0.66, share > 0.1 °C 49 % | 2026-10-26: median 0.16, max 0.67, share > 0.1 °C 57 %
+VTUU   2026-10-24: no 13:00/16:00 in window | 2026-10-25: median 0.00, max 0.42, share > 0.1 °C 33 % | 2026-10-26: median 0.10, max 0.45, share > 0.1 °C 49 %
+all member-days: n=1224, mean 0.405 °C, median 0.08, 90th pct 1.28, max 8.25

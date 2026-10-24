@@ -1,0 +1,69 @@
+{
+ "about": "The eight airports of the METAR spot check (docs/research/model-check-2026-10-24.md); coordinates from aviationweather.gov's METAR records (24 Oct 2026), rounded to 0.001\u00b0. Sample D: never used in any fit.",
+ "stations": [
+  {
+   "id": "VTBD",
+   "name": "Bangkok Don Mueang",
+   "lat": 13.912,
+   "lon": 100.607,
+   "region": "Central",
+   "sample": "D"
+  },
+  {
+   "id": "VTBS",
+   "name": "Bangkok Suvarnabhumi",
+   "lat": 13.686,
+   "lon": 100.767,
+   "region": "Central",
+   "sample": "D"
+  },
+  {
+   "id": "VTCC",
+   "name": "Chiang Mai",
+   "lat": 18.767,
+   "lon": 98.963,
+   "region": "North",
+   "sample": "D"
+  },
+  {
+   "id": "VTCT",
+   "name": "Chiang Rai",
+   "lat": 19.952,
+   "lon": 99.883,
+   "region": "North",
+   "sample": "D"
+  },
+  {
+   "id": "VTSP",
+   "name": "Phuket",
+   "lat": 8.113,
+   "lon": 98.317,
+   "region": "South",
+   "sample": "D"
+  },
+  {
+   "id": "VTSS",
+   "name": "Hat Yai",
+   "lat": 6.933,
+   "lon": 100.393,
+   "region": "South",
+   "sample": "D"
+  },
+  {
+   "id": "VTUD",
+   "name": "Udon Thani",
+   "lat": 17.386,
+   "lon": 102.788,
+   "region": "Northeast",
+   "sample": "D"
+  },
+  {
+   "id": "VTUU",
+   "name": "Ubon Ratchathani",
+   "lat": 15.251,
+   "lon": 104.87,
+   "region": "Northeast",
+   "sample": "D"
+  }
+ ]
+}

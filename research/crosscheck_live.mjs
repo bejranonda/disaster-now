@@ -6,6 +6,8 @@
 //   C. TMD's earthquake list vs EMSC: the same event (≤ 100 km, ≤ 5 min), magnitudes side by side
 //   D. GISTDA's estimate vs the PCD's stations: GISTDA's 24-h mean at each fresh station's own position
 // node research/crosscheck_live.mjs <live dir with warnings.json, tmd_quakes.json, air4thai.json> [--fw URL] [--n 30]
+//   (--fw: FloodWatch's origin or its /api/stations URL; section A compares readings fetched minutes apart, so a gauge
+//   that changed in between can differ: compare the reading times before calling it a disagreement, X18)
 import { readFileSync } from "node:fs";
 import { nearGauges } from "../public/js/water.js";
 import { buildOutlook, chanceWord } from "../public/js/outlook.js";
@@ -15,7 +17,10 @@ import { km } from "../public/js/geo.js";
 
 const args = process.argv.slice(2);
 const LIVE = args[0];
-const FW = args.includes("--fw") ? args[args.indexOf("--fw") + 1] : "https://flood.autobahn.bot/api/stations";
+// a bare origin ("https://flood.autobahn.bot") gets /api/stations: it used to fail only after ThaiWater had been asked
+// (output cross-check X18, KI-029)
+const fwArg = args.includes("--fw") ? args[args.indexOf("--fw") + 1] : "https://flood.autobahn.bot";
+const FW = /\/api\//.test(fwArg) ? fwArg : `${fwArg.replace(/\/+$/, "")}/api/stations`;
 const N = args.includes("--n") ? Number(args[args.indexOf("--n") + 1]) : 30;
 const UA = { "user-agent": "disaster-now-crosscheck/0.3 (+https://github.com/bejranonda/disaster-now)" };
 const live = (f) => JSON.parse(readFileSync(`${LIVE}/${f}`, "utf8"));

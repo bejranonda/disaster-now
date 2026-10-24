@@ -1,0 +1,49 @@
+
+===== run 2026-10-24T08:46:54+00:00: 31 ENS runs =====
+station-days scored: 1487; members per station-day: min 51
+
+[all] n=1487; raw ENS median: MAE 2.99, bias -2.93
+  C0: median MAE 3.56 bias +3.38 | 10–90 % range held 53 % | Brier ≥33 0.259 ≥42 0.0171 | level right 54 % high 45 % low 1 % | false likely เตือนภัย 42 % of days | ≥33 named 1.00 | ≥42 named 11/13, named and false 8.7 %
+  C5: median MAE 1.57 bias +0.32 | 10–90 % range held 92 % | Brier ≥33 0.111 ≥42 0.0083 | level right 81 % high 11 % low 8 % | false likely เตือนภัย 9 % of days | ≥33 named 0.99 | ≥42 named 3/13, named and false 0.7 %
+  C6: median MAE 1.52 bias +0.53 | 10–90 % range held 95 % | Brier ≥33 0.107 ≥42 0.0096 | level right 82 % high 12 % low 7 % | false likely เตือนภัย 9 % of days | ≥33 named 0.99 | ≥42 named 9/13, named and false 2.3 %
+
+[A+B] n=287; raw ENS median: MAE 3.31, bias -3.30
+  C0: median MAE 3.26 bias +2.99 | 10–90 % range held 61 % | Brier ≥33 0.248 ≥42 0.0158 | level right 56 % high 42 % low 2 % | false likely เตือนภัย 39 % of days | ≥33 named 1.00 | ≥42 named 4/4, named and false 9.4 %
+  C5: median MAE 1.51 bias -0.03 | 10–90 % range held 92 % | Brier ≥33 0.118 ≥42 0.0100 | level right 82 % high 9 % low 9 % | false likely เตือนภัย 7 % of days | ≥33 named 0.97 | ≥42 named 1/4, named and false 0.0 %
+  C6: median MAE 1.37 bias +0.16 | 10–90 % range held 97 % | Brier ≥33 0.112 ≥42 0.0081 | level right 82 % high 9 % low 8 % | false likely เตือนภัย 8 % of days | ≥33 named 0.97 | ≥42 named 4/4, named and false 1.0 %
+
+[C (disjoint)] n=952; raw ENS median: MAE 3.11, bias -3.05
+  C0: median MAE 3.48 bias +3.28 | 10–90 % range held 56 % | Brier ≥33 0.263 ≥42 0.0151 | level right 54 % high 45 % low 1 % | false likely เตือนภัย 43 % of days | ≥33 named 1.00 | ≥42 named 6/8, named and false 7.5 %
+  C5: median MAE 1.57 bias +0.19 | 10–90 % range held 92 % | Brier ≥33 0.114 ≥42 0.0076 | level right 80 % high 11 % low 9 % | false likely เตือนภัย 9 % of days | ≥33 named 0.99 | ≥42 named 2/8, named and false 0.4 %
+  C6: median MAE 1.48 bias +0.35 | 10–90 % range held 95 % | Brier ≥33 0.109 ≥42 0.0086 | level right 81 % high 11 % low 8 % | false likely เตือนภัย 9 % of days | ≥33 named 0.99 | ≥42 named 4/8, named and false 1.7 %
+
+[D airports] n=248; raw ENS median: MAE 2.15, bias -2.08
+  C0: median MAE 4.24 bias +4.18 | 10–90 % range held 35 % | Brier ≥33 0.254 ≥42 0.0262 | level right 51 % high 49 % low 0 % | false likely เตือนภัย 40 % of days | ≥33 named 1.00 | ≥42 named 1/1, named and false 12.9 %
+  C5: median MAE 1.65 bias +1.21 | 10–90 % range held 93 % | Brier ≥33 0.090 ≥42 0.0088 | level right 84 % high 14 % low 2 % | false likely เตือนภัย 10 % of days | ≥33 named 1.00 | ≥42 named 0/1, named and false 2.8 %
+  C6: median MAE 1.82 bias +1.64 | 10–90 % range held 93 % | Brier ≥33 0.090 ≥42 0.0151 | level right 82 % high 17 % low 1 % | false likely เตือนภัย 11 % of days | ≥33 named 1.00 | ≥42 named 1/1, named and false 6.0 %
+
+[North] n=313; raw ENS median: MAE 2.83, bias -2.68
+  C0: median MAE 3.87 bias +3.81 | 10–90 % range held 46 % | Brier ≥33 0.304 ≥42 0.0039 | level right 43 % high 57 % low 0 % | false likely เตือนภัย 51 % of days | ≥33 named 1.00 | ≥42 named 0/0, named and false 2.2 %
+  C5: median MAE 1.41 bias +0.45 | 10–90 % range held 92 % | Brier ≥33 0.116 ≥42 0.0001 | level right 77 % high 14 % low 9 % | false likely เตือนภัย 9 % of days | ≥33 named 0.96 | ≥42 named 0/0, named and false 0.0 %
+  C6: median MAE 1.41 bias +0.49 | 10–90 % range held 93 % | Brier ≥33 0.116 ≥42 0.0009 | level right 78 % high 13 % low 8 % | false likely เตือนภัย 9 % of days | ≥33 named 0.94 | ≥42 named 0/0, named and false 0.3 %
+
+[Northeast] n=461; raw ENS median: MAE 2.40, bias -2.38
+  C0: median MAE 4.12 bias +4.07 | 10–90 % range held 39 % | Brier ≥33 0.333 ≥42 0.0089 | level right 38 % high 62 % low 1 % | false likely เตือนภัย 56 % of days | ≥33 named 1.00 | ≥42 named 3/3, named and false 5.0 %
+  C5: median MAE 1.46 bias +0.79 | 10–90 % range held 97 % | Brier ≥33 0.097 ≥42 0.0049 | level right 84 % high 10 % low 6 % | false likely เตือนภัย 7 % of days | ≥33 named 1.00 | ≥42 named 0/3, named and false 0.0 %
+  C6: median MAE 1.41 bias +0.80 | 10–90 % range held 98 % | Brier ≥33 0.097 ≥42 0.0044 | level right 84 % high 10 % low 6 % | false likely เตือนภัย 7 % of days | ≥33 named 1.00 | ≥42 named 3/3, named and false 1.1 %
+
+[Central] n=362; raw ENS median: MAE 2.63, bias -2.59
+  C0: median MAE 3.59 bias +3.56 | 10–90 % range held 52 % | Brier ≥33 0.251 ≥42 0.0286 | level right 60 % high 39 % low 1 % | false likely เตือนภัย 37 % of days | ≥33 named 1.00 | ≥42 named 2/2, named and false 16.0 %
+  C5: median MAE 1.57 bias +0.77 | 10–90 % range held 95 % | Brier ≥33 0.123 ≥42 0.0085 | level right 79 % high 16 % low 4 % | false likely เตือนภัย 15 % of days | ≥33 named 1.00 | ≥42 named 2/2, named and false 3.0 %
+  C6: median MAE 1.61 bias +0.91 | 10–90 % range held 97 % | Brier ≥33 0.122 ≥42 0.0143 | level right 78 % high 16 % low 6 % | false likely เตือนภัย 13 % of days | ≥33 named 1.00 | ≥42 named 2/2, named and false 5.8 %
+
+[East] n=147; raw ENS median: MAE 4.00, bias -3.98
+  C0: median MAE 2.71 bias +2.23 | 10–90 % range held 75 % | Brier ≥33 0.204 ≥42 0.0235 | level right 71 % high 27 % low 2 % | false likely เตือนภัย 29 % of days | ≥33 named 1.00 | ≥42 named 2/3, named and false 11.6 %
+  C5: median MAE 1.70 bias -0.67 | 10–90 % range held 87 % | Brier ≥33 0.139 ≥42 0.0178 | level right 80 % high 7 % low 12 % | false likely เตือนภัย 8 % of days | ≥33 named 0.98 | ≥42 named 0/3, named and false 0.0 %
+  C6: median MAE 1.53 bias -0.22 | 10–90 % range held 95 % | Brier ≥33 0.131 ≥42 0.0163 | level right 80 % high 10 % low 10 % | false likely เตือนภัย 11 % of days | ≥33 named 1.00 | ≥42 named 2/3, named and false 2.0 %
+
+[South] n=204; raw ENS median: MAE 4.45, bias -4.44
+  C0: median MAE 2.41 bias +1.67 | 10–90 % range held 82 % | Brier ≥33 0.075 ≥42 0.0307 | level right 86 % high 12 % low 2 % | false likely เตือนภัย 11 % of days | ≥33 named 1.00 | ≥42 named 4/5, named and false 12.3 %
+  C5: median MAE 1.98 bias -1.05 | 10–90 % range held 82 % | Brier ≥33 0.091 ≥42 0.0211 | level right 85 % high 3 % low 12 % | false likely เตือนภัย 3 % of days | ≥33 named 0.99 | ≥42 named 1/5, named and false 0.0 %
+  C6: median MAE 1.77 bias -0.18 | 10–90 % range held 91 % | Brier ≥33 0.069 ≥42 0.0214 | level right 88 % high 6 % low 6 % | false likely เตือนภัย 5 % of days | ≥33 named 1.00 | ≥42 named 2/5, named and false 2.0 %
+wrote /root/disaster-now/research/out/heat_ens_cool.json

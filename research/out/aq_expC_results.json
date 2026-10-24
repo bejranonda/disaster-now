@@ -1,0 +1,117 @@
+{
+ "protocol": "Experiment C: PM10 and ozone. Do they reach unhealthy levels often enough to need a forecast, and is CAMS\n(raw or damped) usable for them against persistence? (docs/research/predict-air-2026-10-24.md \u00a76)\n\nRun:  <venv>/bin/python -I research/aq_expC.py      (after aq_data.py)\nWrites research/logs/aq_expC-2026-10-24.log and research/out/aq_expC_results.json.\n\n1. PM10, frequency: Air4Thai's daily PM10 means at every station in the yearly sheets 2019\u20132026: the share of\n   station-days above 120 \u00b5g/m\u00b3 (PCD AQI > 100, Table 2 of the 2023 notice), and how often PM10 > 120 came on a day\n   when the same station's PM2.5 was 37.5 or less (i.e. PM10 alone would have raised the level).\n2. PM10, forecast: at the study's stations with PM10 in S3\u2013S4 (Dec 2024\u2013Apr 2026): raw CAMS pm10, persistence and\n   the damped ratio with PM2.5's betas, leads 1\u20132.\n3. Ozone: Air4Thai's hourly history goes back only to late July 2026 (aq_probe), so only the wet season can be\n   scored: three stations that measure O3 (13t Nonthaburi, 30t Rayong, 38t Mae Mo), 26 Jul\u201323 Oct 2026; the day's\n   maximum 8-h mean (ppb) against CAMS ozone (\u00b5g/m\u00b3 / 1.96 ppb at 25 \u00b0C [conversion assumed]), raw, persistence and\n   damped.\n",
+ "pm10_frequency": {
+  "station_days": 151808,
+  "stations": 96,
+  "share_gt120": 0.02009116779089376,
+  "share_gt120_DecApr": 0.04269662921348315,
+  "share_gt180": 0.0042158516020236085,
+  "exceed_with_pm25": 3021,
+  "exceed_pm25_le_37_5": 168,
+  "pm25_gt_37_5_share_same_days": 0.15951680658193584
+ },
+ "pm10_forecast": {
+  "lead1": {
+   "n": 904,
+   "stations": [
+    "57t",
+    "58t",
+    "83t"
+   ],
+   "events_gt120": 57,
+   "mae": {
+    "cams": 28.129668141592923,
+    "persist": 10.037610619469026,
+    "damped": 8.412937278744314
+   },
+   "bias": {
+    "cams": -26.819889380530974,
+    "persist": 0.03761061946902655,
+    "damped": 0.15554445354232385
+   },
+   "gt120_cams": {
+    "hits": 2,
+    "misses": 55,
+    "false_alarms": 1
+   },
+   "gt120_persist": {
+    "hits": 47,
+    "misses": 10,
+    "false_alarms": 10
+   },
+   "gt120_damped": {
+    "hits": 50,
+    "misses": 7,
+    "false_alarms": 10
+   }
+  },
+  "lead2": {
+   "n": 904,
+   "stations": [
+    "57t",
+    "58t",
+    "83t"
+   ],
+   "events_gt120": 57,
+   "mae": {
+    "cams": 28.163097345132744,
+    "persist": 15.400442477876107,
+    "damped": 11.863208011233013
+   },
+   "bias": {
+    "cams": -26.8533185840708,
+    "persist": 0.0420353982300885,
+    "damped": 0.5076318107806471
+   },
+   "gt120_cams": {
+    "hits": 2,
+    "misses": 55,
+    "false_alarms": 1
+   },
+   "gt120_persist": {
+    "hits": 40,
+    "misses": 17,
+    "false_alarms": 17
+   },
+   "gt120_damped": {
+    "hits": 45,
+    "misses": 12,
+    "false_alarms": 14
+   }
+  }
+ },
+ "ozone": {
+  "station_days": 250,
+  "max_obs_ppb": 93.125,
+  "days_gt70": 7,
+  "days_gt50": 27,
+  "lead1": {
+   "n": 245,
+   "mae": {
+    "cams": 19.178175760099958,
+    "persist": 6.82949465500486,
+    "damped": 6.486797726755565
+   },
+   "bias": {
+    "cams": 18.251395251978348,
+    "persist": -0.4119047619047619,
+    "damped": -0.23108326349142777
+   },
+   "corr_cams_obs": 0.6392473871351723
+  },
+  "lead2": {
+   "n": 242,
+   "mae": {
+    "cams": 19.355175127902402,
+    "persist": 8.220065918929556,
+    "damped": 6.997366971465885
+   },
+   "bias": {
+    "cams": 18.459788047450388,
+    "persist": -0.6401269185360096,
+    "damped": -0.2542302639286301
+   },
+   "corr_cams_obs": 0.6422794962548659
+  }
+ }
+}

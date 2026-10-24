@@ -3,7 +3,7 @@
 
 import { heatIndexC } from "./heat.js";
 import { HAZARDS, CHANCE, band } from "./levels.js";
-import { HEAT, correctHeat, dressedChance, dressedQuantile } from "./calibration.js";
+import { HEAT, correctHeat, dressedChance, dressedQuantile, dewPoint, rhFrom } from "./calibration.js";
 
 /** Control run plus every member for one variable, as arrays aligned with hourly.time. */
 export function memberSeries(hourly, v) {
@@ -80,18 +80,58 @@ export function summarize(hazard, vals) {
   return { n, p10, p50, p90, chance };
 }
 
-/** Heat: each member's daily max corrected (calibration.HEAT), then dressed with the correction's tested error, so
- *  the range and the chances are as wide as the validation found them (MODELS.md §2). */
-export function summarizeHeat(rawVals, c) {
-  const vals = rawVals.map((v) => correctHeat(v, c));
+/** Heat: corrected member values dressed with the correction's tested error, so the range and the chances are as wide
+ *  as the validation found them (MODELS.md §1). `method` says which correction ran ("C0" the line, "C6" the cool
+ *  season's). */
+export function summarizeCorrected(vals, sd, rawVals, method) {
   const sorted = [...vals].sort((a, b) => a - b);
   const chance = {};
   for (const b of HAZARDS.heat.bands) {
     if (b.level < 1 || chance[b.level] != null) continue;
-    chance[b.level] = dressedChance(vals, b.min, c.sd);
+    chance[b.level] = dressedChance(vals, b.min, sd);
   }
-  return { n: vals.length, p10: dressedQuantile(vals, 0.1, c.sd), p50: quantile(sorted, 0.5), p90: dressedQuantile(vals, 0.9, c.sd),
-    chance, rawP50: quantile([...rawVals].sort((a, b) => a - b), 0.5), corrected: true };
+  return { n: vals.length, p10: dressedQuantile(vals, 0.1, sd), p50: quantile(sorted, 0.5), p90: dressedQuantile(vals, 0.9, sd),
+    chance, rawP50: quantile([...rawVals].sort((a, b) => a - b), 0.5), corrected: true, method };
+}
+
+/** The year-round line (C0): each member's raw daily max corrected as HI = a + b·HI_raw. */
+export const summarizeHeat = (rawVals, c) => summarizeCorrected(rawVals.map((v) => correctHeat(v, c)), c.sd, rawVals, "C0");
+
+/** The hours the heat correction was fitted on: each forecast's max of 13:00 and 16:00 Bangkok (ECMWF's 06 and 09 UTC
+ *  steps; research/out/calibration.json). 0.3.0 took every hour of the window: +0.41 °C on average and up to 8 °C on
+ *  showery days, through a line that never saw it (model check 2026-10-24 §4.1). A window holding neither hour has no
+ *  daily maximum to correct and gets no heat summary: an evening once became a 30 % "danger" line (S6). */
+export const PREDICTOR_HOURS = [13, 16];
+const hourOf = (t) => Number(String(t).slice(11, 13));
+export const predictorIndex = (times, a, b) => {
+  const out = [];
+  for (let i = Math.max(0, a); i < b && i < times.length; i++) if (PREDICTOR_HOURS.includes(hourOf(times[i]))) out.push(i);
+  return out;
+};
+export const hasAfternoon = (times, a, b) => predictorIndex(times, a, b).length > 0;
+
+/** Each member's maximum over the given hour indices (a member with no value there is left out). */
+export function perMemberAt(series, idx) {
+  const vals = [];
+  for (const s of series) {
+    let acc = null;
+    for (const i of idx) { const v = s[i]; if (v != null && !Number.isNaN(v)) acc = acc == null ? v : Math.max(acc, v); }
+    if (acc != null) vals.push(acc);
+  }
+  return vals;
+}
+
+/** C6's heat index per member and hour: the member's T and dew point corrected first (calibration.HEAT.cool), then the
+ *  NWS heat index of the corrected pair. The offset c is added after the max. */
+export function heatMembersCorrectedInputs(hourly, k) {
+  const t = memberSeries(hourly, "temperature_2m");
+  const rh = memberSeries(hourly, "relative_humidity_2m");
+  return t.map((ts, m) => ts.map((v, i) => {
+    const r = rh[m]?.[i];
+    if (v == null || r == null) return null;
+    const t2 = v + k.dT;
+    return heatIndexC(t2, rhFrom(t2, dewPoint(v, r) + k.dTd));
+  }));
 }
 
 /** The level a window gets from its members (GUIDELINES rule 6): the highest level at least half the members reach;
@@ -130,13 +170,26 @@ export function buildOutlook(ens, nowMs = Date.now()) {
     return quantile(v, 0.5);
   };
   const share = (vals, thr) => (vals.length ? vals.filter((v) => v > thr).length / vals.length : null);
-  const win = (a, b, c = HEAT.lead1) => ({
-    heat: summarizeHeat(perMember(heat, a, b, "max"), c),
+  // the cool season's inputs, per lead (calibration.HEAT.cool: Nov–Feb, provisional)
+  const coolIn = { lead1: heatMembersCorrectedInputs(h, HEAT.cool.lead1), lead2: heatMembersCorrectedInputs(h, HEAT.cool.lead2) };
+  /** One window's heat, at the fitted hours, by the correction for its month (C6 Nov–Feb, else the line). */
+  const heatWin = (a, b, lead) => {
+    const idx = predictorIndex(h.time, a, b);
+    if (!idx.length) return null;
+    const raw = perMemberAt(heat, idx);
+    if (HEAT.cool.months.includes(Number(h.time[idx[0]].slice(5, 7)))) {
+      const k = HEAT.cool[lead];
+      return summarizeCorrected(perMemberAt(coolIn[lead], idx).map((v) => v + k.c), k.sd, raw, "C6");
+    }
+    return summarizeHeat(raw, HEAT[lead]);
+  };
+  const win = (a, b, lead = "lead1") => ({
+    heat: heatWin(a, b, lead),
     rain24: summarize("rain24", perMember(rain, a, b, "sum")),
     gust: summarize("gust", perMember(gust, a, b, "max")),
     tmax: stats(perMember(temp, a, b, "max")), // air temperature, for TMD's "อากาศร้อน / ร้อนจัด" words only
   });
-  const days = dayWindows(h.time, i0).map((d, k) => ({ ...d, ...win(d.i0, d.i1, k >= 2 ? HEAT.lead2 : HEAT.lead1) }));
+  const days = dayWindows(h.time, i0).map((d, k) => ({ ...d, ...win(d.i0, d.i1, k >= 2 ? "lead2" : "lead1") }));
   return {
     issued: h.time[i0], members: heat.length,
     now: { time: h.time[i0], heat: at(heat, i0), temp: at(temp, i0) },
@@ -154,7 +207,7 @@ export function prewarnings(outlook, extra = []) {
   if (!outlook) return extra;
   const out = [];
   outlook.days.forEach((d, di) => {
-    const heat = d.heat.chance[3];
+    const heat = d.heat ? d.heat.chance[3] : null; // no afternoon left in the window: no heat line (S6)
     if (heat >= CHANCE.possible) out.push({ hazard: "heat", day: di, date: d.date, level: 3, chance: heat, value: d.heat.p90 });
     const r3 = d.rain24.chance[3];
     const r2 = d.rain24.chance[2];

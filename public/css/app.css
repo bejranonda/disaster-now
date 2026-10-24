@@ -1,4 +1,4 @@
-/* ภัยรอบบ้าน ตอนนี้ — one column for phones first (checked at 320 and 390 px), large type for older readers.
+/* ภัยรอบบ้าน (Thai Risk) — one column for phones first (checked at 320 and 390 px), large type for older readers.
    Every level has a colour AND a word; no information is in colour alone. */
 :root {
   --bg: #f4f6f8; --card: #fff; --ink: #14202b; --muted: #556170; --line: #d9e0e6; --brand: #0f3d5e; --link: #0b5cad;
@@ -38,7 +38,9 @@ main { max-width: 720px; margin: 0 auto; padding: 12px 12px 24px; }
 .btn.primary { background: var(--brand); color: #fff; border-color: var(--brand); font-weight: 700; }
 @media (prefers-color-scheme: dark) { .btn.primary { background: #1f6fb2; border-color: #1f6fb2; } }
 .btn.big { width: 100%; min-height: 56px; font-size: 1.1rem; }
-.btn.small { min-height: 44px; padding: 6px 10px; font-size: .9rem; }
+.btn.small { min-height: 44px; min-width: 44px; padding: 6px 10px; font-size: .9rem; } /* V28: ↻ was narrower than 44 px */
+/* V28: the hotline numbers are the most important taps on the page; a finger needs 44 × 44 px */
+a[href^="tel:"] { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; font-weight: 700; }
 
 .finder { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 12px; }
 .search { display: flex; gap: 8px; }
@@ -54,7 +56,7 @@ main { max-width: 720px; margin: 0 auto; padding: 12px 12px 24px; }
 .btn.chip { border-radius: 999px 0 0 999px; }
 .x { min-width: 44px; min-height: 44px; border: 1px solid var(--line); border-left: 0; border-radius: 0 999px 999px 0;
   background: var(--card); color: var(--muted); font-size: 1.2rem; cursor: pointer; }
-.msg { margin: 0; padding: 10px 12px; border-radius: 12px; background: var(--watch-bg); color: var(--ink); }
+.msg { margin: 0; padding: 10px 12px; border-radius: 12px; background: var(--l1-bg); color: var(--ink); } /* U19: --watch-bg never existed */
 
 .welcome { background: var(--card); border-radius: var(--r); padding: 14px 16px; border: 1px solid var(--line); }
 .welcome p { margin: 0 0 6px; }
@@ -100,21 +102,29 @@ main { max-width: 720px; margin: 0 auto; padding: 12px 12px 24px; }
 .day small { display: block; font-size: .75rem; }
 .note { margin: 0; font-size: .85rem; color: var(--muted); }
 .src { font-size: .78rem; color: var(--muted); }
-.tag { display: inline-block; padding: 0 6px; border-radius: 6px; background: var(--none-bg); font-size: .72rem; }
+.tag { display: inline-block; padding: 0 6px; border-radius: 6px; background: var(--ln-bg); font-size: .72rem; white-space: nowrap; } /* U19: --none-bg never existed */
 .acts { display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .how { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: none; }
 
-.outlook-wrap { overflow-x: auto; }
+.outlook-wrap { overflow-x: auto; position: relative; } /* holds the cells' .sr-only words (absolute) inside the scroll box */
 .outlook { width: 100%; border-collapse: separate; border-spacing: 4px; font-size: .9rem; }
-.outlook th { text-align: left; font-weight: 600; white-space: nowrap; }
+.outlook th { text-align: left; font-weight: 600; }
+.outlook thead th { white-space: nowrap; }
+/* row names wrap, so the three days fit at 320 px with ก+ (0.3.0 kept them on one line and pushed tomorrow out of view) */
+.outlook tbody th { white-space: normal; overflow-wrap: anywhere; font-size: .85rem; line-height: 1.25; }
 .outlook thead th { text-align: center; }
 .outlook td { text-align: center; border-radius: 8px; padding: 6px 4px; border: 1px solid; }
 .outlook td small { display: block; font-size: .7rem; }
+.outlook td .meter { font-size: .55rem; letter-spacing: 0; line-height: 1.3; } /* KI-025: dots in every cell, narrow enough for 320 px with ก+ */
 .profile { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 6px; }
 .official .links { margin: 0; padding-left: 1.1em; }
 .official .links li { margin: 6px 0; }
 .official a { display: inline-flex; align-items: center; min-height: 44px; }
 .foot { max-width: 720px; margin: 0 auto; padding: 0 14px 30px; }
+/* U22: a focus ring in the link colour, not the browser's orange (which read as "เตรียมตัว") */
+:focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+/* U23: the warning box's toggles were 28 px tall */
+.warn summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; }
 .foot summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; color: var(--link); }
 .about { font-size: .9rem; }
 
@@ -134,7 +144,7 @@ main { max-width: 720px; margin: 0 auto; padding: 12px 12px 24px; }
 .warn p { white-space: pre-line; }
 .warn .mt { margin-top: 8px; }
 .linkbtn { background: none; border: 0; padding: 0; min-height: 44px; color: var(--link); font: inherit; text-decoration: underline; cursor: pointer; }
-.btn.line { background: #06C755; border-color: #06C755; color: #fff; font-weight: 700; }
+.btn.line { background: #06C755; border-color: #06C755; color: #14202b; font-weight: 700; } /* U18: LINE green with dark ink, 7.3:1 (white was 2.26:1) */
 
 .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 0 0 12px; }
 @media (min-width: 560px) { .tiles { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
@@ -146,7 +156,7 @@ main { max-width: 720px; margin: 0 auto; padding: 12px 12px 24px; }
 .tile .meter { margin-top: auto; }
 
 /* level colours: the fill or edge in the level's colour, text always dark-on-light or light-on-dark */
-.lv-ok { --c: var(--l0); --b: var(--l0-bg); --d: var(--l0); }
+.lv-ok { --c: #24599a; --b: var(--l0-bg); --d: var(--l0); } /* U18: words and dots 6.0:1 on their background (FloodWatch's #2F6FB0 was 4.44:1); the border keeps it */
 .lv-watch { --c: var(--l1-ink); --b: var(--l1-bg); --d: var(--l1); }
 .lv-warn { --c: var(--l2-ink); --b: var(--l2-bg); --d: var(--l2); }
 .lv-danger { --c: var(--l3); --b: var(--l3-bg); --d: var(--l3); }

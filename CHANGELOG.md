@@ -2,6 +2,85 @@
 
 ## Unreleased
 
+## 0.4.0 (24 Oct 2026, not deployed): ภัยรอบบ้าน · Thai Risk, one grading for every forecast view, the cool-season heat fix
+
+**The name** (A2, D-044): **ภัยรอบบ้าน · Thai Risk**. The Thai name fits the 320 px header on one line; "Thai Risk"
+matches `risk.autobahn.bot`; the footer says "โครงการทดลองอิสระ ไม่ใช่เว็บของหน่วยงานรัฐ" / "not a government site".
+The preview card and icons are re-rendered. The code name `disaster-now` stays (repository, Worker, KV, Docker).
+
+**The host** (D-045): `autobahn-bot`, which also runs BrainPlatform. The owner chose to run the collector here; D-040
+now says what it guards against (never FloodWatch's server; another app's only with the owner's yes and no shared
+sources, `.env` or tunnel). Node 24, Docker 29, Chromium at `~/.cache/ms-playwright/chromium-1217`; Air4Thai 173
+stations and ThaiWater answering from it. `npm run cf:setup` created the KV namespace (`wrangler.jsonc`).
+
+**Consistency: one forecast, one level, everywhere** ([review](docs/research/review-2026-10-24.md),
+[visitor audit](docs/research/visitor-audit-2026-10-24.md)):
+- `assess.fcLevel` grades a forecast window for the tile, the card's day chips and the 3-day table; pre-warnings keep
+  the agency's band in their words but a forecast's colour. In 0.3.0 the table and pre-warnings were red beside an
+  orange tile and verdict (S1, U1).
+- The table's heat number is floored like the card's (S2). The heat tile names the afternoon whose number it shows
+  (today's before 16:00, else tomorrow's), the same window as the table (U25).
+- The first column is "คืนนี้" from 18:00 (S3); UV's first day is the rest of today like every other row (U16).
+- Today's dust chip says "คาด"; the table's note says the first column is the rest of today and dust is an
+  expectation, not a measurement (S4, U6).
+- Under a TMD warning the card's day chips say "📢 เตือนภัย" as the table does (U4).
+
+**Heat, from the model check** ([research/model-check-2026-10-24.md](docs/research/model-check-2026-10-24.md), MODELS §1.1):
+- The year-round line read 3–4 °C hot from November to February, worse than no correction on 53 stations it never saw
+  (MAE 3.56 vs 3.07 °C), with false "เตือนภัย" on about half the northern days. **Nov–Feb now uses C6** (corrected T
+  and Td, then the heat index; MAE 1.53 °C, danger days kept 7 of 29 vs 8): provisional and post-hoc, the owner's choice
+  (D-046), to be scored as issued at the end of November and in March. Mar–Oct keeps the line.
+- The page now computes what the line was fitted on: each member's max of **13:00 and 16:00** (it took every hour,
+  +0.41 °C on average) and the grid cell's own height (`elevation=nan`; Open-Meteo's downscaling moved Surat Thani's
+  temperature +1.27 °C).
+- The card's accuracy line says what was measured: ±2.5 °C and "usually a little high" in Mar–Oct; ±1.5 °C, provisional,
+  in Nov–Feb; the raw model "3–5 °C low".
+- `research/archive_forecasts.mjs` saves the page's own forecast for 12 points with every member's raw maxima, for
+  the as-issued scoring.
+
+**A false alarm removed (S6):** from 16:00 the "today" heat window had no afternoon, and the daily-maximum correction
+turned an evening's raw 34.9 °C into 40.5 °C with a 31 % chance of "อันตราย". Such a window now has no heat summary
+(`outlook.hasAfternoon`). The walk has an 18:30 page.
+
+**Words that say what the data says:**
+- Heat is "รู้สึกเหมือน 43 °C" / "feels like" (U3); the table row is "ร้อนที่รู้สึก"; in the verdict the band is a
+  level ("ระดับเตือนภัย"), so it isn't read as TMD's notice (U9).
+- The rain tile's word is the gauge's only when the gauge raised it ("ไม่มีฝน" read as today's forecast, U5);
+  no "about under 10%" (U21).
+- The quake tile counts today's far or small quakes instead of "none reported" above them (U8); the lowest felt words
+  only from M5.5, the size the felt reports behind them come from (U15).
+- Landslide: "ใกล้หมู่บ้านเสี่ยง" instead of "พื้นที่เสี่ยง" (U14). GDACS failing is said (U24).
+- A tile without a level shows no number (U13, U12).
+- The flood card names the tile's gauge first; a river that doesn't judge the point loses its status word with 1 m or
+  more to spare (KI-008, S10).
+
+**Search** (U2, U20): a province opens its town's subdistrict (ต.ศรีภูมิ, not a mountain 40 km away at 994 m), a district
+its seat, by code (`#t=`), labelled in the page's language.
+
+**Layout and access:**
+- The 3-day table fits 320 px with ก+ (it hid tomorrow; S5, U7), with dots in every cell and the level's word for
+  screen readers (KI-025).
+- Tap targets 44 × 44 both ways: ↻ and the hotline numbers (V28, S9); the warning's toggles (U23).
+- Contrast: the LINE button 7.3:1 (was 2.26), level-0 words and dots 6.0:1 (was 4.44) (U18); a focus ring in the
+  link colour (U22); two undefined CSS variables (U19).
+- The verdict's live region speaks once it has settled (U11). TMD's "full notice" opens its warnings page, not the
+  CAP XML (U10).
+
+**Privacy** (U17): no coordinates on screen for a GPS or saved place, not even rounded.
+
+**The deploy was refused** (09:23 UTC): the owner's new token lacks *Workers Scripts: Edit*; nothing was created on
+Cloudflare. `node tools/env-check.mjs --probe` now tests the deploy permission with a read-only call (S13).
+
+**Collector files that stopped are missing, not calm** (S12): the page ignores `data/live/` files when `index.json` is
+more than 2 h old (`sources.liveFresh`); KV keeps the last upload forever, and a stale empty list read as "no warning".
+
+**Tests:** 82 unit tests (61 before); the walk adds the table's box at 320 px, tap targets both ways, the evening,
+no-data tiles and no coordinates for a GPS place. `test/cloud.test.mjs` no longer assumes the placeholder KV id (S7).
+
+**Docs:** GUIDELINES 3b, 3e, §2, §6 ("walk the clock"), §8 (D-045); FRANK_FEEDBACK §7.
+
+### Earlier on 24 Oct (in 0.4.0): the move off FloodWatch's server
+
 **The move to a server of its own** (24 Oct 2026; D-040 … D-043):
 - 0.3.0's stack had been set up on FloodWatch's production server by mistake. The owner is moving it to a dedicated
   server for risk and replacing the Cloudflare token.

@@ -1,0 +1,924 @@
+
+===== run 2026-10-24T08:22:29+00:00 =====
+forecast runs read: 962 files; station-day-lead forecasts: 165464
+observed HI-max days per station: 48304:315, 48307:457, 48310:506, 48315:415, 48324:386, 48325:220, 48326:0, 48333:241, 48334:421, 48350:207, 48351:672, 48355:459, 48357:711, 48358:380, 48360:681, 48363:568, 48372:767, 48373:285, 48374:718, 48377:565, 48380:169, 48382:752, 48383:684, 48384:552, 48385:145, 48386:506, 48387:224, 48390:642, 48401:633, 48403:675, 48404:589, 48409:512, 48410:712, 48413:823, 48415:541, 48416:501, 48418:699, 48419:711, 48420:772, 48421:416, 48425:619, 48426:704, 48427:664, 48429:0, 48432:656, 48433:475, 48435:731, 48437:1021, 48440:348, 48450:802, 48451:553, 48453:819, 48454:0, 48455:783, 48458:460, 48461:769, 48464:765, 48474:646, 48478:745, 48479:626, 48481:276, 48501:428, 48520:194, 48553:0, 48554:339, 48555:300, 48556:152, 48557:310, 48560:480, 48561:402, 48563:329, 48564:734, 48571:446, 48574:389, 48581:425, VTBD:967, VTBS:967, VTCC:967, VTCT:967, VTSP:967, VTSS:967, VTUD:967, VTUU:967
+station-day pairs: 90481 (day 1: 45245); sample C stations scored: 53 (48307, 48310, 48315, 48324, 48350, 48351, 48355, 48358, 48360, 48363, 48373, 48374, 48377, 48380, 48382, 48383, 48385, 48386, 48387, 48390, 48401, 48403, 48404, 48410, 48413, 48416, 48418, 48419, 48420, 48421, 48426, 48427, 48433, 48435, 48437, 48450, 48451, 48453, 48458, 48461, 48464, 48474, 48479, 48481, 48501, 48520, 48556, 48557, 48560, 48561, 48563, 48574, 48581)
+dropped C stations (< 30 pairs): []
+
+================ Part A — the current correction by region × month (error = forecast − observed) ================
+
+--- day 1, all rows
+North     Nov      current         n=  653 bias=+3.47 MAE= 3.71 band=  56% hi/lo= 43/  2% | ≥33 ev= 336 POD=0.99 FAR=0.39 fa%=32.6 | ≥42 ev=  19 POD=0.63 FAR=0.52 fa%= 2.0
+North     Dec      current         n=  728 bias=+3.77 MAE= 3.81 band=  45% hi/lo= 55/  0% | ≥33 ev= 229 POD=0.99 FAR=0.62 fa%=50.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Jan      current         n=  851 bias=+4.15 MAE= 4.16 band=  31% hi/lo= 68/  0% | ≥33 ev= 112 POD=0.98 FAR=0.81 fa%=56.1 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Feb      current         n=  660 bias=+3.00 MAE= 3.24 band=  57% hi/lo= 43/  1% | ≥33 ev= 355 POD=1.00 FAR=0.44 fa%=42.9 | ≥42 ev=   5 POD=0.20 FAR=0.67 fa%= 0.3
+North     Mar–May  current         n= 3183 bias=+1.13 MAE= 2.72 band=  69% hi/lo= 23/  8% | ≥33 ev=3019 POD=1.00 FAR=0.05 fa%= 5.0 | ≥42 ev=1232 POD=0.81 FAR=0.37 fa%=18.0
+North     Jun–Sep  current         n= 4184 bias=+1.62 MAE= 2.86 band=  66% hi/lo= 27/  7% | ≥33 ev=3981 POD=1.00 FAR=0.05 fa%= 4.6 | ≥42 ev=1055 POD=0.74 FAR=0.54 fa%=22.4
+North     Oct      current         n=  843 bias=+1.34 MAE= 2.48 band=  77% hi/lo= 16/  7% | ≥33 ev= 783 POD=0.99 FAR=0.07 fa%= 6.9 | ≥42 ev= 143 POD=0.60 FAR=0.49 fa%= 9.7
+North     Nov–Feb  current         n= 2892 bias=+3.64 MAE= 3.76 band=  46% hi/lo= 53/  1% | ≥33 ev=1032 POD=0.99 FAR=0.57 fa%=46.4 | ≥42 ev=  24 POD=0.54 FAR=0.54 fa%= 0.5
+North     Nov–Feb  raw             n= 2892 bias=-2.81 MAE= 2.95 band=  57% hi/lo=  1/ 42% | ≥33 ev=1032 POD=0.29 FAR=0.02 fa%= 0.2 | ≥42 ev=  24 POD=0.00 FAR=   - fa%= 0.0
+North     Nov–Feb  persistence     n= 2464 bias=+0.01 MAE= 1.51 band=  78% hi/lo= 11/ 11% | ≥33 ev= 863 POD=0.77 FAR=0.23 fa%= 8.1 | ≥42 ev=  19 POD=0.53 FAR=0.41 fa%= 0.3
+North     Mar–Oct  current         n= 8210 bias=+1.40 MAE= 2.77 band=  68% hi/lo= 25/  7% | ≥33 ev=7783 POD=1.00 FAR=0.05 fa%= 5.0 | ≥42 ev=2430 POD=0.77 FAR=0.46 fa%=19.4
+North     Mar–Oct  raw             n= 8210 bias=-4.14 MAE= 4.33 band=  56% hi/lo=  1/ 43% | ≥33 ev=7783 POD=0.82 FAR=0.01 fa%= 0.9 | ≥42 ev=2430 POD=0.06 FAR=0.05 fa%= 0.1
+North     Mar–Oct  persistence     n= 6758 bias=-0.00 MAE= 1.92 band=  80% hi/lo= 10/ 10% | ≥33 ev=6431 POD=0.98 FAR=0.02 fa%= 2.2 | ≥42 ev=1973 POD=0.74 FAR=0.26 fa%= 7.5
+Northeast Nov      current         n=  966 bias=+3.62 MAE= 3.83 band=  53% hi/lo= 45/  2% | ≥33 ev= 464 POD=0.99 FAR=0.42 fa%=34.6 | ≥42 ev=  21 POD=0.43 FAR=0.57 fa%= 1.2
+Northeast Dec      current         n= 1084 bias=+4.11 MAE= 4.15 band=  36% hi/lo= 63/  0% | ≥33 ev= 265 POD=0.98 FAR=0.71 fa%=57.6 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Jan      current         n= 1108 bias=+4.58 MAE= 4.58 band=  21% hi/lo= 79/  0% | ≥33 ev=  81 POD=1.00 FAR=0.89 fa%=60.6 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Feb      current         n=  771 bias=+3.43 MAE= 3.56 band=  62% hi/lo= 38/  0% | ≥33 ev= 446 POD=1.00 FAR=0.39 fa%=36.3 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.4
+Northeast Mar–May  current         n= 3394 bias=+1.32 MAE= 2.68 band=  65% hi/lo= 29/  6% | ≥33 ev=3146 POD=1.00 FAR=0.07 fa%= 6.7 | ≥42 ev=1623 POD=0.88 FAR=0.34 fa%=21.5
+Northeast Jun–Sep  current         n= 4202 bias=+1.81 MAE= 2.70 band=  63% hi/lo= 31/  6% | ≥33 ev=4104 POD=1.00 FAR=0.02 fa%= 2.3 | ≥42 ev=1373 POD=0.81 FAR=0.52 fa%=28.8
+Northeast Oct      current         n= 1128 bias=+1.93 MAE= 2.59 band=  78% hi/lo= 17/  5% | ≥33 ev=1009 POD=1.00 FAR=0.09 fa%= 8.3 | ≥42 ev=  85 POD=0.44 FAR=0.73 fa%= 8.7
+Northeast Nov–Feb  current         n= 3929 bias=+3.99 MAE= 4.08 band=  41% hi/lo= 58/  1% | ≥33 ev=1256 POD=0.99 FAR=0.61 fa%=48.6 | ≥42 ev=  23 POD=0.39 FAR=0.62 fa%= 0.4
+Northeast Nov–Feb  raw             n= 3929 bias=-2.48 MAE= 2.53 band=  62% hi/lo=  0/ 38% | ≥33 ev=1256 POD=0.31 FAR=0.01 fa%= 0.1 | ≥42 ev=  23 POD=0.00 FAR=   - fa%= 0.0
+Northeast Nov–Feb  persistence     n= 3649 bias=+0.04 MAE= 1.70 band=  75% hi/lo= 13/ 12% | ≥33 ev=1134 POD=0.76 FAR=0.25 fa%= 8.0 | ≥42 ev=  19 POD=0.32 FAR=0.67 fa%= 0.3
+Northeast Mar–Oct  current         n= 8724 bias=+1.64 MAE= 2.68 band=  66% hi/lo= 28/  6% | ≥33 ev=8259 POD=1.00 FAR=0.05 fa%= 4.8 | ≥42 ev=3081 POD=0.84 FAR=0.44 fa%=23.4
+Northeast Mar–Oct  raw             n= 8724 bias=-3.82 MAE= 4.01 band=  54% hi/lo=  1/ 45% | ≥33 ev=8259 POD=0.89 FAR=0.01 fa%= 0.6 | ≥42 ev=3081 POD=0.02 FAR=0.08 fa%= 0.1
+Northeast Mar–Oct  persistence     n= 7417 bias=-0.03 MAE= 2.04 band=  77% hi/lo= 11/ 12% | ≥33 ev=6984 POD=0.97 FAR=0.03 fa%= 2.8 | ≥42 ev=2577 POD=0.74 FAR=0.24 fa%= 8.3
+Central   Nov      current         n=  733 bias=+3.58 MAE= 3.74 band=  62% hi/lo= 36/  2% | ≥33 ev= 514 POD=0.99 FAR=0.26 fa%=24.6 | ≥42 ev=  33 POD=0.67 FAR=0.75 fa%= 9.1
+Central   Dec      current         n=  867 bias=+3.75 MAE= 3.80 band=  60% hi/lo= 40/  0% | ≥33 ev= 497 POD=1.00 FAR=0.42 fa%=41.2 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+Central   Jan      current         n=  882 bias=+4.26 MAE= 4.28 band=  35% hi/lo= 65/  0% | ≥33 ev= 279 POD=1.00 FAR=0.67 fa%=63.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Central   Feb      current         n=  587 bias=+2.73 MAE= 2.86 band=  79% hi/lo= 20/  1% | ≥33 ev= 509 POD=1.00 FAR=0.13 fa%=12.6 | ≥42 ev=   7 POD=0.43 FAR=0.94 fa%= 7.8
+Central   Mar–May  current         n= 2676 bias=+0.93 MAE= 2.42 band=  74% hi/lo= 21/  5% | ≥33 ev=2637 POD=1.00 FAR=0.01 fa%= 1.5 | ≥42 ev=1713 POD=0.93 FAR=0.26 fa%=20.7
+Central   Jun–Sep  current         n= 4206 bias=+1.81 MAE= 2.49 band=  58% hi/lo= 38/  4% | ≥33 ev=4196 POD=1.00 FAR=0.00 fa%= 0.2 | ≥42 ev=1561 POD=0.91 FAR=0.53 fa%=38.2
+Central   Oct      current         n=  819 bias=+1.07 MAE= 2.22 band=  67% hi/lo= 23/ 10% | ≥33 ev= 813 POD=1.00 FAR=0.01 fa%= 0.7 | ≥42 ev= 225 POD=0.67 FAR=0.55 fa%=22.8
+Central   Nov–Feb  current         n= 3069 bias=+3.66 MAE= 3.74 band=  57% hi/lo= 42/  1% | ≥33 ev=1799 POD=1.00 FAR=0.39 fa%=38.2 | ≥42 ev=  41 POD=0.61 FAR=0.82 fa%= 3.7
+Central   Nov–Feb  raw             n= 3069 bias=-2.44 MAE= 2.53 band=  69% hi/lo=  1/ 31% | ≥33 ev=1799 POD=0.57 FAR=0.01 fa%= 0.4 | ≥42 ev=  41 POD=0.00 FAR=   - fa%= 0.0
+Central   Nov–Feb  persistence     n= 2909 bias=-0.00 MAE= 1.73 band=  78% hi/lo= 11/ 11% | ≥33 ev=1679 POD=0.85 FAR=0.15 fa%= 8.6 | ≥42 ev=  35 POD=0.23 FAR=0.78 fa%= 1.0
+Central   Mar–Oct  current         n= 7701 bias=+1.43 MAE= 2.44 band=  65% hi/lo= 31/  5% | ≥33 ev=7646 POD=1.00 FAR=0.01 fa%= 0.7 | ≥42 ev=3499 POD=0.90 FAR=0.43 fa%=30.5
+Central   Mar–Oct  raw             n= 7701 bias=-3.81 MAE= 3.97 band=  54% hi/lo=  1/ 45% | ≥33 ev=7646 POD=0.97 FAR=0.00 fa%= 0.3 | ≥42 ev=3499 POD=0.09 FAR=0.11 fa%= 0.5
+Central   Mar–Oct  persistence     n= 6823 bias=-0.01 MAE= 1.70 band=  78% hi/lo= 11/ 11% | ≥33 ev=6771 POD=1.00 FAR=0.00 fa%= 0.4 | ≥42 ev=3057 POD=0.77 FAR=0.22 fa%=10.0
+East      Nov      current         n=  292 bias=+2.00 MAE= 2.83 band=  70% hi/lo= 26/  5% | ≥33 ev= 220 POD=0.99 FAR=0.18 fa%=16.8 | ≥42 ev=  12 POD=0.00 FAR=1.00 fa%= 4.5
+East      Dec      current         n=  376 bias=+2.45 MAE= 2.63 band=  76% hi/lo= 24/  0% | ≥33 ev= 281 POD=1.00 FAR=0.25 fa%=24.5 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.5
+East      Jan      current         n=  376 bias=+3.04 MAE= 3.16 band=  53% hi/lo= 47/  0% | ≥33 ev= 181 POD=1.00 FAR=0.49 fa%=46.8 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+East      Feb      current         n=  224 bias=+2.15 MAE= 2.47 band=  89% hi/lo= 10/  1% | ≥33 ev= 207 POD=1.00 FAR=0.08 fa%= 7.6 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 1.3
+East      Mar–May  current         n=  921 bias=-0.56 MAE= 2.40 band=  63% hi/lo= 14/ 23% | ≥33 ev= 912 POD=1.00 FAR=0.01 fa%= 0.9 | ≥42 ev= 584 POD=0.64 FAR=0.24 fa%=13.1
+East      Jun–Sep  current         n= 1271 bias=+0.14 MAE= 2.01 band=  75% hi/lo= 13/ 13% | ≥33 ev=1270 POD=0.99 FAR=0.00 fa%= 0.1 | ≥42 ev= 313 POD=0.53 FAR=0.48 fa%=12.2
+East      Oct      current         n=  192 bias=+0.07 MAE= 2.56 band=  78% hi/lo= 10/ 12% | ≥33 ev= 187 POD=1.00 FAR=0.03 fa%= 2.6 | ≥42 ev=  31 POD=0.23 FAR=0.67 fa%= 7.3
+East      Nov–Feb  current         n= 1268 bias=+2.47 MAE= 2.81 band=  70% hi/lo= 29/  1% | ≥33 ev= 889 POD=1.00 FAR=0.27 fa%=26.3 | ≥42 ev=  15 POD=0.00 FAR=1.00 fa%= 1.4
+East      Nov–Feb  raw             n= 1268 bias=-3.68 MAE= 3.71 band=  50% hi/lo=  0/ 50% | ≥33 ev= 889 POD=0.37 FAR=0.00 fa%= 0.1 | ≥42 ev=  15 POD=0.00 FAR=   - fa%= 0.0
+East      Nov–Feb  persistence     n= 1153 bias=-0.01 MAE= 1.67 band=  79% hi/lo= 10/ 11% | ≥33 ev= 788 POD=0.86 FAR=0.14 fa%= 9.5 | ≥42 ev=  11 POD=0.27 FAR=0.62 fa%= 0.4
+East      Mar–Oct  current         n= 2384 bias=-0.13 MAE= 2.20 band=  70% hi/lo= 13/ 17% | ≥33 ev=2369 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 928 POD=0.59 FAR=0.35 fa%=12.2
+East      Mar–Oct  raw             n= 2384 bias=-5.70 MAE= 5.74 band=  49% hi/lo=  0/ 51% | ≥33 ev=2369 POD=0.83 FAR=0.00 fa%= 0.0 | ≥42 ev= 928 POD=0.02 FAR=0.00 fa%= 0.0
+East      Mar–Oct  persistence     n= 1857 bias=+0.02 MAE= 1.66 band=  80% hi/lo= 10/ 10% | ≥33 ev=1844 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 684 POD=0.74 FAR=0.26 fa%= 9.5
+South     Nov      current         n=  338 bias=+1.24 MAE= 2.64 band=  75% hi/lo= 20/  6% | ≥33 ev= 273 POD=1.00 FAR=0.15 fa%=14.5 | ≥42 ev=  22 POD=0.18 FAR=0.69 fa%= 2.7
+South     Dec      current         n=  415 bias=+1.74 MAE= 2.32 band=  87% hi/lo= 12/  0% | ≥33 ev= 364 POD=1.00 FAR=0.11 fa%=11.3 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.2
+South     Jan      current         n=  587 bias=+2.13 MAE= 2.82 band=  82% hi/lo= 18/  1% | ≥33 ev= 476 POD=1.00 FAR=0.18 fa%=17.4 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+South     Feb      current         n=  427 bias=+1.10 MAE= 2.42 band=  91% hi/lo=  5/  5% | ≥33 ev= 414 POD=1.00 FAR=0.03 fa%= 3.0 | ≥42 ev=  21 POD=0.05 FAR=0.88 fa%= 1.6
+South     Mar–May  current         n= 1941 bias=-0.26 MAE= 2.38 band=  62% hi/lo= 18/ 20% | ≥33 ev=1935 POD=1.00 FAR=0.00 fa%= 0.3 | ≥42 ev= 970 POD=0.62 FAR=0.37 fa%=18.0
+South     Jun–Sep  current         n= 2969 bias=+0.61 MAE= 2.24 band=  62% hi/lo= 24/ 14% | ≥33 ev=2937 POD=1.00 FAR=0.01 fa%= 1.1 | ≥42 ev= 848 POD=0.51 FAR=0.61 fa%=22.5
+South     Oct      current         n=  391 bias=-0.16 MAE= 2.26 band=  75% hi/lo= 10/ 15% | ≥33 ev= 383 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=  70 POD=0.17 FAR=0.69 fa%= 6.9
+South     Nov–Feb  current         n= 1767 bias=+1.62 MAE= 2.57 band=  84% hi/lo= 14/  2% | ≥33 ev=1527 POD=1.00 FAR=0.12 fa%=11.9 | ≥42 ev=  46 POD=0.11 FAR=0.77 fa%= 1.0
+South     Nov–Feb  raw             n= 1767 bias=-4.44 MAE= 4.52 band=  41% hi/lo=  1/ 59% | ≥33 ev=1527 POD=0.35 FAR=0.01 fa%= 0.4 | ≥42 ev=  46 POD=0.00 FAR=   - fa%= 0.0
+South     Nov–Feb  persistence     n= 1461 bias=-0.04 MAE= 1.49 band=  89% hi/lo=  5/  6% | ≥33 ev=1255 POD=0.96 FAR=0.04 fa%= 3.8 | ≥42 ev=  37 POD=0.54 FAR=0.44 fa%= 1.1
+South     Mar–Oct  current         n= 5301 bias=+0.24 MAE= 2.29 band=  63% hi/lo= 21/ 16% | ≥33 ev=5255 POD=1.00 FAR=0.01 fa%= 0.9 | ≥42 ev=1888 POD=0.55 FAR=0.50 fa%=19.7
+South     Mar–Oct  raw             n= 5301 bias=-5.31 MAE= 5.37 band=  51% hi/lo=  0/ 49% | ≥33 ev=5255 POD=0.84 FAR=0.00 fa%= 0.2 | ≥42 ev=1888 POD=0.02 FAR=0.00 fa%= 0.0
+South     Mar–Oct  persistence     n= 4173 bias=+0.04 MAE= 1.76 band=  78% hi/lo= 11/ 11% | ≥33 ev=4130 POD=0.99 FAR=0.01 fa%= 0.9 | ≥42 ev=1386 POD=0.71 FAR=0.30 fa%=10.0
+ALL       Nov      current         n= 2982 bias=+3.15 MAE= 3.55 band=  60% hi/lo= 38/  3% | ≥33 ev=1807 POD=0.99 FAR=0.32 fa%=27.7 | ≥42 ev= 107 POD=0.44 FAR=0.71 fa%= 3.8
+ALL       Dec      current         n= 3470 bias=+3.49 MAE= 3.61 band=  54% hi/lo= 46/  0% | ≥33 ev=1636 POD=1.00 FAR=0.48 fa%=42.9 | ≥42 ev=   3 POD=0.00 FAR=1.00 fa%= 0.1
+ALL       Jan      current         n= 3804 bias=+3.88 MAE= 4.01 band=  39% hi/lo= 61/  0% | ≥33 ev=1129 POD=1.00 FAR=0.64 fa%=52.2 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+ALL       Feb      current         n= 2669 bias=+2.69 MAE= 3.05 band=  71% hi/lo= 28/  1% | ≥33 ev=1931 POD=1.00 FAR=0.26 fa%=25.0 | ≥42 ev=  37 POD=0.14 FAR=0.92 fa%= 2.3
+ALL       Mar–May  current         n=12115 bias=+0.79 MAE= 2.56 band=  67% hi/lo= 23/ 10% | ≥33 ev=11649 POD=1.00 FAR=0.04 fa%= 3.6 | ≥42 ev=6122 POD=0.81 FAR=0.32 fa%=19.2
+ALL       Jun–Sep  current         n=16832 bias=+1.43 MAE= 2.56 band=  63% hi/lo= 29/  8% | ≥33 ev=16488 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=5150 POD=0.76 FAR=0.54 fa%=27.2
+ALL       Oct      current         n= 3373 bias=+1.23 MAE= 2.43 band=  75% hi/lo= 17/  8% | ≥33 ev=3175 POD=1.00 FAR=0.05 fa%= 5.1 | ≥42 ev= 554 POD=0.53 FAR=0.58 fa%=12.1
+ALL       Nov–Feb  current         n=12925 bias=+3.36 MAE= 3.60 band=  55% hi/lo= 44/  1% | ≥33 ev=6503 POD=1.00 FAR=0.43 fa%=38.4 | ≥42 ev= 149 POD=0.35 FAR=0.77 fa%= 1.4
+ALL       Nov–Feb  raw             n=12925 bias=-2.93 MAE= 3.01 band=  58% hi/lo=  1/ 41% | ≥33 ev=6503 POD=0.40 FAR=0.01 fa%= 0.2 | ≥42 ev= 149 POD=0.00 FAR=   - fa%= 0.0
+ALL       Nov–Feb  persistence     n=11636 bias=+0.01 MAE= 1.64 band=  79% hi/lo= 11/ 11% | ≥33 ev=5719 POD=0.85 FAR=0.16 fa%= 7.8 | ≥42 ev= 121 POD=0.39 FAR=0.59 fa%= 0.6
+ALL       Mar–Oct  current         n=32320 bias=+1.17 MAE= 2.55 band=  66% hi/lo= 25/  8% | ≥33 ev=31312 POD=1.00 FAR=0.03 fa%= 2.9 | ≥42 ev=11826 POD=0.78 FAR=0.44 fa%=22.6
+ALL       Mar–Oct  raw             n=32320 bias=-4.28 MAE= 4.43 band=  53% hi/lo=  1/ 46% | ≥33 ev=31312 POD=0.88 FAR=0.01 fa%= 0.5 | ≥42 ev=11826 POD=0.05 FAR=0.08 fa%= 0.2
+ALL       Mar–Oct  persistence     n=27028 bias=-0.00 MAE= 1.86 band=  78% hi/lo= 11/ 11% | ≥33 ev=26160 POD=0.98 FAR=0.02 fa%= 1.6 | ≥42 ev=9677 POD=0.74 FAR=0.25 fa%= 8.9
+
+--- day 1, out-of-sample only (2025 Mar–Oct sample A removed)
+North     Nov      current         n=  653 bias=+3.47 MAE= 3.71 band=  56% hi/lo= 43/  2% | ≥33 ev= 336 POD=0.99 FAR=0.39 fa%=32.6 | ≥42 ev=  19 POD=0.63 FAR=0.52 fa%= 2.0
+North     Dec      current         n=  728 bias=+3.77 MAE= 3.81 band=  45% hi/lo= 55/  0% | ≥33 ev= 229 POD=0.99 FAR=0.62 fa%=50.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Jan      current         n=  851 bias=+4.15 MAE= 4.16 band=  31% hi/lo= 68/  0% | ≥33 ev= 112 POD=0.98 FAR=0.81 fa%=56.1 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Feb      current         n=  660 bias=+3.00 MAE= 3.24 band=  57% hi/lo= 43/  1% | ≥33 ev= 355 POD=1.00 FAR=0.44 fa%=42.9 | ≥42 ev=   5 POD=0.20 FAR=0.67 fa%= 0.3
+North     Mar–May  current         n= 3118 bias=+1.09 MAE= 2.71 band=  69% hi/lo= 23/  8% | ≥33 ev=2959 POD=1.00 FAR=0.05 fa%= 4.9 | ≥42 ev=1231 POD=0.81 FAR=0.36 fa%=18.1
+North     Jun–Sep  current         n= 4128 bias=+1.62 MAE= 2.87 band=  66% hi/lo= 27/  7% | ≥33 ev=3926 POD=1.00 FAR=0.05 fa%= 4.6 | ≥42 ev=1053 POD=0.75 FAR=0.54 fa%=22.6
+North     Oct      current         n=  815 bias=+1.31 MAE= 2.48 band=  76% hi/lo= 16/  7% | ≥33 ev= 762 POD=0.99 FAR=0.06 fa%= 6.3 | ≥42 ev= 143 POD=0.60 FAR=0.49 fa%=10.1
+North     Nov–Feb  current         n= 2892 bias=+3.64 MAE= 3.76 band=  46% hi/lo= 53/  1% | ≥33 ev=1032 POD=0.99 FAR=0.57 fa%=46.4 | ≥42 ev=  24 POD=0.54 FAR=0.54 fa%= 0.5
+North     Nov–Feb  raw             n= 2892 bias=-2.81 MAE= 2.95 band=  57% hi/lo=  1/ 42% | ≥33 ev=1032 POD=0.29 FAR=0.02 fa%= 0.2 | ≥42 ev=  24 POD=0.00 FAR=   - fa%= 0.0
+North     Nov–Feb  persistence     n= 2464 bias=+0.01 MAE= 1.51 band=  78% hi/lo= 11/ 11% | ≥33 ev= 863 POD=0.77 FAR=0.23 fa%= 8.1 | ≥42 ev=  19 POD=0.53 FAR=0.41 fa%= 0.3
+North     Mar–Oct  current         n= 8061 bias=+1.39 MAE= 2.77 band=  68% hi/lo= 25/  7% | ≥33 ev=7647 POD=1.00 FAR=0.05 fa%= 4.9 | ≥42 ev=2427 POD=0.77 FAR=0.46 fa%=19.6
+North     Mar–Oct  raw             n= 8061 bias=-4.15 MAE= 4.34 band=  56% hi/lo=  1/ 43% | ≥33 ev=7647 POD=0.83 FAR=0.01 fa%= 0.9 | ≥42 ev=2427 POD=0.06 FAR=0.05 fa%= 0.1
+North     Mar–Oct  persistence     n= 6649 bias=-0.00 MAE= 1.92 band=  80% hi/lo= 10/ 10% | ≥33 ev=6330 POD=0.98 FAR=0.02 fa%= 2.2 | ≥42 ev=1970 POD=0.74 FAR=0.26 fa%= 7.6
+Northeast Nov      current         n=  966 bias=+3.62 MAE= 3.83 band=  53% hi/lo= 45/  2% | ≥33 ev= 464 POD=0.99 FAR=0.42 fa%=34.6 | ≥42 ev=  21 POD=0.43 FAR=0.57 fa%= 1.2
+Northeast Dec      current         n= 1084 bias=+4.11 MAE= 4.15 band=  36% hi/lo= 63/  0% | ≥33 ev= 265 POD=0.98 FAR=0.71 fa%=57.6 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Jan      current         n= 1108 bias=+4.58 MAE= 4.58 band=  21% hi/lo= 79/  0% | ≥33 ev=  81 POD=1.00 FAR=0.89 fa%=60.6 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Feb      current         n=  771 bias=+3.43 MAE= 3.56 band=  62% hi/lo= 38/  0% | ≥33 ev= 446 POD=1.00 FAR=0.39 fa%=36.3 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.4
+Northeast Mar–May  current         n= 3252 bias=+1.45 MAE= 2.66 band=  65% hi/lo= 29/  5% | ≥33 ev=3012 POD=1.00 FAR=0.07 fa%= 6.7 | ≥42 ev=1524 POD=0.89 FAR=0.35 fa%=22.3
+Northeast Jun–Sep  current         n= 4108 bias=+1.84 MAE= 2.71 band=  63% hi/lo= 31/  6% | ≥33 ev=4011 POD=1.00 FAR=0.02 fa%= 2.3 | ≥42 ev=1319 POD=0.81 FAR=0.53 fa%=29.0
+Northeast Oct      current         n= 1101 bias=+1.96 MAE= 2.60 band=  79% hi/lo= 17/  4% | ≥33 ev= 988 POD=1.00 FAR=0.08 fa%= 8.2 | ≥42 ev=  80 POD=0.45 FAR=0.73 fa%= 8.9
+Northeast Nov–Feb  current         n= 3929 bias=+3.99 MAE= 4.08 band=  41% hi/lo= 58/  1% | ≥33 ev=1256 POD=0.99 FAR=0.61 fa%=48.6 | ≥42 ev=  23 POD=0.39 FAR=0.62 fa%= 0.4
+Northeast Nov–Feb  raw             n= 3929 bias=-2.48 MAE= 2.53 band=  62% hi/lo=  0/ 38% | ≥33 ev=1256 POD=0.31 FAR=0.01 fa%= 0.1 | ≥42 ev=  23 POD=0.00 FAR=   - fa%= 0.0
+Northeast Nov–Feb  persistence     n= 3649 bias=+0.04 MAE= 1.70 band=  75% hi/lo= 13/ 12% | ≥33 ev=1134 POD=0.76 FAR=0.25 fa%= 8.0 | ≥42 ev=  19 POD=0.32 FAR=0.67 fa%= 0.3
+Northeast Mar–Oct  current         n= 8461 bias=+1.71 MAE= 2.68 band=  66% hi/lo= 28/  6% | ≥33 ev=8011 POD=1.00 FAR=0.05 fa%= 4.8 | ≥42 ev=2923 POD=0.84 FAR=0.45 fa%=23.8
+Northeast Mar–Oct  raw             n= 8461 bias=-3.75 MAE= 3.94 band=  54% hi/lo=  1/ 45% | ≥33 ev=8011 POD=0.89 FAR=0.01 fa%= 0.7 | ≥42 ev=2923 POD=0.02 FAR=0.08 fa%= 0.1
+Northeast Mar–Oct  persistence     n= 7214 bias=-0.03 MAE= 2.02 band=  77% hi/lo= 11/ 12% | ≥33 ev=6795 POD=0.97 FAR=0.03 fa%= 2.8 | ≥42 ev=2453 POD=0.74 FAR=0.25 fa%= 8.3
+Central   Nov      current         n=  733 bias=+3.58 MAE= 3.74 band=  62% hi/lo= 36/  2% | ≥33 ev= 514 POD=0.99 FAR=0.26 fa%=24.6 | ≥42 ev=  33 POD=0.67 FAR=0.75 fa%= 9.1
+Central   Dec      current         n=  867 bias=+3.75 MAE= 3.80 band=  60% hi/lo= 40/  0% | ≥33 ev= 497 POD=1.00 FAR=0.42 fa%=41.2 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+Central   Jan      current         n=  882 bias=+4.26 MAE= 4.28 band=  35% hi/lo= 65/  0% | ≥33 ev= 279 POD=1.00 FAR=0.67 fa%=63.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Central   Feb      current         n=  587 bias=+2.73 MAE= 2.86 band=  79% hi/lo= 20/  1% | ≥33 ev= 509 POD=1.00 FAR=0.13 fa%=12.6 | ≥42 ev=   7 POD=0.43 FAR=0.94 fa%= 7.8
+Central   Mar–May  current         n= 2592 bias=+0.97 MAE= 2.45 band=  73% hi/lo= 22/  5% | ≥33 ev=2553 POD=1.00 FAR=0.02 fa%= 1.5 | ≥42 ev=1649 POD=0.93 FAR=0.26 fa%=21.1
+Central   Jun–Sep  current         n= 4097 bias=+1.83 MAE= 2.52 band=  58% hi/lo= 38/  4% | ≥33 ev=4087 POD=1.00 FAR=0.00 fa%= 0.2 | ≥42 ev=1518 POD=0.91 FAR=0.53 fa%=38.5
+Central   Oct      current         n=  794 bias=+1.07 MAE= 2.24 band=  67% hi/lo= 24/ 10% | ≥33 ev= 788 POD=1.00 FAR=0.01 fa%= 0.8 | ≥42 ev= 219 POD=0.67 FAR=0.56 fa%=23.2
+Central   Nov–Feb  current         n= 3069 bias=+3.66 MAE= 3.74 band=  57% hi/lo= 42/  1% | ≥33 ev=1799 POD=1.00 FAR=0.39 fa%=38.2 | ≥42 ev=  41 POD=0.61 FAR=0.82 fa%= 3.7
+Central   Nov–Feb  raw             n= 3069 bias=-2.44 MAE= 2.53 band=  69% hi/lo=  1/ 31% | ≥33 ev=1799 POD=0.57 FAR=0.01 fa%= 0.4 | ≥42 ev=  41 POD=0.00 FAR=   - fa%= 0.0
+Central   Nov–Feb  persistence     n= 2909 bias=-0.00 MAE= 1.73 band=  78% hi/lo= 11/ 11% | ≥33 ev=1679 POD=0.85 FAR=0.15 fa%= 8.6 | ≥42 ev=  35 POD=0.23 FAR=0.78 fa%= 1.0
+Central   Mar–Oct  current         n= 7483 bias=+1.45 MAE= 2.46 band=  64% hi/lo= 31/  5% | ≥33 ev=7428 POD=1.00 FAR=0.01 fa%= 0.7 | ≥42 ev=3386 POD=0.90 FAR=0.43 fa%=30.9
+Central   Mar–Oct  raw             n= 7483 bias=-3.78 MAE= 3.95 band=  54% hi/lo=  1/ 45% | ≥33 ev=7428 POD=0.96 FAR=0.00 fa%= 0.3 | ≥42 ev=3386 POD=0.10 FAR=0.11 fa%= 0.5
+Central   Mar–Oct  persistence     n= 6621 bias=-0.01 MAE= 1.70 band=  78% hi/lo= 11/ 11% | ≥33 ev=6569 POD=1.00 FAR=0.00 fa%= 0.4 | ≥42 ev=2952 POD=0.77 FAR=0.22 fa%= 9.9
+East      Nov      current         n=  292 bias=+2.00 MAE= 2.83 band=  70% hi/lo= 26/  5% | ≥33 ev= 220 POD=0.99 FAR=0.18 fa%=16.8 | ≥42 ev=  12 POD=0.00 FAR=1.00 fa%= 4.5
+East      Dec      current         n=  376 bias=+2.45 MAE= 2.63 band=  76% hi/lo= 24/  0% | ≥33 ev= 281 POD=1.00 FAR=0.25 fa%=24.5 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.5
+East      Jan      current         n=  376 bias=+3.04 MAE= 3.16 band=  53% hi/lo= 47/  0% | ≥33 ev= 181 POD=1.00 FAR=0.49 fa%=46.8 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+East      Feb      current         n=  224 bias=+2.15 MAE= 2.47 band=  89% hi/lo= 10/  1% | ≥33 ev= 207 POD=1.00 FAR=0.08 fa%= 7.6 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 1.3
+East      Mar–May  current         n=  839 bias=-0.77 MAE= 2.40 band=  64% hi/lo= 12/ 24% | ≥33 ev= 831 POD=1.00 FAR=0.01 fa%= 0.8 | ≥42 ev= 556 POD=0.64 FAR=0.20 fa%=10.7
+East      Jun–Sep  current         n= 1159 bias=+0.03 MAE= 2.04 band=  74% hi/lo= 12/ 14% | ≥33 ev=1158 POD=0.98 FAR=0.00 fa%= 0.1 | ≥42 ev= 301 POD=0.52 FAR=0.47 fa%=12.0
+East      Oct      current         n=  171 bias=-0.11 MAE= 2.57 band=  77% hi/lo= 10/ 13% | ≥33 ev= 166 POD=1.00 FAR=0.03 fa%= 2.9 | ≥42 ev=  28 POD=0.18 FAR=0.71 fa%= 7.0
+East      Nov–Feb  current         n= 1268 bias=+2.47 MAE= 2.81 band=  70% hi/lo= 29/  1% | ≥33 ev= 889 POD=1.00 FAR=0.27 fa%=26.3 | ≥42 ev=  15 POD=0.00 FAR=1.00 fa%= 1.4
+East      Nov–Feb  raw             n= 1268 bias=-3.68 MAE= 3.71 band=  50% hi/lo=  0/ 50% | ≥33 ev= 889 POD=0.37 FAR=0.00 fa%= 0.1 | ≥42 ev=  15 POD=0.00 FAR=   - fa%= 0.0
+East      Nov–Feb  persistence     n= 1153 bias=-0.01 MAE= 1.67 band=  79% hi/lo= 10/ 11% | ≥33 ev= 788 POD=0.86 FAR=0.14 fa%= 9.5 | ≥42 ev=  11 POD=0.27 FAR=0.62 fa%= 0.4
+East      Mar–Oct  current         n= 2169 bias=-0.29 MAE= 2.22 band=  70% hi/lo= 12/ 18% | ≥33 ev=2155 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 885 POD=0.59 FAR=0.32 fa%=11.1
+East      Mar–Oct  raw             n= 2169 bias=-5.86 MAE= 5.90 band=  47% hi/lo=  0/ 53% | ≥33 ev=2155 POD=0.83 FAR=0.00 fa%= 0.0 | ≥42 ev= 885 POD=0.02 FAR=0.00 fa%= 0.0
+East      Mar–Oct  persistence     n= 1660 bias=+0.01 MAE= 1.66 band=  80% hi/lo= 10/ 10% | ≥33 ev=1648 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 644 POD=0.75 FAR=0.25 fa%= 9.5
+South     Nov      current         n=  338 bias=+1.24 MAE= 2.64 band=  75% hi/lo= 20/  6% | ≥33 ev= 273 POD=1.00 FAR=0.15 fa%=14.5 | ≥42 ev=  22 POD=0.18 FAR=0.69 fa%= 2.7
+South     Dec      current         n=  415 bias=+1.74 MAE= 2.32 band=  87% hi/lo= 12/  0% | ≥33 ev= 364 POD=1.00 FAR=0.11 fa%=11.3 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.2
+South     Jan      current         n=  587 bias=+2.13 MAE= 2.82 band=  82% hi/lo= 18/  1% | ≥33 ev= 476 POD=1.00 FAR=0.18 fa%=17.4 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+South     Feb      current         n=  427 bias=+1.10 MAE= 2.42 band=  91% hi/lo=  5/  5% | ≥33 ev= 414 POD=1.00 FAR=0.03 fa%= 3.0 | ≥42 ev=  21 POD=0.05 FAR=0.88 fa%= 1.6
+South     Mar–May  current         n= 1832 bias=-0.08 MAE= 2.30 band=  63% hi/lo= 19/ 17% | ≥33 ev=1826 POD=1.00 FAR=0.00 fa%= 0.3 | ≥42 ev= 905 POD=0.66 FAR=0.37 fa%=19.1
+South     Jun–Sep  current         n= 2822 bias=+0.72 MAE= 2.25 band=  62% hi/lo= 25/ 13% | ≥33 ev=2792 POD=1.00 FAR=0.01 fa%= 1.1 | ≥42 ev= 802 POD=0.54 FAR=0.61 fa%=23.7
+South     Oct      current         n=  373 bias=-0.12 MAE= 2.30 band=  74% hi/lo= 10/ 16% | ≥33 ev= 365 POD=1.00 FAR=0.02 fa%= 2.1 | ≥42 ev=  70 POD=0.17 FAR=0.69 fa%= 7.2
+South     Nov–Feb  current         n= 1767 bias=+1.62 MAE= 2.57 band=  84% hi/lo= 14/  2% | ≥33 ev=1527 POD=1.00 FAR=0.12 fa%=11.9 | ≥42 ev=  46 POD=0.11 FAR=0.77 fa%= 1.0
+South     Nov–Feb  raw             n= 1767 bias=-4.44 MAE= 4.52 band=  41% hi/lo=  1/ 59% | ≥33 ev=1527 POD=0.35 FAR=0.01 fa%= 0.4 | ≥42 ev=  46 POD=0.00 FAR=   - fa%= 0.0
+South     Nov–Feb  persistence     n= 1461 bias=-0.04 MAE= 1.49 band=  89% hi/lo=  5/  6% | ≥33 ev=1255 POD=0.96 FAR=0.04 fa%= 3.8 | ≥42 ev=  37 POD=0.54 FAR=0.44 fa%= 1.1
+South     Mar–Oct  current         n= 5027 bias=+0.37 MAE= 2.27 band=  63% hi/lo= 22/ 15% | ≥33 ev=4983 POD=1.00 FAR=0.01 fa%= 0.9 | ≥42 ev=1777 POD=0.59 FAR=0.50 fa%=20.8
+South     Mar–Oct  raw             n= 5027 bias=-5.16 MAE= 5.23 band=  52% hi/lo=  0/ 48% | ≥33 ev=4983 POD=0.86 FAR=0.00 fa%= 0.2 | ≥42 ev=1777 POD=0.02 FAR=0.00 fa%= 0.0
+South     Mar–Oct  persistence     n= 3970 bias=+0.04 MAE= 1.76 band=  78% hi/lo= 11/ 11% | ≥33 ev=3929 POD=0.99 FAR=0.01 fa%= 0.9 | ≥42 ev=1306 POD=0.71 FAR=0.29 fa%= 9.8
+ALL       Nov      current         n= 2982 bias=+3.15 MAE= 3.55 band=  60% hi/lo= 38/  3% | ≥33 ev=1807 POD=0.99 FAR=0.32 fa%=27.7 | ≥42 ev= 107 POD=0.44 FAR=0.71 fa%= 3.8
+ALL       Dec      current         n= 3470 bias=+3.49 MAE= 3.61 band=  54% hi/lo= 46/  0% | ≥33 ev=1636 POD=1.00 FAR=0.48 fa%=42.9 | ≥42 ev=   3 POD=0.00 FAR=1.00 fa%= 0.1
+ALL       Jan      current         n= 3804 bias=+3.88 MAE= 4.01 band=  39% hi/lo= 61/  0% | ≥33 ev=1129 POD=1.00 FAR=0.64 fa%=52.2 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+ALL       Feb      current         n= 2669 bias=+2.69 MAE= 3.05 band=  71% hi/lo= 28/  1% | ≥33 ev=1931 POD=1.00 FAR=0.26 fa%=25.0 | ≥42 ev=  37 POD=0.14 FAR=0.92 fa%= 2.3
+ALL       Mar–May  current         n=11633 bias=+0.85 MAE= 2.55 band=  68% hi/lo= 23/  9% | ≥33 ev=11181 POD=1.00 FAR=0.04 fa%= 3.7 | ≥42 ev=5865 POD=0.82 FAR=0.32 fa%=19.6
+ALL       Jun–Sep  current         n=16314 bias=+1.46 MAE= 2.58 band=  63% hi/lo= 30/  7% | ≥33 ev=15974 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=4993 POD=0.77 FAR=0.54 fa%=27.7
+ALL       Oct      current         n= 3254 bias=+1.23 MAE= 2.45 band=  75% hi/lo= 17/  8% | ≥33 ev=3069 POD=1.00 FAR=0.05 fa%= 4.9 | ≥42 ev= 540 POD=0.53 FAR=0.59 fa%=12.4
+ALL       Nov–Feb  current         n=12925 bias=+3.36 MAE= 3.60 band=  55% hi/lo= 44/  1% | ≥33 ev=6503 POD=1.00 FAR=0.43 fa%=38.4 | ≥42 ev= 149 POD=0.35 FAR=0.77 fa%= 1.4
+ALL       Nov–Feb  raw             n=12925 bias=-2.93 MAE= 3.01 band=  58% hi/lo=  1/ 41% | ≥33 ev=6503 POD=0.40 FAR=0.01 fa%= 0.2 | ≥42 ev= 149 POD=0.00 FAR=   - fa%= 0.0
+ALL       Nov–Feb  persistence     n=11636 bias=+0.01 MAE= 1.64 band=  79% hi/lo= 11/ 11% | ≥33 ev=5719 POD=0.85 FAR=0.16 fa%= 7.8 | ≥42 ev= 121 POD=0.39 FAR=0.59 fa%= 0.6
+ALL       Mar–Oct  current         n=31201 bias=+1.21 MAE= 2.55 band=  66% hi/lo= 26/  8% | ≥33 ev=30224 POD=1.00 FAR=0.03 fa%= 2.9 | ≥42 ev=11398 POD=0.78 FAR=0.45 fa%=23.0
+ALL       Mar–Oct  raw             n=31201 bias=-4.24 MAE= 4.39 band=  54% hi/lo=  1/ 45% | ≥33 ev=30224 POD=0.88 FAR=0.01 fa%= 0.5 | ≥42 ev=11398 POD=0.05 FAR=0.08 fa%= 0.2
+ALL       Mar–Oct  persistence     n=26114 bias=-0.00 MAE= 1.85 band=  78% hi/lo= 11/ 11% | ≥33 ev=25271 POD=0.98 FAR=0.02 fa%= 1.6 | ≥42 ev=9325 POD=0.75 FAR=0.25 fa%= 8.8
+
+--- day 2, all rows
+North     Nov      current         n=  653 bias=+3.58 MAE= 3.79 band=  55% hi/lo= 44/  2% | ≥33 ev= 336 POD=0.99 FAR=0.40 fa%=34.5 | ≥42 ev=  19 POD=0.63 FAR=0.43 fa%= 1.4
+North     Dec      current         n=  728 bias=+3.99 MAE= 4.02 band=  41% hi/lo= 59/  0% | ≥33 ev= 229 POD=1.00 FAR=0.63 fa%=54.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Jan      current         n=  851 bias=+4.44 MAE= 4.44 band=  27% hi/lo= 73/  0% | ≥33 ev= 112 POD=1.00 FAR=0.83 fa%=62.3 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Feb      current         n=  660 bias=+3.18 MAE= 3.39 band=  56% hi/lo= 43/  1% | ≥33 ev= 355 POD=1.00 FAR=0.44 fa%=42.3 | ≥42 ev=   5 POD=0.20 FAR=0.67 fa%= 0.3
+North     Mar–May  current         n= 3181 bias=+1.13 MAE= 2.75 band=  69% hi/lo= 23/  8% | ≥33 ev=3018 POD=1.00 FAR=0.05 fa%= 4.9 | ≥42 ev=1232 POD=0.80 FAR=0.37 fa%=18.4
+North     Jun–Sep  current         n= 4184 bias=+1.63 MAE= 2.90 band=  66% hi/lo= 28/  6% | ≥33 ev=3981 POD=1.00 FAR=0.05 fa%= 4.7 | ≥42 ev=1055 POD=0.75 FAR=0.54 fa%=22.6
+North     Oct      current         n=  843 bias=+1.41 MAE= 2.53 band=  76% hi/lo= 16/  8% | ≥33 ev= 783 POD=1.00 FAR=0.07 fa%= 7.0 | ≥42 ev= 143 POD=0.52 FAR=0.48 fa%= 8.1
+North     Nov–Feb  current         n= 2892 bias=+3.84 MAE= 3.95 band=  43% hi/lo= 56/  0% | ≥33 ev=1032 POD=1.00 FAR=0.58 fa%=49.5 | ≥42 ev=  24 POD=0.54 FAR=0.46 fa%= 0.4
+North     Nov–Feb  raw             n= 2892 bias=-2.80 MAE= 2.93 band=  57% hi/lo=  1/ 42% | ≥33 ev=1032 POD=0.30 FAR=0.03 fa%= 0.3 | ≥42 ev=  24 POD=0.00 FAR=   - fa%= 0.0
+North     Nov–Feb  persistence     n= 2405 bias=+0.02 MAE= 2.22 band=  67% hi/lo= 16/ 16% | ≥33 ev= 852 POD=0.67 FAR=0.33 fa%=12.0 | ≥42 ev=  18 POD=0.28 FAR=0.75 fa%= 0.6
+North     Mar–Oct  current         n= 8208 bias=+1.42 MAE= 2.80 band=  68% hi/lo= 25/  7% | ≥33 ev=7782 POD=1.00 FAR=0.05 fa%= 5.0 | ≥42 ev=2430 POD=0.77 FAR=0.46 fa%=19.5
+North     Mar–Oct  raw             n= 8208 bias=-4.04 MAE= 4.26 band=  56% hi/lo=  2/ 43% | ≥33 ev=7782 POD=0.83 FAR=0.01 fa%= 1.0 | ≥42 ev=2430 POD=0.05 FAR=0.08 fa%= 0.1
+North     Mar–Oct  persistence     n= 6457 bias=-0.01 MAE= 2.35 band=  76% hi/lo= 12/ 12% | ≥33 ev=6143 POD=0.97 FAR=0.03 fa%= 2.9 | ≥42 ev=1856 POD=0.69 FAR=0.31 fa%= 8.7
+Northeast Nov      current         n=  966 bias=+3.82 MAE= 4.00 band=  51% hi/lo= 48/  2% | ≥33 ev= 464 POD=0.99 FAR=0.44 fa%=37.1 | ≥42 ev=  21 POD=0.29 FAR=0.57 fa%= 0.8
+Northeast Dec      current         n= 1084 bias=+4.37 MAE= 4.39 band=  34% hi/lo= 66/  0% | ≥33 ev= 265 POD=0.99 FAR=0.71 fa%=60.7 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Jan      current         n= 1108 bias=+4.87 MAE= 4.87 band=  18% hi/lo= 82/  0% | ≥33 ev=  81 POD=1.00 FAR=0.90 fa%=65.3 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Feb      current         n=  771 bias=+3.65 MAE= 3.77 band=  61% hi/lo= 39/  0% | ≥33 ev= 446 POD=1.00 FAR=0.40 fa%=38.4 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.3
+Northeast Mar–May  current         n= 3391 bias=+1.31 MAE= 2.76 band=  65% hi/lo= 29/  6% | ≥33 ev=3143 POD=1.00 FAR=0.07 fa%= 7.0 | ≥42 ev=1622 POD=0.87 FAR=0.35 fa%=22.2
+Northeast Jun–Sep  current         n= 4202 bias=+1.70 MAE= 2.68 band=  64% hi/lo= 29/  7% | ≥33 ev=4104 POD=1.00 FAR=0.02 fa%= 2.3 | ≥42 ev=1373 POD=0.79 FAR=0.52 fa%=27.4
+Northeast Oct      current         n= 1128 bias=+1.95 MAE= 2.67 band=  79% hi/lo= 16/  5% | ≥33 ev=1009 POD=1.00 FAR=0.10 fa%= 9.6 | ≥42 ev=  85 POD=0.41 FAR=0.66 fa%= 6.0
+Northeast Nov–Feb  current         n= 3929 bias=+4.23 MAE= 4.31 band=  39% hi/lo= 61/  1% | ≥33 ev=1256 POD=1.00 FAR=0.62 fa%=51.8 | ≥42 ev=  23 POD=0.26 FAR=0.62 fa%= 0.3
+Northeast Nov–Feb  raw             n= 3929 bias=-2.41 MAE= 2.49 band=  62% hi/lo=  1/ 37% | ≥33 ev=1256 POD=0.33 FAR=0.02 fa%= 0.2 | ≥42 ev=  23 POD=0.00 FAR=   - fa%= 0.0
+Northeast Nov–Feb  persistence     n= 3603 bias=+0.08 MAE= 2.60 band=  62% hi/lo= 19/ 19% | ≥33 ev=1124 POD=0.61 FAR=0.40 fa%=12.5 | ≥42 ev=  15 POD=0.27 FAR=0.79 fa%= 0.4
+Northeast Mar–Oct  current         n= 8721 bias=+1.58 MAE= 2.71 band=  66% hi/lo= 27/  6% | ≥33 ev=8256 POD=1.00 FAR=0.05 fa%= 5.1 | ≥42 ev=3080 POD=0.82 FAR=0.44 fa%=22.6
+Northeast Mar–Oct  raw             n= 8721 bias=-3.78 MAE= 4.02 band=  53% hi/lo=  1/ 45% | ≥33 ev=8256 POD=0.89 FAR=0.01 fa%= 0.8 | ≥42 ev=3080 POD=0.03 FAR=0.11 fa%= 0.1
+Northeast Mar–Oct  persistence     n= 7167 bias=-0.02 MAE= 2.66 band=  70% hi/lo= 14/ 15% | ≥33 ev=6753 POD=0.96 FAR=0.04 fa%= 3.8 | ≥42 ev=2447 POD=0.68 FAR=0.32 fa%=10.7
+Central   Nov      current         n=  733 bias=+3.57 MAE= 3.76 band=  61% hi/lo= 36/  3% | ≥33 ev= 514 POD=0.99 FAR=0.27 fa%=25.5 | ≥42 ev=  33 POD=0.52 FAR=0.79 fa%= 8.7
+Central   Dec      current         n=  867 bias=+3.79 MAE= 3.84 band=  59% hi/lo= 41/  0% | ≥33 ev= 497 POD=1.00 FAR=0.42 fa%=41.4 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+Central   Jan      current         n=  882 bias=+4.44 MAE= 4.46 band=  34% hi/lo= 66/  0% | ≥33 ev= 279 POD=1.00 FAR=0.68 fa%=66.1 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Central   Feb      current         n=  587 bias=+2.82 MAE= 2.96 band=  74% hi/lo= 25/  1% | ≥33 ev= 509 POD=1.00 FAR=0.13 fa%=13.3 | ≥42 ev=   7 POD=0.29 FAR=0.97 fa%=12.1
+Central   Mar–May  current         n= 2674 bias=+0.84 MAE= 2.44 band=  72% hi/lo= 22/  6% | ≥33 ev=2635 POD=1.00 FAR=0.01 fa%= 1.5 | ≥42 ev=1712 POD=0.92 FAR=0.27 fa%=21.5
+Central   Jun–Sep  current         n= 4206 bias=+1.64 MAE= 2.45 band=  57% hi/lo= 38/  5% | ≥33 ev=4196 POD=1.00 FAR=0.00 fa%= 0.2 | ≥42 ev=1561 POD=0.88 FAR=0.54 fa%=38.2
+Central   Oct      current         n=  819 bias=+1.03 MAE= 2.12 band=  69% hi/lo= 22/  9% | ≥33 ev= 813 POD=1.00 FAR=0.01 fa%= 0.7 | ≥42 ev= 225 POD=0.67 FAR=0.54 fa%=21.5
+Central   Nov–Feb  current         n= 3069 bias=+3.74 MAE= 3.83 band=  55% hi/lo= 44/  1% | ≥33 ev=1799 POD=1.00 FAR=0.40 fa%=39.3 | ≥42 ev=  41 POD=0.46 FAR=0.88 fa%= 4.4
+Central   Nov–Feb  raw             n= 3069 bias=-2.45 MAE= 2.54 band=  69% hi/lo=  1/ 31% | ≥33 ev=1799 POD=0.57 FAR=0.01 fa%= 0.3 | ≥42 ev=  41 POD=0.00 FAR=   - fa%= 0.0
+Central   Nov–Feb  persistence     n= 2879 bias=-0.01 MAE= 2.50 band=  70% hi/lo= 15/ 15% | ≥33 ev=1667 POD=0.79 FAR=0.21 fa%=12.3 | ≥42 ev=  39 POD=0.23 FAR=0.79 fa%= 1.2
+Central   Mar–Oct  current         n= 7699 bias=+1.30 MAE= 2.41 band=  64% hi/lo= 31/  6% | ≥33 ev=7644 POD=1.00 FAR=0.01 fa%= 0.7 | ≥42 ev=3498 POD=0.89 FAR=0.43 fa%=30.6
+Central   Mar–Oct  raw             n= 7699 bias=-3.78 MAE= 3.97 band=  54% hi/lo=  1/ 45% | ≥33 ev=7644 POD=0.96 FAR=0.00 fa%= 0.4 | ≥42 ev=3498 POD=0.10 FAR=0.13 fa%= 0.7
+Central   Mar–Oct  persistence     n= 6617 bias=-0.00 MAE= 2.02 band=  74% hi/lo= 13/ 13% | ≥33 ev=6567 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev=2939 POD=0.73 FAR=0.27 fa%=11.9
+East      Nov      current         n=  292 bias=+2.18 MAE= 2.94 band=  68% hi/lo= 26/  5% | ≥33 ev= 220 POD=0.99 FAR=0.19 fa%=17.1 | ≥42 ev=  12 POD=0.00 FAR=1.00 fa%= 5.1
+East      Dec      current         n=  376 bias=+2.57 MAE= 2.75 band=  74% hi/lo= 25/  1% | ≥33 ev= 281 POD=1.00 FAR=0.25 fa%=25.0 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.5
+East      Jan      current         n=  376 bias=+3.19 MAE= 3.30 band=  51% hi/lo= 49/  0% | ≥33 ev= 181 POD=1.00 FAR=0.51 fa%=50.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+East      Feb      current         n=  224 bias=+2.29 MAE= 2.50 band=  88% hi/lo= 11/  1% | ≥33 ev= 207 POD=1.00 FAR=0.08 fa%= 7.6 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 3.1
+East      Mar–May  current         n=  921 bias=-0.68 MAE= 2.49 band=  61% hi/lo= 14/ 25% | ≥33 ev= 912 POD=1.00 FAR=0.01 fa%= 1.0 | ≥42 ev= 584 POD=0.60 FAR=0.25 fa%=12.6
+East      Jun–Sep  current         n= 1271 bias=+0.09 MAE= 2.03 band=  74% hi/lo= 13/ 13% | ≥33 ev=1270 POD=0.99 FAR=0.00 fa%= 0.1 | ≥42 ev= 313 POD=0.52 FAR=0.49 fa%=12.5
+East      Oct      current         n=  192 bias=-0.02 MAE= 2.53 band=  75% hi/lo= 12/ 13% | ≥33 ev= 187 POD=1.00 FAR=0.03 fa%= 2.6 | ≥42 ev=  31 POD=0.19 FAR=0.73 fa%= 8.3
+East      Nov–Feb  current         n= 1268 bias=+2.61 MAE= 2.91 band=  69% hi/lo= 30/  1% | ≥33 ev= 889 POD=1.00 FAR=0.28 fa%=27.5 | ≥42 ev=  15 POD=0.00 FAR=1.00 fa%= 1.9
+East      Nov–Feb  raw             n= 1268 bias=-3.64 MAE= 3.66 band=  53% hi/lo=  0/ 47% | ≥33 ev= 889 POD=0.40 FAR=0.00 fa%= 0.1 | ≥42 ev=  15 POD=0.00 FAR=   - fa%= 0.0
+East      Nov–Feb  persistence     n= 1123 bias=-0.03 MAE= 2.33 band=  70% hi/lo= 15/ 15% | ≥33 ev= 774 POD=0.80 FAR=0.19 fa%=13.3 | ≥42 ev=   7 POD=0.14 FAR=0.88 fa%= 0.6
+East      Mar–Oct  current         n= 2384 bias=-0.22 MAE= 2.25 band=  69% hi/lo= 13/ 18% | ≥33 ev=2369 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 928 POD=0.56 FAR=0.36 fa%=12.2
+East      Mar–Oct  raw             n= 2384 bias=-5.73 MAE= 5.78 band=  49% hi/lo=  0/ 51% | ≥33 ev=2369 POD=0.83 FAR=0.00 fa%= 0.1 | ≥42 ev= 928 POD=0.01 FAR=0.00 fa%= 0.0
+East      Mar–Oct  persistence     n= 1746 bias=-0.02 MAE= 1.88 band=  78% hi/lo= 11/ 11% | ≥33 ev=1735 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 643 POD=0.70 FAR=0.29 fa%=10.4
+South     Nov      current         n=  338 bias=+1.37 MAE= 2.67 band=  75% hi/lo= 19/  7% | ≥33 ev= 273 POD=1.00 FAR=0.16 fa%=15.7 | ≥42 ev=  22 POD=0.09 FAR=0.75 fa%= 1.8
+South     Dec      current         n=  415 bias=+1.77 MAE= 2.37 band=  87% hi/lo= 13/  0% | ≥33 ev= 364 POD=1.00 FAR=0.12 fa%=12.0 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.5
+South     Jan      current         n=  587 bias=+2.22 MAE= 2.88 band=  81% hi/lo= 19/  0% | ≥33 ev= 476 POD=1.00 FAR=0.18 fa%=18.2 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.2
+South     Feb      current         n=  427 bias=+1.17 MAE= 2.46 band=  89% hi/lo=  6/  5% | ≥33 ev= 414 POD=1.00 FAR=0.03 fa%= 3.0 | ≥42 ev=  21 POD=0.00 FAR=1.00 fa%= 2.6
+South     Mar–May  current         n= 1939 bias=-0.37 MAE= 2.41 band=  62% hi/lo= 17/ 21% | ≥33 ev=1933 POD=1.00 FAR=0.00 fa%= 0.3 | ≥42 ev= 969 POD=0.59 FAR=0.37 fa%=17.4
+South     Jun–Sep  current         n= 2969 bias=+0.47 MAE= 2.27 band=  63% hi/lo= 23/ 15% | ≥33 ev=2937 POD=1.00 FAR=0.01 fa%= 1.1 | ≥42 ev= 848 POD=0.49 FAR=0.61 fa%=21.9
+South     Oct      current         n=  391 bias=-0.04 MAE= 2.33 band=  75% hi/lo=  9/ 15% | ≥33 ev= 383 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=  70 POD=0.16 FAR=0.72 fa%= 7.4
+South     Nov–Feb  current         n= 1767 bias=+1.70 MAE= 2.62 band=  83% hi/lo= 14/  3% | ≥33 ev=1527 POD=1.00 FAR=0.13 fa%=12.6 | ≥42 ev=  46 POD=0.04 FAR=0.91 fa%= 1.1
+South     Nov–Feb  raw             n= 1767 bias=-4.44 MAE= 4.52 band=  42% hi/lo=  1/ 58% | ≥33 ev=1527 POD=0.36 FAR=0.01 fa%= 0.3 | ≥42 ev=  46 POD=0.00 FAR=   - fa%= 0.0
+South     Nov–Feb  persistence     n= 1403 bias=-0.02 MAE= 1.94 band=  84% hi/lo=  8/  8% | ≥33 ev=1198 POD=0.93 FAR=0.07 fa%= 6.1 | ≥42 ev=  33 POD=0.45 FAR=0.57 fa%= 1.4
+South     Mar–Oct  current         n= 5299 bias=+0.13 MAE= 2.33 band=  63% hi/lo= 20/ 17% | ≥33 ev=5253 POD=1.00 FAR=0.01 fa%= 0.9 | ≥42 ev=1887 POD=0.53 FAR=0.50 fa%=19.2
+South     Mar–Oct  raw             n= 5299 bias=-5.36 MAE= 5.43 band=  50% hi/lo=  0/ 50% | ≥33 ev=5253 POD=0.83 FAR=0.00 fa%= 0.2 | ≥42 ev=1887 POD=0.02 FAR=0.03 fa%= 0.0
+South     Mar–Oct  persistence     n= 3951 bias=+0.06 MAE= 2.04 band=  75% hi/lo= 13/ 12% | ≥33 ev=3910 POD=0.99 FAR=0.01 fa%= 1.0 | ≥42 ev=1272 POD=0.66 FAR=0.35 fa%=11.5
+ALL       Nov      current         n= 2982 bias=+3.27 MAE= 3.64 band=  59% hi/lo= 39/  3% | ≥33 ev=1807 POD=0.99 FAR=0.33 fa%=29.3 | ≥42 ev= 107 POD=0.35 FAR=0.73 fa%= 3.4
+ALL       Dec      current         n= 3470 bias=+3.64 MAE= 3.76 band=  52% hi/lo= 47/  0% | ≥33 ev=1636 POD=1.00 FAR=0.49 fa%=44.9 | ≥42 ev=   3 POD=0.00 FAR=1.00 fa%= 0.1
+ALL       Jan      current         n= 3804 bias=+4.10 MAE= 4.22 band=  36% hi/lo= 63/  0% | ≥33 ev=1129 POD=1.00 FAR=0.65 fa%=56.0 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.0
+ALL       Feb      current         n= 2669 bias=+2.84 MAE= 3.18 band=  69% hi/lo= 29/  1% | ≥33 ev=1931 POD=1.00 FAR=0.26 fa%=25.6 | ≥42 ev=  37 POD=0.08 FAR=0.97 fa%= 3.5
+ALL       Mar–May  current         n=12106 bias=+0.74 MAE= 2.61 band=  67% hi/lo= 23/ 10% | ≥33 ev=11641 POD=1.00 FAR=0.04 fa%= 3.7 | ≥42 ev=6119 POD=0.80 FAR=0.33 fa%=19.5
+ALL       Jun–Sep  current         n=16832 bias=+1.33 MAE= 2.55 band=  63% hi/lo= 29/  8% | ≥33 ev=16488 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=5150 POD=0.74 FAR=0.54 fa%=26.8
+ALL       Oct      current         n= 3373 bias=+1.25 MAE= 2.46 band=  75% hi/lo= 16/  8% | ≥33 ev=3175 POD=1.00 FAR=0.06 fa%= 5.5 | ≥42 ev= 554 POD=0.50 FAR=0.56 fa%=10.6
+ALL       Nov–Feb  current         n=12925 bias=+3.52 MAE= 3.75 band=  53% hi/lo= 46/  1% | ≥33 ev=6503 POD=1.00 FAR=0.45 fa%=40.6 | ≥42 ev= 149 POD=0.27 FAR=0.83 fa%= 1.5
+ALL       Nov–Feb  raw             n=12925 bias=-2.91 MAE= 2.99 band=  59% hi/lo=  1/ 40% | ≥33 ev=6503 POD=0.41 FAR=0.01 fa%= 0.3 | ≥42 ev= 149 POD=0.00 FAR=   - fa%= 0.0
+ALL       Nov–Feb  persistence     n=11413 bias=+0.02 MAE= 2.39 band=  69% hi/lo= 16/ 16% | ≥33 ev=5615 POD=0.77 FAR=0.24 fa%=11.6 | ≥42 ev= 112 POD=0.30 FAR=0.73 fa%= 0.8
+ALL       Mar–Oct  current         n=32311 bias=+1.10 MAE= 2.56 band=  66% hi/lo= 25/  9% | ≥33 ev=31304 POD=1.00 FAR=0.03 fa%= 3.0 | ≥42 ev=11823 POD=0.76 FAR=0.45 fa%=22.4
+ALL       Mar–Oct  raw             n=32311 bias=-4.25 MAE= 4.43 band=  53% hi/lo=  1/ 46% | ≥33 ev=31304 POD=0.88 FAR=0.01 fa%= 0.6 | ≥42 ev=11823 POD=0.05 FAR=0.11 fa%= 0.2
+ALL       Mar–Oct  persistence     n=25938 bias=-0.00 MAE= 2.27 band=  74% hi/lo= 13/ 13% | ≥33 ev=25108 POD=0.98 FAR=0.02 fa%= 2.1 | ≥42 ev=9157 POD=0.70 FAR=0.30 fa%=10.6
+
+--- day 2, out-of-sample only (2025 Mar–Oct sample A removed)
+North     Nov      current         n=  653 bias=+3.58 MAE= 3.79 band=  55% hi/lo= 44/  2% | ≥33 ev= 336 POD=0.99 FAR=0.40 fa%=34.5 | ≥42 ev=  19 POD=0.63 FAR=0.43 fa%= 1.4
+North     Dec      current         n=  728 bias=+3.99 MAE= 4.02 band=  41% hi/lo= 59/  0% | ≥33 ev= 229 POD=1.00 FAR=0.63 fa%=54.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Jan      current         n=  851 bias=+4.44 MAE= 4.44 band=  27% hi/lo= 73/  0% | ≥33 ev= 112 POD=1.00 FAR=0.83 fa%=62.3 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+North     Feb      current         n=  660 bias=+3.18 MAE= 3.39 band=  56% hi/lo= 43/  1% | ≥33 ev= 355 POD=1.00 FAR=0.44 fa%=42.3 | ≥42 ev=   5 POD=0.20 FAR=0.67 fa%= 0.3
+North     Mar–May  current         n= 3116 bias=+1.09 MAE= 2.74 band=  69% hi/lo= 23/  8% | ≥33 ev=2958 POD=1.00 FAR=0.05 fa%= 4.9 | ≥42 ev=1231 POD=0.81 FAR=0.37 fa%=18.5
+North     Jun–Sep  current         n= 4128 bias=+1.63 MAE= 2.91 band=  66% hi/lo= 28/  6% | ≥33 ev=3926 POD=1.00 FAR=0.05 fa%= 4.8 | ≥42 ev=1053 POD=0.75 FAR=0.54 fa%=22.8
+North     Oct      current         n=  815 bias=+1.37 MAE= 2.53 band=  76% hi/lo= 15/  8% | ≥33 ev= 762 POD=1.00 FAR=0.06 fa%= 6.4 | ≥42 ev= 143 POD=0.52 FAR=0.48 fa%= 8.3
+North     Nov–Feb  current         n= 2892 bias=+3.84 MAE= 3.95 band=  43% hi/lo= 56/  0% | ≥33 ev=1032 POD=1.00 FAR=0.58 fa%=49.5 | ≥42 ev=  24 POD=0.54 FAR=0.46 fa%= 0.4
+North     Nov–Feb  raw             n= 2892 bias=-2.80 MAE= 2.93 band=  57% hi/lo=  1/ 42% | ≥33 ev=1032 POD=0.30 FAR=0.03 fa%= 0.3 | ≥42 ev=  24 POD=0.00 FAR=   - fa%= 0.0
+North     Nov–Feb  persistence     n= 2405 bias=+0.02 MAE= 2.22 band=  67% hi/lo= 16/ 16% | ≥33 ev= 852 POD=0.67 FAR=0.33 fa%=12.0 | ≥42 ev=  18 POD=0.28 FAR=0.75 fa%= 0.6
+North     Mar–Oct  current         n= 8059 bias=+1.40 MAE= 2.80 band=  68% hi/lo= 25/  7% | ≥33 ev=7646 POD=1.00 FAR=0.05 fa%= 5.0 | ≥42 ev=2427 POD=0.77 FAR=0.46 fa%=19.7
+North     Mar–Oct  raw             n= 8059 bias=-4.05 MAE= 4.27 band=  56% hi/lo=  2/ 43% | ≥33 ev=7646 POD=0.83 FAR=0.01 fa%= 1.0 | ≥42 ev=2427 POD=0.05 FAR=0.08 fa%= 0.1
+North     Mar–Oct  persistence     n= 6360 bias=-0.01 MAE= 2.36 band=  76% hi/lo= 12/ 13% | ≥33 ev=6054 POD=0.97 FAR=0.03 fa%= 2.9 | ≥42 ev=1855 POD=0.69 FAR=0.31 fa%= 8.8
+Northeast Nov      current         n=  966 bias=+3.82 MAE= 4.00 band=  51% hi/lo= 48/  2% | ≥33 ev= 464 POD=0.99 FAR=0.44 fa%=37.1 | ≥42 ev=  21 POD=0.29 FAR=0.57 fa%= 0.8
+Northeast Dec      current         n= 1084 bias=+4.37 MAE= 4.39 band=  34% hi/lo= 66/  0% | ≥33 ev= 265 POD=0.99 FAR=0.71 fa%=60.7 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Jan      current         n= 1108 bias=+4.87 MAE= 4.87 band=  18% hi/lo= 82/  0% | ≥33 ev=  81 POD=1.00 FAR=0.90 fa%=65.3 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Northeast Feb      current         n=  771 bias=+3.65 MAE= 3.77 band=  61% hi/lo= 39/  0% | ≥33 ev= 446 POD=1.00 FAR=0.40 fa%=38.4 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.3
+Northeast Mar–May  current         n= 3249 bias=+1.44 MAE= 2.74 band=  64% hi/lo= 30/  6% | ≥33 ev=3009 POD=1.00 FAR=0.07 fa%= 7.1 | ≥42 ev=1523 POD=0.87 FAR=0.36 fa%=23.0
+Northeast Jun–Sep  current         n= 4108 bias=+1.73 MAE= 2.69 band=  64% hi/lo= 30/  7% | ≥33 ev=4011 POD=1.00 FAR=0.02 fa%= 2.3 | ≥42 ev=1319 POD=0.79 FAR=0.52 fa%=27.5
+Northeast Oct      current         n= 1101 bias=+1.97 MAE= 2.67 band=  80% hi/lo= 16/  5% | ≥33 ev= 988 POD=1.00 FAR=0.10 fa%= 9.4 | ≥42 ev=  80 POD=0.42 FAR=0.67 fa%= 6.2
+Northeast Nov–Feb  current         n= 3929 bias=+4.23 MAE= 4.31 band=  39% hi/lo= 61/  1% | ≥33 ev=1256 POD=1.00 FAR=0.62 fa%=51.8 | ≥42 ev=  23 POD=0.26 FAR=0.62 fa%= 0.3
+Northeast Nov–Feb  raw             n= 3929 bias=-2.41 MAE= 2.49 band=  62% hi/lo=  1/ 37% | ≥33 ev=1256 POD=0.33 FAR=0.02 fa%= 0.2 | ≥42 ev=  23 POD=0.00 FAR=   - fa%= 0.0
+Northeast Nov–Feb  persistence     n= 3603 bias=+0.08 MAE= 2.60 band=  62% hi/lo= 19/ 19% | ≥33 ev=1124 POD=0.61 FAR=0.40 fa%=12.5 | ≥42 ev=  15 POD=0.27 FAR=0.79 fa%= 0.4
+Northeast Mar–Oct  current         n= 8458 bias=+1.65 MAE= 2.71 band=  66% hi/lo= 28/  6% | ≥33 ev=8008 POD=1.00 FAR=0.05 fa%= 5.1 | ≥42 ev=2922 POD=0.82 FAR=0.45 fa%=23.0
+Northeast Mar–Oct  raw             n= 8458 bias=-3.71 MAE= 3.96 band=  54% hi/lo=  1/ 44% | ≥33 ev=8008 POD=0.89 FAR=0.01 fa%= 0.9 | ≥42 ev=2922 POD=0.03 FAR=0.11 fa%= 0.1
+Northeast Mar–Oct  persistence     n= 6982 bias=-0.01 MAE= 2.63 band=  71% hi/lo= 14/ 15% | ≥33 ev=6581 POD=0.96 FAR=0.04 fa%= 3.8 | ≥42 ev=2332 POD=0.68 FAR=0.32 fa%=10.7
+Central   Nov      current         n=  733 bias=+3.57 MAE= 3.76 band=  61% hi/lo= 36/  3% | ≥33 ev= 514 POD=0.99 FAR=0.27 fa%=25.5 | ≥42 ev=  33 POD=0.52 FAR=0.79 fa%= 8.7
+Central   Dec      current         n=  867 bias=+3.79 MAE= 3.84 band=  59% hi/lo= 41/  0% | ≥33 ev= 497 POD=1.00 FAR=0.42 fa%=41.4 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+Central   Jan      current         n=  882 bias=+4.44 MAE= 4.46 band=  34% hi/lo= 66/  0% | ≥33 ev= 279 POD=1.00 FAR=0.68 fa%=66.1 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+Central   Feb      current         n=  587 bias=+2.82 MAE= 2.96 band=  74% hi/lo= 25/  1% | ≥33 ev= 509 POD=1.00 FAR=0.13 fa%=13.3 | ≥42 ev=   7 POD=0.29 FAR=0.97 fa%=12.1
+Central   Mar–May  current         n= 2590 bias=+0.86 MAE= 2.47 band=  72% hi/lo= 22/  6% | ≥33 ev=2551 POD=1.00 FAR=0.02 fa%= 1.5 | ≥42 ev=1648 POD=0.92 FAR=0.27 fa%=21.8
+Central   Jun–Sep  current         n= 4097 bias=+1.66 MAE= 2.47 band=  57% hi/lo= 39/  5% | ≥33 ev=4087 POD=1.00 FAR=0.00 fa%= 0.2 | ≥42 ev=1518 POD=0.88 FAR=0.54 fa%=38.7
+Central   Oct      current         n=  794 bias=+1.04 MAE= 2.14 band=  69% hi/lo= 22/  9% | ≥33 ev= 788 POD=1.00 FAR=0.01 fa%= 0.8 | ≥42 ev= 219 POD=0.67 FAR=0.54 fa%=21.8
+Central   Nov–Feb  current         n= 3069 bias=+3.74 MAE= 3.83 band=  55% hi/lo= 44/  1% | ≥33 ev=1799 POD=1.00 FAR=0.40 fa%=39.3 | ≥42 ev=  41 POD=0.46 FAR=0.88 fa%= 4.4
+Central   Nov–Feb  raw             n= 3069 bias=-2.45 MAE= 2.54 band=  69% hi/lo=  1/ 31% | ≥33 ev=1799 POD=0.57 FAR=0.01 fa%= 0.3 | ≥42 ev=  41 POD=0.00 FAR=   - fa%= 0.0
+Central   Nov–Feb  persistence     n= 2879 bias=-0.01 MAE= 2.50 band=  70% hi/lo= 15/ 15% | ≥33 ev=1667 POD=0.79 FAR=0.21 fa%=12.3 | ≥42 ev=  39 POD=0.23 FAR=0.79 fa%= 1.2
+Central   Mar–Oct  current         n= 7481 bias=+1.32 MAE= 2.43 band=  63% hi/lo= 31/  6% | ≥33 ev=7426 POD=1.00 FAR=0.01 fa%= 0.7 | ≥42 ev=3385 POD=0.89 FAR=0.44 fa%=31.0
+Central   Mar–Oct  raw             n= 7481 bias=-3.76 MAE= 3.95 band=  54% hi/lo=  1/ 45% | ≥33 ev=7426 POD=0.96 FAR=0.00 fa%= 0.4 | ≥42 ev=3385 POD=0.10 FAR=0.13 fa%= 0.7
+Central   Mar–Oct  persistence     n= 6417 bias=-0.00 MAE= 2.01 band=  74% hi/lo= 13/ 13% | ≥33 ev=6367 POD=0.99 FAR=0.01 fa%= 0.7 | ≥42 ev=2836 POD=0.73 FAR=0.27 fa%=11.7
+East      Nov      current         n=  292 bias=+2.18 MAE= 2.94 band=  68% hi/lo= 26/  5% | ≥33 ev= 220 POD=0.99 FAR=0.19 fa%=17.1 | ≥42 ev=  12 POD=0.00 FAR=1.00 fa%= 5.1
+East      Dec      current         n=  376 bias=+2.57 MAE= 2.75 band=  74% hi/lo= 25/  1% | ≥33 ev= 281 POD=1.00 FAR=0.25 fa%=25.0 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.5
+East      Jan      current         n=  376 bias=+3.19 MAE= 3.30 band=  51% hi/lo= 49/  0% | ≥33 ev= 181 POD=1.00 FAR=0.51 fa%=50.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+East      Feb      current         n=  224 bias=+2.29 MAE= 2.50 band=  88% hi/lo= 11/  1% | ≥33 ev= 207 POD=1.00 FAR=0.08 fa%= 7.6 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 3.1
+East      Mar–May  current         n=  839 bias=-0.90 MAE= 2.49 band=  63% hi/lo= 11/ 26% | ≥33 ev= 831 POD=1.00 FAR=0.01 fa%= 1.0 | ≥42 ev= 556 POD=0.61 FAR=0.20 fa%=10.0
+East      Jun–Sep  current         n= 1159 bias=-0.02 MAE= 2.07 band=  73% hi/lo= 13/ 14% | ≥33 ev=1158 POD=0.99 FAR=0.00 fa%= 0.1 | ≥42 ev= 301 POD=0.51 FAR=0.49 fa%=12.7
+East      Oct      current         n=  171 bias=-0.20 MAE= 2.54 band=  74% hi/lo= 12/ 14% | ≥33 ev= 166 POD=1.00 FAR=0.03 fa%= 2.9 | ≥42 ev=  28 POD=0.14 FAR=0.78 fa%= 8.2
+East      Nov–Feb  current         n= 1268 bias=+2.61 MAE= 2.91 band=  69% hi/lo= 30/  1% | ≥33 ev= 889 POD=1.00 FAR=0.28 fa%=27.5 | ≥42 ev=  15 POD=0.00 FAR=1.00 fa%= 1.9
+East      Nov–Feb  raw             n= 1268 bias=-3.64 MAE= 3.66 band=  53% hi/lo=  0/ 47% | ≥33 ev= 889 POD=0.40 FAR=0.00 fa%= 0.1 | ≥42 ev=  15 POD=0.00 FAR=   - fa%= 0.0
+East      Nov–Feb  persistence     n= 1123 bias=-0.03 MAE= 2.33 band=  70% hi/lo= 15/ 15% | ≥33 ev= 774 POD=0.80 FAR=0.19 fa%=13.3 | ≥42 ev=   7 POD=0.14 FAR=0.88 fa%= 0.6
+East      Mar–Oct  current         n= 2169 bias=-0.38 MAE= 2.27 band=  69% hi/lo= 12/ 19% | ≥33 ev=2155 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 885 POD=0.56 FAR=0.33 fa%=11.3
+East      Mar–Oct  raw             n= 2169 bias=-5.89 MAE= 5.94 band=  47% hi/lo=  0/ 53% | ≥33 ev=2155 POD=0.83 FAR=0.00 fa%= 0.1 | ≥42 ev= 885 POD=0.01 FAR=0.00 fa%= 0.0
+East      Mar–Oct  persistence     n= 1553 bias=-0.03 MAE= 1.88 band=  78% hi/lo= 11/ 12% | ≥33 ev=1543 POD=0.99 FAR=0.01 fa%= 0.6 | ≥42 ev= 604 POD=0.71 FAR=0.27 fa%=10.5
+South     Nov      current         n=  338 bias=+1.37 MAE= 2.67 band=  75% hi/lo= 19/  7% | ≥33 ev= 273 POD=1.00 FAR=0.16 fa%=15.7 | ≥42 ev=  22 POD=0.09 FAR=0.75 fa%= 1.8
+South     Dec      current         n=  415 bias=+1.77 MAE= 2.37 band=  87% hi/lo= 13/  0% | ≥33 ev= 364 POD=1.00 FAR=0.12 fa%=12.0 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.5
+South     Jan      current         n=  587 bias=+2.22 MAE= 2.88 band=  81% hi/lo= 19/  0% | ≥33 ev= 476 POD=1.00 FAR=0.18 fa%=18.2 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.2
+South     Feb      current         n=  427 bias=+1.17 MAE= 2.46 band=  89% hi/lo=  6/  5% | ≥33 ev= 414 POD=1.00 FAR=0.03 fa%= 3.0 | ≥42 ev=  21 POD=0.00 FAR=1.00 fa%= 2.6
+South     Mar–May  current         n= 1830 bias=-0.20 MAE= 2.35 band=  63% hi/lo= 18/ 18% | ≥33 ev=1824 POD=1.00 FAR=0.00 fa%= 0.3 | ≥42 ev= 904 POD=0.63 FAR=0.37 fa%=18.4
+South     Jun–Sep  current         n= 2822 bias=+0.59 MAE= 2.26 band=  62% hi/lo= 24/ 14% | ≥33 ev=2792 POD=1.00 FAR=0.01 fa%= 1.1 | ≥42 ev= 802 POD=0.51 FAR=0.61 fa%=23.0
+South     Oct      current         n=  373 bias=+0.00 MAE= 2.37 band=  74% hi/lo= 10/ 16% | ≥33 ev= 365 POD=1.00 FAR=0.02 fa%= 2.1 | ≥42 ev=  70 POD=0.16 FAR=0.72 fa%= 7.8
+South     Nov–Feb  current         n= 1767 bias=+1.70 MAE= 2.62 band=  83% hi/lo= 14/  3% | ≥33 ev=1527 POD=1.00 FAR=0.13 fa%=12.6 | ≥42 ev=  46 POD=0.04 FAR=0.91 fa%= 1.1
+South     Nov–Feb  raw             n= 1767 bias=-4.44 MAE= 4.52 band=  42% hi/lo=  1/ 58% | ≥33 ev=1527 POD=0.36 FAR=0.01 fa%= 0.3 | ≥42 ev=  46 POD=0.00 FAR=   - fa%= 0.0
+South     Nov–Feb  persistence     n= 1403 bias=-0.02 MAE= 1.94 band=  84% hi/lo=  8/  8% | ≥33 ev=1198 POD=0.93 FAR=0.07 fa%= 6.1 | ≥42 ev=  33 POD=0.45 FAR=0.57 fa%= 1.4
+South     Mar–Oct  current         n= 5025 bias=+0.26 MAE= 2.30 band=  64% hi/lo= 21/ 16% | ≥33 ev=4981 POD=1.00 FAR=0.01 fa%= 0.9 | ≥42 ev=1776 POD=0.56 FAR=0.50 fa%=20.2
+South     Mar–Oct  raw             n= 5025 bias=-5.20 MAE= 5.27 band=  52% hi/lo=  0/ 48% | ≥33 ev=4981 POD=0.84 FAR=0.00 fa%= 0.2 | ≥42 ev=1776 POD=0.02 FAR=0.03 fa%= 0.0
+South     Mar–Oct  persistence     n= 3760 bias=+0.06 MAE= 2.03 band=  75% hi/lo= 13/ 12% | ≥33 ev=3721 POD=0.99 FAR=0.01 fa%= 1.0 | ≥42 ev=1195 POD=0.67 FAR=0.35 fa%=11.3
+ALL       Nov      current         n= 2982 bias=+3.27 MAE= 3.64 band=  59% hi/lo= 39/  3% | ≥33 ev=1807 POD=0.99 FAR=0.33 fa%=29.3 | ≥42 ev= 107 POD=0.35 FAR=0.73 fa%= 3.4
+ALL       Dec      current         n= 3470 bias=+3.64 MAE= 3.76 band=  52% hi/lo= 47/  0% | ≥33 ev=1636 POD=1.00 FAR=0.49 fa%=44.9 | ≥42 ev=   3 POD=0.00 FAR=1.00 fa%= 0.1
+ALL       Jan      current         n= 3804 bias=+4.10 MAE= 4.22 band=  36% hi/lo= 63/  0% | ≥33 ev=1129 POD=1.00 FAR=0.65 fa%=56.0 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.0
+ALL       Feb      current         n= 2669 bias=+2.84 MAE= 3.18 band=  69% hi/lo= 29/  1% | ≥33 ev=1931 POD=1.00 FAR=0.26 fa%=25.6 | ≥42 ev=  37 POD=0.08 FAR=0.97 fa%= 3.5
+ALL       Mar–May  current         n=11624 bias=+0.79 MAE= 2.60 band=  67% hi/lo= 23/ 10% | ≥33 ev=11173 POD=1.00 FAR=0.04 fa%= 3.8 | ≥42 ev=5862 POD=0.81 FAR=0.33 fa%=19.8
+ALL       Jun–Sep  current         n=16314 bias=+1.37 MAE= 2.57 band=  63% hi/lo= 29/  8% | ≥33 ev=15974 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=4993 POD=0.75 FAR=0.54 fa%=27.3
+ALL       Oct      current         n= 3254 bias=+1.25 MAE= 2.47 band=  75% hi/lo= 16/  8% | ≥33 ev=3069 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 540 POD=0.50 FAR=0.57 fa%=10.8
+ALL       Nov–Feb  current         n=12925 bias=+3.52 MAE= 3.75 band=  53% hi/lo= 46/  1% | ≥33 ev=6503 POD=1.00 FAR=0.45 fa%=40.6 | ≥42 ev= 149 POD=0.27 FAR=0.83 fa%= 1.5
+ALL       Nov–Feb  raw             n=12925 bias=-2.91 MAE= 2.99 band=  59% hi/lo=  1/ 40% | ≥33 ev=6503 POD=0.41 FAR=0.01 fa%= 0.3 | ≥42 ev= 149 POD=0.00 FAR=   - fa%= 0.0
+ALL       Nov–Feb  persistence     n=11413 bias=+0.02 MAE= 2.39 band=  69% hi/lo= 16/ 16% | ≥33 ev=5615 POD=0.77 FAR=0.24 fa%=11.6 | ≥42 ev= 112 POD=0.30 FAR=0.73 fa%= 0.8
+ALL       Mar–Oct  current         n=31192 bias=+1.14 MAE= 2.57 band=  66% hi/lo= 26/  9% | ≥33 ev=30216 POD=1.00 FAR=0.03 fa%= 3.0 | ≥42 ev=11395 POD=0.77 FAR=0.45 fa%=22.8
+ALL       Mar–Oct  raw             n=31192 bias=-4.20 MAE= 4.39 band=  54% hi/lo=  1/ 45% | ≥33 ev=30216 POD=0.88 FAR=0.01 fa%= 0.6 | ≥42 ev=11395 POD=0.05 FAR=0.11 fa%= 0.2
+ALL       Mar–Oct  persistence     n=25072 bias=-0.00 MAE= 2.27 band=  74% hi/lo= 13/ 13% | ≥33 ev=24266 POD=0.98 FAR=0.02 fa%= 2.1 | ≥42 ev=8822 POD=0.70 FAR=0.30 fa%=10.6
+
+--- why: model − observed at 13:00/16:00 Bangkok (°C), day 1, all rows
+North     cool  n= 5772  T -1.61  Td -1.09
+North     rest  n=16388  T -1.83  Td -0.58
+Northeast cool  n= 7831  T -1.37  Td -1.17
+Northeast rest  n=17415  T -1.47  Td -0.68
+Central   cool  n= 6126  T -0.71  Td -1.80
+Central   rest  n=15346  T -1.63  Td -0.61
+East      cool  n= 2525  T -1.54  Td -1.54
+East      rest  n= 4766  T -2.21  Td -0.81
+South     cool  n= 3532  T -1.98  Td -1.02
+South     rest  n=10591  T -2.00  Td -0.82
+
+--- per station, Nov–Feb, day 1, current correction (all winters)
+48304 A North CHAING RAI ARG       n=   34 bias=+4.19 MAE= 4.19 band=  12% hi/lo= 88/  0% | ≥33 ev=   0 POD=   - FAR=1.00 fa%=73.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48307 C North TUNG CHANG           n=  152 bias=+1.54 MAE= 1.74 band=  74% hi/lo= 23/  3% | ≥33 ev=  24 POD=0.79 FAR=0.51 fa%=13.2 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48310 C North PHAYAO               n=  102 bias=+3.79 MAE= 3.88 band=  42% hi/lo= 58/  0% | ≥33 ev=  31 POD=1.00 FAR=0.64 fa%=52.9 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48315 C North THA WANG PHA         n=   71 bias=+3.34 MAE= 3.38 band=  54% hi/lo= 46/  0% | ≥33 ev=  28 POD=1.00 FAR=0.49 fa%=38.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48324 C North THOEN                n=   89 bias=+1.78 MAE= 2.17 band=  61% hi/lo= 37/  2% | ≥33 ev=  42 POD=1.00 FAR=0.44 fa%=37.1 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+48325 B North MAE SARIANG          n=   41 bias=-1.26 MAE= 1.51 band=  85% hi/lo=  5/ 10% | ≥33 ev=  34 POD=0.91 FAR=0.06 fa%= 4.9 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+48333 B North NAN AGROMET          n=   20 bias=+3.75 MAE= 3.75 band=  45% hi/lo= 55/  0% | ≥33 ev=   7 POD=1.00 FAR=0.53 fa%=40.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48334 A North LAMPANG AGROME       n=   92 bias=+4.35 MAE= 4.38 band=  26% hi/lo= 74/  0% | ≥33 ev=   8 POD=1.00 FAR=0.86 fa%=55.4 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48351 C North UTTARADIT            n=  204 bias=+3.78 MAE= 3.79 band=  50% hi/lo= 50/  0% | ≥33 ev=  95 POD=1.00 FAR=0.50 fa%=47.1 | ≥42 ev=   1 POD=1.00 FAR=0.75 fa%= 1.5
+48372 B North SUKHOTHAI            n=  195 bias=+3.17 MAE= 3.34 band=  56% hi/lo= 43/  1% | ≥33 ev= 103 POD=1.00 FAR=0.42 fa%=38.5 | ≥42 ev=   2 POD=0.50 FAR=0.67 fa%= 1.0
+48373 C North SI SAMRONG AGR       n=   91 bias=+3.09 MAE= 3.10 band=  59% hi/lo= 41/  0% | ≥33 ev=  46 POD=1.00 FAR=0.45 fa%=40.7 | ≥42 ev=   1 POD=1.00 FAR=0.00 fa%= 0.0
+48374 C North LOMSAK               n=  217 bias=+4.87 MAE= 4.88 band=  37% hi/lo= 63/  0% | ≥33 ev=  77 POD=1.00 FAR=0.62 fa%=58.1 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 0.9
+48377 C North BHUMIBOL DAM         n=  142 bias=+3.77 MAE= 3.83 band=  38% hi/lo= 61/  1% | ≥33 ev=  39 POD=1.00 FAR=0.68 fa%=57.7 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+48380 C North KAMPHAENG PHET       n=   50 bias=+3.35 MAE= 3.54 band=  40% hi/lo= 60/  0% | ≥33 ev=  17 POD=1.00 FAR=0.62 fa%=56.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48385 C North UMPHANG              n=   54 bias=+2.47 MAE= 2.57 band=  48% hi/lo= 52/  0% | ≥33 ev=  11 POD=1.00 FAR=0.71 fa%=50.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48386 C North PICHIT AGROMET       n=  161 bias=+1.69 MAE= 2.04 band=  68% hi/lo= 29/  3% | ≥33 ev= 108 POD=0.99 FAR=0.29 fa%=26.7 | ≥42 ev=   7 POD=0.43 FAR=0.25 fa%= 0.6
+48387 C North DOI MU SOE AGR       n=   79 bias=+7.65 MAE= 7.65 band=   0% hi/lo=100/  0% | ≥33 ev=   0 POD=   - FAR=1.00 fa%=55.7 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48401 C North TAKFA AGROMET        n=  199 bias=+3.02 MAE= 3.14 band=  55% hi/lo= 44/  1% | ≥33 ev= 105 POD=1.00 FAR=0.45 fa%=42.7 | ≥42 ev=   6 POD=0.67 FAR=0.20 fa%= 0.5
+48410 C North UTHAITHANI           n=  204 bias=+3.88 MAE= 3.91 band=  51% hi/lo= 49/  0% | ≥33 ev= 100 POD=1.00 FAR=0.48 fa%=45.1 | ≥42 ev=   3 POD=1.00 FAR=0.50 fa%= 1.5
+48413 C North WICHIAN BURI         n=  215 bias=+3.77 MAE= 3.77 band=  51% hi/lo= 49/  0% | ≥33 ev= 101 POD=1.00 FAR=0.50 fa%=46.5 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 1.4
+VTCC D North Chiang Mai            n=  240 bias=+4.68 MAE= 4.68 band=  28% hi/lo= 72/  0% | ≥33 ev=  38 POD=1.00 FAR=0.80 fa%=64.2 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+VTCT D North Chiang Rai            n=  240 bias=+4.92 MAE= 4.93 band=  25% hi/lo= 75/  0% | ≥33 ev=  18 POD=1.00 FAR=0.88 fa%=55.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48350 C North LOEI AGROMET         n=   69 bias=+2.64 MAE= 2.70 band=  72% hi/lo= 28/  0% | ≥33 ev=  25 POD=1.00 FAR=0.31 fa%=15.9 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48355 C North SAKON NAKHON A       n=  161 bias=+2.94 MAE= 3.00 band=  52% hi/lo= 47/  1% | ≥33 ev=  49 POD=0.98 FAR=0.54 fa%=35.4 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+48357 B North NAKHON PHANOM        n=  218 bias=+5.04 MAE= 5.08 band=  27% hi/lo= 72/  1% | ≥33 ev=  50 POD=0.96 FAR=0.74 fa%=61.5 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 0.5
+48358 C North NAKHON PHANOM        n=  185 bias=+5.14 MAE= 5.16 band=  24% hi/lo= 76/  0% | ≥33 ev=  36 POD=1.00 FAR=0.77 fa%=64.3 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48360 C North NONGBUALAMPHU        n=  206 bias=+4.01 MAE= 4.03 band=  38% hi/lo= 62/  0% | ≥33 ev=  34 POD=1.00 FAR=0.74 fa%=46.1 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48363 C North BUNGKARN             n=  200 bias=+1.79 MAE= 2.17 band=  66% hi/lo= 32/  2% | ≥33 ev=  45 POD=0.91 FAR=0.41 fa%=14.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48382 C North KOSUMPHISAI          n=  215 bias=+3.56 MAE= 3.61 band=  43% hi/lo= 56/  0% | ≥33 ev=  76 POD=0.99 FAR=0.58 fa%=47.4 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 0.9
+48383 C North MUKDAHAN             n=  217 bias=+4.17 MAE= 4.23 band=  40% hi/lo= 60/  0% | ≥33 ev=  72 POD=1.00 FAR=0.60 fa%=50.2 | ≥42 ev=   1 POD=1.00 FAR=0.00 fa%= 0.0
+48384 A North THA PHRA AGROM       n=  184 bias=+1.92 MAE= 2.60 band=  53% hi/lo= 43/  3% | ≥33 ev=  82 POD=0.99 FAR=0.46 fa%=37.5 | ≥42 ev=   6 POD=0.17 FAR=0.00 fa%= 0.0
+48390 C North KAMALASAI            n=  202 bias=+3.50 MAE= 3.56 band=  46% hi/lo= 54/  0% | ≥33 ev=  79 POD=0.99 FAR=0.55 fa%=48.0 | ≥42 ev=   2 POD=1.00 FAR=0.00 fa%= 0.0
+48403 C North CHAIYAPHUM           n=  175 bias=+4.36 MAE= 4.36 band=  33% hi/lo= 67/  0% | ≥33 ev=  50 POD=1.00 FAR=0.66 fa%=56.6 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 0.6
+48404 C North ROI ET AGROMET       n=  213 bias=+4.27 MAE= 4.30 band=  38% hi/lo= 62/  0% | ≥33 ev=  70 POD=1.00 FAR=0.62 fa%=53.5 | ≥42 ev=   2 POD=0.50 FAR=0.00 fa%= 0.0
+48409 A North SI SAKET AGROM       n=  202 bias=+3.18 MAE= 3.34 band=  52% hi/lo= 47/  1% | ≥33 ev= 101 POD=1.00 FAR=0.46 fa%=42.1 | ≥42 ev=   6 POD=0.50 FAR=0.25 fa%= 0.5
+48416 C North THA TUM              n=  182 bias=+3.95 MAE= 4.00 band=  46% hi/lo= 54/  0% | ≥33 ev=  76 POD=1.00 FAR=0.54 fa%=48.4 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 0.5
+48432 B North SURIN                n=  201 bias=+3.54 MAE= 3.59 band=  49% hi/lo= 50/  1% | ≥33 ev=  93 POD=1.00 FAR=0.49 fa%=44.8 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+48433 C North SURIN AGROMET        n=  171 bias=+4.30 MAE= 4.32 band=  40% hi/lo= 60/  1% | ≥33 ev=  66 POD=1.00 FAR=0.58 fa%=53.2 | ≥42 ev=   2 POD=0.50 FAR=0.00 fa%= 0.0
+48435 C North PAKCHONG AGROM       n=  208 bias=+5.40 MAE= 5.41 band=  20% hi/lo= 80/  0% | ≥33 ev=  26 POD=1.00 FAR=0.84 fa%=66.8 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48437 C North BURERAM              n=  240 bias=+5.31 MAE= 5.31 band=  30% hi/lo= 70/  0% | ≥33 ev=  69 POD=1.00 FAR=0.68 fa%=60.8 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 1.2
+VTUD D North Udon Thani            n=  240 bias=+4.60 MAE= 4.60 band=  38% hi/lo= 62/  0% | ≥33 ev=  53 POD=1.00 FAR=0.69 fa%=50.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+VTUU D North Ubon Ratchatha        n=  240 bias=+4.46 MAE= 4.49 band=  44% hi/lo= 56/  0% | ≥33 ev= 104 POD=1.00 FAR=0.53 fa%=48.8 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 2.5
+48415 B Centr AYUTTHAYA            n=  191 bias=+3.01 MAE= 3.15 band=  63% hi/lo= 36/  1% | ≥33 ev= 122 POD=1.00 FAR=0.35 fa%=34.6 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 1.6
+48418 C Centr BUA CHUM             n=  196 bias=+3.70 MAE= 3.74 band=  52% hi/lo= 48/  0% | ≥33 ev=  95 POD=1.00 FAR=0.49 fa%=46.9 | ≥42 ev=   4 POD=1.00 FAR=0.20 fa%= 0.5
+48419 C Centr PATHUMTHANI          n=  208 bias=+3.13 MAE= 3.26 band=  64% hi/lo= 35/  1% | ≥33 ev= 143 POD=0.99 FAR=0.31 fa%=30.3 | ≥42 ev=   4 POD=0.75 FAR=0.81 fa%= 6.2
+48420 C Centr SAMUTPRAKAN AG       n=  207 bias=+3.25 MAE= 3.36 band=  63% hi/lo= 36/  1% | ≥33 ev= 127 POD=1.00 FAR=0.37 fa%=35.7 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.5
+48421 C Centr THONG PHAPHUM        n=  171 bias=+1.10 MAE= 1.38 band=  70% hi/lo= 29/  1% | ≥33 ev=  91 POD=0.99 FAR=0.34 fa%=27.5 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48425 B Centr SUPHAN BURI          n=  186 bias=+4.54 MAE= 4.57 band=  49% hi/lo= 51/  0% | ≥33 ev=  90 POD=1.00 FAR=0.51 fa%=50.5 | ≥42 ev=   1 POD=1.00 FAR=0.67 fa%= 1.1
+48426 C Centr LOP BURI             n=  213 bias=+3.86 MAE= 3.89 band=  55% hi/lo= 45/  0% | ≥33 ev= 124 POD=1.00 FAR=0.41 fa%=40.4 | ≥42 ev=   5 POD=0.80 FAR=0.69 fa%= 4.2
+48427 C Centr U THONG AGROME       n=  199 bias=+4.62 MAE= 4.62 band=  45% hi/lo= 55/  0% | ≥33 ev=  89 POD=1.00 FAR=0.54 fa%=52.8 | ≥42 ev=   1 POD=1.00 FAR=0.75 fa%= 1.5
+48450 C Centr KANCHANA BURI        n=  217 bias=+2.36 MAE= 2.52 band=  67% hi/lo= 31/  1% | ≥33 ev= 142 POD=1.00 FAR=0.31 fa%=29.0 | ≥42 ev=   4 POD=0.25 FAR=0.75 fa%= 1.4
+48451 C Centr NAKHONPATHOM         n=  156 bias=+4.26 MAE= 4.26 band=  49% hi/lo= 51/  0% | ≥33 ev=  76 POD=1.00 FAR=0.50 fa%=48.7 | ≥42 ev=   1 POD=1.00 FAR=0.50 fa%= 0.6
+48453 C Centr BANG NA AGROME       n=  218 bias=+4.57 MAE= 4.59 band=  56% hi/lo= 44/  0% | ≥33 ev= 132 POD=1.00 FAR=0.39 fa%=38.1 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 6.9
+48455 A Centr BANGKOK METROP       n=  218 bias=+3.11 MAE= 3.18 band=  72% hi/lo= 27/  1% | ≥33 ev= 169 POD=0.99 FAR=0.22 fa%=21.6 | ≥42 ev=   5 POD=0.60 FAR=0.79 fa%= 5.0
+48464 C Centr RATCHA BURI          n=  209 bias=+2.87 MAE= 3.09 band=  62% hi/lo= 36/  2% | ≥33 ev= 135 POD=1.00 FAR=0.33 fa%=32.1 | ≥42 ev=  10 POD=0.60 FAR=0.33 fa%= 1.4
+VTBD D Centr Bangkok Don Mu        n=  240 bias=+5.02 MAE= 5.05 band=  42% hi/lo= 57/  0% | ≥33 ev= 128 POD=1.00 FAR=0.46 fa%=45.4 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%=11.2
+VTBS D Centr Bangkok Suvarn        n=  240 bias=+4.93 MAE= 4.93 band=  48% hi/lo= 52/  0% | ≥33 ev= 136 POD=1.00 FAR=0.42 fa%=41.2 | ≥42 ev=   1 POD=1.00 FAR=0.95 fa%= 8.8
+48440 B East SRAKAEW               n=  165 bias=+3.23 MAE= 3.23 band=  61% hi/lo= 39/  0% | ≥33 ev=  96 POD=1.00 FAR=0.39 fa%=37.6 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 1.8
+48458 C East CHACHOENGSAO A        n=  173 bias=+1.95 MAE= 2.09 band=  77% hi/lo= 23/  1% | ≥33 ev= 128 POD=1.00 FAR=0.21 fa%=19.7 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.6
+48461 C East PHATTHAYA             n=  213 bias=+2.07 MAE= 2.61 band=  65% hi/lo= 35/  0% | ≥33 ev= 134 POD=1.00 FAR=0.33 fa%=31.5 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.9
+48478 A East RAYONG                n=  213 bias=+3.62 MAE= 3.71 band=  66% hi/lo= 33/  1% | ≥33 ev= 147 POD=0.99 FAR=0.30 fa%=29.6 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 2.8
+48479 C East HUAI PONG AGRO        n=  188 bias=+3.75 MAE= 3.76 band=  66% hi/lo= 34/  0% | ≥33 ev= 127 POD=1.00 FAR=0.31 fa%=30.3 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 3.2
+48481 C East PHLIU AGROMET         n=  139 bias=+0.71 MAE= 1.61 band=  81% hi/lo= 12/  7% | ≥33 ev= 118 POD=0.98 FAR=0.13 fa%=12.2 | ≥42 ev=   9 POD=0.00 FAR=   - fa%= 0.0
+48501 C East KHLONG YAI            n=  177 bias=+1.39 MAE= 2.19 band=  79% hi/lo= 20/  1% | ≥33 ev= 139 POD=1.00 FAR=0.20 fa%=19.2 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+48474 C South NONG PHLUB AGR       n=  181 bias=+3.55 MAE= 3.68 band=  50% hi/lo= 49/  1% | ≥33 ev=  83 POD=1.00 FAR=0.50 fa%=45.3 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+48520 C South SAWI AGROMET         n=   52 bias=+2.90 MAE= 3.03 band=  44% hi/lo= 54/  2% | ≥33 ev=  22 POD=0.95 FAR=0.55 fa%=50.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48554 B South NAKHONSI THAMM       n=   44 bias=+2.33 MAE= 2.54 band=  86% hi/lo= 11/  2% | ≥33 ev=  40 POD=1.00 FAR=0.09 fa%= 9.1 | ≥42 ev=   2 POD=0.50 FAR=0.50 fa%= 2.3
+48555 A South SURAT THANI AG       n=   49 bias=-1.59 MAE= 2.38 band=  88% hi/lo=  8/  4% | ≥33 ev=  43 POD=0.95 FAR=0.09 fa%= 8.2 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48557 C South CHAWANG              n=   89 bias=+1.58 MAE= 1.91 band=  93% hi/lo=  3/  3% | ≥33 ev=  87 POD=1.00 FAR=0.02 fa%= 2.2 | ≥42 ev=   3 POD=0.00 FAR=1.00 fa%= 1.1
+48560 C South PHATTHALUNG AG       n=  105 bias=-2.66 MAE= 2.75 band=  85% hi/lo=  1/ 14% | ≥33 ev= 104 POD=1.00 FAR=0.01 fa%= 1.0 | ≥42 ev=  15 POD=0.00 FAR=   - fa%= 0.0
+48561 C South TAKUA PA             n=  165 bias=+1.33 MAE= 1.96 band=  98% hi/lo=  2/  0% | ≥33 ev= 161 POD=1.00 FAR=0.02 fa%= 2.4 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+48563 C South KRABI                n=  130 bias=+2.48 MAE= 2.63 band=  94% hi/lo=  5/  1% | ≥33 ev= 127 POD=1.00 FAR=0.02 fa%= 2.3 | ≥42 ev=   3 POD=0.67 FAR=0.67 fa%= 3.1
+48564 A South PHUKET               n=  208 bias=-0.48 MAE= 1.86 band=  91% hi/lo=  2/  6% | ≥33 ev= 203 POD=1.00 FAR=0.02 fa%= 2.4 | ≥42 ev=  13 POD=0.00 FAR=   - fa%= 0.0
+48571 B South KHO HONG AGROM       n=   73 bias=+1.37 MAE= 1.81 band=  95% hi/lo=  3/  3% | ≥33 ev=  71 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=   2 POD=0.50 FAR=0.50 fa%= 1.4
+48574 C South SA-DAO               n=   98 bias=+2.70 MAE= 2.93 band=  88% hi/lo= 12/  0% | ≥33 ev=  88 POD=1.00 FAR=0.10 fa%=10.2 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 2.0
+48581 C South YALA AGROMET         n=   93 bias=+1.02 MAE= 1.70 band=  91% hi/lo=  4/  4% | ≥33 ev=  89 POD=1.00 FAR=0.04 fa%= 4.3 | ≥42 ev=   6 POD=0.17 FAR=0.00 fa%= 0.0
+VTSP D South Phuket                n=  240 bias=+1.76 MAE= 2.19 band=  94% hi/lo=  6/  0% | ≥33 ev= 226 POD=1.00 FAR=0.06 fa%= 5.8 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+VTSS D South Hat Yai               n=  240 bias=+3.56 MAE= 3.66 band=  74% hi/lo= 26/  0% | ≥33 ev= 183 POD=1.00 FAR=0.21 fa%=20.8 | ≥42 ev=   0 POD=   - FAR=1.00 fa%= 3.3
+
+================ Part B — region / season terms (protocol) ================
+
+--- day 1: fitted on 3838 rows (A+B, 2024-10-01..2025-09-30)
+  C1: {"cool": -2.82, "rest": -0.408}
+  C2: {"North": -1.114, "Northeast": -1.971, "Central": -1.806, "East": -2.174, "South": 0.643}
+  C3: {"North|cool": -2.963, "North|rest": -0.397, "Northeast|rest": -1.07, "Northeast|cool": -3.286, "Central|rest": -0.596, "Central|cool": -3.697, "East|rest": -1.119, "East|cool": -3.488, "South|rest": 0.979, "South|cool": -0.069}
+  C4: {"11": -2.263, "12": -3.188, "1": -3.786, "2": -1.98, "3": -0.766, "4": 0.15, "5": 0.138, "6": -0.776, "7": -1.209, "8": -0.34, "10": 0.05, "9": -0.31}
+  C5: {"a": 0.56, "b": 1.09, "n": 1421}
+  leave-one-station-out MAE, fit period, all months: C0 2.747  C1 2.266  C2 2.511  C3 2.315  C4 2.227  C5 2.221
+  leave-one-station-out MAE, fit period, Nov–Feb:    C0 3.355  C1 2.044  C2 2.418  C3 1.940  C4 1.931  C5 1.935
+  chosen (lowest LOSO MAE among C1–C5): C5  (C0 2.747 → C5 2.221)
+
+  [fit period, A+B (in-sample) | all months]
+  C0                                 n= 3838 bias=+1.30 MAE= 2.75 band=  65% hi/lo= 26/  9% | ≥33 ev=3226 POD=1.00 FAR=0.14 fa%=13.9 | ≥42 ev=1099 POD=0.71 FAR=0.35 fa%=11.1
+  C1                                 n= 3838 bias=+0.00 MAE= 2.20 band=  74% hi/lo= 15/ 11% | ≥33 ev=3226 POD=0.98 FAR=0.07 fa%= 5.8 | ≥42 ev=1099 POD=0.65 FAR=0.29 fa%= 7.8
+  C2                                 n= 3838 bias=-0.00 MAE= 2.29 band=  70% hi/lo= 15/ 15% | ≥33 ev=3226 POD=1.00 FAR=0.10 fa%= 8.9 | ≥42 ev=1099 POD=0.49 FAR=0.25 fa%= 4.6
+  C3                                 n= 3838 bias=+0.00 MAE= 2.05 band=  75% hi/lo= 13/ 12% | ≥33 ev=3226 POD=0.98 FAR=0.05 fa%= 4.5 | ≥42 ev=1099 POD=0.64 FAR=0.29 fa%= 7.4
+  C4                                 n= 3838 bias=-0.00 MAE= 2.14 band=  75% hi/lo= 14/ 12% | ≥33 ev=3226 POD=0.98 FAR=0.06 fa%= 5.2 | ≥42 ev=1099 POD=0.65 FAR=0.29 fa%= 7.6
+  C5                                 n= 3838 bias=+0.26 MAE= 2.19 band=  74% hi/lo= 16/ 10% | ≥33 ev=3226 POD=0.98 FAR=0.06 fa%= 5.0 | ≥42 ev=1099 POD=0.70 FAR=0.34 fa%=10.5
+  raw                                n= 3838 bias=-4.43 MAE= 4.51 band=  51% hi/lo=  1/ 49% | ≥33 ev=3226 POD=0.76 FAR=0.00 fa%= 0.3 | ≥42 ev=1099 POD=0.02 FAR=0.07 fa%= 0.1
+  pers                               n= 3219 bias=-0.03 MAE= 1.95 band=  77% hi/lo= 11/ 12% | ≥33 ev=2654 POD=0.96 FAR=0.05 fa%= 3.8 | ≥42 ev= 893 POD=0.73 FAR=0.25 fa%= 6.9
+  clim                               n= 1261 bias=+0.81 MAE= 2.12 band=  71% hi/lo= 15/ 14% | ≥33 ev=1249 POD=1.00 FAR=0.01 fa%= 1.0 | ≥42 ev= 513 POD=0.67 FAR=0.34 fa%=14.2
+    ΔMAE C5 − C0 = -0.559 [90 %: -0.782, -0.363]
+    ΔMAE pers − C0 = -0.857 [90 %: -1.076, -0.655]
+
+  [fit period, A+B (in-sample) | Nov–Feb]
+  C0                                 n= 1421 bias=+2.82 MAE= 3.35 band=  60% hi/lo= 38/  2% | ≥33 ev= 878 POD=0.99 FAR=0.35 fa%=32.9 | ≥42 ev=  32 POD=0.28 FAR=0.76 fa%= 2.0
+  C1                                 n= 1421 bias=+0.00 MAE= 1.98 band=  81% hi/lo= 14/  5% | ≥33 ev= 878 POD=0.94 FAR=0.16 fa%=11.3 | ≥42 ev=  32 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 1421 bias=+1.41 MAE= 2.20 band=  74% hi/lo= 24/  2% | ≥33 ev= 878 POD=0.99 FAR=0.25 fa%=20.1 | ≥42 ev=  32 POD=0.19 FAR=0.45 fa%= 0.4
+  C3                                 n= 1421 bias=+0.00 MAE= 1.71 band=  84% hi/lo= 10/  5% | ≥33 ev= 878 POD=0.95 FAR=0.12 fa%= 7.9 | ≥42 ev=  32 POD=0.06 FAR=0.50 fa%= 0.1
+  C4                                 n= 1421 bias=-0.00 MAE= 1.85 band=  82% hi/lo= 12/  6% | ≥33 ev= 878 POD=0.94 FAR=0.14 fa%= 9.5 | ≥42 ev=  32 POD=0.03 FAR=0.00 fa%= 0.0
+  C5                                 n= 1421 bias=-0.00 MAE= 1.84 band=  83% hi/lo= 11/  6% | ≥33 ev= 878 POD=0.93 FAR=0.14 fa%= 9.0 | ≥42 ev=  32 POD=0.09 FAR=0.57 fa%= 0.3
+  raw                                n= 1421 bias=-3.35 MAE= 3.40 band=  60% hi/lo=  0/ 40% | ≥33 ev= 878 POD=0.47 FAR=0.01 fa%= 0.2 | ≥42 ev=  32 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n= 1266 bias=+0.01 MAE= 1.80 band=  81% hi/lo= 10/  9% | ≥33 ev= 764 POD=0.89 FAR=0.12 fa%= 7.2 | ≥42 ev=  29 POD=0.52 FAR=0.48 fa%= 1.1
+  clim                               n=0
+    ΔMAE C5 − C0 = -1.510 [90 %: -1.890, -1.240]
+    ΔMAE pers − C0 = -1.644 [90 %: -2.021, -1.407]
+
+  [fit period, A+B (in-sample) | Mar–Oct]
+  C0                                 n= 2417 bias=+0.41 MAE= 2.39 band=  68% hi/lo= 19/ 13% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=1067 POD=0.72 FAR=0.34 fa%=16.5
+  C1                                 n= 2417 bias=-0.00 MAE= 2.34 band=  70% hi/lo= 15/ 15% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.6 | ≥42 ev=1067 POD=0.67 FAR=0.29 fa%=12.3
+  C2                                 n= 2417 bias=-0.83 MAE= 2.34 band=  68% hi/lo= 10/ 22% | ≥33 ev=2348 POD=1.00 FAR=0.02 fa%= 2.3 | ≥42 ev=1067 POD=0.50 FAR=0.24 fa%= 7.2
+  C3                                 n= 2417 bias=+0.00 MAE= 2.25 band=  70% hi/lo= 15/ 15% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.5 | ≥42 ev=1067 POD=0.66 FAR=0.29 fa%=11.7
+  C4                                 n= 2417 bias=-0.00 MAE= 2.31 band=  70% hi/lo= 15/ 15% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.6 | ≥42 ev=1067 POD=0.67 FAR=0.29 fa%=12.0
+  C5                                 n= 2417 bias=+0.41 MAE= 2.39 band=  68% hi/lo= 19/ 13% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=1067 POD=0.72 FAR=0.34 fa%=16.5
+  raw                                n= 2417 bias=-5.07 MAE= 5.17 band=  45% hi/lo=  1/ 54% | ≥33 ev=2348 POD=0.86 FAR=0.00 fa%= 0.4 | ≥42 ev=1067 POD=0.03 FAR=0.07 fa%= 0.1
+  pers                               n= 1953 bias=-0.05 MAE= 2.05 band=  75% hi/lo= 12/ 13% | ≥33 ev=1890 POD=0.98 FAR=0.02 fa%= 1.6 | ≥42 ev= 864 POD=0.74 FAR=0.25 fa%=10.6
+  clim                               n= 1261 bias=+0.81 MAE= 2.12 band=  71% hi/lo= 15/ 14% | ≥33 ev=1249 POD=1.00 FAR=0.01 fa%= 1.0 | ≥42 ev= 513 POD=0.67 FAR=0.34 fa%=14.2
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.347 [90 %: -0.460, -0.241]
+
+  [later, A+B | all months]
+  C0                                 n= 3914 bias=+1.24 MAE= 2.67 band=  67% hi/lo= 26/  7% | ≥33 ev=3324 POD=1.00 FAR=0.12 fa%=12.0 | ≥42 ev=1177 POD=0.76 FAR=0.36 fa%=12.7
+  C1                                 n= 3914 bias=+0.14 MAE= 2.17 band=  73% hi/lo= 17/ 10% | ≥33 ev=3324 POD=0.98 FAR=0.05 fa%= 4.7 | ≥42 ev=1177 POD=0.72 FAR=0.33 fa%=10.4
+  C2                                 n= 3914 bias=-0.03 MAE= 2.33 band=  69% hi/lo= 16/ 15% | ≥33 ev=3324 POD=0.99 FAR=0.09 fa%= 8.2 | ≥42 ev=1177 POD=0.54 FAR=0.29 fa%= 6.7
+  C3                                 n= 3914 bias=+0.13 MAE= 2.10 band=  74% hi/lo= 15/ 10% | ≥33 ev=3324 POD=0.98 FAR=0.04 fa%= 3.3 | ≥42 ev=1177 POD=0.73 FAR=0.32 fa%=10.4
+  C4                                 n= 3914 bias=+0.15 MAE= 2.14 band=  73% hi/lo= 16/ 11% | ≥33 ev=3324 POD=0.97 FAR=0.05 fa%= 4.3 | ≥42 ev=1177 POD=0.72 FAR=0.33 fa%=10.5
+  C5                                 n= 3914 bias=+0.36 MAE= 2.17 band=  73% hi/lo= 17/ 10% | ≥33 ev=3324 POD=0.98 FAR=0.05 fa%= 4.0 | ≥42 ev=1177 POD=0.76 FAR=0.36 fa%=12.7
+  raw                                n= 3914 bias=-4.47 MAE= 4.53 band=  49% hi/lo=  0/ 51% | ≥33 ev=3324 POD=0.76 FAR=0.01 fa%= 0.3 | ≥42 ev=1177 POD=0.03 FAR=0.00 fa%= 0.0
+  pers                               n= 3258 bias=+0.02 MAE= 1.71 band=  80% hi/lo= 10/ 10% | ≥33 ev=2720 POD=0.96 FAR=0.04 fa%= 3.3 | ≥42 ev= 955 POD=0.80 FAR=0.20 fa%= 6.0
+  clim                               n= 3277 bias=-0.16 MAE= 2.52 band=  67% hi/lo= 14/ 19% | ≥33 ev=2805 POD=0.94 FAR=0.08 fa%= 6.6 | ≥42 ev=1053 POD=0.57 FAR=0.27 fa%= 6.8
+    ΔMAE C5 − C0 = -0.502 [90 %: -0.730, -0.300]
+    ΔMAE pers − C0 = -1.010 [90 %: -1.210, -0.834]
+
+  [later, A+B | Nov–Feb]
+  C0                                 n= 1113 bias=+3.06 MAE= 3.38 band=  57% hi/lo= 42/  1% | ≥33 ev= 581 POD=0.99 FAR=0.42 fa%=37.6 | ≥42 ev=  11 POD=0.18 FAR=0.60 fa%= 0.3
+  C1                                 n= 1113 bias=+0.24 MAE= 1.81 band=  77% hi/lo= 17/  6% | ≥33 ev= 581 POD=0.90 FAR=0.20 fa%=12.0 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 1113 bias=+1.56 MAE= 2.14 band=  68% hi/lo= 29/  2% | ≥33 ev= 581 POD=0.97 FAR=0.33 fa%=24.6 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C3                                 n= 1113 bias=+0.08 MAE= 1.56 band=  80% hi/lo= 12/  8% | ≥33 ev= 581 POD=0.87 FAR=0.14 fa%= 7.3 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C4                                 n= 1113 bias=+0.06 MAE= 1.77 band=  74% hi/lo= 16/ 10% | ≥33 ev= 581 POD=0.81 FAR=0.20 fa%=10.5 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C5                                 n= 1113 bias=-0.03 MAE= 1.61 band=  79% hi/lo= 12/  9% | ≥33 ev= 581 POD=0.86 FAR=0.17 fa%= 9.3 | ≥42 ev=  11 POD=0.09 FAR=0.00 fa%= 0.0
+  raw                                n= 1113 bias=-3.27 MAE= 3.29 band=  51% hi/lo=  0/ 49% | ≥33 ev= 581 POD=0.25 FAR=0.00 fa%= 0.0 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n=  988 bias=-0.04 MAE= 1.57 band=  78% hi/lo= 11/ 12% | ≥33 ev= 502 POD=0.83 FAR=0.17 fa%= 8.5 | ≥42 ev=   9 POD=0.33 FAR=0.57 fa%= 0.4
+  clim                               n=  998 bias=+0.40 MAE= 2.85 band=  62% hi/lo= 20/ 18% | ≥33 ev= 555 POD=0.71 FAR=0.32 fa%=18.7 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -1.766 [90 %: -2.161, -1.491]
+    ΔMAE pers − C0 = -1.892 [90 %: -2.269, -1.627]
+
+  [later, A+B | Mar–Oct]
+  C0                                 n= 2801 bias=+0.51 MAE= 2.39 band=  70% hi/lo= 20/ 10% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.8 | ≥42 ev=1166 POD=0.77 FAR=0.36 fa%=17.7
+  C1                                 n= 2801 bias=+0.11 MAE= 2.32 band=  72% hi/lo= 16/ 12% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.8 | ≥42 ev=1166 POD=0.73 FAR=0.33 fa%=14.6
+  C2                                 n= 2801 bias=-0.66 MAE= 2.40 band=  70% hi/lo= 11/ 19% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.7 | ≥42 ev=1166 POD=0.55 FAR=0.29 fa%= 9.4
+  C3                                 n= 2801 bias=+0.15 MAE= 2.31 band=  72% hi/lo= 17/ 11% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.8 | ≥42 ev=1166 POD=0.73 FAR=0.32 fa%=14.5
+  C4                                 n= 2801 bias=+0.19 MAE= 2.29 band=  72% hi/lo= 17/ 11% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.8 | ≥42 ev=1166 POD=0.73 FAR=0.33 fa%=14.7
+  C5                                 n= 2801 bias=+0.51 MAE= 2.39 band=  70% hi/lo= 20/ 10% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.8 | ≥42 ev=1166 POD=0.77 FAR=0.36 fa%=17.7
+  raw                                n= 2801 bias=-4.94 MAE= 5.02 band=  48% hi/lo=  0/ 51% | ≥33 ev=2743 POD=0.87 FAR=0.01 fa%= 0.5 | ≥42 ev=1166 POD=0.03 FAR=0.00 fa%= 0.0
+  pers                               n= 2270 bias=+0.05 MAE= 1.77 band=  81% hi/lo= 10/  9% | ≥33 ev=2218 POD=0.99 FAR=0.01 fa%= 1.1 | ≥42 ev= 946 POD=0.81 FAR=0.20 fa%= 8.4
+  clim                               n= 2279 bias=-0.41 MAE= 2.37 band=  69% hi/lo= 12/ 19% | ≥33 ev=2250 POD=1.00 FAR=0.01 fa%= 1.3 | ≥42 ev=1042 POD=0.57 FAR=0.27 fa%= 9.7
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.626 [90 %: -0.740, -0.519]
+
+  [later, C (disjoint) | all months]
+  C0                                 n=11327 bias=+1.73 MAE= 2.88 band=  62% hi/lo= 32/  7% | ≥33 ev=9074 POD=1.00 FAR=0.16 fa%=15.4 | ≥42 ev=3038 POD=0.76 FAR=0.41 fa%=14.4
+  C1                                 n=11327 bias=+0.54 MAE= 2.23 band=  70% hi/lo= 20/ 10% | ≥33 ev=9074 POD=0.98 FAR=0.07 fa%= 6.3 | ≥42 ev=3038 POD=0.71 FAR=0.38 fa%=11.7
+  C2                                 n=11327 bias=+0.29 MAE= 2.42 band=  67% hi/lo= 20/ 13% | ≥33 ev=9074 POD=0.99 FAR=0.12 fa%=10.9 | ≥42 ev=3038 POD=0.55 FAR=0.33 fa%= 7.2
+  C3                                 n=11327 bias=+0.40 MAE= 2.20 band=  71% hi/lo= 18/ 11% | ≥33 ev=9074 POD=0.97 FAR=0.06 fa%= 5.0 | ≥42 ev=3038 POD=0.71 FAR=0.38 fa%=11.5
+  C4                                 n=11327 bias=+0.54 MAE= 2.21 band=  71% hi/lo= 19/ 10% | ≥33 ev=9074 POD=0.97 FAR=0.07 fa%= 5.6 | ≥42 ev=3038 POD=0.72 FAR=0.38 fa%=11.7
+  C5                                 n=11327 bias=+0.71 MAE= 2.24 band=  70% hi/lo= 21/  9% | ≥33 ev=9074 POD=0.97 FAR=0.06 fa%= 5.4 | ≥42 ev=3038 POD=0.76 FAR=0.41 fa%=14.2
+  raw                                n=11327 bias=-4.02 MAE= 4.15 band=  51% hi/lo=  1/ 48% | ≥33 ev=9074 POD=0.76 FAR=0.01 fa%= 0.4 | ≥42 ev=3038 POD=0.02 FAR=0.07 fa%= 0.0
+  pers                               n= 9326 bias=+0.03 MAE= 1.65 band=  79% hi/lo= 11/ 11% | ≥33 ev=7334 POD=0.95 FAR=0.05 fa%= 3.7 | ≥42 ev=2462 POD=0.77 FAR=0.23 fa%= 6.2
+  clim                               n=10208 bias=+0.01 MAE= 2.34 band=  70% hi/lo= 15/ 15% | ≥33 ev=8084 POD=0.94 FAR=0.10 fa%= 7.9 | ≥42 ev=2670 POD=0.58 FAR=0.28 fa%= 5.8
+    ΔMAE C5 − C0 = -0.634 [90 %: -0.883, -0.395]
+    ΔMAE pers − C0 = -1.260 [90 %: -1.463, -1.078]
+
+  [later, C (disjoint) | Nov–Feb]
+  C0                                 n= 3658 bias=+3.37 MAE= 3.56 band=  52% hi/lo= 48/  1% | ≥33 ev=1624 POD=0.99 FAR=0.49 fa%=42.1 | ≥42 ev=  29 POD=0.28 FAR=0.70 fa%= 0.5
+  C1                                 n= 3658 bias=+0.55 MAE= 1.75 band=  76% hi/lo= 19/  5% | ≥33 ev=1624 POD=0.90 FAR=0.26 fa%=14.1 | ≥42 ev=  29 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 3658 bias=+1.89 MAE= 2.38 band=  64% hi/lo= 34/  2% | ≥33 ev=1624 POD=0.98 FAR=0.40 fa%=28.5 | ≥42 ev=  29 POD=0.17 FAR=0.55 fa%= 0.2
+  C3                                 n= 3658 bias=+0.39 MAE= 1.70 band=  78% hi/lo= 15/  8% | ≥33 ev=1624 POD=0.86 FAR=0.21 fa%=10.1 | ≥42 ev=  29 POD=0.07 FAR=0.00 fa%= 0.0
+  C4                                 n= 3658 bias=+0.35 MAE= 1.72 band=  75% hi/lo= 17/  8% | ≥33 ev=1624 POD=0.85 FAR=0.24 fa%=11.7 | ≥42 ev=  29 POD=0.00 FAR=   - fa%= 0.0
+  C5                                 n= 3658 bias=+0.21 MAE= 1.60 band=  77% hi/lo= 14/  9% | ≥33 ev=1624 POD=0.87 FAR=0.22 fa%=11.1 | ≥42 ev=  29 POD=0.03 FAR=0.80 fa%= 0.1
+  raw                                n= 3658 bias=-3.00 MAE= 3.07 band=  54% hi/lo=  1/ 45% | ≥33 ev=1624 POD=0.26 FAR=0.01 fa%= 0.1 | ≥42 ev=  29 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n= 3194 bias=+0.02 MAE= 1.60 band=  77% hi/lo= 12/ 11% | ≥33 ev=1370 POD=0.80 FAR=0.20 fa%= 8.4 | ≥42 ev=  20 POD=0.30 FAR=0.71 fa%= 0.5
+  clim                               n= 3514 bias=+0.52 MAE= 2.62 band=  64% hi/lo= 22/ 13% | ≥33 ev=1527 POD=0.71 FAR=0.38 fa%=19.0 | ≥42 ev=  23 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -1.965 [90 %: -2.227, -1.730]
+    ΔMAE pers − C0 = -2.036 [90 %: -2.340, -1.727]
+
+  [later, C (disjoint) | Mar–Oct]
+  C0                                 n= 7669 bias=+0.95 MAE= 2.55 band=  67% hi/lo= 24/  9% | ≥33 ev=7450 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=3009 POD=0.77 FAR=0.41 fa%=21.0
+  C1                                 n= 7669 bias=+0.54 MAE= 2.45 band=  68% hi/lo= 20/ 12% | ≥33 ev=7450 POD=0.99 FAR=0.03 fa%= 2.6 | ≥42 ev=3009 POD=0.71 FAR=0.38 fa%=17.3
+  C2                                 n= 7669 bias=-0.48 MAE= 2.44 band=  68% hi/lo= 13/ 19% | ≥33 ev=7450 POD=0.99 FAR=0.02 fa%= 2.5 | ≥42 ev=3009 POD=0.55 FAR=0.33 fa%=10.6
+  C3                                 n= 7669 bias=+0.40 MAE= 2.43 band=  68% hi/lo= 20/ 12% | ≥33 ev=7450 POD=0.99 FAR=0.03 fa%= 2.6 | ≥42 ev=3009 POD=0.71 FAR=0.38 fa%=16.9
+  C4                                 n= 7669 bias=+0.63 MAE= 2.44 band=  69% hi/lo= 20/ 11% | ≥33 ev=7450 POD=0.99 FAR=0.03 fa%= 2.6 | ≥42 ev=3009 POD=0.73 FAR=0.38 fa%=17.3
+  C5                                 n= 7669 bias=+0.95 MAE= 2.55 band=  67% hi/lo= 24/  9% | ≥33 ev=7450 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=3009 POD=0.77 FAR=0.41 fa%=21.0
+  raw                                n= 7669 bias=-4.51 MAE= 4.66 band=  50% hi/lo=  1/ 49% | ≥33 ev=7450 POD=0.87 FAR=0.01 fa%= 0.5 | ≥42 ev=3009 POD=0.02 FAR=0.07 fa%= 0.1
+  pers                               n= 6132 bias=+0.03 MAE= 1.68 band=  79% hi/lo= 10/ 10% | ≥33 ev=5964 POD=0.99 FAR=0.01 fa%= 1.2 | ≥42 ev=2442 POD=0.77 FAR=0.23 fa%= 9.1
+  clim                               n= 6694 bias=-0.25 MAE= 2.19 band=  72% hi/lo= 11/ 17% | ≥33 ev=6557 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=2647 POD=0.59 FAR=0.28 fa%= 8.9
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.856 [90 %: -0.962, -0.760]
+
+  [earlier, C (disjoint) | all months]
+  C0                                 n=12402 bias=+1.87 MAE= 2.82 band=  63% hi/lo= 31/  6% | ≥33 ev=9806 POD=1.00 FAR=0.17 fa%=16.4 | ≥42 ev=2836 POD=0.74 FAR=0.43 fa%=12.7
+  C1                                 n=12402 bias=+0.52 MAE= 2.09 band=  73% hi/lo= 18/  9% | ≥33 ev=9806 POD=0.98 FAR=0.08 fa%= 6.3 | ≥42 ev=2836 POD=0.68 FAR=0.39 fa%= 9.7
+  C2                                 n=12402 bias=+0.44 MAE= 2.29 band=  70% hi/lo= 19/ 11% | ≥33 ev=9806 POD=0.99 FAR=0.12 fa%=10.9 | ≥42 ev=2836 POD=0.53 FAR=0.32 fa%= 5.8
+  C3                                 n=12402 bias=+0.39 MAE= 2.07 band=  73% hi/lo= 17/ 10% | ≥33 ev=9806 POD=0.97 FAR=0.07 fa%= 5.4 | ≥42 ev=2836 POD=0.67 FAR=0.38 fa%= 9.5
+  C4                                 n=12402 bias=+0.52 MAE= 2.04 band=  73% hi/lo= 17/ 10% | ≥33 ev=9806 POD=0.97 FAR=0.07 fa%= 5.9 | ≥42 ev=2836 POD=0.68 FAR=0.38 fa%= 9.3
+  C5                                 n=12402 bias=+0.71 MAE= 2.11 band=  72% hi/lo= 19/  9% | ≥33 ev=9806 POD=0.98 FAR=0.07 fa%= 5.7 | ≥42 ev=2836 POD=0.73 FAR=0.42 fa%=12.3
+  raw                                n=12402 bias=-3.93 MAE= 4.04 band=  54% hi/lo=  1/ 45% | ≥33 ev=9806 POD=0.76 FAR=0.01 fa%= 0.4 | ≥42 ev=2836 POD=0.02 FAR=0.06 fa%= 0.0
+  pers                               n=10455 bias=-0.01 MAE= 1.88 band=  76% hi/lo= 12/ 12% | ≥33 ev=8117 POD=0.95 FAR=0.06 fa%= 4.4 | ≥42 ev=2298 POD=0.70 FAR=0.29 fa%= 6.4
+  clim                               n= 3900 bias=+1.09 MAE= 2.11 band=  71% hi/lo= 20/  8% | ≥33 ev=3806 POD=1.00 FAR=0.02 fa%= 1.6 | ≥42 ev=1399 POD=0.78 FAR=0.41 fa%=19.1
+    ΔMAE C5 − C0 = -0.712 [90 %: -0.964, -0.489]
+    ΔMAE pers − C0 = -0.991 [90 %: -1.229, -0.772]
+
+  [earlier, C (disjoint) | Nov–Feb]
+  C0                                 n= 4813 bias=+3.23 MAE= 3.45 band=  57% hi/lo= 42/  1% | ≥33 ev=2534 POD=1.00 FAR=0.41 fa%=36.3 | ≥42 ev=  74 POD=0.43 FAR=0.67 fa%= 1.4
+  C1                                 n= 4813 bias=+0.41 MAE= 1.75 band=  80% hi/lo= 15/  5% | ≥33 ev=2534 POD=0.93 FAR=0.17 fa%=10.4 | ≥42 ev=  74 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 4813 bias=+1.77 MAE= 2.34 band=  70% hi/lo= 28/  2% | ≥33 ev=2534 POD=0.98 FAR=0.31 fa%=22.9 | ≥42 ev=  74 POD=0.15 FAR=0.72 fa%= 0.6
+  C3                                 n= 4813 bias=+0.25 MAE= 1.75 band=  81% hi/lo= 12/  7% | ≥33 ev=2534 POD=0.91 FAR=0.15 fa%= 8.3 | ≥42 ev=  74 POD=0.01 FAR=0.86 fa%= 0.1
+  C4                                 n= 4813 bias=+0.38 MAE= 1.67 band=  80% hi/lo= 13/  7% | ≥33 ev=2534 POD=0.91 FAR=0.16 fa%= 9.4 | ≥42 ev=  74 POD=0.04 FAR=0.25 fa%= 0.0
+  C5                                 n= 4813 bias=+0.24 MAE= 1.62 band=  81% hi/lo= 11/  8% | ≥33 ev=2534 POD=0.91 FAR=0.15 fa%= 8.5 | ≥42 ev=  74 POD=0.20 FAR=0.42 fa%= 0.2
+  raw                                n= 4813 bias=-3.04 MAE= 3.12 band=  59% hi/lo=  1/ 40% | ≥33 ev=2534 POD=0.45 FAR=0.01 fa%= 0.2 | ≥42 ev=  74 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n= 4268 bias=+0.01 MAE= 1.71 band=  78% hi/lo= 11/ 11% | ≥33 ev=2197 POD=0.86 FAR=0.15 fa%= 7.8 | ≥42 ev=  60 POD=0.38 FAR=0.59 fa%= 0.8
+  clim                               n=   59 bias=+2.73 MAE= 2.97 band=  66% hi/lo= 32/  2% | ≥33 ev=  16 POD=0.94 FAR=0.46 fa%=22.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -1.834 [90 %: -2.152, -1.592]
+    ΔMAE pers − C0 = -1.785 [90 %: -2.177, -1.559]
+
+  [earlier, C (disjoint) | Mar–Oct]
+  C0                                 n= 7589 bias=+1.01 MAE= 2.42 band=  67% hi/lo= 24/ 10% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 3.8 | ≥42 ev=2762 POD=0.75 FAR=0.42 fa%=19.9
+  C1                                 n= 7589 bias=+0.60 MAE= 2.31 band=  69% hi/lo= 20/ 12% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 3.7 | ≥42 ev=2762 POD=0.69 FAR=0.39 fa%=15.8
+  C2                                 n= 7589 bias=-0.40 MAE= 2.26 band=  70% hi/lo= 13/ 17% | ≥33 ev=7272 POD=0.99 FAR=0.03 fa%= 3.3 | ≥42 ev=2762 POD=0.54 FAR=0.32 fa%= 9.1
+  C3                                 n= 7589 bias=+0.48 MAE= 2.28 band=  69% hi/lo= 19/ 12% | ≥33 ev=7272 POD=0.99 FAR=0.04 fa%= 3.6 | ≥42 ev=2762 POD=0.69 FAR=0.38 fa%=15.4
+  C4                                 n= 7589 bias=+0.61 MAE= 2.28 band=  69% hi/lo= 19/ 12% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 3.7 | ≥42 ev=2762 POD=0.69 FAR=0.38 fa%=15.3
+  C5                                 n= 7589 bias=+1.01 MAE= 2.42 band=  67% hi/lo= 24/ 10% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 3.8 | ≥42 ev=2762 POD=0.75 FAR=0.42 fa%=19.9
+  raw                                n= 7589 bias=-4.50 MAE= 4.63 band=  51% hi/lo=  1/ 48% | ≥33 ev=7272 POD=0.86 FAR=0.01 fa%= 0.4 | ≥42 ev=2762 POD=0.02 FAR=0.06 fa%= 0.0
+  pers                               n= 6187 bias=-0.03 MAE= 1.99 band=  75% hi/lo= 12/ 13% | ≥33 ev=5920 POD=0.98 FAR=0.02 fa%= 2.0 | ≥42 ev=2238 POD=0.71 FAR=0.29 fa%=10.2
+  clim                               n= 3841 bias=+1.07 MAE= 2.10 band=  71% hi/lo= 20/  8% | ≥33 ev=3790 POD=1.00 FAR=0.01 fa%= 1.3 | ≥42 ev=1399 POD=0.78 FAR=0.41 fa%=19.4
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.444 [90 %: -0.578, -0.310]
+
+  [later, D airports (METAR) | all months]
+  C0                                 n= 3104 bias=+3.17 MAE= 3.42 band=  56% hi/lo= 42/  2% | ≥33 ev=2463 POD=1.00 FAR=0.17 fa%=16.7 | ≥42 ev= 226 POD=0.80 FAR=0.80 fa%=23.8
+  C1                                 n= 3104 bias=+2.02 MAE= 2.50 band=  68% hi/lo= 29/  3% | ≥33 ev=2463 POD=0.99 FAR=0.10 fa%= 9.0 | ≥42 ev= 226 POD=0.74 FAR=0.78 fa%=19.3
+  C2                                 n= 3104 bias=+2.11 MAE= 2.57 band=  68% hi/lo= 27/  4% | ≥33 ev=2463 POD=1.00 FAR=0.14 fa%=12.6 | ≥42 ev= 226 POD=0.58 FAR=0.76 fa%=13.1
+  C3                                 n= 3104 bias=+2.21 MAE= 2.54 band=  68% hi/lo= 29/  3% | ≥33 ev=2463 POD=1.00 FAR=0.09 fa%= 7.6 | ≥42 ev= 226 POD=0.73 FAR=0.79 fa%=20.2
+  C4                                 n= 3104 bias=+2.06 MAE= 2.51 band=  68% hi/lo= 30/  2% | ≥33 ev=2463 POD=0.99 FAR=0.10 fa%= 8.5 | ≥42 ev= 226 POD=0.77 FAR=0.78 fa%=20.2
+  C5                                 n= 3104 bias=+2.25 MAE= 2.64 band=  66% hi/lo= 32/  2% | ≥33 ev=2463 POD=0.99 FAR=0.09 fa%= 8.0 | ≥42 ev= 226 POD=0.80 FAR=0.80 fa%=23.1
+  raw                                n= 3104 bias=-2.59 MAE= 2.81 band=  70% hi/lo=  1/ 29% | ≥33 ev=2463 POD=0.78 FAR=0.02 fa%= 1.0 | ≥42 ev= 226 POD=0.04 FAR=0.47 fa%= 0.2
+  pers                               n= 3104 bias=-0.01 MAE= 1.61 band=  83% hi/lo=  9/  9% | ≥33 ev=2463 POD=0.95 FAR=0.05 fa%= 4.0 | ≥42 ev= 226 POD=0.58 FAR=0.41 fa%= 3.0
+  clim                               n= 3104 bias=-0.20 MAE= 2.10 band=  78% hi/lo=  9/ 14% | ≥33 ev=2463 POD=0.95 FAR=0.08 fa%= 6.9 | ≥42 ev= 226 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -0.784 [90 %: -1.075, -0.529]
+    ΔMAE pers − C0 = -1.812 [90 %: -2.039, -1.627]
+
+  [later, D airports (METAR) | Nov–Feb]
+  C0                                 n=  960 bias=+4.19 MAE= 4.28 band=  48% hi/lo= 52/  0% | ≥33 ev= 439 POD=1.00 FAR=0.48 fa%=41.9 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 3.4
+  C1                                 n=  960 bias=+1.37 MAE= 1.95 band=  75% hi/lo= 24/  1% | ≥33 ev= 439 POD=0.97 FAR=0.28 fa%=17.3 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.2
+  C2                                 n=  960 bias=+3.13 MAE= 3.22 band=  61% hi/lo= 38/  0% | ≥33 ev= 439 POD=1.00 FAR=0.40 fa%=29.9 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 1.7
+  C3                                 n=  960 bias=+1.69 MAE= 1.96 band=  80% hi/lo= 19/  1% | ≥33 ev= 439 POD=0.99 FAR=0.22 fa%=12.9 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.4
+  C4                                 n=  960 bias=+1.36 MAE= 1.91 band=  77% hi/lo= 22/  1% | ≥33 ev= 439 POD=0.97 FAR=0.26 fa%=15.7 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.3
+  C5                                 n=  960 bias=+1.20 MAE= 1.74 band=  79% hi/lo= 19/  2% | ≥33 ev= 439 POD=0.97 FAR=0.24 fa%=13.9 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 1.4
+  raw                                n=  960 bias=-2.08 MAE= 2.21 band=  64% hi/lo=  1/ 35% | ≥33 ev= 439 POD=0.45 FAR=0.02 fa%= 0.4 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n=  960 bias=-0.01 MAE= 1.44 band=  81% hi/lo=  9/  9% | ≥33 ev= 439 POD=0.86 FAR=0.14 fa%= 6.5 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.1
+  clim                               n=  960 bias=+0.16 MAE= 2.27 band=  70% hi/lo= 15/ 15% | ≥33 ev= 439 POD=0.73 FAR=0.22 fa%= 9.7 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -2.536 [90 %: -2.831, -2.319]
+    ΔMAE pers − C0 = -2.843 [90 %: -3.234, -2.555]
+
+  [later, D airports (METAR) | Mar–Oct]
+  C0                                 n= 2144 bias=+2.72 MAE= 3.04 band=  60% hi/lo= 38/  3% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 225 POD=0.80 FAR=0.80 fa%=32.9
+  C1                                 n= 2144 bias=+2.31 MAE= 2.74 band=  65% hi/lo= 32/  3% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.2 | ≥42 ev= 225 POD=0.74 FAR=0.78 fa%=27.8
+  C2                                 n= 2144 bias=+1.66 MAE= 2.28 band=  72% hi/lo= 23/  6% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 4.9 | ≥42 ev= 225 POD=0.58 FAR=0.75 fa%=18.2
+  C3                                 n= 2144 bias=+2.45 MAE= 2.81 band=  63% hi/lo= 33/  4% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.2 | ≥42 ev= 225 POD=0.73 FAR=0.79 fa%=29.0
+  C4                                 n= 2144 bias=+2.37 MAE= 2.78 band=  64% hi/lo= 33/  3% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.2 | ≥42 ev= 225 POD=0.77 FAR=0.78 fa%=29.1
+  C5                                 n= 2144 bias=+2.72 MAE= 3.04 band=  60% hi/lo= 38/  3% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 225 POD=0.80 FAR=0.80 fa%=32.9
+  raw                                n= 2144 bias=-2.82 MAE= 3.08 band=  73% hi/lo=  2/ 26% | ≥33 ev=2024 POD=0.86 FAR=0.01 fa%= 1.2 | ≥42 ev= 225 POD=0.04 FAR=0.47 fa%= 0.3
+  pers                               n= 2144 bias=-0.01 MAE= 1.69 band=  83% hi/lo=  8/  9% | ≥33 ev=2024 POD=0.97 FAR=0.03 fa%= 2.8 | ≥42 ev= 225 POD=0.59 FAR=0.41 fa%= 4.3
+  clim                               n= 2144 bias=-0.37 MAE= 2.02 band=  82% hi/lo=  6/ 13% | ≥33 ev=2024 POD=1.00 FAR=0.06 fa%= 5.6 | ≥42 ev= 225 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -1.350 [90 %: -1.494, -1.228]
+
+  [earlier, D airports (METAR) | all months]
+  C0                                 n= 2920 bias=+3.31 MAE= 3.50 band=  59% hi/lo= 40/  1% | ≥33 ev=2297 POD=1.00 FAR=0.18 fa%=16.9 | ≥42 ev= 179 POD=0.82 FAR=0.82 fa%=22.1
+  C1                                 n= 2920 bias=+2.11 MAE= 2.50 band=  69% hi/lo= 29/  2% | ≥33 ev=2297 POD=1.00 FAR=0.11 fa%= 9.7 | ≥42 ev= 179 POD=0.78 FAR=0.79 fa%=17.6
+  C2                                 n= 2920 bias=+2.25 MAE= 2.61 band=  69% hi/lo= 28/  3% | ≥33 ev=2297 POD=1.00 FAR=0.15 fa%=13.6 | ≥42 ev= 179 POD=0.56 FAR=0.79 fa%=12.7
+  C3                                 n= 2920 bias=+2.30 MAE= 2.54 band=  69% hi/lo= 29/  2% | ≥33 ev=2297 POD=1.00 FAR=0.09 fa%= 8.1 | ≥42 ev= 179 POD=0.73 FAR=0.81 fa%=19.5
+  C4                                 n= 2920 bias=+2.12 MAE= 2.51 band=  69% hi/lo= 28/  2% | ≥33 ev=2297 POD=1.00 FAR=0.11 fa%= 9.3 | ≥42 ev= 179 POD=0.73 FAR=0.80 fa%=18.2
+  C5                                 n= 2920 bias=+2.35 MAE= 2.66 band=  68% hi/lo= 30/  2% | ≥33 ev=2297 POD=0.99 FAR=0.10 fa%= 8.4 | ≥42 ev= 179 POD=0.82 FAR=0.81 fa%=21.3
+  raw                                n= 2920 bias=-2.47 MAE= 2.71 band=  72% hi/lo=  1/ 27% | ≥33 ev=2297 POD=0.79 FAR=0.01 fa%= 0.8 | ≥42 ev= 179 POD=0.04 FAR=0.33 fa%= 0.1
+  pers                               n= 2920 bias=+0.01 MAE= 1.77 band=  81% hi/lo=  9/  9% | ≥33 ev=2297 POD=0.94 FAR=0.06 fa%= 4.5 | ≥42 ev= 179 POD=0.49 FAR=0.51 fa%= 3.2
+  clim                               n= 1712 bias=+1.62 MAE= 2.54 band=  75% hi/lo= 19/  5% | ≥33 ev=1619 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 175 POD=0.61 FAR=0.71 fa%=15.1
+    ΔMAE C5 − C0 = -0.838 [90 %: -1.135, -0.582]
+    ΔMAE pers − C0 = -1.731 [90 %: -1.974, -1.540]
+
+  [earlier, D airports (METAR) | Nov–Feb]
+  C0                                 n=  960 bias=+4.29 MAE= 4.35 band=  50% hi/lo= 50/  0% | ≥33 ev= 447 POD=1.00 FAR=0.47 fa%=40.9 | ≥42 ev=   2 POD=0.50 FAR=0.97 fa%= 3.0
+  C1                                 n=  960 bias=+1.47 MAE= 1.97 band=  73% hi/lo= 26/  1% | ≥33 ev= 447 POD=0.98 FAR=0.30 fa%=19.5 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.1
+  C2                                 n=  960 bias=+3.23 MAE= 3.29 band=  60% hi/lo= 40/  0% | ≥33 ev= 447 POD=1.00 FAR=0.41 fa%=32.7 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 1.1
+  C3                                 n=  960 bias=+1.79 MAE= 1.96 band=  79% hi/lo= 21/  0% | ≥33 ev= 447 POD=1.00 FAR=0.24 fa%=14.7 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.3
+  C4                                 n=  960 bias=+1.46 MAE= 1.95 band=  75% hi/lo= 24/  1% | ≥33 ev= 447 POD=0.98 FAR=0.29 fa%=18.4 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.3
+  C5                                 n=  960 bias=+1.37 MAE= 1.81 band=  79% hi/lo= 20/  1% | ≥33 ev= 447 POD=0.97 FAR=0.25 fa%=15.1 | ≥42 ev=   2 POD=0.50 FAR=0.89 fa%= 0.8
+  raw                                n=  960 bias=-1.94 MAE= 2.13 band=  68% hi/lo=  2/ 30% | ≥33 ev= 447 POD=0.55 FAR=0.03 fa%= 0.8 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n=  960 bias=+0.01 MAE= 1.50 band=  81% hi/lo= 10/ 10% | ≥33 ev= 447 POD=0.85 FAR=0.15 fa%= 6.9 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.2
+  clim                               n=0
+    ΔMAE C5 − C0 = -2.548 [90 %: -2.815, -2.356]
+    ΔMAE pers − C0 = -2.852 [90 %: -3.153, -2.678]
+
+  [earlier, D airports (METAR) | Mar–Oct]
+  C0                                 n= 1960 bias=+2.83 MAE= 3.08 band=  63% hi/lo= 35/  2% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 5.2 | ≥42 ev= 177 POD=0.82 FAR=0.81 fa%=31.4
+  C1                                 n= 1960 bias=+2.42 MAE= 2.76 band=  67% hi/lo= 30/  2% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 4.9 | ≥42 ev= 177 POD=0.79 FAR=0.79 fa%=26.2
+  C2                                 n= 1960 bias=+1.77 MAE= 2.28 band=  73% hi/lo= 22/  5% | ≥33 ev=1850 POD=1.00 FAR=0.04 fa%= 4.3 | ≥42 ev= 177 POD=0.56 FAR=0.78 fa%=18.4
+  C3                                 n= 1960 bias=+2.56 MAE= 2.83 band=  65% hi/lo= 33/  3% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 4.8 | ≥42 ev= 177 POD=0.74 FAR=0.81 fa%=28.9
+  C4                                 n= 1960 bias=+2.45 MAE= 2.79 band=  67% hi/lo= 31/  3% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 4.8 | ≥42 ev= 177 POD=0.74 FAR=0.80 fa%=26.9
+  C5                                 n= 1960 bias=+2.83 MAE= 3.08 band=  63% hi/lo= 35/  2% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 5.2 | ≥42 ev= 177 POD=0.82 FAR=0.81 fa%=31.4
+  raw                                n= 1960 bias=-2.73 MAE= 2.99 band=  74% hi/lo=  1/ 25% | ≥33 ev=1850 POD=0.85 FAR=0.01 fa%= 0.8 | ≥42 ev= 177 POD=0.05 FAR=0.33 fa%= 0.2
+  pers                               n= 1960 bias=+0.01 MAE= 1.90 band=  82% hi/lo=  9/  9% | ≥33 ev=1850 POD=0.96 FAR=0.04 fa%= 3.4 | ≥42 ev= 177 POD=0.50 FAR=0.51 fa%= 4.6
+  clim                               n= 1712 bias=+1.62 MAE= 2.54 band=  75% hi/lo= 19/  5% | ≥33 ev=1619 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 175 POD=0.61 FAR=0.71 fa%=15.1
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -1.182 [90 %: -1.349, -1.076]
+
+  made worse beyond chance, later period, C + D (61 stations): C5 vs C0 at 4; C0 vs C5 at 44
+    worse under C5: 48307 +22%, 48363 +15%, 48421 +29%, 48560 +23%
+    worse under C0: 48310 +25%, 48351 +53%, 48355 +41%, 48358 +91%, 48360 +32%, 48373 +35%, 48374 +30%, 48377 +44%, 48382 +35%, 48383 +65%, 48386 +11%, 48387 +14%, 48390 +53%, 48401 +60%, 48403 +42%, 48404 +70%, 48410 +47%, 48413 +41%, 48416 +77%, 48418 +24%, 48419 +33%, 48420 +46%, 48426 +52%, 48427 +40%, 48433 +76%, 48435 +37%, 48437 +24%, 48450 +34%, 48451 +47%, 48453 +31%, 48458 +31%, 48464 +36%, 48474 +48%, 48479 +49%, 48520 +76%, 48563 +59%, 48574 +13%, VTBD +23%, VTBS +22%, VTCC +38%, VTCT +39%, VTSS +24%, VTUD +37%, VTUU +46%
+
+  SHIP RULE day 1 for C5: (1) True (2) True (3) False → does not ship
+
+--- day 2: fitted on 3838 rows (A+B, 2024-10-01..2025-09-30)
+  C1: {"cool": -2.984, "rest": -0.366}
+  C2: {"North": -1.248, "Northeast": -2.066, "Central": -1.81, "East": -2.197, "South": 0.738}
+  C3: {"North|cool": -3.21, "North|rest": -0.487, "Northeast|rest": -1.086, "Northeast|cool": -3.498, "Central|rest": -0.527, "Central|cool": -3.817, "East|rest": -1.045, "East|cool": -3.632, "South|rest": 1.164, "South|cool": -0.166}
+  C4: {"11": -2.344, "12": -3.4, "1": -3.977, "2": -2.142, "3": -0.854, "4": 0.119, "5": 0.214, "6": -0.637, "7": -1.102, "8": -0.192, "10": 0.045, "9": -0.237}
+  C5: {"a": 0.933, "b": 1.075, "n": 1421}
+  leave-one-station-out MAE, fit period, all months: C0 2.813  C1 2.311  C2 2.564  C3 2.336  C4 2.278  C5 2.251
+  leave-one-station-out MAE, fit period, Nov–Feb:    C0 3.479  C1 2.087  C2 2.489  C3 1.976  C4 1.974  C5 1.959
+  chosen (lowest LOSO MAE among C1–C5): C5  (C0 2.813 → C5 2.251)
+
+  [fit period, A+B (in-sample) | all months]
+  C0                                 n= 3838 bias=+1.34 MAE= 2.81 band=  65% hi/lo= 26/  9% | ≥33 ev=3226 POD=1.00 FAR=0.14 fa%=14.2 | ≥42 ev=1099 POD=0.68 FAR=0.36 fa%=11.0
+  C1                                 n= 3838 bias=-0.00 MAE= 2.25 band=  73% hi/lo= 16/ 12% | ≥33 ev=3226 POD=0.98 FAR=0.07 fa%= 6.1 | ≥42 ev=1099 POD=0.64 FAR=0.31 fa%= 8.3
+  C2                                 n= 3838 bias=+0.00 MAE= 2.36 band=  70% hi/lo= 14/ 16% | ≥33 ev=3226 POD=1.00 FAR=0.10 fa%= 9.5 | ≥42 ev=1099 POD=0.45 FAR=0.22 fa%= 3.6
+  C3                                 n= 3838 bias=-0.00 MAE= 2.08 band=  75% hi/lo= 13/ 11% | ≥33 ev=3226 POD=0.99 FAR=0.05 fa%= 4.4 | ≥42 ev=1099 POD=0.65 FAR=0.29 fa%= 7.7
+  C4                                 n= 3838 bias=-0.00 MAE= 2.19 band=  74% hi/lo= 14/ 12% | ≥33 ev=3226 POD=0.98 FAR=0.06 fa%= 5.4 | ≥42 ev=1099 POD=0.64 FAR=0.30 fa%= 8.0
+  C5                                 n= 3838 bias=+0.23 MAE= 2.22 band=  73% hi/lo= 16/ 11% | ≥33 ev=3226 POD=0.98 FAR=0.06 fa%= 5.2 | ≥42 ev=1099 POD=0.68 FAR=0.34 fa%=10.2
+  raw                                n= 3838 bias=-4.38 MAE= 4.48 band=  50% hi/lo=  1/ 49% | ≥33 ev=3226 POD=0.75 FAR=0.01 fa%= 0.3 | ≥42 ev=1099 POD=0.02 FAR=0.07 fa%= 0.1
+  pers                               n= 3095 bias=-0.02 MAE= 2.63 band=  68% hi/lo= 16/ 16% | ≥33 ev=2545 POD=0.93 FAR=0.07 fa%= 5.9 | ≥42 ev= 837 POD=0.66 FAR=0.34 fa%= 9.0
+  clim                               n= 1261 bias=+0.81 MAE= 2.12 band=  71% hi/lo= 15/ 14% | ≥33 ev=1249 POD=1.00 FAR=0.01 fa%= 1.0 | ≥42 ev= 513 POD=0.67 FAR=0.34 fa%=14.2
+    ΔMAE C5 − C0 = -0.596 [90 %: -0.836, -0.383]
+    ΔMAE pers − C0 = -0.240 [90 %: -0.475, -0.013]
+
+  [fit period, A+B (in-sample) | Nov–Feb]
+  C0                                 n= 1421 bias=+2.98 MAE= 3.48 band=  60% hi/lo= 38/  2% | ≥33 ev= 878 POD=1.00 FAR=0.35 fa%=33.6 | ≥42 ev=  32 POD=0.19 FAR=0.85 fa%= 2.4
+  C1                                 n= 1421 bias=-0.00 MAE= 2.02 band=  80% hi/lo= 15/  5% | ≥33 ev= 878 POD=0.95 FAR=0.17 fa%=11.8 | ≥42 ev=  32 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 1421 bias=+1.54 MAE= 2.29 band=  73% hi/lo= 25/  2% | ≥33 ev= 878 POD=1.00 FAR=0.26 fa%=21.2 | ≥42 ev=  32 POD=0.09 FAR=0.67 fa%= 0.4
+  C3                                 n= 1421 bias=+0.00 MAE= 1.75 band=  84% hi/lo= 11/  5% | ≥33 ev= 878 POD=0.95 FAR=0.11 fa%= 7.4 | ≥42 ev=  32 POD=0.03 FAR=0.67 fa%= 0.1
+  C4                                 n= 1421 bias=+0.00 MAE= 1.90 band=  82% hi/lo= 13/  6% | ≥33 ev= 878 POD=0.94 FAR=0.15 fa%=10.0 | ≥42 ev=  32 POD=0.00 FAR=   - fa%= 0.0
+  C5                                 n= 1421 bias=-0.00 MAE= 1.87 band=  82% hi/lo= 11/  7% | ≥33 ev= 878 POD=0.93 FAR=0.14 fa%= 9.2 | ≥42 ev=  32 POD=0.09 FAR=0.50 fa%= 0.2
+  raw                                n= 1421 bias=-3.28 MAE= 3.35 band=  61% hi/lo=  0/ 39% | ≥33 ev= 878 POD=0.48 FAR=0.01 fa%= 0.2 | ≥42 ev=  32 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n= 1240 bias=+0.02 MAE= 2.61 band=  71% hi/lo= 15/ 15% | ≥33 ev= 749 POD=0.82 FAR=0.19 fa%=11.5 | ≥42 ev=  26 POD=0.46 FAR=0.59 fa%= 1.4
+  clim                               n=0
+    ΔMAE C5 − C0 = -1.610 [90 %: -2.024, -1.317]
+    ΔMAE pers − C0 = -0.957 [90 %: -1.425, -0.708]
+
+  [fit period, A+B (in-sample) | Mar–Oct]
+  C0                                 n= 2417 bias=+0.37 MAE= 2.42 band=  67% hi/lo= 19/ 14% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.8 | ≥42 ev=1067 POD=0.70 FAR=0.34 fa%=16.1
+  C1                                 n= 2417 bias=+0.00 MAE= 2.38 band=  68% hi/lo= 16/ 15% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.8 | ≥42 ev=1067 POD=0.66 FAR=0.31 fa%=13.1
+  C2                                 n= 2417 bias=-0.91 MAE= 2.40 band=  68% hi/lo=  8/ 24% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.6 | ≥42 ev=1067 POD=0.46 FAR=0.22 fa%= 5.5
+  C3                                 n= 2417 bias=-0.00 MAE= 2.27 band=  70% hi/lo= 15/ 15% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=1067 POD=0.66 FAR=0.29 fa%=12.1
+  C4                                 n= 2417 bias=-0.00 MAE= 2.37 band=  69% hi/lo= 15/ 15% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.8 | ≥42 ev=1067 POD=0.66 FAR=0.30 fa%=12.7
+  C5                                 n= 2417 bias=+0.37 MAE= 2.42 band=  67% hi/lo= 19/ 14% | ≥33 ev=2348 POD=1.00 FAR=0.03 fa%= 2.8 | ≥42 ev=1067 POD=0.70 FAR=0.34 fa%=16.1
+  raw                                n= 2417 bias=-5.02 MAE= 5.14 band=  44% hi/lo=  1/ 55% | ≥33 ev=2348 POD=0.85 FAR=0.00 fa%= 0.4 | ≥42 ev=1067 POD=0.03 FAR=0.07 fa%= 0.1
+  pers                               n= 1855 bias=-0.04 MAE= 2.64 band=  66% hi/lo= 16/ 18% | ≥33 ev=1796 POD=0.98 FAR=0.02 fa%= 2.2 | ≥42 ev= 811 POD=0.66 FAR=0.33 fa%=14.1
+  clim                               n= 1261 bias=+0.81 MAE= 2.12 band=  71% hi/lo= 15/ 14% | ≥33 ev=1249 POD=1.00 FAR=0.01 fa%= 1.0 | ≥42 ev= 513 POD=0.67 FAR=0.34 fa%=14.2
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = +0.240 [90 %: +0.086, +0.394]
+
+  [later, A+B | all months]
+  C0                                 n= 3914 bias=+1.19 MAE= 2.72 band=  66% hi/lo= 26/  8% | ≥33 ev=3324 POD=1.00 FAR=0.13 fa%=12.6 | ≥42 ev=1177 POD=0.74 FAR=0.36 fa%=12.3
+  C1                                 n= 3914 bias=+0.08 MAE= 2.22 band=  73% hi/lo= 16/ 11% | ≥33 ev=3324 POD=0.98 FAR=0.06 fa%= 4.9 | ≥42 ev=1177 POD=0.70 FAR=0.32 fa%= 9.7
+  C2                                 n= 3914 bias=-0.12 MAE= 2.39 band=  68% hi/lo= 16/ 16% | ≥33 ev=3324 POD=0.99 FAR=0.09 fa%= 8.8 | ≥42 ev=1177 POD=0.48 FAR=0.28 fa%= 5.6
+  C3                                 n= 3914 bias=+0.05 MAE= 2.13 band=  74% hi/lo= 15/ 11% | ≥33 ev=3324 POD=0.98 FAR=0.04 fa%= 3.3 | ≥42 ev=1177 POD=0.70 FAR=0.32 fa%=10.0
+  C4                                 n= 3914 bias=+0.09 MAE= 2.19 band=  72% hi/lo= 16/ 12% | ≥33 ev=3324 POD=0.96 FAR=0.05 fa%= 4.5 | ≥42 ev=1177 POD=0.71 FAR=0.32 fa%=10.1
+  C5                                 n= 3914 bias=+0.25 MAE= 2.19 band=  72% hi/lo= 17/ 11% | ≥33 ev=3324 POD=0.97 FAR=0.05 fa%= 4.1 | ≥42 ev=1177 POD=0.73 FAR=0.36 fa%=12.2
+  raw                                n= 3914 bias=-4.50 MAE= 4.57 band=  49% hi/lo=  0/ 51% | ≥33 ev=3324 POD=0.76 FAR=0.00 fa%= 0.3 | ≥42 ev=1177 POD=0.03 FAR=0.00 fa%= 0.0
+  pers                               n= 3120 bias=+0.01 MAE= 2.13 band=  74% hi/lo= 13/ 13% | ≥33 ev=2602 POD=0.95 FAR=0.05 fa%= 4.6 | ≥42 ev= 906 POD=0.77 FAR=0.24 fa%= 7.1
+  clim                               n= 3277 bias=-0.16 MAE= 2.52 band=  67% hi/lo= 14/ 19% | ≥33 ev=2805 POD=0.94 FAR=0.08 fa%= 6.6 | ≥42 ev=1053 POD=0.57 FAR=0.27 fa%= 6.8
+    ΔMAE C5 − C0 = -0.526 [90 %: -0.764, -0.313]
+    ΔMAE pers − C0 = -0.648 [90 %: -0.847, -0.464]
+
+  [later, A+B | Nov–Feb]
+  C0                                 n= 1113 bias=+3.19 MAE= 3.50 band=  55% hi/lo= 43/  1% | ≥33 ev= 581 POD=0.99 FAR=0.43 fa%=39.4 | ≥42 ev=  11 POD=0.09 FAR=0.67 fa%= 0.2
+  C1                                 n= 1113 bias=+0.21 MAE= 1.86 band=  77% hi/lo= 17/  7% | ≥33 ev= 581 POD=0.89 FAR=0.21 fa%=12.2 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 1113 bias=+1.65 MAE= 2.20 band=  66% hi/lo= 31/  2% | ≥33 ev= 581 POD=0.97 FAR=0.34 fa%=26.5 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C3                                 n= 1113 bias=+0.04 MAE= 1.59 band=  80% hi/lo= 12/  8% | ≥33 ev= 581 POD=0.87 FAR=0.14 fa%= 7.1 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C4                                 n= 1113 bias=+0.03 MAE= 1.84 band=  73% hi/lo= 16/ 11% | ≥33 ev= 581 POD=0.81 FAR=0.20 fa%=10.7 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  C5                                 n= 1113 bias=-0.11 MAE= 1.65 band=  79% hi/lo= 12/  9% | ≥33 ev= 581 POD=0.85 FAR=0.17 fa%= 9.3 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  raw                                n= 1113 bias=-3.29 MAE= 3.33 band=  51% hi/lo=  0/ 48% | ≥33 ev= 581 POD=0.25 FAR=0.01 fa%= 0.1 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n=  967 bias=-0.08 MAE= 2.27 band=  68% hi/lo= 15/ 17% | ≥33 ev= 493 POD=0.76 FAR=0.23 fa%=11.7 | ≥42 ev=   8 POD=0.25 FAR=0.67 fa%= 0.4
+  clim                               n=  998 bias=+0.40 MAE= 2.85 band=  62% hi/lo= 20/ 18% | ≥33 ev= 555 POD=0.71 FAR=0.32 fa%=18.7 | ≥42 ev=  11 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -1.849 [90 %: -2.265, -1.547]
+    ΔMAE pers − C0 = -1.307 [90 %: -1.724, -0.961]
+
+  [later, A+B | Mar–Oct]
+  C0                                 n= 2801 bias=+0.39 MAE= 2.41 band=  70% hi/lo= 19/ 11% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=1166 POD=0.74 FAR=0.36 fa%=17.1
+  C1                                 n= 2801 bias=+0.03 MAE= 2.36 band=  72% hi/lo= 16/ 13% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.9 | ≥42 ev=1166 POD=0.70 FAR=0.32 fa%=13.5
+  C2                                 n= 2801 bias=-0.82 MAE= 2.47 band=  68% hi/lo= 10/ 22% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.7 | ≥42 ev=1166 POD=0.49 FAR=0.28 fa%= 7.8
+  C3                                 n= 2801 bias=+0.06 MAE= 2.34 band=  72% hi/lo= 16/ 12% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 1.9 | ≥42 ev=1166 POD=0.71 FAR=0.32 fa%=14.0
+  C4                                 n= 2801 bias=+0.12 MAE= 2.34 band=  72% hi/lo= 16/ 12% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=1166 POD=0.71 FAR=0.32 fa%=14.1
+  C5                                 n= 2801 bias=+0.39 MAE= 2.41 band=  70% hi/lo= 19/ 11% | ≥33 ev=2743 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=1166 POD=0.74 FAR=0.36 fa%=17.1
+  raw                                n= 2801 bias=-4.98 MAE= 5.07 band=  48% hi/lo=  0/ 52% | ≥33 ev=2743 POD=0.87 FAR=0.00 fa%= 0.4 | ≥42 ev=1166 POD=0.03 FAR=0.00 fa%= 0.0
+  pers                               n= 2153 bias=+0.05 MAE= 2.06 band=  77% hi/lo= 12/ 11% | ≥33 ev=2109 POD=0.99 FAR=0.01 fa%= 1.4 | ≥42 ev= 898 POD=0.77 FAR=0.24 fa%=10.1
+  clim                               n= 2279 bias=-0.41 MAE= 2.37 band=  69% hi/lo= 12/ 19% | ≥33 ev=2250 POD=1.00 FAR=0.01 fa%= 1.3 | ≥42 ev=1042 POD=0.57 FAR=0.27 fa%= 9.7
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.352 [90 %: -0.472, -0.232]
+
+  [later, C (disjoint) | all months]
+  C0                                 n=11327 bias=+1.67 MAE= 2.90 band=  61% hi/lo= 32/  7% | ≥33 ev=9074 POD=1.00 FAR=0.17 fa%=16.3 | ≥42 ev=3038 POD=0.73 FAR=0.41 fa%=13.6
+  C1                                 n=11327 bias=+0.46 MAE= 2.24 band=  71% hi/lo= 19/ 10% | ≥33 ev=9074 POD=0.98 FAR=0.07 fa%= 6.2 | ≥42 ev=3038 POD=0.68 FAR=0.38 fa%=11.0
+  C2                                 n=11327 bias=+0.17 MAE= 2.48 band=  66% hi/lo= 20/ 15% | ≥33 ev=9074 POD=0.99 FAR=0.13 fa%=11.3 | ≥42 ev=3038 POD=0.49 FAR=0.32 fa%= 6.1
+  C3                                 n=11327 bias=+0.29 MAE= 2.21 band=  72% hi/lo= 17/ 12% | ≥33 ev=9074 POD=0.97 FAR=0.06 fa%= 4.7 | ≥42 ev=3038 POD=0.67 FAR=0.36 fa%=10.3
+  C4                                 n=11327 bias=+0.47 MAE= 2.22 band=  71% hi/lo= 19/ 11% | ≥33 ev=9074 POD=0.97 FAR=0.06 fa%= 5.3 | ≥42 ev=3038 POD=0.70 FAR=0.38 fa%=11.3
+  C5                                 n=11327 bias=+0.58 MAE= 2.23 band=  70% hi/lo= 20/ 10% | ≥33 ev=9074 POD=0.97 FAR=0.06 fa%= 5.0 | ≥42 ev=3038 POD=0.73 FAR=0.41 fa%=13.5
+  raw                                n=11327 bias=-4.09 MAE= 4.21 band=  51% hi/lo=  1/ 48% | ≥33 ev=9074 POD=0.76 FAR=0.01 fa%= 0.4 | ≥42 ev=3038 POD=0.03 FAR=0.09 fa%= 0.1
+  pers                               n= 8864 bias=+0.02 MAE= 2.10 band=  73% hi/lo= 13/ 13% | ≥33 ev=6943 POD=0.93 FAR=0.07 fa%= 5.2 | ≥42 ev=2338 POD=0.74 FAR=0.26 fa%= 6.9
+  clim                               n=10208 bias=+0.01 MAE= 2.34 band=  70% hi/lo= 15/ 15% | ≥33 ev=8084 POD=0.94 FAR=0.10 fa%= 7.9 | ≥42 ev=2670 POD=0.58 FAR=0.28 fa%= 5.8
+    ΔMAE C5 − C0 = -0.675 [90 %: -0.940, -0.417]
+    ΔMAE pers − C0 = -0.864 [90 %: -1.067, -0.669]
+
+  [later, C (disjoint) | Nov–Feb]
+  C0                                 n= 3658 bias=+3.49 MAE= 3.68 band=  49% hi/lo= 50/  1% | ≥33 ev=1624 POD=1.00 FAR=0.50 fa%=44.7 | ≥42 ev=  29 POD=0.07 FAR=0.85 fa%= 0.3
+  C1                                 n= 3658 bias=+0.51 MAE= 1.77 band=  76% hi/lo= 19/  5% | ≥33 ev=1624 POD=0.90 FAR=0.25 fa%=13.5 | ≥42 ev=  29 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 3658 bias=+1.96 MAE= 2.44 band=  63% hi/lo= 36/  1% | ≥33 ev=1624 POD=0.98 FAR=0.41 fa%=30.0 | ≥42 ev=  29 POD=0.17 FAR=0.50 fa%= 0.1
+  C3                                 n= 3658 bias=+0.34 MAE= 1.72 band=  78% hi/lo= 14/  8% | ≥33 ev=1624 POD=0.85 FAR=0.19 fa%= 9.0 | ≥42 ev=  29 POD=0.00 FAR=   - fa%= 0.0
+  C4                                 n= 3658 bias=+0.31 MAE= 1.74 band=  75% hi/lo= 16/  8% | ≥33 ev=1624 POD=0.84 FAR=0.22 fa%=10.8 | ≥42 ev=  29 POD=0.00 FAR=   - fa%= 0.0
+  C5                                 n= 3658 bias=+0.10 MAE= 1.59 band=  78% hi/lo= 13/  9% | ≥33 ev=1624 POD=0.85 FAR=0.21 fa%= 9.9 | ≥42 ev=  29 POD=0.00 FAR=1.00 fa%= 0.0
+  raw                                n= 3658 bias=-3.06 MAE= 3.11 band=  55% hi/lo=  0/ 45% | ≥33 ev=1624 POD=0.26 FAR=0.01 fa%= 0.1 | ≥42 ev=  29 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n= 3100 bias=+0.02 MAE= 2.26 band=  68% hi/lo= 16/ 16% | ≥33 ev=1335 POD=0.72 FAR=0.28 fa%=11.9 | ≥42 ev=  23 POD=0.26 FAR=0.74 fa%= 0.5
+  clim                               n= 3514 bias=+0.52 MAE= 2.62 band=  64% hi/lo= 22/ 13% | ≥33 ev=1527 POD=0.71 FAR=0.38 fa%=19.0 | ≥42 ev=  23 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -2.091 [90 %: -2.392, -1.821]
+    ΔMAE pers − C0 = -1.493 [90 %: -1.865, -1.109]
+
+  [later, C (disjoint) | Mar–Oct]
+  C0                                 n= 7669 bias=+0.80 MAE= 2.54 band=  67% hi/lo= 23/ 10% | ≥33 ev=7450 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=3009 POD=0.74 FAR=0.41 fa%=19.9
+  C1                                 n= 7669 bias=+0.44 MAE= 2.46 band=  68% hi/lo= 19/ 13% | ≥33 ev=7450 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=3009 POD=0.68 FAR=0.38 fa%=16.2
+  C2                                 n= 7669 bias=-0.68 MAE= 2.50 band=  67% hi/lo= 12/ 21% | ≥33 ev=7450 POD=0.99 FAR=0.02 fa%= 2.4 | ≥42 ev=3009 POD=0.49 FAR=0.32 fa%= 9.0
+  C3                                 n= 7669 bias=+0.27 MAE= 2.45 band=  69% hi/lo= 18/ 13% | ≥33 ev=7450 POD=0.99 FAR=0.03 fa%= 2.6 | ≥42 ev=3009 POD=0.68 FAR=0.36 fa%=15.2
+  C4                                 n= 7669 bias=+0.54 MAE= 2.45 band=  68% hi/lo= 20/ 12% | ≥33 ev=7450 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=3009 POD=0.71 FAR=0.38 fa%=16.7
+  C5                                 n= 7669 bias=+0.80 MAE= 2.54 band=  67% hi/lo= 23/ 10% | ≥33 ev=7450 POD=1.00 FAR=0.03 fa%= 2.7 | ≥42 ev=3009 POD=0.74 FAR=0.41 fa%=19.9
+  raw                                n= 7669 bias=-4.58 MAE= 4.74 band=  50% hi/lo=  1/ 49% | ≥33 ev=7450 POD=0.87 FAR=0.01 fa%= 0.5 | ≥42 ev=3009 POD=0.03 FAR=0.09 fa%= 0.1
+  pers                               n= 5764 bias=+0.03 MAE= 2.01 band=  76% hi/lo= 12/ 12% | ≥33 ev=5608 POD=0.99 FAR=0.02 fa%= 1.6 | ≥42 ev=2315 POD=0.74 FAR=0.26 fa%=10.3
+  clim                               n= 6694 bias=-0.25 MAE= 2.19 band=  72% hi/lo= 11/ 17% | ≥33 ev=6557 POD=1.00 FAR=0.02 fa%= 2.0 | ≥42 ev=2647 POD=0.59 FAR=0.28 fa%= 8.9
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.526 [90 %: -0.648, -0.409]
+
+  [earlier, C (disjoint) | all months]
+  C0                                 n=12402 bias=+1.96 MAE= 2.93 band=  62% hi/lo= 32/  6% | ≥33 ev=9806 POD=1.00 FAR=0.18 fa%=17.4 | ≥42 ev=2836 POD=0.72 FAR=0.44 fa%=12.8
+  C1                                 n=12402 bias=+0.58 MAE= 2.15 band=  72% hi/lo= 19/  9% | ≥33 ev=9806 POD=0.98 FAR=0.08 fa%= 6.9 | ≥42 ev=2836 POD=0.66 FAR=0.40 fa%=10.0
+  C2                                 n=12402 bias=+0.48 MAE= 2.38 band=  69% hi/lo= 19/ 12% | ≥33 ev=9806 POD=0.99 FAR=0.13 fa%=11.7 | ≥42 ev=2836 POD=0.50 FAR=0.33 fa%= 5.5
+  C3                                 n=12402 bias=+0.42 MAE= 2.12 band=  73% hi/lo= 17/ 10% | ≥33 ev=9806 POD=0.97 FAR=0.07 fa%= 5.7 | ≥42 ev=2836 POD=0.66 FAR=0.40 fa%= 9.8
+  C4                                 n=12402 bias=+0.57 MAE= 2.10 band=  73% hi/lo= 17/ 10% | ≥33 ev=9806 POD=0.98 FAR=0.08 fa%= 6.4 | ≥42 ev=2836 POD=0.67 FAR=0.38 fa%= 9.5
+  C5                                 n=12402 bias=+0.73 MAE= 2.14 band=  72% hi/lo= 19/  9% | ≥33 ev=9806 POD=0.98 FAR=0.07 fa%= 5.9 | ≥42 ev=2836 POD=0.72 FAR=0.43 fa%=12.2
+  raw                                n=12402 bias=-3.83 MAE= 3.98 band=  55% hi/lo=  1/ 44% | ≥33 ev=9806 POD=0.76 FAR=0.01 fa%= 0.6 | ≥42 ev=2836 POD=0.03 FAR=0.07 fa%= 0.0
+  pers                               n=10150 bias=-0.00 MAE= 2.57 band=  68% hi/lo= 15/ 16% | ≥33 ev=7857 POD=0.91 FAR=0.09 fa%= 6.9 | ≥42 ev=2192 POD=0.64 FAR=0.36 fa%= 7.8
+  clim                               n= 3900 bias=+1.09 MAE= 2.11 band=  71% hi/lo= 20/  8% | ≥33 ev=3806 POD=1.00 FAR=0.02 fa%= 1.6 | ≥42 ev=1399 POD=0.78 FAR=0.41 fa%=19.1
+    ΔMAE C5 − C0 = -0.783 [90 %: -1.060, -0.537]
+    ΔMAE pers − C0 = -0.419 [90 %: -0.702, -0.132]
+
+  [earlier, C (disjoint) | Nov–Feb]
+  C0                                 n= 4813 bias=+3.45 MAE= 3.66 band=  55% hi/lo= 44/  1% | ≥33 ev=2534 POD=1.00 FAR=0.42 fa%=38.6 | ≥42 ev=  74 POD=0.39 FAR=0.76 fa%= 1.9
+  C1                                 n= 4813 bias=+0.47 MAE= 1.81 band=  79% hi/lo= 16/  5% | ≥33 ev=2534 POD=0.94 FAR=0.19 fa%=11.5 | ≥42 ev=  74 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n= 4813 bias=+1.93 MAE= 2.46 band=  68% hi/lo= 30/  2% | ≥33 ev=2534 POD=0.99 FAR=0.32 fa%=24.4 | ≥42 ev=  74 POD=0.18 FAR=0.75 fa%= 0.8
+  C3                                 n= 4813 bias=+0.29 MAE= 1.78 band=  81% hi/lo= 13/  7% | ≥33 ev=2534 POD=0.90 FAR=0.15 fa%= 8.5 | ≥42 ev=  74 POD=0.01 FAR=0.90 fa%= 0.2
+  C4                                 n= 4813 bias=+0.44 MAE= 1.71 band=  80% hi/lo= 14/  6% | ≥33 ev=2534 POD=0.92 FAR=0.17 fa%=10.2 | ≥42 ev=  74 POD=0.01 FAR=0.00 fa%= 0.0
+  C5                                 n= 4813 bias=+0.29 MAE= 1.64 band=  81% hi/lo= 12/  8% | ≥33 ev=2534 POD=0.91 FAR=0.16 fa%= 8.8 | ≥42 ev=  74 POD=0.18 FAR=0.48 fa%= 0.2
+  raw                                n= 4813 bias=-2.94 MAE= 3.05 band=  60% hi/lo=  1/ 39% | ≥33 ev=2534 POD=0.48 FAR=0.01 fa%= 0.3 | ≥42 ev=  74 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n= 4186 bias=+0.05 MAE= 2.56 band=  67% hi/lo= 17/ 16% | ≥33 ev=2152 POD=0.77 FAR=0.24 fa%=12.5 | ≥42 ev=  52 POD=0.27 FAR=0.78 fa%= 1.2
+  clim                               n=   59 bias=+2.73 MAE= 2.97 band=  66% hi/lo= 32/  2% | ≥33 ev=  16 POD=0.94 FAR=0.46 fa%=22.0 | ≥42 ev=   0 POD=   - FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -2.019 [90 %: -2.356, -1.766]
+    ΔMAE pers − C0 = -1.159 [90 %: -1.683, -0.897]
+
+  [earlier, C (disjoint) | Mar–Oct]
+  C0                                 n= 7589 bias=+1.01 MAE= 2.46 band=  66% hi/lo= 24/ 10% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 4.0 | ≥42 ev=2762 POD=0.73 FAR=0.43 fa%=19.7
+  C1                                 n= 7589 bias=+0.64 MAE= 2.36 band=  68% hi/lo= 20/ 12% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 4.0 | ≥42 ev=2762 POD=0.68 FAR=0.40 fa%=16.3
+  C2                                 n= 7589 bias=-0.45 MAE= 2.34 band=  69% hi/lo= 12/ 19% | ≥33 ev=7272 POD=0.99 FAR=0.04 fa%= 3.6 | ≥42 ev=2762 POD=0.50 FAR=0.32 fa%= 8.5
+  C3                                 n= 7589 bias=+0.50 MAE= 2.33 band=  68% hi/lo= 20/ 12% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 3.9 | ≥42 ev=2762 POD=0.67 FAR=0.39 fa%=16.0
+  C4                                 n= 7589 bias=+0.66 MAE= 2.34 band=  69% hi/lo= 20/ 12% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 4.0 | ≥42 ev=2762 POD=0.69 FAR=0.38 fa%=15.5
+  C5                                 n= 7589 bias=+1.01 MAE= 2.46 band=  66% hi/lo= 24/ 10% | ≥33 ev=7272 POD=1.00 FAR=0.04 fa%= 4.0 | ≥42 ev=2762 POD=0.73 FAR=0.43 fa%=19.7
+  raw                                n= 7589 bias=-4.39 MAE= 4.57 band=  52% hi/lo=  1/ 47% | ≥33 ev=7272 POD=0.86 FAR=0.01 fa%= 0.7 | ≥42 ev=2762 POD=0.03 FAR=0.07 fa%= 0.1
+  pers                               n= 5964 bias=-0.04 MAE= 2.58 band=  70% hi/lo= 15/ 16% | ≥33 ev=5705 POD=0.97 FAR=0.03 fa%= 2.9 | ≥42 ev=2140 POD=0.65 FAR=0.35 fa%=12.4
+  clim                               n= 3841 bias=+1.07 MAE= 2.10 band=  71% hi/lo= 20/  8% | ≥33 ev=3790 POD=1.00 FAR=0.01 fa%= 1.3 | ≥42 ev=1399 POD=0.78 FAR=0.41 fa%=19.4
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = +0.100 [90 %: -0.113, +0.325]
+
+  [later, D airports (METAR) | all months]
+  C0                                 n= 3104 bias=+3.12 MAE= 3.41 band=  57% hi/lo= 41/  2% | ≥33 ev=2463 POD=1.00 FAR=0.18 fa%=17.4 | ≥42 ev= 226 POD=0.81 FAR=0.80 fa%=22.9
+  C1                                 n= 3104 bias=+1.94 MAE= 2.49 band=  69% hi/lo= 28/  3% | ≥33 ev=2463 POD=0.99 FAR=0.10 fa%= 8.8 | ≥42 ev= 226 POD=0.76 FAR=0.77 fa%=18.1
+  C2                                 n= 3104 bias=+2.02 MAE= 2.57 band=  68% hi/lo= 27/  5% | ≥33 ev=2463 POD=1.00 FAR=0.14 fa%=13.2 | ≥42 ev= 226 POD=0.48 FAR=0.77 fa%=12.0
+  C3                                 n= 3104 bias=+2.13 MAE= 2.53 band=  70% hi/lo= 27/  3% | ≥33 ev=2463 POD=1.00 FAR=0.08 fa%= 7.3 | ≥42 ev= 226 POD=0.73 FAR=0.78 fa%=19.0
+  C4                                 n= 3104 bias=+1.99 MAE= 2.51 band=  69% hi/lo= 29/  3% | ≥33 ev=2463 POD=0.99 FAR=0.10 fa%= 8.3 | ≥42 ev= 226 POD=0.77 FAR=0.77 fa%=19.1
+  C5                                 n= 3104 bias=+2.12 MAE= 2.60 band=  67% hi/lo= 30/  3% | ≥33 ev=2463 POD=0.99 FAR=0.09 fa%= 7.7 | ≥42 ev= 226 POD=0.81 FAR=0.79 fa%=22.1
+  raw                                n= 3104 bias=-2.66 MAE= 2.88 band=  69% hi/lo=  1/ 29% | ≥33 ev=2463 POD=0.77 FAR=0.01 fa%= 0.9 | ≥42 ev= 226 POD=0.05 FAR=0.40 fa%= 0.3
+  pers                               n= 3104 bias=-0.02 MAE= 2.04 band=  78% hi/lo= 11/ 11% | ≥33 ev=2463 POD=0.93 FAR=0.07 fa%= 5.2 | ≥42 ev= 226 POD=0.51 FAR=0.48 fa%= 3.5
+  clim                               n= 3104 bias=-0.20 MAE= 2.10 band=  78% hi/lo=  9/ 14% | ≥33 ev=2463 POD=0.95 FAR=0.08 fa%= 6.9 | ≥42 ev= 226 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -0.807 [90 %: -1.119, -0.534]
+    ΔMAE pers − C0 = -1.364 [90 %: -1.613, -1.155]
+
+  [later, D airports (METAR) | Nov–Feb]
+  C0                                 n=  960 bias=+4.23 MAE= 4.34 band=  46% hi/lo= 53/  0% | ≥33 ev= 439 POD=1.00 FAR=0.49 fa%=43.9 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 3.2
+  C1                                 n=  960 bias=+1.25 MAE= 1.97 band=  75% hi/lo= 23/  2% | ≥33 ev= 439 POD=0.96 FAR=0.27 fa%=16.2 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n=  960 bias=+3.14 MAE= 3.26 band=  60% hi/lo= 40/  0% | ≥33 ev= 439 POD=0.99 FAR=0.41 fa%=31.2 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 1.7
+  C3                                 n=  960 bias=+1.56 MAE= 1.96 band=  80% hi/lo= 19/  1% | ≥33 ev= 439 POD=0.98 FAR=0.21 fa%=11.7 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.5
+  C4                                 n=  960 bias=+1.24 MAE= 1.91 band=  76% hi/lo= 21/  2% | ≥33 ev= 439 POD=0.95 FAR=0.26 fa%=14.9 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.3
+  C5                                 n=  960 bias=+1.01 MAE= 1.72 band=  79% hi/lo= 18/  3% | ≥33 ev= 439 POD=0.95 FAR=0.23 fa%=12.6 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.7
+  raw                                n=  960 bias=-2.20 MAE= 2.31 band=  63% hi/lo=  1/ 36% | ≥33 ev= 439 POD=0.44 FAR=0.01 fa%= 0.2 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n=  960 bias=-0.02 MAE= 1.99 band=  74% hi/lo= 13/ 13% | ≥33 ev= 439 POD=0.80 FAR=0.19 fa%= 8.9 | ≥42 ev=   1 POD=0.00 FAR=1.00 fa%= 0.1
+  clim                               n=  960 bias=+0.16 MAE= 2.27 band=  70% hi/lo= 15/ 15% | ≥33 ev= 439 POD=0.73 FAR=0.22 fa%= 9.7 | ≥42 ev=   1 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = -2.610 [90 %: -2.970, -2.360]
+    ΔMAE pers − C0 = -2.344 [90 %: -2.834, -1.976]
+
+  [later, D airports (METAR) | Mar–Oct]
+  C0                                 n= 2144 bias=+2.62 MAE= 2.99 band=  62% hi/lo= 36/  3% | ≥33 ev=2024 POD=1.00 FAR=0.06 fa%= 5.5 | ≥42 ev= 225 POD=0.81 FAR=0.79 fa%=31.7
+  C1                                 n= 2144 bias=+2.25 MAE= 2.73 band=  67% hi/lo= 30/  3% | ≥33 ev=2024 POD=1.00 FAR=0.06 fa%= 5.5 | ≥42 ev= 225 POD=0.76 FAR=0.77 fa%=26.3
+  C2                                 n= 2144 bias=+1.52 MAE= 2.26 band=  72% hi/lo= 21/  7% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.1 | ≥42 ev= 225 POD=0.48 FAR=0.77 fa%=16.6
+  C3                                 n= 2144 bias=+2.39 MAE= 2.79 band=  65% hi/lo= 31/  3% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 225 POD=0.73 FAR=0.78 fa%=27.2
+  C4                                 n= 2144 bias=+2.32 MAE= 2.77 band=  65% hi/lo= 32/  3% | ≥33 ev=2024 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 225 POD=0.78 FAR=0.77 fa%=27.5
+  C5                                 n= 2144 bias=+2.62 MAE= 2.99 band=  62% hi/lo= 36/  3% | ≥33 ev=2024 POD=1.00 FAR=0.06 fa%= 5.5 | ≥42 ev= 225 POD=0.81 FAR=0.79 fa%=31.7
+  raw                                n= 2144 bias=-2.86 MAE= 3.13 band=  72% hi/lo=  2/ 26% | ≥33 ev=2024 POD=0.84 FAR=0.01 fa%= 1.2 | ≥42 ev= 225 POD=0.05 FAR=0.40 fa%= 0.4
+  pers                               n= 2144 bias=-0.03 MAE= 2.07 band=  80% hi/lo= 10/ 10% | ≥33 ev=2024 POD=0.96 FAR=0.04 fa%= 3.6 | ≥42 ev= 225 POD=0.51 FAR=0.48 fa%= 5.0
+  clim                               n= 2144 bias=-0.37 MAE= 2.02 band=  82% hi/lo=  6/ 13% | ≥33 ev=2024 POD=1.00 FAR=0.06 fa%= 5.6 | ≥42 ev= 225 POD=0.00 FAR=   - fa%= 0.0
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.924 [90 %: -1.109, -0.780]
+
+  [earlier, D airports (METAR) | all months]
+  C0                                 n= 2920 bias=+3.41 MAE= 3.62 band=  57% hi/lo= 41/  1% | ≥33 ev=2297 POD=1.00 FAR=0.19 fa%=17.9 | ≥42 ev= 179 POD=0.81 FAR=0.82 fa%=22.4
+  C1                                 n= 2920 bias=+2.18 MAE= 2.61 band=  68% hi/lo= 29/  2% | ≥33 ev=2297 POD=1.00 FAR=0.12 fa%=10.3 | ≥42 ev= 179 POD=0.77 FAR=0.79 fa%=17.6
+  C2                                 n= 2920 bias=+2.31 MAE= 2.72 band=  68% hi/lo= 28/  4% | ≥33 ev=2297 POD=1.00 FAR=0.16 fa%=14.6 | ≥42 ev= 179 POD=0.50 FAR=0.79 fa%=11.6
+  C3                                 n= 2920 bias=+2.37 MAE= 2.64 band=  69% hi/lo= 29/  2% | ≥33 ev=2297 POD=1.00 FAR=0.10 fa%= 8.4 | ≥42 ev= 179 POD=0.73 FAR=0.81 fa%=18.7
+  C4                                 n= 2920 bias=+2.20 MAE= 2.63 band=  69% hi/lo= 29/  2% | ≥33 ev=2297 POD=0.99 FAR=0.11 fa%= 9.9 | ≥42 ev= 179 POD=0.74 FAR=0.80 fa%=18.1
+  C5                                 n= 2920 bias=+2.39 MAE= 2.74 band=  67% hi/lo= 31/  2% | ≥33 ev=2297 POD=0.99 FAR=0.10 fa%= 8.8 | ≥42 ev= 179 POD=0.81 FAR=0.81 fa%=21.6
+  raw                                n= 2920 bias=-2.35 MAE= 2.67 band=  72% hi/lo=  2/ 26% | ≥33 ev=2297 POD=0.79 FAR=0.02 fa%= 1.2 | ≥42 ev= 179 POD=0.03 FAR=0.60 fa%= 0.3
+  pers                               n= 2920 bias=+0.03 MAE= 2.32 band=  75% hi/lo= 12/ 12% | ≥33 ev=2297 POD=0.92 FAR=0.08 fa%= 6.2 | ≥42 ev= 179 POD=0.41 FAR=0.60 fa%= 3.8
+  clim                               n= 1712 bias=+1.62 MAE= 2.54 band=  75% hi/lo= 19/  5% | ≥33 ev=1619 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 175 POD=0.61 FAR=0.71 fa%=15.1
+    ΔMAE C5 − C0 = -0.887 [90 %: -1.203, -0.616]
+    ΔMAE pers − C0 = -1.308 [90 %: -1.534, -1.110]
+
+  [earlier, D airports (METAR) | Nov–Feb]
+  C0                                 n=  960 bias=+4.49 MAE= 4.54 band=  47% hi/lo= 53/  0% | ≥33 ev= 447 POD=1.00 FAR=0.48 fa%=43.6 | ≥42 ev=   2 POD=1.00 FAR=0.94 fa%= 3.2
+  C1                                 n=  960 bias=+1.51 MAE= 2.02 band=  72% hi/lo= 27/  1% | ≥33 ev= 447 POD=0.98 FAR=0.31 fa%=20.4 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+  C2                                 n=  960 bias=+3.39 MAE= 3.43 band=  58% hi/lo= 41/  0% | ≥33 ev= 447 POD=1.00 FAR=0.42 fa%=34.4 | ≥42 ev=   2 POD=0.50 FAR=0.88 fa%= 0.7
+  C3                                 n=  960 bias=+1.82 MAE= 2.00 band=  78% hi/lo= 21/  0% | ≥33 ev= 447 POD=1.00 FAR=0.24 fa%=14.9 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+  C4                                 n=  960 bias=+1.50 MAE= 2.00 band=  73% hi/lo= 25/  1% | ≥33 ev= 447 POD=0.98 FAR=0.30 fa%=19.6 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.2
+  C5                                 n=  960 bias=+1.40 MAE= 1.85 band=  78% hi/lo= 21/  1% | ≥33 ev= 447 POD=0.98 FAR=0.26 fa%=15.7 | ≥42 ev=   2 POD=1.00 FAR=0.78 fa%= 0.7
+  raw                                n=  960 bias=-1.85 MAE= 2.07 band=  71% hi/lo=  1/ 28% | ≥33 ev= 447 POD=0.58 FAR=0.03 fa%= 0.8 | ≥42 ev=   2 POD=0.00 FAR=   - fa%= 0.0
+  pers                               n=  960 bias=+0.02 MAE= 2.24 band=  71% hi/lo= 14/ 15% | ≥33 ev= 447 POD=0.79 FAR=0.21 fa%= 9.8 | ≥42 ev=   2 POD=0.00 FAR=1.00 fa%= 0.2
+  clim                               n=0
+    ΔMAE C5 − C0 = -2.697 [90 %: -2.984, -2.509]
+    ΔMAE pers − C0 = -2.301 [90 %: -2.680, -2.135]
+
+  [earlier, D airports (METAR) | Mar–Oct]
+  C0                                 n= 1960 bias=+2.88 MAE= 3.17 band=  62% hi/lo= 36/  2% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 177 POD=0.81 FAR=0.81 fa%=31.8
+  C1                                 n= 1960 bias=+2.51 MAE= 2.90 band=  67% hi/lo= 31/  3% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 5.3 | ≥42 ev= 177 POD=0.77 FAR=0.79 fa%=26.2
+  C2                                 n= 1960 bias=+1.78 MAE= 2.37 band=  73% hi/lo= 21/  6% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 4.8 | ≥42 ev= 177 POD=0.50 FAR=0.79 fa%=16.9
+  C3                                 n= 1960 bias=+2.64 MAE= 2.96 band=  65% hi/lo= 32/  3% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 5.3 | ≥42 ev= 177 POD=0.74 FAR=0.81 fa%=27.8
+  C4                                 n= 1960 bias=+2.55 MAE= 2.94 band=  66% hi/lo= 31/  3% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 5.2 | ≥42 ev= 177 POD=0.75 FAR=0.80 fa%=26.9
+  C5                                 n= 1960 bias=+2.88 MAE= 3.17 band=  62% hi/lo= 36/  2% | ≥33 ev=1850 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 177 POD=0.81 FAR=0.81 fa%=31.8
+  raw                                n= 1960 bias=-2.60 MAE= 2.96 band=  73% hi/lo=  2/ 25% | ≥33 ev=1850 POD=0.85 FAR=0.02 fa%= 1.3 | ≥42 ev= 177 POD=0.03 FAR=0.60 fa%= 0.5
+  pers                               n= 1960 bias=+0.04 MAE= 2.35 band=  78% hi/lo= 11/ 11% | ≥33 ev=1850 POD=0.96 FAR=0.05 fa%= 4.4 | ≥42 ev= 177 POD=0.41 FAR=0.60 fa%= 5.6
+  clim                               n= 1712 bias=+1.62 MAE= 2.54 band=  75% hi/lo= 19/  5% | ≥33 ev=1619 POD=1.00 FAR=0.05 fa%= 5.4 | ≥42 ev= 175 POD=0.61 FAR=0.71 fa%=15.1
+    ΔMAE C5 − C0 = +0.000 [90 %: +0.000, +0.000]
+    ΔMAE pers − C0 = -0.822 [90 %: -0.965, -0.714]
+
+  made worse beyond chance, later period, C + D (61 stations): C5 vs C0 at 4; C0 vs C5 at 43
+    worse under C5: 48307 +13%, 48363 +11%, 48421 +27%, 48560 +23%
+    worse under C0: 48310 +26%, 48351 +57%, 48355 +41%, 48358 +93%, 48360 +37%, 48373 +37%, 48374 +33%, 48377 +48%, 48382 +41%, 48383 +62%, 48387 +15%, 48390 +59%, 48401 +61%, 48403 +49%, 48404 +78%, 48410 +50%, 48413 +44%, 48416 +82%, 48418 +26%, 48419 +34%, 48420 +46%, 48426 +53%, 48427 +45%, 48433 +83%, 48435 +38%, 48437 +26%, 48450 +33%, 48451 +47%, 48453 +35%, 48458 +32%, 48464 +35%, 48474 +52%, 48479 +51%, 48520 +87%, 48563 +62%, 48574 +19%, VTBD +28%, VTBS +23%, VTCC +38%, VTCT +38%, VTSS +25%, VTUD +41%, VTUU +46%
+
+  SHIP RULE day 2 for C5: (1) True (2) True (3) False → does not ship
+
+wrote /root/disaster-now/research/out/heat_region_season.json

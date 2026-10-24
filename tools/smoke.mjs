@@ -33,11 +33,11 @@ const ok = (cond, msg) => { console.log(`${cond ? "ok  " : "FAIL"} ${msg}`); if 
 // LINE's in-app browser on a mid-range Android, the audience's usual window (visitor audit V5)
 const LINE_UA = "Mozilla/5.0 (Linux; Android 14; SM-A156E) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/129.0 Mobile Safari/537.36 Line/14.16.0";
 
-async function newPage(browser, { width = 390, height = 844, fail = false, ua, live = null, liveDelayMs = 0 } = {}) {
+async function newPage(browser, { width = 390, height = 844, fail = false, ua, live = null, liveDelayMs = 0, now = NOW } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 2, locale: "th-TH",
     timezoneId: "Asia/Bangkok", geolocation: BKK, permissions: ["geolocation"], isMobile: true, hasTouch: true, ...(ua ? { userAgent: ua } : {}) });
   const page = await ctx.newPage();
-  if (!LIVE) await page.clock.setFixedTime(NOW);
+  if (!LIVE) await page.clock.setFixedTime(now);
   const errors = [];
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("console", (m) => { if (m.type() === "error" && !/Failed to load resource/.test(m.text())) errors.push(m.text()); });
@@ -65,8 +65,9 @@ async function tapTargets(page) {
   return page.evaluate(() => [...document.querySelectorAll("button, a, input, summary")].filter((e) => {
     const r = e.getBoundingClientRect();
     return r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== "hidden";
-  }).map((e) => ({ t: (e.textContent || e.placeholder || e.getAttribute("aria-label") || "").trim().slice(0, 30), h: e.getBoundingClientRect().height }))
-    .filter((x) => x.h < 44));
+  }).map((e) => ({ t: (e.textContent || e.placeholder || e.getAttribute("aria-label") || "").trim().slice(0, 30),
+    h: Math.round(e.getBoundingClientRect().height), w: Math.round(e.getBoundingClientRect().width) }))
+    .filter((x) => x.h < 44 || x.w < 44)); // both ways: V28's ↻ and hotline numbers were tall enough but too narrow
 }
 
 const overflow = (page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
@@ -91,6 +92,9 @@ async function main() {
     ok(/แขวง|ต\./.test(name), `GPS names the subdistrict: "${name}"`);
     const verdict = await text(page, "#verdict");
     ok(verdict.length > 5, `verdict: ${verdict.replace(/\s+/g, " ").slice(0, 160)}`);
+    // GUIDELINES §2 (U17): a GPS place shows no coordinates anywhere on screen, rounded or not
+    const shown = await page.evaluate(() => document.body.innerText);
+    ok(!/\b\d{1,2}\.\d{1,4},\s*\d{2,3}\.\d{1,4}\b/.test(shown), "no coordinates on screen for a GPS place (U17)");
     const cards = await page.locator(".card").count();
     ok(cards === 10, `10 hazard cards (${cards})`);
     if (!LIVE) {
@@ -101,7 +105,7 @@ async function main() {
       ok(fl.includes("131 ซม."), "flood card leads with cm below the bank for C.12 (1.31 m in ThaiWater's fixture)");
       ok((await text(page, "#outlook")).includes("พรุ่งนี้"), "3-day table has tomorrow");
       const heat = await text(page, "#card-heat");
-      ok(/4[0-9]\s°C/.test(heat) && heat.includes("ปรับแก้"), `heat card shows the corrected value (ECMWF + 5 °C, MODELS §1): ${heat.split("\n").slice(0, 5).join(" | ")}`);
+      ok(/4[0-9]\s°C/.test(heat) && heat.includes("ปรับแก้"), `heat card shows the corrected value (MODELS §1): ${heat.split("\n").slice(0, 5).join(" | ")}`);
     }
     ok((await overflow(page)) <= 0, "no horizontal scroll at 390 px");
     const small = await tapTargets(page);
@@ -158,6 +162,12 @@ async function main() {
     await small320.page.click("#bigger");
     await small320.page.waitForTimeout(500);
     ok((await overflow(small320.page)) <= 0, "no horizontal scroll at 320 px with larger text");
+    // the table scrolls inside its own box, which the page check can't see: 0.3.0 hid tomorrow and day 3 there
+    const tbl = await small320.page.evaluate(() => {
+      const t = document.querySelector(".outlook");
+      return t ? [Math.round(t.getBoundingClientRect().width), t.parentElement.clientWidth] : null;
+    });
+    ok(tbl && tbl[0] <= tbl[1], `the 3-day table shows all three days at 320 px with larger text (${tbl})`);
     if (SHOTS) await small320.page.screenshot({ path: `${SHOTS}/05-report-320-bigger.png`, fullPage: true });
     await small320.ctx.close();
 
@@ -183,7 +193,8 @@ async function main() {
 
       // 5d. English page, Hat Yai under TMD's heavy-rain warning: the collector's checked English, labelled (docs/AI.md)
       const warn = readFileSync(new URL("../test/fixtures/warnings_en.json", import.meta.url), "utf8");
-      const en = await newPage(browser, { live: { "index.json": JSON.stringify({ files: { "warnings.json": "2026-10-23T19:45:00Z" }, failed: {} }), "warnings.json": warn } });
+      const index = (generated) => JSON.stringify({ generated, files: { "warnings.json": "2026-10-23T19:45:00Z" }, failed: {} });
+      const en = await newPage(browser, { live: { "index.json": index("2026-10-23T19:45:00Z"), "warnings.json": warn } });
       await en.page.goto(`${base}?lang=en#p=7.01,100.47`);
       await en.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 });
       const w = await text(en.page, "#warnings");
@@ -192,6 +203,32 @@ async function main() {
       ok(/TMD warning/.test(head) && !/chance/i.test(head), `verdict leads with the warning, no model chance beside it (KI-028): "${head.trim()}"`);
       if (SHOTS) await en.page.screenshot({ path: `${SHOTS}/06-warning-en-390.png` });
       await en.ctx.close();
+
+      // 5e. the same files from a collector that stopped 6 h ago: missing, never "no warning" (S12)
+      const old = await newPage(browser, { live: { "index.json": index("2026-10-23T13:45:00Z"), "warnings.json": warn } });
+      await old.page.goto(`${base}#p=7.01,100.47`);
+      await old.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 });
+      const ow = await text(old.page, "#warnings");
+      const ov = await text(old.page, "#verdict");
+      ok(/ตรวจประกาศเตือนภัยของกรมอุตุฯ ไม่ได้/.test(ow) && !/กรมอุตุฯ: /.test(await text(old.page, "#pre")) && /ประกาศเตือนภัย/.test(ov),
+        "a stale collector's warnings are treated as missing, not shown and not calm (S12)");
+      await old.ctx.close();
+    }
+
+    // 5b. the evening on the same fixtures: the main walk's clock (02:50 in Bangkok) never sees a window without an
+    // afternoon, which is how the evening "danger heat" line (S6) went unseen from 0.2.0 to 0.4.0
+    if (!LIVE) {
+      const eve = await newPage(browser, { now: new Date("2026-10-24T11:30:00Z") }); // 18:30 in Bangkok
+      await eve.page.goto(`${base}#p=13.76,100.5`);
+      await eve.page.waitForFunction(() => document.querySelectorAll(".card").length >= 10 && document.querySelector(".outlook"));
+      await eve.page.waitForTimeout(800);
+      const head = await eve.page.locator(".outlook thead th").allInnerTexts();
+      const heat0 = (await eve.page.locator(".outlook tbody tr").first().locator("td").first().innerText()).trim();
+      const pre = await text(eve.page, "#pre");
+      ok(head.includes("คืนนี้") && heat0 === "–" && !/ร้อนระดับอันตราย[^\n]*คืนนี้/.test(pre),
+        `at 18:30 the first column is "คืนนี้", with no heat number or danger-heat line for the evening (S6): ${JSON.stringify(head)} heat "${heat0}"`);
+      ok(eve.errors.length === 0, `no page errors in the evening (${eve.errors.slice(0, 2).join(" | ")})`);
+      await eve.ctx.close();
     }
 
     // 6. every source down: the page still answers
@@ -203,6 +240,7 @@ async function main() {
       const v = await text(down.page, "#verdict");
       ok(/ยังไม่มีข้อมูล/.test(v), `all sources down → "${v.trim()}"`);
       ok((await down.page.locator(".card .pill").allInnerTexts()).every((p) => /ดึงข้อมูลไม่สำเร็จ|ยังไม่มีข้อมูล/.test(p)), "every card says it couldn't load, none shows a level");
+      ok((await down.page.locator(".tile .tv").count()) === 0, "no tile without a level shows a number (U13: '260 ซม.' read as calm)");
       ok(down.errors.length === 0, `no page errors with sources down (${down.errors.slice(0, 2).join(" | ")})`);
       await down.ctx.close();
     }

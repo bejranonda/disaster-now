@@ -1,0 +1,138 @@
+
+===== run 2026-10-24T08:44:43+00:00 : research/aq_probe.py =====
+## 1. Air4Thai daily_download spreadsheets
+  PM2.5 2026: 0.13 MB, 104 station columns, rows 181 (2026-01-01..2026-06-30); first columns ['Date', '02T', '05T', '10T', '12T', '59T']
+  PM2.5 2025: 0.23 MB, 105 station columns, rows 365 (2025-01-01..2025-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2024: 0.25 MB, 96 station columns, rows 366 (2024-01-01..2024-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2023: 0.24 MB, 96 station columns, rows 365 (2023-01-01..2023-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2022: 0.20 MB, 87 station columns, rows 365 (2022-01-01..2022-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2021: 0.17 MB, 78 station columns, rows 365 (2021-01-01..2021-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2020: 0.15 MB, 68 station columns, rows 366 (2020-01-01..2020-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2019: 0.13 MB, 66 station columns, rows 365 (2019-01-01..2019-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2015: 0.04 MB, 12 station columns, rows 365 (2015-01-01..2015-12-31); first columns ['Date', '59T ', '61T', '54T ', '24T ', '26T ']
+  PM2.5 2011: 0.02 MB, 3 station columns, rows 365 (2011-01-01..2011-12-31); first columns ['Date', '54T', '36T', '30T']
+  PM10 2026: 0.06 MB, 42 station columns, rows 181 (2026-01-01..2026-06-30); first columns ['Date', '59T', '54T', '16T', '13T', '22T']
+  PM10 2025: 0.11 MB, 47 station columns, rows 365 (2025-01-01..2025-12-31); first columns ['Date', '59T', '54T', '16T', '13T', '22T']
+  PM10 2023: 0.17 MB, 67 station columns, rows 365 (2023-01-01..2023-12-31); first columns ['Date', '02T', '05T', '59T', '52T', '53T']
+  O3 2026: 404
+  O3 2025: 404
+  O3 2023: 404
+  NO2 2026: 404
+  NO2 2025: 404
+  NO2 2023: 404
+  CO 2026: 404
+  CO 2025: 404
+  CO 2023: 404
+  SO2 2026: 404
+  SO2 2025: 404
+  SO2 2023: 404
+
+## 2. FIRMS country archives
+  GET https://firms.modaps.eosdis.nasa.gov/data/country/ → 404 application/json 191 bytes
+    links (0): []
+  GET https://firms.modaps.eosdis.nasa.gov/data/country/zips/ → 404 application/json 191 bytes
+    links (0): []
+
+## 3. Open-Meteo air quality: how far back
+  answered: {'latitude': 18.800003, 'longitude': 99.0, 'generationtime_ms': 0.06651878356933594, 'utc_offset_seconds': 25200, 'timezone': 'Asia/Bangkok', 'timezone_abbreviation': 'GMT+7', 'elevation': 312.0, 'hourly_units': {'time': 'iso8601', 'pm2_5': 'μg/m³'}, 'hourly': {'time': ['2020-01-01T00:00', '2020-01-
+
+## 4. Open-Meteo archive (ERA5) variables for one day
+  boundary_layer_height: [15.0, 15.0, 65.0, 1235.0, 1135.0, 30.0]
+  wind_speed_10m: [2.3, 1.9, 2.0, 4.5, 4.2, 5.4]
+  wind_direction_10m: [108, 68, 45, 209, 250, 266]
+  wind_speed_100m: [5.8, 2.9, 2.9, 5.6, 5.0, 7.4]
+  wind_direction_100m: [187, 180, 30, 207, 240, 247]
+  precipitation: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  relative_humidity_2m: [75, 83, 91, 49, 39, 62]
+  temperature_2m: [24.2, 22.1, 20.0, 31.9, 34.3, 30.2]
+  surface_pressure: [976.4, 974.9, 977.5, 977.9, 974.5, 975.8]
+  cloud_cover: [4, 4, 1, 10, 33, 78]
+  grid 18.75,99.0 elevation 312.0
+## 3b. CAMS on Open-Meteo: first date with values (Chiang Mai 18.79,98.99; 2 days each)
+  2021-06-01..2021-06-02: 0/48 hourly values; first non-null index None
+  2022-07-30..2022-07-31: 0/48 hourly values; first non-null index None
+  2022-08-10..2022-08-11: 48/48 hourly values; first non-null index 0
+  2022-12-01..2022-12-02: 48/48 hourly values; first non-null index 0
+  study's weighted calls so far: 6.0
+## 4b. ERA5 boundary_layer_height is null on Open-Meteo from 2024-01-02 to 2024-04-30 at all 14 stations (aq_data); other models for one day
+  era5: [None, None, None, None, None, None, None, None]
+  era5_seamless: [None, None, None, None, None, None, None, None]
+  ecmwf_ifs: [None, None, None, None, None, None, None, None]
+  study's weighted calls so far: 1266.2
+## 5. Open-Meteo previous-runs API (forecasts as issued 1 and 2 days earlier), ECMWF IFS 0.25, one day in S4 and one in S3
+  2025-12-15 precipitation_previous_day2: [0.0, 0.0, 0.0, 0.0]
+  2025-12-15 wind_speed_10m_previous_day2: [0.72, 0.58, 1.1, 0.32]
+  2025-12-15 relative_humidity_2m_previous_day2: [86, 86, 63, 70]
+  2025-12-15 surface_pressure_previous_day2: [969.7, 968.9, 970.3, 967.3]
+  2025-12-15 temperature_2m_previous_day2: [17.8, 16.7, 24.7, 23.2]
+  2025-12-15 wind_speed_100m_previous_day2: [1.1, 0.73, 1.2, 1.26]
+  2025-02-15 precipitation_previous_day2: [0.0, 0.0, 0.0, 0.0]
+  2025-02-15 wind_speed_10m_previous_day2: [1.88, 1.42, 0.67, 0.22]
+  2025-02-15 relative_humidity_2m_previous_day2: [66, 87, 39, 52]
+  2025-02-15 surface_pressure_previous_day2: [962.9, 962.8, 965.9, 962.4]
+  2025-02-15 temperature_2m_previous_day2: [18.6, 13.4, 28.4, 26.3]
+  2025-02-15 wind_speed_100m_previous_day2: [2.75, 1.66, 0.92, 1.24]
+  study's weighted calls so far: 1268.2
+
+===== run 2026-10-24T09:20:01+00:00 : research/aq_probe.py =====
+## 1. Air4Thai daily_download spreadsheets
+  PM2.5 2026: 0.13 MB, 104 station columns, rows 181 (2026-01-01..2026-06-30); first columns ['Date', '02T', '05T', '10T', '12T', '59T']
+  PM2.5 2025: 0.23 MB, 105 station columns, rows 365 (2025-01-01..2025-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2024: 0.25 MB, 96 station columns, rows 366 (2024-01-01..2024-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2023: 0.24 MB, 96 station columns, rows 365 (2023-01-01..2023-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2022: 0.20 MB, 87 station columns, rows 365 (2022-01-01..2022-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2021: 0.17 MB, 78 station columns, rows 365 (2021-01-01..2021-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2020: 0.15 MB, 68 station columns, rows 366 (2020-01-01..2020-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2019: 0.13 MB, 66 station columns, rows 365 (2019-01-01..2019-12-31); first columns ['Date', '02T', '05T', '10T', '11T', '12T']
+  PM2.5 2015: 0.04 MB, 12 station columns, rows 365 (2015-01-01..2015-12-31); first columns ['Date', '59T ', '61T', '54T ', '24T ', '26T ']
+  PM2.5 2011: 0.02 MB, 3 station columns, rows 365 (2011-01-01..2011-12-31); first columns ['Date', '54T', '36T', '30T']
+  PM10 2026: 0.06 MB, 42 station columns, rows 181 (2026-01-01..2026-06-30); first columns ['Date', '59T', '54T', '16T', '13T', '22T']
+  PM10 2025: 0.11 MB, 47 station columns, rows 365 (2025-01-01..2025-12-31); first columns ['Date', '59T', '54T', '16T', '13T', '22T']
+  PM10 2023: 0.17 MB, 67 station columns, rows 365 (2023-01-01..2023-12-31); first columns ['Date', '02T', '05T', '59T', '52T', '53T']
+  O3 2026: 404
+  O3 2025: 404
+  O3 2023: 404
+  NO2 2026: 404
+  NO2 2025: 404
+  NO2 2023: 404
+  CO 2026: 404
+  CO 2025: 404
+  CO 2023: 404
+  SO2 2026: 404
+  SO2 2025: 404
+  SO2 2023: 404
+
+## 2. FIRMS country archives
+  GET https://firms.modaps.eosdis.nasa.gov/data/country/ → 404 application/json 191 bytes
+    links (0): []
+  GET https://firms.modaps.eosdis.nasa.gov/data/country/zips/ → 404 application/json 191 bytes
+    links (0): []
+
+## 3. Open-Meteo air quality: how far back
+  answered: {'latitude': 18.800003, 'longitude': 99.0, 'generationtime_ms': 0.06651878356933594, 'utc_offset_seconds': 25200, 'timezone': 'Asia/Bangkok', 'timezone_abbreviation': 'GMT+7', 'elevation': 312.0, 'hourly_units': {'time': 'iso8601', 'pm2_5': 'μg/m³'}, 'hourly': {'time': ['2020-01-01T00:00', '2020-01-
+
+## 4. Open-Meteo archive (ERA5) variables for one day
+  boundary_layer_height: [15.0, 15.0, 65.0, 1235.0, 1135.0, 30.0]
+  wind_speed_10m: [2.3, 1.9, 2.0, 4.5, 4.2, 5.4]
+  wind_direction_10m: [108, 68, 45, 209, 250, 266]
+  wind_speed_100m: [5.8, 2.9, 2.9, 5.6, 5.0, 7.4]
+  wind_direction_100m: [187, 180, 30, 207, 240, 247]
+  precipitation: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  relative_humidity_2m: [75, 83, 91, 49, 39, 62]
+  temperature_2m: [24.2, 22.1, 20.0, 31.9, 34.3, 30.2]
+  surface_pressure: [976.4, 974.9, 977.5, 977.9, 974.5, 975.8]
+  cloud_cover: [4, 4, 1, 10, 33, 78]
+  grid 18.75,99.0 elevation 312.0
+
+## 6. Air4Thai hourly history: how far back for O3 (station 50t, one day each)
+  2026-03-01: 0 hourly values
+  2026-07-01: 0 hourly values
+  2026-08-01: 24 hourly values
+
+## 7. FIRMS yearly country files (HEAD)
+  viirs-snpp/2021/viirs-snpp_2021_Thailand.csv: 200, 8913953 bytes
+  viirs-snpp/2026/viirs-snpp_2026_Thailand.csv: 404, 214 bytes
+  modis/2026/modis_2026_Thailand.csv: 404, 209 bytes
+  viirs-noaa20/2026/viirs-noaa20_2026_Thailand.csv: 404, 216 bytes
+  viirs-snpp/2023/viirs-snpp_2023_Laos.csv: 404, 210 bytes
+  viirs-snpp/2023/viirs-snpp_2023_Lao_PDR.csv: 200, 20596652 bytes

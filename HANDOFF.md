@@ -1,127 +1,105 @@
 # Handoff
 
-**Disaster Now (ภัยรอบบ้าน ตอนนี้) v0.3.0, 24 Oct 2026.** Built, validated, audited and **ready for Cloudflare at
-`risk.autobahn.bot`**, and **moving to a server of its own**. It is **not deployed** and **not tried on real phones**.
-Read this first, then [AGENTS.md](AGENTS.md).
+**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.4.0, 24 Oct 2026.** Built, validated, audited three ways, and
+running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused the deploy because the token lacks
+*Workers Scripts: Edit*. Not tried on real phones. Read this first, then [AGENTS.md](AGENTS.md).
 
 ## 1. Where things stand
 
-- **The page** (`public/`, static, no framework):
-  - GPS or search finds the nearest of 7,425 subdistricts.
-  - For that point: a verdict, ten tiles, pre-warnings, the 3-day table and ten cards, in Thai and English.
-  - Forecasts as validated ([docs/MODELS.md](docs/MODELS.md)).
-- **0.3.0 added** ([CHANGELOG](CHANGELOG.md)):
-  - **Cloudflare** prepared: Workers static assets plus a KV-backed `/data/live/*`, tested with a dry run and `wrangler dev` ([docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)).
-  - **GLM** writes checked English for TMD's Thai-only warnings, and nothing else on a visitor's path ([docs/AI.md](docs/AI.md)).
-  - The **live cross-check** found TMD warning heavy rain where the model said "low" in all 11 provinces. The warning now leads the tile, the verdict and the table ([research](docs/research/crosscheck-live-2026-10-23.md)).
-  - The verdict sits on the first screen at 360 × 640.
-  - No interim verdict while sources arrive.
-  - Link previews.
-  - A `.env` for this project only.
-- **The move (24 Oct 2026; D-040, D-041):**
-  - **What happened:** 0.3.0's stack was set up on FloodWatch's production server by mistake. It ran healthy there,
-    then was stopped.
-  - **The owner's plan:** a dedicated server for risk, and a new Cloudflare token.
-  - **Before leaving, the session:**
-    - fast-forwarded `main` to the work branch and pushed both;
-    - removed this project's Docker volume and images from FloodWatch's server ([SERVER §2.4](docs/SERVER.md#24-floodwatchs-server-cleaned-up-24-oct-2026));
-    - left FloodWatch untouched.
-  - **Still on FloodWatch's server: the checkout `/root/disaster-now`, with `.env` and `.env.floodwatch-original`.**
-    Claude Code's safety check blocked the agent from deleting its own working directory. Run
-    `rm -rf /root/disaster-now` there (A11).
-  - **Nothing of this app runs anywhere now.** The new server's runbook is [SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
-    `npm run preflight` says when a host is ready, and fails on FloodWatch's.
-- **Checks, 24 Oct 2026 ≈ 06:50 UTC, on FloodWatch's server before the cleanup:**
-  - `npm test`: 61 of 61 (2 new for the preflight).
-  - The visitor walk: 29 of 29 on fixtures.
-  - `npm run check:docs` and `npm run check:advice` both pass.
-  - `npm run preflight` failed with "FloodWatch runs on this host", as intended.
-  - From 23 Oct on the same host: live walks in Bangkok (360 × 640 LINE), Phuket (EN) and Chiang Mai, and
-    `npm run cf:deploy -- --dry-run` (32 files, both bindings).
-  - Not run: the gauge cross-check (ThaiWater 429, KI-029). Nothing has run on the risk server yet.
+- **The page** (`public/`, static): GPS or search → a verdict, ten tiles, pre-warnings, a 3-day table and ten cards,
+  in Thai and English, for any of 7,425 subdistricts.
+- **0.4.0** ([CHANGELOG](CHANGELOG.md)):
+  - **The name** ภัยรอบบ้าน · Thai Risk (D-044).
+  - **One forecast, one level:** `assess.fcLevel` grades a forecast for the tile, chips, table and pre-warnings.
+    0.3.0 showed the same heat forecast orange and red.
+  - **Heat:** the line ran 3–4 °C hot from November to February, worse than raw. Nov–Feb now uses **C6**, provisional
+    (D-046). The page also computes what was validated: 13:00/16:00 and `elevation=nan`.
+  - **An evening false alarm removed** (S6). **A province search** opens its town. **Stale collector files are
+    missing, not calm** (S12).
+  - 25 visitor findings (U), 19 output findings (X) and the session's own (S) fixed or recorded
+    ([review](docs/research/review-2026-10-24.md)).
+- **The host:** `autobahn-bot`, beside BrainPlatform (the owner's choice, D-045). The stack is up: web on 127.0.0.1:8090
+  and the collector every 15 min. Air4Thai 173 stations; ThaiWater answering. KV namespace `disaster-now-live` created.
+- **Research in progress at this commit** (agents still running; results in a later commit): earthquakes, air quality
+  ([done](docs/research/predict-air-2026-10-24.md)), fire/rain/flood/storms/drought, and a hindcast of the Hat Yai
+  flood of late 2025. See FRANK_FEEDBACK §7.8.
+- **Checks, 24 Oct 2026 ≈ 09:30 UTC, on `autobahn-bot`:**
+  - `npm test` 82 of 82.
+  - The fixture walk passes every check: the table's box at 320 px, the evening, tap targets both ways, a stale
+    collector, no coordinates on screen.
+  - One live walk (16:21 Bangkok) passes.
+  - `check:docs` and `check:advice` pass; `preflight` shows no ❌.
+  - `cf:deploy -- --dry-run` passes; **`cf:deploy` was refused (403)**.
 
 ## 2. What the owner has to do ([docs/OWNER_ACTIONS.md](docs/OWNER_ACTIONS.md))
 
-0. **A11: on FloodWatch's server, `rm -rf /root/disaster-now`.** Everything is on GitHub. That removes the last
-   copy of FloodWatch's `.env` made for this project and the old token.
-1. **A12: set up the risk server** ([SERVER.md §2.3](docs/SERVER.md#23-install-and-go-live)).
-   - Clone `main` and write a fresh `.env` ([§2.2](docs/SERVER.md#22-the-new-env-fresh-never-copied): where each value comes from).
-   - Run `npm run preflight`, then `npm ci && npm test` and the walk.
-2. **A9: the new tokens.** One to deploy, one KV-only as `CF_KV_TOKEN`.
-   - The old token came from FloodWatch's `.env`. **Check whether FloodWatch's deploys use it before revoking it.**
-3. **A10: go live from the risk server:** `npm run cf:setup` → `docker compose up -d --build` → `npm run cf:deploy`.
-4. **A6:** check that Air4Thai answers the new host (170 or more stations in `index.json`).
-5. **A4:** test on an Android and an iPhone, inside LINE, and check the link preview in a chat.
-6. **A5:** a native Thai review, starting from GLM's first reading ([copy review](docs/research/copy-review-glm-2026-10-23.md)), and a bilingual check of the first ten warning translations.
-7. **Decisions:**
-   - D1 (heat);
-   - D6 (GLM translation, its platform, and **a GLM key of this project's own**);
-   - D7 (rain level vs word);
-   - D5 (GISTDA alone).
-8. **A8, B1–B4:**
-   - GitHub's default branch `main`, and the v0.2.0 and v0.3.0 releases;
-   - CORS on FloodWatch;
-   - a shared ThaiWater snapshot (INTEGRATION §3.5).
+1. **A9: the token.**
+   - Add *Account → Workers Scripts: Edit* and *Zone autobahn.bot → Workers Routes: Edit*.
+   - Remove what it doesn't need: all other zones, Zone Settings, Page Rules, Firewall, Workers AI, Pages, R2.
+   - Make a second, KV-only token as `CF_KV_TOKEN`.
+   - `node tools/env-check.mjs --probe` must say "Workers deploy: allowed".
+2. **A10: deploy.** `npm run cf:deploy`, then `docker compose up -d` (so the collector reads `CF_KV_TOKEN`), then
+   `node tools/health.mjs --web https://risk.autobahn.bot/`.
+3. **A4:** an Android and an iPhone, from a LINE chat; tap 📍; send the link to a family group.
+4. **A5:** a native Thai review, from GLM's first reading.
+5. **Decisions:** D1 (heat orange most afternoons), D8 (the redesign), D9 (one palette for the family), D10, and
+   whether to keep C6 after it is scored (end of November).
+6. **A11, A8, B1–B4:** delete the old checkout on FloodWatch's server; GitHub default branch and releases; CORS on
+   FloodWatch; a shared ThaiWater snapshot.
 
 ## 3. What an agent can do next ([docs/ROADMAP.md](docs/ROADMAP.md))
 
-- **On the risk server, with the owner's go-ahead:** the runbook's steps and checks (SERVER §2.3), then the host's
-  facts into §4 below. Use the prompt in [FRANK_FEEDBACK §6](docs/FRANK_FEEDBACK.md#6-the-move-24-oct-2026-sorry-i-deployed-in-the-wrong-server).
-- **AI-ready, in order:**
-  1. The 3-day table's dots and words (KI-025).
-  2. Thai region names: a build-time table, GLM-drafted and reviewed (KI-024).
-  3. Search aliases for landmarks: the same way (KI-012).
-  4. The flood line (KI-008).
-  5. The polish list (KI-027).
-  6. Bad-day fixtures (KI-020).
-- **Once live:** district forecast files, a GDACS digest, an archive of issued forecasts and warnings (to score
-  province warnings against point chances, MODELS §7.8).
+- **After the owner's token:** deploy, check the edge (`/data/live/index.json` under 15 min old, `kv.ok`), and re-take
+  `docs/screens/` from the live site.
+- **Daily from the server:** `node research/archive_forecasts.mjs` (cron), so C6 and the PM2.5 chance can be scored as
+  issued (MODELS §1.1).
+- **The research's ship verdicts** (FRANK_FEEDBACK §8 when written), e.g. the PM2.5 chance line (Dec–Apr) and PCD's
+  forecast image link.
+- **AI-ready:** KI-024 (Thai region names), KI-012 (landmarks), KI-033/D8 (the redesign, after the owner).
 
 ## 4. How to work here
 
 - **Commands:**
-  - `npm run preflight` first on any host;
+  - `npm run preflight`;
   - `npm test`;
-  - `CHROME_PATH=<chromium> npm run smoke` (add `-- --live` for wording or source changes: once per change, never in a loop);
+  - `CHROME_PATH=/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome npm run smoke` (`-- --live` once per
+    change);
   - `npm run check:docs`, `npm run check:advice`;
   - `node tools/env-check.mjs --probe`;
   - `docker compose up -d --build`, then `node tools/health.mjs --web http://127.0.0.1:8090/`;
   - `npm run cf:deploy -- --dry-run`.
-- **The risk server's facts** (fill these in once it exists):
+- **This host's facts:**
 
   | Fact | Value |
   |---|---|
-  | Host, provider, country | — |
-  | Node | — (below 22, wrangler runs in Docker) |
-  | Chromium path | — (`npx playwright@1.56.1 install --with-deps chromium` prints it) |
-  | Air4Thai from it | — (170 or more stations?) |
-  | ThaiWater from it | — (200, or 429?) |
+  | Host | `autobahn-bot`; also runs BrainPlatform (`/root/BrainPlatform/deploy`, `deploy-*` containers: never touch) |
+  | Node, Docker | 24.14.0 (wrangler runs without Docker); 29.4.0 with compose |
+  | Chromium | `/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome` |
+  | Air4Thai from it | 173 stations (07:50 UTC, 24 Oct) |
+  | ThaiWater from it | answering, no 429 in the session's walks and audits |
+  | Python | 3.12, no numpy: research scripts make a venv in the scratchpad |
 
-- **In a cloud session:** Chromium is at `/opt/pw-browsers/chromium`.
-- **A change is done when** the tests and the walk pass and the docs change in the same commit: CHANGELOG,
-  KNOWN_ISSUES and KNOWLEDGE for any number, and this file if the state changed.
-- **A release bumps the version** in `package.json`, `package-lock.json`, `main.js`, `sw.js` (twice) and `index.html` (GUIDELINES §6).
-- **The rules that bite** (all in [docs/GUIDELINES.md](docs/GUIDELINES.md)):
+- **A change is done when** the tests and the walk pass and the docs change in the same commit (CHANGELOG,
+  KNOWN_ISSUES, KNOWLEDGE for any number, this file if the state changed).
+- **A release bumps the version** in `package.json`, `package-lock.json`, `main.js`, `sw.js` (twice) and `index.html`.
+- **The rules that bite** ([docs/GUIDELINES.md](docs/GUIDELINES.md)):
   - evidence for every number;
   - the agency's word leads;
-  - the verdict is never milder than a tile;
-  - missing data is never calm;
-  - a forecast tops out at เตรียมตัว;
-  - the exact GPS fix never leaves the phone;
-  - AI only off the visitor's path, checked, labelled (§10);
-  - keys only in `.env`, one per job;
-  - never another project's `.env` or tunnel token;
-  - **one server per app** (never FloodWatch's);
-  - push before leaving a server.
+  - one grading for every view of a forecast;
+  - a correction only inside the domain it was fitted on;
+  - missing data, including a stale collector, is never calm;
+  - walk the clock (the evening too);
+  - the exact GPS fix never leaves the phone, and no coordinates on screen for it;
+  - never FloodWatch's server;
+  - one live walk per change.
 - **Where things are:**
 
   | What | Where |
   |---|---|
   | Every number | [KNOWLEDGE](docs/KNOWLEDGE.md) |
-  | Every source | [SOURCES](docs/SOURCES.md) |
-  | Every forecast's skill | [MODELS](docs/MODELS.md) |
-  | The risk server's runbook | [SERVER §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server) |
-  | Cloudflare and GLM | [CLOUDFLARE](docs/CLOUDFLARE.md), [AI](docs/AI.md) |
-  | How it was built and checked | [APPROACH_AND_METHODS](docs/APPROACH_AND_METHODS.md) |
-  | The research trail and decisions D-001 … D-043 | [research/HISTORY](docs/research/HISTORY.md) |
-  | Frank feedback, including on the sessions' own faults | [FRANK_FEEDBACK](docs/FRANK_FEEDBACK.md) |
+  | Every forecast's skill | [MODELS](docs/MODELS.md) (§1.1: the model check) |
+  | Known problems | [KNOWN_ISSUES](docs/KNOWN_ISSUES.md) |
+  | This session's audits | [review](docs/research/review-2026-10-24.md), [visitor](docs/research/visitor-audit-2026-10-24.md), [output](docs/research/output-crosscheck-2026-10-24.md), [model check](docs/research/model-check-2026-10-24.md) |
+  | The server and Cloudflare | [SERVER](docs/SERVER.md), [CLOUDFLARE](docs/CLOUDFLARE.md) |
+  | Decisions D-001 … D-049 | [research/HISTORY](docs/research/HISTORY.md) |
+  | Frank feedback | [FRANK_FEEDBACK](docs/FRANK_FEEDBACK.md) |

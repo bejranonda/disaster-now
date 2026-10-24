@@ -22,7 +22,7 @@ const OG = `<!doctype html><html lang="th"><head><meta charset="utf-8">
   .lv { display: flex; gap: 14px; margin-top: 40px; font-size: 30px; font-weight: 700; }
   .lv span { padding: 8px 22px; border-radius: 999px; color: #14202b; }
 </style></head><body>
-<div class="row">${icon}<div><h1>ภัยรอบบ้าน ตอนนี้</h1><div class="en">Disaster Now · risk.autobahn.bot</div></div></div>
+<div class="row">${icon}<div><h1>ภัยรอบบ้าน</h1><div class="en">Thai Risk · risk.autobahn.bot</div></div></div>
 <p>ทุกความเสี่ยงที่จุดเดียว ตอนนี้และ 3 วันข้างหน้า<br>ร้อน ฝุ่น ฝน ลม น้ำท่วม ดินถล่ม แผ่นดินไหว ไฟป่า</p>
 <div class="lv"><span style="background:#cfe3f5">ยังไม่น่าห่วง</span><span style="background:#ffe58a">ติดตามไว้</span><span style="background:#ffc28a">เตรียมตัว</span><span style="background:#ff9a9a">ทำทันที</span></div>
 </body></html>`;

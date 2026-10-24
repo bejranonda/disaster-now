@@ -1,0 +1,12 @@
+station-days with a daily max in both: 6704; |new − old| <= 0.05 (rounding): 6704; max |diff| 0.050 °C
+only in the earlier file: 0; only in the new pipeline: 0 (the GHCNh files were re-downloaded on 24 Oct; NCEI updates them)
+largest differences: [0.05, -0.05, 0.05, 0.05, 0.05]
+day-1 forecast HI, Node GRIB reader vs the earlier eccodes values: 12777 station-days, within 0.05 °C (rounding): 12777, max |diff| 0.050 °C
+Chiang Rai airport vs Chiang Rai agromet, ~15 km, all months: n=315, airport − station mean -0.16 °C, mean |diff| 0.99
+Chiang Rai airport vs Chiang Rai agromet, ~15 km, Nov–Feb: n=34, airport − station mean -0.26 °C, mean |diff| 0.64
+Hat Yai airport vs Kho Hong agromet, ~15 km, all months: n=446, airport − station mean -1.36 °C, mean |diff| 1.79
+Hat Yai airport vs Kho Hong agromet, ~15 km, Nov–Feb: n=73, airport − station mean -1.78 °C, mean |diff| 1.79
+Phuket airport vs Phuket, ~27 km, all months: n=734, airport − station mean -1.56 °C, mean |diff| 1.88
+Phuket airport vs Phuket, ~27 km, Nov–Feb: n=208, airport − station mean -1.65 °C, mean |diff| 1.88
+Don Mueang vs Bangkok Metropolis, ~20 km, all months: n=783, airport − station mean -2.64 °C, mean |diff| 2.67
+Don Mueang vs Bangkok Metropolis, ~20 km, Nov–Feb: n=218, airport − station mean -2.53 °C, mean |diff| 2.56

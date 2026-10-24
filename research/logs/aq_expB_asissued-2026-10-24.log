@@ -1,0 +1,24 @@
+
+===== run 2026-10-24T09:07:03+00:00 : research/aq_expB_asissued.py =====
+forecast days: 1256; with day-2 forecasts 1256; Open-Meteo weighted calls by this study: 1376.2
+lead 1: damped_met refitted (alpha 1000), coefficients rain=-0.004 rain_prev=-0.012 d_ws=-0.008 d_ws100=-0.001 d_rh=-0.014 d_sp=-0.028 d_dtr=+0.013
+lead 2: damped_met refitted (alpha 1000), coefficients rain=-0.010 rain_prev=-0.002 d_ws=-0.015 d_ws100=-0.006 d_rh=-0.032 d_sp=-0.034 d_dtr=+0.025
+
+## B-S4 lead 1: n=1169
+   persist              MAE=  5.20 bias= +0.01 band=74.7%
+   damped               MAE=  4.73 bias= +0.19 band=76.4%
+   damped_met_era5      MAE=  4.69 bias= +0.29 band=76.5%
+   damped_met_forecast  MAE=  4.70 bias= +0.61 band=76.5%
+   damped_met_era5      vs damped -0.04 [-0.11, +0.02]; worse at []
+   damped_met_forecast  vs damped -0.03 [-0.11, +0.05]; worse at ['41t(+6%)']
+   feature correlation forecast vs ERA5: rain 0.74, rain_prev 0.73, d_ws 0.75, d_ws100 0.75, d_rh 0.60, d_sp 0.93, d_dtr 0.63
+
+## B-S4 lead 2: n=1168
+   persist              MAE=  8.07 bias= +0.03 band=64.4%
+   damped               MAE=  6.57 bias= +0.51 band=68.7%
+   damped_met_era5      MAE=  6.32 bias= +0.52 band=69.5%
+   damped_met_forecast  MAE=  6.31 bias= +0.86 band=70.1%
+   damped_met_era5      vs damped -0.25 [-0.36, -0.13]; worse at []
+   damped_met_forecast  vs damped -0.26 [-0.40, -0.12]; worse at ['41t(+7%)']
+   feature correlation forecast vs ERA5: rain 0.74, rain_prev 0.73, d_ws 0.83, d_ws100 0.83, d_rh 0.74, d_sp 0.97, d_dtr 0.74
+wrote /root/disaster-now/research/out/aq_expB_asissued.json; Open-Meteo weighted calls by this study: 1376.2

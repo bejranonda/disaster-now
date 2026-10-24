@@ -1,4 +1,4 @@
-# Cloudflare: how Disaster Now goes public at risk.autobahn.bot
+# Cloudflare: how ภัยรอบบ้าน · Thai Risk goes public at risk.autobahn.bot
 
 **State (24 Oct 2026, 0.3.0):** prepared and tested locally, **not deployed**.
 - The Worker, its config and the collector's upload exist, and pass their tests, a wrangler dry run and a local
@@ -72,6 +72,24 @@ what to expect, not what the new token can do.
 **Not checked:** a real deploy, the custom domain's certificate, KV's write limit in practice, the page on the edge
 from Thailand.
 
+### 3.1 Checked on 24 Oct 2026 (`autobahn-bot`, the owner's new token)
+
+- **The token:** valid; zone `autobahn.bot` visible and `CLOUDFLARE_ZONE_ID` matching; `risk.autobahn.bot` free; Workers
+  scripts readable (0 on the account); Workers KV 401 at first, readable after the owner added *Workers KV Storage:
+  Edit*. Its scope is far wider than this app needs: *All zones across all accounts*, with Zone Settings, Page Rules,
+  Firewall and DNS: Edit, plus Workers AI, Pages and R2 (A9, KI-036).
+- `npm run cf:setup`: created `disaster-now-live` (`fc82e9e8…`, now in `wrangler.jsonc`).
+- `npm run cf:deploy -- --dry-run` (Node 24, wrangler directly): both bindings. Its "Read 39 files" counts the raw
+  directory, directories included; `WRANGLER_LOG=debug` shows `data/live/*`, `_headers` and `.assetsignore` as
+  "Ignoring asset", so the collector's local files never ship as stale assets (wrangler 4.148.0, `buildAssetManifest`).
+- **`npm run cf:deploy`: refused**, "A request to the Cloudflare API (/accounts/…/workers/scripts/disaster-now/secrets)
+  failed. No access to the specified resource" (09:23 UTC). The token can list scripts but not deploy them: it lacks
+  *Workers Scripts: Edit*. Nothing was created (0 scripts, no DNS record). `node tools/env-check.mjs --probe` now asks
+  the same endpoint read-only and prints "Workers deploy: allowed" or "REFUSED".
+- **The page and stale KV:** since 0.4.0 the page ignores the live files when `index.json` is more than 2 h old
+  (`sources.liveFresh`, S12), because KV keeps the last upload while the server is down. Until `CF_KV_TOKEN` is set, the
+  deployed page will say it couldn't check TMD's warnings, and the fire tile will have no data, which is honest.
+
 ## 4. What the owner does
 
 All of it on **the risk server**, in a fresh `.env` ([SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)); never on FloodWatch's.
@@ -79,9 +97,10 @@ All of it on **the risk server**, in a fresh `.env` ([SERVER.md §2](SERVER.md#2
 1. **Two new tokens for this project** (the old one came from FloodWatch's `.env`: check whether FloodWatch's deploys
    use it before you revoke it):
    - `CLOUDFLARE_API_TOKEN`, to deploy: Account → *Workers Scripts: Edit*, *Workers KV Storage: Edit*; Zone
-     `autobahn.bot` → *Workers Routes: Edit*, *DNS: Edit* (for the custom domain).
+     `autobahn.bot` → *Workers Routes: Edit*, *DNS: Edit* (for the custom domain). **Only these, on this account and
+     this zone** (24 Oct: the new token had KV but not Workers Scripts: Edit, and every zone of every account).
    - `CF_KV_TOKEN`, for the collector: only *Workers KV Storage: Edit*. docker-compose.yml passes it and nothing else.
-2. `npm run preflight` (no ❌), then `npm run env:check -- --probe` → "Workers KV: readable".
+2. `npm run preflight` (no ❌), then `npm run env:check -- --probe` → "Workers KV: readable" and **"Workers deploy: allowed"**.
 3. `npm run cf:setup` → creates `disaster-now-live`, writes its id (commit `wrangler.jsonc`; the id is not a secret).
 4. `docker compose up -d --build` → the collector uploads every 15 minutes (`docker compose logs collector` shows `kv: 6 files uploaded`).
 5. `npm run cf:deploy` (on Node 22 it runs wrangler directly; on Node 20 in `node:22-bookworm-slim` by itself;

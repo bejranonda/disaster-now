@@ -73,7 +73,18 @@ export function parseCap(xml) {
     instruction: tag(info, "instruction"), severity: tag(info, "severity"), urgency: tag(info, "urgency"),
     certainty: tag(info, "certainty"), effective: tag(info, "effective"), expires: tag(info, "expires"),
     areaDesc: tag(info, "areaDesc"), web: tag(info, "web"), provinces,
+    // CAP 1.2: "sender,identifier,sent" entries, space-separated; an Update or Cancel names what it replaces
+    references: (tag(xml, "references") || "").trim().split(/\s+/).map((r) => r.split(",")[1]).filter(Boolean),
   };
+}
+
+/** The notices in force: actual, not expired, not a Cancel, and not replaced by a later Update or Cancel that names
+ *  them in `<references>`. 0.3.0 ignored references, so a notice TMD had updated or cancelled stayed on the page (on
+ *  22 Oct an Update ended an Extreme alert 15 min early; output cross-check X8). */
+export function inForce(list, nowMs = Date.now()) {
+  const replaced = new Set(list.flatMap((w) => w.references || []));
+  return list.filter((w) => w.status === "Actual" && w.msgType !== "Cancel" && !replaced.has(w.id)
+    && (!w.expires || Date.parse(w.expires) > nowMs));
 }
 
 async function warnings() {
@@ -83,12 +94,10 @@ async function warnings() {
   const items = [];
   for (const l of links.slice(0, 20)) {
     try {
-      const w = parseCap(await fetchText(l));
-      const live = !w.expires || Date.parse(w.expires) > Date.now();
-      if (w.status === "Actual" && w.msgType !== "Cancel" && live) items.push({ ...w, link: l });
+      items.push({ ...parseCap(await fetchText(l)), link: l });
     } catch (e) { items.push({ link: l, error: String(e.message || e) }); }
   }
-  return { source: "Thai Meteorological Department CAP feed (public domain)", url, items: items.filter((i) => !i.error), failed: items.filter((i) => i.error) };
+  return { source: "Thai Meteorological Department CAP feed (public domain)", url, items: inForce(items.filter((i) => !i.error)), failed: items.filter((i) => i.error) };
 }
 
 // ---------- TMD earthquakes ----------

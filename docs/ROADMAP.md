@@ -12,10 +12,14 @@ Each item has a "done when". **AI-ready** items need nothing from the owner; **o
 
 See [CHANGELOG.md](../CHANGELOG.md).
 
+- **v0.4.0 (24 Oct 2026, not deployed):** the name ภัยรอบบ้าน · Thai Risk; the collector on `autobahn-bot`; one grading for
+  every forecast view; the cool-season heat fix (C6) and the fitted predictor; the evening false alarm; the province
+  search; stale collector files missing; the 3-day table's dots and its 320 px fit; 25 visitor and 19 output findings.
+
 ## v0.4: live (owner first, then AI-ready)
 
-0. **The risk server** (A12, KI-032; [SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)): a dedicated server, a fresh `.env`, new tokens. *Done when* `npm run preflight` shows no ❌ there.
-1. **Go live at risk.autobahn.bot** (A9, A10; [CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)): new tokens, `npm run cf:setup`, the collector on the risk server, `npm run cf:deploy`. *Done when* the URL answers from the edge, `data/live/index.json` there is under 15 min old, and the warning, fire and storm tiles show data.
+0. ✅ **The risk server** (A12; `autobahn-bot`, D-045): preflight with no ❌, the stack healthy (24 Oct 2026).
+1. **Go live at risk.autobahn.bot** (A9, A10; 24 Oct: refused for want of *Workers Scripts: Edit*; [CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)): new tokens, `npm run cf:setup`, the collector on the risk server, `npm run cf:deploy`. *Done when* the URL answers from the edge, `data/live/index.json` there is under 15 min old, and the warning, fire and storm tiles show data.
 2. **Air4Thai from the risk server** (A6): 173 stations from FloodWatch's server on 23 Oct; measure it again on the new host.
 3. **Real-phone test** inside LINE (A4). *Done when* the 12 tasks of the UX scout's script pass on an Android and an iPhone.
 4. **FloodWatch CORS** for `/api/point` and `/api/geocode` (B1, B2), then flip `public/config.json`. *Done when* the flood tile names FloodWatch as its source for a Bangkok point.
@@ -52,6 +56,15 @@ From [SERVER.md §6](SERVER.md#6-what-to-build-on-the-server-next):
 6. **Air4Thai's full pollutants and ThaiWater's salinity** (สำแล) in the collector.
 7. **A map** (Leaflet, loaded only when asked) to pick a point by tapping, as FloodWatch does. The UX scout advised against a map on the first screen.
 8. **Measure the nearest-centre error** near district borders from the boundary file (KI-006).
+
+## v0.5 also: from the 24 Oct audits and research
+
+1. **The redesign** (D8, KI-033): one drawing per hazard. *Done when* a visitor audit finds no two views of one forecast.
+2. **The PM2.5 chance line, Dec–Apr** ([predict-air](research/predict-air-2026-10-24.md)): "พรุ่งนี้ โอกาสที่ฝุ่นเฉลี่ยทั้งวันจะถึงระดับ
+   เริ่มมีผลกระทบต่อสุขภาพ ราว 40%", lognormal dressing of the damped ratio (σ 0.343 / 0.380), PCD station input only.
+   Provisional, like the damped ratio. And a link to PCD's 7-day forecast image.
+3. **Score C6 and the PM2.5 chance as issued** from `research/archive_forecasts.mjs` (daily cron): end of November, March.
+4. **The other prediction studies' verdicts** (earthquakes, fire/rain/flood, the Hat Yai hindcast): when they report.
 
 ## v0.6: forecasts ([MODELS.md §7](MODELS.md#7-what-is-still-to-test))
 

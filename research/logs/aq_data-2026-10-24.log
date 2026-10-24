@@ -1,0 +1,40 @@
+
+===== run 2026-10-24T08:51:10+00:00 : research/aq_data.py =====
+station 35t A north     Chiang Mai           18.8407,98.9698 City Hall, Chiangmai
+station 37t A north     Lampang              18.2783,99.5065 Meteorological stations, Lampang
+station 70t A north     Phayao               19.2002,99.8930 Phayao Provincial, Phayao
+station 50t A bangkok   Bangkok Pathum Wan   13.7299,100.5365 Chulalongkorn Hospital
+station 46t A northeast Khon Kaen            16.4454,102.8353 Hydrogeological Group Water Resources Regional Office4 khonkaen
+station 44t A south     Hat Yai              7.0204,100.4841 Hat Yai Municipality
+station 57t B north     Chiang Rai           19.9092,99.8235 Natural Resources and Environment Office, Chiangrai
+station 67t B north     Nan                  18.7889,100.7763 Municipality Office, Nan
+station 58t B north     Mae Hong Son         19.3045,97.9716 Natural Resources and Environment Office, Mae Hongson
+station 69t B north     Phrae                18.1284,100.1624 Meteorology Center, Phrae
+station 05t B bangkok   Bangkok Bang Na      13.6662,100.6057 Thai Meteorological Department
+station 41t B central   Nakhon Sawan         15.6862,100.1106 Nakhonsawan Irrigation Project
+station 83t B northeast Ubon Ratchathani     15.2454,104.8462 OTOP Center, Ubon Ratchathani
+station 42t B south     Surat Thani          9.1260,99.3251 Environment Agency Section 14, Surat Thani
+Air4Thai PM2.5 daily rows 36719 (2019-01-01..2026-06-30); PM10 rows 22596 at ['05t', '35t', '37t', '41t', '42t', '44t', '46t', '50t', '57t', '58t', '67t', '69t', '70t', '83t']
+CAMS daily rows 8806; grids: 05t=13.70,100.60, 35t=18.80,99.00, 37t=18.30,99.50, 41t=15.70,100.10, 42t=9.10,99.30, 44t=7.00,100.50, 46t=16.40,102.80, 50t=13.70,100.50, 57t=19.90,99.80, 58t=19.30,98.00, 67t=18.80,100.80, 69t=18.10,100.20, 70t=19.20,99.90, 83t=15.20,104.80
+Open-Meteo weighted calls by this study so far: 634.6
+ERA5 daily rows 8806; Open-Meteo weighted calls so far: 1263.2
+  FIRMS 2022 Thailand: 4.3 MB, 54784 detections, 46138 kept (nominal/high, vegetation, Nov–Apr); dates 2022-01-01..2023-01-01
+  FIRMS 2022 Myanmar: 18.2 MB, 232524 detections, 194810 kept (nominal/high, vegetation, Nov–Apr); dates 2022-01-01..2023-01-01
+  FIRMS 2022 Lao_PDR: 9.5 MB, 119496 detections, 107881 kept (nominal/high, vegetation, Nov–Apr); dates 2022-01-01..2023-01-01
+  FIRMS 2022 Cambodia: 7.3 MB, 92425 detections, 84946 kept (nominal/high, vegetation, Nov–Apr); dates 2022-01-01..2023-01-01
+  FIRMS 2023 Thailand: 14.2 MB, 180567 detections, 152579 kept (nominal/high, vegetation, Nov–Apr); dates 2023-01-01..2024-01-01
+  FIRMS 2023 Myanmar: 33.2 MB, 424514 detections, 351464 kept (nominal/high, vegetation, Nov–Apr); dates 2023-01-01..2024-01-01
+  FIRMS 2023 Lao_PDR: 20.6 MB, 259582 detections, 227155 kept (nominal/high, vegetation, Nov–Apr); dates 2023-01-01..2024-01-01
+  FIRMS 2023 Cambodia: 9.6 MB, 121297 detections, 105362 kept (nominal/high, vegetation, Nov–Apr); dates 2023-01-01..2024-01-01
+  FIRMS 2024 Thailand: 11.3 MB, 143538 detections, 112043 kept (nominal/high, vegetation, Nov–Apr); dates 2024-01-01..2025-01-01
+  FIRMS 2024 Myanmar: 26.5 MB, 338017 detections, 272894 kept (nominal/high, vegetation, Nov–Apr); dates 2024-01-01..2025-01-01
+  FIRMS 2024 Lao_PDR: 13.9 MB, 175592 detections, 146943 kept (nominal/high, vegetation, Nov–Apr); dates 2024-01-01..2025-01-01
+  FIRMS 2024 Cambodia: 12.3 MB, 154570 detections, 132459 kept (nominal/high, vegetation, Nov–Apr); dates 2024-01-01..2025-01-01
+  FIRMS 2025 Thailand: 8.2 MB, 103794 detections, 90363 kept (nominal/high, vegetation, Nov–Apr); dates 2025-01-01..2026-01-01
+  FIRMS 2025 Myanmar: 23.7 MB, 302675 detections, 251706 kept (nominal/high, vegetation, Nov–Apr); dates 2025-01-01..2026-01-01
+  FIRMS 2025 Lao_PDR: 9.7 MB, 122502 detections, 106447 kept (nominal/high, vegetation, Nov–Apr); dates 2025-01-01..2026-01-01
+  FIRMS 2025 Cambodia: 8.7 MB, 109649 detections, 97881 kept (nominal/high, vegetation, Nov–Apr); dates 2025-01-01..2026-01-01
+FIRMS kept detections: 2481071
+fire feature rows 10066
+wrote /root/disaster-now/research/data/aq_daily.csv.gz: 8806 rows, 8579 with PM2.5, 8806 with CAMS, 7126 with ERA5, 6608 with fire features
+Open-Meteo weighted calls by this study: 1263.2

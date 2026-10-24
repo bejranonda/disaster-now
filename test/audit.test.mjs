@@ -6,7 +6,7 @@ import { readFileSync } from "node:fs";
 
 import { assess, MODEL_MAX, BKK_MMI_TERM, STORM_SHOW_KM } from "../public/js/assess.js";
 import { nearestTambon } from "../public/js/geo.js";
-import { chanceWord, prewarnings } from "../public/js/outlook.js";
+import { chanceWord, prewarnings, buildOutlook } from "../public/js/outlook.js";
 import { capHazard } from "../public/js/events.js";
 import { quakesForPoint } from "../public/js/quake.js";
 import { band } from "../public/js/levels.js";
@@ -157,4 +157,244 @@ test("V10/V15: the FloodWatch link carries the rounded point; far storms are lef
   const wind = card(r, "wind");
   assert.ok(STORM_SHOW_KM <= 1500);
   assert.ok(!wind.lines.some((l) => /In-fa|จำปี/.test(l)), wind.lines.join(" | "));
+});
+
+// ---------- the review of 24 Oct 2026 (docs/research/review-2026-10-24.md; S-series) ----------
+
+test("S1: every view of a forecast takes the tile's level, never above เตรียมตัว: table, card days, pre-warnings' colour", () => {
+  for (const [lat, lon] of [[13.7563, 100.5018], [7.0086, 100.4747], [18.7883, 98.9853]]) {
+    const r = assess(full(at(lat, lon), { now: Date.parse("2026-10-24T06:00:00Z") }), "th");
+    for (const row of r.outlook) {
+      for (const k of ["heat", "rain", "gust", "uv", "pm25"]) {
+        if (row[k] && !row[k].official) assert.ok(row[k].level <= MODEL_MAX, `table ${k} ${row.name} at ${lat}: ${row[k].level}`);
+      }
+    }
+    for (const c of r.cards) for (const d of c.days || []) assert.ok(d.level <= MODEL_MAX, `${c.id} day ${d.name} at ${lat}: ${d.level}`);
+    for (const x of r.pre) assert.ok(x.tone <= MODEL_MAX, `pre ${x.hazard} tone ${x.tone}`);
+  }
+  // Bangkok's fixture: a forecast of ≥ 42 °C keeps its agency word in the pre-warning (level 3) but is orange (tone 2)
+  const r = assess(full(at(13.7563, 100.5018)), "th");
+  const heatPre = r.pre.find((x) => x.hazard === "heat");
+  assert.ok(heatPre && heatPre.level === 3 && heatPre.tone === MODEL_MAX);
+  assert.equal(r.outlook[0].heat.level, card(r, "heat").days[0].level);
+});
+
+test("S2: the table's heat number is the card's (floored, KI-F16), so it never reads past its band", () => {
+  const r = assess(full(at(13.7563, 100.5018)), "th");
+  const days = card(r, "heat").days;
+  r.outlook.forEach((row, i) => assert.equal(row.heat.text, days[i].text));
+});
+
+test("S3: from 18:00 Bangkok time the first column is 'คืนนี้' and the night's UV is 0", () => {
+  const eve = Date.parse("2026-10-24T12:30:00Z"); // 19:30 in Bangkok
+  for (const lang of ["th", "en"]) {
+    const r = assess(full(at(13.7563, 100.5018), { now: eve }), lang);
+    assert.equal(r.outlook[0].name, lang === "en" ? "Tonight" : "คืนนี้");
+    assert.equal(r.outlook[1].name, lang === "en" ? "Tomorrow" : "พรุ่งนี้");
+    if (r.outlook[0].uv) assert.deepEqual([r.outlook[0].uv.text, r.outlook[0].uv.level], ["0", 0]);
+  }
+  const morning = assess(full(at(13.7563, 100.5018), { now: Date.parse("2026-10-24T02:00:00Z") }), "th");
+  assert.equal(morning.outlook[0].name, "วันนี้");
+});
+
+test("S4: the dust card's 'today' is marked as expected, not read against the measured 24-h mean", () => {
+  const r = assess(full(at(13.7563, 100.5018)), "th");
+  const d0 = card(r, "pm25").days?.[0];
+  assert.ok(d0, "the fixture has a dust outlook");
+  assert.equal(d0.sub, "คาด");
+});
+
+test("KI-008/V17: a river that doesn't judge the point carries no status word with ≥ 1 m to spare; the tile's gauge is named", () => {
+  for (const lang of ["th", "en"]) {
+    const c = card(assess(full(at(13.7563, 100.5018)), lang), "flood");
+    const outside = c.lines.filter((l) => /นอกแนวคัน|outside the walls/.test(l));
+    assert.ok(outside.length, "the Bangkok fixture has a river gauge outside the walls");
+    for (const l of outside) assert.doesNotMatch(l, /ใกล้ล้นตลิ่ง|near the bank|เฝ้าระวัง|watch/i, l);
+    const named = c.lines.find((l) => /ตัวเลขบนป้ายน้ำท่วม|the flood tile's number/.test(l));
+    assert.ok(named, "one line names the tile's gauge");
+    const cm = (s) => s.match(/(\d[\d,]*)\s*(?:ซม|cm)/)?.[1];
+    assert.equal(cm(named), cm(c.value), "the named gauge is the tile's number");
+  }
+});
+
+test("S6: no heat number or 'danger' line for a window with no afternoon left (the correction is for daily maxima)", () => {
+  const ens = jx("ens_bkk.json");
+  const at18 = buildOutlook(ens, Date.parse("2026-10-24T11:00:00Z")); // 18:00 in Bangkok
+  assert.equal(at18.days[0].heat, null);
+  assert.ok(at18.days[1].heat && at18.next24.heat, "tomorrow and the tile's 24 h keep theirs");
+  assert.ok(!prewarnings(at18).some((x) => x.hazard === "heat" && x.day === 0));
+  const r = assess(full(at(13.7563, 100.5018), { now: Date.parse("2026-10-24T11:00:00Z") }), "th");
+  assert.equal(r.outlook[0].heat, null);
+  assert.ok(!card(r, "heat").days.some((d) => d.name === "คืนนี้" || d.name === "วันนี้"));
+  // before 16:00 the rest of today still holds the afternoon peak
+  assert.ok(buildOutlook(ens, Date.parse("2026-10-24T07:30:00Z")).days[0].heat); // 14:30
+});
+
+test("U2/U20: a province opens its town's subdistrict and a district its seat, by code (#t=), labelled when drawn", async () => {
+  const { localSearch, hitPlace } = await import("../public/js/places.js");
+  const cm = hitPlace(localSearch(TAMBON, "เชียงใหม่")[0]);
+  assert.deepEqual([cm.source, cm.code, cm.name], ["tambon", 500101, ""]); // ต.ศรีภูมิ, not a mountain 40 km away
+  assert.equal(nearestTambon(TAMBON, cm.lat, cm.lon).code, 500101);
+  for (const [q, code] of [["ภูเก็ต", 830101], ["ขอนแก่น", 400101], ["อุบลราชธานี", 340101], ["กรุงเทพมหานคร", 100101]]) {
+    assert.equal(hitPlace(localSearch(TAMBON, q)[0]).code, code, q);
+  }
+  const mr = localSearch(TAMBON, "แม่ริม").find((h) => h.kind === "a");
+  assert.equal(hitPlace(mr).code, 500701); // อ.แม่ริม's seat, ต.ริมใต้
+  // a district whose xx01 no longer exists opens its lowest-coded subdistrict (14 of 928, e.g. เขตบางเขน)
+  const bkn = localSearch(TAMBON, "บางเขน").find((h) => h.kind === "a");
+  assert.ok(Math.floor(hitPlace(bkn).code / 100) === 1005);
+});
+
+test("U3/U25: the heat tile is the afternoon its label names, said as 'feels like'", () => {
+  for (const [iso, label, day] of [["2026-10-23T19:50:00Z", "บ่ายนี้", 0], ["2026-10-24T09:30:00Z", "บ่ายพรุ่งนี้", 1]]) {
+    const r = assess(full(at(13.7563, 100.5018), { now: Date.parse(iso) }), "th");
+    const h = card(r, "heat");
+    assert.ok(h.value.startsWith(`${label} รู้สึกเหมือน `), h.value);
+    // the tile's number is the same window's as the table's cell for that day
+    const cell = r.outlook[day].heat || r.outlook[1].heat;
+    assert.equal(h.value.match(/(\d+) °C/)[1], cell.text.replace("°", ""), `${iso}: tile ${h.value} vs table ${cell.text}`);
+  }
+  const en = card(assess(full(at(13.7563, 100.5018)), "en"), "heat");
+  assert.match(en.value, /^This afternoon: feels like \d+ °C$/);
+});
+
+test("U4: under a TMD warning the card's day chips say so, as the table does", () => {
+  const w = parseCap(fx("tmd_cap_item.xml"));
+  const r = assess(full(at(7.0086, 100.4747), { warnings: { items: [w] } }), "th");
+  const chips = card(r, "rain").days;
+  assert.equal(chips[0].text, "📢 เตือนภัย");
+  assert.equal(chips[0].level, r.outlook[0].rain.level, "the chip takes the warning's level, as the table's cell does");
+  assert.notEqual(chips[1].text, "📢 เตือนภัย", "the warning ends 08:00 on day 0: tomorrow keeps the model's word");
+});
+
+test("U5: the rain tile's word is the gauge's only when the gauge raised it", () => {
+  const r = card(assess(full(at(13.7563, 100.5018)), "th"), "rain");
+  assert.notEqual(r.word, "ไม่มีฝน", "yesterday's dry gauge is not today's word");
+  assert.equal(r.word, "ยังไม่น่าห่วง");
+});
+
+test("U8/U15: today's far or small quakes are counted on the tile; felt words only from M5.5 at the low band", () => {
+  const tmdQuakes = { items: [
+    { time: "2026-10-24T02:31:00+07:00", lat: 18.9, lon: 102.6, mag: 4.2, depth: 10, placeTh: "ประเทศลาว", place: "ประเทศลาว" },
+    { time: "2026-10-24T01:33:00+07:00", lat: 18.8, lon: 102.5, mag: 1.8, depth: 10, placeTh: "ประเทศลาว", place: "ประเทศลาว" },
+  ] };
+  const kk = at(16.43, 102.83); // Khon Kaen, about 265–275 km away (the list's radius is 300 km)
+  const q = card(assess(full(kk, { tmdQuakes, emsc: { features: [] }, usgs: { features: [] } }), "th"), "quake");
+  assert.equal(q.level, 0);
+  assert.match(q.word, /^24 ชม\. นี้ 2 ครั้ง/);
+  for (const l of q.lines.filter((x) => /ขนาด [14]\./.test(x))) assert.doesNotMatch(l, /รู้สึก/, l);
+});
+
+test("U9: in the verdict the heat band is named as a level, so 'เตือนภัย' isn't read as TMD's notice", () => {
+  for (const lang of ["th", "en"]) {
+    const r = assess(full(at(13.7563, 100.5018)), lang);
+    const heat = [r.verdict.worst, ...r.verdict.others].find((i) => i && i.id === "heat");
+    assert.ok(heat, "the Bangkok fixture's verdict names heat");
+    assert.match(heat.word, lang === "en" ? / level$/ : /^ระดับ/);
+  }
+});
+
+test("U14/U21/U24: words that say what the data says", () => {
+  const p = at(18.79, 98.99);
+  const ls = card(assess(full(p, { dmrSlide: { count: 2 } }), "th"), "landslide");
+  if (ls.level === 0) assert.equal(ls.word, "ใกล้หมู่บ้านเสี่ยง ฝนยังไม่มาก");
+  const rain = card(assess(full(at(13.7563, 100.5018)), "th"), "rain");
+  assert.doesNotMatch(rain.lines.join(" "), /ราว ไม่ถึง|ราว เกิน/);
+  const wind = card(assess(full(at(13.7563, 100.5018), { gdacs: undefined, errors: { gdacs: "timeout" } }), "th"), "wind");
+  assert.ok(wind.lines.some((l) => /GDACS ไม่ได้/.test(l)), wind.lines.join(" | "));
+});
+
+test("U16: UV's first day is the rest of today, like every other column", () => {
+  const morning = assess(full(at(13.7563, 100.5018), { now: Date.parse("2026-10-24T01:00:00Z") }), "th"); // 08:00
+  const late = assess(full(at(13.7563, 100.5018), { now: Date.parse("2026-10-24T08:30:00Z") }), "th"); // 15:30
+  assert.ok(+late.outlook[0].uv.text < +morning.outlook[0].uv.text, `${late.outlook[0].uv.text} vs ${morning.outlook[0].uv.text}`);
+  assert.match(card(late, "uv").lines[0], /พรุ่งนี้/);
+});
+
+test("X8: a CAP Update or Cancel replaces the notices it references; the replaced ones leave the page", async () => {
+  const { inForce } = await import("../tools/collect.mjs");
+  const now = Date.parse("2026-10-22T10:00:00Z");
+  const base = { status: "Actual", expires: "2026-10-22T18:00:00+07:00", references: [] };
+  const alert = { ...base, id: "A", msgType: "Alert" };
+  const update = { ...base, id: "B", msgType: "Update", references: ["A"] };
+  const cancel = { ...base, id: "C", msgType: "Cancel", references: ["B"] };
+  assert.deepEqual(inForce([alert], now).map((w) => w.id), ["A"]);
+  assert.deepEqual(inForce([alert, update], now).map((w) => w.id), ["B"]);
+  assert.deepEqual(inForce([alert, update, cancel], now).map((w) => w.id), []);
+  assert.deepEqual(inForce([{ ...alert, status: "Exercise" }, { ...alert, id: "D", expires: "2026-10-22T08:00:00+07:00" }], now), []);
+  // the parser reads <references> ("sender,identifier,sent" entries)
+  const xml = fx("tmd_cap_item.xml").replace("</msgType>", "</msgType><references>tmd@tmd.go.th,TMD-OLD-1,2026-10-22T10:00:00+07:00 tmd@tmd.go.th,TMD-OLD-2,2026-10-22T11:00:00+07:00</references>");
+  assert.deepEqual(parseCap(xml).references, ["TMD-OLD-1", "TMD-OLD-2"]);
+});
+
+test("X3: the heat number never sits below its own word's band (41.978 shows 42 under อันตราย)", async () => {
+  const { heatNum } = await import("../public/js/assess.js");
+  for (const v of [41.978, 41.94, 42, 32.96, 33.04, 26.96, 51.97]) {
+    assert.equal(band("heat", heatNum(v)).level, band("heat", v).level, `${v} → ${heatNum(v)}`);
+    assert.ok(heatNum(v) <= Math.round(v), "never above the rounded value");
+  }
+});
+
+test("X10: the English page links to บ้านรอดไหม's English guides", () => {
+  const en = assess(full(at(13.7563, 100.5018)), "en");
+  const th = assess(full(at(13.7563, 100.5018)), "th");
+  for (const c of en.cards) if (c.link?.href.includes("baanrodmai")) assert.match(c.link.href, /autobahn\.bot\/en\//, c.id);
+  for (const c of th.cards) if (c.link?.href.includes("baanrodmai")) assert.doesNotMatch(c.link.href, /\/en\//, c.id);
+});
+
+// ---------- the model check of 24 Oct 2026 (docs/research/model-check-2026-10-24.md) ----------
+
+test("model check §4.2: the ensemble is asked for the grid cell's own height, as the correction was fitted", async () => {
+  const { urls } = await import("../public/js/sources.js");
+  assert.match(urls({ lat: 9.13, lon: 99.33 }, NOW).ens, /[?&]elevation=nan(&|$)/);
+});
+
+test("model check §4.1: the heat correction gets each member's max of 13:00 and 16:00, as it was fitted", async () => {
+  const { heatMembers, predictorIndex, perMemberAt, summarizeHeat } = await import("../public/js/outlook.js");
+  const { HEAT } = await import("../public/js/calibration.js");
+  const ens = jx("ens_bkk.json");
+  const o = buildOutlook(ens, NOW);
+  const d = o.days[1];
+  const idx = predictorIndex(ens.hourly.time, d.i0, d.i1);
+  assert.deepEqual(idx.map((i) => ens.hourly.time[i].slice(11, 16)), ["13:00", "16:00"]);
+  const expect = summarizeHeat(perMemberAt(heatMembers(ens.hourly), idx), HEAT.lead1);
+  assert.equal(d.heat.p50, expect.p50);
+  assert.equal(d.heat.method, "C0", "October: the year-round line");
+});
+
+test("D-046: Nov–Feb uses C6 (corrected T and Td, then the heat index); in dry cool air it is milder than the line", async () => {
+  const { HEAT, dewPoint, rhFrom } = await import("../public/js/calibration.js");
+  const { heatIndexC } = await import("../public/js/heat.js");
+  // dew point and RH are each other's inverse (Magnus 17.625 / 243.04)
+  for (const [t, rh] of [[30, 50], [33, 75], [24, 90]]) assert.ok(Math.abs(rhFrom(t, dewPoint(t, rh)) - rh) < 1e-9);
+  // a synthetic December day: 51 members at 30 °C and 50 % at 13:00 and 16:00
+  const time = []; const T = []; const RH = [];
+  for (let d = 10; d <= 13; d++) for (let hh = 0; hh < 24; hh++) {
+    time.push(`2026-12-${d}T${String(hh).padStart(2, "0")}:00`);
+    T.push(hh >= 12 && hh <= 16 ? 30 : 24); RH.push(hh >= 12 && hh <= 16 ? 50 : 85);
+  }
+  const hourly = { time, temperature_2m: T, relative_humidity_2m: RH, precipitation: T.map(() => 0), wind_gusts_10m: T.map(() => 10) };
+  for (let m = 1; m <= 50; m++) {
+    const k = String(m).padStart(2, "0");
+    Object.assign(hourly, { [`temperature_2m_member${k}`]: T, [`relative_humidity_2m_member${k}`]: RH, [`precipitation_member${k}`]: T.map(() => 0), [`wind_gusts_10m_member${k}`]: T.map(() => 10) });
+  }
+  const o = buildOutlook({ hourly, utc_offset_seconds: 25200 }, Date.parse("2026-12-10T00:30:00Z"));
+  const d1 = o.days[1];
+  assert.equal(d1.heat.method, "C6");
+  const k = HEAT.cool.lead1;
+  const expect = heatIndexC(30 + k.dT, rhFrom(30 + k.dT, dewPoint(30, 50) + k.dTd)) + k.c;
+  assert.ok(Math.abs(d1.heat.p50 - expect) < 1e-9, `${d1.heat.p50} vs ${expect}`);
+  const line = HEAT.lead1.a + HEAT.lead1.b * heatIndexC(30, 50);
+  assert.ok(line - d1.heat.p50 > 2, `the line ${line.toFixed(1)} vs C6 ${d1.heat.p50.toFixed(1)}: the line runs hot in dry cool air`);
+});
+
+test("S12: the collector's files count only while fresh (KV keeps the last upload when the server stops)", async () => {
+  const { liveFresh, LIVE_MAX_AGE_H } = await import("../public/js/sources.js");
+  const now = Date.parse("2026-10-24T09:00:00Z");
+  assert.equal(LIVE_MAX_AGE_H, 2);
+  assert.ok(liveFresh({ generated: "2026-10-24T08:45:00Z" }, now));
+  assert.ok(liveFresh({ generated: "2026-10-24T07:01:00Z" }, now));
+  assert.ok(!liveFresh({ generated: "2026-10-24T06:59:00Z" }, now));
+  assert.ok(!liveFresh({ files: {} }, now), "no time, no trust");
+  assert.ok(!liveFresh({ generated: "2026-10-25T09:00:00Z" }, now), "a clock far in the future isn't trusted either");
 });

@@ -1,0 +1,788 @@
+{
+ "about": "Thai GHCNh stations (NCEI ghcnh-station-list.csv, read 2026-10-24) with the region used by docs/research/model-check-2026-10-24.md. Regions follow TMD's (เหนือ includes Nakhon Sawan, Uthai Thani, Phetchabun, Tak; Central/Bangkok includes Kanchanaburi and Ratchaburi; Prachuap's Nong Phlub is South, as TMD's south-east-coast region). Samples A and B are the 2026-10-23 study's; C = every other station, fixed before any result was looked at (≤ 500 m, no island or marine station); a C station is scored only if it has ≥ 30 forecast–observation pairs in the period.",
+ "stations": [
+  {
+   "id": "THM00048302",
+   "wmo": "48302",
+   "lat": 19.9167,
+   "lon": 99.0333,
+   "elev": 1530.0,
+   "name": "DOI ANG KHANG",
+   "region": "North",
+   "sample": "excluded",
+   "excluded": "elevation 1530 m (mountain top, not a populated point)"
+  },
+  {
+   "id": "THM00048304",
+   "wmo": "48304",
+   "lat": 19.8667,
+   "lon": 99.7667,
+   "elev": 401.0,
+   "name": "CHAING RAI ARGOMET",
+   "region": "North",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048307",
+   "wmo": "48307",
+   "lat": 19.4167,
+   "lon": 100.8833,
+   "elev": 335.0,
+   "name": "TUNG CHANG",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048310",
+   "wmo": "48310",
+   "lat": 19.1931,
+   "lon": 99.9,
+   "elev": 398.9,
+   "name": "PHAYAO",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048315",
+   "wmo": "48315",
+   "lat": 19.1167,
+   "lon": 100.8,
+   "elev": 237.0,
+   "name": "THA WANG PHA",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048324",
+   "wmo": "48324",
+   "lat": 17.6333,
+   "lon": 99.25,
+   "elev": 192.0,
+   "name": "THOEN",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048325",
+   "wmo": "48325",
+   "lat": 18.1667,
+   "lon": 97.9333,
+   "elev": 213.0,
+   "name": "MAE SARIANG",
+   "region": "North",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048326",
+   "wmo": "48326",
+   "lat": 18.9167,
+   "lon": 99.0,
+   "elev": 318.0,
+   "name": "MAE JO AGROMET",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048333",
+   "wmo": "48333",
+   "lat": 18.8667,
+   "lon": 100.75,
+   "elev": 264.0,
+   "name": "NAN AGROMET",
+   "region": "North",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048334",
+   "wmo": "48334",
+   "lat": 18.3167,
+   "lon": 99.2833,
+   "elev": 319.0,
+   "name": "LAMPANG AGROMET",
+   "region": "North",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048350",
+   "wmo": "48350",
+   "lat": 17.4,
+   "lon": 101.7333,
+   "elev": 264.0,
+   "name": "LOEI AGROMET",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048351",
+   "wmo": "48351",
+   "lat": 17.6167,
+   "lon": 100.1,
+   "elev": 64.0,
+   "name": "UTTARADIT",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048355",
+   "wmo": "48355",
+   "lat": 17.1167,
+   "lon": 104.05,
+   "elev": 192.0,
+   "name": "SAKON NAKHON AGROMET",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048357",
+   "wmo": "48357",
+   "lat": 17.4167,
+   "lon": 104.7833,
+   "elev": 148.0,
+   "name": "NAKHON PHANOM",
+   "region": "Northeast",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048358",
+   "wmo": "48358",
+   "lat": 17.4333,
+   "lon": 104.7833,
+   "elev": 153.0,
+   "name": "NAKHON PHANOM AGROMET",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048360",
+   "wmo": "48360",
+   "lat": 17.2167,
+   "lon": 102.4167,
+   "elev": 228.0,
+   "name": "NONGBUALAMPHU",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048363",
+   "wmo": "48363",
+   "lat": 18.4136,
+   "lon": 103.5167,
+   "elev": 159.9,
+   "name": "BUNGKARN",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048372",
+   "wmo": "48372",
+   "lat": 17.1,
+   "lon": 99.8,
+   "elev": 50.0,
+   "name": "SUKHOTHAI",
+   "region": "North",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048373",
+   "wmo": "48373",
+   "lat": 17.1667,
+   "lon": 99.8667,
+   "elev": 54.0,
+   "name": "SI SAMRONG AGROMET",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048374",
+   "wmo": "48374",
+   "lat": 16.7667,
+   "lon": 101.25,
+   "elev": 145.0,
+   "name": "LOMSAK",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048377",
+   "wmo": "48377",
+   "lat": 17.2333,
+   "lon": 99.05,
+   "elev": 144.0,
+   "name": "BHUMIBOL DAM",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048380",
+   "wmo": "48380",
+   "lat": 16.4833,
+   "lon": 99.5333,
+   "elev": 82.0,
+   "name": "KAMPHAENG PHET",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048382",
+   "wmo": "48382",
+   "lat": 16.25,
+   "lon": 103.0667,
+   "elev": 154.0,
+   "name": "KOSUMPHISAI",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048383",
+   "wmo": "48383",
+   "lat": 16.5333,
+   "lon": 104.7167,
+   "elev": 140.0,
+   "name": "MUKDAHAN",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048384",
+   "wmo": "48384",
+   "lat": 16.3333,
+   "lon": 102.8167,
+   "elev": 166.0,
+   "name": "THA PHRA AGROMET",
+   "region": "Northeast",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048385",
+   "wmo": "48385",
+   "lat": 16.0167,
+   "lon": 98.8667,
+   "elev": 460.0,
+   "name": "UMPHANG",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048386",
+   "wmo": "48386",
+   "lat": 16.3333,
+   "lon": 100.3667,
+   "elev": 39.4,
+   "name": "PICHIT AGROMET",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048387",
+   "wmo": "48387",
+   "lat": 16.75,
+   "lon": 98.9333,
+   "elev": 368.0,
+   "name": "DOI MU SOE AGROMET",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048390",
+   "wmo": "48390",
+   "lat": 16.3333,
+   "lon": 103.5833,
+   "elev": 140.9,
+   "name": "KAMALASAI",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048401",
+   "wmo": "48401",
+   "lat": 15.35,
+   "lon": 100.5,
+   "elev": 87.0,
+   "name": "TAKFA AGROMET",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048403",
+   "wmo": "48403",
+   "lat": 15.8,
+   "lon": 102.0333,
+   "elev": 184.0,
+   "name": "CHAIYAPHUM",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048404",
+   "wmo": "48404",
+   "lat": 16.0667,
+   "lon": 103.6167,
+   "elev": 156.0,
+   "name": "ROI ET AGROMET",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048409",
+   "wmo": "48409",
+   "lat": 15.0853,
+   "lon": 104.3306,
+   "elev": 129.2,
+   "name": "SI SAKET AGROMET",
+   "region": "Northeast",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048410",
+   "wmo": "48410",
+   "lat": 15.3667,
+   "lon": 100.0333,
+   "elev": 26.2,
+   "name": "UTHAITHANI",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048413",
+   "wmo": "48413",
+   "lat": 15.6569,
+   "lon": 101.1053,
+   "elev": 69.7,
+   "name": "WICHIAN BURI",
+   "region": "North",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048415",
+   "wmo": "48415",
+   "lat": 14.5167,
+   "lon": 100.7167,
+   "elev": 10.0,
+   "name": "AYUTTHAYA",
+   "region": "Central",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048416",
+   "wmo": "48416",
+   "lat": 15.3167,
+   "lon": 103.6833,
+   "elev": 130.0,
+   "name": "THA TUM",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048418",
+   "wmo": "48418",
+   "lat": 15.2667,
+   "lon": 101.2,
+   "elev": 51.0,
+   "name": "BUA CHUM",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048419",
+   "wmo": "48419",
+   "lat": 14.1,
+   "lon": 100.6167,
+   "elev": 7.0,
+   "name": "PATHUMTHANI",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048420",
+   "wmo": "48420",
+   "lat": 13.5167,
+   "lon": 100.75,
+   "elev": 3.0,
+   "name": "SAMUTPRAKAN AGROMET",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048421",
+   "wmo": "48421",
+   "lat": 14.75,
+   "lon": 98.6333,
+   "elev": 99.0,
+   "name": "THONG PHAPHUM",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048425",
+   "wmo": "48425",
+   "lat": 14.4667,
+   "lon": 100.1333,
+   "elev": 9.0,
+   "name": "SUPHAN BURI",
+   "region": "Central",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048426",
+   "wmo": "48426",
+   "lat": 14.8,
+   "lon": 100.6167,
+   "elev": 11.0,
+   "name": "LOP BURI",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048427",
+   "wmo": "48427",
+   "lat": 14.3,
+   "lon": 99.8667,
+   "elev": 7.0,
+   "name": "U THONG AGROMET",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048429",
+   "wmo": "48429",
+   "lat": 13.6833,
+   "lon": 100.7667,
+   "elev": 6.0,
+   "name": "SUVARNABHUMI INTER AIRPORT",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048432",
+   "wmo": "48432",
+   "lat": 14.8833,
+   "lon": 103.5,
+   "elev": 147.0,
+   "name": "SURIN",
+   "region": "Northeast",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048433",
+   "wmo": "48433",
+   "lat": 14.8833,
+   "lon": 103.45,
+   "elev": 145.0,
+   "name": "SURIN AGROMET",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048435",
+   "wmo": "48435",
+   "lat": 14.6333,
+   "lon": 101.3167,
+   "elev": 388.0,
+   "name": "PAKCHONG AGROMET",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048437",
+   "wmo": "48437",
+   "lat": 15.2333,
+   "lon": 103.25,
+   "elev": 184.0,
+   "name": "BURERAM",
+   "region": "Northeast",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048440",
+   "wmo": "48440",
+   "lat": 13.7833,
+   "lon": 102.0333,
+   "elev": 43.0,
+   "name": "SRAKAEW",
+   "region": "East",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048450",
+   "wmo": "48450",
+   "lat": 14.0167,
+   "lon": 99.5333,
+   "elev": 29.0,
+   "name": "KANCHANA BURI",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048451",
+   "wmo": "48451",
+   "lat": 14.0167,
+   "lon": 99.9667,
+   "elev": 10.0,
+   "name": "NAKHONPATHOM",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048453",
+   "wmo": "48453",
+   "lat": 13.6667,
+   "lon": 100.6167,
+   "elev": 6.0,
+   "name": "BANG NA AGROMET",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048454",
+   "wmo": "48454",
+   "lat": 13.7,
+   "lon": 100.5667,
+   "elev": 6.0,
+   "name": "BANGKOK PORT",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048455",
+   "wmo": "48455",
+   "lat": 13.7333,
+   "lon": 100.5667,
+   "elev": 4.0,
+   "name": "BANGKOK METROPOLIS",
+   "region": "Central",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048457",
+   "wmo": "48457",
+   "lat": 13.3833,
+   "lon": 100.6,
+   "elev": 15.0,
+   "name": "BANGKOK PILOT",
+   "region": "East",
+   "sample": "excluded",
+   "excluded": "marine pilot station"
+  },
+  {
+   "id": "THM00048458",
+   "wmo": "48458",
+   "lat": 13.5672,
+   "lon": 101.4544,
+   "elev": 70.2,
+   "name": "CHACHOENGSAO AGROMET",
+   "region": "East",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048460",
+   "wmo": "48460",
+   "lat": 13.1667,
+   "lon": 100.8,
+   "elev": 27.0,
+   "name": "KO SICHANG",
+   "region": "East",
+   "sample": "excluded",
+   "excluded": "island (Ko Sichang)"
+  },
+  {
+   "id": "THM00048461",
+   "wmo": "48461",
+   "lat": 12.9167,
+   "lon": 100.8667,
+   "elev": 61.0,
+   "name": "PHATTHAYA",
+   "region": "East",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048464",
+   "wmo": "48464",
+   "lat": 13.4833,
+   "lon": 99.7833,
+   "elev": 5.0,
+   "name": "RATCHA BURI",
+   "region": "Central",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048474",
+   "wmo": "48474",
+   "lat": 12.5833,
+   "lon": 99.7333,
+   "elev": 108.0,
+   "name": "NONG PHLUB AGROMET",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048478",
+   "wmo": "48478",
+   "lat": 12.6333,
+   "lon": 101.35,
+   "elev": 5.0,
+   "name": "RAYONG",
+   "region": "East",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048479",
+   "wmo": "48479",
+   "lat": 12.7333,
+   "lon": 101.1333,
+   "elev": 45.0,
+   "name": "HUAI PONG AGROMET",
+   "region": "East",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048481",
+   "wmo": "48481",
+   "lat": 12.5,
+   "lon": 102.1667,
+   "elev": 24.0,
+   "name": "PHLIU AGROMET",
+   "region": "East",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048501",
+   "wmo": "48501",
+   "lat": 11.7667,
+   "lon": 102.8833,
+   "elev": 4.0,
+   "name": "KHLONG YAI",
+   "region": "East",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048520",
+   "wmo": "48520",
+   "lat": 10.3333,
+   "lon": 99.1,
+   "elev": 13.0,
+   "name": "SAWI AGROMET",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048553",
+   "wmo": "48553",
+   "lat": 9.25,
+   "lon": 99.867,
+   "elev": 5.0,
+   "name": "KHANOM",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048554",
+   "wmo": "48554",
+   "lat": 8.3592,
+   "lon": 100.0594,
+   "elev": 3.0,
+   "name": "NAKHONSI THAMMARAT AGROMET",
+   "region": "South",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048555",
+   "wmo": "48555",
+   "lat": 9.1,
+   "lon": 99.6333,
+   "elev": 37.0,
+   "name": "SURAT THANI AGROMET",
+   "region": "South",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048556",
+   "wmo": "48556",
+   "lat": 8.5667,
+   "lon": 99.25,
+   "elev": 14.0,
+   "name": "PHRASANG",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048557",
+   "wmo": "48557",
+   "lat": 8.4333,
+   "lon": 99.5167,
+   "elev": 30.0,
+   "name": "CHAWANG",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048560",
+   "wmo": "48560",
+   "lat": 7.5833,
+   "lon": 100.1667,
+   "elev": 4.0,
+   "name": "PHATTHALUNG AGROMET",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048561",
+   "wmo": "48561",
+   "lat": 8.6833,
+   "lon": 98.25,
+   "elev": 4.0,
+   "name": "TAKUA PA",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048563",
+   "wmo": "48563",
+   "lat": 8.1,
+   "lon": 98.9833,
+   "elev": 45.0,
+   "name": "KRABI",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048564",
+   "wmo": "48564",
+   "lat": 7.8833,
+   "lon": 98.4,
+   "elev": 4.0,
+   "name": "PHUKET",
+   "region": "South",
+   "sample": "A"
+  },
+  {
+   "id": "THM00048571",
+   "wmo": "48571",
+   "lat": 7.0,
+   "lon": 100.5,
+   "elev": 10.0,
+   "name": "KHO HONG AGROMET",
+   "region": "South",
+   "sample": "B"
+  },
+  {
+   "id": "THM00048574",
+   "wmo": "48574",
+   "lat": 6.8,
+   "lon": 100.3833,
+   "elev": 25.0,
+   "name": "SA-DAO",
+   "region": "South",
+   "sample": "C"
+  },
+  {
+   "id": "THM00048581",
+   "wmo": "48581",
+   "lat": 6.5167,
+   "lon": 101.2833,
+   "elev": 36.0,
+   "name": "YALA AGROMET",
+   "region": "South",
+   "sample": "C"
+  }
+ ]
+}

@@ -1,6 +1,6 @@
-# ภัยรอบบ้าน ตอนนี้ · Disaster Now
+# ภัยรอบบ้าน · Thai Risk
 
-**One page that shows every hazard at a point in Thailand, now and for the next 3 days.** Tap 📍 (or search a subdistrict, a road, a place) and see, for that point: rain, river level and flash floods, PM2.5 dust and other pollution, heat, UV, wind and storms, landslides, earthquakes and fires, each in the agency's own words with its source and time, one sourced action, and a link to what to do.
+**One page that shows every hazard at a point in Thailand, now and for the next 3 days** (code name `disaster-now`). Tap 📍 (or search a subdistrict, a road, a place) and see, for that point: rain, river level and flash floods, PM2.5 dust and other pollution, heat, UV, wind and storms, landslides, earthquakes and fires, each in the agency's own words with its source and time, one sourced action, and a link to what to do.
 
 > v0.3.0 · 24 Oct 2026 · **built, validated, audited, ready for Cloudflare at `risk.autobahn.bot`, moving to a server of its own; not deployed, not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
 
@@ -10,6 +10,7 @@
 
 - **Choose a point:** GPS on a tap; instant search over all 7,425 subdistricts, 928 districts and 77 provinces on the phone; Enter asks OpenStreetMap for roads, sois and places (FloodWatch's way of searching: abbreviations and soi variants). Up to five saved places open first next time ("บ้าน", "บ้านแม่").
 - **A verdict in one line,** by what to do (ยังไม่น่าห่วง · ติดตามไว้ · เตรียมตัว · ทำทันที), never milder than any hazard, naming the worst one in the agency's word with one action from บ้านรอดไหม.
+- **One forecast, one level, everywhere:** the tile, the card's days, the 3-day table and the pre-warnings grade a forecast the same way, and a forecast alone never goes past เตรียมตัว in any of them. Heat is said as "รู้สึกเหมือน 43 °C" (the heat index), for the afternoon it names.
 - **Ten tiles** in a fixed order, each with the agency's word, the value and a 4-dot meter; **detail cards** with sources, times and ages; a **3-day table**; **pre-warnings** by day with chances ("พรุ่งนี้ ฝนหนัก โอกาส 40%"), never countdowns.
 - **Measurements first:** PCD stations, ThaiWater gauges (judged exactly as FloodWatch judges them), HII's flash-flood list, TMD's warnings, which lift their tile and lead.
 - **Models labelled and validated** ([docs/MODELS.md](docs/MODELS.md)):
@@ -28,13 +29,14 @@
 npm install                       # only playwright-core, for the visitor walk
 npm run serve                     # http://127.0.0.1:8787/
 npm test                          # unit tests on saved live responses
-CHROME_PATH=/opt/pw-browsers/chromium npm run smoke            # the visitor walk (fixtures, clock pinned)
-CHROME_PATH=/opt/pw-browsers/chromium npm run smoke -- --live  # the same on today's sources
+CHROME_PATH=<chromium> npm run smoke            # the visitor walk (fixtures, clock pinned; also an 18:30 page)
+CHROME_PATH=<chromium> npm run smoke -- --live  # the same on today's sources, once per change
+# <chromium>: /root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome on autobahn-bot, /opt/pw-browsers/chromium in a cloud session
 npm run collect                   # the collector once → public/data/live/
 npm run check:advice              # advice lines still equal บ้านรอดไหม's
 ```
 
-**On its own server and on Cloudflare** (the runbook: [docs/SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server); [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)). Never on another app's production server:
+**On the server and on Cloudflare** (the runbook: [docs/SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server); [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)). The collector runs on `autobahn-bot` beside BrainPlatform, by the owner's choice (D-045); never on FloodWatch's server:
 
 ```
 cp .env.example .env && chmod 600 .env   # fresh on every server, with tokens made for this project
@@ -56,7 +58,7 @@ ECMWF ensemble and CAMS via Open-Meteo (CC BY 4.0) · Pollution Control Departme
 
 ## The family
 
-It is the third app beside **FloodWatch** (https://flood.autobahn.bot, water) and **บ้านรอดไหม** (https://baanrodmai.autobahn.bot, what to do); its own address will be **https://risk.autobahn.bot**. Its gauge statuses agree with FloodWatch's on 691 of 693 gauges; its advice lines are บ้านรอดไหม's word for word. [docs/INTEGRATION.md](docs/INTEGRATION.md).
+It is the third app beside **FloodWatch** (https://flood.autobahn.bot, water) and **บ้านรอดไหม** (https://baanrodmai.autobahn.bot, what to do); its own address will be **https://risk.autobahn.bot** (ready; the deploy waits for the token's *Workers Scripts: Edit*). Its gauge statuses agree with FloodWatch's on 691 of 693 gauges; its advice lines are บ้านรอดไหม's word for word. [docs/INTEGRATION.md](docs/INTEGRATION.md).
 
 ## Docs
 

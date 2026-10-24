@@ -1,0 +1,114 @@
+{
+ "35t": {
+  "lat": 18.840732,
+  "lon": 98.96978,
+  "region": "north",
+  "name": "Chiang Mai",
+  "sample": "A",
+  "name_en": "City Hall, Chiangmai"
+ },
+ "37t": {
+  "lat": 18.2783333,
+  "lon": 99.5064666,
+  "region": "north",
+  "name": "Lampang",
+  "sample": "A",
+  "name_en": "Meteorological stations, Lampang"
+ },
+ "70t": {
+  "lat": 19.200226,
+  "lon": 99.893048,
+  "region": "north",
+  "name": "Phayao",
+  "sample": "A",
+  "name_en": "Phayao Provincial, Phayao"
+ },
+ "50t": {
+  "lat": 13.729852,
+  "lon": 100.536501,
+  "region": "bangkok",
+  "name": "Bangkok Pathum Wan",
+  "sample": "A",
+  "name_en": "Chulalongkorn Hospital"
+ },
+ "46t": {
+  "lat": 16.44538333,
+  "lon": 102.83525,
+  "region": "northeast",
+  "name": "Khon Kaen",
+  "sample": "A",
+  "name_en": "Hydrogeological Group Water Resources Regional Office4 khonkaen"
+ },
+ "44t": {
+  "lat": 7.020434,
+  "lon": 100.484088,
+  "region": "south",
+  "name": "Hat Yai",
+  "sample": "A",
+  "name_en": "Hat Yai Municipality"
+ },
+ "57t": {
+  "lat": 19.909217,
+  "lon": 99.823467,
+  "region": "north",
+  "name": "Chiang Rai",
+  "sample": "B",
+  "name_en": "Natural Resources and Environment Office, Chiangrai"
+ },
+ "67t": {
+  "lat": 18.7888833,
+  "lon": 100.7763166,
+  "region": "north",
+  "name": "Nan",
+  "sample": "B",
+  "name_en": "Municipality Office, Nan"
+ },
+ "58t": {
+  "lat": 19.30455,
+  "lon": 97.97165,
+  "region": "north",
+  "name": "Mae Hong Son",
+  "sample": "B",
+  "name_en": "Natural Resources and Environment Office, Mae Hongson"
+ },
+ "69t": {
+  "lat": 18.1283666,
+  "lon": 100.1624333,
+  "region": "north",
+  "name": "Phrae",
+  "sample": "B",
+  "name_en": "Meteorology Center, Phrae"
+ },
+ "05t": {
+  "lat": 13.666183,
+  "lon": 100.605742,
+  "region": "bangkok",
+  "name": "Bangkok Bang Na",
+  "sample": "B",
+  "name_en": "Thai Meteorological Department"
+ },
+ "41t": {
+  "lat": 15.68623,
+  "lon": 100.110556,
+  "region": "central",
+  "name": "Nakhon Sawan",
+  "sample": "B",
+  "name_en": "Nakhonsawan Irrigation Project"
+ },
+ "83t": {
+  "lat": 15.245413,
+  "lon": 104.846219,
+  "region": "northeast",
+  "name": "Ubon Ratchathani",
+  "sample": "B",
+  "name_en": "OTOP Center, Ubon Ratchathani"
+ },
+ "42t": {
+  "lat": 9.126017,
+  "lon": 99.325145,
+  "region": "south",
+  "name": "Surat Thani",
+  "sample": "B",
+  "name_en": "Environment Agency Section 14, Surat Thani"
+ }
+}

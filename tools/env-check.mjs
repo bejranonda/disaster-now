@@ -11,6 +11,8 @@ const root = new URL("../", import.meta.url);
 const read = (f) => { try { return readFileSync(new URL(f, root), "utf8"); } catch { return null; } };
 const template = parseEnv(read(".env.example") || "");
 const envText = read(".env");
+// the Worker's name, from wrangler.jsonc (comments stripped)
+const WORKER = (() => { try { return JSON.parse((read("wrangler.jsonc") || "{}").replace(/^\s*\/\/.*$/gm, "")).name || "disaster-now"; } catch { return "disaster-now"; } })();
 const env = { ...parseEnv(envText || ""), ...Object.fromEntries(Object.keys(template).filter((k) => process.env[k] !== undefined).map((k) => [k, process.env[k]])) };
 
 /** Rows for the listing: never a value, only its state. */
@@ -51,6 +53,14 @@ if (process.argv.includes("--probe")) {
     if (v.ok && env.CLOUDFLARE_ACCOUNT_ID) {
       const w = await cf(`/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/workers/scripts`, tok);
       console.log(`  Workers scripts: ${w.ok ? `readable (${w.d.result.length} on the account)` : `not readable (HTTP ${w.status}): add Workers Scripts permission`}`);
+      // Reading isn't deploying: on 24 Oct 2026 a token that could list scripts was refused by `wrangler deploy`
+      // ("No access to the specified resource" on …/scripts/<name>/secrets). That same read-only call answers
+      // "not found" (10007) or 200 when the token may deploy, and 10000 "no access" when it lacks Workers Scripts: Edit.
+      const sec = await cf(`/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/workers/scripts/${WORKER}/secrets`, tok);
+      const code = sec.d?.errors?.[0]?.code;
+      const may = sec.ok || code === 10007 || sec.status === 404;
+      console.log(`  Workers deploy ("${WORKER}"): ${may ? "allowed" : `REFUSED (HTTP ${sec.status}${code ? `, code ${code}` : ""}): add Account → Workers Scripts: Edit, and Zone ${env.CLOUDFLARE_DOMAIN || ""} → Workers Routes: Edit`}`);
+      if (!may) bad++;
       const kv = await cf(`/accounts/${env.CLOUDFLARE_ACCOUNT_ID}/storage/kv/namespaces?per_page=100`, tok);
       const ns = kv.ok ? kv.d.result.find((n) => n.id === env.CF_KV_NAMESPACE_ID) : null;
       console.log(`  Workers KV: ${kv.ok ? `readable${env.CF_KV_NAMESPACE_ID ? (ns ? `, namespace "${ns.title}" found` : ", CF_KV_NAMESPACE_ID NOT FOUND") : ""}` : `not readable (HTTP ${kv.status}): add Workers KV Storage permission`}`);

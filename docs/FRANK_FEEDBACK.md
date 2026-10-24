@@ -180,3 +180,84 @@ You may: npm run cf:setup, docker compose up -d --build, npm run cf:deploy, comm
 You may not: print .env values; loop live calls (one live walk per change); revoke or touch FloodWatch's tokens.
 Then: the host's facts into HANDOFF §4; A5's review changes; KI-025's table words.
 ```
+
+## 7. The fourth session (24 Oct 2026, 0.4.0): the new host, the name, the go-live
+
+### To you, frankly
+
+1. **"I have moved the project to a new server" — it is not new, and not dedicated.** `autobahn-bot` has run
+   BrainPlatform's production stack for two months (web, MCP server, worker, Postgres, Redis, backups). One day
+   after writing "one server per app" because of exactly this kind of move, the project landed on another app's
+   production host without a word about it. I asked instead of guessing, you said yes, and for this pair it is
+   fine: BrainPlatform calls none of this app's sources and shares no `.env` or tunnel. But a rule you bend silently
+   stops being a rule, for you and for the next agent. D-040 now says what it protects against (D-045), and
+   `npm run preflight` still warns about other apps' containers. Next time, put it in the brief: "this host also runs
+   BrainPlatform; that's fine".
+2. **The new Cloudflare token can rewrite every zone you own.** Your screenshot shows *All zones across all accounts*
+   with Zone Settings, Page Rules, Firewall and DNS: Edit, plus Workers AI, Pages and R2. It sits in a `.env` on a
+   server that runs another production app. If it leaks, FloodWatch's DNS, bejranonda.com's firewall and every other
+   zone go with it. This app needs *Workers Scripts: Edit*, *Workers KV Storage: Edit*, and, on **autobahn.bot only**,
+   *Workers Routes: Edit* and *DNS: Edit* (SERVER §2.2). Make that token, and a second one with *Workers KV Storage:
+   Edit* alone for the collector (`CF_KV_TOKEN`), then revoke this one. It is the same lesson as the copied `.env`
+   (§5): one scoped key per job.
+3. **Asking about the name was right, and "Thai Risk" alone would have been a mistake.** It reads as a country-risk
+   rating in English, and beside ThaiWater it looks official. The page is now **ภัยรอบบ้าน · Thai Risk**, with a footer
+   that says it isn't a government site.
+4. **The brief repeats itself for the third session running.** "Validate the outcome, also the consistency to the
+   current app and content" appears three times again, word for word, and "as visitors" twice. It doesn't make a
+   session validate more; the concrete asks do. This time, "validate the model outcome and cross-validate the
+   forecasting results" led to the most important fix of the day (S6 below), and "test as visitors" to the second
+   (the search that opened Chiang Mai 40 km away on a mountain, U2). Say each once, with what "done" means.
+5. **"Continue to develop" with no priority** let me choose. I chose the visitor-facing contradictions over new
+   features: the page told one family three severities for one forecast. If you have a priority (real phones,
+   the redesign, a new hazard), name it.
+6. **The biggest gap is still yours to close, and it takes ten minutes:** open https://risk.autobahn.bot on an
+   Android and an iPhone, from a LINE chat, tap 📍, and send the link to a family group (A4). No agent can do it,
+   and every session since the first has listed it.
+7. **Decide D1 (heat).** With the consistency fix the page is orange, not red, on forecast heat, but it is still
+   orange on most afternoons. Count the orange days in the first month, as recommended, but decide what you'll do
+   with the count before you see it.
+
+8. **Your second message ("can we forecast or give risks … by learning from data, history, existing forecasts and
+   theories") is the better version of the first session's "ML to forecast 12–72 h"** (§1.4). It asks for *risk* as
+   well as forecasts, and for what the world already does, which is where the honest answers are: aftershock
+   probabilities exist and are operational in the US, New Zealand and Italy; earthquake prediction does not; air
+   quality is mostly a question of whether a Thai agency already publishes a forecast the page should quote. The answers
+   go into a §8 when the research ends (four studies were still running at this commit: earthquakes, air quality,
+   other hazards, and the Hat Yai flood of late 2025). Two frank notes on that message: it pastes
+   the same validation block a fourth time today (it adds nothing the first message didn't say), and it arrived while
+   the go-live was waiting on a model check. Research and a release in one session work, but say which comes first.
+
+### Frank about my own part
+
+- **S6 is the session's real catch, and it was luck as much as care.** The heat correction (fitted on afternoon
+  maxima) ran on evening windows since 0.2.0, so from about 16:00 the page could list "ร้อนระดับอันตราย · โอกาส 30%"
+  for the night. The validation, three audits and my own first pass missed it, because every walk pins the clock at
+  02:50. I saw it only after relabelling the evening column "คืนนี้" and printing it. The walk now has an evening
+  page, and GUIDELINES §6 says "walk the clock".
+- **My first fix for the table broke it differently:** the dots widened the cells and exposed `.sr-only` spans
+  escaping the scroll box. Measuring the overflowing elements (not guessing) found both causes in one probe, and
+  showed the table had hidden tomorrow at 320 px with ก+ even before my change. The walk now checks the table's box.
+- **I used two live page loads for layout probes** before I started blocking ThaiWater in them. Small, but it is the
+  quota KI-029 is about.
+- **The visitor auditor read my uncommitted edits while auditing the old build**, and said so. Its line numbers refer
+  to commit `0d60644`. Running audits against a moving tree is a trade: faster, but the report needs that caveat.
+
+### A better prompt for the next session
+
+Your brief had five good asks (check, name, UX as a visitor, cross-validate the forecasts, frank feedback). This keeps
+them and adds what the session had to ask or guess:
+
+```
+# ภัยรอบบ้าน (disaster-now): <phase>
+Host: autobahn-bot (also runs BrainPlatform; that's fine, D-045). Branch: <branch>. Version after: <x.y.z>.
+Done when:
+  - npm test, npm run smoke, check:docs, check:advice pass; one live walk read as a visitor
+  - an independent visitor audit, output audit and model check ran on the new build; every high finding fixed
+  - <the feature's own criteria, checkable>
+You may: deploy to risk.autobahn.bot (cf:deploy) after the checks; restart the collector stack.
+You may not: touch deploy-* or floodwatch-* containers; print .env; loop live calls; change FloodWatch or บ้านรอดไหม.
+Priority: <1. … 2. … 3. …>. Out of scope: <…>.
+Decided: <name, decisions D-…>. Open for me: <questions you want answered rather than guessed>.
+Record: docs as AGENTS.md §4; frank feedback in FRANK_FEEDBACK §N; commit and push to <branch>.
+```
