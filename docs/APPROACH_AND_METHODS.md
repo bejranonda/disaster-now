@@ -147,3 +147,27 @@ The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_hea
   BrainPlatform's web was checked while they ran.
 - **A permission denied is reported, not routed around:** the refused deploy became an owner action and a probe that
   tests the permission read-only.
+
+## 11. Live, and FloodWatch as a source (24 Oct 2026, evening, 0.6.0)
+
+- **Use the sister app's API server-side.** FloodWatch sends no CORS, which mattered only for the browser. The collector
+  reads `/api/stations` and `/api/risks` every 15 min and publishes one file; the page reads FloodWatch's own rows and
+  words while the file is fresh and falls back to ThaiWater from the phone when it isn't, so it backs FloodWatch up
+  rather than depending on it. No visitor's position goes to FloodWatch (its `/api/point` stays unused).
+- **Its record, not its band.** FloodWatch's bank chances run high in the middle band (25–50 % came true 14 %); the
+  page quotes how often each group came true in its last 30 days, as FloodWatch does (its D-077), and lets a forecast
+  lift a tile only to เตรียมตัว.
+- **A rule validated on one basin is marked as such.** The upstream rule A lifts to เตรียมตัว only on the U-Taphao,
+  where it caught 5 of 5 floods in 30 seasons; elsewhere it lifts to ติดตามไว้ until a record exists. Hat Yai's own
+  red-flag rain (300 mm in 3 days) is quoted as Hat Yai's.
+- **Count a rule's firings nationwide on today's data before shipping it**, and read them: that is how the over-reach
+  (a gauge 12.6 km away across the river) and a contradiction ("upstream rose" beside "upstream data are 5 h old") were
+  found after every fixture test passed.
+- **Follow the agency's colours.** The heat bands were one step above the DOH's own colours since 0.1; nobody had
+  compared them until the UX study read the DOH's statement and บ้านรอดไหม's `/hot`. PM2.5 had followed PCD's all along.
+- **Independent studies with narrow briefs**, run in parallel with the build (lead time, D11, UX, devices); each wrote
+  one report and its scripts, and the build took what their evidence carried: the D11 study's "words and links" stays
+  the owner's to approve because AGENTS.md reserves that wording.
+- **Deploy when the permission exists, not before:** the token's *Workers Scripts: Edit* arrived during the session; the
+  probe said "allowed", 0.5.0 went live at once and 0.6.0 at the end, each checked from the edge.
+

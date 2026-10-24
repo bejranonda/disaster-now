@@ -1,0 +1,31 @@
+# research/eq_d11_etas.py
+# started 2026-10-24T20:28:32+00:00
+events M >= 5.0: 2887 (1973-02-16 .. 2026-10-20); inside the target region 2629
+b (Aki-Utsu, M>=5, 1973-2014, all events, n=2406): 1.118  -> beta 2.575
+background from 981 independent M>=5 epicentres 1973-2014; Poisson-baseline density from all 2406 M>=5 epicentres
+fit targets: 1996; pairs: 1,556,646 (0 s)
+
+ETAS fit (74 s, success=True, CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH): -logL = 27732.3
+   mu     = 0.03998
+   A      = 1.947
+   alpha  = 1.122
+   c      = 0.00939
+   p      = 1.019
+   D      = 8.065
+   gamma  = 1.261
+   q      = 1.811
+   branching ratio (untruncated G-R) 3.452; truncated at M9.2: 3.444
+   background share of fit-period events: 0.256
+   expected direct M>=5 aftershocks of an M6 / M7 / M7.7: 5.98 / 18.37 / 40.30
+   kernel scale s for M5 / M6 / M7: 8.1 / 15.2 / 28.5 km
+
+=== Region-level test 2015-01-01 .. 2026-10-16: 424 M>=5 events in the target region ===
+expected count: ETAS 517, Poisson (training rate of all events) 672, observed 424
+log-likelihood: ETAS -6871.9, Poisson -7631.9; information gain per event 1.792 nats (2.586 bits), probability gain per event 6.00
+daily-updated: 4306 days, 354 with >= 1 event; Poisson log-lik ETAS -1465.8 vs Poisson -1531.9 (gain +66.1 nats over 4306 days)
+   P(>=1 M>=5 in the region in the day): Brier ETAS 0.0757, Poisson 0.0793, BSS +0.045; mean p ETAS 0.095, Poisson 0.145, observed 0.082
+   reliability ETAS daily [0.0,0.2): n=4232 mean p 0.092 observed 0.081
+   reliability ETAS daily [0.2,0.4): n=66 mean p 0.249 observed 0.136
+   reliability ETAS daily [0.4,0.6): n=8 mean p 0.503 observed 0.500
+
+wrote research/out/eq_d11_etas.json and research/out/eq_d11_etas_grids.npz

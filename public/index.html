@@ -21,7 +21,23 @@
 <meta property="og:image:alt" content="ภัยรอบบ้าน (Thai Risk): ทุกความเสี่ยงที่จุดเดียว ตอนนี้และ 3 วันข้างหน้า">
 <meta property="og:locale" content="th_TH">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/app.css?v=0.5.0">
+<link rel="stylesheet" href="css/app.css?v=0.6.0">
+<!-- the module graph loaded in 5 serial round trips: on Slow 3G 📍 did nothing until 11.9 s (device study T5) -->
+<link rel="modulepreload" href="js/geo.js">
+<link rel="modulepreload" href="js/heat.js">
+<link rel="modulepreload" href="js/levels.js">
+<link rel="modulepreload" href="js/outlook.js">
+<link rel="modulepreload" href="js/airq.js">
+<link rel="modulepreload" href="js/water.js">
+<link rel="modulepreload" href="js/quake.js">
+<link rel="modulepreload" href="js/events.js">
+<link rel="modulepreload" href="js/sources.js">
+<link rel="modulepreload" href="js/assess.js">
+<link rel="modulepreload" href="js/places.js">
+<link rel="modulepreload" href="js/i18n.js">
+<link rel="modulepreload" href="js/ipe.js">
+<link rel="modulepreload" href="js/actions.js">
+<link rel="modulepreload" href="js/calibration.js">
 </head>
 <body>
 <header class="top">
@@ -47,6 +63,15 @@
     <p id="finder-msg" class="msg" role="status" hidden></p>
   </section>
 
+  <p id="opening" class="opening-msg" data-t="openingShared">กำลังเปิดพื้นที่ที่ส่งมา…</p>
+  <script>
+    // a shared link opens on its place, not on the welcome screen, while the code still loads (T5); the subdistrict
+    // table starts at once
+    if (/^#(t|p)=/.test(location.hash)) {
+      document.documentElement.classList.add("opening");
+      if (/^#t=/.test(location.hash)) { var l = document.createElement("link"); l.rel = "preload"; l.as = "fetch"; l.href = "data/tambon.json"; l.crossOrigin = "anonymous"; document.head.appendChild(l); }
+    }
+  </script>
   <section id="welcome" class="welcome">
     <p data-t="welcome1">ดูทุกความเสี่ยงที่จุดเดียว: ความร้อน ฝุ่น มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า</p>
     <p class="muted" data-t="welcome2">ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงานไทยและนานาชาติ ตำแหน่งของคุณอยู่ในเครื่องนี้ ส่งให้แหล่งข้อมูลเฉพาะแบบปัดเศษ ~1 กม.</p>
@@ -61,6 +86,7 @@
     </div>
 
     <div id="verdict" class="verdict lv-none" role="status" aria-live="polite"></div>
+    <div id="changes" class="changes" hidden></div>
     <div class="place-act">
       <button type="button" id="save" class="btn small">⭐ <span data-t="save">บันทึก</span></button>
       <button type="button" id="line" class="btn small line" data-t="line">ส่งใน LINE</button>
@@ -109,6 +135,6 @@
   <p class="muted small"><span data-t="footer">ภัยรอบบ้าน · Thai Risk · โครงการทดลองอิสระ ไม่ใช่เว็บของหน่วยงานรัฐ ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ</span> · <span id="ver"></span></p>
 </footer>
 
-<script type="module" src="js/main.js?v=0.5.0"></script>
+<script type="module" src="js/main.js?v=0.6.0"></script>
 </body>
 </html>

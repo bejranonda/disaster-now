@@ -5,7 +5,8 @@
 import { band, scale, roundTo, HAZARDS, RIVER_WORDS } from "./levels.js";
 import { buildOutlook, prewarnings, windowLevel, chanceText, chanceWord, RAIN_WORD_CUTS } from "./outlook.js";
 import { parseGistda, parseAir4Thai, nearestStation, buildAir } from "./airq.js";
-import { nearRain, nearGauges, parseFlashFlood, parseFloodWatchPoint, FW_LEVEL, areaIndex, waterWord, POLDER_PROVINCES } from "./water.js";
+import { nearRain, nearGauges, parseFlashFlood, parseFloodWatchPoint, FW_LEVEL, areaIndex, waterWord, POLDER_PROVINCES, fwRows, nearFw,
+  fwWatch, fwOutlook, nearRainDays, fwGauges, upstreamSignal } from "./water.js";
 import { parseEmsc, parseUsgs, mergeQuakes, quakesForPoint, tsunamiWatch } from "./quake.js";
 import { warningsFor, capHazard, gdacsNear, cycloneLevel, hotspotsNear, hotspotLevel, arcCount, jmaStorm, stormLevel, tmdStormsNear } from "./events.js";
 import { actionFor } from "./actions.js";
@@ -115,7 +116,7 @@ export function assess(b, lang = "th", ipe = null) {
           "Cool season (Nov–Feb): a provisional correction; tested back on stations it wasn't fitted on, a typical miss of ±1.5 °C, not yet tested as issued (the year-round line read 3–4 °C high in this season); day 3 is untested")
         : L("ความแม่นยำที่ทดสอบกับสถานีที่ไม่ได้ใช้ปรับ (2025–26): พลาดราว ±2.5 °C และมักสูงกว่าจริงเล็กน้อย วันที่ 3 ยังไม่ได้ทดสอบ",
           "Tested on stations it wasn't fitted on (2025–26): a typical miss of ±2.5 °C, usually a little high; day 3 is untested");
-      if (w.chance[3] >= 0.1) c.lines.push(L(`โอกาสถึงระดับอันตราย (≥ 42 °C) ${chanceText(w.chance[3], lang)}`, `Chance of danger level (≥ 42 °C): ${chanceText(w.chance[3], lang)}`));
+      if (w.chance[2] >= 0.1) c.lines.push(L(`โอกาสถึงระดับอันตราย (≥ 42 °C) ${chanceText(w.chance[2], lang)}`, `Chance of danger level (≥ 42 °C): ${chanceText(w.chance[2], lang)}`));
       // a window with no afternoon left has no heat summary (outlook.hasAfternoon, S6): those days are left out
       c.days = ens.days.map((d, i) => (d.heat ? { name: dayName(i, d.date, lang, now), date: d.date, level: fcLevel("heat", d.heat), text: `${heatNum(d.heat.p50)}°` } : null)).filter(Boolean);
       // no clock: Open-Meteo doesn't say which run it served (visitor audit V25)
@@ -262,6 +263,26 @@ export function assess(b, lang = "th", ipe = null) {
         `${fmt(r.rain24, 1)} mm measured in the last 24 h at ${r.name} (${fmt(r.km, 1)} km away)`));
       c.src.push({ name: L("สถานีวัดฝน (คลังข้อมูลน้ำแห่งชาติ)", "Rain gauge (ThaiWater)"), time: timeText(r.time, now, lang), ageH: r.ageH });
     } else if (b.twRain) c.lines.push(L("ไม่มีสถานีวัดฝนที่ส่งข้อมูลใน 3 ชม. ในรัศมี 10 กม.", "No rain gauge reporting within 10 km in the last 3 h"));
+    // the size of a multi-day rain, measured (KI-039): the 24-h band can't tell 100 mm from 370 mm, and in Hat Yai
+    // three days brought 426–654 mm (hatyai-flood-2025-hindcast §3.2). Words, and one tested level: Hat Yai's red flag
+    const days3 = b.rain3d ? nearRainDays(b.rain3d, lat, lon, now) : null;
+    let lv3 = -1;
+    if (days3) {
+      const n = days3.r72 != null ? 3 : 2;
+      const tot = days3.r72 ?? days3.r48;
+      c.lines.splice(rainNear.length ? 1 : 0, 0, L(`ฝนสะสมที่วัดได้ ${n} วัน (${n * 24} ชม.): ${fmt(tot)} มม. ที่${days3.name} (ห่าง ${fmt(days3.km, 1)} กม.)`,
+        `${fmt(tot)} mm measured over ${n} days (${n * 24} h) at ${days3.name} (${fmt(days3.km, 1)} km away)`));
+      // Hat Yai's own red-flag criterion (more than 300 mm in 3 days, the U-Taphao basin's [S31]): measured, it came about
+      // 24 h before the flood in 2024 and 2025, and caught 3 of 4 floods in 37 seasons with one false alarm, a near flood
+      // (floodwatch-hatyai-leadtime §4.2). A measurement, so it may lift the tile to เตรียมตัว; elsewhere it is a reference
+      if (days3.r72 >= RAIN3D_RED_MM) {
+        lv3 = 2;
+        c.lines.splice(rainNear.length ? 2 : 1, 0, L(`ฝนเกิน ${RAIN3D_RED_MM} มม. ใน 3 วัน: หาดใหญ่ใช้ค่านี้เป็นเกณฑ์ธงแดง (เตรียมอพยพ) ปี 2567 และ 2568 ค่านี้มาก่อนน้ำท่วมราว 1 วัน ติดตามประกาศของเทศบาลและจังหวัด`,
+          `Over ${RAIN3D_RED_MM} mm in 3 days: Hat Yai's red-flag line (get ready to evacuate); in 2024 and 2025 it came about a day before the flood. Follow your municipality's and province's notices`));
+      }
+      c.src.push({ name: L(`ฝนสะสม ${n} วัน (สถานีวัดฝนคลังข้อมูลน้ำแห่งชาติ รวมโดยตัวเก็บข้อมูลของเว็บนี้ทุกชั่วโมง)`,
+        `${n}-day rain (ThaiWater gauges, added up hourly by this site's collector)`), time: timeText(localOf(Date.parse(days3.time)), now, lang) });
+    }
     if (ens) {
       const w = ens.next24.rain24;
       const lv = windowLevel(w);
@@ -282,6 +303,7 @@ export function assess(b, lang = "th", ipe = null) {
       if (c.level >= 0) c.word = word(rainNear[0].band);
       c.error = b.errors?.ens;
     }
+    if (lv3 > c.level) { c.level = lv3; c.word = L(`ฝน 3 วันเกิน ${RAIN3D_RED_MM} มม.`, `3-day rain over ${RAIN3D_RED_MM} mm`); }
     if (lvObs >= 2) c.lines.push(L("ฝนหนักเมื่อ 24 ชม. ที่ผ่านมา ระวังน้ำท่วมขังและน้ำป่า", "Heavy rain in the last 24 h: watch for flooding"));
     // the validation's honest number (MODELS.md §3): at a single station, heavy rain 1–2 days ahead is mostly missed
     if (ens) c.note = L("ฝนหนักเฉพาะจุดพยากรณ์ล่วงหน้าได้ไม่แม่น: ปี 2026 แบบจำลองจับวันฝนหนักที่สถานีได้ราว 1 ใน 8 ดูประกาศกรมอุตุฯ ประกอบ",
@@ -356,7 +378,11 @@ export function assess(b, lang = "th", ipe = null) {
   }
 
   // ---------- river and flood ----------
-  const gauges = b.twLevel ? nearGauges(b.twLevel, lat, lon, now) : [];
+  // FloodWatch's own rows when the collector's copy is fresh (BMA's canals included, KI-007); else ThaiWater, read
+  // from the phone, so the tile still judges the gauges when FloodWatch's server is down
+  const fwr = fwRows(b.fwLive, now);
+  const fromFw = fwGauges(fwr, lat, lon, now);
+  const gauges = fromFw.length ? fromFw : b.twLevel ? nearGauges(b.twLevel, lat, lon, now) : [];
   const ff = b.hiiFf != null ? parseFlashFlood(b.hiiFf) : null;
   const fw = b.floodwatch ? parseFloodWatchPoint(b.floodwatch) : null;
   {
@@ -397,23 +423,115 @@ export function assess(b, lang = "th", ipe = null) {
         // KI-008: a river that doesn't judge the point, with a metre or more below its bank, carries no status word
         // (C.12 read "ใกล้ล้นตลิ่ง" at 92 % of bed-to-bank with 1.31 m to spare: one line that alarmed and dismissed itself)
         const st = x.status >= 0 && !(outside && x.freeboard >= 1) ? ` · ${word(RIVER_WORDS[x.status])}` : "";
-        const used = x === g && !outside ? L(" · ตัวเลขบนป้ายน้ำท่วม", " · the flood tile's number") : "";
+        // (only when the tile has a number: with no gauge within 8 km it says "no data", live at Hat Yai on 24 Oct)
+        const used = x === g && !outside && ai.category != null ? L(" · ตัวเลขบนป้ายน้ำท่วม", " · the flood tile's number") : "";
         // (HII's "previous" reading has no stated interval, so no rise/fall is shown: FloodWatch has the trend)
         c.lines.push(`${x.name}${x.river ? ` (${x.river})` : ""} ${L("ห่าง", "")} ${fmt(x.km, 1)} ${L("กม.", "km")}: ${fb}${st}${ctx}${used}`);
       }
-      c.value = g.freeboard == null ? "" : g.freeboard >= 0 ? L(`ต่ำกว่าตลิ่ง ${fmt(g.freeboard * 100)} ซม.`, `${fmt(g.freeboard * 100)} cm below bank`) : L(`ล้นตลิ่ง ${fmt(-g.freeboard * 100)} ซม.`, `${fmt(-g.freeboard * 100)} cm over bank`);
-      if (g.status >= 1 && g.pct != null && g.level < g.bank) {
+      c.value = g.freeboard == null || ai.category == null ? "" : g.freeboard >= 0 ? L(`ต่ำกว่าตลิ่ง ${fmt(g.freeboard * 100)} ซม.`, `${fmt(g.freeboard * 100)} cm below bank`) : L(`ล้นตลิ่ง ${fmt(-g.freeboard * 100)} ซม.`, `${fmt(-g.freeboard * 100)} cm over bank`);
+      // the reason for a gauge's word, only where the gauge has one: a river outside Bangkok's walls with a metre or more
+      // to spare has none (KI-008), and "ใกล้ล้นตลิ่ง because 91 %" under its plain line contradicted it
+      const gOutside = polder && !["คลอง", "บึง"].includes(waterWord(g, polder));
+      if (g.status >= 1 && g.pct != null && (g.level != null ? g.level < g.bank : g.freeboard > 0) && !(gOutside && g.freeboard >= 1)) {
         c.lines.push(L(`"${word(RIVER_WORDS[g.status])}" ที่ ${g.name} เพราะน้ำสูง ${fmt(g.pct)}% ของความสูงจากท้องน้ำถึงตลิ่ง (เกณฑ์ FloodWatch: 70% เฝ้าระวัง 90% ใกล้ล้นตลิ่ง)`,
           `"${word(RIVER_WORDS[g.status])}" at ${g.name}: the water is at ${fmt(g.pct)}% of the height from the bed to the bank (FloodWatch's rule: 70% watch, 90% near the bank)`));
       }
-      c.src.push({ name: L("สถานีวัดระดับน้ำ (คลังข้อมูลน้ำแห่งชาติ)", "Water-level gauges (ThaiWater)"), time: timeText(fresh[0].time, now, lang), ageH: fresh[0].ageH });
-      c.note = L("ใช้เกณฑ์และวิธีเดียวกับ FloodWatch (เทียบตลิ่งของแต่ละสถานี) ไม่ได้บอกว่าบ้านคุณน้ำท่วมหรือไม่",
-        "The same rule and method as FloodWatch (each gauge against its own bank); it doesn't say whether your house floods");
+      c.src.push(fresh[0].fw
+        ? { name: L("สถานีวัดระดับน้ำ ตามที่ FloodWatch อ่าน (สสน. กรมชลประทาน กฟผ. กทม.)", "Water-level gauges as FloodWatch reads them (HII, RID, EGAT, BMA)"), time: timeText(fresh[0].time, now, lang), ageH: fresh[0].ageH }
+        : { name: L("สถานีวัดระดับน้ำ (คลังข้อมูลน้ำแห่งชาติ)", "Water-level gauges (ThaiWater)"), time: timeText(fresh[0].time, now, lang), ageH: fresh[0].ageH });
+      c.note = fresh[0].fw
+        ? L("สถานะของแต่ละสถานีเป็นของ FloodWatch เอง (เทียบตลิ่งของแต่ละสถานี) ไม่ได้บอกว่าบ้านคุณน้ำท่วมหรือไม่",
+          "Each gauge's status is FloodWatch's own (each gauge against its own bank); it doesn't say whether your house floods")
+        : L("ใช้เกณฑ์และวิธีเดียวกับ FloodWatch (เทียบตลิ่งของแต่ละสถานี) ไม่ได้บอกว่าบ้านคุณน้ำท่วมหรือไม่",
+          "The same rule and method as FloodWatch (each gauge against its own bank); it doesn't say whether your house floods");
       c.word = word(RIVER_WORDS[c.level]);
-    } else if (b.twLevel) {
+    } else if (b.twLevel || fwr) {
       // no gauge is no data (FloodWatch: "ไม่มีสถานีวัดน้ำใกล้พอ ยังสรุประดับลำน้ำไม่ได้")
       c.lines.push(L("ไม่มีสถานีวัดระดับน้ำที่ส่งข้อมูลใน 3 ชม. ในรัศมี 20 กม. ยังสรุประดับลำน้ำไม่ได้", "No water-level gauge reporting within 20 km in the last 3 h: the waterways can't be judged"));
     }
+    // FloodWatch's own look ahead, from its "⚠️ จับตา" tab, with how often it came true (its /api/risks records)
+    // only the gauges that judge the point (the area index's basis: within 3 km, else 8 km, canals only in Bangkok's
+    // polders): a sluice gate 12.6 km away across the river turned Lat Phrao orange while every canal near it was normal
+    const judge = fresh.length ? areaIndex(fresh, place?.pv).basis || [] : [];
+    const basisCodes = new Set(judge.map((x) => x.code));
+    const fwNear = nearFw(fwr, lat, lon).filter((r) => basisCodes.has(r.code));
+    const watch = fwWatch(fwNear, fwr?.records);
+    const lvMeasured = c.level;
+    // this page's own upstream lines on FloodWatch's gauges, for a city whose own gauge is late or still under its bank
+    // (floodwatch-hatyai-leadtime §6: at Hat Yai, "upstream over its bank and rising" caught 5 of 5 floods with 5
+    // near-miss seasons in 30; elsewhere it has no record yet, so it lifts the tile to ติดตามไว้ only)
+    const upSig = upstreamSignal(fwr, judge, now);
+    if (upSig) {
+      const upRec = fwr.records?.upstream?.n ? L(` · 30 วันที่ผ่านมา FloodWatch เห็นต้นน้ำขึ้นแบบนี้ ${fwr.records.upstream.n.toLocaleString("en")} ครั้ง ปลายน้ำขึ้นตามจริง ${Math.round(fwr.records.upstream.hit * 100)}%`,
+        ` · in the last 30 days FloodWatch saw an upstream rise like this ${fwr.records.upstream.n.toLocaleString("en")} times; the gauge downstream rose after it ${Math.round(fwr.records.upstream.hit * 100)}% of the time`) : "";
+      const { g, u } = upSig;
+      if (upSig.kind === "A") {
+        c.level = Math.max(c.level, g.river === "คลองอู่ตะเภา" ? 2 : 1);
+        c.lines.unshift(L(`⬆️ ต้นน้ำล้นตลิ่งแล้ว: ${u.name}${u.river ? ` (${u.river})` : ""} ${upSig.over > 0 ? `สูงกว่าตลิ่ง ${fmt(upSig.over * 100)} ซม.` : "ถึงตลิ่ง"} และยังขึ้น (${fmt(upSig.rise)} ซม. ใน 24 ชม.) น้ำจากจุดนั้นมักถึง${g.name}ภายในราว ${upSig.hi} ชม. หรือเร็วกว่านั้น (FloodWatch)${upRec}`,
+          `⬆️ Upstream is over its bank: ${u.name}${u.river ? ` (${u.river})` : ""} is ${upSig.over > 0 ? `${fmt(upSig.over * 100)} cm over its bank` : "at its bank"} and still rising (${fmt(upSig.rise)} cm in 24 h). Its water usually reaches ${g.name} within about ${upSig.hi} h, or sooner (FloodWatch)${upRec}`));
+      } else if (upSig.kind === "B") {
+        c.level = Math.max(c.level, 1);
+        c.lines.unshift(L(`⬆️ ต้นน้ำใกล้ล้นตลิ่ง: ${u.name}${u.river ? ` (${u.river})` : ""} ขึ้น ${fmt(upSig.rise)} ซม. ใน 24 ชม. น้ำที่${g.name}อาจขึ้นตามภายในราว ${upSig.hi} ชม. (FloodWatch)${upRec}`,
+          `⬆️ Upstream near its bank: ${u.name}${u.river ? ` (${u.river})` : ""} rose ${fmt(upSig.rise)} cm in 24 h; the water at ${g.name} may follow within about ${upSig.hi} h (FloodWatch)${upRec}`));
+      } else if (upSig.kind === "C") {
+        c.lines.unshift(L(`⬆️ ต้นน้ำยังขึ้นอยู่: ${u.name} ขึ้น ${fmt(upSig.rise)} ซม. ใน 24 ชม. น้ำที่${g.name}อาจสูงขึ้นอีก (FloodWatch)`,
+          `⬆️ Upstream is still rising: ${u.name} rose ${fmt(upSig.rise)} cm in 24 h; the water at ${g.name} may rise further (FloodWatch)`));
+      } else {
+        const old = upSig.ageH > 48; // a gauge silent for days is not "N hours late" (one was 588 h on 24 Oct)
+        c.lines.push(old ? L("สถานีต้นน้ำไม่ส่งข้อมูลมากว่า 2 วัน: ยังบอกไม่ได้ว่าน้ำจากต้นน้ำกำลังมาหรือไม่", "The upstream gauges haven't reported for over 2 days: whether water is coming from upstream can't be told")
+          : L(`ข้อมูลต้นน้ำล่าสุดเมื่อ ${fmt(upSig.ageH)} ชม.ก่อน: ยังบอกไม่ได้ว่าน้ำจากต้นน้ำกำลังมาหรือไม่`, `Upstream gauges last reported ${fmt(upSig.ageH)} h ago: whether water is coming from upstream can't be told`));
+      }
+      if (c.level > lvMeasured) c.word = L("น้ำจากต้นน้ำ (FloodWatch)", "Water from upstream (FloodWatch)");
+    }
+    if (watch) {
+      const gg = watch.gauge;
+      const rec = watch.record ? L(` · ${watch.record.days} วันที่ผ่านมา FloodWatch บอกแบบนี้ ${watch.record.n.toLocaleString("en")} ครั้ง เกิดจริง ${Math.round(watch.record.hit * 100)}%`,
+        ` · in the last ${watch.record.days} days FloodWatch said this ${watch.record.n.toLocaleString("en")} times; it happened ${Math.round(watch.record.hit * 100)}% of the time`) : "";
+      const at = `${gg.name}${gg.river ? ` (${gg.river})` : ""}`;
+      const dist = L(`ห่าง ${fmt(gg.km, 1)} กม.`, `${fmt(gg.km, 1)} km away`);
+      if (watch.key === "may_reach") {
+        // a forecast: >50 % came true 65 % of the time, 25–50 % 14 % (FloodWatch's records, 24 Oct 2026)
+        c.level = Math.max(c.level, watch.gauge.group[1] === ">50%" ? 2 : 1);
+        c.lines.unshift(L(`📈 FloodWatch: ${at} ${dist} อาจถึงตลิ่งใน ${watch.gauge.group[2] || 24} ชม.${rec}`,
+          `📈 FloodWatch: ${at}, ${dist}, may reach its bank within ${watch.gauge.group[2] || 24} h${rec}`));
+      } else if (watch.key === "upstream") {
+        // a range, never a countdown: the measured X.90 → X.44 times were 0–11 h for FloodWatch's 6-h lag (lead-time §6)
+        const [, , upName, lag, rise] = gg.group;
+        if (!upSig || upSig.kind === "late") {
+          c.lines.unshift(L(`⬆️ น้ำจากต้นน้ำ: ${upName} ขึ้น ${fmt(rise)} ซม. ใน 24 ชม. น้ำจากจุดนั้นมักถึง ${at} (${dist}) ภายในราว ${fmt(2 * lag)} ชม. หรือเร็วกว่านั้น (FloodWatch)${rec}`,
+            `⬆️ Water from upstream: ${upName} rose ${fmt(rise)} cm in 24 h; its water usually reaches ${at} (${dist}) within about ${fmt(2 * lag)} h, or sooner (FloodWatch)${rec}`));
+        }
+      } else if (watch.key === "fast_rise") {
+        c.level = Math.max(c.level, 1);
+        c.lines.unshift(L(`📈 FloodWatch คาดว่าน้ำที่ ${at} (${dist}) จะขึ้นเร็ว ราว ${fmt(gg.group[1])} ซม. ใน 24 ชม.${rec}`,
+          `📈 FloodWatch expects a fast rise at ${at} (${dist}): about ${fmt(gg.group[1])} cm in 24 h${rec}`));
+      }
+      // a level raised by FloodWatch's look ahead says so in the tile's word ("ปกติ" on an orange tile contradicts itself)
+      // a level raised by FloodWatch's look ahead says so in the tile's word ("ปกติ" on an orange tile contradicts itself);
+      // when the upstream line raised it as far, its word stays
+      const lvWatch = watch.key === "may_reach" ? (gg.group[1] === ">50%" ? 2 : 1) : watch.key === "fast_rise" ? 1 : -1;
+      if (lvWatch > lvMeasured && lvWatch >= c.level) {
+        c.word = watch.key === "may_reach" ? L("อาจถึงตลิ่ง (FloodWatch)", "May reach bank (FloodWatch)") : L("น้ำขึ้นเร็ว (FloodWatch)", "Fast rise (FloodWatch)");
+      }
+      else if (!c.word && c.level >= 0) c.word = word(RIVER_WORDS[c.level]);
+    }
+    // FloodWatch's 24-h outlook for the tile's gauge, when it beats "no change" (FloodWatch's own skill)
+    // (only the gauge that judges the point: a river outside Bangkok's walls is listed but doesn't, KI-008)
+    const tileGauge = fwr && judge[0] ? fwr.byCode[judge[0].code] : null;
+    const ol = fwOutlook(tileGauge);
+    if (ol) {
+      const cm = (v) => `${v > 0 ? "+" : ""}${fmt(v * 100)}`;
+      const dir = ol.dir > 0 ? L("ขึ้น", "rising") : ol.dir < 0 ? L("ลง", "falling") : L("ทรงตัว", "steady");
+      c.lines.push(L(`FloodWatch คาด 24 ชม. ที่ ${tileGauge.name}: ${dir} (น่าจะ ${cm(ol.lo)} ถึง ${cm(ol.hi)} ซม.)`,
+        `FloodWatch's next 24 h at ${tileGauge.name}: ${dir} (likely ${cm(ol.lo)} to ${cm(ol.hi)} cm)`));
+    }
+    // FloodWatch didn't answer the collector (its one server or its tunnel down): the tile is ThaiWater's, and says why
+    if (!fwr && b.fwDown) {
+      c.lines.push(L(`FloodWatch ไม่ตอบเมื่อตัวเก็บข้อมูลของเว็บนี้ตรวจล่าสุด (${timeText(localOf(Date.parse(b.fwDown)), now, lang)}): สถานีด้านบนอ่านจากคลังข้อมูลน้ำแห่งชาติโดยตรง ยังไม่มีคำคาดการณ์ของ FloodWatch`,
+        `FloodWatch didn't answer this site's collector at its last check (${timeText(localOf(Date.parse(b.fwDown)), now, lang)}): the gauges above come straight from ThaiWater, without FloodWatch's outlook`));
+    }
+    if (watch || ol) c.src.push({ name: L("FloodWatch (ตัวเก็บข้อมูลของเว็บนี้อ่านทุก 15 นาที)", "FloodWatch (read every 15 min by this site's collector)"),
+      time: fwr.generated ? timeText(localOf(Date.parse(fwr.generated)), now, lang) : "", model: true });
     if (ff) {
       const hit = place && ff.find((r) => r.code === place.code);
       if (hit) {
@@ -576,7 +694,8 @@ export function assess(b, lang = "th", ipe = null) {
   const enough = graded.length * 2 >= cards.length;
   const verdict = {
     level: !enough ? -1 : top,
-    complete: graded.length === cards.length,
+    // every tile and the warnings: "ทุกเรื่องอยู่ในระดับต่ำสุด" above "ยังไม่มีข้อมูล: ประกาศเตือนภัย" contradicted itself (T16)
+    complete: graded.length === cards.length && Boolean(b.warnings),
     name: !enough ? L("ยังไม่มีข้อมูลพอ", "Not enough data yet") : word(scale(top)),
     worst: worst ? item(worst) : null,
     warning: warnings[0] || null,
@@ -614,6 +733,25 @@ export function assess(b, lang = "th", ipe = null) {
       Object.assign(d, { level: Math.max(d.level, w.level), text: L("📢 เตือนภัย", "📢 TMD warning"), sub: "" });
     }
   }
+  // "ข้างหน้า": the worst of the coming days when it is above the verdict, in words on the first screen. Days 2–3 never
+  // change the verdict's colour (a forecast; the hindcast's "สูง" had 12 false alarms in three seasons at 7 stations),
+  // but in Hat Yai on 17–18 Nov 2025 "สูง for the day after" sat in a yellow chip under a heat headline (UX study §5.1–5.2)
+  const AHEAD = [["rain", "rain", "🌧️"], ["heat", "heat", "🌡️"], ["gust", "wind", "💨"], ["pm25", "pm25", "😷"]];
+  const ahead = [];
+  outlook.forEach((row, i) => {
+    if (i === 0) return;
+    for (const [k, id, icon] of AHEAD) {
+      const x = row[k];
+      if (!x || !(x.level > Math.max(verdict.level, 0))) continue;
+      const what = x.official ? L(`${row.name} มีประกาศเตือนภัยของกรมอุตุฯ`, `${row.name}: TMD warning in force`)
+        : k === "rain" ? L(`ฝนหนัก ${row.name} โอกาส${x.text}`, `Heavy rain ${row.name}: ${x.text} chance`)
+          : k === "heat" ? L(`ร้อน ${row.name} รู้สึกเหมือนราว ${x.text}C`, `Heat ${row.name}: feels like about ${x.text}C`)
+            : k === "gust" ? L(`ลมกระโชก ${row.name} ราว ${x.text} กม./ชม.`, `Gusts ${row.name}: about ${x.text} km/h`)
+              : L(`ฝุ่น ${row.name} คาดว่า${x.text}`, `Dust ${row.name}: expected ${x.text}`);
+      ahead.push({ id, icon, level: x.level, day: i, text: what, official: !!x.official });
+    }
+  });
+  verdict.ahead = ahead.sort((a, b2) => b2.level - a.level || a.day - b2.day || ORDER.indexOf(a.id) - ORDER.indexOf(b2.id))[0] || null;
 
   // ---------- the place itself (long-term) ----------
   const profile = [];
@@ -650,12 +788,50 @@ export function assess(b, lang = "th", ipe = null) {
   return { cards: order, verdict, warnings, pre, outlook, profile, station, quakes: quakes.length, members: ens?.members ?? 0 };
 }
 
+/** "What changed since you last looked" (UX study §5.3): this look's levels against the last look's, for one place.
+ *  `prev` and the result live only in the phone's localStorage, keyed by subdistrict code (GUIDELINES §2). Only
+ *  hazards graded both times; a fall is said as plainly as a rise. → [{id, icon, short, from, to}] */
+export function changesSince(prev, r) {
+  if (!prev || !prev.levels || !r) return [];
+  return r.cards.filter((c) => c.level >= 0 && prev.levels[c.id] >= 0 && prev.levels[c.id] !== c.level)
+    .map((c) => ({ id: c.id, icon: c.icon, short: c.short, from: prev.levels[c.id], to: c.level }));
+}
+/** This look, to store: the levels and the time, nothing else. */
+export const lookOf = (r, nowMs) => ({ at: nowMs, levels: Object.fromEntries(r.cards.filter((c) => c.level >= 0).map((c) => [c.id, c.level])) });
+
+/** The share text: the five things a forwarded warning needs (source, hazard, place, time, what to do) and the
+ *  snapshot's own time, so a message forwarded the next day isn't read as now (UX study §5.3). `url` carries the
+ *  subdistrict code, never the GPS fix (GUIDELINES §2). */
+export function shareMessage(r, { name, when, url, lang = "th" }) {
+  const L = (th, en) => (lang === "en" ? en : th);
+  const v = r?.verdict;
+  const lines = [L(`ภัยรอบบ้าน · ${name}`, `Thai Risk · ${name}`), L(`ข้อมูล ณ ${when} (เปิดลิงก์ดูล่าสุด)`, `As of ${when} (open the link for now)`)];
+  if (v && v.level >= 0) {
+    const dots = "●".repeat(v.level + 1) + "○".repeat(3 - Math.min(v.level, 3));
+    lines.push(`${dots} ${v.name}${v.worst ? `: ${v.worst.icon} ${v.worst.short} ${v.worst.word}${v.worst.value ? ` · ${v.worst.value}` : ""}` : ""}`);
+  }
+  if (v?.warning) {
+    const w = v.warning;
+    const head = lang === "en" ? (w.en?.checked ? w.en.headline : w.event) : w.headline || w.event;
+    lines.push(`📢 ${L("กรมอุตุฯ", "TMD")}: ${head}`);
+  }
+  if (v?.ahead) lines.push(`${L("ข้างหน้า", "Coming up")}: ${v.ahead.icon} ${v.ahead.text}`);
+  if (v?.action) lines.push(`👉 ${v.action.text}`);
+  if (v && v.level >= 2 && (v.worst?.id === "rain" || v.worst?.id === "flood")) {
+    lines.push(L("ข้อความเตือนภัยบนมือถือมาจาก ปภ. · คำสั่งอพยพมาจากเทศบาลและจังหวัด", "Phone alerts come from DDPM; evacuation orders from the municipality and province"));
+  }
+  if (url) lines.push(url);
+  return lines.join("\n");
+}
+
 /** Fixed order of the tiles and cards (people learn where their tile is; the UX scout §5b): the six the scout put
  *  first, then the rest. */
 export const ORDER = ["rain", "flood", "pm25", "heat", "quake", "fire", "wind", "uv", "landslide", "air"];
 
 /** The rain (24 h) above which the DMR's landslide watch applies; see levels.js and KNOWLEDGE §3 (provisional). */
 export const LANDSLIDE_RAIN_MM = 100;
+/** Hat Yai's red-flag rain: more than 300 mm in 3 days (the U-Taphao basin's criteria, hatyai-flood-2025-hindcast §1 [S31]). */
+export const RAIN3D_RED_MM = 300;
 
 /** Storm lines only for storms that come within this distance (the cross-check: 7,000 km away is noise). */
 export const STORM_SHOW_KM = 1500;

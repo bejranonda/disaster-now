@@ -97,7 +97,7 @@ held a Cloudflare token taken from FloodWatch's `.env`; it is being replaced. De
 git clone https://github.com/bejranonda/disaster-now.git /srv/disaster-now && cd /srv/disaster-now
 cp .env.example .env && chmod 600 .env       # §2.2: new values only
 npm run preflight                            # 1. ❌ until the host and .env are right
-npm ci && npm test                           # 2. 82 unit tests (0.4.0)
+npm ci && npm test                           # 2. 103 unit tests (0.6.0)
 npx playwright@1.56.1 install --with-deps chromium                # 3. the same version as playwright-core
 CHROME_PATH=<the chrome it installed under ~/.cache/ms-playwright> npm run smoke   # "all checks passed"
 npm run env:check -- --probe                 # 4. token valid, zone visible, KV readable, "Workers deploy: allowed", GLM answers
@@ -105,10 +105,10 @@ npm run cf:setup                             # 5. KV namespace "disaster-now-liv
 git commit -m "chore: the KV namespace id" wrangler.jsonc   #    the id is not a secret
 docker compose up -d --build && docker compose ps            # 6. both healthy after about a minute
 node tools/health.mjs --web http://127.0.0.1:8090/
-docker compose logs collector | tail         # 7. "kv: 6 files uploaded"; air4thai.json with 170 or more stations
+docker compose logs collector | tail         # 7. "kv: 7 files uploaded" (8 when the hourly rain is due); air4thai.json with 170 or more stations; floodwatch.json with 1,300 or more gauges
 npm run smoke -- --live                      #    once, read as a visitor; ThaiWater's flood tile must not say 429
 npm run cf:deploy -- --dry-run && npm run cf:deploy          # 8. the page and the Worker at risk.autobahn.bot
-node tools/health.mjs --web https://risk.autobahn.bot/       # 9. then a phone inside LINE, and the link in a chat
+node tools/health.mjs --web https://risk.autobahn.bot/ --need-live   # 9. then a phone inside LINE, and the link in a chat
 ```
 
 **Done when:**

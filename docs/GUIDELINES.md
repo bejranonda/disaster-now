@@ -26,6 +26,13 @@ Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai 
 - **Search text leaves the phone only when the person presses search,** to Photon or Nominatim, and the button says so ("คำที่พิมพ์จะส่งไปค้นที่นั่น"). Never per keystroke (Nominatim forbids autocomplete).
 - **Shared links carry a subdistrict code (`#t=100103`) for a GPS fix, a saved place, or a subdistrict, district or province found by name** (a district or province opens its seat's subdistrict, review U2), never the coordinates of a home; a place found on OpenStreetMap may keep its rounded point (`#p=`). (UX scout §4c.6.)
 - **Coordinates appear on screen only for a place found on OpenStreetMap,** never for a GPS fix or a saved place, not even rounded (the footer says "ปัดเศษราว 1 กม."; U17).
+- **The address bar holds the place as its subdistrict code** after a GPS fix or a saved place (`#t=…`, the share link's
+  own form, since 0.6.0: LINE's own ⋯ → Share sends the address bar, device study T9), never coordinates.
+- **"What changed since you last looked" stays on the phone:** `localStorage` key `dn:seen`, keyed by subdistrict code,
+  holding each hazard's level and the time of the look, five places at most; never a position, a name, or anything sent
+  (0.6.0, D-059).
+- **Storage blocked is no memory, never a broken page** (T1): every `localStorage`/`sessionStorage` access, the getter
+  included, sits inside a `try`.
 - **Saved places stay in `localStorage`,** five at most. This site has no server, no cookies, no analytics and no accounts. Anything per-person on a future server waits for a Thai lawyer (Hazard-huntz docs/09 §7, PDPA).
 - **The static host must allow geolocation:** `Permissions-Policy: geolocation=(self)`. Don't copy Hazard-huntz's `_headers`, which sends `geolocation=()`.
 
@@ -34,7 +41,8 @@ Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai 
 - **Honest User-Agent** in the collector and research (`disaster-now-collector/0.2 (+repo URL)`); browsers send their own.
 - **A failed fetch is never written as data:** the collector keeps the old file and lists the failure (FIRMS with no file read is a failure, not "0 hotspots").
 - **Never faster than the source updates;** the page caches each answer in `sessionStorage` for the source's cadence (`SOURCES[*].ttl`).
-- **No evasion:** no bot-challenge solving, no proxy rotation, no geo-block workaround. A Thai-only host waits for a host in Thailand (Hazard-huntz docs/09 §5).
+- **No evasion:** no bot-challenge solving, no proxy rotation, no geo-block workaround. A Thai-only host waits for a host in Thailand (Hazard-huntz docs/09 §5). **No VPN** (D-058): every source answers the collector's host; BMA's and RID's gauges come through FloodWatch, which runs the family's one Thai egress under its own rules (public pages only).
+- **The family's data once:** a feed FloodWatch already reads (gauges, its forecasts) comes from FloodWatch's API through the collector, not from a second fetch of the agency (D-054); the page keeps a direct fallback for when FloodWatch is down.
 - **Each source's time rule is written in code with a test** (KNOWLEDGE §4): GISTDA's "Z" is Bangkok time; HII has no offset; TMD's CAP list `pubDate` is 7 h early (take the item's times); TMD's storm `time` is UTC without an offset; TMD's quake RSS description is Bangkok time in CE.
 - **Show the age:** "⏱ N ชม.ก่อน" when a reading is over an hour old; readings older than about three times their cadence are dropped (PCD stations 3 h, gauges 3 h as FloodWatch's `STALE_MIN` of 180 min, rain 3 h; the docs said 6 h for gauges until 0.4.0, X19).
 - **Never mix agencies' levels** (FloodWatch KI-217): each gauge is judged only against its own bank; BMA's canals by BMA's thresholds (only FloodWatch has them).
@@ -45,6 +53,15 @@ Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai 
 - **Rivers read as FloodWatch reads them:** the same bank rule (`levels.riverLevel` = FloodWatch `classify_status`), the same words (`RIVER_WORDS` = FloodWatch `STATUS`), the same point rule (`water.areaIndex` = FloodWatch `point.area_index`: in Bangkok and its five neighbours only canals judge a point), the same rain gauge limits (10 km, 3 h). `research/crosscheck_floodwatch.mjs` checks it: 691 of 693 gauges agreed on 23 Oct 2026.
 - **Advice lines are Hazard-huntz's, word for word** (`actions.js` ← `kit.json → air, hot`), and every "ทำอย่างไร" link goes to its guide. Change them there first; `npm run check:advice` compares with the live copy.
 - **The same PM2.5 and heat-index bands** as Hazard-huntz (PCD 2023; TMD/DOH), checked by a unit test.
+- **The agency's own colours where it gives them** (D-053): PCD's yellow, orange and red for PM2.5 and the DOH's for
+  heat map one-to-one onto ติดตามไว้, เตรียมตัว and ทำทันที; the agency's green becomes the family's blue
+  ยังไม่น่าห่วง. Never a step above the agency's colour on the app's own initiative: until 0.5.0 heat sat one step
+  higher and was orange on 94–100 % of Mar–Oct days.
+- **FloodWatch's look ahead counts only from the gauges that judge the point** (the area index's basis, D-055), says
+  its 30-day record, and names itself in the tile's word when it raises the level. **An upstream line says nothing**
+  when the upstream reading is over 3 h old or flagged, the link is spurious (lag under 3 h or at 48 h, a twin, over
+  50 km), or the rise is a single reading; it never reassures ("ต้นน้ำปกติ", "ลดแล้ว") and gives a range ("within about
+  2 × lag h, or sooner"), never a countdown (D-056).
 
 ## 5. Thai and English copy
 
@@ -66,6 +83,12 @@ Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai 
 - **A page string that describes data must match what the cells show** (KI-F26: the rain row said "mm" for a year of chance words).
 - **Every module the page imports is in `sw.js`'s `SHELL`** (one missing file kills the page offline: the visitor audit's V3); `test/audit.test.mjs` walks the imports and fails otherwise.
 - **Each audit finding that is fixed gets a test** named after its ID (`test/audit.test.mjs`: "M5/V2: …").
+- **Walk the device too** (device study, 0.6.0): site data blocked, LINE without Web Share, the place kept in the
+  address bar, an offline link with a query; the smoke walk checks the first and third since 0.6.0. A new module is
+  also a `<link rel="modulepreload">` in `index.html` (Slow 3G loaded the graph in 5 serial round trips, T5).
+- **Check a new rule on today's real data before it ships** (0.6.0): the first look-ahead version passed every fixture
+  test and turned Lat Phrao orange from a sluice gate 12.6 km away; a nationwide count of how many subdistricts a rule
+  fires at, read line by line, caught it and a contradiction at Palian.
 
 ## 7. Models and forecasts
 

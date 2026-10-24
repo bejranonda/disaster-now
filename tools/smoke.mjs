@@ -6,6 +6,8 @@
 import { readFileSync, mkdirSync } from "node:fs";
 import { chromium } from "playwright-core";
 import { serve } from "./serve.mjs";
+import { parseFloodWatch } from "./collect.mjs";
+import { nearestTambon } from "../public/js/geo.js";
 
 const args = process.argv.slice(2);
 const LIVE = args.includes("--live");
@@ -107,6 +109,12 @@ async function main() {
       const heat = await text(page, "#card-heat");
       ok(/4[0-9]\s°C/.test(heat) && heat.includes("ปรับแก้"), `heat card shows the corrected value (MODELS §1): ${heat.split("\n").slice(0, 5).join(" | ")}`);
     }
+    // T9: the address bar keeps the place as its subdistrict code (LINE's own ⋯ → Share sends it), also after a tile tap
+    const h1 = await page.evaluate(() => location.hash);
+    await page.locator(".tile").first().click();
+    await page.waitForTimeout(300);
+    const h2 = await page.evaluate(() => location.hash);
+    ok(/^#t=\d{6}$/.test(h1) && h2 === h1, `after GPS the address bar holds the subdistrict code, and a tile tap keeps it (T9): "${h1}" → "${h2}"`);
     ok((await overflow(page)) <= 0, "no horizontal scroll at 390 px");
     const small = await tapTargets(page);
     ok(small.length === 0, `tap targets ≥ 44 px (${small.length} smaller: ${JSON.stringify(small.slice(0, 6))})`);
@@ -213,6 +221,55 @@ async function main() {
       ok(/ตรวจประกาศเตือนภัยของกรมอุตุฯ ไม่ได้/.test(ow) && !/กรมอุตุฯ: /.test(await text(old.page, "#pre")) && /ประกาศเตือนภัย/.test(ov),
         "a stale collector's warnings are treated as missing, not shown and not calm (S12)");
       await old.ctx.close();
+
+      // 5f. FloodWatch's look ahead and the measured 3-day rain, through the collector (Trang's วังวิเศษ, FloodWatch's
+      // "may reach the bank within 24 h, 25–50 %" on 24 Oct 2026; a made-up 3-day total at a made-up gauge beside it)
+      const fwFile = JSON.stringify({ ...parseFloodWatch(JSON.parse(FX("fw_stations.json")), JSON.parse(FX("fw_risks.json"))), fetched: "2026-10-23T19:45:00Z" });
+      const r3 = JSON.stringify({ fetched: "2026-10-23T19:40:00Z", rows: [["T1", "สถานีทดสอบ", 7.66, 99.47, 120, 260, 410, "2026-10-23T19:30Z"]] });
+      const fwIdx = JSON.stringify({ generated: "2026-10-23T19:45:00Z", files: { "floodwatch.json": "2026-10-23T19:45:00Z", "rain3d.json": "2026-10-23T19:40:00Z" }, failed: {} });
+      const tr = await newPage(browser, { live: { "index.json": fwIdx, "floodwatch.json": fwFile, "rain3d.json": r3 } });
+      await tr.page.goto(`${base}#p=7.67,99.46`);
+      await tr.page.waitForFunction(() => document.querySelectorAll(".card").length >= 10 && document.querySelector("#verdict .vname"), null, { timeout: 20000 });
+      await tr.page.waitForTimeout(600);
+      const tf = await text(tr.page, "#card-flood");
+      const trn = await text(tr.page, "#card-rain");
+      // the gauge is near its bank now (FloodWatch: warning, 94 %): the measured word leads, the forecast is a line
+      ok(/📈 FloodWatch: วังวิเศษ/.test(tf) && /เกิดจริง 14%/.test(tf) && /ใกล้ล้นตลิ่ง/.test(tf) && /ตามที่ FloodWatch อ่าน/.test(tf),
+        `FloodWatch's "may reach the bank" reaches the flood card with its track record, under the measured word: ${tf.split("\n").slice(0, 4).join(" | ")}`);
+      ok(/ฝนสะสมที่วัดได้ 3 วัน \(72 ชม\.\): 410 มม\./.test(trn), "the rain card shows the measured 3-day total");
+      ok(tr.errors.length === 0, `no page errors with FloodWatch's file (${tr.errors.slice(0, 2).join(" | ")})`);
+      if (SHOTS) await tr.page.screenshot({ path: `${SHOTS}/08-floodwatch-ahead-390.png`, fullPage: true });
+      await tr.ctx.close();
+
+      // 5h. site data blocked ("Block all cookies"): the storage getters throw; a shared link still opens its place (T1)
+      const nb = await newPage(browser);
+      await nb.page.addInitScript(() => {
+        for (const k of ["localStorage", "sessionStorage"]) Object.defineProperty(window, k, { get() { throw new DOMException("blocked", "SecurityError"); } });
+      });
+      await nb.page.goto(`${base}#t=100101`);
+      const nbOk = await nb.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 }).then(() => true, () => false);
+      ok(nbOk && nb.errors.length === 0, `with site data blocked a shared link still opens and grades its place (T1) ${nb.errors.slice(0, 1).join("")}`);
+      await nb.ctx.close();
+
+      // 5g. what changed since the last look (UX §5.3): yesterday's look kept on the phone said heat 0; then the look
+      // this load stores, so a reload says nothing
+      const code = nearestTambon(JSON.parse(readFileSync(new URL("../public/data/tambon.json", import.meta.url), "utf8")), BKK.latitude, BKK.longitude).code;
+      const sv = await newPage(browser);
+      await sv.page.addInitScript(([c, t]) => {
+        if (!sessionStorage.getItem("smoke:seeded")) { localStorage.setItem("dn:seen", JSON.stringify({ [c]: { at: t, levels: { heat: 0, rain: 0 } } })); sessionStorage.setItem("smoke:seeded", "1"); }
+      }, [code, Date.parse("2026-10-23T07:00:00Z")]);
+      await sv.page.goto(`${base}#t=${code}`);
+      await sv.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 });
+      await sv.page.waitForTimeout(5600); // the look is stored once every source has answered or 5 s have passed
+      const chg = (await sv.page.locator("#changes").isVisible()) ? await text(sv.page, "#changes") : "";
+      ok(/เปลี่ยนจากที่ดูครั้งก่อน/.test(chg) && /ความร้อน ยังไม่น่าห่วง ↑ เตรียมตัว/.test(chg), `what changed since the last look: "${chg.replace(/\s+/g, " ")}"`);
+      const stored = await sv.page.evaluate((c) => JSON.parse(localStorage.getItem("dn:seen"))[c], code);
+      ok(stored && stored.levels.heat === 2 && Object.keys(stored).sort().join() === "at,levels", "this look is stored: levels and a time, by subdistrict code only");
+      await sv.page.reload();
+      await sv.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 });
+      await sv.page.waitForTimeout(800);
+      ok(!(await sv.page.locator("#changes").isVisible()), "a reload with nothing changed says nothing");
+      await sv.ctx.close();
     }
 
     // 5b. the evening on the same fixtures: the main walk's clock (02:50 in Bangkok) never sees a window without an

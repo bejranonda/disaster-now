@@ -1,0 +1,84 @@
+# research/eq_d11_point_extra.py
+# started 2026-10-24T20:39:39+00:00
+=== 1. POST-HOC: triggered test windows against DYFI reports (CDI within 20 km of the city) ===
+
+-- T6 test, reported CDI >= 2.5 in the window: 4 of 50 windows (9 trigger quakes)
+     Bangkok after the M7.7 of 2025-03-28T06:20: M4.6 CDI 3.9 (1 responses); M5.1 CDI 2.5 (3 responses); M4.7 CDI 2.5 (2 responses); M4.9 CDI 3.2 (2 responses)
+     Chiang Mai after the M6.2 of 2019-11-20T23:50: M4.4 CDI 2.7 (1 responses)
+     Chiang Mai after the M7.7 of 2025-03-28T06:20: M5.1 CDI 3.2 (6 responses)
+     Phuket after the M6.5 of 2016-12-06T22:03: M4.9 CDI 3.1 (2 responses)
+     C: mean p 0.015  Brier 0.0776  BSS vs C +0.000  log -0.3439  95 % Brier(C)-Brier +0.0000 .. +0.0000
+    BT: mean p 0.127  Brier 0.0758  BSS vs C +0.023  log -0.2899  95 % Brier(C)-Brier -0.0158 .. +0.0120
+     E: mean p 0.106  Brier 0.0816  BSS vs C -0.051  log -0.2635  95 % Brier(C)-Brier -0.0390 .. +0.0200
+    GP: mean p 0.152  Brier 0.0721  BSS vs C +0.070  log -0.2626  95 % Brier(C)-Brier -0.0115 .. +0.0195
+
+-- T6 test, reported CDI >= 4.0 in the window: 0 of 50 windows (9 trigger quakes)
+     C: mean p 0.004  Brier 0.0000  BSS vs C +0.000  log -0.0037  95 % Brier(C)-Brier +0.0000 .. +0.0000
+    BT: mean p 0.021  Brier 0.0004  BSS vs C -28.633  log -0.0208  95 % Brier(C)-Brier -0.0004 .. -0.0004
+     E: mean p 0.010  Brier 0.0005  BSS vs C -36.524  log -0.0103  95 % Brier(C)-Brier -0.0015 .. -0.0000
+    GP: mean p 0.023  Brier 0.0012  BSS vs C -80.707  log -0.0233  95 % Brier(C)-Brier -0.0019 .. -0.0001
+
+-- T55 test, reported CDI >= 2.5 in the window: 10 of 63 windows (14 trigger quakes)
+     Bangkok after the M7.7 of 2025-03-28T06:20: M4.6 CDI 3.9 (1 responses); M5.1 CDI 2.5 (3 responses); M4.7 CDI 2.5 (2 responses); M4.9 CDI 3.2 (2 responses)
+     Chiang Mai after the M5.7 of 2019-11-20T21:03: M6.2 CDI 2.6 (46 responses); M4.4 CDI 2.7 (1 responses)
+     Chiang Mai after the M5.5 of 2021-12-19T21:06: M5.7 CDI 3.1 (1 responses)
+     Chiang Mai after the M7.7 of 2025-03-28T06:20: M5.1 CDI 3.2 (6 responses)
+     Chiang Rai after the M5.7 of 2019-11-20T21:03: M6.2 CDI 2.9 (12 responses)
+     Chiang Rai after the M5.5 of 2021-12-19T21:06: M5.7 CDI 4.3 (1 responses)
+     Chiang Rai after the M5.9 of 2022-07-21T17:07: M4.9 CDI 3.8 (1 responses)
+     Phuket after the M6.5 of 2016-12-06T22:03: M4.9 CDI 3.1 (2 responses)
+     Udon Thani after the M5.7 of 2019-11-20T21:03: M6.2 CDI 2.9 (9 responses)
+     Nan after the M5.7 of 2019-11-20T21:03: M6.2 CDI 3.8 (3 responses)
+     C: mean p 0.015  Brier 0.1540  BSS vs C +0.000  log -0.6759  95 % Brier(C)-Brier +0.0000 .. +0.0000
+    BT: mean p 0.145  Brier 0.1337  BSS vs C +0.132  log -0.4383  95 % Brier(C)-Brier -0.0090 .. +0.0630
+     E: mean p 0.102  Brier 0.1149  BSS vs C +0.254  log -0.3667  95 % Brier(C)-Brier +0.0032 .. +0.0931
+    GP: mean p 0.139  Brier 0.1237  BSS vs C +0.197  log -0.4112  95 % Brier(C)-Brier +0.0013 .. +0.0699
+
+-- T55 test, reported CDI >= 4.0 in the window: 1 of 63 windows (14 trigger quakes)
+     Chiang Rai after the M5.5 of 2021-12-19T21:06: M5.7 CDI 4.3 (1 responses)
+     C: mean p 0.004  Brier 0.0157  BSS vs C +0.000  log -0.0885  95 % Brier(C)-Brier +0.0000 .. +0.0000
+    BT: mean p 0.022  Brier 0.0157  BSS vs C +0.005  log -0.0825  95 % Brier(C)-Brier -0.0005 .. +0.0014
+     E: mean p 0.008  Brier 0.0156  BSS vs C +0.008  log -0.0761  95 % Brier(C)-Brier -0.0003 .. +0.0009
+    GP: mean p 0.020  Brier 0.0162  BSS vs C -0.030  log -0.0861  95 % Brier(C)-Brier -0.0015 .. +0.0010
+
+=== 2. Power: ETAS chances taken as the truth; trigger quakes resampled k times ===
+   T6 target A: k= 1 (~9 trigger quakes, ~12 years): skill detected in 18 % of 300 simulations
+   T6 target A: k= 3 (~27 trigger quakes, ~36 years): skill detected in 60 % of 300 simulations
+   T6 target A: k=10 (~90 trigger quakes, ~120 years): skill detected in 98 % of 300 simulations
+   T6 target A: k=30 (~270 trigger quakes, ~360 years): skill detected in 100 % of 300 simulations
+   T6 target B: k= 1 (~9 trigger quakes, ~12 years): skill detected in 25 % of 300 simulations
+   T6 target B: k= 3 (~27 trigger quakes, ~36 years): skill detected in 62 % of 300 simulations
+   T6 target B: k=10 (~90 trigger quakes, ~120 years): skill detected in 98 % of 300 simulations
+   T6 target B: k=30 (~270 trigger quakes, ~360 years): skill detected in 100 % of 300 simulations
+   T6 target C: k= 1 (~9 trigger quakes, ~12 years): skill detected in 0 % of 300 simulations
+   T6 target C: k= 3 (~27 trigger quakes, ~36 years): skill detected in 1 % of 300 simulations
+   T6 target C: k=10 (~90 trigger quakes, ~120 years): skill detected in 8 % of 300 simulations
+   T6 target C: k=30 (~270 trigger quakes, ~360 years): skill detected in 20 % of 300 simulations
+   T55 target A: k= 1 (~14 trigger quakes, ~12 years): skill detected in 29 % of 300 simulations
+   T55 target A: k= 3 (~42 trigger quakes, ~36 years): skill detected in 73 % of 300 simulations
+   T55 target A: k=10 (~140 trigger quakes, ~120 years): skill detected in 100 % of 300 simulations
+   T55 target A: k=30 (~420 trigger quakes, ~360 years): skill detected in 100 % of 300 simulations
+   T55 target B: k= 1 (~14 trigger quakes, ~12 years): skill detected in 22 % of 300 simulations
+   T55 target B: k= 3 (~42 trigger quakes, ~36 years): skill detected in 58 % of 300 simulations
+   T55 target B: k=10 (~140 trigger quakes, ~120 years): skill detected in 98 % of 300 simulations
+   T55 target B: k=30 (~420 trigger quakes, ~360 years): skill detected in 100 % of 300 simulations
+   T55 target C: k= 1 (~14 trigger quakes, ~12 years): skill detected in 0 % of 300 simulations
+   T55 target C: k= 3 (~42 trigger quakes, ~36 years): skill detected in 0 % of 300 simulations
+   T55 target C: k=10 (~140 trigger quakes, ~120 years): skill detected in 6 % of 300 simulations
+   T55 target C: k=30 (~420 trigger quakes, ~360 years): skill detected in 22 % of 300 simulations
+
+=== 3. Machine learning on catalogue features, weekly windows ===
+
+-- target A: training weeks 27375 (events 82), test weeks 9225 (events 30); outcome check vs eq_d11_point: 1
+   climatology   mean p 0.0030  Brier 0.00322  BSS +0.000  log -0.0192 (gain vs climatology +0.0000 nats/week)  95 % Brier(C)-Brier +0.00000 .. +0.00000
+   ETAS          mean p 0.0054  Brier 0.00343  BSS -0.066  log -0.0206 (gain vs climatology -0.0014 nats/week)  95 % Brier(C)-Brier -0.00059 .. -0.00001
+   logistic      mean p 0.0029  Brier 0.00325  BSS -0.008  log -0.0217 (gain vs climatology -0.0025 nats/week)  95 % Brier(C)-Brier -0.00005 .. -0.00001
+   boosted trees mean p 0.0030  Brier 0.00328  BSS -0.020  log -0.0193 (gain vs climatology -0.0002 nats/week)  95 % Brier(C)-Brier -0.00015 .. -0.00000
+
+-- target B: training weeks 15630 (events 227), test weeks 9225 (events 60); outcome check vs eq_d11_point: 1
+   climatology   mean p 0.0145  Brier 0.00653  BSS +0.000  log -0.0417 (gain vs climatology +0.0000 nats/week)  95 % Brier(C)-Brier +0.00000 .. +0.00000
+   ETAS          mean p 0.0098  Brier 0.00663  BSS -0.016  log -0.0401 (gain vs climatology +0.0017 nats/week)  95 % Brier(C)-Brier -0.00040 .. +0.00006
+   logistic      mean p 0.0136  Brier 0.00653  BSS -0.000  log -0.0417 (gain vs climatology +0.0001 nats/week)  95 % Brier(C)-Brier -0.00003 .. +0.00002
+   boosted trees mean p 0.0139  Brier 0.00658  BSS -0.009  log -0.0417 (gain vs climatology +0.0000 nats/week)  95 % Brier(C)-Brier -0.00010 .. -0.00002
+
+wrote research/out/eq_d11_point_extra.json

@@ -161,16 +161,18 @@ export async function osmSearch(q, lang = "th", fetchImpl = globalThis.fetch, or
 
 // ---------- saved places (on this phone only) ----------
 const KEY = "dn:places";
-export function loadPlaces(store = globalThis.localStorage) {
+// the getter itself throws where site data is blocked ("Block all cookies"): the page then simply keeps no places (T1)
+const local = () => { try { return globalThis.localStorage || null; } catch { return null; } };
+export function loadPlaces(store = local()) {
   try { return JSON.parse(store.getItem(KEY) || "[]").filter((p) => p && typeof p.lat === "number"); } catch { return []; }
 }
-export function savePlace(p, store = globalThis.localStorage) {
+export function savePlace(p, store = local()) {
   const list = loadPlaces(store).filter((x) => Math.abs(x.lat - p.lat) > 0.001 || Math.abs(x.lon - p.lon) > 0.001);
   list.unshift({ name: String(p.name || "").slice(0, 40), lat: Math.round(p.lat * 1e4) / 1e4, lon: Math.round(p.lon * 1e4) / 1e4 });
   try { store.setItem(KEY, JSON.stringify(list.slice(0, 5))); } catch { /* full or blocked */ }
   return list.slice(0, 5);
 }
-export function removePlace(i, store = globalThis.localStorage) {
+export function removePlace(i, store = local()) {
   const list = loadPlaces(store);
   list.splice(i, 1);
   try { store.setItem(KEY, JSON.stringify(list)); } catch { /* ignore */ }

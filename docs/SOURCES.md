@@ -35,6 +35,8 @@ Marks: ✅ live call answered as described · ⚠️ with a catch · 🔑 key ne
 | `storms.json` | **TMD** storm page data | `www.tmd.go.th/api/Weather/StormTrack?stormId=0` | ✅ 16.8 KB: จำปี (CHAMPI), 41 points to 26 Oct 18:00 | **`time` is UTC without an offset** (pairs with `dateTimeTH` +7 h, Buddhist year) | the page's own call, not a documented API |
 | `hotspots.json` | **NASA FIRMS** VIIRS SNPP + NOAA-20, SE Asia 24 h | `firms.modaps.eosdis.nasa.gov/data/active_fire/…/SUOMI_VIIRS_C2_SouthEast_Asia_24h.csv` (+ `J1_…`) | ✅ 303 hotspots in Thailand's box (low confidence left out) | `acq_date` + `acq_time` UTC | 1.9 MB, no gzip, no CORS |
 | `air4thai.json` | **Air4Thai** | `air4thai.pcd.go.th/services/getNewAQI_JSON.php` with `tools/certs/` | ⚠️ TLS now verifies; the server answered **HTTP 503** twice (20:16, 20:21 UTC) | as above | the page falls back to the CORS mirror |
+| `floodwatch.json` (0.6.0) | **FloodWatch** (the owner's sister app) | `flood.autobahn.bot/api/stations` (2.47 MB) and `/api/risks` (18.6 KB), every run | ✅ 24 Oct 20:15 UTC: 1,408 gauges → 1,374 rows kept (257 KB, ≈ 68 KB gzip); 62 in a "⚠️ จับตา" group | ISO times with offset (UTC); a gauge counts while ≤ 3 h old | no CORS (fine server-side), no ETag; FloodWatch refreshes levels every 10 min, forecasts every 30 |
+| `rain3d.json` (0.6.0) | **ThaiWater (HII)** `rain_24h`, all gauges | `api-v3.thaiwater.net/api/v1/thaiwater30/public/rain_24h`, **once an hour** | ✅ 4,749 gauges, 1,293 non-zero (24 Oct 20:26 UTC); history from 20:28 UTC | Bangkok time, no offset; a rolling 24-h total at each reading | snapshots kept 50 h in `rain_hist.json` (never uploaded); 2- and 3-day totals need readings 24 and 48 h back within 90 min |
 
 ## 3. Linked, not read
 

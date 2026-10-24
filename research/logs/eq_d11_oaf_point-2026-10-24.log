@@ -1,0 +1,127 @@
+# research/eq_d11_oaf_point.py
+# started 2026-10-24T20:33:38+00:00
+75 versions of USGS's forecast for the M7.7 with windows inside the catalog
+
+== The first versions, 1-week window: P(felt at the city) recomputed (S1 uniform circle / S2 recorded aftershock zone) ==
+version 0: issued 2025-03-28 15:20:18.999000+00:00, window from 9.7 h, circle 196 km, P(>=1 M>=5) 0.97, aftershocks recorded so far 15
+   Bangkok          MMI>=2.5: S1 0.276  S2 0.292  observed 0
+   Bangkok          MMI>=4.0: S1 0.029  S2 0.032  observed 0
+   Chiang Mai       MMI>=2.5: S1 0.279  S2 0.282  observed 0
+   Chiang Mai       MMI>=4.0: S1 0.029  S2 0.030  observed 0
+   Chiang Rai       MMI>=2.5: S1 0.298  S2 0.293  observed 0
+   Chiang Rai       MMI>=4.0: S1 0.032  S2 0.031  observed 0
+   Mae Hong Son     MMI>=2.5: S1 0.426  S2 0.430  observed 0
+   Mae Hong Son     MMI>=4.0: S1 0.053  S2 0.053  observed 0
+   Mae Sot (Tak)    MMI>=2.5: S1 0.159  S2 0.162  observed 0
+   Mae Sot (Tak)    MMI>=4.0: S1 0.014  S2 0.014  observed 0
+   Kanchanaburi     MMI>=2.5: S1 0.073  S2 0.074  observed 0
+   Kanchanaburi     MMI>=4.0: S1 0.005  S2 0.005  observed 0
+   Khon Kaen        MMI>=2.5: S1 0.076  S2 0.077  observed 0
+   Khon Kaen        MMI>=4.0: S1 0.005  S2 0.005  observed 0
+   Nan              MMI>=2.5: S1 0.178  S2 0.178  observed 0
+   Nan              MMI>=4.0: S1 0.016  S2 0.017  observed 0
+version 1: issued 2025-03-29 00:35:16.268000+00:00, window from 16.7 h, circle 400 km, P(>=1 M>=5) 0.92, aftershocks recorded so far 23
+   Bangkok          MMI>=2.5: S1 0.226  S2 0.229  observed 0
+   Bangkok          MMI>=4.0: S1 0.024  S2 0.025  observed 0
+   Chiang Mai       MMI>=2.5: S1 0.396  S2 0.236  observed 0
+   Chiang Mai       MMI>=4.0: S1 0.070  S2 0.026  observed 0
+   Chiang Rai       MMI>=2.5: S1 0.400  S2 0.219  observed 0
+   Chiang Rai       MMI>=4.0: S1 0.071  S2 0.023  observed 0
+   Mae Hong Son     MMI>=2.5: S1 0.531  S2 0.404  observed 0
+   Mae Hong Son     MMI>=4.0: S1 0.155  S2 0.052  observed 0
+   Mae Sot (Tak)    MMI>=2.5: S1 0.184  S2 0.140  observed 0
+   Mae Sot (Tak)    MMI>=4.0: S1 0.019  S2 0.013  observed 0
+   Kanchanaburi     MMI>=2.5: S1 0.068  S2 0.059  observed 0
+   Kanchanaburi     MMI>=4.0: S1 0.005  S2 0.005  observed 0
+   Khon Kaen        MMI>=2.5: S1 0.068  S2 0.057  observed 0
+   Khon Kaen        MMI>=4.0: S1 0.006  S2 0.004  observed 0
+   Nan              MMI>=2.5: S1 0.201  S2 0.134  observed 0
+   Nan              MMI>=4.0: S1 0.021  S2 0.013  observed 0
+version 2: issued 2025-03-29 22:48:11.194000+00:00, window from 40.7 h, circle 400 km, P(>=1 M>=5) 0.80, aftershocks recorded so far 25
+   Bangkok          MMI>=2.5: S1 0.119  S2 0.126  observed 0
+   Bangkok          MMI>=4.0: S1 0.011  S2 0.012  observed 0
+   Chiang Mai       MMI>=2.5: S1 0.230  S2 0.134  observed 0
+   Chiang Mai       MMI>=4.0: S1 0.032  S2 0.012  observed 0
+   Chiang Rai       MMI>=2.5: S1 0.224  S2 0.120  observed 0
+   Chiang Rai       MMI>=4.0: S1 0.031  S2 0.011  observed 0
+   Mae Hong Son     MMI>=2.5: S1 0.336  S2 0.256  observed 0
+   Mae Hong Son     MMI>=4.0: S1 0.079  S2 0.027  observed 0
+   Mae Sot (Tak)    MMI>=2.5: S1 0.095  S2 0.074  observed 0
+   Mae Sot (Tak)    MMI>=4.0: S1 0.008  S2 0.006  observed 0
+   Kanchanaburi     MMI>=2.5: S1 0.032  S2 0.029  observed 0
+   Kanchanaburi     MMI>=4.0: S1 0.002  S2 0.002  observed 0
+   Khon Kaen        MMI>=2.5: S1 0.032  S2 0.028  observed 0
+   Khon Kaen        MMI>=4.0: S1 0.002  S2 0.002  observed 0
+   Nan              MMI>=2.5: S1 0.101  S2 0.070  observed 0
+   Nan              MMI>=4.0: S1 0.009  S2 0.006  observed 0
+
+== All versions pooled (overlapping windows: a case study, not independent tests) ==
+1 Day    MMI>=2.5 Bangkok          n= 75 mean P S1 0.006 S2 0.006 observed share 0.000
+1 Day    MMI>=2.5 Chiang Mai       n= 75 mean P S1 0.010 S2 0.006 observed share 0.000
+1 Day    MMI>=2.5 Chiang Rai       n= 75 mean P S1 0.010 S2 0.006 observed share 0.000
+1 Day    MMI>=2.5 Kanchanaburi     n= 75 mean P S1 0.001 S2 0.001 observed share 0.000
+1 Day    MMI>=2.5 Khon Kaen        n= 75 mean P S1 0.001 S2 0.001 observed share 0.000
+1 Day    MMI>=2.5 Mae Hong Son     n= 75 mean P S1 0.016 S2 0.012 observed share 0.000
+1 Day    MMI>=2.5 Mae Sot (Tak)    n= 75 mean P S1 0.004 S2 0.003 observed share 0.000
+1 Day    MMI>=2.5 Nan              n= 75 mean P S1 0.005 S2 0.003 observed share 0.000
+1 Day    MMI>=4.0 Bangkok          n= 75 mean P S1 0.001 S2 0.001 observed share 0.000
+1 Day    MMI>=4.0 Chiang Mai       n= 75 mean P S1 0.001 S2 0.001 observed share 0.000
+1 Day    MMI>=4.0 Chiang Rai       n= 75 mean P S1 0.001 S2 0.001 observed share 0.000
+1 Day    MMI>=4.0 Kanchanaburi     n= 75 mean P S1 0.000 S2 0.000 observed share 0.000
+1 Day    MMI>=4.0 Khon Kaen        n= 75 mean P S1 0.000 S2 0.000 observed share 0.000
+1 Day    MMI>=4.0 Mae Hong Son     n= 75 mean P S1 0.003 S2 0.001 observed share 0.000
+1 Day    MMI>=4.0 Mae Sot (Tak)    n= 75 mean P S1 0.000 S2 0.000 observed share 0.000
+1 Day    MMI>=4.0 Nan              n= 75 mean P S1 0.000 S2 0.000 observed share 0.000
+1 Month  MMI>=2.5 Bangkok          n= 75 mean P S1 0.062 S2 0.065 observed share 0.000
+1 Month  MMI>=2.5 Chiang Mai       n= 75 mean P S1 0.112 S2 0.070 observed share 0.000
+1 Month  MMI>=2.5 Chiang Rai       n= 75 mean P S1 0.113 S2 0.066 observed share 0.000
+1 Month  MMI>=2.5 Kanchanaburi     n= 75 mean P S1 0.017 S2 0.015 observed share 0.000
+1 Month  MMI>=2.5 Khon Kaen        n= 75 mean P S1 0.017 S2 0.015 observed share 0.000
+1 Month  MMI>=2.5 Mae Hong Son     n= 75 mean P S1 0.162 S2 0.127 observed share 0.000
+1 Month  MMI>=2.5 Mae Sot (Tak)    n= 75 mean P S1 0.048 S2 0.039 observed share 0.000
+1 Month  MMI>=2.5 Nan              n= 75 mean P S1 0.053 S2 0.038 observed share 0.000
+1 Month  MMI>=4.0 Bangkok          n= 75 mean P S1 0.006 S2 0.006 observed share 0.000
+1 Month  MMI>=4.0 Chiang Mai       n= 75 mean P S1 0.017 S2 0.008 observed share 0.000
+1 Month  MMI>=4.0 Chiang Rai       n= 75 mean P S1 0.017 S2 0.006 observed share 0.000
+1 Month  MMI>=4.0 Kanchanaburi     n= 75 mean P S1 0.001 S2 0.001 observed share 0.000
+1 Month  MMI>=4.0 Khon Kaen        n= 75 mean P S1 0.001 S2 0.001 observed share 0.000
+1 Month  MMI>=4.0 Mae Hong Son     n= 75 mean P S1 0.037 S2 0.014 observed share 0.000
+1 Month  MMI>=4.0 Mae Sot (Tak)    n= 75 mean P S1 0.004 S2 0.003 observed share 0.000
+1 Month  MMI>=4.0 Nan              n= 75 mean P S1 0.005 S2 0.003 observed share 0.000
+1 Week   MMI>=2.5 Bangkok          n= 75 mean P S1 0.024 S2 0.026 observed share 0.000
+1 Week   MMI>=2.5 Chiang Mai       n= 75 mean P S1 0.044 S2 0.027 observed share 0.000
+1 Week   MMI>=2.5 Chiang Rai       n= 75 mean P S1 0.044 S2 0.025 observed share 0.000
+1 Week   MMI>=2.5 Kanchanaburi     n= 75 mean P S1 0.006 S2 0.006 observed share 0.000
+1 Week   MMI>=2.5 Khon Kaen        n= 75 mean P S1 0.006 S2 0.006 observed share 0.000
+1 Week   MMI>=2.5 Mae Hong Son     n= 75 mean P S1 0.067 S2 0.051 observed share 0.000
+1 Week   MMI>=2.5 Mae Sot (Tak)    n= 75 mean P S1 0.018 S2 0.015 observed share 0.000
+1 Week   MMI>=2.5 Nan              n= 75 mean P S1 0.020 S2 0.014 observed share 0.000
+1 Week   MMI>=4.0 Bangkok          n= 75 mean P S1 0.002 S2 0.002 observed share 0.000
+1 Week   MMI>=4.0 Chiang Mai       n= 75 mean P S1 0.006 S2 0.003 observed share 0.000
+1 Week   MMI>=4.0 Chiang Rai       n= 75 mean P S1 0.006 S2 0.002 observed share 0.000
+1 Week   MMI>=4.0 Kanchanaburi     n= 75 mean P S1 0.000 S2 0.000 observed share 0.000
+1 Week   MMI>=4.0 Khon Kaen        n= 75 mean P S1 0.000 S2 0.000 observed share 0.000
+1 Week   MMI>=4.0 Mae Hong Son     n= 75 mean P S1 0.014 S2 0.005 observed share 0.000
+1 Week   MMI>=4.0 Mae Sot (Tak)    n= 75 mean P S1 0.002 S2 0.001 observed share 0.000
+1 Week   MMI>=4.0 Nan              n= 75 mean P S1 0.002 S2 0.001 observed share 0.000
+1 Year   MMI>=2.5 Bangkok          n= 50 mean P S1 0.265 S2 0.278 observed share 0.000
+1 Year   MMI>=2.5 Chiang Mai       n= 50 mean P S1 0.428 S2 0.297 observed share 0.000
+1 Year   MMI>=2.5 Chiang Rai       n= 50 mean P S1 0.429 S2 0.285 observed share 0.000
+1 Year   MMI>=2.5 Kanchanaburi     n= 50 mean P S1 0.085 S2 0.078 observed share 0.000
+1 Year   MMI>=2.5 Khon Kaen        n= 50 mean P S1 0.086 S2 0.076 observed share 0.000
+1 Year   MMI>=2.5 Mae Hong Son     n= 50 mean P S1 0.544 S2 0.466 observed share 0.000
+1 Year   MMI>=2.5 Mae Sot (Tak)    n= 50 mean P S1 0.220 S2 0.179 observed share 0.000
+1 Year   MMI>=2.5 Nan              n= 50 mean P S1 0.239 S2 0.177 observed share 0.000
+1 Year   MMI>=4.0 Bangkok          n= 50 mean P S1 0.032 S2 0.034 observed share 0.000
+1 Year   MMI>=4.0 Chiang Mai       n= 50 mean P S1 0.090 S2 0.043 observed share 0.000
+1 Year   MMI>=4.0 Chiang Rai       n= 50 mean P S1 0.088 S2 0.034 observed share 0.000
+1 Year   MMI>=4.0 Kanchanaburi     n= 50 mean P S1 0.007 S2 0.006 observed share 0.000
+1 Year   MMI>=4.0 Khon Kaen        n= 50 mean P S1 0.007 S2 0.006 observed share 0.000
+1 Year   MMI>=4.0 Mae Hong Son     n= 50 mean P S1 0.175 S2 0.071 observed share 0.000
+1 Year   MMI>=4.0 Mae Sot (Tak)    n= 50 mean P S1 0.024 S2 0.019 observed share 0.000
+1 Year   MMI>=4.0 Nan              n= 50 mean P S1 0.027 S2 0.018 observed share 0.000
+
+== ComCat quakes after the first hour that reached MMI >= 2.5 at any of these cities (within 600 km of the epicentre, to 2026-10) ==
+   +   66.0 d  M4.2 43 km NNE of Chiang Mai, Thailand: Chiang Mai 2.8
+
+wrote research/out/eq_d11_oaf_point.json

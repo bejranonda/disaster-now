@@ -1,0 +1,152 @@
+# research/eq_d11_recheck.py
+# started 2026-10-24T20:49:18+00:00
+=== 1. Power of the earlier test (69 test sequences, eq_aftershock_sequences.csv) ===
+M5_7d   truth=R : n=69, expected events 7.9; expected BSS if true +0.147 (simulated mean +0.148); detected (95 % lower bound > 0) in 27.4 % of 2000 simulations
+M5_7d   truth=B1: n=69, expected events 8.9; expected BSS if true +0.156 (simulated mean +0.161); detected (95 % lower bound > 0) in 23.8 % of 2000 simulations
+M4_7d   truth=R : n=69, expected events 29.1; expected BSS if true +0.193 (simulated mean +0.189); detected (95 % lower bound > 0) in 55.6 % of 2000 simulations
+M4_7d   truth=B1: n=69, expected events 20.0; expected BSS if true +0.092 (simulated mean +0.090); detected (95 % lower bound > 0) in 23.4 % of 2000 simulations
+M5_30d  truth=R : n=69, expected events 12.0; expected BSS if true +0.152 (simulated mean +0.150); detected (95 % lower bound > 0) in 28.9 % of 2000 simulations
+M5_30d  truth=B1: n=69, expected events 10.1; expected BSS if true +0.166 (simulated mean +0.173); detected (95 % lower bound > 0) in 28.1 % of 2000 simulations
+M4_30d  truth=R : n=69, expected events 37.4; expected BSS if true +0.253 (simulated mean +0.251); detected (95 % lower bound > 0) in 75.8 % of 2000 simulations
+M4_30d  truth=B1: n=69, expected events 23.1; expected BSS if true +0.115 (simulated mean +0.115); detected (95 % lower bound > 0) in 36.1 % of 2000 simulations
+
+=== 2. Real-time trigger set: 567 sequences (earlier study: 391); by set {'train': 480, 'test': 87}; Gardner-Knopoff flag of the triggers: {0: 364, 1: 140, -1: 63} (0 independent, -1 'foreshock', 1 'aftershock')
+followed by a LARGER quake within 7 d inside the circle: 19 of 567 (3.4 %); train 0.035, test 0.023
+   M5.5-6.0: larger within 7 d 16/389
+   M6.0-6.5: larger within 7 d 2/129
+   M6.5-7.0: larger within 7 d 1/35
+   M7.0-: larger within 7 d 0/14
+   [split 2015] regional refit on 480 sequences: a_mean -3.314, sigma 0.854, p 0.300
+
+=== 2b. Real-time set, test 2015-2026 (pre-registered split) ===
+
+-- [test] issued 1h after, >= 1 M>=5 within 7 d: n = 87, observed 9 (10.3 %); say-nothing (p = 0) Brier 0.1034
+    B0: mean p 0.146  Brier 0.0945  BSS +0.000  log -0.3405  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.141  Brier 0.1033  BSS -0.092  log -0.3582  95 % Brier(B0)-Brier -0.0253 .. +0.0064
+     G: mean p 0.268  Brier 0.1502  BSS -0.589  log -0.4908  95 % Brier(B0)-Brier -0.0920 .. -0.0225
+        reliability: [0.10,0.20) n=40 p=0.16 obs=0.15; [0.20,0.40) n=33 p=0.27 obs=0.03; [0.40,0.70) n=11 p=0.50 obs=0.18; [0.70,1.00) n=3 p=0.81 obs=0.00
+     R: mean p 0.102  Brier 0.1029  BSS -0.088  log -0.3716  95 % Brier(B0)-Brier -0.0254 .. +0.0060
+
+-- [test] issued 1h after, >= 1 M>=4 within 7 d: n = 87, observed 32 (36.8 %); say-nothing (p = 0) Brier 0.3678
+    B0: mean p 0.319  Brier 0.2349  BSS +0.000  log -0.6632  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.316  Brier 0.2382  BSS -0.014  log -0.6694  95 % Brier(B0)-Brier -0.0288 .. +0.0232
+     G: mean p 0.665  Brier 0.3236  BSS -0.377  log -0.9253  95 % Brier(B0)-Brier -0.1639 .. -0.0112
+     R: mean p 0.353  Brier 0.2418  BSS -0.029  log -0.6784  95 % Brier(B0)-Brier -0.0382 .. +0.0248
+
+-- [test] issued 1h after, >= 1 M>=5 within 30 d: n = 87, observed 12 (13.8 %); say-nothing (p = 0) Brier 0.1379
+    B0: mean p 0.177  Brier 0.1204  BSS +0.000  log -0.4068  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.172  Brier 0.1185  BSS +0.016  log -0.3971  95 % Brier(B0)-Brier -0.0162 .. +0.0235
+     G: mean p 0.321  Brier 0.1770  BSS -0.470  log -0.5434  95 % Brier(B0)-Brier -0.0945 .. -0.0180
+     R: mean p 0.190  Brier 0.1279  BSS -0.062  log -0.4309  95 % Brier(B0)-Brier -0.0287 .. +0.0160
+
+-- [test] issued 1h after, >= 1 M>=4 within 30 d: n = 87, observed 36 (41.4 %); say-nothing (p = 0) Brier 0.4138
+    B0: mean p 0.360  Brier 0.2454  BSS +0.000  log -0.6843  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.360  Brier 0.2559  BSS -0.043  log -0.7078  95 % Brier(B0)-Brier -0.0417 .. +0.0172
+     G: mean p 0.722  Brier 0.3445  BSS -0.404  log -1.0091  95 % Brier(B0)-Brier -0.1827 .. -0.0180
+     R: mean p 0.523  Brier 0.2676  BSS -0.091  log -0.7450  95 % Brier(B0)-Brier -0.0725 .. +0.0234
+
+-- [test] issued 1d after, >= 1 M>=5 within 7 d: n = 87, observed 5 (5.7 %); say-nothing (p = 0) Brier 0.0575
+    B0: mean p 0.098  Brier 0.0558  BSS +0.000  log -0.2307  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.094  Brier 0.0619  BSS -0.109  log -0.2380  95 % Brier(B0)-Brier -0.0212 .. +0.0080
+     G: mean p 0.177  Brier 0.0887  BSS -0.589  log -0.3250  95 % Brier(B0)-Brier -0.0582 .. -0.0113
+        reliability: [0.05,0.10) n=23 p=0.08 obs=0.13; [0.10,0.20) n=43 p=0.14 obs=0.02; [0.20,0.40) n=15 p=0.27 obs=0.07; [0.40,0.70) n=5 p=0.51 obs=0.00; [0.70,1.00) n=1 p=0.88 obs=0.00
+    GU: mean p 0.136  Brier 0.0606  BSS -0.085  log -0.2376  95 % Brier(B0)-Brier -0.0298 .. +0.0261
+        reliability: [0.00,0.05) n=20 p=0.04 obs=0.10; [0.05,0.10) n=34 p=0.07 obs=0.00; [0.10,0.20) n=17 p=0.14 obs=0.00; [0.20,0.40) n=9 p=0.25 obs=0.11; [0.40,0.70) n=6 p=0.56 obs=0.17; [0.70,1.00) n=1 p=0.70 obs=1.00
+    RU: mean p 0.170  Brier 0.0941  BSS -0.686  log -0.3307  95 % Brier(B0)-Brier -0.0885 .. +0.0107
+        reliability: [0.00,0.05) n=38 p=0.04 obs=0.05; [0.05,0.10) n=21 p=0.07 obs=0.00; [0.10,0.20) n=8 p=0.15 obs=0.00; [0.20,0.40) n=10 p=0.28 obs=0.10; [0.40,0.70) n=3 p=0.53 obs=0.00; [0.70,1.00) n=7 p=0.90 obs=0.29
+
+-- [test] issued 1d after, >= 1 M>=4 within 7 d: n = 87, observed 23 (26.4 %); say-nothing (p = 0) Brier 0.2644
+    B0: mean p 0.244  Brier 0.1949  BSS +0.000  log -0.5787  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.240  Brier 0.1992  BSS -0.022  log -0.5871  95 % Brier(B0)-Brier -0.0297 .. +0.0222
+     G: mean p 0.541  Brier 0.2997  BSS -0.538  log -0.8423  95 % Brier(B0)-Brier -0.1698 .. -0.0351
+    GU: mean p 0.499  Brier 0.2325  BSS -0.193  log -0.6760  95 % Brier(B0)-Brier -0.1056 .. +0.0309
+    RU: mean p 0.420  Brier 0.1981  BSS -0.017  log -0.6341  95 % Brier(B0)-Brier -0.0657 .. +0.0570
+
+-- [test] issued 1d after, >= 1 M>=5 within 30 d: n = 87, observed 8 (9.2 %); say-nothing (p = 0) Brier 0.0920
+    B0: mean p 0.137  Brier 0.0856  BSS +0.000  log -0.3168  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.132  Brier 0.0804  BSS +0.061  log -0.2938  95 % Brier(B0)-Brier -0.0135 .. +0.0283
+     G: mean p 0.250  Brier 0.1241  BSS -0.450  log -0.4165  95 % Brier(B0)-Brier -0.0664 .. -0.0052
+    GU: mean p 0.204  Brier 0.0984  BSS -0.149  log -0.3508  95 % Brier(B0)-Brier -0.0485 .. +0.0268
+    RU: mean p 0.274  Brier 0.1529  BSS -0.787  log -0.5843  95 % Brier(B0)-Brier -0.1282 .. -0.0076
+
+-- [test] issued 1d after, >= 1 M>=4 within 30 d: n = 87, observed 29 (33.3 %); say-nothing (p = 0) Brier 0.3333
+    B0: mean p 0.306  Brier 0.2230  BSS +0.000  log -0.6382  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.306  Brier 0.2386  BSS -0.070  log -0.6722  95 % Brier(B0)-Brier -0.0457 .. +0.0150
+     G: mean p 0.644  Brier 0.3387  BSS -0.519  log -0.9662  95 % Brier(B0)-Brier -0.1878 .. -0.0370
+    GU: mean p 0.610  Brier 0.2817  BSS -0.263  log -0.8083  95 % Brier(B0)-Brier -0.1272 .. +0.0165
+    RU: mean p 0.585  Brier 0.2607  BSS -0.169  log -0.7887  95 % Brier(B0)-Brier -0.1092 .. +0.0322
+
+=== 3. Leave-one-era-out cross-validation, all real-time sequences ===
+   [era 1973-1989 held out] regional refit on 451 sequences: a_mean -3.300, sigma 0.888, p 0.300
+   [era 1990-1999 held out] regional refit on 491 sequences: a_mean -3.208, sigma 0.837, p 0.300
+   [era 2000-2009 held out] regional refit on 360 sequences: a_mean -2.850, sigma 0.704, p 1.091
+   [era 2010-2014 held out] regional refit on 486 sequences: a_mean -3.425, sigma 0.929, p 0.300
+   [era 2015-2026 held out] regional refit on 480 sequences: a_mean -3.314, sigma 0.854, p 0.300
+
+-- [cv-all] issued 1h after, >= 1 M>=5 within 7 d: n = 567, observed 79 (13.9 %); say-nothing (p = 0) Brier 0.1393
+    B0: mean p 0.137  Brier 0.1205  BSS +0.000  log -0.4062  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.136  Brier 0.1108  BSS +0.081  log -0.3781  95 % Brier(B0)-Brier +0.0015 .. +0.0188
+     G: mean p 0.265  Brier 0.1364  BSS -0.132  log -0.4484  95 % Brier(B0)-Brier -0.0304 .. -0.0007
+     R: mean p 0.121  Brier 0.1129  BSS +0.063  log -0.3958  95 % Brier(B0)-Brier -0.0005 .. +0.0162
+
+-- [cv-all] issued 1h after, >= 1 M>=4 within 7 d: n = 567, observed 185 (32.6 %); say-nothing (p = 0) Brier 0.3263
+    B0: mean p 0.319  Brier 0.2246  BSS +0.000  log -0.6425  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.319  Brier 0.2089  BSS +0.070  log -0.6063  95 % Brier(B0)-Brier +0.0066 .. +0.0249
+     G: mean p 0.660  Brier 0.3255  BSS -0.449  log -0.8882  95 % Brier(B0)-Brier -0.1291 .. -0.0722
+     R: mean p 0.401  Brier 0.2160  BSS +0.038  log -0.6209  95 % Brier(B0)-Brier -0.0053 .. +0.0234
+
+-- [cv-all] issued 1h after, >= 1 M>=5 within 30 d: n = 567, observed 97 (17.1 %); say-nothing (p = 0) Brier 0.1711
+    B0: mean p 0.166  Brier 0.1430  BSS +0.000  log -0.4618  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.165  Brier 0.1253  BSS +0.124  log -0.4240  95 % Brier(B0)-Brier +0.0078 .. +0.0275
+     G: mean p 0.319  Brier 0.1594  BSS -0.115  log -0.4994  95 % Brier(B0)-Brier -0.0333 .. +0.0009
+     R: mean p 0.186  Brier 0.1320  BSS +0.077  log -0.4422  95 % Brier(B0)-Brier +0.0014 .. +0.0221
+
+-- [cv-all] issued 1h after, >= 1 M>=4 within 30 d: n = 567, observed 209 (36.9 %); say-nothing (p = 0) Brier 0.3686
+    B0: mean p 0.359  Brier 0.2387  BSS +0.000  log -0.6712  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.358  Brier 0.2233  BSS +0.065  log -0.6368  95 % Brier(B0)-Brier +0.0061 .. +0.0252
+     G: mean p 0.719  Brier 0.3484  BSS -0.460  log -0.9551  95 % Brier(B0)-Brier -0.1398 .. -0.0786
+     R: mean p 0.522  Brier 0.2510  BSS -0.051  log -0.6955  95 % Brier(B0)-Brier -0.0290 .. +0.0041
+
+-- [cv-all] issued 1d after, >= 1 M>=5 within 7 d: n = 567, observed 52 (9.2 %); say-nothing (p = 0) Brier 0.0917
+    B0: mean p 0.091  Brier 0.0836  BSS +0.000  log -0.3084  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.090  Brier 0.0737  BSS +0.119  log -0.2734  95 % Brier(B0)-Brier +0.0016 .. +0.0189
+     G: mean p 0.178  Brier 0.0872  BSS -0.042  log -0.3233  95 % Brier(B0)-Brier -0.0154 .. +0.0090
+    GU: mean p 0.138  Brier 0.0662  BSS +0.208  log -0.2560  95 % Brier(B0)-Brier +0.0033 .. +0.0324
+    RU: mean p 0.126  Brier 0.0744  BSS +0.110  log -0.2845  95 % Brier(B0)-Brier -0.0071 .. +0.0270
+
+-- [cv-all] issued 1d after, >= 1 M>=4 within 7 d: n = 567, observed 140 (24.7 %); say-nothing (p = 0) Brier 0.2469
+    B0: mean p 0.242  Brier 0.1880  BSS +0.000  log -0.5645  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.242  Brier 0.1692  BSS +0.100  log -0.5186  95 % Brier(B0)-Brier +0.0092 .. +0.0290
+     G: mean p 0.538  Brier 0.2661  BSS -0.415  log -0.7393  95 % Brier(B0)-Brier -0.1042 .. -0.0523
+    GU: mean p 0.494  Brier 0.2141  BSS -0.139  log -0.6213  95 % Brier(B0)-Brier -0.0505 .. -0.0019
+    RU: mean p 0.365  Brier 0.1686  BSS +0.103  log -0.5325  95 % Brier(B0)-Brier -0.0002 .. +0.0397
+
+-- [cv-all] issued 1d after, >= 1 M>=5 within 30 d: n = 567, observed 74 (13.1 %); say-nothing (p = 0) Brier 0.1305
+    B0: mean p 0.125  Brier 0.1145  BSS +0.000  log -0.3920  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.124  Brier 0.0947  BSS +0.173  log -0.3456  95 % Brier(B0)-Brier +0.0091 .. +0.0321
+     G: mean p 0.251  Brier 0.1180  BSS -0.031  log -0.4022  95 % Brier(B0)-Brier -0.0180 .. +0.0111
+    GU: mean p 0.204  Brier 0.0919  BSS +0.198  log -0.3276  95 % Brier(B0)-Brier +0.0074 .. +0.0381
+    RU: mean p 0.200  Brier 0.1133  BSS +0.011  log -0.4110  95 % Brier(B0)-Brier -0.0192 .. +0.0202
+
+-- [cv-all] issued 1d after, >= 1 M>=4 within 30 d: n = 567, observed 176 (31.0 %); say-nothing (p = 0) Brier 0.3104
+    B0: mean p 0.302  Brier 0.2187  BSS +0.000  log -0.6304  95 % Brier(B0)-Brier +0.0000 .. +0.0000
+    B1: mean p 0.302  Brier 0.2016  BSS +0.078  log -0.5917  95 % Brier(B0)-Brier +0.0071 .. +0.0273
+     G: mean p 0.643  Brier 0.3167  BSS -0.448  log -0.8612  95 % Brier(B0)-Brier -0.1259 .. -0.0698
+    GU: mean p 0.608  Brier 0.2661  BSS -0.217  log -0.7426  95 % Brier(B0)-Brier -0.0749 .. -0.0197
+    RU: mean p 0.499  Brier 0.2288  BSS -0.047  log -0.6669  95 % Brier(B0)-Brier -0.0317 .. +0.0117
+
+=== 4. Distribution of first-day counts used by the update (test set) ===
+n_early (events >= Mc(t) in (1.4 min, 1 d]): zero in 67 of 87; median 0; max 5
+largest test triggers (issued 1 d; M>=5 in 7 d): G / GU / RU / B1 / observed
+   2025-03-28 M7.7 SZ-GENERIC   n_early=  2  G 0.88  GU 0.64  RU 0.83  B1 0.69  obs 0
+   2026-08-15 M6.9 SZ-ONSHORE   n_early=  0  G 0.59  GU 0.27  RU 0.20  B1 0.32  obs 0
+   2016-04-13 M6.9 ANSR-ABSLDEC n_early=  0  G 0.57  GU 0.20  RU 0.20  B1 0.32  obs 0
+   2016-08-24 M6.8 SZ-GENERIC   n_early=  0  G 0.45  GU 0.20  RU 0.18  B1 0.32  obs 0
+   2016-01-03 M6.7 ANSR-ABSLDEC n_early=  0  G 0.46  GU 0.17  RU 0.16  B1 0.32  obs 0
+   2015-11-08 M6.6 SZ-GENERIC   n_early=  5  G 0.35  GU 0.70  RU 0.97  B1 0.32  obs 1
+   2022-09-05 M6.6 ANSR-DEEPCON n_early=  1  G 0.50  GU 0.30  RU 0.44  B1 0.32  obs 0
+   2016-12-06 M6.5 SZ-INLBACK   n_early=  0  G 0.34  GU 0.15  RU 0.13  B1 0.32  obs 0
+   2025-07-28 M6.4 SZ-GENERIC   n_early=  0  G 0.28  GU 0.12  RU 0.12  B1 0.05  obs 0
+   2017-11-17 M6.4 ANSR-DEEPCON n_early=  1  G 0.39  GU 0.26  RU 0.40  B1 0.05  obs 0
+
+wrote research/out/eq_d11_recheck.json and research/out/eq_d11_realtime_sequences.csv.gz

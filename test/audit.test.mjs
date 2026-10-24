@@ -172,10 +172,11 @@ test("S1: every view of a forecast takes the tile's level, never above เตร
     for (const c of r.cards) for (const d of c.days || []) assert.ok(d.level <= MODEL_MAX, `${c.id} day ${d.name} at ${lat}: ${d.level}`);
     for (const x of r.pre) assert.ok(x.tone <= MODEL_MAX, `pre ${x.hazard} tone ${x.tone}`);
   }
-  // Bangkok's fixture: a forecast of ≥ 42 °C keeps its agency word in the pre-warning (level 3) but is orange (tone 2)
+  // Bangkok's fixture: a forecast of ≥ 42 °C keeps its agency word in the pre-warning ("ร้อนระดับอันตราย") and is
+  // orange (tone 2): since 0.6.0 อันตราย is level 2 itself, the DOH's orange (D-053)
   const r = assess(full(at(13.7563, 100.5018)), "th");
   const heatPre = r.pre.find((x) => x.hazard === "heat");
-  assert.ok(heatPre && heatPre.level === 3 && heatPre.tone === MODEL_MAX);
+  assert.ok(heatPre && heatPre.level === 2 && heatPre.tone === MODEL_MAX, JSON.stringify(heatPre));
   assert.equal(r.outlook[0].heat.level, card(r, "heat").days[0].level);
 });
 
@@ -487,4 +488,43 @@ test("Hat Yai hindcast §4: a multi-day caution when heavy rain is possible; who
     const hy = card(assess(full(at(7.0086, 100.4747), { warnings: { items: [parseCap(fx("tmd_cap_item.xml"))] } }), lang), "rain");
     assert.ok(hy.level >= 2 && hy.lines.some((l) => (lang === "en" ? /This page sends no alerts$/ : /เว็บนี้ไม่ส่งการแจ้งเตือน$/).test(l)), hy.lines.join(" | "));
   }
+});
+
+test("UX §5.2: \"ข้างหน้า\" names the worst coming day above the verdict, in words, without lifting the verdict", async () => {
+  const { shareMessage } = await import("../public/js/assess.js");
+  // Bangkok's fixture made cool (−8 °C every member, every hour) and wet the day after tomorrow (+4 mm/h in every member)
+  const b = full(at(13.7563, 100.5018));
+  const ens = JSON.parse(JSON.stringify(b.ens));
+  const day3 = assess(b, "th").outlook[2].date;
+  for (const [k, arr] of Object.entries(ens.hourly)) {
+    if (k.startsWith("temperature_2m")) ens.hourly[k] = arr.map((v) => (v == null ? v : v - 8));
+    if (k.startsWith("precipitation")) ens.hourly[k] = arr.map((v, i) => (v != null && ens.hourly.time[i].startsWith(day3) ? v + 4 : v));
+  }
+  const r = assess({ ...b, ens }, "th");
+  const a = r.verdict.ahead;
+  assert.ok(a && a.id === "rain" && a.day === 2 && a.level === 2, JSON.stringify(a));
+  assert.ok(r.verdict.level < 2, `the verdict keeps its own level (${r.verdict.level}): days 2–3 are words, never its colour`);
+  assert.match(a.text, /^ฝนหนัก .+ โอกาสสูง$/);
+  // the share text: source, hazard, place, time, what to do, and its own time; the subdistrict link, no coordinates
+  const fake = { verdict: { level: 1, name: "ติดตามไว้", worst: { id: "heat", icon: "🌡️", short: "ความร้อน", word: "ระดับเตือนภัย", value: "บ่ายนี้ รู้สึกเหมือน 38 °C" },
+    ahead: { icon: "🌧️", text: "ฝนหนัก พ. 19 โอกาสสูง", level: 2 }, action: { text: "ลดกิจกรรมกลางแดด" }, warning: null } };
+  const msg = shareMessage(fake, { name: "ต.หาดใหญ่ อ.หาดใหญ่ จ.สงขลา", when: "17 พ.ย. 19:05", url: "https://risk.autobahn.bot/#t=901101" }).split("\n");
+  assert.deepEqual(msg, ["ภัยรอบบ้าน · ต.หาดใหญ่ อ.หาดใหญ่ จ.สงขลา", "ข้อมูล ณ 17 พ.ย. 19:05 (เปิดลิงก์ดูล่าสุด)",
+    "●●○○ ติดตามไว้: 🌡️ ความร้อน ระดับเตือนภัย · บ่ายนี้ รู้สึกเหมือน 38 °C", "ข้างหน้า: 🌧️ ฝนหนัก พ. 19 โอกาสสูง", "👉 ลดกิจกรรมกลางแดด",
+    "https://risk.autobahn.bot/#t=901101"]);
+  const real = shareMessage(r, { name: "x", when: "y", url: "https://risk.autobahn.bot/#t=100101" });
+  assert.ok(/ข้างหน้า: 🌧️ ฝนหนัก/.test(real) && !/\d{1,2}\.\d{3,}/.test(real), real);
+});
+
+test("UX §5.3: what changed since the last look, per subdistrict, levels only", async () => {
+  const { changesSince, lookOf } = await import("../public/js/assess.js");
+  const r = assess(full(at(13.7563, 100.5018)), "th");
+  const look = lookOf(r, NOW);
+  assert.deepEqual(Object.keys(look).sort(), ["at", "levels"], "a time and levels: no position, no place name");
+  assert.deepEqual(changesSince(look, r), [], "nothing changed, nothing said");
+  const before = { at: NOW - 864e5, levels: { ...look.levels, heat: 0, rain: 2, fire: 1 } };
+  const ch = changesSince(before, r);
+  assert.deepEqual(ch.map((x) => [x.id, x.from, x.to]).sort(), [["heat", 0, look.levels.heat], ["rain", 2, look.levels.rain]].sort(),
+    "a rise and a fall both said; a hazard with no data now (fire) is not a change");
+  assert.deepEqual(changesSince(null, r), []);
 });

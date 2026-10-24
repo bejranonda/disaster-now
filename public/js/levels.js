@@ -17,12 +17,16 @@ export const UNKNOWN = { level: -1, key: "none", th: "ไม่มีข้อ�
 // PCD's edges are 25.0 / 25.1, WHO's UV index is a whole number). `th`/`en` are the source's own words.
 export const HAZARDS = {
   heat: { // heat index, °C, hourly; the day's peak is what counts
+    // The levels are the DOH's own colours (0.6.0, D1 → D-053): เฝ้าระวัง green ("ทำกิจกรรมได้ปกติ แต่ควรดื่มน้ำ"), เตือนภัย
+    // yellow ("เริ่มเสี่ยง ควรลดกิจกรรมกลางแดด"), อันตราย orange, อันตรายมาก red (the Director-General, Daily News 7 Apr 2026;
+    // บ้านรอดไหม's /hot draws the same). Until 0.5.0 every band sat one step higher, so heat was orange on 94–100 % of
+    // Mar–Oct days and hid Hat Yai's rain signal in Nov 2025 (docs/research/ux-d8-d1-d9-incidents-2026-10-24.md §3).
     unit: "°C", step: 0.1, src: ["doh-heatlevels-2569", "bma-heat-posttoday-2569", "tmd-heatindex-posttoday-2567"],
     bands: [
       { min: -Infinity, level: 0, th: "ปกติ", en: "Normal" },
-      { min: 27.0, level: 1, th: "เฝ้าระวัง", en: "Watch" },
-      { min: 33.0, level: 2, th: "เตือนภัย", en: "Warning" },
-      { min: 42.0, level: 3, th: "อันตราย", en: "Danger" },
+      { min: 27.0, level: 0, th: "เฝ้าระวัง", en: "Watch" },
+      { min: 33.0, level: 1, th: "เตือนภัย", en: "Warning" },
+      { min: 42.0, level: 2, th: "อันตราย", en: "Danger" },
       { min: 52.0, level: 3, th: "อันตรายมาก", en: "Extreme danger" },
     ],
   },

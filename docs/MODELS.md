@@ -18,7 +18,9 @@ The forecasts the page shows, the corrections it applies and the skill each one 
 | 🌧️ Heavy rain | ensemble chance of > 35 mm in 24 h, **as three words only** | words only, no amounts | at a point, heavy rain 1–2 days ahead is mostly missed (HRES POD 0.04–0.13); ensemble Brier skill −0.08 to +0.12; heavy rain fell on 2–6 % of the days the ensemble gave 0 % |
 | 💨 Gusts | ensemble gusts | shown, labelled **not validated** | no gust observations were available |
 | 🌏 "Was it felt here?" | Allen, Wald & Worden 2012 (hypocentral) **+ 1.06 MMI in greater Bangkok** | ship, soft words | MAE 0.96 MMI over 357 Thai city reports, bias 0.00; Bangkok under-predicted in all 12 crustal events by an average of 1.06 MMI. With that term added, the residual for the 2025 M7.7 fell from 0.95 to −0.11. Nothing forecasts earthquakes |
-| 🌊 Rivers | FloodWatch's (linked, not modelled here) | link | FloodWatch's 24 h median beat "no change" by 6.9 % as issued (5–12 Oct 2026); its 90 % range held 90–92 % |
+| 🌊 Rivers | **FloodWatch's own rows** (status, outlook, "⚠️ จับตา" groups) through the collector since 0.6.0; ThaiWater from the phone when FloodWatch's file is missing | FloodWatch's words, with its record | FloodWatch's 24 h median beat "no change" by 6.9 % as issued (5–12 Oct 2026); its 90 % range held 90–92 %; its groups' 30-day records: may reach the bank > 50 % came true 65 % (n 459), upstream 55 % (n 8,215) |
+| ⬆️ Water from upstream | this page's rule on FloodWatch's gauges and learned lags (§3.3) | A lifts to เตรียมตัว only on the U-Taphao | Hat Yai: "upstream over its bank and rising" 5 of 5 floods, 5 near-miss seasons in 30; X.90 at 90 %: false-alarm ratio 0.55 |
+| 🌧️ Rain measured over 3 days | ThaiWater's rolling 24-h totals, added up hourly by the collector | words; > 300 mm lifts to เตรียมตัว (Hat Yai's red flag) | Hat Yai airport, Oct–Jan, 37 seasons: 3 of 4 floods, one false alarm (a near flood); ~24 h before the flood in 2024 and 2025 |
 
 ## 1. Heat index
 
@@ -55,7 +57,8 @@ Persistence is better still, but the app has no observed maximum at most points 
 - The ensemble test covers one hot season.
 - TMD's own heat-index formula is **[unverified]** (KI-004).
 
-**What it does to the page:** with the correction, Bangkok's October afternoons read 42–44 °C, "อันตราย". Observed Bangkok October days reach ≥ 42 °C on 48 % of days, April days on 95 % (`research/out/e1e2_results.json`). The level is capped at เตรียมตัว for a forecast alone (§6, KI-005).
+**What it does to the page:** with the correction, Bangkok's October afternoons read 42–44 °C, "อันตราย". Observed Bangkok October days reach ≥ 42 °C on 48 % of days, April days on 95 % (`research/out/e1e2_results.json`). The level is capped at เตรียมตัว for a forecast alone (§6). Since 0.6.0 อันตราย is the DOH's orange (level 2) and
+เตือนภัย its yellow (level 1), so orange heat means "≥ 42 °C likely" (D-053, KI-F38).
 
 ### 1.1 The model check of 24 Oct 2026, and what 0.4.0 changed
 
@@ -223,8 +226,32 @@ viewed at 19:00.
 - **Shipped (0.5.0):** a caution on the rain card when any day reads มีโอกาส or สูง ("ฝนหลายวันติดกันอาจหนักกว่าที่พยากรณ์มาก …
   ราว 4 เท่า …"), and at เตรียมตัว or above, who alerts (DDPM's Cell Broadcast) and who orders an evacuation (the
   municipality and the province), "เว็บนี้ไม่ส่งการแจ้งเตือน".
-- **Next:** a measured 3-day rain line and the collector's province files (the measured path to phones), FloodWatch's
-  upstream line (Sadao's X.173A is ~13 h above X.44 and outside this page's 20 km list).
+- **Shipped (0.6.0):** the measured 3-day rain line and Hat Yai's red flag (§3.3), FloodWatch's own gauges and groups,
+  and the upstream lines (§3.3).
+
+### 3.3 Hat Yai again: the river, the upstream lines and the red-flag rain (24 Oct 2026, evening)
+
+[research/floodwatch-hatyai-leadtime-2026-10-24.md](research/floodwatch-hatyai-leadtime-2026-10-24.md): the owner asked
+whether FloodWatch could warn Hat Yai 4–6 h ahead. Hydrographs re-read from ThaiWater (every crossing in FloodWatch's
+own replay right to the hour); triggers tested on RID's annual maxima (35 seasons) and Hat Yai airport's rain (37);
+scripts `research/fwhy_*.py`.
+
+| Signal (Nov 2025) | Hours before X.44's bank (22 Nov 12:00) | Other seasons |
+|---|---|---|
+| X.44's own watch (70 %) / warning (90 %) | 17 / 7 | — |
+| FloodWatch's bank chance as served | 1–2 (its KI-545: a silent upstream copy); 5–6 fixed | — |
+| X.90 ≥ 9.30 m (the basin's red-flag level) | 5 (2024: 17) | 5 of 5 floods in 35 seasons, 2 near-miss false alarms |
+| Measured rain, 72 h ≥ 300 mm at the airport | ≈ 24 (2024: ≈ 24); 3 h before the first hill flooding | 3 of 4 floods with data in 37 seasons; one false alarm (2009, a near flood) |
+| Upstream over its bank and rising (rule A) | +17 before the second wave; A 46 h ahead in 2024 | at Hat Yai 5 of 5 floods, 5 near-miss seasons in 30 |
+| A model with upstream levels and measured rain | 13 (9 with a 4-h data delay) | one event: illustrative only |
+
+The size of the second wave was the miss: Sadao (X.173A) passed 16.4 m 30 h before and rose to 18.0 m, while
+FloodWatch's forecast said 7.92 m at X.44 and the river reached 9.91 m. **Every lead assumes RID's data arrive on time:
+on 24 Oct RID's southern gauges were a median 28 h old.**
+
+**What 0.6.0 does with it:** the upstream lines A/B/C (KNOWLEDGE §6; A → เตรียมตัว on the คลองอู่ตะเภา, ติดตามไว้
+elsewhere until a record exists), the range "within about 2 × lag h, or sooner", silence for stale, flagged, spiky or
+spurious links; the measured 3-day total, and more than 300 mm lifts the rain tile to เตรียมตัว.
 
 ## 4. Gusts
 
@@ -262,6 +289,15 @@ categories (prediction, early warning, probabilities, forecasts; https://pnsn.or
 read 24 Oct 2026). Scripts `research/eq_*.py`; USGS ComCat 1973–2026, box 0–30°N 88–110°E, M ≥ 4 (19,718 events).
 
 - **Prediction:** none exists (USGS, ICEF 2011, TMD). The card now says what can't be predicted: when, where, how big.
+- **Re-checked the same evening ([eq-d11](research/eq-d11-2026-10-24.md)):** the verdict was half right. Robust: the
+  generic model over-forecasts this region (567 real-time sequences 2015–2026, Brier skill −0.59, interval below
+  zero). Underpowered: "a regional refit tied the base rate" (27 % power). Cross-validated over all 567, the history of
+  same-size quakes (+0.08 to +0.12) and the generic model updated with the first day (+0.21) beat the base rate for
+  "another M ≥ 5 near the first quake within a week" — a chance for the zone, not a place. At 15 Thai cities weekly,
+  ETAS and machine learning tie each city's long-term rate (−0.07 to 0.00); "may be felt" needs ~36 years of quakes
+  for 60 % power, IV can't be checked from the Thai record; tides (×1.1 at most), the monsoon (0.88× the dry-season
+  rate), b-values (unmeasurable here), radon, animals, the ionosphere and AI show no usable skill. **Recommended: words
+  and links only** (D-060, the owner's D11).
 - **Aftershock chances, tested here, have no skill:** 322 sequences before 2015 to fit, 69 after to test (M ≥ 5.5
   mainshocks). Page et al. 2016's generic parameters (USGS's own code) scored **worse than the base rate** on all four
   targets (Brier skill −0.49 to −0.91); a regional refit tied the base rate at best (−0.15 to −0.00). USGS's own 75

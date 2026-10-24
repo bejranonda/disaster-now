@@ -2,7 +2,7 @@
 
 **One page that shows every hazard at a point in Thailand, now and for the next 3 days** (code name `disaster-now`). Tap 📍 (or search a subdistrict, a road, a place) and see, for that point: rain, river level and flash floods, PM2.5 dust and other pollution, heat, UV, wind and storms, landslides, earthquakes and fires, each in the agency's own words with its source and time, one sourced action, and a link to what to do.
 
-> v0.5.0 · 24 Oct 2026 · **built, validated, audited three ways, its prediction research done; the collector runs on `autobahn-bot`; not deployed (the Cloudflare token lacks *Workers Scripts: Edit*), not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
+> v0.6.0 · 24 Oct 2026 · **live at https://risk.autobahn.bot** (its live files wait for the collector's KV token); FloodWatch's own gauges and look ahead; the measured 3-day rain; heat in the DOH's own colours; simulated in LINE and on tablets, **not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
 
 <img src="docs/screens/report-390.png" width="260" alt="The report for Bangkok's old town at 390 px, in Thai"> <img src="docs/screens/report-en-390.png" width="260" alt="Phuket in English under TMD's heavy-rain warning"> <img src="docs/screens/warning-en-390.png" width="260" alt="TMD's warning in GLM's checked English, labelled as a machine translation">
 
@@ -10,16 +10,18 @@
 
 - **Choose a point:** GPS on a tap; instant search over all 7,425 subdistricts, 928 districts and 77 provinces on the phone; Enter asks OpenStreetMap for roads, sois and places (FloodWatch's way of searching: abbreviations and soi variants). Up to five saved places open first next time ("บ้าน", "บ้านแม่").
 - **A verdict in one line,** by what to do (ยังไม่น่าห่วง · ติดตามไว้ · เตรียมตัว · ทำทันที), never milder than any hazard, naming the worst one in the agency's word with one action from บ้านรอดไหม.
-- **One forecast, one level, everywhere:** the tile, the card's days, the 3-day table and the pre-warnings grade a forecast the same way, and a forecast alone never goes past เตรียมตัว in any of them. Heat is said as "รู้สึกเหมือน 43 °C" (the heat index), for the afternoon it names.
+- **One forecast, one level, everywhere:** the tile, the card's days, the 3-day table and the pre-warnings grade a forecast the same way, and a forecast alone never goes past เตรียมตัว in any of them. Heat is said as "รู้สึกเหมือน 43 °C" (the heat index), for the afternoon it names, **in the Department of Health's own colours** (เตือนภัย yellow, อันตราย orange).
 - **Ten tiles** in a fixed order, each with the agency's word, the value and a 4-dot meter; **detail cards** with sources, times and ages; a **3-day table**; **pre-warnings** by day with chances ("พรุ่งนี้ ฝนหนัก โอกาส 40%"), never countdowns.
-- **Measurements first:** PCD stations, ThaiWater gauges (judged exactly as FloodWatch judges them), HII's flash-flood list, TMD's warnings, which lift their tile and lead.
+- **Measurements first:** PCD stations, river and canal gauges **as FloodWatch reads them** (its own rows through this site's collector, BMA's canals included; ThaiWater from the phone, judged by FloodWatch's rules, when FloodWatch is down), rain measured over 1–3 days (Hat Yai's red flag, 300 mm in 3 days, named when crossed), HII's flash-flood list, TMD's warnings, which lift their tile and lead.
+- **Water from upstream:** FloodWatch's "⚠️ จับตา" lines with how often they came true, and upstream lines on its learned travel times ("within about 12 h, or sooner"), never a countdown.
+- **What's coming and what changed:** "ข้างหน้า" names the worst coming day in the verdict; "เปลี่ยนจากที่ดูครั้งก่อน" says what moved since your last look (kept on the phone); the share text carries its own time.
 - **Models labelled and validated** ([docs/MODELS.md](docs/MODELS.md)):
   - The ECMWF ensemble (51 runs) for heat. Raw it read 5 °C low; corrected it is within 2.4 °C on held-out stations.
   - Rain as three chance words, gusts labelled unvalidated.
   - CAMS for dust, damped and applied to the measurement, which beat persistence.
   - An intensity equation for "was it felt here?", with a Bangkok term.
   - A forecast alone never says "act now".
-- **Private by design:** the exact fix never leaves the phone (providers get ~1 km); shared links carry a subdistrict code, not a home; no server, cookies, analytics or accounts.
+- **Private by design:** the exact fix never leaves the phone (providers get ~1 km); shared links and the address bar carry a subdistrict code, not a home; no server, analytics or accounts, and no cookies of its own (Cloudflare's zone currently adds a security cookie: owner action A14).
 - **Official warnings lead:** a TMD warning takes its tile, the verdict and the 3-day table, even where the model is milder (it said "low" in all 11 provinces TMD warned on 24 Oct).
 - **Thai and English,** larger text, dark mode, installable, a proper preview card in LINE. On the English page, TMD's Thai-only warnings come with GLM's checked machine translation, labelled, with the Thai original one tap away ([docs/AI.md](docs/AI.md)). AI writes nothing else.
 
@@ -58,7 +60,7 @@ ECMWF ensemble and CAMS via Open-Meteo (CC BY 4.0) · Pollution Control Departme
 
 ## The family
 
-It is the third app beside **FloodWatch** (https://flood.autobahn.bot, water) and **บ้านรอดไหม** (https://baanrodmai.autobahn.bot, what to do); its own address will be **https://risk.autobahn.bot** (ready; the deploy waits for the token's *Workers Scripts: Edit*). Its gauge statuses agree with FloodWatch's on 691 of 693 gauges; its advice lines are บ้านรอดไหม's word for word. [docs/INTEGRATION.md](docs/INTEGRATION.md).
+It is the third app beside **FloodWatch** (https://flood.autobahn.bot, water) and **บ้านรอดไหม** (https://baanrodmai.autobahn.bot, what to do); its own address is **https://risk.autobahn.bot** (live since 24 Oct 2026). It reads FloodWatch's gauges through its collector and backs FloodWatch up when FloodWatch's server is down (ThaiWater from the phone, FloodWatch's rules); its own ThaiWater statuses agree with FloodWatch's on 737 of 742 gauges; its advice lines are บ้านรอดไหม's word for word. [docs/INTEGRATION.md](docs/INTEGRATION.md).
 
 ## Docs
 

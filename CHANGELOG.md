@@ -2,6 +2,73 @@
 
 ## Unreleased
 
+## 0.6.0 (24 Oct 2026, evening): live at risk.autobahn.bot, FloodWatch's own gauges, the measured 3-day rain
+
+**Deployed.** The owner's token gained *Workers Scripts: Edit* and *Workers Routes: Edit*; `npm run cf:deploy` put 0.5.0
+on https://risk.autobahn.bot at 20:13 UTC (version `9b913164`), and 0.6.0 later the same evening (CLOUDFLARE §3.2). The
+edge's `/data/live/*` stays empty until the collector gets its KV-only token (KI-036, A9).
+
+**FloodWatch through the collector** ([floodwatch-integration](docs/research/floodwatch-integration-2026-10-24.md)):
+- `floodwatch.json`: the collector reads FloodWatch's `/api/stations` and `/api/risks` every 15 min (no CORS needed
+  server-side) and publishes each gauge's FloodWatch status, 24-h outlook with its skill, "⚠️ จับตา" group, upstream
+  travel times and the groups' 30-day records (1,374 gauges, ≈ 68 KB gzipped).
+- **KI-007 closed while the file is fresh:** the flood tile reads FloodWatch's own rows, BMA's 201 canal gauges
+  included (Bangkok's old town: 141 fresh gauges within 20 km, confidence medium; it had ThaiWater's 8). Without the
+  file it falls back to ThaiWater from the phone, so it still works when FloodWatch's server is down.
+- **FloodWatch's look ahead, in its words, with its record**, for the gauges that judge the point: "📈 FloodWatch:
+  {gauge} อาจถึงตลิ่งใน 24 ชม. · 30 วันที่ผ่านมา FloodWatch บอกแบบนี้ 459 ครั้ง เกิดจริง 65%", the upstream line
+  ("⬆️ น้ำจากต้นน้ำ: … ในราว 9 ชม. ช้าหรือเร็วกว่านี้ได้"), a fast rise; and FloodWatch's 24-h outlook for the tile's
+  gauge when it beats "no change". A forecast lifts the tile to เตรียมตัว at most, and its word says so.
+- Caught on live data before shipping: the first version let a sluice gate 12.6 km away, across the river, turn Lat
+  Phrao orange; the look ahead now follows the area index's own gauges. And KI-008's last contradiction (a "91 %"
+  reason under a river with 1.5 m to spare) is gone.
+
+**The measured rain over 2–3 days** (`rain3d.json`, KI-039): the collector reads ThaiWater's 4,749 rain gauges once an
+hour and keeps 50 h of readings; the rain card says "ฝนสะสมที่วัดได้ 3 วัน (72 ชม.): 410 มม. ที่…" for the nearest gauge
+within 10 km with 50 mm or more. Words only. The history began at 20:28 UTC on 24 Oct.
+
+**Tools:** `node tools/health.mjs --web URL --need-live` fails when the edge's live index is missing or stale (it
+called the edge "ok" with a 404). KV writes ≈ 696 a day (7 keys every 15 min, the rain hourly).
+
+**Hat Yai again: the river and the rain** ([lead time](docs/research/floodwatch-hatyai-leadtime-2026-10-24.md), D-056,
+D-057): FloodWatch's own steps at X.44 gave 17 h (watch) and 7 h (warning) before its bank in Nov 2025, its forecast
+1–2 h (its KI-545); the hill flooding was led only by measured rain. The page now adds its own **upstream lines** on
+FloodWatch's gauges and lags: "⬆️ ต้นน้ำล้นตลิ่งแล้ว … น้ำจากจุดนั้นมักถึง{gauge}ภายในราว 12 ชม. หรือเร็วกว่านั้น" (A: เตรียมตัว
+on the คลองอู่ตะเภา, where it caught 5 of 5 floods with 5 near-miss seasons in 30; ติดตามไว้ elsewhere), near the bank (B),
+more is coming (C), and an honest "ข้อมูลต้นน้ำล่าสุดเมื่อ N ชม.ก่อน" when every upstream gauge is late; silence for stale,
+flagged, spiky or spurious links. **More than 300 mm measured in 3 days lifts the rain tile to เตรียมตัว**, named as
+Hat Yai's red flag (~24 h before the flood in 2024 and 2025; 3 of 4 floods in 37 seasons).
+
+**D1, heat in the DOH's own colours** (D-053, [UX study §3](docs/research/ux-d8-d1-d9-incidents-2026-10-24.md)):
+เตือนภัย is yellow (ติดตามไว้), อันตราย orange (เตรียมตัว), อันตรายมาก red, as the DOH colours them and บ้านรอดไหม's `/hot`
+draws them. Orange heat was 94–100 % of Mar–Oct days and hid Hat Yai's rain on 14–18 Nov 2025; now it means "≥ 42 °C
+likely". On the live site at Hat Yai the verdict is now led by rain.
+
+**The first screen** (UX study §5): "ข้างหน้า" names the worst coming day when it is above the verdict (words and dots,
+never the verdict's colour); "เปลี่ยนจากที่ดูครั้งก่อน (…): 🌧️ ฝน ติดตามไว้ ↑ เตรียมตัว" from the last look kept on the
+phone (by subdistrict code, levels only, 5 places); the share text carries the place, its own time, the level and
+hazard, a TMD notice, the coming day, the action, who alerts and who orders, and the subdistrict link.
+
+**LINE and tablets, simulated** ([device study](docs/research/device-sim-2026-10-24.md)): no high findings; fixed T1
+(site data blocked opened the welcome page), T2/T3 (share and save never silent; LINE without Web Share sends through
+LINE), T4 (LINE's own location permission named), T5 (module preloads; "กำลังเปิดพื้นที่ที่ส่งมา…" at once), T7/T10
+(offline links with a query; no cached redirect), T9 (the address bar keeps the place's subdistrict code; tiles keep
+it), T8/T12 (wrapping, no sticky header on short screens), T14–T16. Open: T6 (Cloudflare's zone cookie, A14), T13
+(tablets get the phone column), real phones (A4).
+
+**D11, earthquakes** ([eq-d11](docs/research/eq-d11-2026-10-24.md), D-060): the owner asked whether to compute or
+recompute chances. No, in both senses; the words and the reworded USGS link are ready in OWNER_ACTIONS D11 and wait
+for the owner's yes. **D8 and D9:** recommendations in OWNER_ACTIONS (improve, don't extend; this page's four colours
+for the family).
+
+**Also:** with no gauge within 8 km the flood card no longer shows a number or calls one "the tile's" (live at Hat Yai).
+Tests: 103 (89 at 0.5.0); the walk adds FloodWatch's line, the 3-day total, the last look, blocked storage and the
+address bar.
+
+**VPN:** none, and none needed (this host is in Germany, every source answers it; BMA's and RID's gauges arrive through
+FloodWatch, which runs the family's one Thai egress). Rotating addresses to get past ThaiWater's limit would be the
+evasion both projects forbid (floodwatch-integration §5).
+
 ## 0.5.0 (24 Oct 2026, not deployed): what the prediction research and the Hat Yai hindcast found
 
 Five studies asked whether the page could forecast, or give a risk for, each hazard at a point, by learning from data,

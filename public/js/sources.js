@@ -51,22 +51,24 @@ export const liveFresh = (index, nowMs) => Boolean(index && index.generated
 
 const qs = (o) => Object.entries(o).map(([k, v]) => `${k}=${encodeURIComponent(v)}`).join("&");
 
+// `sessionStorage` itself throws where site data is blocked: then nothing is cached and every source still answers (T1)
+const session = () => { try { return globalThis.sessionStorage || null; } catch { return null; } };
 function cacheGet(key, ttlMin) {
   try {
-    const hit = JSON.parse(sessionStorage.getItem(key) || "null");
+    const hit = JSON.parse(session().getItem(key) || "null");
     if (hit && Date.now() - hit.at < ttlMin * 60e3) return hit;
   } catch { /* private mode or a full store: just fetch */ }
   return null;
 }
 function cachePut(key, v) {
-  try { sessionStorage.setItem(key, JSON.stringify(v)); } catch { /* ignore */ }
+  try { session().setItem(key, JSON.stringify(v)); } catch { /* ignore */ }
 }
 
 /** GET with a timeout; text or JSON; cached for the source's ttl. */
 export async function get(name, url, { as = "json", fetchImpl = globalThis.fetch } = {}) {
   const ttl = SOURCES[name]?.ttl ?? 10;
   const key = `dn:${url}`;
-  const hit = typeof sessionStorage !== "undefined" ? cacheGet(key, ttl) : null;
+  const hit = session() ? cacheGet(key, ttl) : null;
   if (hit) return { ok: true, data: hit.data, url, at: hit.at, cached: true };
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), TIMEOUT_MS);
@@ -76,7 +78,7 @@ export async function get(name, url, { as = "json", fetchImpl = globalThis.fetch
     const data = as === "text" ? await r.text() : await r.json();
     if (data && data.error === true) return { ok: false, error: data.reason || "error", url }; // Open-Meteo's own errors
     const out = { ok: true, data, url, at: Date.now() };
-    if (typeof sessionStorage !== "undefined") cachePut(key, { data, at: out.at });
+    if (session()) cachePut(key, { data, at: out.at });
     return out;
   } catch (e) {
     return { ok: false, error: e.name === "AbortError" ? "timeout" : (e.message || "network"), url };

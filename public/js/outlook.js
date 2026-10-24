@@ -207,8 +207,9 @@ export function prewarnings(outlook, extra = []) {
   if (!outlook) return extra;
   const out = [];
   outlook.days.forEach((d, di) => {
-    const heat = d.heat ? d.heat.chance[3] : null; // no afternoon left in the window: no heat line (S6)
-    if (heat >= CHANCE.possible) out.push({ hazard: "heat", day: di, date: d.date, level: 3, chance: heat, value: d.heat.p90 });
+    // อันตราย (≥ 42 °C) is level 2 since 0.6.0 (the DOH's orange, D-053); no afternoon left in the window: no line (S6)
+    const heat = d.heat ? d.heat.chance[2] : null;
+    if (heat >= CHANCE.possible) out.push({ hazard: "heat", day: di, date: d.date, level: 2, chance: heat, value: d.heat.p90 });
     const r3 = d.rain24.chance[3];
     const r2 = d.rain24.chance[2];
     // both lines when heavy rain is likelier than very heavy (visitor audit V8: "very heavy 30%" hid "heavy over 90%")

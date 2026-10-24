@@ -11,7 +11,10 @@ The audits of 23 Oct 2026 use their own IDs: M1–M5 and H1–H4 from the [outpu
 
 ## Open
 
-### KI-001 Not deployed, not tried on real phones (high)
+### KI-001 Not tried on real phones (high; was "not deployed" until 24 Oct 2026)
+- **Deployed on 24 Oct 2026, 20:13 UTC:** https://risk.autobahn.bot (Worker version `9b913164`, 0.5.0), once the owner's
+  token gained *Workers Scripts: Edit*. The edge's `/data/live/*` stays empty until the collector has a KV token (KI-036).
+
 Checked only in headless Chromium (23 Oct 2026).
 - GPS inside LINE's in-app browser is undocumented by LINE.
 - iPhone Safari is untested.
@@ -21,7 +24,7 @@ Checked only in headless Chromium (23 Oct 2026).
 - **Since 24 Oct 2026, nothing of this app runs anywhere.** FloodWatch's server was the wrong one, and it was cleaned
   up. The stack waits for the risk server and the new tokens (KI-032).
 
-**Next:** [OWNER_ACTIONS A12, A9, A10, A4](OWNER_ACTIONS.md#a-to-go-live).
+**Next:** [OWNER_ACTIONS A4](OWNER_ACTIONS.md#a-to-go-live) (real phones), and A9's KV token.
 
 ### KI-002 Air4Thai's server sends a broken certificate chain, and answered 503 (high)
 - **The chain:** Let's Encrypt's YR1 intermediate is missing (Hazard-huntz docs/09 §3). curl, Node and Python refuse it.
@@ -51,18 +54,6 @@ TMD's warnings, TMD's quake list, TMD's storm tracks and NASA FIRMS hotspots nee
 - **The formula:** which one TMD's own product uses is **[unverified]**. Its agromet page names Steadman 1979 and shows older bands, 27/32/41/54.
 - The app uses the NWS method (Steadman, then Rothfusz). TMD's own example (33 °C, 80 %) gives 48.1 °C by it, against TMD's 49 °C.
 
-### KI-005 Heat reads "อันตราย" on most afternoons once corrected (high; owner decision D1)
-- **Why it reads so high:** the raw ensemble read about 5 °C low against TMD's stations, so 0.2.0 shows only corrected values ([MODELS §1](MODELS.md#1-heat-index)).
-- **What that means:** Bangkok's October afternoons now read 42–44 °C, "อันตราย". Observed Bangkok October days reach 42 °C or more on 48 % of days, and April days on 95 % (station data, `research/out/e1e2_results.json`).
-- **What 0.2.0 does:** a forecast alone stops at เตรียมตัว (`MODEL_MAX`, V1). The tile says "บ่ายนี้" (V6), and the pre-warnings list "ร้อนระดับอันตราย" on such days.
-- **The risk:** the verdict is orange on most days at most places, which may teach people to ignore orange.
-- **Part of it is the correction's own warm bias** (model check, 24 Oct 2026): on 53 stations it never saw, the
-  year-round line read +0.95 °C hot in Mar–Oct (+0.9 to +1.9 in the North, Northeast and Central), with false อันตราย on
-  19–31 % of days there; in Nov–Feb it read 3–4 °C hot. 0.4.0 fixes the input (13:00/16:00, grid height) and uses C6
-  in Nov–Feb (KI-037); the hot season keeps the line, which catches more danger days.
-
-**Next:** the owner's D1, and count the orange-verdict days in the first month.
-
 ### KI-006 The subdistrict is the nearest centre, not the one containing the point (medium)
 - Near a district or province border, the nearest of 7,425 centres can be the neighbour's, and a TMD warning is matched by province.
 - The output cross-check saw it once: Chiang Mai, ต.พระสิงห์ against GISTDA's ศรีภูมิ.
@@ -70,10 +61,16 @@ TMD's warnings, TMD's quake list, TMD's storm tracks and NASA FIRMS hotspots nee
 
 **Next:** measure against the boundary file (ROADMAP v0.5, item 8).
 
-### KI-007 In Bangkok the flood tile sees few canal gauges (medium)
+### KI-007 In Bangkok the flood tile sees few canal gauges, unless the collector's FloodWatch file is fresh (medium → low)
 ThaiWater gives 8 gauges for Bangkok. FloodWatch's point check counted 33 near the old town, most of them BMA canals behind BMA's own servers. The app mirrors FloodWatch's rule but with less data, so its confidence is often "ต่ำมาก".
 
-**Fix:** FloodWatch CORS on `/api/point` (OWNER_ACTIONS B1), then `"floodwatchPoint": true`.
+- **Since 0.6.0** the collector publishes FloodWatch's own rows (`floodwatch.json`, BMA's 201 gauges among 1,374), and
+  the tile reads them while the file is under 2 h old: on 24 Oct 20:26 UTC the old town had 141 fresh gauges within
+  20 km and confidence **medium** ([floodwatch-integration §3](research/floodwatch-integration-2026-10-24.md#3-what-the-page-does-with-it)).
+- Without a fresh file (FloodWatch down, or no KV token on the edge, KI-036) the tile falls back to ThaiWater's 8.
+
+**Next:** nothing in this app; the KV token (A9) makes the edge serve the file. CORS on `/api/point` (B1) is no
+longer needed.
 
 ### KI-008 FloodWatch's river rule reads deep rivers as near the bank, in one self-contradicting line (medium; V17)
 - C.12 (Chao Phraya, Samsen) was "ใกล้ล้นตลิ่ง" at 92 % of bed-to-bank with **1.31 m** of freeboard (24 Oct 02:00).
@@ -225,12 +222,20 @@ translations (OWNER_ACTIONS A5), and a phrase table for TMD's fixed instructions
   forecast. 0.3.0's contradictions (S1, U1, U4, U6, U16, U25, X1–X6) all lived in the gaps between them.
 - 0.4.0 makes them agree (`assess.fcLevel`, one window per label, the warning override on chips too) and tests it, but
   the page is still 7,700–10,500 px long at 390 px.
-- **Next:** the owner's D8 (drop the chips, fold the pre-warnings into the table, cards open in place), as one release
-  with its own visitor audit.
+- **The UX study (24 Oct 2026, evening):** one heat forecast was painted orange 12 times on Bangkok's fixture; the page
+  is 8,612 px at 360 px. Recommended: improve, don't extend — three views (the verdict with "ข้างหน้า" and "เปลี่ยนจากที่ดู
+  ครั้งก่อน", one row per hazard with a 3-day strip that absorbs the table, the chips and the pre-warnings, the detail
+  opened in place) ([ux study §2](research/ux-d8-d1-d9-incidents-2026-10-24.md#2-d8-the-redesign)). 0.6.0 ships the
+  two verdict lines.
+- **Next:** the owner's D8, as one release with its own visitor audit and real phones (A4).
 
 ### KI-034 The family's colours differ for the same word (low; X17, D9)
 FloodWatch's watch and critical colours and บ้านรอดไหม's heat and dust colours differ from this page's (INTEGRATION §5,
-corrected on 24 Oct: it had said they matched). **Next:** the owner's D9.
+corrected on 24 Oct: it had said they matched). Since 0.6.0 this page's heat follows the DOH's colours, as บ้านรอดไหม's
+`/hot` does (D-053). The UX study's check: FloodWatch's watch `#B58900` and warning `#E46C0A` are indistinguishable to
+deuteranopes (ΔE00 1.8) with white badge text at 3.2–3.3 : 1; this page's four keep every adjacent pair ≥ 20
+([ux study §4](research/ux-d8-d1-d9-incidents-2026-10-24.md#4-d9-one-palette-for-the-three-apps)).
+**Next:** the owner's D9 (recommended: this page's four colours in all three apps, the agency's word on each).
 
 ### KI-035 HII's flash-flood report is shown without its time (low; X16)
 The card says "รายงานล่าสุดของ สสน." with no time (the file's `Last-Modified` was 14:43 Bangkok on 24 Oct). A browser
@@ -243,8 +248,15 @@ report with its time (SERVER §6.3).
 - `CF_KV_TOKEN` is empty: the collector can't upload to KV, so the Worker's `/data/live/*` serves what was uploaded by
   hand, or nothing (the warning, fire and storm tiles then say they couldn't load).
 
-**Next:** OWNER_ACTIONS A9: a token scoped to `autobahn.bot` and the Workers permissions, a KV-only `CF_KV_TOKEN`, then
-`docker compose up -d` (the collector reads `.env` at start) and revoke the broad one.
+- **24 Oct 2026, 20:12 UTC:** the token gained *Workers Scripts: Edit* and *Workers Routes: Edit*; `cf:deploy` worked.
+  It is still as broad as before, and `CF_KV_TOKEN` is still empty: the edge answers **404 for `/data/live/index.json`**,
+  so on https://risk.autobahn.bot the warnings box says it couldn't check TMD, the fire and storm tiles have no data,
+  and the flood tile uses ThaiWater only. `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live` fails
+  until the KV token is set.
+
+**Next:** OWNER_ACTIONS A9: a KV-only `CF_KV_TOKEN` (*Account → Workers KV Storage: Edit*, nothing else), then
+`docker compose up -d` (the collector reads `.env` at start); narrow the deploy token to `autobahn.bot` and the Workers
+permissions.
 
 ### KI-039 A multi-day flood rain looks like "สูง", never like its size (high; Hat Yai hindcast)
 - In the Hat Yai flood of Nov 2025 the page would have said "สูง" two days ahead and reached ทำทันที from measured rain
@@ -252,9 +264,49 @@ report with its time (SERVER §6.3).
   neighbourhood chance did no better on a held-out season.
 - The page measures rain over 24 h only; the upstream gauge that rose first (Sadao, X.173A) is outside its 20 km list.
 - **Since 0.5.0:** the rain card's caution about multi-day rain, and who alerts and who orders at เตรียมตัว or above.
-- **Next:** a measured 3-day rain line (the collector keeps 07:00 snapshots); the collector's province rain and level
-  files, so the measured path reaches phones without each calling ThaiWater (KI-029); FloodWatch's upstream line
-  (INTEGRATION §3.7); a 3-day chance only after Nov–Jan 2026–27 is scored.
+- **Since 0.6.0:** the measured 2- and 3-day rain at the nearest gauge within 10 km (`rain3d.json`, from hourly
+  readings of ThaiWater's 4,749 gauges; the history began 24 Oct 20:28 UTC, so 3-day totals appear from 26 Oct);
+  FloodWatch's own "⚠️ จับตา" lines with their 30-day records, including its upstream group, for the gauges that judge
+  the point ([floodwatch-integration](research/floodwatch-integration-2026-10-24.md)).
+- **Also since 0.6.0:** this page's own upstream lines on FloodWatch's gauges (A over its bank → เตรียมตัว on the
+  U-Taphao, ติดตามไว้ elsewhere; B near its bank; C more is coming; D-056), which don't wait for the city's gauge; and
+  Hat Yai's red flag, more than 300 mm measured in 3 days, lifts the rain tile to เตรียมตัว (D-057). Re-read
+  independently, Nov 2025: X.44's own watch step came 17 h and its warning 7 h before its bank; the 3-day rain line
+  ~24 h before the flood in 2024 and 2025 ([lead-time](research/floodwatch-hatyai-leadtime-2026-10-24.md)).
+- **Still open:** the size of the second wave (FloodWatch forecast 7.92 m, X.44 reached 9.91 m); RID's southern gauges
+  a median 28 h late (KI-041); the upstream rule's record outside Hat Yai; a 3-day chance only after Nov–Jan 2026–27
+  is scored.
+
+### KI-040 FloodWatch's file is 257 KB for every visit (low)
+- `floodwatch.json` carries all 1,374 gauges (about 68 KB gzipped) so the page can find its own; a first visit was
+  450–470 KB before it (KI-016).
+- KV's free writes (1,000 a day) don't allow one file per province at a 15-min cadence (77 × 96).
+- **Next:** if phones on slow links matter more, split by region (6 files: ≈ 576 more writes a day, over the free
+  plan) or let the Worker answer `?pv=` from the one file; measure first.
+
+### KI-041 Hat Yai city's own gauges are often too old to judge (medium; Hat Yai)
+- At 20:26 UTC on 24 Oct, RID's X.44 (บ้านหาดใหญ่ใน, 1.5 km from the centre) and X.90 were 4.4 h old, beyond FloodWatch's
+  3 h, so neither app judged the city from them; the tile said no gauge within 8 km. HII's twin at X.90's site
+  (SLA002, 8.9 km) was fresh.
+- **Next:** FloodWatch (it reads RID's feeds; INTEGRATION §3); whether RID reported hourly during Nov 2025 is in
+  [floodwatch-hatyai-leadtime](research/floodwatch-hatyai-leadtime-2026-10-24.md).
+
+### KI-042 Cloudflare sets a cookie on every visitor (medium; device study T6, owner)
+- The `autobahn.bot` zone's Bot Fight Mode / JavaScript detections inject a hidden iframe and
+  `/cdn-cgi/challenge-platform/…` into every page and set **`cf_clearance`** (HttpOnly, one year): three extra requests
+  and a cookie, against GUIDELINES §2 ("no cookies") and the About text ("เว็บนี้ไม่เก็บข้อมูลใด ๆ ของคุณ").
+- Not the repository's: a zone-wide setting (the Free plan can't scope Bot Fight Mode to one hostname), shared with
+  FloodWatch, which relies on challenging non-browser clients (its KI-506).
+- **Next:** OWNER_ACTIONS A14: turn JavaScript detections off for the zone, or disclose the security cookie.
+
+### KI-043 What only a real phone can show, and tablets get the phone layout (medium; device study T3, T5, T8, T13; A4)
+- Simulated in headless Chromium only (no WebKit on this host): whether LINE's iOS browser shows `window.prompt` (T3:
+  0.6.0 saves under the default name and says so when it doesn't), whether LINE's WebView follows the phone's font size
+  (T8: at 200 % the verdict left a 360 × 560 screen; 0.6.0 unsticks the header on short screens), the GPS prompt itself.
+- Slow 3G (T5): 0.6.0 preloads the modules and shows "กำลังเปิดพื้นที่ที่ส่งมา…" for a shared link at once; not
+  re-measured on a throttled link.
+- Tablets (T13): the same 720 px column, 53–64 % of a landscape screen. It reads well; a wider layout belongs to D8.
+- **Next:** OWNER_ACTIONS A4 (an Android and an iPhone, from a LINE chat; a tablet).
 
 ### KI-038 The dust chance is provisional, and over-warns at its low end (low)
 - Shown 20 % → 8 % happened (disjoint stations, two dust seasons); it inherits the damped ratio's post-hoc status, and
@@ -270,6 +322,36 @@ report with its time (SERVER §6.3).
   and in March (pre-registered in MODELS §1.1). Revert if C6 loses on MAE or danger-day hits.
 
 ## Fixed
+
+### KI-F38 Heat read orange on most afternoons, a step above the DOH's own colours (0.6.0; was KI-005, D1 → D-053)
+- **Why it reads so high:** the raw ensemble read about 5 °C low against TMD's stations, so 0.2.0 shows only corrected values ([MODELS §1](MODELS.md#1-heat-index)).
+- **What that means:** Bangkok's October afternoons now read 42–44 °C, "อันตราย". Observed Bangkok October days reach 42 °C or more on 48 % of days, and April days on 95 % (station data, `research/out/e1e2_results.json`).
+- **What 0.2.0 does:** a forecast alone stops at เตรียมตัว (`MODEL_MAX`, V1). The tile says "บ่ายนี้" (V6), and the pre-warnings list "ร้อนระดับอันตราย" on such days.
+- **The risk:** the verdict is orange on most days at most places, which may teach people to ignore orange.
+- **Part of it is the correction's own warm bias** (model check, 24 Oct 2026): on 53 stations it never saw, the
+  year-round line read +0.95 °C hot in Mar–Oct (+0.9 to +1.9 in the North, Northeast and Central), with false อันตราย on
+  19–31 % of days there; in Nov–Feb it read 3–4 °C hot. 0.4.0 fixes the input (13:00/16:00, grid height) and uses C6
+  in Nov–Feb (KI-037); the hot season keeps the line, which catches more danger days.
+
+
+
+- **Fixed in 0.6.0:** the bands take the DOH's colours (เตือนภัย yellow, อันตราย orange, อันตรายมาก red; KNOWLEDGE §2).
+  Orange heat now means "≥ 42 °C likely": with observed values, Bangkok 60 % of Mar–Oct days, Chiang Mai 3 %, Hat Yai
+  12 % (was 94–100 % everywhere). On the edge at 20:58 UTC Hat Yai's verdict was led by rain, heat a yellow "เรื่องอื่น".
+- **Still to do:** count orange and red verdicts at the 12 archive points (`research/archive_forecasts.mjs`, cron).
+
+### KI-F39 Device findings: blocked storage, silent share and save, the address bar, offline links (0.6.0; T1, T2, T4, T7, T9, T10, T12, T14–T16)
+- **T1:** with site data blocked, the storage getters threw and a shared link opened on the welcome page; now no storage
+  is simply no memory (`places.js`, `sources.js`; smoke "with site data blocked …").
+- **T2, T3:** share never fails silently (inside LINE without Web Share it sends through LINE; otherwise the link to copy
+  by hand); save falls back to the default name when the WebView has no prompt.
+- **T4, T14, T15:** LINE's own location permission named inside LINE; an approximate fix (±2 km or more) says the
+  subdistrict may be wrong; 📍 is busy while it waits.
+- **T7, T10:** offline links with a query open from the cache; a redirect is never cached (`sw.js`).
+- **T9:** the address bar keeps the place as its subdistrict code after GPS, and tiles scroll without replacing it
+  (smoke "after GPS the address bar holds …").
+- **T12, T8:** long tile values and place names wrap; the header stops being sticky on short screens.
+- **T16:** "all at the lowest step" needs the warnings read too.
 
 ### KI-F37 The page didn't compute what the heat line was fitted on (0.4.0; model check §4.1–4.2)
 It took each member's max over every hour (+0.41 °C on average, up to 8.3 °C on showery days) and Open-Meteo's

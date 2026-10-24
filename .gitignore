@@ -18,3 +18,4 @@ research/data/eq_opensha_oaf/
 .dev.vars.*
 .DS_Store
 __pycache__/
+research/out/eq_d11_etas_grids.npz

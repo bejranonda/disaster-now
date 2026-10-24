@@ -3,14 +3,14 @@
 
 import { inThailand, nearestTambon, placeLabel, rounded } from "./geo.js";
 import { get, urls, SOURCES, liveFresh } from "./sources.js";
-import { assess, timeText, localOf } from "./assess.js";
+import { assess, timeText, localOf, shareMessage, changesSince, lookOf } from "./assess.js";
 import { localSearch, hitLabel, hitPlace, osmSearch, loadPlaces, savePlace, removePlace } from "./places.js";
 import { STR, makeT, PRE_WHAT, PRE_ICON } from "./i18n.js";
 import { scale } from "./levels.js";
 import { dayName } from "./assess.js";
 import { IPE } from "./ipe.js";
 
-export const VERSION = "0.5.0";
+export const VERSION = "0.6.0";
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LV = (l) => (l == null || l < 0 ? "none" : scale(l).key);
@@ -25,6 +25,18 @@ let tambon = null;
 let current = null; // {lat, lon, name, source, place}
 let bundle = null;
 let lastVerdict = null; // the verdict's last HTML: the live region is rewritten only when it changes (U11)
+// "What changed since you last looked", per load: the last look's levels for this subdistrict, read once (UX §5.3)
+let seen = null;
+const SEEN_KEY = "dn:seen";
+const SEEN_MAX = 5; // places kept, by subdistrict code; levels and a time only, never a position, never sent
+function readSeen() { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || "{}") || {}; } catch { return {}; } }
+function writeSeen(code, look) {
+  try {
+    const all = { ...readSeen(), [code]: look };
+    const keep = Object.entries(all).sort((a, b) => b[1].at - a[1].at).slice(0, SEEN_MAX);
+    localStorage.setItem(SEEN_KEY, JSON.stringify(Object.fromEntries(keep)));
+  } catch { /* private mode: no memory, no line */ }
+}
 let loadSeq = 0;
 let lastLoad = 0;
 
@@ -77,13 +89,20 @@ function say(msg) {
 }
 
 // ---------- choosing a point ----------
+const inLine = () => /\bLine\//.test(navigator.userAgent);
 function locate() {
   if (!navigator.geolocation) { say(t("geoNone")); lineHint(); $("#q").focus(); return; }
+  const btn = $("#gps");
+  if (btn.getAttribute("aria-busy") === "true") return; // one request at a time (T15)
   say(t("locating"));
+  btn.setAttribute("aria-busy", "true");
+  const done = () => btn.removeAttribute("aria-busy");
   navigator.geolocation.getCurrentPosition(
-    (pos) => { say(""); choose({ lat: pos.coords.latitude, lon: pos.coords.longitude, name: t("gpsLabel"), source: "gps", acc: pos.coords.accuracy }); },
+    (pos) => { done(); say(""); choose({ lat: pos.coords.latitude, lon: pos.coords.longitude, name: t("gpsLabel"), source: "gps", acc: pos.coords.accuracy }); },
     (err) => {
-      say(err.code === 1 ? t("geoDenied") : t("geoFail"));
+      done();
+      // inside LINE the permission is LINE's own app permission, not a site setting (T4)
+      say(err.code === 1 ? t(inLine() ? "geoDeniedLine" : "geoDenied") : t("geoFail"));
       lineHint();
       $("#q").focus();
     },
@@ -93,7 +112,7 @@ function locate() {
 
 /** LINE's in-app browser: offer the phone's own browser, where location usually works. */
 function lineHint() {
-  if (!/\bLine\//.test(navigator.userAgent)) return;
+  if (!inLine()) return;
   const u = new URL(location.href);
   u.searchParams.set("openExternalBrowser", "1");
   $("#finder-msg").insertAdjacentHTML("beforeend", ` <a href="${esc(u.href)}">${esc(t("openBrowser"))}</a>`);
@@ -118,6 +137,7 @@ async function load() {
   lastLoad = Date.now();
   const p = current;
   bundle = { now: Date.now(), point: p, errors: {} };
+  seen = { prev: undefined, stored: false };
   setTimeout(() => { if (seq === loadSeq) { bundle.waitOver = true; schedule(); } }, 5000);
   const u0 = urls(p.lat, p.lon);
   const jobs = [
@@ -150,7 +170,11 @@ async function load() {
   await loadTambon();
   if (seq !== loadSeq) return;
   p.place = nearestTambon(tambon, p.lat, p.lon);
+  // keep the place in the address bar, as its subdistrict code (the share link's own form, never the fix), so LINE's
+  // own ⋯ → Share or Copy link sends the place, not the welcome page (T9)
+  if ((p.source === "gps" || p.source === "saved") && p.place?.code) history.replaceState(null, "", `${location.pathname}${location.search}#t=${p.place.code}`);
   $("#welcome").hidden = true;
+  document.documentElement.classList.remove("opening");
   $("#report").hidden = false;
   $(".finder").classList.add("has-place");
   renderPlace();
@@ -175,7 +199,10 @@ async function liveFiles(u) {
   const fresh = idx.ok && liveFresh(idx.data, bundle.now);
   if (idx.ok && !fresh) bundle.errors.live = "stale";
   const files = fresh ? idx.data.files || {} : {};
-  const want = { warnings: "warnings.json", hotspots: "hotspots.json", tmdQuakes: "tmd_quakes.json", storms: "storms.json", a4t: "air4thai.json" };
+  // FloodWatch didn't answer the collector's last run: the flood card says so (UX study §6.3), without a call per visitor
+  if (fresh && idx.data.failed?.["floodwatch.json"]) bundle.fwDown = idx.data.generated;
+  const want = { warnings: "warnings.json", hotspots: "hotspots.json", tmdQuakes: "tmd_quakes.json", storms: "storms.json", a4t: "air4thai.json",
+    fwLive: "floodwatch.json", rain3d: "rain3d.json" };
   await Promise.all(Object.entries(want).map(async ([k, f]) => {
     if (!files[f]) return;
     const r = await get("live", u.live(f));
@@ -209,7 +236,9 @@ function renderPlace() {
   const acc = p.source === "gps" && p.acc ? ` (±${p.acc < 1000 ? `${Math.round(p.acc)} ${lang === "en" ? "m" : "ม."}` : `${(p.acc / 1000).toFixed(1)} ${lang === "en" ? "km" : "กม."}`})` : "";
   $("#place-sub").innerHTML = esc([p.source === "gps" ? `📍 ${t("gpsLabel")}${acc}` : "", named ? `${t("nearT")} ${label}` : "",
     showXY ? xy : ""].filter(Boolean).join(" · "))
-    + (p.source === "gps" ? ` · <button type="button" class="linkbtn" id="notthis">${esc(t("notThis"))}</button>` : "");
+    + (p.source === "gps" ? ` · <button type="button" class="linkbtn" id="notthis">${esc(t("notThis"))}</button>` : "")
+    // an approximate fix (Android "Approximate", iOS "Precise: Off", ±5 km) can name the wrong subdistrict (T14, KI-006)
+    + (p.source === "gps" && p.acc > 2000 ? `<br><span class="small">${esc(t(inLine() ? "approxLine" : "approx"))}</span>` : "");
   $("#notthis")?.addEventListener("click", () => { openFinder(); say(t("pickYourself")); });
   const saved = loadPlaces().some((x) => Math.abs(x.lat - p.lat) < 0.001 && Math.abs(x.lon - p.lon) < 0.001);
   $("#save").innerHTML = `${saved ? "★" : "☆"} <span>${esc(saved ? t("saved") : t("save"))}</span>`;
@@ -238,12 +267,27 @@ function render(first) {
   const vHtml = !settled ? null : first && v.level < 0 ? `<div class="vtitle">${esc(t("loading"))}</div>`
     : `<div class="vtop"><span class="meter" aria-hidden="true">${meter(v.level)}</span><span class="vname">${esc(v.name)}</span></div>`
       + (head ? `<div class="vhead">${head}</div>` : "")
+      // the worst coming day when it is above the verdict: words and dots, never the verdict's colour (UX study §5.2)
+      + (v.ahead ? `<div class="vahead"><span class="muted small">${esc(t("aheadL"))}</span> ${v.ahead.icon} ${esc(v.ahead.text)} <span class="meter small" aria-label="${esc(scale(v.ahead.level)[lang])}">${meter(v.ahead.level)}</span></div>` : "")
       + (v.action ? `<div class="vact">👉 ${esc(v.action.text)} <span class="muted small">(${esc(v.action.src.map((x) => x.kind === "official" ? t("official") : t("news")).filter((x, i, a) => a.indexOf(x) === i).join(", "))})</span></div>` : "")
       // a mask line never goes out without the under-2 line (บ้านรอดไหม F129; cross-check H1)
       + (v.action?.baby ? `<div class="vact baby">👶 ${esc(v.action.baby.text)}</div>` : "")
       + (v.others.length ? `<div class="vchips"><span class="muted small">${esc(t("alsoL"))}</span>${v.others.map(chip).join("")}</div>` : "")
       + (v.missing.length ? `<div class="vmiss">${esc(t("missing"))} ${esc(v.missing.join(", "))}</div>` : "");
   if (vHtml != null && vHtml !== lastVerdict) { vEl.innerHTML = vHtml; lastVerdict = vHtml; }
+  // what changed since the last look at this subdistrict: read the last look once per load, store this one once settled
+  const code = current?.place?.code;
+  if (settled && code && v.level >= 0 && seen) {
+    if (seen.prev === undefined) seen.prev = readSeen()[code] || null;
+    if (!seen.stored && bundle.liveDone && bundle.waitOver) { writeSeen(code, lookOf(r, bundle.now)); seen.stored = true; }
+  }
+  const ch = settled && seen?.prev ? changesSince(seen.prev, r) : [];
+  const chEl = $("#changes");
+  if (chEl) {
+    chEl.hidden = !ch.length;
+    chEl.innerHTML = ch.length ? `<span class="muted small">${esc(t("changedSince", { t: timeText(localOf(seen.prev.at), bundle.now, lang) }))}</span> `
+      + ch.map((x) => `<span class="chg">${x.icon} ${esc(x.short)} ${esc(scale(x.from)[lang])} ${x.to > x.from ? "↑" : "↓"} <b>${esc(scale(x.to)[lang])}</b></span>`).join(" · ") : "";
+  }
   else if (vHtml == null) lastVerdict = null;
   // tiles: every hazard at a glance, in a fixed order
   $("#tiles").innerHTML = r.cards.map((c) => `<a class="tile lv-${LV(c.level)}" href="#card-${c.id}">
@@ -412,10 +456,14 @@ $("#save").addEventListener("click", () => {
   const i = list.findIndex((x) => Math.abs(x.lat - current.lat) < 0.001 && Math.abs(x.lon - current.lon) < 0.001);
   if (i >= 0) { removePlace(i); renderPlace(); return; }
   const def = current.source === "gps" ? (lang === "en" ? "Home" : "บ้าน") : (current.name || placeLabel(current.place, lang));
-  const name = window.prompt(t("namePrompt"), def);
-  if (name == null) return;
-  savePlace({ name: name.trim() || def, lat: current.lat, lon: current.lon });
+  // an in-app WebView without a prompt panel answers null at once (WKWebView): save under the default name, and say so
+  const t0 = Date.now();
+  let name = null;
+  try { name = window.prompt(t("namePrompt"), def); } catch { /* no prompts here */ }
+  if (name == null && Date.now() - t0 > 300) return; // the person cancelled
+  savePlace({ name: (name || "").trim() || def, lat: current.lat, lon: current.lon });
   renderPlace();
+  if (name == null) { say(t("savedAs", { n: def })); setTimeout(() => say(""), 3000); }
 });
 /** The link to share: a GPS fix or a saved place goes by its subdistrict code only (#t=100101), so a family group
  *  sees the subdistrict, never the house (the UX scout §4c.6); a searched public place keeps its rounded point. */
@@ -427,26 +475,31 @@ function shareUrl() {
   return `${base}#p=${r.lat},${r.lon}${current.name ? `,${encodeURIComponent(current.name)}` : ""}`;
 }
 const shareName = () => (current.name && current.source === "search" ? current.name : placeLabel(current.place, lang));
-function shareText() {
+/** The share text with its own time and the five elements (assess.shareMessage); `url` null for navigator.share,
+ *  which takes the link separately. */
+function shareText(url = null) {
   const r = bundle ? assess(bundle, lang, IPE) : null;
-  const v = r?.verdict;
   const d = new Date(bundle?.now || Date.now()).toLocaleString(lang === "en" ? "en-GB" : "th-TH", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" });
-  const what = v && v.level >= 0 ? `${v.name}${v.worst ? ` · ${v.worst.short}: ${v.worst.word}` : ""}` : "";
-  return t("shareText", { n: shareName(), d, v: what ? ` ${what}` : "" });
+  return shareMessage(r, { name: shareName(), when: d, url, lang });
 }
 $("#share").addEventListener("click", async () => {
   if (!current) return;
   const url = shareUrl();
   const text = shareText();
+  // LINE's Android WebView has no Web Share: send it the way "ส่งใน LINE" does (T2)
+  if (!navigator.share && inLine()) { $("#line").click(); return; }
   try {
     if (navigator.share) await navigator.share({ title: t("brand"), text, url });
-    else { await navigator.clipboard.writeText(`${text} ${url}`); say(t("copied")); setTimeout(() => say(""), 2500); }
-  } catch { /* the person closed the share sheet */ }
+    else { await navigator.clipboard.writeText(shareText(url)); say(t("copied")); setTimeout(() => say(""), 2500); }
+  } catch (e) {
+    if (e && e.name === "AbortError") return; // the person closed the share sheet
+    say(`${t("copyFail")} ${url}`); // never silent: the link to copy by hand
+  }
 });
 $("#line").addEventListener("click", () => {
   if (!current) return;
   // LINE's share URL scheme (developers.line.biz, "Using LINE URL scheme"; https://line.me/R/share answered 302 on 23 Oct 2026)
-  window.open(`https://line.me/R/share?text=${encodeURIComponent(`${shareText()} ${shareUrl()}`)}`, "_blank", "noopener");
+  window.open(`https://line.me/R/share?text=${encodeURIComponent(shareText(shareUrl()))}`, "_blank", "noopener");
 });
 $("#lang").addEventListener("click", () => {
   lang = lang === "en" ? "th" : "en";
@@ -466,6 +519,20 @@ document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible" && current && Date.now() - lastLoad > 15 * 60e3) load();
 });
 window.addEventListener("hashchange", fromHash);
+// a tile or chip scrolls to its card and keeps the place's #t= in the address bar: "#card-pm25" there made LINE's own
+// Share send the welcome page (T9); the card takes focus so a screen reader follows
+document.addEventListener("click", (e) => {
+  const a = e.target.closest?.('a[href^="#card-"]');
+  if (!a) return;
+  const el = document.getElementById(a.getAttribute("href").slice(1));
+  if (!el) return;
+  e.preventDefault();
+  let still = false;
+  try { still = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { /* old browsers */ }
+  el.scrollIntoView({ block: "start", behavior: still ? "auto" : "smooth" });
+  el.setAttribute("tabindex", "-1");
+  el.focus({ preventScroll: true });
+});
 
 function fromHash() {
   const tm = location.hash.match(/^#t=(\d{6})$/);
@@ -473,7 +540,7 @@ function fromHash() {
     loadTambon().then(() => {
       const row = tambon.t.find((r) => r[0] === +tm[1]);
       if (row) choose({ lat: row[3], lon: row[4], name: "", source: "tambon", code: row[0] });
-      else say(t("badCode"));
+      else { document.documentElement.classList.remove("opening"); say(t("badCode")); }
     });
     return true;
   }

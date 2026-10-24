@@ -37,6 +37,7 @@ export const STR = {
     en: "Thai Risk · ภัยรอบบ้าน · an independent experiment, not a government site; data can be wrong or late; always check with the agencies" },
   // messages
   locating: { th: "กำลังหาตำแหน่ง…", en: "Finding your location…" },
+  geoDeniedLine: { th: "LINE ยังไม่ได้รับอนุญาตให้ใช้ตำแหน่ง: เปิดในการตั้งค่าเครื่อง (LINE > ตำแหน่ง) หรือเปิดในเบราว์เซอร์ของเครื่อง หรือพิมพ์ค้นหาแทน", en: "LINE isn't allowed to use your location: allow it in the phone's settings (LINE > Location), open this in the phone's browser, or search instead." },
   geoDenied: { th: "ไม่ได้รับอนุญาตให้ใช้ตำแหน่ง เปิดสิทธิ์ตำแหน่งในเบราว์เซอร์ หรือพิมพ์ค้นหาแทน", en: "Location permission was refused. Allow it in the browser, or search instead." },
   geoFail: { th: "หาตำแหน่งไม่ได้ ลองอีกครั้ง หรือพิมพ์ค้นหาแทน (ถ้าเปิดจาก LINE ลองเปิดในเบราว์เซอร์)", en: "Couldn't get your location. Try again or search instead (from LINE, try opening in your browser)." },
   geoNone: { th: "เบราว์เซอร์นี้ไม่มีตำแหน่ง พิมพ์ค้นหาแทน", en: "This browser has no location; please search instead." },
@@ -53,7 +54,13 @@ export const STR = {
   roundedKm: { th: "ปัดเศษราว 1 กม.", en: "rounded to about 1 km" },
   namePrompt: { th: "ตั้งชื่อที่นี่ (เช่น บ้าน บ้านแม่ ที่ทำงาน)", en: "Name this place (e.g. home, mum's, work)" },
   copied: { th: "คัดลอกลิงก์แล้ว", en: "Link copied" },
-  shareText: { th: "ภัยรอบบ้านที่ {n} ({d}):{v}", en: "Hazards at {n} ({d}):{v}" },
+  copyFail: { th: "คัดลอกเองไม่ได้ กดค้างที่ลิงก์นี้เพื่อคัดลอก:", en: "Couldn't copy: press and hold this link to copy it:" },
+  savedAs: { th: "บันทึกเป็น \"{n}\" แล้ว", en: "Saved as \"{n}\"" },
+  approx: { th: "ตำแหน่งโดยประมาณ ตำบลอาจไม่ตรง: เปิดตำแหน่งแบบแม่นยำในการตั้งค่า หรือค้นหาตำบลเอง", en: "An approximate location: the subdistrict may be wrong. Turn on precise location in settings, or search for it" },
+  approxLine: { th: "ตำแหน่งโดยประมาณ ตำบลอาจไม่ตรง: เปิดตำแหน่งแบบแม่นยำให้ LINE ในการตั้งค่าเครื่อง หรือค้นหาตำบลเอง", en: "An approximate location: the subdistrict may be wrong. Allow LINE precise location in the phone's settings, or search for it" },
+  openingShared: { th: "กำลังเปิดพื้นที่ที่ส่งมา…", en: "Opening the shared place…" },
+  aheadL: { th: "ข้างหน้า:", en: "Coming up:" },
+  changedSince: { th: "เปลี่ยนจากที่ดูครั้งก่อน ({t}):", en: "Changed since you last looked ({t}):" },
   badCode: { th: "ไม่พบรหัสตำบลในลิงก์นี้ ลองค้นหาชื่อตำบลแทน", en: "This link's subdistrict code wasn't found; search for the name instead" },
   issued: { th: "ออก", en: "issued" },
   readNotice: { th: "อ่านรายละเอียด", en: "Details (Thai)" },
@@ -106,7 +113,7 @@ export function makeT(lang) {
 
 /** The pre-warning's "what" in words. */
 export const PRE_WHAT = {
-  heat: { 3: { th: "ร้อนระดับอันตราย (≥ 42 °C)", en: "Dangerous heat (≥ 42 °C)" } },
+  heat: { 2: { th: "ร้อนระดับอันตราย (≥ 42 °C)", en: "Dangerous heat (≥ 42 °C)" } },
   rain24: { 2: { th: "ฝนหนัก (> 35 มม.)", en: "Heavy rain (> 35 mm)" }, 3: { th: "ฝนหนักมาก (> 90 มม.)", en: "Very heavy rain (> 90 mm)" } },
   gust: { 2: { th: "ลมกระโชกแรงมาก (≥ 62 กม./ชม.)", en: "Gale-force gusts (≥ 62 km/h)" } },
   pm25: { 2: { th: "ฝุ่นเริ่มมีผลกระทบต่อสุขภาพ", en: "Dust starting to affect health" }, 3: { th: "ฝุ่นมีผลกระทบต่อสุขภาพ", en: "Dust affecting health" } },

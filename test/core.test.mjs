@@ -44,8 +44,9 @@ test("heat index matches the NWS method", () => {
   assert.ok(Math.abs(heatIndexC(32.22, 70) - 41.1) < 0.3);
   assert.ok(Math.abs(heatIndexC(26.67, 40) - 26.6) < 0.4);
   assert.equal(heatIndexC(null, 50), null);
-  // a Bangkok afternoon: 34 °C at 60 % → about 42–43 °C (อันตราย)
-  assert.equal(band("heat", heatIndexC(34, 60)).level, 3);
+  // a Bangkok afternoon: 34 °C at 60 % → about 42–43 °C (อันตราย, the DOH's orange: level 2 since 0.6.0, D-053)
+  assert.equal(band("heat", heatIndexC(34, 60)).th, "อันตราย");
+  assert.equal(band("heat", heatIndexC(34, 60)).level, 2);
 });
 
 test("bands use the sources' own edges", () => {
@@ -58,7 +59,9 @@ test("bands use the sources' own edges", () => {
   assert.equal(band("uv", 5.6).th, "สูง");
   assert.equal(band("rain24", 35.0).th, "ฝนปานกลาง");
   assert.equal(band("rain24", 35.1).th, "ฝนหนัก");
-  assert.equal(band("heat", 26.96).level, 1); // 27.0 after rounding
+  assert.equal(band("heat", 26.96).th, "เฝ้าระวัง"); // 27.0 after rounding
+  // the DOH's colours (D-053): เฝ้าระวัง green → the family's level 0, เตือนภัย yellow 1, อันตราย orange 2, อันตรายมาก red 3
+  assert.deepEqual([26.9, 27.0, 33.0, 42.0, 52.0].map((v) => band("heat", v).level), [0, 0, 1, 2, 3]);
   assert.equal(band("heat", null).level, -1);
   assert.equal(roundTo(25.1 * 1, 0.1), 25.1);
   for (const [k, h] of Object.entries(HAZARDS)) {

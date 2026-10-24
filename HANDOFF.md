@@ -1,66 +1,61 @@
 # Handoff
 
-**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.5.0, 24 Oct 2026.** Built, validated, audited three ways, and
-running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused the deploy because the token lacks
-*Workers Scripts: Edit*. Not tried on real phones. Read this first, then [AGENTS.md](AGENTS.md).
+**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.6.0, 24 Oct 2026, evening. Live at https://risk.autobahn.bot**
+(Cloudflare Workers, since 20:13 UTC). Its live files (TMD's warnings, fires, storms, FloodWatch's lines) wait for the
+collector's KV token (A9). Simulated in LINE and on tablets, not tried on real phones (A4). Read this first, then
+[AGENTS.md](AGENTS.md).
 
 ## 1. Where things stand
 
 - **The page** (`public/`, static): GPS or search → a verdict, ten tiles, pre-warnings, a 3-day table and ten cards,
   in Thai and English, for any of 7,425 subdistricts.
-- **0.4.0** ([CHANGELOG](CHANGELOG.md)):
-  - **The name** ภัยรอบบ้าน · Thai Risk (D-044).
-  - **One forecast, one level:** `assess.fcLevel` grades a forecast for the tile, chips, table and pre-warnings.
-    0.3.0 showed the same heat forecast orange and red.
-  - **Heat:** the line ran 3–4 °C hot from November to February, worse than raw. Nov–Feb now uses **C6**, provisional
-    (D-046). The page also computes what was validated: 13:00/16:00 and `elevation=nan`.
-  - **An evening false alarm removed** (S6). **A province search** opens its town. **Stale collector files are
-    missing, not calm** (S12).
-  - 25 visitor findings (U), 19 output findings (X) and the session's own (S) fixed or recorded
-    ([review](docs/research/review-2026-10-24.md)).
-- **The host:** `autobahn-bot`, beside BrainPlatform (the owner's choice, D-045). The stack is up: web on 127.0.0.1:8090
-  and the collector every 15 min. Air4Thai 173 stations; ThaiWater answering. KV namespace `disaster-now-live` created.
-- **0.5.0, the prediction research** ([FRANK_FEEDBACK §8](docs/FRANK_FEEDBACK.md#8-prediction-research-24-oct-2026)):
-  five studies ([air](docs/research/predict-air-2026-10-24.md), [earthquakes](docs/research/predict-earthquake-2026-10-24.md),
-  [other hazards](docs/research/predict-hazards-2026-10-24.md), [Hat Yai 2025](docs/research/hatyai-flood-2025-hindcast.md),
-  [heat](docs/research/model-check-2026-10-24.md)). Shipped: a dust-day chance (Dec–Apr, provisional), PCD's forecast
-  link; earthquake wording, Android's alerts, the 2564 seismic zones, the Bangkok term on land only; a multi-day rain
-  caution and who alerts at เตรียมตัว+. Aftershock chances, ML, a 25 km rain chance and GloFAS did not earn a place.
-- **Checks, 24 Oct 2026 ≈ 09:30 UTC, on `autobahn-bot`:**
-  - `npm test` 89 of 89 at 0.5.0 (82 at 0.4.0).
-  - The fixture walk passes every check: the table's box at 320 px, the evening, tap targets both ways, a stale
-    collector, no coordinates on screen.
-  - One live walk (16:21 Bangkok) passes.
-  - `check:docs` and `check:advice` pass; `preflight` shows no ❌.
-  - `cf:deploy -- --dry-run` passes; **`cf:deploy` was refused (403)**.
+- **0.6.0** ([CHANGELOG](CHANGELOG.md)):
+  - **Live.** The token gained *Workers Scripts: Edit*; 0.5.0 went live at 20:13 UTC, 0.6.0 at the end of the session.
+  - **FloodWatch through the collector** (`floodwatch.json`, D-054): the flood tile reads FloodWatch's own rows while
+    fresh, BMA's canals included (KI-007 closed); ThaiWater from the phone otherwise, so the page backs FloodWatch up.
+    FloodWatch's look ahead with its 30-day record, only from the gauges that judge the point (D-055).
+  - **Hat Yai:** this page's own upstream lines (D-056), the measured 3-day rain and Hat Yai's red flag (D-057)
+    ([lead time](docs/research/floodwatch-hatyai-leadtime-2026-10-24.md)).
+  - **D1 decided: heat in the DOH's own colours** (D-053). Orange heat now means "≥ 42 °C likely"; a rain or river
+    signal changes the colour a family sees.
+  - **The first screen:** "ข้างหน้า", "เปลี่ยนจากที่ดูครั้งก่อน", a share text with its own time (D-059).
+  - **The device study's fixes** (T1–T5, T7–T10, T12, T14–T16).
+- **The host:** `autobahn-bot` (Germany), beside BrainPlatform (D-045). Web on 127.0.0.1:8090; the collector every
+  15 min writes 7 files plus `rain3d.json` hourly (its rain history began 20:28 UTC on 24 Oct: 3-day totals from 26 Oct).
+- **Research this evening:** [FloodWatch's API](docs/research/floodwatch-integration-2026-10-24.md),
+  [Hat Yai lead time](docs/research/floodwatch-hatyai-leadtime-2026-10-24.md), [D11](docs/research/eq-d11-2026-10-24.md),
+  [UX D8/D1/D9/incidents](docs/research/ux-d8-d1-d9-incidents-2026-10-24.md), [devices](docs/research/device-sim-2026-10-24.md);
+  frank summary in [FRANK_FEEDBACK §9](docs/FRANK_FEEDBACK.md#9-live-floodwatch-hat-yai-again-24-oct-2026-evening-060).
+- **Checks, 24 Oct 2026 ≈ 21:00–21:30 UTC, on `autobahn-bot`:**
+  - `npm test` 103 of 103 (89 at 0.5.0).
+  - The fixture walk passes every check, new: FloodWatch's line, the 3-day total, the last look, blocked storage, the
+    address bar.
+  - One live walk (Bangkok, 03:56 Bangkok time) passes: the flood tile from a BMA canal gauge 0.4 km away.
+  - One edge load (Hat Yai, LINE window): no page errors; the verdict led by rain.
+  - `check:docs` (47 files) and `check:advice` pass; `docker compose` healthy; `health --web http://127.0.0.1:8090/
+    --need-live` ok; on the edge `--need-live` fails (no KV token yet).
 
 ## 2. What the owner has to do ([docs/OWNER_ACTIONS.md](docs/OWNER_ACTIONS.md))
 
-1. **A9: the token.**
-   - Add *Account → Workers Scripts: Edit* and *Zone autobahn.bot → Workers Routes: Edit*.
-   - Remove what it doesn't need: all other zones, Zone Settings, Page Rules, Firewall, Workers AI, Pages, R2.
-   - Make a second, KV-only token as `CF_KV_TOKEN`.
-   - `node tools/env-check.mjs --probe` must say "Workers deploy: allowed".
-2. **A10: deploy.** `npm run cf:deploy`, then `docker compose up -d` (so the collector reads `CF_KV_TOKEN`), then
-   `node tools/health.mjs --web https://risk.autobahn.bot/`.
-3. **A4:** an Android and an iPhone, from a LINE chat; tap 📍; send the link to a family group.
-4. **A5:** a native Thai review, from GLM's first reading.
-5. **Decisions:** D1 (heat orange most afternoons), D8 (the redesign), D9 (one palette for the family), D10, **D11
-   (the earthquake rule)**, and whether to keep C6 after it is scored (end of November).
-6. **Four emails to agencies** (C4, C6, C7, C8): ONWR's flood warnings, PCD's dust forecast as data, RFD's fire rating
-   and ONWR's drought index, DDPM's alert channels. And FloodWatch's replay of Hat Yai, Nov 2025 (B5).
-7. **A11, A8, B1–B4:** delete the old checkout on FloodWatch's server; GitHub default branch and releases; CORS on
-   FloodWatch; a shared ThaiWater snapshot.
+1. **A9: the KV-only token.** A new token with only *Account → Workers KV Storage: Edit* as `CF_KV_TOKEN` in `.env`,
+   then `docker compose up -d`. Then `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live` exits 0.
+   Later, narrow the deploy token (it still reaches every zone of every account).
+2. **A4:** an Android and an iPhone from a LINE chat, and a tablet: the device study's §5 list.
+3. **A14:** Cloudflare's zone cookie (`cf_clearance`, KI-042): turn JavaScript detections off for `autobahn.bot`, or let
+   the page disclose it.
+4. **Decisions:** D11 (the words are ready; your yes ships them), D8 (improve, don't extend), D9 (one palette), D10;
+   keep C6 after its scoring (end of November); keep D1 after a month of the archive.
+5. **FloodWatch (B6–B8):** a measured-rain endpoint; Hat Yai's RID freshness; KI-545 first, then upstream levels and
+   measured rain in its model.
+6. **Four emails to agencies** (C4, C6, C7, C8), **A5** (a Thai reader), **A11, A8, B2–B4**.
 
 ## 3. What an agent can do next ([docs/ROADMAP.md](docs/ROADMAP.md))
 
-- **After the owner's token:** deploy, check the edge (`/data/live/index.json` under 15 min old, `kv.ok`), and re-take
-  `docs/screens/` from the live site.
-- **Daily from the server:** `node research/archive_forecasts.mjs` (cron), so C6 and the PM2.5 chance can be scored as
-  issued (MODELS §1.1).
-- **The measured path for floods** (KI-039): the collector's province rain and level files, a measured 3-day rain line,
-  FloodWatch's upstream line; then a 3-day rain chance only if Nov–Jan 2026–27 scores it.
-- **AI-ready:** KI-024 (Thai region names), KI-012 (landmarks), KI-033/D8 (the redesign, after the owner).
+- **After the KV token:** `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live`, then one edge load at
+  Bangkok and Hat Yai, read as a visitor (FloodWatch's lines, the warnings box).
+- **Daily from the server:** `node research/archive_forecasts.mjs` (cron): C6, the dust chance and D1 counted as issued.
+- **The upstream rule's record outside Hat Yai** (D-056: A lifts to เตรียมตัว only on the U-Taphao until then).
+- **D8 and D11 after the owner's yes.**
 
 ## 4. How to work here
 
@@ -68,20 +63,21 @@ running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused th
   - `npm run preflight`;
   - `npm test`;
   - `CHROME_PATH=/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome npm run smoke` (`-- --live` once per
-    change);
+    change, after `docker compose cp collector:/app/public/data/live/. public/data/live/` so it reads fresh files);
   - `npm run check:docs`, `npm run check:advice`;
   - `node tools/env-check.mjs --probe`;
-  - `docker compose up -d --build`, then `node tools/health.mjs --web http://127.0.0.1:8090/`;
-  - `npm run cf:deploy -- --dry-run`.
+  - `docker compose up -d --build`, then `node tools/health.mjs --web http://127.0.0.1:8090/ --need-live`;
+  - `npm run cf:deploy` (the token may deploy since 24 Oct 20:12 UTC), then `node tools/health.mjs --web https://risk.autobahn.bot/`.
 - **This host's facts:**
 
   | Fact | Value |
   |---|---|
-  | Host | `autobahn-bot`; also runs BrainPlatform (`/root/BrainPlatform/deploy`, `deploy-*` containers: never touch) |
+  | Host | `autobahn-bot` (Cloudflare trace `loc=DE`); also runs BrainPlatform (`/root/BrainPlatform/deploy`, `deploy-*` containers: never touch) |
   | Node, Docker | 24.14.0 (wrangler runs without Docker); 29.4.0 with compose |
-  | Chromium | `/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome` |
-  | Air4Thai from it | 173 stations (07:50 UTC, 24 Oct) |
-  | ThaiWater from it | answering, no 429 in the session's walks and audits |
+  | Chromium | `/root/.cache/ms-playwright/chromium-1217/chrome-linux64/chrome` (no WebKit) |
+  | Air4Thai from it | 173 stations |
+  | ThaiWater from it | answering; the collector reads `rain_24h` once an hour |
+  | FloodWatch from it | `/api/stations` 2.47 MB and `/api/risks`, 200, no CORS needed server-side |
   | Python | 3.12, no numpy: research scripts make a venv in the scratchpad |
 
 - **A change is done when** the tests and the walk pass and the docs change in the same commit (CHANGELOG,
@@ -89,22 +85,22 @@ running its collector on `autobahn-bot`. **Not deployed:** Cloudflare refused th
 - **A release bumps the version** in `package.json`, `package-lock.json`, `main.js`, `sw.js` (twice) and `index.html`.
 - **The rules that bite** ([docs/GUIDELINES.md](docs/GUIDELINES.md)):
   - evidence for every number;
-  - the agency's word leads;
+  - the agency's word leads, in the agency's own colours;
   - one grading for every view of a forecast;
-  - a correction only inside the domain it was fitted on;
-  - missing data, including a stale collector, is never calm;
-  - walk the clock (the evening too);
+  - a correction only inside the domain it was fitted on, a rule's level only where its record is;
+  - missing data, including a stale collector or a late upstream gauge, is never calm;
+  - walk the clock (the evening too) and the device (blocked storage, LINE without Web Share);
+  - count a new rule's firings on today's real data and read them before shipping;
   - the exact GPS fix never leaves the phone, and no coordinates on screen for it;
-  - never FloodWatch's server;
-  - one live walk per change.
+  - never FloodWatch's server; one live walk per change; no VPN, no rotation.
 - **Where things are:**
 
   | What | Where |
   |---|---|
   | Every number | [KNOWLEDGE](docs/KNOWLEDGE.md) |
-  | Every forecast's skill | [MODELS](docs/MODELS.md) (§1.1: the model check) |
+  | Every forecast's skill | [MODELS](docs/MODELS.md) (§1.1: the model check; §3.3: Hat Yai's river and rain) |
   | Known problems | [KNOWN_ISSUES](docs/KNOWN_ISSUES.md) |
-  | This session's audits | [review](docs/research/review-2026-10-24.md), [visitor](docs/research/visitor-audit-2026-10-24.md), [output](docs/research/output-crosscheck-2026-10-24.md), [model check](docs/research/model-check-2026-10-24.md) |
+  | The audits and studies | [docs/research/](docs/research/) (index in [docs/README](docs/README.md)) |
   | The server and Cloudflare | [SERVER](docs/SERVER.md), [CLOUDFLARE](docs/CLOUDFLARE.md) |
-  | Decisions D-001 … D-052 | [research/HISTORY](docs/research/HISTORY.md) |
+  | Decisions D-001 … D-060 | [research/HISTORY](docs/research/HISTORY.md) |
   | Frank feedback | [FRANK_FEEDBACK](docs/FRANK_FEEDBACK.md) |

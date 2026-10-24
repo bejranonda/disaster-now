@@ -1,0 +1,36 @@
+# research/eq_d11_other.py
+# started 2026-10-24T20:48:22+00:00
+=== Tides: Schuster test on Gardner-Knopoff-independent M >= 5 events 1973-2026 ===
+(p < 0.05 would suggest a tidal modulation; a = modulation amplitude, best-phase gain <= 1 + a; phase0 in degrees)
+   all               semi-diurnal lunar (2H_moon)   N= 1285  Schuster p=0.910  a=0.017  phase0=  295
+   all               semi-diurnal solar (2H_sun)    N= 1285  Schuster p=0.326  a=0.059  phase0=  193
+   all               fortnightly (2 x elongation)   N= 1285  Schuster p=0.103  a=0.084  phase0=  357
+   shallow <= 40 km  semi-diurnal lunar (2H_moon)   N=  878  Schuster p=0.499  a=0.056  phase0=  254
+   shallow <= 40 km  semi-diurnal solar (2H_sun)    N=  878  Schuster p=0.721  a=0.039  phase0=  179
+   shallow <= 40 km  fortnightly (2 x elongation)   N=  878  Schuster p=0.035  a=0.123  phase0=   22
+   M >= 6            semi-diurnal lunar (2H_moon)   N=  155  Schuster p=0.499  a=0.134  phase0=   58
+   M >= 6            semi-diurnal solar (2H_sun)    N=  155  Schuster p=0.967  a=0.030  phase0=  203
+   M >= 6            fortnightly (2 x elongation)   N=  155  Schuster p=0.605  a=0.114  phase0=   48
+   ephemeris check: elongation at 2024-04-08 18:17 UTC (a total solar eclipse, Moon-Sun conjunction): 0.15 deg
+
+=== Season (hydrological / monsoon load): annual phase, Schuster test ===
+   whole box                        N= 1285 Schuster p=0.086 a=0.087 peak day-of-year   364 | May-Oct 600 vs Nov-Apr 685: rate ratio 0.88 (95 % 0.78-0.98); (May-Oct has 184 days vs 181)
+   north of 18 N, 92-102 E          N=  394 Schuster p=0.481 a=0.086 peak day-of-year   365 | May-Oct 181 vs Nov-Apr 213: rate ratio 0.85 (95 % 0.70-1.04); (May-Oct has 184 days vs 181)
+   north of 18 N, shallow <= 40 km  N=  361 Schuster p=0.418 a=0.098 peak day-of-year   316 | May-Oct 177 vs Nov-Apr 184: rate ratio 0.96 (95 % 0.78-1.18); (May-Oct has 184 days vs 181)
+
+=== Foreshocks: is a quake followed by a LARGER one within 7 days and 50 km? (real-time view, every M >= 5) ===
+  train: 1508 quakes M >= 5; followed by a larger one within 7 d and 50 km: 123 (8.16 %); time-independent chance at the same places 0.302 % -> gain 27x
+     M5.0-5.5: 78/1010 = 7.7 % (time-independent 0.408 %)
+     M5.5-6.0: 41/335 = 12.2 % (time-independent 0.115 %)
+     M6.0-6.5: 3/118 = 2.5 % (time-independent 0.036 %)
+     M6.5-: 1/45 = 2.2 % (time-independent 0.004 %)
+  test: 359 quakes M >= 5; followed by a larger one within 7 d and 50 km: 18 (5.01 %); time-independent chance at the same places 0.333 % -> gain 15x
+     M5.0-5.5: 15/287 = 5.2 % (time-independent 0.399 %)
+     M5.5-6.0: 3/50 = 6.0 % (time-independent 0.094 %)
+     M6.0-6.5: 0/15 = 0.0 % (time-independent 0.029 %)
+     M6.5-: 0/7 = 0.0 % (time-independent 0.005 %)
+
+=== Real-time b-value: events above completeness in a sequence's first day / week ===
+  real-time sequences (M >= 5.5 triggers, circle as USGS): 567; events >= Mc(t) in the first day: median 0, 90th percentile 1, max 37; in (1 h, 30 d]: median 0, 90th 2; sequences with >= 50 events in 30 d: 2
+
+wrote research/out/eq_d11_other.json

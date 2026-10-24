@@ -1,6 +1,6 @@
 // Uploads the collector's files to Workers KV, where the Cloudflare Worker serves them as /data/live/* (worker/index.mjs,
-// docs/CLOUDFLARE.md). One bulk request per run. KV's free plan allows 1,000 writes a day: 6 files every 15 minutes is
-// at most 576. The token needs only "Workers KV Storage: Edit"; it goes in the Authorization header and is never printed.
+// docs/CLOUDFLARE.md). One bulk request per run. KV's free plan allows 1,000 writes a day: 7 files every 15 minutes and
+// rain3d.json once an hour is ≈ 696. The token needs only "Workers KV Storage: Edit"; it goes in the Authorization header and is never printed.
 
 export const API = "https://api.cloudflare.com/client/v4";
 

@@ -22,7 +22,7 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 
 | Hazard | Bands (agency words) → app level | Source | Status |
 |---|---|---|---|
-| Heat index, daily max (°C) | < 27.0 → 0 · 27.0–32.9 เฝ้าระวัง → 1 · 33.0–41.9 เตือนภัย → 2 · 42.0–51.9 อันตราย → 3 · ≥ 52.0 อันตรายมาก → 3 | DOH/TMD 2024 scheme via BMA (Post Today 2 Apr 2026), DOH (Daily News 7 Apr 2026), TMD (Post Today 11 Mar 2024); TMD's own page for 42.0–51.9 | ⚠️ news quoting the agencies |
+| Heat index, daily max (°C) | **since 0.6.0, the DOH's own colours (D-053):** < 33.0 (ปกติ, 27.0–32.9 เฝ้าระวัง, the DOH's green) → 0 · 33.0–41.9 เตือนภัย (yellow) → 1 · 42.0–51.9 อันตราย (orange) → 2 · ≥ 52.0 อันตรายมาก (red) → 3. Until 0.5.0 each band sat one step higher (27 → 1, 33 → 2, 42 and 52 → 3) | DOH/TMD 2024 scheme via BMA (Post Today 2 Apr 2026), DOH (Daily News 7 Apr 2026: "สีเขียว ทำกิจกรรมได้ปกติ … สีเหลือง เริ่มเสี่ยง … สีส้ม เสี่ยงสูง … สีแดง อันตรายมาก"), THE STANDARD 3 May 2024 (the band–colour pairs), TMD (Post Today 11 Mar 2024); บ้านรอดไหม's `/hot` draws the same colours | ⚠️ news quoting the agencies; the colours: ux-d8-d1-d9-incidents §3.2 |
 | Heat-index formula | US NWS: Steadman's simple formula, then the Rothfusz regression with the two adjustments | NWS WPC page; TMD's 2012 explainer prints the same; TMD's agromet page names "Stedman (1979)" and an example (33 °C, 80 % → 49 °C) the NWS formula gives as 48.1 °C | ⚠️ which formula today's TMD product uses is **[unverified]** |
 | PM2.5, 24-h mean (µg/m³, 1 decimal) | 0–15.0 ดีมาก · 15.1–25.0 ดี → 0 · 25.1–37.5 ปานกลาง → 1 · 37.6–75.0 เริ่มมีผลกระทบต่อสุขภาพ → 2 · ≥ 75.1 มีผลกระทบต่อสุขภาพ → 3 | PCD notice 2566, Royal Gazette, Table 2 (`ratchakitcha.soc.go.th/documents/140D157S0000000000300.pdf`) | ✅ re-read |
 | Thai AQI (the highest sub-index) | 0–25 · 26–50 → 0 · 51–100 → 1 · 101–200 → 2 · ≥ 201 → 3 | the same notice | ✅ |
@@ -81,6 +81,45 @@ From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and
 - **ThaiWater's own `situation_level` is not used:** it is the same % of bed-to-bank, and C.12 (Chao Phraya at Samsen) read level 4 "มาก" / FloodWatch "warning" at **1.31 m** below its bank (92.2 %), on 24 Oct 02:00.
 - **The point:** FloodWatch's `point.area_index`: fresh gauges within 8 km; the up-to-3 within 3 km, weighted 1/max(d, 0.3)²; rounded to a category; in Bangkok and its five neighbours (provinces 10, 11, 12, 13, 73, 74) canal gauges only. For the old town it gives "normal", as FloodWatch's own `/api/point` did (`test/more.test.mjs`).
 - **Measured rain:** FloodWatch's limits (≤ 10 km, ≤ 3 h): at 13.75, 100.5 both apps name ปากคลองตลาด, 4.5 mm.
+- **FloodWatch's own rows (0.6.0, `floodwatch.json`):** the collector reads `/api/stations` (1,408 gauges, 2.47 MB) and
+  `/api/risks` (18.6 KB) every 15 min; it keeps 1,374 rows with a position that FloodWatch doesn't reject (257 KB,
+  ≈ 68 KB gzipped). Agencies: RID 676, HII 366, BMA 201, FOP 92, EGAT 73 (24 Oct 2026, 20:15 UTC). A gauge is used
+  while its reading is ≤ 3 h old (FloodWatch's `STALE_MIN` 180) and has no quality note (erratic, stuck, hidden values,
+  suspect datum); the file while it is ≤ 2 h old.
+- **FloodWatch's "⚠️ จับตา" groups and their 30-day records** (`/api/risks` → `records`, computed 24 Oct 12:37 UTC):
+  may reach the bank in 24 h, > 50 %: **459 cases, 64.9 % came true**; 25–50 %: 383, 14.4 %; in 48 h: 515, 62.3 % and
+  554, 11.0 %; upstream rising: 8,215, 55 %; fast rise: 1,504, 54 %; near the bank (24 h): 2,124, 3 %. FloodWatch's
+  upstream rule (`risks.py`): the gauge at watch or warning, a learned upstream gauge 3–48 h away and fresh, up ≥ 30 cm
+  in 24 h ("69 % led to a ≥ 10 cm rise downstream, 24 % without", its 2026-10-03 check). The page shows the record,
+  never the band as a percent (FloodWatch D-077: the 25–50 % band came true about a third as often as it says).
+- **The look ahead's tile levels (this app's choice, a forecast's ceiling):** > 50 % → at least เตรียมตัว; 25–50 % and
+  fast rise → at least เฝ้าระวัง; upstream → the gauge's own level. Only the gauges that judge the point (the area
+  index's basis) count.
+- **This page's own upstream lines (D-056, `water.upstreamSignal`; [lead-time §6](research/floodwatch-hatyai-leadtime-2026-10-24.md#6-wording-for-an-upstream-water-is-coming-line-q3)):**
+  an upstream gauge U of a judging gauge G (FloodWatch's `upstream`, lag 3–47 h, not G's twin, within 50 km, read ≤ 3 h
+  ago, no quality note, measured 24-h rise ≥ 30 cm with a fit r² ≥ 0.5). **A** U at or over its bank, G under its own:
+  เตรียมตัว on the คลองอู่ตะเภา (Hat Yai: 5 of 5 floods, 5 near-miss seasons in 30), ติดตามไว้ elsewhere. **B** U near
+  its bank (FloodWatch "warning"): ติดตามไว้ (X.90 at 90 %: false-alarm ratio 0.55). **C** G already over its bank and U
+  still rising: words only. The time is "within about 2 × lag h, or sooner" (measured X.90 → X.44: 0–11 h for a 6-h lag).
+  When every usable upstream gauge is late and G is at watch or above: "ข้อมูลต้นน้ำล่าสุดเมื่อ N ชม.ก่อน" (over 48 h:
+  "ไม่ส่งข้อมูลมากว่า 2 วัน"); never "ต้นน้ำปกติ" or "ลดแล้ว". Live on 24 Oct 20:55 UTC: C at 6 subdistricts (Khuan Kalong
+  +253 cm above Satun's over-bank gauge); "late" at 22.
+- **Hat Yai, Nov 2025, independently re-read** (lead-time §2–4): X.44's watch (70 %) came 17 h and its warning (90 %)
+  7 h before its bank (7.15 m, 22 Nov 12:00); FloodWatch's bank chance as served gave 1–2 h (its KI-545), 5–6 h fixed;
+  the city's first flooding (Kho Hong's hill water from 21 Nov 15:00) was led only by measured rain; Sadao (X.173A) passed
+  16.4 m 30 h before the second wave while FloodWatch's forecast said 7.92 m and X.44 reached 9.91 m. RID's southern
+  gauges were a median **28 h** old on 24 Oct (X.44: 4.5 h).
+- **FloodWatch's outlook line:** only with skill > 0 against "no change" and a likely (50 %) range ≤ 0.75 m (its
+  `WIDE_LIKELY_M`).
+- **Measured rain over 2–3 days (0.6.0, `rain3d.json`):** ThaiWater `rain_24h` (4,749 gauges, a rolling 24-h total at
+  each reading; 1,293 non-zero at 20:26 UTC on 24 Oct) read once an hour (`RAIN_EVERY_MIN` 55); r48 = now + 24 h
+  before, r72 = + 48 h before, each part within 90 min of its time; 50 h of snapshots kept; gauges with ≥ 50 mm
+  published; the card names the nearest within 10 km. Context: at Hat Yai airport in Oct–Jan (51 seasons) 3-day totals
+  of ≥ 150 / 250 / 350 mm were 1.94 / 0.57 / 0.08 % of windows; Nov 2025 brought 654 mm (hatyai-flood-2025-hindcast §3.2).
+  The U-Taphao basin's red-flag criteria include more than 300 mm in 3 days or 200 mm in a day (its §1, [S31]).
+  **Since 0.6.0 (D-057)** a measured 72-h total over 300 mm lifts the rain tile to เตรียมตัว, named as Hat Yai's red
+  flag: at Hat Yai airport it came about 24 h before the flood in 2024 and 2025, and caught 3 of 4 floods with data in
+  37 Oct–Jan seasons, one false alarm (2009, a near flood) (lead-time §4.2).
 
 ## 7. Places and search
 
@@ -154,7 +193,7 @@ With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the 
   [AI.md §1](AI.md#1-what-glm-is-as-of-october-2026-researched-in-this-session).
 - **Cloudflare (documented limits):** Workers Free 100,000 requests a day, 10 ms CPU per invocation, 5 cron triggers;
   static-asset requests outside `run_worker_first` are not Worker calls; KV Free 100,000 reads and 1,000 writes a day
-  (the collector writes at most 6 keys a run, 576 a day at 15 min). [CLOUDFLARE.md §1](CLOUDFLARE.md#1-the-recommendation-frankly).
+  (the collector writes at most 8 keys a run: 7 every 15 min and the hourly rain, ≈ 696 a day, since 0.6.0). [CLOUDFLARE.md §1](CLOUDFLARE.md#1-the-recommendation-frankly).
 - **Small-phone layout:** at 360 × 640 with a LINE user agent the verdict ends at 504 px (was 642). The 3-day table
   starts 1,529–2,267 px down at 390 px (was 5,865–6,574).
 

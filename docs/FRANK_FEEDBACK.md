@@ -310,3 +310,56 @@ persistence or the base rate). The short, frank answers:
   official-channels line) and held back everything that needs your decision (the earthquake rule, the redesign, the
   family palette). Revert any of them if you disagree; each has its own test.
 
+
+## 9. Live, FloodWatch, Hat Yai again (24 Oct 2026, evening, 0.6.0)
+
+You asked eight things at once: use FloodWatch's API, check its Hat Yai 4–6 h goal, deploy with the new token, step
+up warnings for a Hat Yai, define Thai Risk's backup role, answer the VPN question, test LINE and tablets, and research
+D1, D8, D9 and D11. Four studies ran beside the build
+([lead time](research/floodwatch-hatyai-leadtime-2026-10-24.md), [D11](research/eq-d11-2026-10-24.md),
+[UX](research/ux-d8-d1-d9-incidents-2026-10-24.md), [devices](research/device-sim-2026-10-24.md)).
+
+### To you, frankly
+
+1. **Hat Yai's 4–6 h goal is the wrong question for FloodWatch, and the right one for the data.** Its own measured
+   steps at X.44 gave 17 h (watch) and 7 h (warning) before the bank in Nov 2025, and its upstream group 17 h. Its
+   *forecast* gave 1–2 h, because of its own KI-545. The city's first flooding came from the hills (Kho Hong), which no
+   river gauge saw; only measured rain did (Hat Yai's own 300 mm in 3 days, ~24 h ahead in 2024 and 2025). And the
+   second wave's miss was size: the forecast said 7.92 m, the river reached 9.91 m. **Fix KI-545 first; then give the
+   model upstream levels and measured rain** (a simple version gave 13 h on one event). Before any of that: **RID's
+   southern gauges were a median 28 h late today.** Every lead in every study assumes data that arrive on time.
+2. **Thai Risk can't make Hat Yai's warning earlier than its data; it can make it visible.** 0.6.0 shows the
+   measured 3-day rain and names Hat Yai's red flag when it is crossed; it shows FloodWatch's own look ahead with its
+   record; it adds upstream lines that don't wait for the city's gauge; and since your D1 answer, everyday heat no
+   longer paints the verdict orange, so a rain or river signal changes the colour a family sees. That last one is the
+   biggest change for a Hat Yai, and it cost one line in `levels.js`.
+3. **No VPN, and don't add one.** FloodWatch's is a Thai egress for geo-blocked public pages, auto-replacing dead
+   relays; its own rules forbid rotating to get past blocks. This server is in Germany too and every source answers
+   it. The only limit met is ThaiWater's per-IP one, and rotating addresses around it is exactly what both projects
+   forbid. FloodWatch's egress already brings BMA's and RID's gauges into Thai Risk through its API.
+4. **The token:** it deploys now, but it still reaches every zone of every account you own, on a host that runs
+   another app. Please make the KV-only token (one permission) and narrow the deploy token. Until the KV token exists,
+   the live site can't show TMD's warnings, fires, storms or FloodWatch's lines; it says so honestly.
+5. **Cloudflare sets a one-year cookie on every visitor** (a zone setting, Bot Fight Mode / JavaScript detections). The
+   page promises no cookies. Your call (A14): turn it off for the zone, or let the page say so.
+6. **D11:** the research says *don't compute*, in both of your senses: not our own aftershock chance, and not
+   USGS's recomputed for a place. The words and the reworded link are ready in OWNER_ACTIONS; say yes and they ship.
+7. **Your prompt:** the answers you gave (D1 "if it is good you can show"; A4 "simulate it yourself") were the most
+   useful lines in it: they turned decisions into work. The FloodWatch and Hat Yai questions were concrete and good.
+   The prompt mixed eight topics with the same pasted validation block; it worked, but **one topic per message, plus a
+   line saying what "done" means** ("deploy and show me Hat Yai's page on the live site"), would get you results
+   sooner and let each one be checked. Saying when the token was ready ("Sorry, token is just now updated") was
+   exactly right: it unblocked the deploy at once.
+
+### Frank about my own part
+
+- **The first FloodWatch look-ahead was wrong on real data,** after every fixture test passed: a sluice gate 12.6 km away
+  across the river turned Lat Phrao orange. A nationwide count on today's file caught it, and the same count caught a
+  contradiction at Palian ("upstream rose" beside "upstream data are 5 h old"). Both are fixed and tested; the lesson
+  is in GUIDELINES §6 (count a rule's firings on real data and read them before shipping).
+- **I shipped D1 on your answer** ("if it is good you can show"), reading it as a delegation; it changes what most
+  afternoons look like. If you meant only "show heat", revert `levels.js`'s heat levels (one block, one test).
+- **I did not ship D11's words,** although the study recommends them: AGENTS.md reserves that wording for you.
+- **The live page has shown 0.5.0 since 20:13 and 0.6.0 since 20:57 UTC,** each checked from the edge; one live walk
+  (Bangkok) and one edge load (Hat Yai) were the only live page loads I made, and the studies stayed within their
+  ThaiWater budgets (10, 0, 0 and 2 loads).

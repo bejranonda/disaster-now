@@ -1,0 +1,180 @@
+# research/eq_d11_point.py
+# started 2026-10-24T20:31:33+00:00
+Bangkok              climatology A 0.0016  B 0.0201  C 0.0029; test weeks with event A 0.0000 B 0.0065 C 0.0016
+Chiang Mai           climatology A 0.0082  B 0.0134  C 0.0058; test weeks with event A 0.0098 B 0.0114 C 0.0016
+Chiang Rai           climatology A 0.0115  B 0.0182  C 0.0048; test weeks with event A 0.0065 B 0.0114 C 0.0016
+Mae Hong Son         climatology A 0.0148  B 0.0144  C 0.0038; test weeks with event A 0.0179 B 0.0130 C 0.0016
+Mae Sot (Tak)        climatology A 0.0044  B 0.0163  C 0.0029; test weeks with event A 0.0065 B 0.0081 C 0.0016
+Kanchanaburi         climatology A 0.0016  B 0.0115  C 0.0029; test weeks with event A 0.0000 B 0.0016 C 0.0000
+Phuket               climatology A 0.0005  B 0.0192  C 0.0038; test weeks with event A 0.0000 B 0.0065 C 0.0000
+Ranong               climatology A 0.0005  B 0.0163  C 0.0029; test weeks with event A 0.0000 B 0.0065 C 0.0000
+Khon Kaen            climatology A 0.0000  B 0.0105  C 0.0029; test weeks with event A 0.0000 B 0.0033 C 0.0000
+Udon Thani           climatology A 0.0000  B 0.0096  C 0.0029; test weeks with event A 0.0033 B 0.0033 C 0.0000
+Nakhon Ratchasima    climatology A 0.0000  B 0.0105  C 0.0029; test weeks with event A 0.0000 B 0.0016 C 0.0000
+Hat Yai (Songkhla)   climatology A 0.0000  B 0.0192  C 0.0038; test weeks with event A 0.0000 B 0.0065 C 0.0000
+Surat Thani          climatology A 0.0000  B 0.0153  C 0.0038; test weeks with event A 0.0000 B 0.0065 C 0.0000
+Ubon Ratchathani     climatology A 0.0000  B 0.0086  C 0.0029; test weeks with event A 0.0000 B 0.0016 C 0.0000
+Nan                  climatology A 0.0049  B 0.0134  C 0.0029; test weeks with event A 0.0049 B 0.0098 C 0.0033
+
+T6: training triggered windows 292 (from 51 quakes); share with event A 0.041 B 0.127 C 0.021
+
+T55: training triggered windows 317 (from 65 quakes); share with event A 0.069 B 0.145 C 0.022
+
+-- W test target A: n = 9225 windows (615 blocks), observed 30 (0.33 %); say nothing (p = 0) Brier 0.00325
+     C: mean p 0.0032 (median 0.0005, max 0.015)  Brier 0.00322  BSS +0.000  log -0.0192  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+     E: mean p 0.0054 (median 0.0020, max 0.664)  Brier 0.00343  BSS -0.066  log -0.0206  gain vs C -0.0014 nats/window  95 % Brier(C)-Brier -0.00073 .. -0.00001
+        reliability: [0,0.005) n=6381 p=0.002 obs=0.001; [0.005,0.01) n=1141 p=0.007 obs=0.007; [0.01,0.02) n=1483 p=0.013 obs=0.007; [0.02,0.05) n=177 p=0.029 obs=0.023; [0.05,0.1) n=32 p=0.066 obs=0.031; [0.1,0.2) n=7 p=0.122 obs=0.000; [0.5,1) n=4 p=0.649 obs=0.000
+
+-- W test target B: n = 9225 windows (615 blocks), observed 60 (0.65 %); say nothing (p = 0) Brier 0.00650
+     C: mean p 0.0144 (median 0.0144, max 0.020)  Brier 0.00652  BSS +0.000  log -0.0417  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+     E: mean p 0.0098 (median 0.0085, max 0.895)  Brier 0.00663  BSS -0.016  log -0.0401  gain vs C +0.0016 nats/window  95 % Brier(C)-Brier -0.00038 .. +0.00005
+        reliability: [0,0.005) n=2306 p=0.004 obs=0.003; [0.005,0.01) n=3266 p=0.008 obs=0.007; [0.01,0.02) n=3329 p=0.014 obs=0.009; [0.02,0.05) n=296 p=0.026 obs=0.003; [0.05,0.1) n=18 p=0.068 obs=0.000; [0.1,0.2) n=6 p=0.138 obs=0.000; [0.2,0.5) n=3 p=0.312 obs=0.000; [0.5,1) n=1 p=0.895 obs=0.000
+
+-- W test target C: n = 9225 windows (615 blocks), observed 7 (0.08 %); say nothing (p = 0) Brier 0.00076
+     C: mean p 0.0035 (median 0.0029, max 0.006)  Brier 0.00077  BSS +0.000  log -0.0077  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+     E: mean p 0.0008 (median 0.0006, max 0.170)  Brier 0.00076  BSS +0.005  log -0.0062  gain vs C +0.0016 nats/window  95 % Brier(C)-Brier -0.00001 .. +0.00001
+        reliability: [0,0.005) n=9174 p=0.001 obs=0.001; [0.005,0.01) n=43 p=0.007 obs=0.000; [0.01,0.02) n=5 p=0.013 obs=0.000; [0.02,0.05) n=2 p=0.035 obs=0.000; [0.1,0.2) n=1 p=0.170 obs=0.000
+
+-- T6 test target A: n = 50 windows (9 blocks), observed 1 (2.00 %); say nothing (p = 0) Brier 0.02000
+     C: mean p 0.0046 (median 0.0016, max 0.015)  Brier 0.01946  BSS +0.000  log -0.0887  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0411 (median 0.0411, max 0.041)  Brier 0.02005  BSS -0.030  log -0.1050  gain vs C -0.0162 nats/window  95 % Brier(C)-Brier -0.00165 .. +0.00071
+   B1T: mean p 0.0555 (median 0.0482, max 0.116)  Brier 0.02369  BSS -0.218  log -0.1378  gain vs C -0.0490 nats/window  95 % Brier(C)-Brier -0.00924 .. -0.00103
+     E: mean p 0.0830 (median 0.0099, max 0.609)  Brier 0.04571  BSS -1.349  log -0.1309  gain vs C -0.0421 nats/window  95 % Brier(C)-Brier -0.09724 .. +0.01691
+        reliability: [0,0.005) n=18 p=0.003 obs=0.000; [0.005,0.01) n=7 p=0.008 obs=0.000; [0.01,0.02) n=10 p=0.015 obs=0.000; [0.02,0.05) n=5 p=0.032 obs=0.000; [0.05,0.1) n=3 p=0.084 obs=0.000; [0.2,0.5) n=2 p=0.268 obs=0.500; [0.5,1) n=5 p=0.589 obs=0.000
+    GP: mean p 0.0503 (median 0.0030, max 0.655)  Brier 0.01387  BSS +0.287  log -0.0533  gain vs C +0.0354 nats/window  95 % Brier(C)-Brier -0.02989 .. +0.03493
+        reliability: [0,0.005) n=31 p=0.002 obs=0.000; [0.005,0.01) n=4 p=0.008 obs=0.000; [0.01,0.02) n=7 p=0.013 obs=0.000; [0.2,0.5) n=5 p=0.337 obs=0.000; [0.5,1) n=1 p=0.655 obs=1.000
+
+-- T6 test target B: n = 50 windows (9 blocks), observed 0 (0.00 %); say nothing (p = 0) Brier 0.00000
+     C: mean p 0.0155 (median 0.0153, max 0.020)  Brier 0.00025  BSS +0.000  log -0.0156  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.1267 (median 0.1267, max 0.127)  Brier 0.01606  BSS -63.720  log -0.1355  gain vs C -0.1199 nats/window  95 % Brier(C)-Brier -0.01583 .. -0.01577
+   B1T: mean p 0.1195 (median 0.1386, max 0.209)  Brier 0.01794  BSS -71.323  log -0.1297  gain vs C -0.1141 nats/window  95 % Brier(C)-Brier -0.02837 .. -0.00338
+     E: mean p 0.1061 (median 0.0563, max 0.850)  Brier 0.02977  BSS -119.000  log -0.1365  gain vs C -0.1209 nats/window  95 % Brier(C)-Brier -0.06624 .. -0.00420
+        reliability: [0.01,0.02) n=1 p=0.017 obs=0.000; [0.02,0.05) n=20 p=0.035 obs=0.000; [0.05,0.1) n=13 p=0.067 obs=0.000; [0.1,0.2) n=9 p=0.129 obs=0.000; [0.2,0.5) n=6 p=0.283 obs=0.000; [0.5,1) n=1 p=0.850 obs=0.000
+    GP: mean p 0.1525 (median 0.1035, max 0.586)  Brier 0.03877  BSS -155.278  log -0.1795  gain vs C -0.1639 nats/window  95 % Brier(C)-Brier -0.06222 .. -0.00886
+        reliability: [0.05,0.1) n=25 p=0.078 obs=0.000; [0.1,0.2) n=17 p=0.139 obs=0.000; [0.2,0.5) n=7 p=0.388 obs=0.000; [0.5,1) n=1 p=0.586 obs=0.000
+
+-- T6 test target C: n = 50 windows (9 blocks), observed 0 (0.00 %); say nothing (p = 0) Brier 0.00000
+     C: mean p 0.0037 (median 0.0038, max 0.006)  Brier 0.00001  BSS +0.000  log -0.0037  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0205 (median 0.0205, max 0.021)  Brier 0.00042  BSS -28.633  log -0.0208  gain vs C -0.0171 nats/window  95 % Brier(C)-Brier -0.00041 .. -0.00041
+   B1T: mean p 0.0184 (median 0.0233, max 0.024)  Brier 0.00037  BSS -25.022  log -0.0185  gain vs C -0.0149 nats/window  95 % Brier(C)-Brier -0.00048 .. -0.00017
+     E: mean p 0.0100 (median 0.0041, max 0.145)  Brier 0.00053  BSS -36.524  log -0.0103  gain vs C -0.0066 nats/window  95 % Brier(C)-Brier -0.00143 .. -0.00001
+        reliability: [0,0.005) n=28 p=0.003 obs=0.000; [0.005,0.01) n=12 p=0.007 obs=0.000; [0.01,0.02) n=6 p=0.015 obs=0.000; [0.02,0.05) n=3 p=0.032 obs=0.000; [0.1,0.2) n=1 p=0.145 obs=0.000
+    GP: mean p 0.0227 (median 0.0129, max 0.123)  Brier 0.00116  BSS -80.707  log -0.0233  gain vs C -0.0196 nats/window  95 % Brier(C)-Brier -0.00190 .. -0.00014
+        reliability: [0.005,0.01) n=17 p=0.009 obs=0.000; [0.01,0.02) n=23 p=0.015 obs=0.000; [0.02,0.05) n=5 p=0.035 obs=0.000; [0.05,0.1) n=3 p=0.078 obs=0.000; [0.1,0.2) n=2 p=0.115 obs=0.000
+
+-- T6 train target A: n = 292 windows (51 blocks), observed 12 (4.11 %); say nothing (p = 0) Brier 0.04110
+     C: mean p 0.0034 (median 0.0005, max 0.015)  Brier 0.04027  BSS +0.000  log -0.1934  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0411 (median 0.0411, max 0.041)  Brier 0.03941  BSS +0.022  log -0.1714  gain vs C +0.0220 nats/window  95 % Brier(C)-Brier -0.00142 .. +0.00358
+   B1T: mean p 0.0411 (median 0.0181, max 0.116)  Brier 0.03826  BSS +0.050  log -0.1593  gain vs C +0.0341 nats/window  95 % Brier(C)-Brier -0.00238 .. +0.00869
+     E: mean p 0.0492 (median 0.0065, max 0.750)  Brier 0.02095  BSS +0.480  log -0.0668  gain vs C +0.1265 nats/window  95 % Brier(C)-Brier -0.00908 .. +0.05512
+    GP: mean p 0.0587 (median 0.0016, max 0.988)  Brier 0.05260  BSS -0.306  log -0.1927  gain vs C +0.0006 nats/window  95 % Brier(C)-Brier -0.06060 .. +0.03230
+
+-- T6 train target B: n = 292 windows (51 blocks), observed 37 (12.67 %); say nothing (p = 0) Brier 0.12671
+     C: mean p 0.0152 (median 0.0153, max 0.020)  Brier 0.12310  BSS +0.000  log -0.5472  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.1267 (median 0.1267, max 0.127)  Brier 0.11066  BSS +0.101  log -0.3801  gain vs C +0.1671 nats/window  95 % Brier(C)-Brier -0.00800 .. +0.03969
+   B1T: mean p 0.1267 (median 0.1386, max 0.209)  Brier 0.10832  BSS +0.120  log -0.3690  gain vs C +0.1782 nats/window  95 % Brier(C)-Brier -0.01021 .. +0.04497
+     E: mean p 0.0775 (median 0.0461, max 0.956)  Brier 0.10045  BSS +0.184  log -0.3624  gain vs C +0.1848 nats/window  95 % Brier(C)-Brier -0.00234 .. +0.05254
+    GP: mean p 0.2028 (median 0.1063, max 0.990)  Brier 0.10039  BSS +0.184  log -0.3322  gain vs C +0.2150 nats/window  95 % Brier(C)-Brier -0.04482 .. +0.10210
+
+-- T6 train target C: n = 292 windows (51 blocks), observed 6 (2.05 %); say nothing (p = 0) Brier 0.02055
+     C: mean p 0.0035 (median 0.0029, max 0.006)  Brier 0.02040  BSS +0.000  log -0.1172  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0205 (median 0.0205, max 0.021)  Brier 0.02013  BSS +0.013  log -0.1002  gain vs C +0.0171 nats/window  95 % Brier(C)-Brier -0.00041 .. +0.00125
+   B1T: mean p 0.0205 (median 0.0241, max 0.024)  Brier 0.02010  BSS +0.015  log -0.0994  gain vs C +0.0178 nats/window  95 % Brier(C)-Brier -0.00045 .. +0.00151
+     E: mean p 0.0086 (median 0.0032, max 0.590)  Brier 0.01591  BSS +0.220  log -0.0791  gain vs C +0.0381 nats/window  95 % Brier(C)-Brier -0.00006 .. +0.01191
+    GP: mean p 0.0465 (median 0.0128, max 0.773)  Brier 0.02507  BSS -0.229  log -0.0873  gain vs C +0.0299 nats/window  95 % Brier(C)-Brier -0.02845 .. +0.01287
+
+-- T55 test target A: n = 63 windows (14 blocks), observed 5 (7.94 %); say nothing (p = 0) Brier 0.07937
+     C: mean p 0.0053 (median 0.0044, max 0.015)  Brier 0.07815  BSS +0.000  log -0.4238  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0694 (median 0.0694, max 0.069)  Brier 0.07317  BSS +0.064  log -0.2780  gain vs C +0.1458 nats/window  95 % Brier(C)-Brier -0.00476 .. +0.02499
+   B1T: mean p 0.1370 (median 0.0494, max 0.370)  Brier 0.07146  BSS +0.086  log -0.2605  gain vs C +0.1633 nats/window  95 % Brier(C)-Brier -0.06058 .. +0.10866
+     E: mean p 0.1032 (median 0.0157, max 0.609)  Brier 0.06207  BSS +0.206  log -0.1901  gain vs C +0.2337 nats/window  95 % Brier(C)-Brier -0.04187 .. +0.08950
+        reliability: [0,0.005) n=19 p=0.003 obs=0.000; [0.005,0.01) n=7 p=0.008 obs=0.000; [0.01,0.02) n=10 p=0.015 obs=0.000; [0.02,0.05) n=5 p=0.032 obs=0.000; [0.05,0.1) n=3 p=0.084 obs=0.000; [0.2,0.5) n=18 p=0.290 obs=0.278; [0.5,1) n=1 p=0.609 obs=0.000
+    GP: mean p 0.0742 (median 0.0049, max 0.655)  Brier 0.05615  BSS +0.281  log -0.1711  gain vs C +0.2526 nats/window  95 % Brier(C)-Brier -0.02277 .. +0.07166
+        reliability: [0,0.005) n=32 p=0.002 obs=0.000; [0.005,0.01) n=4 p=0.008 obs=0.000; [0.01,0.02) n=7 p=0.013 obs=0.000; [0.1,0.2) n=9 p=0.166 obs=0.444; [0.2,0.5) n=8 p=0.293 obs=0.000; [0.5,1) n=1 p=0.655 obs=1.000
+
+-- T55 test target B: n = 63 windows (14 blocks), observed 4 (6.35 %); say nothing (p = 0) Brier 0.06349
+     C: mean p 0.0154 (median 0.0153, max 0.020)  Brier 0.06200  BSS +0.000  log -0.2888  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.1451 (median 0.1451, max 0.145)  Brier 0.06612  BSS -0.066  log -0.2694  gain vs C +0.0194 nats/window  95 % Brier(C)-Brier -0.02082 .. +0.03928
+   B1T: mean p 0.1721 (median 0.1386, max 0.333)  Brier 0.06267  BSS -0.011  log -0.2420  gain vs C +0.0468 nats/window  95 % Brier(C)-Brier -0.05404 .. +0.08492
+     E: mean p 0.1023 (median 0.0615, max 0.574)  Brier 0.05482  BSS +0.116  log -0.2129  gain vs C +0.0759 nats/window  95 % Brier(C)-Brier -0.02062 .. +0.06568
+        reliability: [0.01,0.02) n=1 p=0.017 obs=0.000; [0.02,0.05) n=21 p=0.036 obs=0.000; [0.05,0.1) n=22 p=0.070 obs=0.091; [0.1,0.2) n=9 p=0.124 obs=0.000; [0.2,0.5) n=9 p=0.273 obs=0.111; [0.5,1) n=1 p=0.574 obs=1.000
+    GP: mean p 0.1388 (median 0.0967, max 0.586)  Brier 0.07576  BSS -0.222  log -0.2819  gain vs C +0.0070 nats/window  95 % Brier(C)-Brier -0.05104 .. +0.04331
+        reliability: [0.02,0.05) n=1 p=0.043 obs=0.000; [0.05,0.1) n=32 p=0.077 obs=0.062; [0.1,0.2) n=22 p=0.140 obs=0.045; [0.2,0.5) n=7 p=0.370 obs=0.143; [0.5,1) n=1 p=0.586 obs=0.000
+
+-- T55 test target C: n = 63 windows (14 blocks), observed 1 (1.59 %); say nothing (p = 0) Brier 0.01587
+     C: mean p 0.0038 (median 0.0038, max 0.006)  Brier 0.01580  BSS +0.000  log -0.0966  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0221 (median 0.0221, max 0.022)  Brier 0.01566  BSS +0.009  log -0.0825  gain vs C +0.0141 nats/window  95 % Brier(C)-Brier -0.00047 .. +0.00172
+   B1T: mean p 0.0232 (median 0.0241, max 0.037)  Brier 0.01533  BSS +0.030  log -0.0752  gain vs C +0.0214 nats/window  95 % Brier(C)-Brier -0.00075 .. +0.00304
+     E: mean p 0.0084 (median 0.0049, max 0.067)  Brier 0.01393  BSS +0.118  log -0.0503  gain vs C +0.0463 nats/window  95 % Brier(C)-Brier -0.00014 .. +0.00693
+        reliability: [0,0.005) n=32 p=0.003 obs=0.000; [0.005,0.01) n=19 p=0.007 obs=0.000; [0.01,0.02) n=7 p=0.016 obs=0.000; [0.02,0.05) n=4 p=0.030 obs=0.000; [0.05,0.1) n=1 p=0.067 obs=1.000
+    GP: mean p 0.0199 (median 0.0124, max 0.123)  Brier 0.01493  BSS +0.055  log -0.0652  gain vs C +0.0314 nats/window  95 % Brier(C)-Brier -0.00142 .. +0.00574
+        reliability: [0.005,0.01) n=21 p=0.009 obs=0.000; [0.01,0.02) n=30 p=0.014 obs=0.000; [0.02,0.05) n=7 p=0.033 obs=0.000; [0.05,0.1) n=4 p=0.072 obs=0.250; [0.1,0.2) n=1 p=0.123 obs=0.000
+
+-- T55 train target A: n = 317 windows (65 blocks), observed 22 (6.94 %); say nothing (p = 0) Brier 0.06940
+     C: mean p 0.0038 (median 0.0016, max 0.015)  Brier 0.06812  BSS +0.000  log -0.3368  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0694 (median 0.0694, max 0.069)  Brier 0.06458  BSS +0.052  log -0.2521  gain vs C +0.0847 nats/window  95 % Brier(C)-Brier -0.00176 .. +0.01043
+   B1T: mean p 0.0694 (median 0.0181, max 0.370)  Brier 0.05509  BSS +0.191  log -0.2025  gain vs C +0.1343 nats/window  95 % Brier(C)-Brier -0.00409 .. +0.03623
+     E: mean p 0.0634 (median 0.0067, max 0.750)  Brier 0.03419  BSS +0.498  log -0.1027  gain vs C +0.2341 nats/window  95 % Brier(C)-Brier +0.00397 .. +0.07152
+    GP: mean p 0.0638 (median 0.0016, max 0.991)  Brier 0.06658  BSS +0.023  log -0.2291  gain vs C +0.1077 nats/window  95 % Brier(C)-Brier -0.04478 .. +0.04749
+
+-- T55 train target B: n = 317 windows (65 blocks), observed 46 (14.51 %); say nothing (p = 0) Brier 0.14511
+     C: mean p 0.0153 (median 0.0153, max 0.020)  Brier 0.14090  BSS +0.000  log -0.6228  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.1451 (median 0.1451, max 0.145)  Brier 0.12405  BSS +0.120  log -0.4141  gain vs C +0.2087 nats/window  95 % Brier(C)-Brier -0.00657 .. +0.04489
+   B1T: mean p 0.1451 (median 0.1386, max 0.333)  Brier 0.11868  BSS +0.158  log -0.3937  gain vs C +0.2292 nats/window  95 % Brier(C)-Brier -0.00687 .. +0.05485
+     E: mean p 0.0827 (median 0.0474, max 0.956)  Brier 0.10921  BSS +0.225  log -0.3831  gain vs C +0.2397 nats/window  95 % Brier(C)-Brier +0.00633 .. +0.06081
+    GP: mean p 0.1932 (median 0.1039, max 0.990)  Brier 0.11192  BSS +0.206  log -0.3625  gain vs C +0.2603 nats/window  95 % Brier(C)-Brier -0.03668 .. +0.10096
+
+-- T55 train target C: n = 317 windows (65 blocks), observed 7 (2.21 %); say nothing (p = 0) Brier 0.02208
+     C: mean p 0.0035 (median 0.0029, max 0.006)  Brier 0.02191  BSS +0.000  log -0.1251  gain vs C +0.0000 nats/window  95 % Brier(C)-Brier +0.00000 .. +0.00000
+    BT: mean p 0.0221 (median 0.0221, max 0.022)  Brier 0.02159  BSS +0.015  log -0.1060  gain vs C +0.0191 nats/window  95 % Brier(C)-Brier -0.00037 .. +0.00135
+   B1T: mean p 0.0221 (median 0.0241, max 0.037)  Brier 0.02155  BSS +0.017  log -0.1049  gain vs C +0.0201 nats/window  95 % Brier(C)-Brier -0.00047 .. +0.00162
+     E: mean p 0.0089 (median 0.0034, max 0.590)  Brier 0.01776  BSS +0.189  log -0.0878  gain vs C +0.0373 nats/window  95 % Brier(C)-Brier -0.00005 .. +0.01123
+    GP: mean p 0.0436 (median 0.0126, max 0.774)  Brier 0.02597  BSS -0.185  log -0.0934  gain vs C +0.0317 nats/window  95 % Brier(C)-Brier -0.02642 .. +0.01229
+
+=== What a page would have shown (test) ===
+W A E: P >= 5 % (would round to >= 10 %) in 0.5 % of windows; P >= 1 % in 18.5 %; ratio to climatology median 3.3, max 624138
+W B E: P >= 5 % (would round to >= 10 %) in 0.3 % of windows; P >= 1 % in 39.6 %; ratio to climatology median 0.6, max 67
+W C E: P >= 5 % (would round to >= 10 %) in 0.0 % of windows; P >= 1 % in 0.1 %; ratio to climatology median 0.2, max 59
+T6 A E: P >= 5 % (would round to >= 10 %) in 20.0 % of windows; P >= 1 % in 50.0 %; ratio to climatology median 10.5, max 559389
+T6 A GP: P >= 5 % (would round to >= 10 %) in 12.0 % of windows; P >= 1 % in 26.0 %; ratio to climatology median 1.0, max 348965
+T6 B E: P >= 5 % (would round to >= 10 %) in 58.0 % of windows; P >= 1 % in 100.0 %; ratio to climatology median 3.9, max 63
+T6 B GP: P >= 5 % (would round to >= 10 %) in 100.0 % of windows; P >= 1 % in 100.0 %; ratio to climatology median 6.4, max 41
+T6 C E: P >= 5 % (would round to >= 10 %) in 2.0 % of windows; P >= 1 % in 20.0 %; ratio to climatology median 1.2, max 51
+T6 C GP: P >= 5 % (would round to >= 10 %) in 10.0 % of windows; P >= 1 % in 66.0 %; ratio to climatology median 3.4, max 37
+
+=== Case studies (triggered windows, M >= 6.0 scheme) ===
+Chiang Rai M6.1 (in the ETAS training years) (trigger M6.1, 2014-05-05T11:08:43.420Z):
+   Bangkok            A: C 0.002 E 0.001 GP 0.002 obs 0 | B: C 0.020 E 0.086 GP 0.109 obs 0 | C: C 0.0029 E 0.0065 GP 0.0141 obs 0
+   Chiang Mai         A: C 0.008 E 0.437 GP 0.319 obs 1 | B: C 0.013 E 0.512 GP 0.346 obs 1 | C: C 0.0058 E 0.0560 GP 0.0687 obs 0
+   Chiang Rai         A: C 0.012 E 0.440 GP 0.322 obs 1 | B: C 0.018 E 0.861 GP 0.541 obs 1 | C: C 0.0048 E 0.5896 GP 0.4163 obs 1
+   Mae Hong Son       A: C 0.015 E 0.440 GP 0.324 obs 1 | B: C 0.014 E 0.240 GP 0.210 obs 0 | C: C 0.0038 E 0.0210 GP 0.0314 obs 0
+   Mae Sot (Tak)      A: C 0.004 E 0.023 GP 0.004 obs 0 | B: C 0.016 E 0.061 GP 0.089 obs 0 | C: C 0.0029 E 0.0041 GP 0.0100 obs 0
+   Udon Thani         A: C 0.000 E 0.006 GP 0.000 obs 0 | B: C 0.010 E 0.039 GP 0.060 obs 0 | C: C 0.0029 E 0.0027 GP 0.0083 obs 0
+   Nan                A: C 0.005 E 0.436 GP 0.317 obs 1 | B: C 0.013 E 0.345 GP 0.264 obs 0 | C: C 0.0029 E 0.0317 GP 0.0432 obs 0
+Sainyabuli, Laos M6.2 (trigger M6.2, 2019-11-20T23:50:43.955Z):
+   Bangkok            A: C 0.002 E 0.001 GP 0.002 obs 0 | B: C 0.020 E 0.136 GP 0.127 obs 0 | C: C 0.0029 E 0.0100 GP 0.0158 obs 0
+   Chiang Mai         A: C 0.008 E 0.581 GP 0.354 obs 0 | B: C 0.013 E 0.179 GP 0.142 obs 0 | C: C 0.0058 E 0.0159 GP 0.0218 obs 0
+   Chiang Rai         A: C 0.012 E 0.598 GP 0.356 obs 0 | B: C 0.018 E 0.421 GP 0.264 obs 0 | C: C 0.0048 E 0.0402 GP 0.0426 obs 0
+   Mae Hong Son       A: C 0.015 E 0.041 GP 0.015 obs 0 | B: C 0.014 E 0.095 GP 0.090 obs 0 | C: C 0.0038 E 0.0069 GP 0.0120 obs 0
+   Mae Sot (Tak)      A: C 0.004 E 0.010 GP 0.004 obs 0 | B: C 0.016 E 0.060 GP 0.073 obs 0 | C: C 0.0029 E 0.0042 GP 0.0083 obs 0
+   Khon Kaen          A: C 0.000 E 0.016 GP 0.000 obs 0 | B: C 0.011 E 0.074 GP 0.080 obs 0 | C: C 0.0029 E 0.0051 GP 0.0106 obs 0
+   Udon Thani         A: C 0.000 E 0.559 GP 0.349 obs 0 | B: C 0.010 E 0.148 GP 0.131 obs 0 | C: C 0.0029 E 0.0105 GP 0.0170 obs 0
+   Nan                A: C 0.005 E 0.599 GP 0.352 obs 0 | B: C 0.013 E 0.850 GP 0.474 obs 0 | C: C 0.0029 E 0.1453 GP 0.1075 obs 0
+Sagaing (Mandalay) M7.7 (trigger M7.7, 2025-03-28T06:20:52.715Z):
+   Bangkok            A: C 0.002 E 0.001 GP 0.002 obs 0 | B: C 0.020 E 0.207 GP 0.455 obs 0 | C: C 0.0029 E 0.0157 GP 0.0765 obs 0
+   Chiang Mai         A: C 0.008 E 0.081 GP 0.008 obs 0 | B: C 0.013 E 0.223 GP 0.445 obs 0 | C: C 0.0058 E 0.0212 GP 0.0770 obs 0
+   Chiang Rai         A: C 0.012 E 0.097 GP 0.012 obs 0 | B: C 0.018 E 0.235 GP 0.458 obs 0 | C: C 0.0048 E 0.0186 GP 0.0799 obs 0
+   Mae Hong Son       A: C 0.015 E 0.315 GP 0.655 obs 1 | B: C 0.014 E 0.374 GP 0.586 obs 0 | C: C 0.0038 E 0.0343 GP 0.1233 obs 0
+   Mae Sot (Tak)      A: C 0.004 E 0.015 GP 0.004 obs 0 | B: C 0.016 E 0.104 GP 0.302 obs 0 | C: C 0.0029 E 0.0073 GP 0.0410 obs 0
+   Kanchanaburi       A: C 0.002 E 0.002 GP 0.002 obs 0 | B: C 0.012 E 0.044 GP 0.163 obs 0 | C: C 0.0029 E 0.0030 GP 0.0193 obs 0
+   Phuket             A: C 0.001 E 0.004 GP 0.001 obs 0 | B: C 0.019 E 0.024 GP 0.079 obs 0 | C: C 0.0038 E 0.0015 GP 0.0090 obs 0
+   Ranong             A: C 0.001 E 0.002 GP 0.001 obs 0 | B: C 0.016 E 0.026 GP 0.096 obs 0 | C: C 0.0029 E 0.0017 GP 0.0102 obs 0
+   Khon Kaen          A: C 0.000 E 0.005 GP 0.000 obs 0 | B: C 0.011 E 0.047 GP 0.167 obs 0 | C: C 0.0029 E 0.0031 GP 0.0198 obs 0
+   Udon Thani         A: C 0.000 E 0.009 GP 0.000 obs 0 | B: C 0.010 E 0.053 GP 0.188 obs 0 | C: C 0.0029 E 0.0036 GP 0.0230 obs 0
+   Nakhon Ratchasima  A: C 0.000 E 0.003 GP 0.000 obs 0 | B: C 0.011 E 0.039 GP 0.151 obs 0 | C: C 0.0029 E 0.0025 GP 0.0175 obs 0
+   Hat Yai (Songkhla) A: C 0.000 E 0.001 GP 0.000 obs 0 | B: C 0.019 E 0.017 GP 0.069 obs 0 | C: C 0.0038 E 0.0010 GP 0.0079 obs 0
+   Surat Thani        A: C 0.000 E 0.001 GP 0.000 obs 0 | B: C 0.015 E 0.022 GP 0.085 obs 0 | C: C 0.0038 E 0.0014 GP 0.0099 obs 0
+   Ubon Ratchathani   A: C 0.000 E 0.001 GP 0.000 obs 0 | B: C 0.009 E 0.025 GP 0.112 obs 0 | C: C 0.0029 E 0.0017 GP 0.0128 obs 0
+   Nan                A: C 0.005 E 0.034 GP 0.005 obs 0 | B: C 0.013 E 0.134 GP 0.320 obs 0 | C: C 0.0029 E 0.0114 GP 0.0451 obs 0
+
+wrote research/out/eq_d11_point.json and research/out/eq_d11_point_windows.csv.gz

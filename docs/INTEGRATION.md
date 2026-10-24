@@ -37,9 +37,40 @@ The owner has three apps that touch the same people on the same bad day. Built s
 | CORS on FloodWatch's `/api/point`, `/api/stations`, `/api/geocode` | **still none**; OPTIONS answers 405 (B1, B2) |
 | บ้านรอดไหม's English guides | all 8 answer 200; the English page links to them since 0.4.0 (they went to the Thai pages through a no-op, X10) |
 
+### Since 0.6.0 (24 Oct 2026, evening): the collector reads FloodWatch
+
+The collector reads FloodWatch's `/api/stations` and `/api/risks` every 15 min (server-side: no CORS needed) and
+publishes `floodwatch.json`: every gauge with FloodWatch's own status, its 24-h outlook and skill, its "⚠️ จับตา" group
+and upstream travel times, and the groups' 30-day records. The flood tile reads FloodWatch's rows while the file is
+fresh (BMA's canals included: KI-007 closed), and ThaiWater's from the phone when it isn't; the card repeats
+FloodWatch's look ahead, with its record, for the gauges that judge the point. Details, numbers and the over-reach
+caught on live data: [floodwatch-integration-2026-10-24](research/floodwatch-integration-2026-10-24.md).
+
+### Roles: Thai Risk as FloodWatch's backup (24 Oct 2026, the owner's question)
+
+FloodWatch is one server in Germany behind a Cloudflare Tunnel (its database, collectors and API on one VPS); when it
+or the tunnel stops, flood.autobahn.bot stops. Thai Risk is static files at Cloudflare's edge, and the phone itself
+reads ThaiWater's gauges near the point and grades them by FloodWatch's own rules. So:
+
+| Role | Thai Risk does | Thai Risk doesn't |
+|---|---|---|
+| **The river near a point when FloodWatch is down** | judges the gauges from ThaiWater with FloodWatch's bank and point rules (737 of 742 statuses equal FloodWatch's, 24 Oct), and says FloodWatch didn't answer (0.6.0) | copy FloodWatch's forecasts, BMA's canal thresholds, maps, history or `/impact` |
+| **Every hazard at the point** | rain warnings (TMD CAP), measured rain over 1–3 days, HII's flash-flood list, heat, dust, quakes, fires | water-level forecasts of its own |
+| **FloodWatch's words where a family looks** | its status, outlook and "⚠️ จับตา" groups with their records, for the gauges that judge the point; its upstream links turned into "water from upstream" lines | re-grade FloodWatch's gauges or its bands |
+| **The first screen in a LINE group** | the verdict, "ข้างหน้า", what changed since the last look, a share text with its own time | push alerts (no LINE Notify since 31 Mar 2025; web push doesn't reach LINE's browser; DDPM's Cell Broadcast is the alert) |
+| **The FloodWatch link** | every flood card links to the point on flood.autobahn.bot (rounded) | send a visitor's position to FloodWatch's server |
+
+**For FloodWatch:** name the backup on its offline or "server unavailable" page ("ระดับน้ำใกล้จุดของฉัน: risk.autobahn.bot"),
+and before the next monsoon size the edge: Workers Free allows 100,000 requests a day and a page load makes up to eight
+`/data/live/*` requests, so roughly 12,000–16,000 page loads a day before the live files fail (then the page says it
+couldn't check, never calm); Workers Paid is US$5 a month (the UX study §6).
+
 ## 3. Small changes in FloodWatch that would help most
 
-1. **CORS on `/api/point` for this site's origin.** Then the flood tile shows FloodWatch's own answer, which includes BMA's canal gauges (this app sees only ThaiWater's 8 Bangkok gauges; FloodWatch had 33 near the old town). `/api/point` is already a private-query path (not logged). Turn it on in `public/config.json` with `"floodwatchPoint": true` once FloodWatch allows it.
+1. ~~**CORS on `/api/point` for this site's origin.**~~ **No longer needed (0.6.0):** the collector's `floodwatch.json`
+   gives the page FloodWatch's own gauges, BMA's canals included, without a visitor's position reaching a second server.
+   (Before: the flood tile would show FloodWatch's own answer, which includes BMA's canal gauges; this app saw only
+   ThaiWater's 8 Bangkok gauges, FloodWatch 33 near the old town.)
 2. **CORS on `/api/geocode`.** Nominatim's 1-request-a-second limit is for a whole application's users together; FloodWatch already throttles and caches to it and never logs queries (its D-032). Then set `"geocoder": "floodwatch"` in `public/config.json`.
 3. **Nothing of this app on FloodWatch's server** (changed 24 Oct 2026, D-040). Its collector was tested there on
    23 Oct (5 of 5 files, Air4Thai 173 stations), but it shared FloodWatch's IP and quota (KI-029). It now runs on a
@@ -49,7 +80,9 @@ The owner has three apps that touch the same people on the same bad day. Built s
 4. **A frank one about FloodWatch itself:** its bank rule counts "% of the height from the river bed to the bank". On a deep river that reads "ใกล้ล้นตลิ่ง" while the water is far below the bank: C.12 (Chao Phraya at Samsen) was "warning" at 92 % with **1.31 m** of freeboard on 24 Oct 02:00. FloodWatch marks the rule heuristic (its `classify_status` docstring). A freeboard rule for rivers (e.g. watch under 1.0 m, warning under 0.5 m, as FloodWatch's own `scenarios.py` uses for the impact strip) would read better to citizens. This app copies FloodWatch's rule for consistency; change both together.
 
 5. **Publish the ThaiWater snapshot FloodWatch already fetches** (every 10 min) as a file this app can read, e.g.
-   `/api/stations` with CORS, or a KV key on the same Cloudflare account. On 23 Oct ThaiWater answered HTTP 429 to the
+   `/api/stations` with CORS, or a KV key on the same Cloudflare account. **Half done (0.6.0):** the gauges come from
+   `/api/stations` through the collector. **Still wanted: a measured-rain endpoint** (24/48/72 h per gauge, from the
+   readings FloodWatch stores); until then the collector reads ThaiWater's `rain_24h` once an hour for the 3-day line. On 23 Oct ThaiWater answered HTTP 429 to the
    server both apps shared that night (KI-029). Even on separate servers, one fetch for the family is kinder to HII.
 6. **From the hazards research of 24 Oct 2026** ([predict-hazards](research/predict-hazards-2026-10-24.md)):
    - **GloFAS is FloodWatch's to test,** at its own gauges, matching river cells by upstream area (the nearest cell was
@@ -62,7 +95,9 @@ The owner has three apps that touch the same people on the same bad day. Built s
    FloodWatch already carries the U-Taphao chain (X.173A and SLA003 at Sadao, X.90 and SLA002, X.44, X.174, ONE037);
    its links put Sadao about 13 h above X.44. **FloodWatch should own an "upstream" line** for a point (which gauge
    rises first, and roughly when its water arrives) that this page then shows: the page's own 20 km list for Hat Yai
-   never reaches Sadao. Its 24-h forecast at X.44 had skill 0.17; at 48–72 h it fell back to persistence. Replay the
+   never reaches Sadao. **0.6.0 shows FloodWatch's own upstream group** (55 % came true in its last 30 days); it fires
+   only once the downstream gauge is at watch or warning, and Hat Yai's own RID gauges were 4.4 h old on 24 Oct
+   (KI-041). Its 24-h forecast at X.44 had skill 0.17; at 48–72 h it fell back to persistence. Replay the
    event from its database (OWNER_ACTIONS B5). And one official-channels block, the same words in all three apps
    (who alerts: DDPM's Cell Broadcast; who orders an evacuation: the municipality and the province).
 8. **One AI pattern for the family.** FloodWatch's `ai.run` (budget, breaker, `reasoning_effort: "low"`, content-only

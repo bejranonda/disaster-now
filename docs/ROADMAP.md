@@ -16,13 +16,35 @@ See [CHANGELOG.md](../CHANGELOG.md).
   every forecast view; the cool-season heat fix (C6) and the fitted predictor; the evening false alarm; the province
   search; stale collector files missing; the 3-day table's dots and its 320 px fit; 25 visitor and 19 output findings.
 
+- **v0.5.0 (24 Oct 2026):** the prediction research (a dust-day chance, earthquake wording, seismic zones, the Hat Yai
+  hindcast's lines).
+- **v0.6.0 (24 Oct 2026, live at https://risk.autobahn.bot):** deployed; FloodWatch's own gauges through the collector
+  (KI-007 closed while fresh) with its look ahead and this page's upstream lines; the measured 3-day rain and Hat Yai's
+  red flag; heat in the DOH's colours (D1); "ข้างหน้า", what changed since the last look, a share text with its time;
+  the device study's fixes.
+
+## Next, in order (from 24 Oct 2026, evening)
+
+1. **The KV token** (A9), then `docker compose up -d`: the edge gets warnings, fires, storms and FloodWatch's lines.
+   *Done when* `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live` exits 0.
+2. **Real phones in LINE, and a tablet** (A4): the device study's §5 list.
+3. **The archive on cron** (`research/archive_forecasts.mjs`, daily): C6 and the dust chance scored as issued, and the
+   orange and red verdict days counted after D1.
+4. **The D8 redesign** after the owner's yes: one release with its own visitor audit ([ux study §2](research/ux-d8-d1-d9-incidents-2026-10-24.md#2-d8-the-redesign)).
+5. **D11's words and link** after the owner's yes ([OWNER_ACTIONS D11](OWNER_ACTIONS.md#d-decisions)).
+6. **The upstream rule's record outside Hat Yai:** log each A/B firing and what the gauge downstream did (from
+   FloodWatch's history); lift A to เตรียมตัว elsewhere only with a record like the U-Taphao's.
+7. **FloodWatch's file, leaner:** the lead-time study's additions (`c12`, the bank bands, `rid_age`) and the upstream links
+   filtered at the collector; measure page weight first (KI-040).
+
 ## v0.4: live (owner first, then AI-ready)
 
 0. ✅ **The risk server** (A12; `autobahn-bot`, D-045): preflight with no ❌, the stack healthy (24 Oct 2026).
-1. **Go live at risk.autobahn.bot** (A9, A10; 24 Oct: refused for want of *Workers Scripts: Edit*; [CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)): new tokens, `npm run cf:setup`, the collector on the risk server, `npm run cf:deploy`. *Done when* the URL answers from the edge, `data/live/index.json` there is under 15 min old, and the warning, fire and storm tiles show data.
+1. ✅ **Go live at risk.autobahn.bot** (A10 done 24 Oct 2026, 20:13 UTC; the live files wait for A9's KV token; [CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)): new tokens, `npm run cf:setup`, the collector on the risk server, `npm run cf:deploy`. *Done when* the URL answers from the edge, `data/live/index.json` there is under 15 min old, and the warning, fire and storm tiles show data.
 2. **Air4Thai from the risk server** (A6): 173 stations from FloodWatch's server on 23 Oct; measure it again on the new host.
 3. **Real-phone test** inside LINE (A4). *Done when* the 12 tasks of the UX scout's script pass on an Android and an iPhone.
-4. **FloodWatch CORS** for `/api/point` and `/api/geocode` (B1, B2), then flip `public/config.json`. *Done when* the flood tile names FloodWatch as its source for a Bangkok point.
+4. ✅ **FloodWatch as the flood tile's source for a Bangkok point** (0.6.0, through the collector; CORS no longer needed for
+   `/api/point`). `/api/geocode` CORS (B2) still open.
 
 ## v0.4 also: what the audits left (AI-ready)
 
@@ -34,7 +56,7 @@ In order. Each item names its known issue and audit finding.
 3b. **The rain level and its word** (KI-030, after the owner's D7).
 4. **Thai place names and units in Thai mode** (KI-024, V12). *Done when* no Latin capitals appear in a Thai quake line, and dust reads "มคก./ลบ.ม.".
 5. **Search that finds local names** (KI-012, V19): bias Photon by the last place, expand "ม.", a landmark list. *Done when* "ม.เชียงใหม่" and "นิมมาน" find Chiang Mai University and the road.
-6. **The flood line that contradicts itself** (KI-008, V17). *Done when* the tile names its gauge and a river line with 1 m or more of freeboard carries no "ใกล้ล้นตลิ่ง".
+6. ✅ **The flood line that contradicts itself** (KI-008, V17; the last "91 %" reason line went in 0.6.0). *Done when* the tile names its gauge and a river line with 1 m or more of freeboard carries no "ใกล้ล้นตลิ่ง".
 7. **The polish list** (KI-027): tap widths, rem sizes, line breaks, one name per hazard, saved places, at-risk dust lines (from บ้านรอดไหม's `kit.json → air`), a retry, the welcome screen with TMD's notices.
 8. **Fixtures for bad days** (KI-020): a wet, a smoky, a warning and a felt-quake state for the smoke walk, from the visitor audit's states.
 
@@ -65,8 +87,9 @@ From [SERVER.md §6](SERVER.md#6-what-to-build-on-the-server-next):
    Provisional, like the damped ratio. And a link to PCD's 7-day forecast image.
 3. **Score C6 and the PM2.5 chance as issued** from `research/archive_forecasts.mjs` (daily cron): end of November, March.
 4. ✅ **The prediction studies** (0.5.0): see CHANGELOG 0.5.0 and FRANK_FEEDBACK §8.
-5. **The measured path for floods** (KI-039, the Hat Yai hindcast): the collector's province rain and level files
-   (SERVER §6.4), a measured 3-day rain line, FloodWatch's upstream line (B5). *Done when* a replay of 19–26 Nov 2025
+5. **The measured path for floods** (KI-039, the Hat Yai hindcast): ✅ a measured 3-day rain line and Hat Yai's red flag,
+   ✅ FloodWatch's gauges and upstream lines (0.6.0); still: the collector's province rain files so a flood-night crowd
+   doesn't each call ThaiWater. *Done when* a replay of 19–26 Nov 2025
    shows the page at ทำทันที from measurements before the first Extreme phone alert.
 6. **Archive for the next tests:** GWIS fire danger and PCD's forecast images from December; HII's flash-flood list
    daily; then the fire-weather line and a 3-day rain chance can be scored as issued.

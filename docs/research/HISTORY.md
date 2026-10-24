@@ -238,3 +238,23 @@ forecasts), and the Hat Yai flood of late 2025.
 | D-050 | **A dust-day chance, Dec–Apr, from a station, provisional** | it beat climatology and persistence on disjoint stations in two seasons; it adds words, not levels | MODELS §2.1, KI-038 |
 | D-051 | **No earthquake chance of our own; the law's zones, Android's alerts and the prediction wording ship; the Bangkok term on land only** | aftershock chances had no skill over the base rate here; the zones are the law's words; the term was fitted on crustal quakes | MODELS §5.1, OWNER_ACTIONS D11 |
 | D-052 | **After Hat Yai: say the size can be far bigger, and who alerts and orders; build the measured path** | the forecast was 3.5–4.7× short; no tested trigger did better; measured rain would have led the Extreme alert by ~45 h | MODELS §3.2, KI-039 |
+
+## 9. Live, FloodWatch's gauges, the DOH's heat colours (24 Oct 2026, ≈ 20:10–21:30 UTC, 0.6.0)
+
+The owner updated the Cloudflare token, asked how this page can use FloodWatch's API, whether FloodWatch can warn Hat
+Yai 4–6 h ahead, how to step up warnings for a Hat Yai, whether this project has FloodWatch's VPN rotation, and for
+research and suggestions on D1, D8, D9 and D11 (with a simulated LINE and tablet test for A4). Four studies ran beside
+the build: [floodwatch-hatyai-leadtime](floodwatch-hatyai-leadtime-2026-10-24.md),
+[eq-d11](eq-d11-2026-10-24.md), [ux-d8-d1-d9-incidents](ux-d8-d1-d9-incidents-2026-10-24.md),
+[device-sim](device-sim-2026-10-24.md); the integration itself is [floodwatch-integration](floodwatch-integration-2026-10-24.md).
+
+| ID | Decision | Why | Where |
+|---|---|---|---|
+| D-053 | **Heat in the DOH's own colours** (เฝ้าระวัง → level 0, เตือนภัย 1, อันตราย 2, อันตรายมาก 3); the owner's D1, "if it is good you can show" | the DOH colours its bands green, yellow, orange, red; the page sat one step higher, so heat was orange on 94–100 % of Mar–Oct days and hid Hat Yai's rain signal on 14–18 Nov 2025; PM2.5 already followed PCD's colours this way | `levels.js`, KNOWLEDGE §2, ux study §3 |
+| D-054 | **FloodWatch through the collector** (`/api/stations`, `/api/risks` every 15 min → `floodwatch.json`); the flood tile reads FloodWatch's own rows while fresh, ThaiWater's otherwise | one fetch for the family; BMA's canals without CORS (KI-007); the page still judges gauges when FloodWatch is down | INTEGRATION §3, floodwatch-integration |
+| D-055 | **FloodWatch's look ahead only from the gauges that judge the point**, with its 30-day record; a forecast lifts to เตรียมตัว at most and says so in the tile's word | a sluice gate 12.6 km away turned Lat Phrao orange in the first version | KNOWLEDGE §6 |
+| D-056 | **This page's own upstream lines (A over its bank → เตรียมตัว on the U-Taphao, ติดตามไว้ elsewhere; B near its bank → ติดตามไว้; C more is coming)**, ranges of 2 × FloodWatch's lag "or sooner", and silence for stale, flagged, spiky or spurious links | at Hat Yai A caught 5 of 5 floods with 5 near-miss seasons in 30; measured X.90 → X.44 times were 0–11 h for a 6-h lag | `water.upstreamSignal`, lead-time §6 |
+| D-057 | **Measured rain over 2–3 days; more than 300 mm in 3 days lifts the rain tile to เตรียมตัว, named as Hat Yai's red flag** | the 24-h band can't show size; the city's own criterion came ~24 h before the flood in 2024 and 2025, 3 of 4 floods in 37 seasons, one false alarm (a near flood) | `rain3d.json`, KI-039 |
+| D-058 | **No VPN, no rotation** | every source answers this host (Germany); BMA's and RID's gauges come through FloodWatch's one Thai egress; rotating past ThaiWater's limit is the evasion both projects forbid | floodwatch-integration §5 |
+| D-059 | **"ข้างหน้า", "เปลี่ยนจากที่ดูครั้งก่อน" and a share text with its own time**, before any redesign | the hindcast's rain signal sat in a chip for two days; a forwarded message needs its time and source; the last look is kept on the phone by subdistrict code only | UX study §5, GUIDELINES §2 |
+| D-060 | **D11 stays words and links; the page computes no earthquake chance, and doesn't recompute USGS's for a place** (recommended; the wording is the owner's) | the generic model over-forecasts here (Brier skill −0.59 on 567 real-time quakes); a place's "may be felt" chance can't be checked in decades of Thai record; tides, monsoon, b-values, radon, animals and AI show no usable skill | eq-d11, OWNER_ACTIONS D11 |
