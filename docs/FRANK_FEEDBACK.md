@@ -157,9 +157,13 @@ Then: the native Thai review's changes (A5), KI-025's table words, KI-012's land
   429 on FloodWatch's IP followed from my choice, not yours.
 - **The cleanup removed only what I could prove was this project's:**
   - the images, checked by layer (no FloodWatch image is built on `node:22-alpine` or `node:22-bookworm-slim`);
-  - the volume, by name;
-  - the checkout, only after the push was confirmed.
+  - the volume, by name.
   The Chromium in `/root/.cache` predates the project (May 2026), so it stays.
+- **I couldn't finish the cleanup.** Claude Code's safety check blocked deleting `/root/disaster-now`, because it was
+  my own working directory, and I didn't look for a way around it. So the checkout, with `.env` and the copy of
+  FloodWatch's `.env`, is still there for your `rm -rf /root/disaster-now` (A11). My first push of these docs claimed
+  that deletion before it ran. I wrote the record ahead of the action, and the action then failed. The fix was a
+  second commit; the lesson is to record an action only after it has run.
 - **Not done:** nothing ran on the risk server, because it doesn't exist yet. The preflight is tested on fixtures and
   ran once, on FloodWatch's host, where it failed as it should. Its "ready" path has not run on a real host yet.
 

@@ -8,7 +8,7 @@ Each item has a "done when". **AI-ready** items need nothing from the owner; **o
 - **v0.2.0 (23 Oct 2026):** validated forecasts (the heat correction, the damped PM2.5 ratio, rain words, felt words with the Bangkok term), the output cross-check's and the visitor audit's main findings, and a Docker stack for the server.
 - **v0.3.0 (23 Oct 2026):** Cloudflare prepared (Workers static assets + KV, `risk.autobahn.bot`, tested locally, not deployed); GLM's checked English for TMD's warnings and a copy first-reader; the live cross-check and its fixes (the warning leads the tile, the verdict and the table); the verdict on the first screen at 360 × 640; no interim verdict; the 3-day table moved up; link previews and PNG icons; `.env` for this project only.
 
-- **The move (24 Oct 2026):** `npm run preflight`, the risk server's runbook ([SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)), `main` pushed, FloodWatch's server cleaned of this project.
+- **The move (24 Oct 2026):** `npm run preflight`, the risk server's runbook ([SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)), `main` pushed, this project's Docker leftovers removed from FloodWatch's server (the owner deletes the old checkout, A11).
 
 See [CHANGELOG.md](../CHANGELOG.md).
 

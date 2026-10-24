@@ -217,14 +217,16 @@ translations (OWNER_ACTIONS A5), and a phrase table for TMD's fixed instructions
   dedicated server for risk and replacing the Cloudflare token, which came from FloodWatch's `.env` (24 Oct).
 - **Done before leaving FloodWatch's server:**
   - everything was pushed to `main` and the work branch;
-  - this app's volume, images, checkout and both `.env` files were removed (SERVER §2.4);
+  - this app's Docker volume and images were removed (SERVER §2.4);
+  - **not done:** the checkout with both `.env` files, blocked by Claude Code's safety check on deleting the
+    agent's working directory: the owner's `rm -rf /root/disaster-now` (A11);
   - FloodWatch's containers, `.env` and tunnel were left untouched.
 - **Unknown until the risk server exists:** its Node version, its Chromium path, and whether Air4Thai (A6) and
   ThaiWater answer it.
 - **The guard:** `npm run preflight` fails on a host that runs FloodWatch's containers, and warns on any other app's
   containers or a `.env` with names this project doesn't read. Tests: `test/cloud.test.mjs` "preflight".
 
-**Next:** [OWNER_ACTIONS A12, A9, A10](OWNER_ACTIONS.md#a-to-go-live), runbook [SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
+**Next:** [OWNER_ACTIONS A11, A12, A9, A10](OWNER_ACTIONS.md#a-to-go-live), runbook [SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
 
 ## Fixed
 

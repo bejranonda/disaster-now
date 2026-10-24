@@ -77,7 +77,7 @@ The page itself still has **no server logic**:
 ### 2.2 The new `.env` (fresh, never copied)
 
 `cp .env.example .env && chmod 600 .env`, then fill in values issued **for this project**. The old server's `.env`
-held a Cloudflare token taken from FloodWatch's `.env`; it is being replaced, and that file was deleted with the old checkout.
+held a Cloudflare token taken from FloodWatch's `.env`; it is being replaced. Delete that file with the old checkout (A11).
 
 | Variable | Where it comes from |
 |---|---|
@@ -125,11 +125,16 @@ answers from it.
 
 ### 2.4 FloodWatch's server, cleaned up (24 Oct 2026)
 
-The session that wrote this did it, after pushing everything to GitHub:
-- **Removed, all of it this project's:**
+After pushing everything to GitHub, the session that wrote this:
+- **Removed** what was provably this project's:
   - the `disaster-now_live` volume (public data only);
-  - the images `disaster-now:local`, `node:22-alpine` and `node:22-bookworm-slim` (no FloodWatch image is built on them, checked by layer);
-  - the checkout `/root/disaster-now`, with its `.env` and `.env.floodwatch-original`.
+  - the images `disaster-now:local`, `node:22-alpine` and `node:22-bookworm-slim` (no FloodWatch image is built on
+    them, checked by layer);
+  - its own scratch files.
+- **Could not remove the checkout** `/root/disaster-now`, which still holds `.env` (the old token) and
+  `.env.floodwatch-original` (a full copy of FloodWatch's `.env`). Claude Code's safety check stops an agent from
+  deleting its own working directory, so this step is **the owner's** (OWNER_ACTIONS A11): `rm -rf /root/disaster-now`.
+  Nothing in it is lost: `main` on GitHub has every commit, and the `.env` values are re-issued on the risk server.
 - **Left alone:**
   - every `floodwatch-*` container;
   - FloodWatch's own `.env` and tunnel;

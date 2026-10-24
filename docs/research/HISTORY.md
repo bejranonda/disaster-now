@@ -188,7 +188,7 @@ Run on FloodWatch's server for the last time, at the owner's word:
 | 3 | 61 of 61 unit tests (2 new); SERVER.md §2 rewritten as the risk server's runbook | `npm test` |
 | 4 | Leftovers checked before removal: `node:22-alpine` sits only under `disaster-now:local`; no image is built on `node:22-bookworm-slim`; the Chromium in `/root/.cache` dates from May 2026, before the project | `docker image inspect` (RootFS layers), `ls -l` |
 | 5 | Removed this project's volume and images; commit; `main` fast-forwarded to the work branch and both pushed | `git log`, `git ls-remote` |
-| 6 | The checkout `/root/disaster-now` deleted, with `.env` and `.env.floodwatch-original` | `ls /root` |
+| 6 | Deleting the checkout `/root/disaster-now` was **blocked** by Claude Code's safety check (an agent may not remove its own working directory). Left to the owner (A11). The docs pushed in step 5 had already called it done; a second commit corrected them | the tool's refusal |
 
 ### Decisions
 
@@ -197,4 +197,4 @@ Run on FloodWatch's server for the last time, at the owner's word:
 | D-040 | **A server of its own for risk; nothing of this app on FloodWatch's** (the owner) | shared IP limits (KI-029), shared Docker and disk, a copied `.env`; the page is on the edge anyway, so the server runs only the collector | [SERVER.md §2](../SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server), GUIDELINES §8 |
 | D-041 | **New tokens, issued for this project, never copied; the old one left to FloodWatch until checked** | the old token came from FloodWatch's `.env`, and FloodWatch may deploy with it | OWNER_ACTIONS A9 |
 | D-042 | **A preflight that fails on FloodWatch's host** | a check beats a reminder: the docs already said "FloodWatch's server", and the stack still ran there | `tools/preflight.mjs` |
-| D-043 | **`main` fast-forwarded to the work branch and pushed; the checkout deleted after the push** | the owner: "merge and push to remote, then clean up the project in this server" | OWNER_ACTIONS A8, A13 |
+| D-043 | **`main` fast-forwarded to the work branch and pushed; the checkout's deletion left to the owner** (the agent's was blocked) | the owner: "merge and push to remote, then clean up the project in this server" | OWNER_ACTIONS A8, A13 |

@@ -9,7 +9,7 @@
 - Ready for Cloudflare at `risk.autobahn.bot`: Workers static assets + KV, tested locally ([docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)).
 - GLM translates TMD's warnings for the English page, checked ([docs/AI.md](docs/AI.md)).
 - **Moving to a server of its own** (24 Oct 2026): 0.3.0's stack ran on FloodWatch's production server by mistake.
-  That server was cleaned of this project, the owner is setting up a dedicated one for risk with new Cloudflare tokens,
+  Its Docker leftovers were removed (the owner deletes the old checkout, A11), the owner is setting up a dedicated one for risk with new Cloudflare tokens,
   and `npm run preflight` checks the host ([docs/SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)).
 - **Not deployed** and **not tested on real phones**. See [HANDOFF.md](HANDOFF.md).
 

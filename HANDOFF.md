@@ -24,9 +24,11 @@ Read this first, then [AGENTS.md](AGENTS.md).
   - **The owner's plan:** a dedicated server for risk, and a new Cloudflare token.
   - **Before leaving, the session:**
     - fast-forwarded `main` to the work branch and pushed both;
-    - removed everything of this project from FloodWatch's server: its volume, its images, the checkout and both
-      `.env` files ([SERVER §2.4](docs/SERVER.md#24-floodwatchs-server-cleaned-up-24-oct-2026));
+    - removed this project's Docker volume and images from FloodWatch's server ([SERVER §2.4](docs/SERVER.md#24-floodwatchs-server-cleaned-up-24-oct-2026));
     - left FloodWatch untouched.
+  - **Still on FloodWatch's server: the checkout `/root/disaster-now`, with `.env` and `.env.floodwatch-original`.**
+    Claude Code's safety check blocked the agent from deleting its own working directory. Run
+    `rm -rf /root/disaster-now` there (A11).
   - **Nothing of this app runs anywhere now.** The new server's runbook is [SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
     `npm run preflight` says when a host is ready, and fails on FloodWatch's.
 - **Checks, 24 Oct 2026 ≈ 06:50 UTC, on FloodWatch's server before the cleanup:**
@@ -40,6 +42,8 @@ Read this first, then [AGENTS.md](AGENTS.md).
 
 ## 2. What the owner has to do ([docs/OWNER_ACTIONS.md](docs/OWNER_ACTIONS.md))
 
+0. **A11: on FloodWatch's server, `rm -rf /root/disaster-now`.** Everything is on GitHub. That removes the last
+   copy of FloodWatch's `.env` made for this project and the old token.
 1. **A12: set up the risk server** ([SERVER.md §2.3](docs/SERVER.md#23-install-and-go-live)).
    - Clone `main` and write a fresh `.env` ([§2.2](docs/SERVER.md#22-the-new-env-fresh-never-copied): where each value comes from).
    - Run `npm run preflight`, then `npm ci && npm test` and the walk.

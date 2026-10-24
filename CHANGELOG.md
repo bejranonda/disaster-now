@@ -27,8 +27,9 @@
 - **Comments** in `.env.example` (fresh on every server; a GLM key of its own), `docker-compose.yml` and `tools/cf-deploy.mjs`.
 - **Git and cleanup:**
   - `main` was fast-forwarded to the work branch, and both were pushed.
-  - Then FloodWatch's server was cleaned of this project: the volume, the images, the checkout and both `.env` files.
-  - FloodWatch was left untouched.
+  - Then this project's Docker volume and images were removed from FloodWatch's server; FloodWatch was left untouched.
+  - The checkout itself (with `.env` and `.env.floodwatch-original`) is the owner's to delete: Claude Code's safety
+    check stops an agent from removing its own working directory (A11).
 
 ## 0.3.0 (23 Oct 2026, not deployed): Cloudflare-ready at risk.autobahn.bot, GLM English for TMD's warnings, the live cross-check's fixes
 
