@@ -14,7 +14,7 @@ import { gzipSync } from "node:zlib";
 const ROOT = fileURLToPath(new URL("../public/", import.meta.url));
 const TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8",
   ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml", ".webmanifest": "application/manifest+json",
-  ".png": "image/png", ".txt": "text/plain; charset=utf-8" };
+  ".png": "image/png", ".txt": "text/plain; charset=utf-8", ".woff2": "font/woff2" };
 const COMPRESS = /^(text\/|application\/(json|manifest\+json)|image\/svg)/;
 
 /** Cloudflare's `_headers` format: a path line (`/*`, `/data/live/*`, `/exact`), then indented `Name: value` lines.

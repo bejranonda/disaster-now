@@ -1,16 +1,15 @@
 // The page: choose a point (GPS, search, a saved place or a #p= link), fetch every source in parallel, and draw
 // the cards as each answer arrives. All judgement is in assess.js; this file only fetches and draws.
 
-import { inThailand, nearestTambon, placeLabel, rounded } from "./geo.js";
+import { inThailand, nearestTambon, placeLabel, placeParts, rounded } from "./geo.js";
 import { get, urls, SOURCES, liveFresh } from "./sources.js";
-import { assess, timeText, localOf, shareMessage, changesSince, lookOf } from "./assess.js";
+import { assess, timeText, localOf, shareMessage, changesSince, lookOf, listLevel } from "./assess.js";
 import { localSearch, hitLabel, hitPlace, osmSearch, loadPlaces, savePlace, removePlace } from "./places.js";
-import { STR, makeT, PRE_WHAT, PRE_ICON } from "./i18n.js";
+import { makeT } from "./i18n.js";
 import { scale } from "./levels.js";
-import { dayName } from "./assess.js";
 import { IPE } from "./ipe.js";
 
-export const VERSION = "0.6.0";
+export const VERSION = "0.7.0";
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LV = (l) => (l == null || l < 0 ? "none" : scale(l).key);
@@ -176,6 +175,7 @@ async function load() {
   $("#welcome").hidden = true;
   document.documentElement.classList.remove("opening");
   $("#report").hidden = false;
+  $("#report-head").hidden = false;
   $(".finder").classList.add("has-place");
   renderPlace();
   render(true);
@@ -222,6 +222,42 @@ function schedule() {
 }
 
 // ---------- drawing ----------
+// ---------- drawing helpers (0.7.0: this site's icons and its staff-gauge level glyph, no emoji in the interface) ----------
+/** A symbol from index.html's sprite. */
+const svg = (id, cls = "") => `<svg class="ic${cls ? ` ${cls}` : ""}" aria-hidden="true"><use href="#${id}"/></svg>`;
+const ICON = { heat: "i-heat", pm25: "i-pm25", air: "i-air", uv: "i-uv", rain: "i-rain", flood: "i-flood", wind: "i-wind",
+  landslide: "i-landslide", quake: "i-quake", fire: "i-fire" };
+const icon = (id) => svg(ICON[id] || "i-info");
+const PROFILE_ICON = { "📐": "i-place", "〰️": "i-quake", "🏢": "i-quake", "⛰️": "i-landslide", "🌊": "i-flood" };
+/** The staff gauge: a water-level pole filled from the bottom (blue, yellow, orange, red) up to the level, so a level
+ *  reads by height as well as colour; dashed and empty for no data. Its word is its label for screen readers. */
+const gauge = (l, big = false) => `<span class="gauge g${l == null || l < 0 ? "n" : Math.min(3, l)}${big ? " big" : ""}" role="img" aria-label="${esc(l == null || l < 0 ? t("noData") : scale(l)[lang])}"><i></i><i></i><i></i><i></i></span>`;
+/** A data line or cell that starts with an emoji (assess.js keeps them: the share text goes to LINE as plain text) is
+ *  drawn with this site's icon instead. */
+const LEAD = [["📈", "i-trend"], ["⬆️", "i-up"], ["⚠️", "i-notice"], ["📱", "i-mobile"], ["📢", "i-notice"]];
+function rich(s) {
+  const str = String(s ?? "");
+  for (const [e, id] of LEAD) if (str.startsWith(e)) return `${svg(id, "lead")}${esc(str.slice(e.length).trimStart())}`;
+  return esc(str);
+}
+let infoSeq = 0;
+/** ⓘ: a source or method one tap away (touch has no hover): a button that shows the text under its line. */
+function info(text, { html = false, label = t("whereFrom") } = {}) {
+  const id = `info-${++infoSeq}`;
+  return { btn: `<button type="button" class="info" aria-expanded="false" aria-controls="${id}">${svg("i-info")}<span class="sr-only">${esc(label)}</span></button>`,
+    box: `<div class="info-text" id="${id}" hidden>${html ? text : esc(text)}</div>` };
+}
+/** A value that comes from a model, not a measurement, says so on the row and the hero (GUIDELINES rule 3; redesign
+ *  audit R10): the forecast hazards, CAMS's UV, GISTDA's or CAMS's dust when no PCD station leads. */
+function faceTag(c, { calmToo = false } = {}) {
+  // on the row face only where a model value asks for attention; a calm row keeps it in its sources (less ink)
+  if (!c || c.level < 0 || c.official || (!calmToo && c.level < 1)) return "";
+  if (["heat", "rain", "wind"].includes(c.id) && c.src.some((x) => x.model)) return t("tagForecast");
+  if (c.id === "uv") return t("tagModel");
+  if ((c.id === "pm25" || c.id === "air") && c.src[0]?.model) return t("tagEstimate");
+  return "";
+}
+
 function renderPlace() {
   const p = current;
   const label = p.place ? placeLabel(p.place, lang) : "";
@@ -232,16 +268,23 @@ function renderPlace() {
   // U17 (GUIDELINES §2): coordinates only for a searched public place, never for a GPS fix or a saved place (a "บ้าน"
   // screenshot travels in family groups), nor for a subdistrict, whose name says where it is
   const showXY = p.source === "search";
-  $("#place-name").textContent = named || label || (showXY ? xy : "");
+  // the subdistrict as the title and its district and province under it: the whole label wrapped to three lines at 360 px
+  const [tName, tRest] = placeParts(p.place, lang);
+  $("#place-name").textContent = named || tName || (showXY ? xy : "");
   const acc = p.source === "gps" && p.acc ? ` (±${p.acc < 1000 ? `${Math.round(p.acc)} ${lang === "en" ? "m" : "ม."}` : `${(p.acc / 1000).toFixed(1)} ${lang === "en" ? "km" : "กม."}`})` : "";
-  $("#place-sub").innerHTML = esc([p.source === "gps" ? `📍 ${t("gpsLabel")}${acc}` : "", named ? `${t("nearT")} ${label}` : "",
-    showXY ? xy : ""].filter(Boolean).join(" · "))
-    + (p.source === "gps" ? ` · <button type="button" class="linkbtn" id="notthis">${esc(t("notThis"))}</button>` : "")
+  const parts = [named ? `${t("nearT")} ${label}` : tRest, showXY ? xy : ""].filter(Boolean).map(esc);
+  $("#place-sub").innerHTML = (p.source === "gps" ? `<span class="gpsl">${svg("i-locate")} ${esc(`${t("gpsLabel")}${acc}`)}</span>${parts.length ? "<br>" : ""}` : "")
+    + parts.join(", ")
+    + (p.source === "gps" ? ` <button type="button" class="linkbtn" id="notthis">${esc(t("notThis"))}</button>` : "")
     // an approximate fix (Android "Approximate", iOS "Precise: Off", ±5 km) can name the wrong subdistrict (T14, KI-006)
-    + (p.source === "gps" && p.acc > 2000 ? `<br><span class="small">${esc(t(inLine() ? "approxLine" : "approx"))}</span>` : "");
+    + (p.source === "gps" && p.acc > 2000 ? `<br>${esc(t(inLine() ? "approxLine" : "approx"))}` : "");
   $("#notthis")?.addEventListener("click", () => { openFinder(); say(t("pickYourself")); });
   const saved = loadPlaces().some((x) => Math.abs(x.lat - p.lat) < 0.001 && Math.abs(x.lon - p.lon) < 0.001);
-  $("#save").innerHTML = `${saved ? "★" : "☆"} <span>${esc(saved ? t("saved") : t("save"))}</span>`;
+  const sv = $("#save");
+  sv.dataset.saved = saved ? "1" : "";
+  sv.setAttribute("aria-pressed", String(saved));
+  sv.title = saved ? t("saved") : t("save");
+  sv.setAttribute("aria-label", sv.title);
   renderSaved();
 }
 
@@ -255,26 +298,45 @@ function render(first) {
   // early verdict from the first few sources was milder or about another hazard (KI-026, visitor audit V21)
   const settled = bundle.waitOver || (["ens", "aq"].every((k) => bundle[k] || bundle.errors[k]) && bundle.liveDone);
   if (!settled) {
-    vEl.className = "verdict lv-none";
-    vEl.innerHTML = `<div class="vtitle">${esc(t("loadingN", { n: r.cards.filter((c) => c.level >= 0).length, m: r.cards.length }))}</div>`;
-  } else vEl.className = `verdict lv-${first && v.level < 0 ? "none" : LV(v.level)}`;
-  const chip = (i) => `<a class="vchip lv-${LV(i.level)}" href="#card-${i.id}">${i.icon} ${esc(i.short)}: <b>${esc(i.word)}</b></a>`;
-  const head = v.worst ? `${v.worst.icon} ${esc(v.worst.short)}: ${esc(v.worst.word)}${v.worst.value ? ` · ${esc(v.worst.value)}` : ""}`
-    : v.warning ? `📢 ${esc(lang === "en" ? (v.warning.en?.checked ? v.warning.en.headline : v.warning.event) : v.warning.headline || v.warning.event)}` : v.level === 0 ? esc(t(v.complete ? "allQuiet" : "quietSoFar")) : "";
+    vEl.className = "hero lv-none hatch";
+    vEl.innerHTML = `<div class="hero-top">${gauge(-1, true)}<p class="vtitle">${esc(t("loadingN", { n: r.cards.filter((c) => c.level >= 0).length, m: r.cards.length }))}</p></div>`;
+  } else vEl.className = `hero lv-${first && v.level < 0 ? "none" : LV(v.level)}${v.level < 0 ? " hatch" : ""}`;
+  const warnHead = (w) => (lang === "en" ? (w.en?.checked ? w.en.headline : w.event) : w.headline || w.event);
+  const worstCard = v.worst ? r.cards.find((c) => c.id === v.worst.id) : null;
+  const wTag = faceTag(worstCard);
+  // a forecast alone tops out at เตรียมตัว: said where "ระดับอันตราย" sits beside "เตรียมตัว" (redesign audit R11)
+  const capTip = wTag && wTag === t("tagForecast") ? info(t("capNote"), { label: t("whyLevel") }) : null;
+  const head = v.worst ? `<p class="vhead">${icon(v.worst.id)}<span>${esc(v.worst.short)}: ${esc(v.worst.word)}${v.worst.value ? `<br><span class="vval">${esc(v.worst.value)}</span>` : ""}${wTag ? ` <span class="tag">${esc(wTag)}</span>` : ""}</span>${capTip ? capTip.btn : ""}</p>${capTip ? capTip.box : ""}`
+    : v.warning ? `<p class="vhead">${svg("i-notice")}<span>${esc(warnHead(v.warning))}</span></p>`
+      : v.level === 0 ? `<p class="vhead"><span>${esc(t(v.complete ? "allQuiet" : "quietSoFar"))}</span></p>` : "";
   // U11: the verdict is an aria-live region; it was rewritten 12 times in 14 s on one load. It is busy (silent) until
   // settled, and rewritten only when its text changes
   vEl.setAttribute("aria-busy", settled ? "false" : "true");
-  const vHtml = !settled ? null : first && v.level < 0 ? `<div class="vtitle">${esc(t("loading"))}</div>`
-    : `<div class="vtop"><span class="meter" aria-hidden="true">${meter(v.level)}</span><span class="vname">${esc(v.name)}</span></div>`
-      + (head ? `<div class="vhead">${head}</div>` : "")
-      // the worst coming day when it is above the verdict: words and dots, never the verdict's colour (UX study §5.2)
-      + (v.ahead ? `<div class="vahead"><span class="muted small">${esc(t("aheadL"))}</span> ${v.ahead.icon} ${esc(v.ahead.text)} <span class="meter small" aria-label="${esc(scale(v.ahead.level)[lang])}">${meter(v.ahead.level)}</span></div>` : "")
-      + (v.action ? `<div class="vact">👉 ${esc(v.action.text)} <span class="muted small">(${esc(v.action.src.map((x) => x.kind === "official" ? t("official") : t("news")).filter((x, i, a) => a.indexOf(x) === i).join(", "))})</span></div>` : "")
+  infoSeq = 0;
+  let vHtml = null;
+  if (settled && first && v.level < 0) vHtml = `<div class="hero-top">${gauge(-1, true)}<p class="vtitle">${esc(t("loading"))}</p></div>`;
+  else if (settled) {
+    const actSrc = v.action ? info(`${t("whereFrom")}: ${v.action.src.map((x) => (x.kind === "official" ? t("official") : t("news"))).filter((x, i, a) => a.indexOf(x) === i).join(", ")}`) : null;
+    const body = [
+      v.action ? `<p class="vact"><span class="do" aria-hidden="true"></span><span>${esc(v.action.text)}</span>${actSrc.btn}</p>${actSrc.box}` : "",
       // a mask line never goes out without the under-2 line (บ้านรอดไหม F129; cross-check H1)
-      + (v.action?.baby ? `<div class="vact baby">👶 ${esc(v.action.baby.text)}</div>` : "")
-      + (v.others.length ? `<div class="vchips"><span class="muted small">${esc(t("alsoL"))}</span>${v.others.map(chip).join("")}</div>` : "")
-      + (v.missing.length ? `<div class="vmiss">${esc(t("missing"))} ${esc(v.missing.join(", "))}</div>` : "");
+      v.action?.baby ? `<p class="vact baby"><span class="do" aria-hidden="true"></span><span>${esc(v.action.baby.text)}</span></p>` : "",
+      // the other hazards at the verdict's level, named (0.6.0's "เรื่องอื่น"; redesign audit R3)
+      (() => {
+        const same = v.level >= 1 ? v.others.filter((o) => o.level === v.level) : [];
+        return same.length ? `<p class="vmore">${esc(t("alsoSame"))} ${same.map((o) => `<b>${esc(o.short)}</b> ${esc(o.word)}`).join(", ")}</p>` : "";
+      })(),
+      // the worst coming day when it is above the verdict, or another hazard reaching it: words and the gauge, never the
+      // verdict's colour (UX study §5.2)
+      v.ahead ? `<p class="vahead">${svg("i-ahead")}<span>${esc(t("aheadL"))} <b>${esc(v.ahead.text)}</b></span>${gauge(v.ahead.level)}</p>` : "",
+      // missing is never calm: named here, and where to look for unchecked warnings said in full (redesign audit R4)
+      v.missing.length ? `<p class="vmiss">${gauge(-1)}<span>${esc(t("missing"))} ${esc(v.missing.join(", "))}${!bundle.warnings && bundle.liveDone ? ` (${esc(t("warnLook"))})` : ""}</span></p>` : "",
+    ].filter(Boolean).join("");
+    vHtml = `<div class="hero-top">${gauge(v.level, true)}<div><p class="vname">${esc(v.name)}</p>${head}</div></div>`
+      + (body ? `<div class="hero-body">${body}</div>` : "");
+  }
   if (vHtml != null && vHtml !== lastVerdict) { vEl.innerHTML = vHtml; lastVerdict = vHtml; }
+  else if (vHtml == null) lastVerdict = null;
   // what changed since the last look at this subdistrict: read the last look once per load, store this one once settled
   const code = current?.place?.code;
   if (settled && code && v.level >= 0 && seen) {
@@ -283,82 +345,87 @@ function render(first) {
   }
   const ch = settled && seen?.prev ? changesSince(seen.prev, r) : [];
   const chEl = $("#changes");
-  if (chEl) {
-    chEl.hidden = !ch.length;
-    chEl.innerHTML = ch.length ? `<span class="muted small">${esc(t("changedSince", { t: timeText(localOf(seen.prev.at), bundle.now, lang) }))}</span> `
-      + ch.map((x) => `<span class="chg">${x.icon} ${esc(x.short)} ${esc(scale(x.from)[lang])} ${x.to > x.from ? "↑" : "↓"} <b>${esc(scale(x.to)[lang])}</b></span>`).join(" · ") : "";
-  }
-  else if (vHtml == null) lastVerdict = null;
-  // tiles: every hazard at a glance, in a fixed order
-  $("#tiles").innerHTML = r.cards.map((c) => `<a class="tile lv-${LV(c.level)}" href="#card-${c.id}">
-      <span class="tt"><span aria-hidden="true">${c.icon}</span> ${esc(c.short)}</span>
-      <span class="tw">${esc(c.level < 0 ? (c.error ? t("failed") : t("noData")) : c.word || "")}</span>
-      ${c.value && c.level >= 0 ? `<span class="tv">${esc(c.value)}</span>` : ""}
-      <span class="meter" aria-label="${esc(c.level < 0 ? t("noData") : scale(c.level)[lang])}">${meter(c.level)}</span></a>`).join("");
-  // official warnings
+  chEl.hidden = !ch.length;
+  chEl.innerHTML = ch.length ? `${svg("i-changed")}<span>${esc(t("changedSince", { t: timeText(localOf(seen.prev.at), bundle.now, lang) }))} `
+    + ch.map((x) => `<span class="chg">${esc(x.short)} ${esc(scale(x.from)[lang])} ${x.to > x.from ? "↑" : "↓"} <b>${esc(scale(x.to)[lang])}</b></span>`).join(", ") + "</span>" : "";
+  // official warnings: TMD's own words lead, under the hero
   const when = (iso) => (iso && !Number.isNaN(Date.parse(iso)) ? timeText(localOf(Date.parse(iso)), bundle.now, lang) : "");
   $("#warnings").innerHTML = r.warnings.map((w) => {
     // English page: the collector's checked machine translation when there is one (docs/AI.md §2), else TMD's Thai
     const en = lang === "en" && w.en?.checked ? w.en : null;
-    return `<div class="warn lv-${LV(w.level)}"><b>${esc(t("officialNow"))}</b><br>`
-      + `${esc(en ? en.headline || w.event : lang === "en" ? `${w.event || ""} (in Thai)` : w.headline || w.event)}`
-      + `<br><span class="small">${w.sent ? `${esc(t("issued"))} ${esc(when(w.sent))}` : ""}${w.expires ? ` · ${esc(t("until"))} ${esc(when(w.expires))}` : ""}</span>`
+    return `<div class="warn lv-${LV(w.level)}"><p class="warn-h">${svg("i-notice")}${esc(t("officialNow"))}</p>`
+      + `<p><b>${esc(en ? en.headline || w.event : lang === "en" ? `${w.event || ""} (in Thai)` : w.headline || w.event)}</b></p>`
+      + `<p class="small muted">${w.sent ? `${esc(t("issued"))} ${esc(when(w.sent))}` : ""}${w.expires ? `, ${esc(t("until"))} ${esc(when(w.expires))}` : ""}</p>`
       + `${(en ? en.instruction : w.instruction) ? `<p>${esc(en ? en.instruction : w.instruction)}</p>` : ""}`
       + `${(en ? en.description : w.description) ? `<details><summary>${esc(t(en ? "readNoticeEn" : "readNotice"))}</summary><p class="small">${esc(en ? en.description : w.description)}</p></details>` : ""}`
-      + (en ? `<p class="small muted mt">🤖 ${esc(t("machineTr"))}</p><details lang="th"><summary>${esc(t("thaiOriginal"))}</summary><p class="small">${esc([w.headline, w.instruction, w.description].filter(Boolean).join("\n\n"))}</p></details>` : "")
+      + (en ? `<p class="small muted mt">${esc(t("machineTr"))}</p><details lang="th"><summary>${esc(t("thaiOriginal"))}</summary><p class="small">${esc([w.headline, w.instruction, w.description].filter(Boolean).join("\n\n"))}</p></details>` : "")
       // TMD's warnings page in the page's language: the CAP item's link is a raw XML file (visitor audit U10)
-      + `<a class="how" href="${esc(lang === "en" ? TMD_WARNINGS_EN : TMD_WARNINGS)}" target="_blank" rel="noopener">${esc(t("fullNotice"))} →</a></div>`;
-  }).join("")
-    + (bundle.warnings || !bundle.liveDone ? "" : `<div class="warn lv-none">${esc(t("warnUnknown"))}</div>`);
-  // pre-warnings
-  const pre = r.pre.filter((x) => PRE_WHAT[x.hazard]?.[x.level]);
-  $("#pre-wrap").hidden = !bundle.ens && !pre.length;
-  const official = r.warnings.map((w) => `<li class="lv-${LV(w.level)}">📢 ${esc(lang === "en" ? `TMD: ${w.en?.checked ? w.en.headline : w.event || ""}` : `กรมอุตุฯ: ${w.headline || w.event}`)}${w.expires ? ` · ${esc(t("until"))} ${esc(when(w.expires))}` : ""}</li>`).join("");
-  $("#pre").innerHTML = official + (pre.length ? pre.map((x) => {
-    const what = PRE_WHAT[x.hazard][x.level][lang];
-    const date = x.date || r.outlook[x.day]?.date;
-    const day = date ? dayName(x.day, date, lang, bundle.now) : "";
-    const key = x.chance != null ? "preItem" : "preItemNoP";
-    return `<li class="lv-${LV(x.tone ?? x.level)}">${esc(t(key, { icon: PRE_ICON[x.hazard], what, day, p: x.chance != null ? chancePct(x.chance) : "" }))}</li>`;
-  }).join("") : official ? "" : `<li class="lv-ok">${esc(t("preNone"))}</li>`);
-  // detail cards in the same fixed order as the tiles
-  $("#cards").innerHTML = r.cards.map(cardHtml).join("");
-  // outlook table
+      + `<a class="how" href="${esc(lang === "en" ? TMD_WARNINGS_EN : TMD_WARNINGS)}" target="_blank" rel="noopener">${esc(t("fullNotice"))}${svg("i-ext")}</a></div>`;
+  }).join("");
+  // every hazard, sorted by concern (the owner, 25 Oct 2026), grouped: needs attention, no data (never calm), calm.
+  // A row opens in place; rows the visitor opened stay open when new answers redraw the list
+  const open = new Set([...document.querySelectorAll("#cards details[open]")].map((d) => d.id));
+  // grouped by the scale's own words, each row by the worse of today and its coming days (redesign audit R1, R5); until
+  // the sources have settled the rows keep the fixed order with no groups, so nothing jumps under a finger (R8)
+  const groups = [[3, (c) => listLevel(c) === 3], [2, (c) => listLevel(c) === 2], [1, (c) => listLevel(c) === 1],
+    [-1, (c) => listLevel(c) < 1 && c.level < 0], [0, (c) => listLevel(c) === 0]];
+  const word = (l) => (l < 0 ? t("noData") : scale(l)[lang]);
+  $("#cards").innerHTML = !settled ? r.cards.map((c) => rowHtml(c, open.has(`card-${c.id}`))).join("")
+    : groups.map(([l, f]) => {
+      const g = r.byConcern.filter(f);
+      return g.length ? `<h3 class="grp lv-${LV(l)}">${l >= 0 ? gauge(l) : gauge(-1)}<span>${esc(word(l))}</span><span class="n">${g.length}</span></h3>${g.map((c) => rowHtml(c, open.has(`card-${c.id}`))).join("")}` : "";
+    }).join("");
+  // the 3-day table, folded: the same graded cells as each row's days (assess.fcLevel)
   $("#outlook").innerHTML = r.outlook.length ? outlookHtml(r.outlook) : "";
-  // profile
+  $("#outlook-box").hidden = !r.outlook.length;
+  // the place's long-term profile, folded
   $("#profile-wrap").hidden = !r.profile.length;
-  $("#profile").innerHTML = r.profile.map((p) => `<li><span aria-hidden="true">${p.icon}</span> ${esc(p.text)}</li>`).join("");
+  $("#profile").innerHTML = r.profile.map((p) => `<li>${svg(PROFILE_ICON[p.icon] || "i-place")} ${esc(p.text)}</li>`).join("");
   const rp = rounded(current.lat, current.lon);
-  $("#updated").textContent = t("updated", { t: new Date(bundle.now).toLocaleTimeString(lang === "en" ? "en-GB" : "th-TH", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }), m: r.members || "–",
+  const anyData = r.cards.some((c) => c.level >= 0);
+  $("#updated").textContent = !anyData ? t("triedAt", { t: new Date(bundle.now).toLocaleTimeString(lang === "en" ? "en-GB" : "th-TH", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }) }) : t("updated", { t: new Date(bundle.now).toLocaleTimeString(lang === "en" ? "en-GB" : "th-TH", { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Bangkok" }), m: r.members || "–",
     p: current.source === "search" ? `${rp.lat.toFixed(2)}, ${rp.lon.toFixed(2)}` : t("roundedKm") }); // U17
 }
 
-/** ●●○○: the level counted in dots, so it reads without colour; dashes for no data. */
-const meter = (l) => (l == null || l < 0 ? "– – – –" : "●".repeat(l + 1) + "○".repeat(3 - Math.min(l, 3)));
-
-const chancePct = (p) => (p < 0.1 ? (lang === "en" ? "under 10%" : "ไม่ถึง 10%") : p > 0.9 ? (lang === "en" ? "over 90%" : "เกิน 90%") : `${Math.round(p * 10) * 10}%`);
-
-function cardHtml(c) {
+/** One hazard's row: its icon on a token tinted by its level, its name, the agency's word and the value, the gauge;
+ *  opened, the detail (the sourced action, the lines, the coming days, the method note, the sources, the links). */
+function rowHtml(c, isOpen) {
   const lv = LV(c.level);
-  const word = c.level < 0 ? (c.error ? t("failed") : STR.missing[lang].replace(":", "")) : c.word;
-  const days = c.days ? `<div class="days">${c.days.map((d) => `<span class="day lv-${LV(d.level)}"><b>${esc(d.name)}</b> ${esc(d.text)}${d.sub ? `<small>${esc(d.sub)}</small>` : ""}</span>`).join("")}</div>` : "";
-  const age = (s) => (s.ageH != null && s.ageH >= 1 ? ` <span class="old">⏱ ${esc(t("hoursOld", { h: Math.round(s.ageH) }))}</span>` : "");
-  const src = c.src.length ? `<div class="src">${esc(t("source"))}: ${c.src.map((s) => `${esc(s.name)}${s.time ? ` · ${esc(s.time)}` : ""}${age(s)}${s.model ? ` <span class="tag">${esc(t("model"))}</span>` : ""}`).join(" | ")}</div>` : "";
-  const links = [c.link && `<a class="how" href="${esc(c.link.href)}" target="_blank" rel="noopener">${esc(c.link.text)} →</a>`,
-    c.more && `<a class="how" href="${esc(c.more.href)}" target="_blank" rel="noopener">${esc(c.more.text)} →</a>`].filter(Boolean).join("");
-  return `<article class="card lv-${lv}" id="card-${c.id}">
-    <header><span class="ic" aria-hidden="true">${c.icon}</span><h3>${esc(c.title)}</h3><span class="pill lv-${lv}">${esc(word || "")}<span class="meter" aria-hidden="true">${meter(c.level)}</span></span></header>
-    ${c.value ? `<div class="val">${esc(c.value)}</div>` : ""}
-    ${c.action ? `<p class="act">👉 ${esc(c.action.text)}</p>` : ""}
-    ${c.action?.baby ? `<p class="act baby">👶 ${esc(c.action.baby.text)}</p>` : ""}
-    ${c.lines && c.lines.length ? `<ul class="lines">${c.lines.filter(Boolean).map((l) => `<li>${esc(l)}</li>`).join("")}</ul>` : ""}
-    ${c.error && c.level < 0 ? `<p class="muted small">${esc(t("failed"))} (${esc(errWord(c.error))})</p>` : ""}
+  // the heat band's "เตือนภัย" beside a TMD notice reads as an official warning (U9): named as a level, as in the hero
+  const word = c.level < 0 ? (c.error ? t("failed") : t("noData")) : c.id === "heat" && !c.official && c.word ? L2(`ระดับ${c.word}`, `${c.word} level`) : c.word || "";
+  const value = c.level >= 0 && c.value ? c.value : "";
+  const tag = faceTag(c);
+  // a coming day above today's level, on the row itself, named with its day and level (R1)
+  const badge = c.ahead && c.ahead.level > Math.max(c.level, 0)
+    ? `<span class="badge lv-${LV(c.ahead.level)}">${gauge(c.ahead.level)}${esc(c.ahead.official ? `${c.ahead.name} ${t("tmdShort")}` : `${c.ahead.name} ${scale(c.ahead.level)[lang]}`)}</span>` : "";
+  // UV's day peaks are information, not a level: no gauge, no colour (R2)
+  const dayCell = (d) => (d.info ? `<div class="day info"><span class="dn">${esc(d.name)}</span><span class="dv">${rich(d.text)}</span>${d.sub ? `<small>${esc(d.sub)}</small>` : ""}</div>`
+    : `<div class="day lv-${LV(d.level)}"><span class="dn">${esc(d.name)}</span><span class="dv">${gauge(d.level)}${rich(d.text)}</span>${d.sub ? `<small>${esc(d.sub)}</small>` : ""}</div>`);
+  const days = c.days?.length ? `<div class="days">${c.days.map(dayCell).join("")}</div>` : "";
+  const age = (s) => (s.ageH != null && s.ageH >= 1 ? ` <span class="old">${esc(t("hoursOld", { h: Math.round(s.ageH) }))}</span>` : "");
+  const mtag = (s) => (s.model && !/แบบจำลอง|model|ensemble/i.test(s.name) ? ` <span class="tag">${esc(t("model"))}</span>` : ""); // R9: never twice
+  const src = c.src.length ? `<p class="src">${esc(t("source"))}: ${c.src.map((s) => `${esc(s.name)}${s.time ? `, ${esc(s.time)}` : ""}${age(s)}${mtag(s)}`).join("; ")}</p>` : "";
+  // the method note and the sources: one real toggle at the end, as in the hero (R9)
+  const ref = c.note || src ? (() => { const x = info(`${c.note ? `<p class="note">${esc(c.note)}</p>` : ""}${src}`, { html: true, label: t("refH") });
+    return `<p class="refrow"><span>${esc(t("refH"))}</span>${x.btn}</p>${x.box}`; })() : "";
+  const links = [c.link && `<a class="how" href="${esc(c.link.href)}" target="_blank" rel="noopener">${esc(c.link.text)}${svg("i-ext")}</a>`,
+    c.more && `<a class="how" href="${esc(c.more.href)}" target="_blank" rel="noopener">${esc(c.more.text)}${svg("i-ext")}</a>`].filter(Boolean).join("");
+  return `<details class="card lv-${lv}" id="card-${c.id}"${isOpen ? " open" : ""}>
+    <summary class="row">${gauge(c.level)}<span class="token${c.level < 0 ? " hatch" : ""}">${icon(c.id)}</span>
+      <span class="row-main"><span class="row-name">${esc(c.title)}${badge}</span><span class="row-sub"><span class="w">${esc(word)}</span>${value ? `<span class="v">${esc(value)}</span>` : ""}${tag ? ` <span class="tag">${esc(tag)}</span>` : ""}</span></span>
+      ${svg("i-chev", "chev")}</summary>
+    <div class="detail">
+    ${c.action ? `<p class="act"><span class="do" aria-hidden="true"></span><span>${esc(c.action.text)}</span></p>` : ""}
+    ${c.action?.baby ? `<p class="act baby"><span class="do" aria-hidden="true"></span><span>${esc(c.action.baby.text)}</span></p>` : ""}
+    ${c.lines && c.lines.length ? `<ul class="lines">${c.lines.filter(Boolean).map((l) => `<li>${rich(l)}</li>`).join("")}</ul>` : ""}
+    ${c.error && c.level < 0 && !(c.lines || []).length ? `<p class="failnote">${esc(errWord(c.error))}</p>` : ""}
     ${days}
-    ${c.note ? `<p class="note">${esc(c.note)}</p>` : ""}
-    ${src}
     ${links ? `<div class="acts">${links}</div>` : ""}
-  </article>`;
+    ${ref}
+    </div>
+  </details>`;
 }
+const L2 = (th, en) => (lang === "en" ? en : th);
 
 /** A fetch error in words a visitor reads (not "timeout", "HTTP 500"). */
 function errWord(e) {
@@ -370,16 +437,16 @@ function errWord(e) {
 }
 
 function outlookHtml(rows) {
-  // the row's name says what a rain cell is ("โอกาสฝนหนัก"); the cell had "ฝนหนัก" twice under its word before 0.3.0
-  // dots under every value, and the level's word for screen readers: colour is never the only signal (KI-025)
-  const cell = (x) => (x ? `<td class="lv-${LV(x.level)}">${esc(x.text)}<small class="meter" aria-hidden="true">${meter(x.level)}</small>`
+  // the row's name says what a rain cell is ("โอกาสฝนหนัก"); a gauge in every cell and the level's word for screen
+  // readers: colour is never the only signal (KI-025)
+  const cell = (x) => (x && x.info ? `<td class="info"><span class="cell">${rich(x.text)}</span></td>` : x ? `<td class="lv-${LV(x.level)}"><span class="cell">${gauge(x.level)}${rich(x.text)}</span>`
     + `${x.level >= 0 ? `<span class="sr-only"> (${esc(scale(x.level)[lang])})</span>` : ""}</td>` : "<td class='lv-none'>–</td>");
   return `<table class="outlook"><thead><tr><th></th>${rows.map((r) => `<th>${esc(r.name)}</th>`).join("")}</tr></thead><tbody>
-    <tr><th>${esc(t("rowHeat"))}</th>${rows.map((r) => cell(r.heat)).join("")}</tr>
-    <tr><th>${esc(t("rowRain"))}</th>${rows.map((r) => cell(r.rain)).join("")}</tr>
-    <tr><th>${esc(t("rowPm"))}</th>${rows.map((r) => cell(r.pm25)).join("")}</tr>
-    <tr><th>${esc(t("rowUv"))}</th>${rows.map((r) => cell(r.uv)).join("")}</tr>
-    <tr><th>${esc(t("rowGust"))}</th>${rows.map((r) => cell(r.gust)).join("")}</tr>
+    <tr><th>${icon("heat")} ${esc(t("rowHeat"))}</th>${rows.map((r) => cell(r.heat)).join("")}</tr>
+    <tr><th>${icon("rain")} ${esc(t("rowRain"))}</th>${rows.map((r) => cell(r.rain)).join("")}</tr>
+    <tr><th>${icon("pm25")} ${esc(t("rowPm"))}</th>${rows.map((r) => cell(r.pm25)).join("")}</tr>
+    <tr><th>${icon("uv")} ${esc(t("rowUv"))}</th>${rows.map((r) => cell(r.uv)).join("")}</tr>
+    <tr><th>${icon("wind")} ${esc(t("rowGust"))}</th>${rows.map((r) => cell(r.gust)).join("")}</tr>
   </tbody></table>`;
 }
 
@@ -388,7 +455,7 @@ function renderSaved() {
   const list = loadPlaces();
   const el = $("#saved");
   el.hidden = !list.length;
-  el.innerHTML = list.map((p, i) => `<span class="sp"><button type="button" class="btn chip" data-i="${i}">⭐ ${esc(p.name)}</button><button type="button" class="x" data-x="${i}" aria-label="${esc(t("remove"))} ${esc(p.name)}">×</button></span>`).join("");
+  el.innerHTML = list.map((p, i) => `<span class="sp"><button type="button" class="chip" data-i="${i}">${svg("i-star")}${esc(p.name)}</button><button type="button" class="x" data-x="${i}" aria-label="${esc(t("remove"))} ${esc(p.name)}">×</button></span>`).join("");
   el.querySelectorAll("[data-i]").forEach((b) => b.addEventListener("click", () => { const p = list[+b.dataset.i]; choose({ ...p, source: "saved" }); }));
   el.querySelectorAll("[data-x]").forEach((b) => b.addEventListener("click", () => { removePlace(+b.dataset.x); renderSaved(); if (current) renderPlace(); }));
 }
@@ -401,8 +468,8 @@ async function onInput() {
   await loadTambon();
   const hits = localSearch(tambon, q);
   ul.hidden = false;
-  ul.innerHTML = hits.map((h, i) => `<li><button type="button" class="hit" data-i="${i}">📌 ${esc(hitLabel(h, lang))}</button></li>`).join("")
-    + `<li><button type="button" class="hit osm" id="osm">${esc(t("osmBtn", { q }))}</button><div id="osm-res"></div></li>`;
+  ul.innerHTML = hits.map((h, i) => `<li><button type="button" class="hit" data-i="${i}">${svg("i-place")}<span>${esc(hitLabel(h, lang))}</span></button></li>`).join("")
+    + `<li><button type="button" class="hit osm" id="osm">${svg("i-search")}<span>${esc(t("osmBtn", { q }))}</span></button><div id="osm-res"></div></li>`;
   ul.querySelectorAll(".hit[data-i]").forEach((b) => b.addEventListener("click", () => {
     const h = hits[+b.dataset.i];
     choose(hitPlace(h));
@@ -416,7 +483,7 @@ async function osm(q) {
   box.innerHTML = `<p class="muted">${esc(t("osmWait"))}</p>`;
   try {
     const res = await osmSearch(q, lang, fetch, await geocoderOrder());
-    box.innerHTML = res.length ? res.map((r, i) => `<button type="button" class="hit" data-o="${i}">📍 ${esc(r.name)} <span class="muted">${esc(r.area)}</span></button>`).join("") + `<p class="muted small">${esc(t("osmCredit"))}</p>`
+    box.innerHTML = res.length ? res.map((r, i) => `<button type="button" class="hit" data-o="${i}">${svg("i-search")}<span>${esc(r.name)} <span class="muted">${esc(r.area)}</span></span></button>`).join("") + `<p class="muted small">${esc(t("osmCredit"))}</p>`
       : `<p class="muted">${esc(t("osmNone"))}</p>`;
     box.querySelectorAll("[data-o]").forEach((b) => b.addEventListener("click", () => {
       const r = res[+b.dataset.o];
@@ -519,14 +586,25 @@ document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible" && current && Date.now() - lastLoad > 15 * 60e3) load();
 });
 window.addEventListener("hashchange", fromHash);
-// a tile or chip scrolls to its card and keeps the place's #t= in the address bar: "#card-pm25" there made LINE's own
-// Share send the welcome page (T9); the card takes focus so a screen reader follows
+// ⓘ: show or hide its text (touch has no hover, so no tooltips)
+document.addEventListener("click", (e) => {
+  const b = e.target.closest?.(".info");
+  if (!b) return;
+  e.preventDefault();
+  const box = document.getElementById(b.getAttribute("aria-controls"));
+  const on = b.getAttribute("aria-expanded") !== "true";
+  b.setAttribute("aria-expanded", String(on));
+  if (box) box.hidden = !on;
+});
+// a link to a hazard opens its row and scrolls to it, keeping the place's #t= in the address bar: "#card-pm25" there
+// made LINE's own Share send the welcome page (T9); the row takes focus so a screen reader follows
 document.addEventListener("click", (e) => {
   const a = e.target.closest?.('a[href^="#card-"]');
   if (!a) return;
   const el = document.getElementById(a.getAttribute("href").slice(1));
   if (!el) return;
   e.preventDefault();
+  if (el.tagName === "DETAILS") el.open = true;
   let still = false;
   try { still = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { /* old browsers */ }
   el.scrollIntoView({ block: "start", behavior: still ? "auto" : "smooth" });

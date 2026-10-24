@@ -2,11 +2,12 @@
 
 **State (24 Oct 2026, 20:13 UTC): deployed.** https://risk.autobahn.bot serves the page from Cloudflare's edge
 (Worker `disaster-now`, custom domain; versions `9b913164` = 0.5.0 at 20:13 UTC, `fc4b98b6` = 0.6.0 at 20:57,
-`0b47a297` = 0.6.0 with one flood-card fix at 21:05; [§3.2](#32-the-deploy-24-oct-2026-evening)).
-- **`/data/live/*` answers 404 on the edge**: the collector on `autobahn-bot` runs and writes its files, but
-  `CF_KV_TOKEN` is empty, so it uploads nothing to KV (KI-036, A9). The page then says it couldn't check TMD's warnings,
-  has no fire or storm data, and reads river gauges from ThaiWater only: honest, but less than it could show.
-- `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live` fails until the KV token is set.
+`0b47a297` = 0.6.0 with one flood-card fix at 21:05, `e8ef0130` = 0.7.0 (the redesign) at 22:08 UTC;
+[§3.2](#32-the-deploy-24-oct-2026-evening)).
+- **The live files are on the edge since 24 Oct 21:12 UTC:** the owner set a KV-only `CF_KV_TOKEN` (checked read-only:
+  it reads and writes the namespace, sees no zones or scripts, and is refused for DNS and deploys); the collector
+  uploads 7 files a run (8 when the hourly rain is due); `node tools/health.mjs --web https://risk.autobahn.bot/
+  --need-live` exits 0.
 
 ## 1. The recommendation, frankly
 

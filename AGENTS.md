@@ -4,16 +4,17 @@
 
 **ภัยรอบบ้าน · Thai Risk** (code name `disaster-now`; ภัยรอบบ้าน ตอนนี้ / Disaster Now until 0.3.0) is one Thai web page: share GPS or search a place, and see every hazard at that point now and for the next 3 days, with the agency's own words, the source and time of every number, one sourced action and a link to what to do. Heat, PM2.5 and other pollution, UV, rain, wind and storms, river level and flash floods, landslides, earthquakes, fires. Static files (`public/`), no server, no framework, no runtime packages; a collector (`tools/collect.mjs`) for the feeds a phone can't read. It is the third app of the owner (`bejranonda`), beside FloodWatch (`flood2026-research`, water) and บ้านรอดไหม (`Hazard-huntz`, what to do), and must agree with both ([docs/INTEGRATION.md](docs/INTEGRATION.md)).
 
-**State (24 Oct 2026, evening):** v0.6.0, **live at https://risk.autobahn.bot** ([FRANK_FEEDBACK §9](docs/FRANK_FEEDBACK.md#9-live-floodwatch-hat-yai-again-24-oct-2026-evening-060)):
-FloodWatch's own gauges through the collector, this page's upstream lines and Hat Yai's red-flag rain, heat in the
-DOH's colours (D1), "ข้างหน้า" and what changed since the last look.
+**State (25 Oct 2026):** v0.7.0, **live at https://risk.autobahn.bot** with its live files
+([FRANK_FEEDBACK §10](docs/FRANK_FEEDBACK.md#10-the-redesign-25-oct-2026-070)): the redesign (one hero, one list sorted by
+concern whose rows open in place, the staff gauge, the site's own icons and font), FloodWatch's gauges through the
+collector, this page's upstream lines and Hat Yai's red-flag rain, heat in the DOH's colours (D1).
 - Built, validated, and audited again in 0.4.0: an independent visitor audit, an output cross-check (139 of 144 numbers
   equal the sources) and a model check that found the heat line 3–4 °C hot in Nov–Feb (now C6 there, provisional;
   [docs/MODELS.md §1.1](docs/MODELS.md#11-the-model-check-of-24-oct-2026-and-what-040-changed)).
 - **The collector runs on `autobahn-bot`**, beside BrainPlatform's production stack (the owner's choice, D-045): never
   touch its `deploy-*` containers.
-- **Deployed** (`npm run cf:deploy`, 24 Oct 2026); the edge's `/data/live/*` waits for the collector's KV-only token
-  (OWNER_ACTIONS A9; [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)).
+- **Deployed** (`npm run cf:deploy`); the collector uploads its files to KV with its own KV-only token; the deploy
+  token is still broader than it needs to be (OWNER_ACTIONS A9; [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)).
 - **Simulated in LINE and on tablets, not tested on real phones** (A4). See [HANDOFF.md](HANDOFF.md).
 
 ## 2. Read in this order
@@ -61,6 +62,9 @@ DOH's colours (D1), "ข้างหน้า" and what changed since the last l
 - **Never invent a number, an endpoint or a safety line;** mark the unconfirmed **[unverified]**.
 - **The agency's word leads; the app's level is never milder than it;** the verdict is never milder than a tile; missing data is never calm; **a forecast alone tops out at เตรียมตัว**; an official warning lifts its tile.
 - **Measurements before models; ranges and chances, never countdowns; nothing predicts earthquakes** (and the page computes no earthquake chance of its own, nor recomputes an agency's for a place: D-060; the aftershock wording is the owner's D11).
+- **The list is sorted by concern** (each row by the worse of today and its coming days, grouped by the scale's words;
+  the verdict's colour stays today's); **the interface draws no emoji** (the site's icons and the staff gauge; data
+  words may keep theirs for the LINE share text); **a model value is tagged on its face** (D-061–D-063).
 - **The agency's own colours where it gives them** (D-053: heat follows the DOH's, PM2.5 PCD's); **FloodWatch's look ahead only from the gauges that judge the point, with its record; upstream lines say nothing on stale, flagged or spurious data** (D-055, D-056).
 - **The exact GPS fix never leaves the phone** (rounded to ~1 km for providers and links; no coordinates on screen for a GPS place); shared links carry a subdistrict code; no cookies, analytics or accounts; a server publishes files and keeps nothing about a person.
 - **Only validated forecast numbers, in validated words** (MODELS.md): never the raw heat index, never a rain amount as a forecast.

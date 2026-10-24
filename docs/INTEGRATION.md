@@ -114,9 +114,12 @@ couldn't check, never calm); Workers Paid is US$5 a month (the UX study §6).
 ## 5. One family, one look
 
 - **Link previews:** since 0.3.0 this page has Open Graph tags and a 1200 × 630 card (`public/og.png`, from
-  `tools/make-images.mjs`). In LINE the preview is what a family sees before anyone taps. Give FloodWatch and บ้านรอดไหม
+  `tools/make-images.mjs`; redrawn in 0.7.0 with the new mark, a house painted as the staff gauge, and the four levels as
+  gauges). In LINE the preview is what a family sees before anyone taps. Give FloodWatch and บ้านรอดไหม
   cards in the same layout (icon, Thai name, one line, the four level chips) and the family looks like one service.
 
+- **0.7.0's look is this app's, not yet the family's:** the staff gauge, the icons and Anuphan could be shared, but
+  only after D9 and real phones (A4); the four level colours themselves are unchanged (the family palette D9 proposes).
 - **The same four-level scale** in all three apps would help most. **Today the colours differ** (checked 24 Oct, X17):
   - FloodWatch: normal `#2f6fb0` and warning `#e46c0a` are this app's, but watch `#b58900` and critical `#c62828` are not
     (this app: `#F2E700`, `#B3122E`). An earlier version of this page said they "already match"; two of four don't.

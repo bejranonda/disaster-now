@@ -16,6 +16,10 @@ Four levels named by what to do, the same for every hazard ([UX scout §5a](rese
 
 The UX scout checked the palette by simulation (Machado 2009, CIEDE2000): smallest difference between any two fills 18.4 (tritan, orange vs crimson); label contrast 5.2–11.2 : 1. The orange is FloodWatch's warning orange. Never "ปลอดภัย".
 
+- **The page (0.7.0):** Anuphan Variable (Cadson Demak, SIL OFL 1.1; fontsource 5.2.8), Thai subset 18,924 B and Latin
+  35,036 B, every weight 100–700; an SVG sprite of 28 icons and the mark; Bangkok's fixture page about 2,600 px tall at
+  390 px (8,612 at 360 in 0.6.0); the hero ends at 491–505 px on a 360 × 640 LINE screen.
+
 ## 2. Bands, and who sets them
 
 From [research/thresholds-2026-10-23.md](research/thresholds-2026-10-23.md) (and its JSON), re-read where marked:

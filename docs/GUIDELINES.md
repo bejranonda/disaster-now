@@ -75,11 +75,35 @@ Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai 
 
 - **Phones first:** checked at 320 × 568 and 390 × 844, with ก+ (larger text), in light and dark mode; no horizontal scroll, **of the page or of the 3-day table inside its box** (0.3.0 hid tomorrow at 320 px with ก+, review S5); every tap target ≥ 44 px **wide and tall** (the smoke test measures both since 0.4.0; it measured height only and missed V28); text at 4.5:1 or more (U18).
 - **Walk the clock.** The fixture walk pins 02:50 in Bangkok, when every window still holds an afternoon. A change to anything with a day or a window is also walked in the evening (`npm run smoke` has an 18:30 page since 0.4.0) and read at noon: the evening's false "danger heat" (S6) lived from 0.2.0 to 0.4.0 because nobody looked after 16:00.
-- **Fixed tile order** (`assess.ORDER`): people learn where their tile is.
+- **The list is sorted by concern** (0.7.0, the owner's brief, D-061; `assess.byConcern`), **grouped by the scale's own
+  words**: each row by the worse of today's level and its coming days' (`assess.listLevel`; a coming day is a forecast,
+  so เตรียมตัว at most unless TMD's notice covers it), highest first; then no data (never calm, so above the calm ones);
+  then ยังไม่น่าห่วง; ties by today's level, then the fixed order (`assess.ORDER`). A row placed by a coming day says so
+  on its face ("พรุ่งนี้ เตรียมตัว"). **The verdict's colour stays today's.** Until the sources settle the rows keep the
+  fixed order with no groups (nothing moves under a finger). UV's day peaks are information, not a level (redesign
+  audit R1, R2, R5, R8).
+- **A model value says so on its face** where it asks for attention (ติดตามไว้ and above) and in the hero: "พยากรณ์",
+  "ค่าประมาณ", "แบบจำลอง" (rule 3; audit R10); every row's sources fold says it for the rest.
+- **ⓘ is always a button** that shows its text; never a decorative glyph (audit R9). `[hidden]` always wins over a
+  component's own `display`.
+- **Progressive disclosure, with a floor** (0.7.0, D-062): the first screen holds the place, the hero (the level, the
+  worst hazard in the agency's word and value, the sourced action, "ข้างหน้า", what is missing) and the start of the list.
+  A row opens in place for its lines, days, method note, sources and links; the 3-day table and the long-term profile
+  are folded; a source is one ⓘ away. **Never folded:** an official warning (its own block under the hero, with its
+  instruction), the list of what is missing, the level of every hazard. Touch has no hover: no tooltips, ⓘ buttons.
+- **The site's own graphics** (0.7.0, D-062): icons from the sprite in `index.html` (one line weight on a 24 px grid),
+  never emoji in the interface; a level is drawn as **the staff gauge** (four segments filled from the bottom, blue,
+  yellow, orange, red; dashed for no data), so it reads by height as well as colour, with its word as its label. Data
+  words from `assess.js` may start with an emoji (the share text goes to LINE as text); the page draws its icon instead
+  (`main.rich`).
+- **The site's own font, self-hosted:** Anuphan (Cadson Demak, SIL OFL 1.1, `public/fonts/`), Thai and Latin subsets,
+  54 KB for every weight; no font request leaves the site. A new weight or face needs its licence beside it.
+- **Two columns from 960 px** (the place and hero on the left, the list on the right; not sticky: a long notice must scroll); one column below, 680 px at most.
 - **Before a change is done:** `npm test` (unit tests on saved live responses) and `CHROME_PATH=/opt/pw-browsers/chromium npm run smoke` (the visitor walk on fixtures, the clock pinned to 23 Oct 2026 19:50 UTC); for source or wording changes also `npm run smoke -- --live` and read its output as a visitor would.
 - **A new source gets:** a fixture saved from a live call, a parser with a unit test (including its missing-value codes and its time rule), a row in [SOURCES.md](SOURCES.md), and its credit line.
 - **Bump `?v=`** on `css/app.css` and `js/main.js` in `index.html` and in `sw.js`'s `SHELL`, `VERSION` in `main.js` and `sw.js`, and `package.json` (and `package-lock.json`) with every release.
-- **The first screen of a 360 × 640 phone inside LINE shows the verdict** (smoke check, KI-F23), and no level shows before the forecast, air quality and warnings have answered or 5 s have passed (KI-F24).
+- **The first screen of a 360 × 640 phone inside LINE shows the verdict** (smoke check, KI-F23; since 0.7.0 the list
+  starts on it too), and no level shows before the forecast, air quality and warnings have answered or 5 s have passed (KI-F24).
 - **A page string that describes data must match what the cells show** (KI-F26: the rain row said "mm" for a year of chance words).
 - **Every module the page imports is in `sw.js`'s `SHELL`** (one missing file kills the page offline: the visitor audit's V3); `test/audit.test.mjs` walks the imports and fails otherwise.
 - **Each audit finding that is fixed gets a test** named after its ID (`test/audit.test.mjs`: "M5/V2: …").

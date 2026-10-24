@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ภัยรอบบ้าน · Thai Risk</title>
 <meta name="description" content="เปิดตำแหน่งหรือค้นหาพื้นที่ แล้วดูทุกความเสี่ยงที่จุดนั้น: ความร้อน ฝุ่น PM2.5 มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงาน">
-<meta name="theme-color" content="#0f3d5e">
+<meta name="theme-color" content="#eef2f4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e161d" media="(prefers-color-scheme: dark)">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -21,7 +22,9 @@
 <meta property="og:image:alt" content="ภัยรอบบ้าน (Thai Risk): ทุกความเสี่ยงที่จุดเดียว ตอนนี้และ 3 วันข้างหน้า">
 <meta property="og:locale" content="th_TH">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/app.css?v=0.6.0">
+<!-- Anuphan (Cadson Demak, SIL OFL 1.1, fonts/OFL-Anuphan.txt), self-hosted: no font request leaves this site -->
+<link rel="preload" href="fonts/anuphan-thai.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/app.css?v=0.7.0">
 <!-- the module graph loaded in 5 serial round trips: on Slow 3G 📍 did nothing until 11.9 s (device study T5) -->
 <link rel="modulepreload" href="js/geo.js">
 <link rel="modulepreload" href="js/heat.js">
@@ -40,91 +43,143 @@
 <link rel="modulepreload" href="js/calibration.js">
 </head>
 <body>
-<header class="top">
-  <div class="brand"><span class="logo" aria-hidden="true">◉</span> <span data-t="brand">ภัยรอบบ้าน</span></div>
+<!-- This site's own icons (0.7.0): one line weight, drawn on a 24 px grid; no emoji in the interface -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <!-- the mark: a house painted as the staff gauge, the four levels rising to a red roof -->
+  <symbol id="i-logo" viewBox="0 0 32 32"><path d="M16 3.6 27.4 13.4H4.6z" fill="#b3122e" stroke="none"/><rect x="6.8" y="14.6" width="18.4" height="3.9" fill="#e46c0a" stroke="none"/><rect x="6.8" y="19.7" width="18.4" height="3.9" fill="#d4c400" stroke="none"/><rect x="6.8" y="24.8" width="18.4" height="3.9" rx=".8" fill="#2f6fb0" stroke="none"/></symbol>
+  <symbol id="i-heat" viewBox="0 0 24 24"><path d="M10 4.6a2 2 0 0 1 4 0v8.9a4.3 4.3 0 1 1-4 0z"/><path d="M12 9.5v6"/><path d="M17.2 6.5h2.6M17.2 10h1.8"/></symbol>
+  <symbol id="i-pm25" viewBox="0 0 24 24"><circle cx="7" cy="8.2" r="2.2"/><circle cx="15.6" cy="6.2" r="1.4"/><circle cx="16.8" cy="13.6" r="2.6"/><circle cx="8.6" cy="15.6" r="1.7"/><circle cx="12.6" cy="20" r="1.1"/><circle cx="4.6" cy="20" r=".6" fill="currentColor" stroke="none"/><circle cx="20.4" cy="19.4" r=".6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-air" viewBox="0 0 24 24"><path d="M3.5 20.5h17"/><path d="M5 20.5v-7l4 2.4v-2.4l4 2.4V7.5h3.4v13"/><path d="M14.2 4.6c.8-1.4 2.4-1.5 3.3-.6.8.8 2.2.7 2.8-.3"/></symbol>
+  <symbol id="i-uv" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M5.4 18.6 7 17M17 7l1.6-1.6"/></symbol>
+  <symbol id="i-rain" viewBox="0 0 24 24"><path d="M7.4 14.2h9.8a3.6 3.6 0 0 0 .4-7.2 5.2 5.2 0 0 0-10-1A4.1 4.1 0 0 0 7.4 14.2z"/><path d="M8.6 17.4 7.6 20M12.6 17.4l-1 2.6M16.6 17.4l-1 2.6"/></symbol>
+  <symbol id="i-flood" viewBox="0 0 24 24"><path d="M5.5 11 12 5.5l6.5 5.5M7.6 9.6V14M16.4 9.6V14"/><path d="M3 16.6c1.5 0 1.5-1 3-1s1.5 1 3 1 1.5-1 3-1 1.5 1 3 1 1.5-1 3-1 1.5 1 3 1M3 20.4c1.5 0 1.5-1 3-1s1.5 1 3 1 1.5-1 3-1 1.5 1 3 1 1.5-1 3-1 1.5 1 3 1"/></symbol>
+  <symbol id="i-wind" viewBox="0 0 24 24"><path d="M3 8.6h10.4a2.6 2.6 0 1 0-2.6-2.6M3 12.6h14.6a2.6 2.6 0 1 1-2.6 2.6M3 16.6h6.4"/></symbol>
+  <symbol id="i-landslide" viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M3 20 9.6 7.4l4.2 6.4"/><circle cx="15.6" cy="15.6" r="1.5"/><circle cx="19" cy="17.8" r="1.1"/><path d="M14.6 9.2l1.9 1.6"/></symbol>
+  <symbol id="i-quake" viewBox="0 0 24 24"><path d="M3 19.6h18"/><path d="M8 19.6v-6.4l4-3.4 4 3.4v6.4"/><path d="m11.4 19.6 1.1-2.2-1-1.6"/><path d="M4.6 8.4 3.2 10l1.4 1.6M19.4 8.4l1.4 1.6-1.4 1.6M7 5.2l-1 1.2M17 5.2l1 1.2"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 3.2c.6 3 4.8 5.2 4.8 10.2a4.8 4.8 0 0 1-9.6 0c0-2.3 1.2-3.8 2.4-4.8.2 1.7 1 2.7 2.1 3.2-.7-2.7-.6-5.6.3-8.6z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.2"/><path d="m15.4 15.4 4.8 4.8"/></symbol>
+  <symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="6.6"/><circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/><path d="M12 2.4v3M12 18.6v3M2.4 12h3M18.6 12h3"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3.6v11M7.8 7.6 12 3.6l4.2 4"/><path d="M5.2 11.6v8.2h13.6v-8.2"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19.6 12.6A7.6 7.6 0 1 1 17 6.4"/><path d="M19.4 3.6v4.6h-4.6"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 11v5.4"/><circle cx="12" cy="7.8" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m7 9.6 5 5 5-5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 3.6h2.8l1.5 4-2 1.6a10.6 10.6 0 0 0 5.9 5.9l1.6-2 4 1.5v2.8a2 2 0 0 1-2.1 2A15.8 15.8 0 0 1 4.6 5.7a2 2 0 0 1 2-2.1z"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M13.6 4.4h6v6M19.6 4.4l-8.4 8.4"/><path d="M17.6 13.8v5.8H4.4V6.4h5.8"/></symbol>
+  <symbol id="i-notice" viewBox="0 0 24 24"><path d="M12 3.8 21 19.6H3z"/><path d="M12 9.6v4.6"/><circle cx="12" cy="16.8" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M12 4.2c4.7 0 8.5 3 8.5 6.7s-3.8 6.7-8.5 6.7c-.8 0-1.6-.1-2.4-.3l-4.1 2.3 1-3.3C4.6 15 3.5 13.1 3.5 10.9c0-3.7 3.8-6.7 8.5-6.7z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4.2 4.2 0 0 0 6 0l3-3a4.2 4.2 0 0 0-6-6l-1 1"/><path d="M14 10a4.2 4.2 0 0 0-6 0l-3 3a4.2 4.2 0 0 0 6 6l1-1"/></symbol>
+  <symbol id="i-ahead" viewBox="0 0 24 24"><path d="M4.6 6.4h14.8v13H4.6zM4.6 10.2h14.8M8.6 4v4M15.4 4v4"/></symbol>
+  <symbol id="i-changed" viewBox="0 0 24 24"><path d="M4.4 12a7.6 7.6 0 1 0 2.2-5.4"/><path d="M4.4 3.8v4.4h4.4M12 8.2v4.2l2.8 1.8"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M3.5 16.6 9 11.1l4 4 7.5-7.6"/><path d="M15.4 7.5h5.1v5.1"/></symbol>
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19.5v-14M6.6 10.6 12 5.2l5.4 5.4"/></symbol>
+  <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="7" y="3.4" width="10" height="17.2" rx="2.2"/><path d="M11 17.4h2"/></symbol>
+  <symbol id="i-place" viewBox="0 0 24 24"><path d="M12 21s6.6-6 6.6-11.2a6.6 6.6 0 0 0-13.2 0C5.4 15 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></symbol>
+</svg>
+
+<header class="top"><div class="top-in">
+  <a class="brand" href="./" aria-label="ภัยรอบบ้าน · Thai Risk"><svg class="ic logo" aria-hidden="true"><use href="#i-logo"/></svg><span class="wordmark" data-t="brand">ภัยรอบบ้าน</span></a>
   <div class="tools">
     <button type="button" id="bigger" class="tbtn" aria-pressed="false" data-t-title="bigger" title="ตัวหนังสือใหญ่ขึ้น">ก+</button>
     <button type="button" id="lang" class="tbtn" lang="en">EN</button>
   </div>
-</header>
+</div></header>
 
 <main id="main">
-  <section class="finder" aria-labelledby="finder-h">
-    <h1 id="finder-h" class="sr-only" data-t="finderH">เลือกจุดที่จะดู</h1>
-    <button type="button" id="change" class="btn change"><span aria-hidden="true">🔎</span> <span data-t="change">ดูที่อื่น</span></button>
-    <button type="button" id="gps" class="btn primary big"><span aria-hidden="true">📍</span> <span data-t="gps">ใช้ตำแหน่งของฉันตอนนี้</span></button>
-    <form id="search" class="search" role="search" autocomplete="off">
-      <label for="q" class="sr-only" data-t="searchLabel">ค้นหาพื้นที่</label>
-      <input id="q" type="search" enterkeyhint="search" data-t-ph="searchPh" placeholder="หรือพิมพ์ ตำบล อำเภอ จังหวัด ซอย ถนน สถานที่">
-      <button type="submit" class="btn" data-t="searchBtn">ค้นหา</button>
-    </form>
-    <ul id="results" class="results" hidden></ul>
-    <div id="saved" class="saved" hidden></div>
-    <p id="finder-msg" class="msg" role="status" hidden></p>
-  </section>
+  <div class="layout">
+    <div class="col-a">
+      <section class="finder" aria-labelledby="finder-h">
+        <h2 id="finder-h" class="sr-only" data-t="finderH">เลือกจุดที่จะดู</h2>
+        <button type="button" id="change" class="change"><svg class="ic" aria-hidden="true"><use href="#i-search"/></svg><span data-t="change">ดูที่อื่น</span></button>
+        <button type="button" id="gps" class="btn primary big"><svg class="ic" aria-hidden="true"><use href="#i-locate"/></svg><span data-t="gps">ใช้ตำแหน่งของฉันตอนนี้</span></button>
+        <form id="search" class="search" role="search" autocomplete="off">
+          <label for="q" class="sr-only" data-t="searchLabel">ค้นหาพื้นที่</label>
+          <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="q" type="search" enterkeyhint="search" data-t-ph="searchPh" placeholder="พิมพ์ตำบล อำเภอ ถนน หรือสถานที่">
+          <button type="submit" class="btn" data-t="searchBtn">ค้นหา</button>
+        </form>
+        <ul id="results" class="results" hidden></ul>
+        <div id="saved" class="saved" hidden></div>
+        <p id="finder-msg" class="msg" role="status" hidden></p>
+      </section>
 
-  <p id="opening" class="opening-msg" data-t="openingShared">กำลังเปิดพื้นที่ที่ส่งมา…</p>
-  <script>
-    // a shared link opens on its place, not on the welcome screen, while the code still loads (T5); the subdistrict
-    // table starts at once
-    if (/^#(t|p)=/.test(location.hash)) {
-      document.documentElement.classList.add("opening");
-      if (/^#t=/.test(location.hash)) { var l = document.createElement("link"); l.rel = "preload"; l.as = "fetch"; l.href = "data/tambon.json"; l.crossOrigin = "anonymous"; document.head.appendChild(l); }
-    }
-  </script>
-  <section id="welcome" class="welcome">
-    <p data-t="welcome1">ดูทุกความเสี่ยงที่จุดเดียว: ความร้อน ฝุ่น มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า</p>
-    <p class="muted" data-t="welcome2">ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงานไทยและนานาชาติ ตำแหน่งของคุณอยู่ในเครื่องนี้ ส่งให้แหล่งข้อมูลเฉพาะแบบปัดเศษ ~1 กม.</p>
-  </section>
+      <p id="opening" class="opening-msg" data-t="openingShared">กำลังเปิดพื้นที่ที่ส่งมา…</p>
+      <script>
+        // a shared link opens on its place, not on the welcome screen, while the code still loads (T5); the subdistrict
+        // table starts at once
+        if (/^#(t|p)=/.test(location.hash)) {
+          document.documentElement.classList.add("opening");
+          if (/^#t=/.test(location.hash)) { var l = document.createElement("link"); l.rel = "preload"; l.as = "fetch"; l.href = "data/tambon.json"; l.crossOrigin = "anonymous"; document.head.appendChild(l); }
+        }
+      </script>
+      <section id="welcome" class="welcome">
+        <h1 class="welcome-lead" data-t="welcome1">ดูทุกความเสี่ยงที่จุดเดียว: ความร้อน ฝุ่น มลพิษ UV ฝน ลม น้ำท่วม น้ำป่า ดินถล่ม แผ่นดินไหว ไฟป่า</h1>
+        <p class="hazard-strip" aria-hidden="true"><svg class="ic"><use href="#i-heat"/></svg><svg class="ic"><use href="#i-pm25"/></svg><svg class="ic"><use href="#i-air"/></svg><svg class="ic"><use href="#i-uv"/></svg><svg class="ic"><use href="#i-rain"/></svg><svg class="ic"><use href="#i-wind"/></svg><svg class="ic"><use href="#i-flood"/></svg><svg class="ic"><use href="#i-landslide"/></svg><svg class="ic"><use href="#i-quake"/></svg><svg class="ic"><use href="#i-fire"/></svg></p>
+        <p class="muted" data-t="welcome2">ตอนนี้และ 3 วันข้างหน้า จากข้อมูลเปิดของหน่วยงานไทยและนานาชาติ ตำแหน่งของคุณอยู่ในเครื่องนี้ ส่งให้แหล่งข้อมูลเฉพาะแบบปัดเศษราว 1 กม.</p>
+      </section>
 
-  <section id="report" hidden>
-    <div class="place">
-      <div class="place-main">
-        <div id="place-name" class="place-name"></div>
-        <div id="place-sub" class="place-sub muted"></div>
+      <div id="report-head" class="report-head" hidden>
+        <div class="place">
+          <div class="place-main">
+            <h1 id="place-name" class="place-name"></h1>
+            <div id="place-sub" class="place-sub"></div>
+          </div>
+          <div class="place-act">
+            <button type="button" id="save" class="ibtn" data-t-title="save"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg></button>
+            <button type="button" id="refresh" class="ibtn" data-t-title="refresh" title="อัปเดต"><svg class="ic" aria-hidden="true"><use href="#i-refresh"/></svg></button>
+          </div>
+        </div>
+        <section id="verdict" class="hero lv-none" role="status" aria-live="polite"></section>
+        <!-- the family's journey ends in one tap: sending the place to a LINE group (redesign audit R7) -->
+        <div class="share-row">
+          <button type="button" id="line" class="btn line"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg><span data-t="shareLine">ส่งใน LINE</span></button>
+          <button type="button" id="share" class="btn"><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg><span data-t="shareLink">แชร์ลิงก์</span></button>
+        </div>
+        <div id="changes" class="changes" hidden></div>
+        <div id="warnings" class="warnings"></div>
       </div>
     </div>
 
-    <div id="verdict" class="verdict lv-none" role="status" aria-live="polite"></div>
-    <div id="changes" class="changes" hidden></div>
-    <div class="place-act">
-      <button type="button" id="save" class="btn small">⭐ <span data-t="save">บันทึก</span></button>
-      <button type="button" id="line" class="btn small line" data-t="line">ส่งใน LINE</button>
-      <button type="button" id="share" class="btn small">↗ <span data-t="share">แชร์</span></button>
-      <button type="button" id="refresh" class="btn small" data-t-title="refresh" title="อัปเดต">↻</button>
-    </div>
-    <div id="warnings"></div>
-    <h2 class="sr-only" data-t="tilesH">ทุกเรื่องที่จุดนี้</h2>
-    <nav id="tiles" class="tiles"></nav>
-    <section id="pre-wrap" class="block" hidden>
-      <h2 data-t="preH">⏰ เตือนล่วงหน้า 3 วัน</h2>
-      <ul id="pre" class="pre"></ul>
-    </section>
-    <section class="block">
-      <h2 data-t="outlookH">3 วันข้างหน้า</h2>
-      <div id="outlook" class="outlook-wrap"></div>
-      <p class="muted small" data-t="outlookNote">ตัวเลขกลางของแบบจำลอง 51 ชุด สีบอกระดับ ฝนคือโอกาสฝนหนัก (เกิน 35 มม.) ในวันนั้น ฝุ่นคือค่าเฉลี่ยทั้งวัน 📢 คือวันที่มีประกาศเตือนภัยของกรมอุตุฯ</p>
-    </section>
-    <div id="cards" class="cards"></div>
-    <section class="block" id="profile-wrap" hidden>
-      <h2 data-t="profileH">ข้อมูลพื้นที่ (ระยะยาว)</h2>
-      <ul id="profile" class="profile"></ul>
-    </section>
-    <p id="updated" class="muted small"></p>
-  </section>
+    <div class="col-b">
+      <section id="report" hidden>
+        <div class="list-head">
+          <h2 data-t="tilesH">ทุกเรื่องที่จุดนี้</h2>
+          <span class="muted small" data-t="sortedNote">เรียงตามความน่าห่วง</span>
+        </div>
+        <div id="cards" class="list"></div>
+        <p id="updated" class="updated"></p>
 
-  <section class="block official">
-    <h2 data-t="officialH">ประกาศเตือนภัยทางการ</h2>
-    <p data-t="officialP">เว็บนี้สรุปข้อมูลเปิด ไม่ใช่ประกาศเตือนภัย ฟังประกาศจากหน่วยงาน:</p>
-    <ul class="links">
-      <li><a href="https://www.tmd.go.th/warning-and-events/warnings" rel="noopener" target="_blank" data-t="lTmd">กรมอุตุนิยมวิทยา: ประกาศเตือนภัย</a> · <a href="tel:1182">1182</a></li>
-      <li><a href="https://www.disaster.go.th" rel="noopener" target="_blank" data-t="lDdpm">ปภ. สายด่วนนิรภัย</a> · <a href="tel:1784">1784</a></li>
-      <li><a href="https://earthquake.tmd.go.th" rel="noopener" target="_blank" data-t="lQuake">กองเฝ้าระวังแผ่นดินไหว กรมอุตุฯ</a></li>
-      <li><a href="https://air4thai.pcd.go.th" rel="noopener" target="_blank" data-t="lAir">Air4Thai กรมควบคุมมลพิษ</a></li>
-      <li><a href="https://www.thaiwater.net" rel="noopener" target="_blank" data-t="lWater">คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</a> · <a href="https://flood.autobahn.bot" rel="noopener" target="_blank">FloodWatch</a></li>
-      <li><span data-t="lEmergency">เจ็บป่วยฉุกเฉิน</span> <a href="tel:1669">1669</a> · <span data-t="lFire">ไฟไหม้</span> <a href="tel:199">199</a></li>
-    </ul>
-  </section>
+        <details id="outlook-box" class="fold">
+          <summary><svg class="ic" aria-hidden="true"><use href="#i-ahead"/></svg><span data-t="outlookH">3 วันข้างหน้า</span><svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <div id="outlook" class="outlook-wrap"></div>
+          <p class="muted small" data-t="outlookNote">ค่ากลางจากแบบจำลอง 51 ชุด สีและขีดบอกระดับ</p>
+        </details>
+        <details id="profile-wrap" class="fold" hidden>
+          <summary><svg class="ic" aria-hidden="true"><use href="#i-place"/></svg><span data-t="profileH">ข้อมูลพื้นที่ (ระยะยาว)</span><svg class="ic chev" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+          <ul id="profile" class="profile"></ul>
+        </details>
+      </section>
+
+    </div>
+    <section class="official" aria-labelledby="official-h">
+        <h2 id="official-h" data-t="officialH">ประกาศเตือนภัยทางการ</h2>
+        <p class="small" data-t="officialP">เว็บนี้สรุปข้อมูลเปิด ไม่ใช่ประกาศเตือนภัย ฟังประกาศจากหน่วยงาน:</p>
+        <div class="calls">
+          <a class="call" href="tel:1182"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><b>1182</b><span data-t="cTmd">กรมอุตุฯ</span></a>
+          <a class="call" href="tel:1784"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><b>1784</b><span data-t="cDdpm">ปภ.</span></a>
+          <a class="call" href="tel:1669"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><b>1669</b><span data-t="lEmergency">เจ็บป่วยฉุกเฉิน</span></a>
+          <a class="call" href="tel:199"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><b>199</b><span data-t="lFire">ไฟไหม้</span></a>
+        </div>
+        <ul class="links">
+          <li><a href="https://www.tmd.go.th/warning-and-events/warnings" rel="noopener" target="_blank"><span data-t="lTmd">กรมอุตุนิยมวิทยา: ประกาศเตือนภัย</span><svg class="ic ext" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+          <li><a href="https://www.disaster.go.th" rel="noopener" target="_blank"><span data-t="lDdpm">ปภ. สายด่วนนิรภัย</span><svg class="ic ext" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+          <li><a href="https://earthquake.tmd.go.th" rel="noopener" target="_blank"><span data-t="lQuake">กองเฝ้าระวังแผ่นดินไหว กรมอุตุฯ</span><svg class="ic ext" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+          <li><a href="https://air4thai.pcd.go.th" rel="noopener" target="_blank"><span data-t="lAir">Air4Thai กรมควบคุมมลพิษ</span><svg class="ic ext" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+          <li><a href="https://www.thaiwater.net" rel="noopener" target="_blank"><span data-t="lWater">คลังข้อมูลน้ำแห่งชาติ (ThaiWater)</span><svg class="ic ext" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+          <li><a href="https://flood.autobahn.bot" rel="noopener" target="_blank"><span>FloodWatch</span><svg class="ic ext" aria-hidden="true"><use href="#i-ext"/></svg></a></li>
+        </ul>
+      </section>
+  </div>
 </main>
 
 <footer class="foot">
@@ -135,6 +190,6 @@
   <p class="muted small"><span data-t="footer">ภัยรอบบ้าน · Thai Risk · โครงการทดลองอิสระ ไม่ใช่เว็บของหน่วยงานรัฐ ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ</span> · <span id="ver"></span></p>
 </footer>
 
-<script type="module" src="js/main.js?v=0.6.0"></script>
+<script type="module" src="js/main.js?v=0.7.0"></script>
 </body>
 </html>

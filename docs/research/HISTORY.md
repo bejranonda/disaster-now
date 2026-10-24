@@ -258,3 +258,16 @@ the build: [floodwatch-hatyai-leadtime](floodwatch-hatyai-leadtime-2026-10-24.md
 | D-058 | **No VPN, no rotation** | every source answers this host (Germany); BMA's and RID's gauges come through FloodWatch's one Thai egress; rotating past ThaiWater's limit is the evasion both projects forbid | floodwatch-integration §5 |
 | D-059 | **"ข้างหน้า", "เปลี่ยนจากที่ดูครั้งก่อน" and a share text with its own time**, before any redesign | the hindcast's rain signal sat in a chip for two days; a forwarded message needs its time and source; the last look is kept on the phone by subdistrict code only | UX study §5, GUIDELINES §2 |
 | D-060 | **D11 stays words and links; the page computes no earthquake chance, and doesn't recompute USGS's for a place** (recommended; the wording is the owner's) | the generic model over-forecasts here (Brier skill −0.59 on 567 real-time quakes); a place's "may be felt" chance can't be checked in decades of Thai record; tides, monsoon, b-values, radon, animals and AI show no usable skill | eq-d11, OWNER_ACTIONS D11 |
+
+## 10. The redesign (25 Oct 2026, 0.7.0)
+
+The owner, after seeing the live page: "ตอนนี้หน้าเวปดูรกมาก … อยากให้เป็นแบบ Progressive disclosure", modern, clean and
+minimal, "not like a website a child made", the site's own graphical tokens instead of emoji, the indices sorted by
+severity, reference details in a fold, an (i) or a note. Sample layouts came with the brief (a triage stack, a matrix, tabs
+with a bento grid, an uncertainty view, a civic card), "only to learn from".
+
+| ID | Decision | Why | Where |
+|---|---|---|---|
+| D-061 | **The hazards are listed by concern** (ติดตามไว้+ highest first, then no data, then calm; ties by the coming day, then the old order) | the owner's brief; the fixed order (UX scout §5b, "people learn where their tile is") put a calm hazard above an orange one; no data above calm keeps "missing is never calm" | `assess.byConcern`, GUIDELINES §6 |
+| D-062 | **D8 as the owner's brief decides it:** one hero, one sorted list whose rows open in place, the 3-day table and the profile folded, sources behind ⓘ, the site's own icons and the staff-gauge glyph, Anuphan self-hosted; the pre-warning list, tiles, verdict chips and separate cards go | the UX study's "improve, don't extend" (three views); the sample layouts' triage (option 1) and contextual links (option 5); kept from the matrix (option 2) only as the folded table, because a matrix of ten hazards × four columns doesn't fit 320 px with ก+ | GUIDELINES §6, CHANGELOG 0.7.0 |
+| D-063 | **The independent audit before shipping, and its fixes:** a row is placed by the worse of today and its coming days (its own, not the verdict's), the groups are the scale's words, the order holds until the sources settle, UV's day peaks are information, model values are tagged on the faces, LINE is one labelled tap under the hero, the gauge leads each row | R1 (high): heavy rain tomorrow at เตรียมตัว sat under "ยังไม่น่าห่วง" on a hot day, the Hat Yai pattern; R2–R10 (medium) ([redesign-audit](redesign-audit-2026-10-25.md)) | CHANGELOG 0.7.0 |

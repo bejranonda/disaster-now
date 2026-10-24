@@ -2,6 +2,64 @@
 
 ## Unreleased
 
+## 0.7.0 (25 Oct 2026): the redesign — calm, sorted by concern, details on demand, the site's own graphics
+
+The owner (25 Oct): the page "looks cluttered, too much everywhere"; progressive disclosure; modern, clean and
+minimal, "not like a website a child made"; our own graphical tokens, not emoji; the indices sorted by severity, not a
+fixed order; reference details in a fold, an ⓘ or a note. This is D8, decided by that brief (D-061, D-062).
+
+- **One answer first.** A hero band tinted by the level: the staff gauge, the level's name ("เตรียมตัว"), the worst
+  hazard in the agency's word with its value, the sourced action (its source behind ⓘ), "ข้างหน้า", what is missing
+  (where to look for unchecked warnings behind ⓘ). An official TMD notice keeps its own block under it.
+- **Every hazard in one list, sorted by concern** (`assess.byConcern`): ต้องระวัง (highest first), ยังไม่มีข้อมูล (never
+  calm), ยังไม่น่าห่วง; ties keep the old order. Each row: the hazard's icon on a token tinted by its level, the agency's
+  word and value, a badge when a coming day is worse ("พรุ่งนี้ เตรียมตัว"), the gauge. **A row opens in place** for the
+  action, the lines, the 3-day strip, the method note, the sources and the links; rows stay open as answers arrive.
+- **Folded:** the 3-day table (each cell with a small gauge) and the place's long-term profile. The separate tiles,
+  pre-warning list, verdict chips and ten cards are gone: the six drawings of one forecast became three (hero, row,
+  table), all from `assess.fcLevel`.
+- **The site's own graphics:** an SVG sprite of 28 icons and the mark (one line weight, 24 px grid) instead of emoji; the **staff gauge**,
+  a water-level pole filled from the bottom (blue, yellow, orange, red; dashed for no data), as the level glyph
+  everywhere (it replaces ●●○○); a new mark, a house painted as the gauge with a red roof (favicon, app icons, the LINE
+  preview card re-rendered by `tools/make-images.mjs`, which now embeds the site's font).
+- **Type:** Anuphan (Cadson Demak, SIL OFL 1.1), self-hosted, Thai + Latin, 54 KB for every weight
+  (`public/fonts/`, cached offline by the service worker).
+- **Layout:** a light header; the search folds to one row; the place's title is its subdistrict with the district and
+  province under it; save, share (a menu: ส่งใน LINE, or share another way / copy the link) and refresh as 44 px icon
+  buttons; hotlines as four tap tiles; two columns from 960 px (the place and hero on the left).
+- **Measured:** Bangkok's fixture page is about 2,600 px at 390 px (8,612 at 360 before); at 360 × 640 in LINE the hero
+  ends at 489 px (the walk's check) and the list starts on the first screen.
+- **An independent audit of the redesign** ([redesign-audit](docs/research/redesign-audit-2026-10-25.md), R1–R20, before
+  shipping) found one high regression and nine medium issues; fixed in this release:
+  - **R1 (high):** heavy rain tomorrow at เตรียมตัว sat under "ยังไม่น่าห่วง" on a hot day (the Hat Yai pattern), and
+    0.6.0's open heads-up list was gone. Each hazard now has its own coming-day level (`card.ahead`, against its own level,
+    not the verdict's); the list places a row by the worse of today and its coming days (`assess.listLevel`), with a
+    badge naming the day ("พรุ่งนี้ เตรียมตัว"); the hero's "ข้างหน้า" also names another hazard reaching today's level.
+    The verdict's colour stays today's. Test "R1".
+  - **R5:** the groups are the scale's own words with their gauge (ทำทันที, เตรียมตัว, ติดตามไว้, ไม่มีข้อมูล, ยังไม่น่าห่วง),
+    not a fifth word. **R8:** until the sources settle the rows keep the fixed order with no groups, so nothing jumps.
+  - **R2:** UV's day peaks (8+ on every clear day) are drawn as information, without a level, beside a row graded on the UV
+    now; UV has no coming-day badge.
+  - **R3:** the hero names the other hazards at its level ("ระดับเดียวกัน: …"). **R4:** where to look for unchecked warnings
+    is in the missing line itself ("(ดูประกาศที่ tmd.go.th หรือ LINE ALERT)").
+  - **R6:** the gauge is in em (ก+ enlarges it), its empty segments outlined, and it leads every row, beside a neutral
+    icon: one level signal per row. **R7:** "ส่งใน LINE" and "แชร์ลิงก์" are labelled buttons under the hero (one tap).
+  - **R9:** an opened row shows the action, the lines, the days and the links; the method note and the sources sit behind
+    a real "ที่มาและวิธีคิด ⓘ" toggle; no decorative ⓘ; no doubled "แบบจำลอง". **R10/R11:** a model value says so on the
+    face ("พยากรณ์", "ค่าประมาณ", "แบบจำลอง") at ติดตามไว้ and above and in the hero, whose ⓘ says a forecast alone tops
+    out at เตรียมตัว.
+  - Lows: the focus ring inside the list (R12); the place's name is the page's h1 and the groups are h3 (R13); "Nothing
+    notable yet: gusts 27 km/h" (R14); larger secondary text (R16); the hotlines in the left column on desktop (R17); the
+    bottom block renamed "สายด่วนและเว็บของหน่วยงาน", no developer copy for fire, "ลองดึงข้อมูลเมื่อ …" when nothing
+    loaded, the heat row's "ระดับเตือนภัย", "ความร้อนที่รู้สึก", a shaking house for earthquakes (no longer read as a
+    heartbeat), the welcome icons in the sentence's order, "ราว 1 กม." (R18); the GPS line on its own line, two header
+    buttons (R19); `serve.mjs` serves `.woff2` as `font/woff2` (R20). R15 (line breaks inside units) is open (KI-044).
+  - `[hidden]` always wins over a component's own `display` (the sources fold showed open).
+- **Live, 25 Oct 05:08 Bangkok** (version `e8ef0130`): Hat Yai under TMD's Extreme very-heavy-rain notice reads "ทำทันที",
+  rain first, the notice in full; the flood row says "ไม่มีข้อมูล" (RID's gauges late, KI-041).
+- Tests: 105 (concern order, R1/R2); the walk reads rows opened and closed (sources included), checks the order, that the
+  chrome has no emoji, the dashed gauges when every source is down; one live walk (Bangkok) passes.
+
 ## 0.6.0 (24 Oct 2026, evening): live at risk.autobahn.bot, FloodWatch's own gauges, the measured 3-day rain
 
 **Deployed.** The owner's token gained *Workers Scripts: Edit* and *Workers Routes: Edit*; `npm run cf:deploy` put 0.5.0

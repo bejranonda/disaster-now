@@ -1,14 +1,20 @@
 # Handoff
 
-**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.6.0, 24 Oct 2026, evening. Live at https://risk.autobahn.bot**
-(Cloudflare Workers, since 20:13 UTC). Its live files (TMD's warnings, fires, storms, FloodWatch's lines) wait for the
-collector's KV token (A9). Simulated in LINE and on tablets, not tried on real phones (A4). Read this first, then
-[AGENTS.md](AGENTS.md).
+**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.7.0, 25 Oct 2026. Live at https://risk.autobahn.bot**
+(Cloudflare Workers, version `e8ef0130`), with its live files (the collector uploads to KV every 15 min since 24 Oct
+21:12 UTC). Redesigned on the owner's brief and audited before shipping. Simulated in LINE and on tablets, not tried on
+real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
 
 ## 1. Where things stand
 
 - **The page** (`public/`, static): GPS or search → a verdict, ten tiles, pre-warnings, a 3-day table and ten cards,
   in Thai and English, for any of 7,425 subdistricts.
+- **0.7.0, the redesign** ([CHANGELOG](CHANGELOG.md), D-061–D-063): one hero (the level on the staff gauge, the worst
+  hazard, the action, "ข้างหน้า", what is missing), "ส่งใน LINE" in one tap, every hazard in one list **sorted by concern**
+  (by the worse of today and its coming days, grouped by the scale's words) whose rows open in place; the 3-day table and
+  the profile folded; sources behind a real ⓘ; the site's own icons, mark and font (Anuphan, self-hosted); two columns
+  from 960 px. An independent audit ([redesign-audit](docs/research/redesign-audit-2026-10-25.md)) found R1 (a coming
+  เตรียมตัว filed under "ยังไม่น่าห่วง") and nine mediums before it shipped; all fixed.
 - **0.6.0** ([CHANGELOG](CHANGELOG.md)):
   - **Live.** The token gained *Workers Scripts: Edit*; 0.5.0 went live at 20:13 UTC, 0.6.0 at the end of the session.
   - **FloodWatch through the collector** (`floodwatch.json`, D-054): the flood tile reads FloodWatch's own rows while
@@ -26,36 +32,35 @@ collector's KV token (A9). Simulated in LINE and on tablets, not tried on real p
   [Hat Yai lead time](docs/research/floodwatch-hatyai-leadtime-2026-10-24.md), [D11](docs/research/eq-d11-2026-10-24.md),
   [UX D8/D1/D9/incidents](docs/research/ux-d8-d1-d9-incidents-2026-10-24.md), [devices](docs/research/device-sim-2026-10-24.md);
   frank summary in [FRANK_FEEDBACK §9](docs/FRANK_FEEDBACK.md#9-live-floodwatch-hat-yai-again-24-oct-2026-evening-060).
-- **Checks, 24 Oct 2026 ≈ 21:00–21:30 UTC, on `autobahn-bot`:**
-  - `npm test` 103 of 103 (89 at 0.5.0).
-  - The fixture walk passes every check, new: FloodWatch's line, the 3-day total, the last look, blocked storage, the
-    address bar.
-  - One live walk (Bangkok, 03:56 Bangkok time) passes: the flood tile from a BMA canal gauge 0.4 km away.
-  - One edge load (Hat Yai, LINE window): no page errors; the verdict led by rain.
-  - `check:docs` (47 files) and `check:advice` pass; `docker compose` healthy; `health --web http://127.0.0.1:8090/
-    --need-live` ok; on the edge `--need-live` fails (no KV token yet).
+- **Checks, 25 Oct 2026 ≈ 05:00 Bangkok (22:00 UTC), on `autobahn-bot`:**
+  - `npm test` 105 of 105.
+  - The fixture walk passes every check (the list's order, no emoji in the chrome, rows read open and closed with their
+    sources, the dashed gauges when every source is down, the hero ends at 491–505 px at 360 × 640 in LINE).
+  - One live walk (Bangkok) passes; the live cross-check (gauges 638 of 646 with FloodWatch, quakes, GISTDA ×1.28).
+  - One load of the deployed page at Hat Yai under TMD's real Extreme very-heavy-rain notice: "ทำทันที", rain first,
+    the notice in full, no page errors.
+  - `check:docs` (48 files) and `check:advice` pass; the stack healthy; `health --web https://risk.autobahn.bot/
+    --need-live` ok (`kv: true`).
 
 ## 2. What the owner has to do ([docs/OWNER_ACTIONS.md](docs/OWNER_ACTIONS.md))
 
-1. **A9: the KV-only token.** A new token with only *Account → Workers KV Storage: Edit* as `CF_KV_TOKEN` in `.env`,
-   then `docker compose up -d`. Then `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live` exits 0.
-   Later, narrow the deploy token (it still reaches every zone of every account).
-2. **A4:** an Android and an iPhone from a LINE chat, and a tablet: the device study's §5 list.
+1. **Look at the redesign on your phone** (A4, with two family members if you can: the older reader is the test, KI-044).
+   If anything reads wrong, `npx wrangler@4.148.0 rollback` returns 0.6.0.
+2. **A9:** narrow the deploy token (the KV-only token is done and checked).
 3. **A14:** Cloudflare's zone cookie (`cf_clearance`, KI-042): turn JavaScript detections off for `autobahn.bot`, or let
    the page disclose it.
-4. **Decisions:** D11 (the words are ready; your yes ships them), D8 (improve, don't extend), D9 (one palette), D10;
-   keep C6 after its scoring (end of November); keep D1 after a month of the archive.
+4. **Decisions:** D11 (the words are ready; your yes ships them), D9 (one palette for the family), D10; keep C6 after
+   its scoring (end of November); keep D1 after a month of the archive. D8 is done (0.7.0).
 5. **FloodWatch (B6–B8):** a measured-rain endpoint; Hat Yai's RID freshness; KI-545 first, then upstream levels and
    measured rain in its model.
 6. **Four emails to agencies** (C4, C6, C7, C8), **A5** (a Thai reader), **A11, A8, B2–B4**.
 
 ## 3. What an agent can do next ([docs/ROADMAP.md](docs/ROADMAP.md))
 
-- **After the KV token:** `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live`, then one edge load at
-  Bangkok and Hat Yai, read as a visitor (FloodWatch's lines, the warnings box).
+- **R15:** NBSP between numbers and units in `assess.js`'s lines (KI-044).
 - **Daily from the server:** `node research/archive_forecasts.mjs` (cron): C6, the dust chance and D1 counted as issued.
 - **The upstream rule's record outside Hat Yai** (D-056: A lifts to เตรียมตัว only on the U-Taphao until then).
-- **D8 and D11 after the owner's yes.**
+- **D11 after the owner's yes.**
 
 ## 4. How to work here
 
@@ -91,6 +96,9 @@ collector's KV token (A9). Simulated in LINE and on tablets, not tried on real p
   - missing data, including a stale collector or a late upstream gauge, is never calm;
   - walk the clock (the evening too) and the device (blocked storage, LINE without Web Share);
   - count a new rule's firings on today's real data and read them before shipping;
+  - construct the worst day (a hot day before heavy rain) before calling an order or a fold safe;
+  - never fold an official warning, what is missing, or a hazard's level; ⓘ is always a button;
+  - no emoji in the interface: the sprite's icons and the staff gauge;
   - the exact GPS fix never leaves the phone, and no coordinates on screen for it;
   - never FloodWatch's server; one live walk per change; no VPN, no rotation.
 - **Where things are:**
@@ -102,5 +110,5 @@ collector's KV token (A9). Simulated in LINE and on tablets, not tried on real p
   | Known problems | [KNOWN_ISSUES](docs/KNOWN_ISSUES.md) |
   | The audits and studies | [docs/research/](docs/research/) (index in [docs/README](docs/README.md)) |
   | The server and Cloudflare | [SERVER](docs/SERVER.md), [CLOUDFLARE](docs/CLOUDFLARE.md) |
-  | Decisions D-001 … D-060 | [research/HISTORY](docs/research/HISTORY.md) |
+  | Decisions D-001 … D-063 | [research/HISTORY](docs/research/HISTORY.md) |
   | Frank feedback | [FRANK_FEEDBACK](docs/FRANK_FEEDBACK.md) |

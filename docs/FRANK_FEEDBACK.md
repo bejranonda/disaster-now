@@ -363,3 +363,38 @@ D1, D8, D9 and D11. Four studies ran beside the build
 - **The live page has shown 0.5.0 since 20:13 and 0.6.0 since 20:57 UTC,** each checked from the edge; one live walk
   (Bangkok) and one edge load (Hat Yai) were the only live page loads I made, and the studies stayed within their
   ThaiWater budgets (10, 0, 0 and 2 loads).
+
+## 10. The redesign (25 Oct 2026, 0.7.0)
+
+You looked at the live page and said it was cluttered, "like a website a child made", and asked for progressive
+disclosure, a modern and minimal look, our own graphics instead of emoji, and the hazards sorted by severity. You were
+right, and the evidence was already in the UX study: one heat forecast was painted orange 12 times on one page.
+
+### To you, frankly
+
+1. **Your brief was the best kind:** a clear complaint, the direction, what to keep, and sample layouts marked "only to
+   learn from". It made D8 a decision instead of a debate. The sample layouts helped most where they disagreed: the
+   triage stack (your option 1) and the contextual links (option 5) shipped; the matrix (option 2) became the folded
+   table, because ten hazards × four columns doesn't fit a 320 px phone with ก+.
+2. **"Sorted by severity" hid a trap,** and the independent audit found it before you did: sorted by *today*, heavy rain
+   tomorrow sat under "ยังไม่น่าห่วง" on a hot day, the exact Hat Yai pattern, and the old heads-up list that would have
+   caught it was gone. The list now places each hazard by the worse of today and its coming days and says which day.
+   Any future "simplify" request should come with the question "what does this hide on the worst day?".
+3. **Minimal has a floor here.** The official warning, the list of what is missing, and every hazard's level are never
+   folded; sources and method are one tap away, never gone. A cleaner page that hides a warning would be a worse page.
+4. **Test it on people.** Simulation can't tell whether an older reader reads the loopless Anuphan as easily as a looped
+   face, or whether "ขีดบอกระดับ" (the staff gauge) is understood without its words. Ten minutes with two family members
+   on their own phones (A4, A5) would tell more than another audit.
+5. **On your instructions:** the paste of five layouts was useful because you said not to follow them. The repeated
+   validation block again added nothing the rules don't already require; one line ("validate as before") would do.
+   And when you add a token mid-task ("CF_KV_TOKEN is added in .env already"), that one line is perfect: it was acted on
+   within a minute.
+
+### Frank about my own part
+
+- **My first build had the R1 regression.** I tested the order on today's fixture, not on the day that matters. The
+  audit's constructed case (a hot day before heavy rain) is now a unit test; it should have been mine.
+- **I spent the boldness on the staff gauge**, then drew it at 7 px at the far edge of each row, where the audit rightly
+  called it a footnote. It now leads every row, sized in em, and the groups are named by its words.
+- **I shipped without your second look.** You asked for the redesign and the session's standing approval covered the
+  deploy; if anything reads wrong on your phone, `npx wrangler@4.148.0 rollback` returns 0.6.0 in seconds (CLOUDFLARE §4).

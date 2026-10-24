@@ -97,7 +97,7 @@ held a Cloudflare token taken from FloodWatch's `.env`; it is being replaced. De
 git clone https://github.com/bejranonda/disaster-now.git /srv/disaster-now && cd /srv/disaster-now
 cp .env.example .env && chmod 600 .env       # §2.2: new values only
 npm run preflight                            # 1. ❌ until the host and .env are right
-npm ci && npm test                           # 2. 103 unit tests (0.6.0)
+npm ci && npm test                           # 2. 105 unit tests (0.7.0)
 npx playwright@1.56.1 install --with-deps chromium                # 3. the same version as playwright-core
 CHROME_PATH=<the chrome it installed under ~/.cache/ms-playwright> npm run smoke   # "all checks passed"
 npm run env:check -- --probe                 # 4. token valid, zone visible, KV readable, "Workers deploy: allowed", GLM answers

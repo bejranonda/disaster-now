@@ -56,6 +56,14 @@ export function placeLabel(place, lang = "th") {
     bkk ? place.province.th : `จ.${place.province.th}`].join(" ");
 }
 
+/** The place's label in two parts for the page's title: the subdistrict, then its district and province. */
+export function placeParts(place, lang = "th") {
+  if (!place) return ["", ""];
+  if (lang === "en") return [place.tambon.en, [place.amphoe.en, place.province.en].filter(Boolean).join(", ")];
+  const bkk = place.pv === 10;
+  return [`${bkk ? "แขวง" : "ต."}${place.tambon.th}`, `${bkk ? "เขต" : "อ."}${place.amphoe.th} ${bkk ? place.province.th : `จ.${place.province.th}`}`];
+}
+
 /** Initial bearing in degrees and a Thai/English 8-point compass word, for "120 กม. ทางทิศเหนือ". */
 export function bearing(lat1, lon1, lat2, lon2) {
   const y = Math.sin(rad(lon2 - lon1)) * Math.cos(rad(lat2));

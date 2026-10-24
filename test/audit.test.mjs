@@ -528,3 +528,39 @@ test("UX §5.3: what changed since the last look, per subdistrict, levels only",
     "a rise and a fall both said; a hazard with no data now (fire) is not a change");
   assert.deepEqual(changesSince(null, r), []);
 });
+
+test("D8 (0.7.0): the list is sorted by concern — graded levels first, then no data, then calm; ties keep the fixed order", async () => {
+  const { byConcern, concern, ORDER } = await import("../public/js/assess.js");
+  const r = assess(full(at(13.7563, 100.5018)), "th");
+  const ids = r.byConcern.map((c) => c.id);
+  assert.deepEqual([...ids].sort(), [...ORDER].sort(), "every hazard once");
+  for (let i = 1; i < r.byConcern.length; i++) assert.ok(concern(r.byConcern[i - 1]) >= concern(r.byConcern[i]), ids.join(","));
+  // Bangkok's fixture: heat (เตรียมตัว) leads, PM2.5 (ติดตามไว้) next, fire (no data in the fixture walk) before the calm ones
+  assert.equal(ids[0], "heat");
+  const fake = (id, level, ahead) => ({ id, level, ahead });
+  assert.deepEqual(byConcern([fake("uv", 0), fake("flood", -1), fake("rain", 1), fake("heat", 1, { level: 2 }), fake("pm25", 3)]).map((c) => c.id),
+    ["pm25", "heat", "rain", "flood", "uv"]);
+  assert.deepEqual(r.cards.map((c) => c.id), ORDER, "the cards' own order is unchanged");
+});
+
+test("R1 (redesign audit): a coming day at เตรียมตัว never sits under ยังไม่น่าห่วง, even on a day the verdict is that high", async () => {
+  const { listLevel } = await import("../public/js/assess.js");
+  // Bangkok's fixture (heat เตรียมตัว today) with heavy rain tomorrow in every member: the Hat Yai pattern
+  const b = full(at(13.7563, 100.5018));
+  const ens = JSON.parse(JSON.stringify(b.ens));
+  const day2 = assess(b, "th").outlook[1].date;
+  for (const [k, arr] of Object.entries(ens.hourly)) {
+    if (k.startsWith("precipitation")) ens.hourly[k] = arr.map((v, i) => (v != null && ens.hourly.time[i].startsWith(day2) ? v + 3 : v));
+  }
+  const r = assess({ ...b, ens }, "th");
+  const rain = r.cards.find((c) => c.id === "rain");
+  assert.equal(rain.level, 0, "today's rain is still calm");
+  assert.ok(rain.ahead && rain.ahead.level === 2 && rain.ahead.day === 1, JSON.stringify(rain.ahead));
+  assert.equal(listLevel(rain), 2, "the row is placed at เตรียมตัว by its coming day");
+  assert.ok(r.byConcern.findIndex((c) => c.id === "rain") <= 2, r.byConcern.map((c) => c.id).join(","));
+  assert.equal(r.verdict.level, 2, "the verdict's colour stays today's (days 2–3 never colour it)");
+  assert.ok(r.verdict.ahead && r.verdict.ahead.id === "rain", `the hero names it: ${JSON.stringify(r.verdict.ahead)}`);
+  // R2: UV's day peaks are information, not a level the list can sort by
+  const uv = r.cards.find((c) => c.id === "uv");
+  assert.ok(uv.days.every((d) => d.info) && !uv.ahead, JSON.stringify(uv.days));
+});

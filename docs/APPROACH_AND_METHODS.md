@@ -171,3 +171,20 @@ The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_hea
 - **Deploy when the permission exists, not before:** the token's *Workers Scripts: Edit* arrived during the session; the
   probe said "allowed", 0.5.0 went live at once and 0.6.0 at the end, each checked from the edge.
 
+
+## 12. The redesign (25 Oct 2026, 0.7.0)
+
+- **A brief, a plan, then a build, then an audit that doesn't see the plan.** The owner's brief and sample layouts; a
+  short design plan (subject, palette, type, layout, one bold element: the staff gauge) reviewed against generated-page
+  defaults before any code; screenshots after every change (390, 360 × 640 in LINE, 320 with ก+, dark, English, desktop,
+  tablet); then an independent visitor audit given the code and the brief but not the designer's notes. It found what
+  the designer's own screenshots couldn't: a constructed hot-day-before-the-rain case (R1).
+- **Construct the worst day.** Fixtures are one calm night; the audit's useful cases were edited forecasts (heavy rain
+  tomorrow, a cool day before a wet one, every source down, sources arriving slowly). The R1 case is now a unit test.
+- **Progressive disclosure with a floor:** what may never be folded (an official warning, what is missing, every
+  hazard's level) was written down before anything was folded (GUIDELINES §6).
+- **Own the graphics:** an SVG sprite in the page (no request, `currentColor`, one line weight), a self-hosted variable
+  font (54 KB for every weight, its licence beside it), and a level glyph that reads by height, so colour is never the
+  only signal; data words keep their emoji for the LINE share text, and the page draws its icons instead.
+- **Live checks after the build:** one live walk, the live cross-check (gauges 98.8 % with FloodWatch, quakes, GISTDA),
+  and one load of the deployed page at Hat Yai under TMD's real Extreme warning that night.

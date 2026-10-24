@@ -79,7 +79,9 @@ export function assess(b, lang = "th", ipe = null) {
   const cards = [];
   const extraPre = [];
   // UV's days, capped like every forecast; the first is the rest of today, like every other column (U16)
-  const uvDay = (d, i) => ({ name: dayName(i, d.date, lang, now), level: Math.min(MODEL_MAX, d.band.level), text: fmt(d.max) });
+  // its level is kept for the data, but drawn as information: the row is graded on the UV now, and a peak of 8 or more
+  // is every clear day's (thresholds §3.2), so the chips and the table say the peak without a level (redesign audit R2)
+  const uvDay = (d, i) => ({ name: dayName(i, d.date, lang, now), level: Math.min(MODEL_MAX, d.band.level), text: fmt(d.max), info: true });
 
   const ens = b.ens ? buildOutlook(b.ens, now) : null;
   const gistda = b.gistda ? parseGistda(b.gistda) : null;
@@ -89,7 +91,7 @@ export function assess(b, lang = "th", ipe = null) {
 
   // ---------- heat ----------
   {
-    const c = { id: "heat", icon: "🌡️", title: L("ความร้อน (ดัชนีความร้อน)", "Heat (heat index)"), short: L("ความร้อน", "Heat"), level: -1,
+    const c = { id: "heat", icon: "🌡️", title: L("ความร้อนที่รู้สึก", "Heat (feels like)"), short: L("ความร้อน", "Heat"), level: -1,
       link: { href: guide("hot"), text: L("ร้อนแบบนี้ ทำอย่างไร", "What to do in this heat") }, src: [] };
     if (ens) {
       // the number is the afternoon its label names: today's while today's window still holds one (before 16:00),
@@ -643,7 +645,7 @@ export function assess(b, lang = "th", ipe = null) {
       // the time of the latest satellite pass in the file, not the collector's fetch (visitor audit V24)
       c.src.push({ name: L("NASA FIRMS (VIIRS) ภาพดาวเทียมล่าสุด", "NASA FIRMS (VIIRS), latest pass"), time: lastPass ? timeText(localOf(Date.parse(lastPass)), now, lang) : "" });
     } else {
-      c.lines.push(L("ยังไม่มีข้อมูลจุดความร้อน (ต้องเปิดตัวเก็บข้อมูลของเว็บนี้)", "No hotspot data yet (this site's collector isn't running)"));
+      c.lines.push(L("ยังไม่มีข้อมูลจุดความร้อนตอนนี้ ดูแผนที่จุดความร้อนของ GISTDA หรือ NASA FIRMS", "No hotspot data right now: see the hotspot maps of GISTDA or NASA FIRMS")); // R18: not developer copy
     }
     cards.push(c);
   }
@@ -736,22 +738,32 @@ export function assess(b, lang = "th", ipe = null) {
   // "ข้างหน้า": the worst of the coming days when it is above the verdict, in words on the first screen. Days 2–3 never
   // change the verdict's colour (a forecast; the hindcast's "สูง" had 12 false alarms in three seasons at 7 stations),
   // but in Hat Yai on 17–18 Nov 2025 "สูง for the day after" sat in a yellow chip under a heat headline (UX study §5.1–5.2)
+  // (UV is not here: its day peaks are information, not a level; R2)
   const AHEAD = [["rain", "rain", "🌧️"], ["heat", "heat", "🌡️"], ["gust", "wind", "💨"], ["pm25", "pm25", "😷"]];
-  const ahead = [];
+  const coming = [];
   outlook.forEach((row, i) => {
     if (i === 0) return;
     for (const [k, id, icon] of AHEAD) {
       const x = row[k];
-      if (!x || !(x.level > Math.max(verdict.level, 0))) continue;
+      if (!x || !(x.level >= 1)) continue;
       const what = x.official ? L(`${row.name} มีประกาศเตือนภัยของกรมอุตุฯ`, `${row.name}: TMD warning in force`)
         : k === "rain" ? L(`ฝนหนัก ${row.name} โอกาส${x.text}`, `Heavy rain ${row.name}: ${x.text} chance`)
           : k === "heat" ? L(`ร้อน ${row.name} รู้สึกเหมือนราว ${x.text}C`, `Heat ${row.name}: feels like about ${x.text}C`)
             : k === "gust" ? L(`ลมกระโชก ${row.name} ราว ${x.text} กม./ชม.`, `Gusts ${row.name}: about ${x.text} km/h`)
               : L(`ฝุ่น ${row.name} คาดว่า${x.text}`, `Dust ${row.name}: expected ${x.text}`);
-      ahead.push({ id, icon, level: x.level, day: i, text: what, official: !!x.official });
+      coming.push({ id, icon, level: x.level, day: i, text: what, official: !!x.official });
     }
   });
-  verdict.ahead = ahead.sort((a, b2) => b2.level - a.level || a.day - b2.day || ORDER.indexOf(a.id) - ORDER.indexOf(b2.id))[0] || null;
+  const byWorst = (a, b2) => b2.level - a.level || a.day - b2.day || ORDER.indexOf(a.id) - ORDER.indexOf(b2.id);
+  // each hazard's own worst coming day above ITS level, for its row's badge and its place in the list (redesign audit
+  // R1: compared with the verdict, heavy rain tomorrow at เตรียมตัว sat under "ยังไม่น่าห่วง" on a hot day, the Hat Yai pattern)
+  for (const x of [...coming].sort(byWorst)) {
+    const c = cards.find((y) => y.id === x.id);
+    if (c && x.level > Math.max(c.level, 0) && !c.ahead) c.ahead = { level: x.level, day: x.day, name: outlook[x.day].name, official: x.official, text: x.text };
+  }
+  // the hero names the worst coming day above the verdict, or another hazard reaching the verdict's level on a coming day
+  verdict.ahead = coming.filter((x) => x.level > Math.max(verdict.level, 0)
+    || (x.level === verdict.level && x.id !== verdict.worst?.id && (cards.find((c) => c.id === x.id)?.level ?? -1) < x.level)).sort(byWorst)[0] || null;
 
   // ---------- the place itself (long-term) ----------
   const profile = [];
@@ -785,7 +797,7 @@ export function assess(b, lang = "th", ipe = null) {
     profile.push({ icon: "🌊", text: L("จังหวัดชายฝั่งอันดามัน: รู้เส้นทางอพยพสึนามิและจุดรวมพลใกล้บ้าน", "Andaman coast province: know your tsunami evacuation route") });
   }
 
-  return { cards: order, verdict, warnings, pre, outlook, profile, station, quakes: quakes.length, members: ens?.members ?? 0 };
+  return { cards: order, byConcern: byConcern(order), verdict, warnings, pre, outlook, profile, station, quakes: quakes.length, members: ens?.members ?? 0 };
 }
 
 /** "What changed since you last looked" (UX study §5.3): this look's levels against the last look's, for one place.
@@ -824,8 +836,19 @@ export function shareMessage(r, { name, when, url, lang = "th" }) {
   return lines.join("\n");
 }
 
-/** Fixed order of the tiles and cards (people learn where their tile is; the UX scout §5b): the six the scout put
- *  first, then the rest. */
+/** How much a hazard asks for attention, for the list's order (the owner, 25 Oct 2026: "sorted according to severity,
+ *  not fixed"): a graded level of ติดตามไว้ or above first, highest first; then no data (never calm, so above the calm
+ *  ones); then ยังไม่น่าห่วง. Ties: a worse coming day first, then the fixed order, so equal rows don't jump around. */
+/** A row's level in the list: the worse of today's and its coming days' (R1); a coming day is a forecast, so at most
+ *  เตรียมตัว unless TMD's notice covers that day. */
+export const listLevel = (c) => Math.max(c.level, c.ahead?.level ?? -1);
+export const concern = (c) => { const l = listLevel(c); return l >= 1 ? 10 + l : c.level < 0 ? 5 : 0; };
+export function byConcern(cards) {
+  return [...cards].sort((a, b) => concern(b) - concern(a) || b.level - a.level || ORDER.indexOf(a.id) - ORDER.indexOf(b.id));
+}
+
+/** Fixed order of the hazards (the UX scout §5b), now only the tie-break of the list and the order of the table and
+ *  of the cards' data: the six the scout put first, then the rest. */
 export const ORDER = ["rain", "flood", "pm25", "heat", "quake", "fire", "wind", "uv", "landslide", "air"];
 
 /** The rain (24 h) above which the DMR's landslide watch applies; see levels.js and KNOWLEDGE §3 (provisional). */

@@ -74,6 +74,18 @@ async function tapTargets(page) {
 
 const overflow = (page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 const text = (page, sel) => page.locator(sel).innerText();
+// a hazard's row or a folded section, read whole: opened, read, closed again (0.7.0: details open in place)
+const full = (page, sel) => page.$eval(sel, (e) => {
+  const d = e.tagName === "DETAILS" && !e.open;
+  if (d) e.open = true;
+  // the sources and method sit behind the row's own ⓘ toggle (0.7.0): shown for the read too
+  const folded = [...e.querySelectorAll(".info-text[hidden]")];
+  folded.forEach((x) => { x.hidden = false; });
+  const s = e.innerText;
+  folded.forEach((x) => { x.hidden = true; });
+  if (d) e.open = false;
+  return s;
+});
 
 async function main() {
   const server = await serve(0);
@@ -100,18 +112,23 @@ async function main() {
     const cards = await page.locator(".card").count();
     ok(cards === 10, `10 hazard cards (${cards})`);
     if (!LIVE) {
-      const pm = await text(page, "#card-pm25");
+      const pm = await full(page, "#card-pm25");
       ok(pm.includes("31.9"), "PM2.5 card shows the nearest PCD station's 24-h mean (31.9 at bkp92t, from the fixture)");
       ok(pm.includes("สำนักงานเขตพระนคร"), "PM2.5 card names the station");
-      const fl = await text(page, "#card-flood");
+      const fl = await full(page, "#card-flood");
       ok(fl.includes("131 ซม."), "flood card leads with cm below the bank for C.12 (1.31 m in ThaiWater's fixture)");
-      ok((await text(page, "#outlook")).includes("พรุ่งนี้"), "3-day table has tomorrow");
-      const heat = await text(page, "#card-heat");
+      ok((await full(page, "#outlook-box")).includes("พรุ่งนี้"), "3-day table has tomorrow");
+      const heat = await full(page, "#card-heat");
+      // D8 (0.7.0): the list is sorted by concern, the hero first; on Bangkok's fixture heat (เตรียมตัว) leads
+      const order = await page.$$eval("#cards details.card", (els) => els.map((e) => e.id.slice(5)));
+      ok(order[0] === "heat" && order.length === 10, `the list is sorted by concern, heat first (${order.join(",")})`);
+      ok(!(await page.$eval("#main", (e) => /[\u{1F300}-\u{1FAFF}\u2600-\u27BF]/u.test([...e.querySelectorAll(".row, .hero, .list-head, .fold > summary, .official .calls")].map((x) => x.textContent).join(" ")))),
+        "no emoji in the interface's chrome: this site's own icons (0.7.0)");
       ok(/4[0-9]\s°C/.test(heat) && heat.includes("ปรับแก้"), `heat card shows the corrected value (MODELS §1): ${heat.split("\n").slice(0, 5).join(" | ")}`);
     }
     // T9: the address bar keeps the place as its subdistrict code (LINE's own ⋯ → Share sends it), also after a tile tap
     const h1 = await page.evaluate(() => location.hash);
-    await page.locator(".tile").first().click();
+    await page.locator("#cards .row").first().click();
     await page.waitForTimeout(300);
     const h2 = await page.evaluate(() => location.hash);
     ok(/^#t=\d{6}$/.test(h1) && h2 === h1, `after GPS the address bar holds the subdistrict code, and a tile tap keeps it (T9): "${h1}" → "${h2}"`);
@@ -122,15 +139,15 @@ async function main() {
     if (LIVE) {
       for (const id of ["heat", "pm25", "air", "uv", "rain", "wind", "flood", "landslide", "quake", "fire"]) {
         const c = page.locator(`#card-${id}`);
-        if (await c.count()) console.log(`   [${id}] ${(await c.innerText()).replace(/\s+/g, " ").slice(0, 260)}`);
+        if (await c.count()) console.log(`   [${id}] ${(await full(page, `#card-${id}`)).replace(/\s+/g, " ").slice(0, 260)}`);
       }
     }
     // 2. English
     await page.click("#lang");
     await page.waitForTimeout(200);
     const en = await text(page, "#main");
-    ok(/Heat \(heat index\)/.test(en) && /The next 3 days/.test(en), "English switch translates the cards and headings");
-    const thaiLeft = (await page.locator(".card h3, .block h2, #verdict .vtitle").allInnerTexts()).filter((s) => /[฀-๿]/.test(s));
+    ok(/Heat \(feels like\)/.test(en) && /The next 3 days/.test(en), "English switch translates the cards and headings");
+    const thaiLeft = (await page.locator(".row-name, .list-head h2, .fold > summary, .official h2, #verdict .vtitle").allInnerTexts()).filter((s) => /[฀-๿]/.test(s));
     ok(thaiLeft.length === 0, `no Thai left in English headings (${JSON.stringify(thaiLeft)})`);
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/03-report-en-390.png`, fullPage: true });
     await page.click("#lang");
@@ -144,7 +161,8 @@ async function main() {
     ok(hits.some((h) => h.includes("OpenStreetMap")), "the OpenStreetMap button is offered");
     if (SHOTS) await page.screenshot({ path: `${SHOTS}/04-search-390.png` });
     await page.locator("#results .hit").first().click();
-    await page.waitForFunction(() => document.querySelector("#place-name").textContent.includes("เชียงใหม่"));
+    // the title is the subdistrict, its district and province under it (0.7.0)
+    await page.waitForFunction(() => document.querySelector(".place-main").textContent.includes("เชียงใหม่"));
     ok(true, "choosing a hit opens that place");
     page.once("dialog", (d) => d.accept("บ้านแม่"));
     await page.click("#save");
@@ -172,6 +190,7 @@ async function main() {
     ok((await overflow(small320.page)) <= 0, "no horizontal scroll at 320 px with larger text");
     // the table scrolls inside its own box, which the page check can't see: 0.3.0 hid tomorrow and day 3 there
     const tbl = await small320.page.evaluate(() => {
+      document.querySelector("#outlook-box").open = true;
       const t = document.querySelector(".outlook");
       return t ? [Math.round(t.getBoundingClientRect().width), t.parentElement.clientWidth] : null;
     });
@@ -218,7 +237,9 @@ async function main() {
       await old.page.waitForFunction(() => document.querySelector("#verdict .vname"), null, { timeout: 20000 });
       const ow = await text(old.page, "#warnings");
       const ov = await text(old.page, "#verdict");
-      ok(/ตรวจประกาศเตือนภัยของกรมอุตุฯ ไม่ได้/.test(ow) && !/กรมอุตุฯ: /.test(await text(old.page, "#pre")) && /ประกาศเตือนภัย/.test(ov),
+      const ovAll = await old.page.$eval("#verdict", (e) => e.textContent);
+      // the hero's missing line names the warnings and where to look, in plain sight (redesign audit R4)
+      ok(/ยังไม่มีข้อมูล:[^\n]*ประกาศเตือนภัย[^\n]*tmd\.go\.th/.test(ov) && ovAll.includes("LINE ALERT") && !ow.trim(),
         "a stale collector's warnings are treated as missing, not shown and not calm (S12)");
       await old.ctx.close();
 
@@ -231,10 +252,10 @@ async function main() {
       await tr.page.goto(`${base}#p=7.67,99.46`);
       await tr.page.waitForFunction(() => document.querySelectorAll(".card").length >= 10 && document.querySelector("#verdict .vname"), null, { timeout: 20000 });
       await tr.page.waitForTimeout(600);
-      const tf = await text(tr.page, "#card-flood");
-      const trn = await text(tr.page, "#card-rain");
+      const tf = await full(tr.page, "#card-flood");
+      const trn = await full(tr.page, "#card-rain");
       // the gauge is near its bank now (FloodWatch: warning, 94 %): the measured word leads, the forecast is a line
-      ok(/📈 FloodWatch: วังวิเศษ/.test(tf) && /เกิดจริง 14%/.test(tf) && /ใกล้ล้นตลิ่ง/.test(tf) && /ตามที่ FloodWatch อ่าน/.test(tf),
+      ok(/FloodWatch: วังวิเศษ/.test(tf) && /เกิดจริง 14%/.test(tf) && /ใกล้ล้นตลิ่ง/.test(tf) && /ตามที่ FloodWatch อ่าน/.test(tf),
         `FloodWatch's "may reach the bank" reaches the flood card with its track record, under the measured word: ${tf.split("\n").slice(0, 4).join(" | ")}`);
       ok(/ฝนสะสมที่วัดได้ 3 วัน \(72 ชม\.\): 410 มม\./.test(trn), "the rain card shows the measured 3-day total");
       ok(tr.errors.length === 0, `no page errors with FloodWatch's file (${tr.errors.slice(0, 2).join(" | ")})`);
@@ -279,9 +300,10 @@ async function main() {
       await eve.page.goto(`${base}#p=13.76,100.5`);
       await eve.page.waitForFunction(() => document.querySelectorAll(".card").length >= 10 && document.querySelector(".outlook"));
       await eve.page.waitForTimeout(800);
-      const head = await eve.page.locator(".outlook thead th").allInnerTexts();
-      const heat0 = (await eve.page.locator(".outlook tbody tr").first().locator("td").first().innerText()).trim();
-      const pre = await text(eve.page, "#pre");
+      // (the table sits in a closed fold: its text, not its rendered text)
+      const head = (await eve.page.locator(".outlook thead th").allTextContents()).map((x) => x.trim());
+      const heat0 = (await eve.page.locator(".outlook tbody tr").first().locator("td").first().textContent()).trim();
+      const pre = await text(eve.page, "#verdict");
       ok(head.includes("คืนนี้") && heat0 === "–" && !/ร้อนระดับอันตราย[^\n]*คืนนี้/.test(pre),
         `at 18:30 the first column is "คืนนี้", with no heat number or danger-heat line for the evening (S6): ${JSON.stringify(head)} heat "${heat0}"`);
       ok(eve.errors.length === 0, `no page errors in the evening (${eve.errors.slice(0, 2).join(" | ")})`);
@@ -296,8 +318,9 @@ async function main() {
       await down.page.waitForTimeout(1500);
       const v = await text(down.page, "#verdict");
       ok(/ยังไม่มีข้อมูล/.test(v), `all sources down → "${v.trim()}"`);
-      ok((await down.page.locator(".card .pill").allInnerTexts()).every((p) => /ดึงข้อมูลไม่สำเร็จ|ยังไม่มีข้อมูล/.test(p)), "every card says it couldn't load, none shows a level");
-      ok((await down.page.locator(".tile .tv").count()) === 0, "no tile without a level shows a number (U13: '260 ซม.' read as calm)");
+      const subs = await down.page.locator("#cards .row-sub").allInnerTexts();
+      ok(subs.length === 10 && subs.every((p) => /^(ดึงข้อมูลไม่สำเร็จ|ไม่มีข้อมูล)$/.test(p.trim())), `every row says it couldn't load, none shows a level or a number (U13) ${JSON.stringify(subs.slice(0, 3))}`);
+      ok((await down.page.locator("#cards .row > .gauge.gn").count()) === 10, "every row's gauge is the dashed no-data one");
       ok(down.errors.length === 0, `no page errors with sources down (${down.errors.slice(0, 2).join(" | ")})`);
       await down.ctx.close();
     }

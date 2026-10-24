@@ -23,14 +23,17 @@ See [CHANGELOG.md](../CHANGELOG.md).
   red flag; heat in the DOH's colours (D1); "ข้างหน้า", what changed since the last look, a share text with its time;
   the device study's fixes.
 
-## Next, in order (from 24 Oct 2026, evening)
+- **v0.7.0 (25 Oct 2026, live):** the redesign (D8 by the owner's brief): one hero, one list sorted by concern with rows
+  that open in place, the staff gauge, the site's icons and font; an independent audit's R1 and nine mediums fixed.
 
-1. **The KV token** (A9), then `docker compose up -d`: the edge gets warnings, fires, storms and FloodWatch's lines.
-   *Done when* `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live` exits 0.
+## Next, in order (from 25 Oct 2026)
+
+1. ✅ **The KV token** (A9, 24 Oct 21:12 UTC): the edge serves the live files; `health --need-live` exits 0.
 2. **Real phones in LINE, and a tablet** (A4): the device study's §5 list.
 3. **The archive on cron** (`research/archive_forecasts.mjs`, daily): C6 and the dust chance scored as issued, and the
    orange and red verdict days counted after D1.
-4. **The D8 redesign** after the owner's yes: one release with its own visitor audit ([ux study §2](research/ux-d8-d1-d9-incidents-2026-10-24.md#2-d8-the-redesign)).
+4. ✅ **The D8 redesign** (0.7.0). Next for it: real phones and older readers (A4, A5; KI-043, KI-044), and NBSP
+   between numbers and units (R15).
 5. **D11's words and link** after the owner's yes ([OWNER_ACTIONS D11](OWNER_ACTIONS.md#d-decisions)).
 6. **The upstream rule's record outside Hat Yai:** log each A/B firing and what the gauge downstream did (from
    FloodWatch's history); lift A to เตรียมตัว elsewhere only with a record like the U-Taphao's.
@@ -81,7 +84,7 @@ From [SERVER.md §6](SERVER.md#6-what-to-build-on-the-server-next):
 
 ## v0.5 also: from the 24 Oct audits and research
 
-1. **The redesign** (D8, KI-033): one drawing per hazard. *Done when* a visitor audit finds no two views of one forecast.
+1. ✅ **The redesign** (D8, KI-F40; 0.7.0): one drawing per hazard. *Done when* a visitor audit finds no two views of one forecast.
 2. **The PM2.5 chance line, Dec–Apr** ([predict-air](research/predict-air-2026-10-24.md)): "พรุ่งนี้ โอกาสที่ฝุ่นเฉลี่ยทั้งวันจะถึงระดับ
    เริ่มมีผลกระทบต่อสุขภาพ ราว 40%", lognormal dressing of the damped ratio (σ 0.343 / 0.380), PCD station input only.
    Provisional, like the damped ratio. And a link to PCD's 7-day forecast image.

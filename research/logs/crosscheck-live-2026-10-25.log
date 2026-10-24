@@ -1,0 +1,53 @@
+cross-check at 2026-10-24T21:31:13.573Z
+
+A. gauges: 646 judged by both, 638 the same (98.8 %)
+   BKC003 ours warning / FloodWatch watch
+   BKC002 ours critical / FloodWatch warning
+   PTTEP1 ours watch / FloodWatch normal
+   GLF003 ours warning / FloodWatch watch
+   CPY016 ours watch / FloodWatch warning
+   TCP004 ours normal / FloodWatch watch
+   C.3 ours normal / FloodWatch watch
+   Y.15 ours normal / FloodWatch watch
+
+B. 2 TMD warning(s) in force
+   Very Heavy Rain (Extreme), 7 provinces, until 2026-10-25T06:00:00+07:00
+     Krabi          heavy-rain chance 14 % (possible), median 24-h rain 23.1 mm
+     Songkhla       heavy-rain chance 29 % (possible), median 24-h rain 27.3 mm
+     Satun          heavy-rain chance 37 % (possible), median 24-h rain 24.7 mm
+     Trang          heavy-rain chance 25 % (possible), median 24-h rain 25.3 mm
+     Pattani        heavy-rain chance 16 % (possible), median 24-h rain 20.6 mm
+     Yala           heavy-rain chance 20 % (possible), median 24-h rain 24.9 mm
+     Narathiwat     heavy-rain chance 16 % (possible), median 24-h rain 23.1 mm
+     → the ensemble says "low" (< 10 %) in 0 of 7 warned provinces
+   Heavy Rain (Severe), 6 provinces, until 2026-10-25T06:00:00+07:00
+     Nakhon Si Thammarat heavy-rain chance 8 % (low), median 24-h rain 17.6 mm
+     Phangnga       heavy-rain chance 10 % (low), median 24-h rain 16.7 mm
+     Phuket         heavy-rain chance 16 % (possible), median 24-h rain 23.7 mm
+     Surat Thani    heavy-rain chance 6 % (low), median 24-h rain 11.4 mm
+     Ranong         heavy-rain chance 2 % (low), median 24-h rain 10.2 mm
+     Phatthalung    heavy-rain chance 16 % (possible), median 24-h rain 24.1 mm
+     → the ensemble says "low" (< 10 %) in 4 of 6 warned provinces
+
+C. TMD quakes 10, EMSC events in the box (8 days) 81
+   2026-10-25T04:01:29+07:00 M1.9 ประเทศเมียนมา → no EMSC match
+   2026-10-25T03:23:13+07:00 M1.9 ประเทศเมียนมา → no EMSC match
+   2026-10-25T02:46:11+07:00 M3.8 ประเทศเมียนมา → EMSC M3.8 MYANMAR (0 km apart)
+   2026-10-25T01:02:54+07:00 M2.2 ประเทศลาว → no EMSC match
+   2026-10-24T20:18:24+07:00 M3 ประเทศเมียนมา → EMSC M3 MYANMAR (0 km apart)
+   2026-10-24T17:46:54+07:00 M2 ประเทศลาว → no EMSC match
+   2026-10-24T17:40:17+07:00 M2 ประเทศลาว → no EMSC match
+   2026-10-24T17:16:09+07:00 M4.6 พรมแดนประเทศเมียนมา - ประเทศอิ → EMSC M4.4 MYANMAR (87 km apart)
+   2026-10-24T17:06:47+07:00 M4.3 ประเทศเมียนมา → EMSC M4.3 MYANMAR (0 km apart)
+   2026-10-24T17:04:22+07:00 M2.1 ประเทศเมียนมา → no EMSC match
+   → 4 of 10 matched; TMD − EMSC magnitude: median 0.00, range 0.0…0.2
+
+D. GISTDA 24-h estimate at 10 fresh PCD stations: median ×1.28 (10–90 %: ×1.11…×2.22); over ×1.5 at 2
+   119t    PCD 5.7  GISTDA 12.7  ×2.22
+   bkp116t PCD 14.4  GISTDA 18.8  ×1.30
+   bkp131t PCD 14.3  GISTDA 17.7  ×1.24
+   bkp70t  PCD 13.1  GISTDA 18.1  ×1.38
+   bkp85t  PCD 14.3  GISTDA 17.9  ×1.25
+   o10     PCD 12.9  GISTDA 19.1  ×1.48
+   47t     PCD 18.0  GISTDA 19.5  ×1.08
+   43t     PCD 7.3  GISTDA 11.3  ×1.55

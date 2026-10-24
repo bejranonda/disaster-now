@@ -13,7 +13,7 @@ The audits of 23 Oct 2026 use their own IDs: M1–M5 and H1–H4 from the [outpu
 
 ### KI-001 Not tried on real phones (high; was "not deployed" until 24 Oct 2026)
 - **Deployed on 24 Oct 2026, 20:13 UTC:** https://risk.autobahn.bot (Worker version `9b913164`, 0.5.0), once the owner's
-  token gained *Workers Scripts: Edit*. The edge's `/data/live/*` stays empty until the collector has a KV token (KI-036).
+  token gained *Workers Scripts: Edit*; the live files reach the edge since 21:12 UTC (the KV token). 0.7.0 since 25 Oct.
 
 Checked only in headless Chromium (23 Oct 2026).
 - GPS inside LINE's in-app browser is undocumented by LINE.
@@ -217,18 +217,6 @@ one tap away, the level and times set by rules only. **Next:** a bilingual reade
 translations (OWNER_ACTIONS A5), and a phrase table for TMD's fixed instructions.
 
 
-### KI-033 The page draws each hazard up to six ways (medium; U-series, D8)
-- The verdict, the tile, the pre-warnings, the 3-day table, the card and the card's day chips each show the same
-  forecast. 0.3.0's contradictions (S1, U1, U4, U6, U16, U25, X1–X6) all lived in the gaps between them.
-- 0.4.0 makes them agree (`assess.fcLevel`, one window per label, the warning override on chips too) and tests it, but
-  the page is still 7,700–10,500 px long at 390 px.
-- **The UX study (24 Oct 2026, evening):** one heat forecast was painted orange 12 times on Bangkok's fixture; the page
-  is 8,612 px at 360 px. Recommended: improve, don't extend — three views (the verdict with "ข้างหน้า" and "เปลี่ยนจากที่ดู
-  ครั้งก่อน", one row per hazard with a 3-day strip that absorbs the table, the chips and the pre-warnings, the detail
-  opened in place) ([ux study §2](research/ux-d8-d1-d9-incidents-2026-10-24.md#2-d8-the-redesign)). 0.6.0 ships the
-  two verdict lines.
-- **Next:** the owner's D8, as one release with its own visitor audit and real phones (A4).
-
 ### KI-034 The family's colours differ for the same word (low; X17, D9)
 FloodWatch's watch and critical colours and บ้านรอดไหม's heat and dust colours differ from this page's (INTEGRATION §5,
 corrected on 24 Oct: it had said they matched). Since 0.6.0 this page's heat follows the DOH's colours, as บ้านรอดไหม's
@@ -242,21 +230,15 @@ The card says "รายงานล่าสุดของ สสน." with no
 can't read that header from another origin unless HII exposes it. **Next:** the collector reads it and publishes the
 report with its time (SERVER §6.3).
 
-### KI-036 The Cloudflare token is broader than this app, and the collector has no KV token (medium; A9)
-- The token in `.env` (24 Oct 2026) covers *All zones across all accounts* with Zone Settings, Page Rules, Firewall and
-  DNS: Edit, plus Workers AI, Pages and R2. A leak would reach every zone the owner has, on a host that runs another app.
-- `CF_KV_TOKEN` is empty: the collector can't upload to KV, so the Worker's `/data/live/*` serves what was uploaded by
-  hand, or nothing (the warning, fire and storm tiles then say they couldn't load).
+### KI-036 The deploy token is broader than this app (medium; A9)
+- The deploy token in `.env` covers *All zones across all accounts* with Zone Settings, Page Rules, Firewall and DNS:
+  Edit, plus Workers AI, Pages and R2. A leak would reach every zone the owner has, on a host that runs another app.
+- **24 Oct 2026, 20:12 UTC:** it gained *Workers Scripts: Edit* and *Workers Routes: Edit*; `cf:deploy` works.
+- **24 Oct 2026, 21:12 UTC: the collector's KV-only token is set** (checked read-only: KV read and write; no zones, no
+  scripts; DNS and deploys refused). The edge serves the live files; `health --web https://risk.autobahn.bot/
+  --need-live` exits 0.
 
-- **24 Oct 2026, 20:12 UTC:** the token gained *Workers Scripts: Edit* and *Workers Routes: Edit*; `cf:deploy` worked.
-  It is still as broad as before, and `CF_KV_TOKEN` is still empty: the edge answers **404 for `/data/live/index.json`**,
-  so on https://risk.autobahn.bot the warnings box says it couldn't check TMD, the fire and storm tiles have no data,
-  and the flood tile uses ThaiWater only. `node tools/health.mjs --web https://risk.autobahn.bot/ --need-live` fails
-  until the KV token is set.
-
-**Next:** OWNER_ACTIONS A9: a KV-only `CF_KV_TOKEN` (*Account → Workers KV Storage: Edit*, nothing else), then
-`docker compose up -d` (the collector reads `.env` at start); narrow the deploy token to `autobahn.bot` and the Workers
-permissions.
+**Next:** OWNER_ACTIONS A9: narrow the deploy token to `autobahn.bot` and the Workers permissions.
 
 ### KI-039 A multi-day flood rain looks like "สูง", never like its size (high; Hat Yai hindcast)
 - In the Hat Yai flood of Nov 2025 the page would have said "สูง" two days ahead and reached ทำทันที from measured rain
@@ -305,8 +287,17 @@ permissions.
   (T8: at 200 % the verdict left a 360 × 560 screen; 0.6.0 unsticks the header on short screens), the GPS prompt itself.
 - Slow 3G (T5): 0.6.0 preloads the modules and shows "กำลังเปิดพื้นที่ที่ส่งมา…" for a shared link at once; not
   re-measured on a throttled link.
-- Tablets (T13): the same 720 px column, 53–64 % of a landscape screen. It reads well; a wider layout belongs to D8.
+- Tablets (T13): since 0.7.0 two columns from 960 px (an iPad in landscape: the hero and hotlines left, the list right);
+  portrait tablets (744–820 px) keep the 680 px phone column.
 - **Next:** OWNER_ACTIONS A4 (an Android and an iPhone, from a LINE chat; a tablet).
+
+### KI-044 What the redesign audit left open (low; R13, R15, R16)
+- **R15:** lines can break between a number and its unit or inside an abbreviation ("≥ 42 / °C", "กรมอุ / ตุฯ") at 320 px
+  with ก+; the data words come from `assess.js` with ordinary spaces.
+- **R16:** the loopless Anuphan for body text is a choice to test with older readers (A5, A4); secondary text is
+  13.6–15.6 px at the default size.
+- **R13:** the level glyph is read with its word, and the group heading says the same word again for screen readers.
+- **Next:** NBSP between numbers and units in `assess.js`'s lines; a reading test with older readers before changing the face.
 
 ### KI-038 The dust chance is provisional, and over-warns at its low end (low)
 - Shown 20 % → 8 % happened (disjoint stations, two dust seasons); it inherits the damped ratio's post-hoc status, and
@@ -322,6 +313,23 @@ permissions.
   and in March (pre-registered in MODELS §1.1). Revert if C6 loses on MAE or danger-day hits.
 
 ## Fixed
+
+### KI-F40 The page drew each hazard up to six ways, in a fixed order, with emoji (0.7.0; was KI-033, D8 → D-061, D-062)
+- The verdict, the tile, the pre-warnings, the 3-day table, the card and the card's day chips each show the same
+  forecast. 0.3.0's contradictions (S1, U1, U4, U6, U16, U25, X1–X6) all lived in the gaps between them.
+- 0.4.0 makes them agree (`assess.fcLevel`, one window per label, the warning override on chips too) and tests it, but
+  the page is still 7,700–10,500 px long at 390 px.
+- **The UX study (24 Oct 2026, evening):** one heat forecast was painted orange 12 times on Bangkok's fixture; the page
+  is 8,612 px at 360 px. Recommended: improve, don't extend — three views (the verdict with "ข้างหน้า" and "เปลี่ยนจากที่ดู
+  ครั้งก่อน", one row per hazard with a 3-day strip that absorbs the table, the chips and the pre-warnings, the detail
+  opened in place) ([ux study §2](research/ux-d8-d1-d9-incidents-2026-10-24.md#2-d8-the-redesign)). 0.6.0 ships the
+  two verdict lines.
+
+- **Fixed in 0.7.0** (the owner's brief, 25 Oct): one hero, one list sorted by concern (by the worse of today and the
+  coming days, grouped by the scale's words) whose rows open in place, the 3-day table and profile folded, sources behind
+  a real ⓘ toggle, the staff-gauge glyph and the site's own icons and font. Bangkok's fixture page: about 2,600 px at 390
+  px (was 8,612 at 360); the hero ends at 491–505 px on a 360 × 640 LINE screen. An independent audit (R1–R20) ran before
+  shipping; R1 (a coming เตรียมตัว under "ยังไม่น่าห่วง") and nine mediums were fixed (CHANGELOG 0.7.0).
 
 ### KI-F38 Heat read orange on most afternoons, a step above the DOH's own colours (0.6.0; was KI-005, D1 → D-053)
 - **Why it reads so high:** the raw ensemble read about 5 °C low against TMD's stations, so 0.2.0 shows only corrected values ([MODELS §1](MODELS.md#1-heat-index)).
