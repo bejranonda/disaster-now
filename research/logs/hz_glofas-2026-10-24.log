@@ -1,0 +1,75 @@
+===== hz_glofas 2026-10-24T11:56:30Z
+
+kok_chiangrai (Kok at Chiang Rai city): asked 19.92,99.83; cell 19.925,99.825 (0.8 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 66, p90 488, max 1232 on 2024-09-12
+  2024: annual max 1232 on 2024-09-12; top peaks 12 Sep 1232, 05 Oct 795, 23 Sep 763; ratio of max to median 17.8
+  2025: annual max 546 on 2025-09-01; top peaks 01 Sep 546, 30 Jul 512, 09 Aug 484; ratio of max to median 8.8
+  2024 Jul-Nov monthly mean: Jul 129, Aug 499, Sep 765, Oct 565, Nov 213
+
+sai_maesai (Sai at Mae Sai): asked 20.43,99.88; cell 20.425,99.875 (0.8 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 21, p90 96, max 204 on 2024-09-12
+  2024: annual max 204 on 2024-09-12; top peaks 12 Sep 204, 22 Sep 133, 29 Aug 126; ratio of max to median 8.7
+  2025: annual max 107 on 2025-07-29; top peaks 29 Jul 107, 01 Sep 104, 08 Aug 96; ratio of max to median 5.8
+  2024 Jul-Nov monthly mean: Jul 48, Aug 96, Sep 133, Oct 99, Nov 52
+
+ping_chiangmai (Ping at Chiang Mai city (P.1)): asked 18.79,99.0; cell 18.775,99.025 (3.1 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 10, p90 37, max 91 on 2025-08-27
+  2024: annual max 67 on 2024-10-04; top peaks 04 Oct 67, 24 Sep 61, 12 Sep 52; ratio of max to median 6.8
+  2025: annual max 91 on 2025-08-27; top peaks 27 Aug 91, 02 Oct 37, 30 Jul 35; ratio of max to median 8.0
+  2024 Jul-Nov monthly mean: Jul 15, Aug 40, Sep 44, Oct 42, Nov 19
+
+nan_nan (Nan at Nan city (N.1)): asked 18.78,100.78; cell 18.775,100.775 (0.8 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 0, p90 1, max 7 on 2025-08-27
+  2024: annual max 5 on 2024-09-26; top peaks 26 Sep 5, 05 Aug 3, 23 Aug 2; ratio of max to median 46.8
+  2025: annual max 7 on 2025-08-27; top peaks 27 Aug 7, 30 Jul 6, 19 Jul 3; ratio of max to median 57.6
+  2024 Jul-Nov monthly mean: Jul 0, Aug 1, Sep 1, Oct 1, Nov 0
+
+yom_sukhothai (Yom at Sukhothai city): asked 17.01,99.82; cell 17.025,99.825 (1.8 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 0, p90 1, max 2 on 2025-10-01
+  2024: annual max 2 on 2024-10-04; top peaks 04 Oct 2, 06 Aug 2, 22 Sep 2; ratio of max to median 6.6
+  2025: annual max 2 on 2025-10-01; top peaks 01 Oct 2, 01 Sep 2, 11 Sep 1; ratio of max to median 6.6
+  2024 Jul-Nov monthly mean: Jul 1, Aug 1, Sep 1, Oct 1, Nov 0
+
+chaophraya_nakhonsawan (Chao Phraya at Nakhon Sawan (C.2)): asked 15.7,100.13; cell 15.675,100.125 (2.8 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 0, p90 1, max 2 on 2024-10-04
+  2024: annual max 2 on 2024-10-04; top peaks 04 Oct 2, 22 Oct 2, 04 Sep 1; ratio of max to median 12.1
+  2025: annual max 2 on 2025-09-29; top peaks 29 Sep 2, 04 Nov 2, 11 Sep 1; ratio of max to median 7.4
+  2024 Jul-Nov monthly mean: Jul 0, Aug 1, Sep 1, Oct 1, Nov 0
+  2022-08-01..2022-11-30: max 3 on 2022-10-01; vs the 2024-25 max 2
+
+chaophraya_bangkok (Chao Phraya at Bangkok): asked 13.75,100.49; cell 13.775,100.475 (3.2 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 1022, p90 3356, max 5320 on 2024-10-07
+  2024: annual max 5320 on 2024-10-07; top peaks 07 Oct 5320, 27 Sep 3498, 24 Oct 3442; ratio of max to median 5.7
+  2025: annual max 5057 on 2025-10-02; top peaks 02 Oct 5057, 10 Sep 4354, 12 Oct 4045; ratio of max to median 4.4
+  2024 Jul-Nov monthly mean: Jul 1330, Aug 2524, Sep 2840, Oct 3480, Nov 1654
+
+mun_ubon (Mun at Ubon Ratchathani (M.7)): asked 15.23,104.86; cell 15.225,104.875 (1.7 km away); n 731 days, 0 missing
+  2024-25 discharge m3/s: median 347, p90 1373, max 2654 on 2025-10-03
+  2024: annual max 2253 on 2024-07-18; top peaks 18 Jul 2253, 27 Sep 1376, 07 Oct 1113; ratio of max to median 9.5
+  2025: annual max 2654 on 2025-10-03; top peaks 03 Oct 2654, 13 Oct 1981, 23 Sep 1870; ratio of max to median 6.4
+  2024 Jul-Nov monthly mean: Jul 916, Aug 713, Sep 917, Oct 810, Nov 334
+  2022-08-01..2022-11-30: max 5069 on 2022-10-06; vs the 2024-25 max 2654
+
+Cell search (added after the first run) for the sites that returned a side cell:
+  ping_chiangmai: the largest-flow cell 18.675,98.925 is 15.0 km from the gauge (first-run choice, rejected: it drifts downstream)
+  ping_chiangmai: best cell 18.775,98.925 (8.1 km from the gauge); 25-cell means (20 Sep-3 Oct 2024) top 5 [328, 326, 323, 305, 88]; Aug-Oct 2024 max 409 on 2024-10-05; peaks 05 Oct 409, 25 Sep 355, 14 Sep 328
+  nan_nan: the largest-flow cell 18.675,100.725 is 13.0 km from the gauge (first-run choice, rejected: it drifts downstream)
+  nan_nan: best cell 18.775,100.725 (5.8 km from the gauge); 25-cell means (20 Sep-3 Oct 2024) top 5 [438, 436, 397, 391, 369]; Aug-Oct 2024 max 709 on 2024-08-04; peaks 04 Aug 709, 26 Sep 609, 13 Sep 597
+  yom_sukhothai: the largest-flow cell 16.925,99.925 is 14.6 km from the gauge (first-run choice, rejected: it drifts downstream)
+  yom_sukhothai: best cell 17.075,99.775 (8.7 km from the gauge); 25-cell means (20 Sep-3 Oct 2024) top 5 [493, 493, 483, 456, 455]; Aug-Oct 2024 max 759 on 2024-10-06; peaks 06 Oct 759, 26 Sep 458, 16 Oct 444
+  chaophraya_nakhonsawan: the largest-flow cell 15.575,100.025 is 17.9 km from the gauge (first-run choice, rejected: it drifts downstream)
+  chaophraya_nakhonsawan: best cell 15.675,100.075 (6.5 km from the gauge); 25-cell means (20 Sep-3 Oct 2024) top 5 [2675, 2646, 2646, 1443, 1442]; Aug-Oct 2024 max 4063 on 2024-10-06; peaks 06 Oct 4063, 26 Sep 2837, 16 Oct 2546
+    2022 Aug-Nov at the best cell: max 4177 on 2022-10-05
+
+Open-Meteo weight spent by this task so far: 1284.8
+===== hz_glofas_now 2026-10-24T11:56:31Z
+Nan cell (18.775, 100.725), Aug 2026: max 747 m3/s on 2026-08-14; daily 01:323 02:339 03:355 04:360 05:320 06:325 07:372 08:424 09:494 10:577 11:633 12:592 13:735 14:747 15:699 16:666 17:526 18:471 19:433 20:480 21:461 22:433 23:395 24:335 25:288 26:263 27:230 28:236 29:239 30:227 31:281
+forecast at the Nan cell (asked 2026-10-24): 30 days from 2026-10-24; columns ['time', 'river_discharge', 'river_discharge_mean', 'river_discharge_median', 'river_discharge_max', 'river_discharge_min', 'river_discharge_p25', 'river_discharge_p75']
+  time 2026-10-24, river_discharge 24.41, river_discharge_mean 24.41, river_discharge_median 24.41, river_discharge_max 24.41, river_discharge_min 24.41, river_discharge_p25 24.41, river_discharge_p75 24.41
+  time 2026-10-25, river_discharge 24.41, river_discharge_mean 24.42, river_discharge_median 24.41, river_discharge_max 24.53, river_discharge_min 24.41, river_discharge_p25 24.41, river_discharge_p75 24.41
+  time 2026-10-26, river_discharge 24.41, river_discharge_mean 24.47, river_discharge_median 24.41, river_discharge_max 25.12, river_discharge_min 24.29, river_discharge_p25 24.35, river_discharge_p75 24.53
+  time 2026-10-27, river_discharge 25.18, river_discharge_mean 25.09, river_discharge_median 24.82, river_discharge_max 28.38, river_discharge_min 24.29, river_discharge_p25 24.56, river_discharge_p75 25.3
+  time 2026-10-30, river_discharge 30.92, river_discharge_mean 28.36, river_discharge_median 27.84, river_discharge_max 36.41, river_discharge_min 24.82, river_discharge_p25 25.82, river_discharge_p75 30.08
+  time 2026-11-06, river_discharge 24.53, river_discharge_mean 27.32, river_discharge_median 25.79, river_discharge_max 45.88, river_discharge_min 24.06, river_discharge_p25 24.67, river_discharge_p75 27.71
+  time 2026-11-22, river_discharge 23.43, river_discharge_mean 25.74, river_discharge_median 23.89, river_discharge_max 48.32, river_discharge_min 22.66, river_discharge_p25 23.38, river_discharge_p75 25.61
+weight spent by this task so far: 1284.8

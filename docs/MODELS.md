@@ -183,6 +183,26 @@ to test, on disjoint stations B (Chiang Rai, Nan, Mae Hong Son, Phrae, Bang Na, 
 
 The chance rule (§6) still lifts the tile when ≥ 20 % of members reach heavy rain. A neighbourhood chance ("within 25 km") was not tested and may score better (ROADMAP).
 
+### 3.1 Rain, fire weather and floods: the research of 24 Oct 2026
+
+[research/predict-hazards-2026-10-24.md](research/predict-hazards-2026-10-24.md) (scripts `research/hz_*.py`):
+- **The rain words hold on 76 stations in 2025** (38 + 38 disjoint): after "ต่ำ" heavy rain fell on 2.9 % of days, after
+  "มีโอกาส" on 14–19 %, after "สูง" on 37–43 %; but 57–62 % of heavy-rain days still came under "ต่ำ". The ensemble
+  chance's Brier skill was +0.044 / +0.064 at the point.
+- **A "within 25 km" chance doesn't earn new words:** the average over 25 km scored +0.053 / +0.079, the largest within
+  25 km +0.019 / +0.074; the gain is small, and the event itself can't be verified without a dense gauge network.
+  **Not shipped.**
+- **Landslide rule** (DMR's 100 mm): an ensemble chance of 100 mm ≥ 20 % came on 15 of 39,642 station-days, 10 of them
+  with 100 mm or more, out of 156 such days. It names few of them; HII's and DMR's own products stay.
+- **Fire weather** (Canadian FWI from ERA5, 10 northern points, dry seasons 2020–2025): with the calendar, Brier skill
+  +0.19 on later years and other points for days with 10 or more hotspots within 25 km; yesterday's count alone +0.46 to
+  +0.48 (the page already shows it). FWI ≥ 29 was followed by such days 33–36 % of the time, against 4–7 %. But the
+  FWI the page could read (GWIS) averaged 16.3 against ERA5's 25.1 in Jan–Apr 2026: **wait**, archive GWIS from
+  December, re-test after the 2027 season.
+- **GloFAS** (Open-Meteo's flood API) peaked on the reported 2024 flood days at Mae Sai, Chiang Rai, Chiang Mai and Nan
+  where the right river cell was found (4 of 8 gauges returned a side channel). Its licence says it "does not constitute
+  in any way a flood warning". **Not for this page:** FloodWatch's to test (INTEGRATION §3).
+
 ## 4. Gusts
 
 No gust observations were available in the station records used, so **nothing is validated**. The card says "ยังไม่ได้ตรวจสอบความแม่นยำ".

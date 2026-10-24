@@ -1,0 +1,6 @@
+ecmwf_ifs025 2024-01-01..2024-01-14: 336 hours; non-null per variable {'precipitation': 0, 'precipitation_previous_day1': 0, 'precipitation_previous_day2': 0, 'precipitation_previous_day3': 0}
+ecmwf_ifs025 2023-12-01..2023-12-14: 336 hours; non-null per variable {'precipitation': 0, 'precipitation_previous_day1': 0, 'precipitation_previous_day2': 0, 'precipitation_previous_day3': 0}
+jma_gsm 2019-07-01..2019-07-14: 336 hours; non-null per variable {'precipitation': 336, 'precipitation_previous_day1': 336, 'precipitation_previous_day2': 336, 'precipitation_previous_day3': 336}
+ecmwf_ifs025 2024-06-01..2024-06-14: 336 hours; non-null per variable {'precipitation': 336, 'precipitation_previous_day1': 336, 'precipitation_previous_day2': 336, 'precipitation_previous_day3': 336}
+ecmwf_ifs025 2025-06-01..2025-06-14: 336 hours; non-null per variable {'precipitation': 336, 'precipitation_previous_day1': 336, 'precipitation_previous_day2': 336, 'precipitation_previous_day3': 336}
+weight spent so far by this task: 1284.8

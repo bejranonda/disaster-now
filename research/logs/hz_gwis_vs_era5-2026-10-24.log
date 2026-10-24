@@ -1,0 +1,16 @@
+===== hz_gwis_vs_era5 2026-10-24T09:18:08Z
+days with both: 240 ({'chiang_mai': 120, 'nan': 120})
+  FWI : GWIS mean    16.3  ERA5 mean    25.1  Pearson r 0.72  Spearman 0.73  median |diff| 7.6
+  FFMC: GWIS mean    86.2  ERA5 mean    89.3  Pearson r 0.58  Spearman 0.69  median |diff| 2.2
+  DMC : GWIS mean    76.4  ERA5 mean   115.7  Pearson r 0.68  Spearman 0.64  median |diff| 31.3
+  DC  : GWIS mean   428.5  ERA5 mean   562.5  Pearson r 0.97  Spearman 0.97  median |diff| 115.1
+  ISI : GWIS mean     4.2  ERA5 mean     6.3  Pearson r 0.69  Spearman 0.68  median |diff| 1.8
+  BUI : GWIS mean   102.0  ERA5 mean   149.7  Pearson r 0.77  Spearman 0.71  median |diff| 34.0
+  FWI >= 21.3: GWIS says yes on 0.25 of days, ERA5 on 0.56; agree on 0.69
+  FWI >= 29.0: GWIS says yes on 0.04 of days, ERA5 on 0.35; agree on 0.68
+  FWI >= 38.0: GWIS says yes on 0.00 of days, ERA5 on 0.16; agree on 0.84
+  ERA5 FWI >= 21.3 on 0.56 of days; GWIS FWI at the same rank: 15.5
+  ERA5 FWI >= 29.0 on 0.35 of days; GWIS FWI at the same rank: 18.6
+  ERA5 FWI >= 38.0 on 0.16 of days; GWIS FWI at the same rank: 24.1
+  chiang_mai: FWI r 0.66, mean GWIS 15.8 vs ERA5 25.6
+  nan: FWI r 0.78, mean GWIS 16.8 vs ERA5 24.5

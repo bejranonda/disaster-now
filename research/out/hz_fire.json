@@ -1,0 +1,1868 @@
+{
+ "n_scored": 6380,
+ "radius_km": 25.0,
+ "by_threshold": {
+  "10": {
+   "train": {
+    "n": 1595,
+    "events": 292,
+    "chosen_feature": "relative_humidity_2m",
+    "fwi_threshold": 29.0
+   },
+   "sets": {
+    "A later years (2023-25)": {
+     "climatology": {
+      "n": 1595,
+      "events": 326,
+      "brier": 0.1618,
+      "bss_vs_clim": 0.0,
+      "auc": 0.633
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 326,
+      "brier": 0.0881,
+      "bss_vs_clim": 0.455,
+      "auc": 0.909
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 326,
+      "brier": 0.0894,
+      "bss_vs_clim": 0.447,
+      "auc": 0.911
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 326,
+      "brier": 0.1317,
+      "bss_vs_clim": 0.186,
+      "auc": 0.792
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 326,
+      "brier": 0.0871,
+      "bss_vs_clim": 0.462,
+      "auc": 0.92
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 326,
+      "brier": 0.0884,
+      "bss_vs_clim": 0.454,
+      "auc": 0.921
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 326,
+      "brier": 0.0896,
+      "bss_vs_clim": 0.446,
+      "auc": 0.913
+     },
+     "fwi_gain_boot": {
+      "diff": -0.0023,
+      "lo95": -0.00499,
+      "hi95": 0.00067
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.03012,
+      "lo95": -0.03873,
+      "hi95": -0.02231
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.794,
+      "p_event_yes": 0.253,
+      "p_event_no": 0.018,
+      "hits": 320,
+      "false_alarms": 946,
+      "misses": 6,
+      "pod": 0.982,
+      "far": 0.747,
+      "csi": 0.252
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.155,
+      "p_event_yes": 0.415,
+      "p_event_no": 0.166,
+      "hits": 103,
+      "false_alarms": 145,
+      "misses": 223,
+      "pod": 0.316,
+      "far": 0.585,
+      "csi": 0.219
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.945,
+      "p_event_yes": 0.216,
+      "p_event_no": 0.011,
+      "hits": 325,
+      "false_alarms": 1182,
+      "misses": 1,
+      "pod": 0.997,
+      "far": 0.784,
+      "csi": 0.216
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.928,
+      "p_event_yes": 0.22,
+      "p_event_no": 0.009,
+      "hits": 325,
+      "false_alarms": 1155,
+      "misses": 1,
+      "pod": 0.997,
+      "far": 0.78,
+      "csi": 0.219
+     },
+     "rule_fwi": {
+      "threshold": 29.0,
+      "share_yes": 0.522,
+      "p_event_yes": 0.326,
+      "p_event_no": 0.072,
+      "hits": 271,
+      "false_alarms": 561,
+      "misses": 55,
+      "pod": 0.831,
+      "far": 0.674,
+      "csi": 0.306
+     },
+     "rule_persistence": {
+      "hits": 226,
+      "false_alarms": 99,
+      "misses": 100,
+      "pod": 0.693,
+      "far": 0.305,
+      "csi": 0.532
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 849,
+       "forecast": 0.012,
+       "observed": 0.019
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 135,
+       "forecast": 0.075,
+       "observed": 0.111
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 157,
+       "forecast": 0.143,
+       "observed": 0.191
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 162,
+       "forecast": 0.288,
+       "observed": 0.327
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 119,
+       "forecast": 0.492,
+       "observed": 0.513
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 173,
+       "forecast": 0.787,
+       "observed": 0.873
+      }
+     ]
+    },
+    "B disjoint points, later years (2023-25)": {
+     "climatology": {
+      "n": 1595,
+      "events": 325,
+      "brier": 0.1504,
+      "bss_vs_clim": 0.0,
+      "auc": 0.704
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 325,
+      "brier": 0.0785,
+      "bss_vs_clim": 0.478,
+      "auc": 0.927
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 325,
+      "brier": 0.079,
+      "bss_vs_clim": 0.475,
+      "auc": 0.926
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 325,
+      "brier": 0.1221,
+      "bss_vs_clim": 0.188,
+      "auc": 0.82
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 325,
+      "brier": 0.0766,
+      "bss_vs_clim": 0.491,
+      "auc": 0.929
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 325,
+      "brier": 0.0752,
+      "bss_vs_clim": 0.5,
+      "auc": 0.932
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 325,
+      "brier": 0.0778,
+      "bss_vs_clim": 0.483,
+      "auc": 0.927
+     },
+     "fwi_gain_boot": {
+      "diff": -0.00237,
+      "lo95": -0.00443,
+      "hi95": -0.00018
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.02829,
+      "lo95": -0.03773,
+      "hi95": -0.01887
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.781,
+      "p_event_yes": 0.256,
+      "p_event_no": 0.017,
+      "hits": 319,
+      "false_alarms": 926,
+      "misses": 6,
+      "pod": 0.982,
+      "far": 0.744,
+      "csi": 0.255
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.182,
+      "p_event_yes": 0.548,
+      "p_event_no": 0.127,
+      "hits": 159,
+      "false_alarms": 131,
+      "misses": 166,
+      "pod": 0.489,
+      "far": 0.452,
+      "csi": 0.349
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.943,
+      "p_event_yes": 0.216,
+      "p_event_no": 0.0,
+      "hits": 325,
+      "false_alarms": 1179,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.784,
+      "csi": 0.216
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.915,
+      "p_event_yes": 0.223,
+      "p_event_no": 0.0,
+      "hits": 325,
+      "false_alarms": 1134,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.777,
+      "csi": 0.223
+     },
+     "rule_fwi": {
+      "threshold": 29.0,
+      "share_yes": 0.504,
+      "p_event_yes": 0.364,
+      "p_event_no": 0.04,
+      "hits": 293,
+      "false_alarms": 511,
+      "misses": 32,
+      "pod": 0.902,
+      "far": 0.636,
+      "csi": 0.35
+     },
+     "rule_persistence": {
+      "hits": 235,
+      "false_alarms": 88,
+      "misses": 90,
+      "pod": 0.723,
+      "far": 0.272,
+      "csi": 0.569
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 891,
+       "forecast": 0.013,
+       "observed": 0.022
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 130,
+       "forecast": 0.069,
+       "observed": 0.1
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 137,
+       "forecast": 0.145,
+       "observed": 0.168
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 130,
+       "forecast": 0.283,
+       "observed": 0.3
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 83,
+       "forecast": 0.495,
+       "observed": 0.458
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 224,
+       "forecast": 0.836,
+       "observed": 0.857
+      }
+     ]
+    },
+    "B disjoint points, same years (2020-22)": {
+     "climatology": {
+      "n": 1595,
+      "events": 295,
+      "brier": 0.1261,
+      "bss_vs_clim": 0.0,
+      "auc": 0.783
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 295,
+      "brier": 0.0792,
+      "bss_vs_clim": 0.372,
+      "auc": 0.914
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 295,
+      "brier": 0.0775,
+      "bss_vs_clim": 0.386,
+      "auc": 0.924
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 295,
+      "brier": 0.0906,
+      "bss_vs_clim": 0.282,
+      "auc": 0.898
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 295,
+      "brier": 0.0738,
+      "bss_vs_clim": 0.415,
+      "auc": 0.937
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 295,
+      "brier": 0.0727,
+      "bss_vs_clim": 0.424,
+      "auc": 0.939
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 295,
+      "brier": 0.0761,
+      "bss_vs_clim": 0.397,
+      "auc": 0.932
+     },
+     "fwi_gain_boot": {
+      "diff": -0.00364,
+      "lo95": -0.00618,
+      "hi95": -0.00121
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.03552,
+      "lo95": -0.04684,
+      "hi95": -0.02498
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.579,
+      "p_event_yes": 0.299,
+      "p_event_no": 0.028,
+      "hits": 276,
+      "false_alarms": 647,
+      "misses": 19,
+      "pod": 0.936,
+      "far": 0.701,
+      "csi": 0.293
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.181,
+      "p_event_yes": 0.543,
+      "p_event_no": 0.106,
+      "hits": 157,
+      "false_alarms": 132,
+      "misses": 138,
+      "pod": 0.532,
+      "far": 0.457,
+      "csi": 0.368
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.853,
+      "p_event_yes": 0.217,
+      "p_event_no": 0.0,
+      "hits": 295,
+      "false_alarms": 1066,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.783,
+      "csi": 0.217
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.734,
+      "p_event_yes": 0.25,
+      "p_event_no": 0.005,
+      "hits": 293,
+      "false_alarms": 877,
+      "misses": 2,
+      "pod": 0.993,
+      "far": 0.75,
+      "csi": 0.25
+     },
+     "rule_fwi": {
+      "threshold": 29.0,
+      "share_yes": 0.408,
+      "p_event_yes": 0.369,
+      "p_event_no": 0.058,
+      "hits": 240,
+      "false_alarms": 410,
+      "misses": 55,
+      "pod": 0.814,
+      "far": 0.631,
+      "csi": 0.34
+     },
+     "rule_persistence": {
+      "hits": 203,
+      "false_alarms": 92,
+      "misses": 92,
+      "pod": 0.688,
+      "far": 0.312,
+      "csi": 0.525
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 933,
+       "forecast": 0.009,
+       "observed": 0.015
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 123,
+       "forecast": 0.075,
+       "observed": 0.081
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 115,
+       "forecast": 0.142,
+       "observed": 0.174
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 131,
+       "forecast": 0.288,
+       "observed": 0.298
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 91,
+       "forecast": 0.495,
+       "observed": 0.495
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 202,
+       "forecast": 0.833,
+       "observed": 0.827
+      }
+     ]
+    }
+   },
+   "lead": {
+    "all days|1|A later years (2023-25)": {
+     "n": 1595,
+     "events": 326,
+     "bss_count": 0.447,
+     "bss_count_fwi": 0.462,
+     "auc_count": 0.911,
+     "auc_count_fwi": 0.92,
+     "dbrier": -0.0023,
+     "lo95": -0.00499,
+     "hi95": 0.00067
+    },
+    "all days|1|B disjoint points, later years (2023-25)": {
+     "n": 1595,
+     "events": 325,
+     "bss_count": 0.475,
+     "bss_count_fwi": 0.491,
+     "auc_count": 0.926,
+     "auc_count_fwi": 0.929,
+     "dbrier": -0.00237,
+     "lo95": -0.00443,
+     "hi95": -0.00018
+    },
+    "all days|2|A later years (2023-25)": {
+     "n": 1595,
+     "events": 326,
+     "bss_count": 0.249,
+     "bss_count_fwi": 0.3,
+     "auc_count": 0.831,
+     "auc_count_fwi": 0.863,
+     "dbrier": -0.00837,
+     "lo95": -0.01349,
+     "hi95": -0.00282
+    },
+    "all days|2|B disjoint points, later years (2023-25)": {
+     "n": 1595,
+     "events": 325,
+     "bss_count": 0.345,
+     "bss_count_fwi": 0.379,
+     "auc_count": 0.881,
+     "auc_count_fwi": 0.889,
+     "dbrier": -0.00506,
+     "lo95": -0.00919,
+     "hi95": -0.00087
+    },
+    "all days|3|A later years (2023-25)": {
+     "n": 1595,
+     "events": 326,
+     "bss_count": 0.165,
+     "bss_count_fwi": 0.238,
+     "auc_count": 0.78,
+     "auc_count_fwi": 0.828,
+     "dbrier": -0.01182,
+     "lo95": -0.01877,
+     "hi95": -0.00425
+    },
+    "all days|3|B disjoint points, later years (2023-25)": {
+     "n": 1595,
+     "events": 325,
+     "bss_count": 0.252,
+     "bss_count_fwi": 0.285,
+     "auc_count": 0.842,
+     "auc_count_fwi": 0.853,
+     "dbrier": -0.00496,
+     "lo95": -0.01105,
+     "hi95": 0.00125
+    },
+    "dry days only (cloud check)|1|A later years (2023-25)": {
+     "n": 1297,
+     "events": 312,
+     "bss_count": 0.446,
+     "bss_count_fwi": 0.456,
+     "auc_count": 0.9,
+     "auc_count_fwi": 0.905,
+     "dbrier": -0.00192,
+     "lo95": -0.00404,
+     "hi95": 0.00032
+    },
+    "dry days only (cloud check)|1|B disjoint points, later years (2023-25)": {
+     "n": 1274,
+     "events": 306,
+     "bss_count": 0.479,
+     "bss_count_fwi": 0.486,
+     "auc_count": 0.923,
+     "auc_count_fwi": 0.924,
+     "dbrier": -0.00126,
+     "lo95": -0.00314,
+     "hi95": 0.00078
+    },
+    "dry days only (cloud check)|2|A later years (2023-25)": {
+     "n": 1297,
+     "events": 312,
+     "bss_count": 0.253,
+     "bss_count_fwi": 0.281,
+     "auc_count": 0.817,
+     "auc_count_fwi": 0.836,
+     "dbrier": -0.00518,
+     "lo95": -0.00905,
+     "hi95": -0.00088
+    },
+    "dry days only (cloud check)|2|B disjoint points, later years (2023-25)": {
+     "n": 1274,
+     "events": 306,
+     "bss_count": 0.364,
+     "bss_count_fwi": 0.376,
+     "auc_count": 0.884,
+     "auc_count_fwi": 0.885,
+     "dbrier": -0.00205,
+     "lo95": -0.00521,
+     "hi95": 0.00126
+    },
+    "dry days only (cloud check)|3|A later years (2023-25)": {
+     "n": 1297,
+     "events": 312,
+     "bss_count": 0.179,
+     "bss_count_fwi": 0.216,
+     "auc_count": 0.77,
+     "auc_count_fwi": 0.796,
+     "dbrier": -0.00674,
+     "lo95": -0.01253,
+     "hi95": -0.00039
+    },
+    "dry days only (cloud check)|3|B disjoint points, later years (2023-25)": {
+     "n": 1274,
+     "events": 306,
+     "bss_count": 0.275,
+     "bss_count_fwi": 0.28,
+     "auc_count": 0.848,
+     "auc_count_fwi": 0.848,
+     "dbrier": -0.00078,
+     "lo95": -0.00573,
+     "hi95": 0.00439
+    },
+    "dry|clim_fwi|A later years (2023-25)": {
+     "n": 1297,
+     "events": 312,
+     "bss": 0.148,
+     "auc_clim": 0.62,
+     "auc_clim_fwi": 0.747,
+     "rate_low_third": 0.086,
+     "rate_high_third": 0.407
+    },
+    "dry|clim_fwi|B disjoint points, later years (2023-25)": {
+     "n": 1274,
+     "events": 306,
+     "bss": 0.162,
+     "auc_clim": 0.714,
+     "auc_clim_fwi": 0.802,
+     "rate_low_third": 0.036,
+     "rate_high_third": 0.504
+    }
+   },
+   "by_fwi_class": [
+    {
+     "fwi": "0-5.2",
+     "n": 532,
+     "event_rate": 0.0
+    },
+    {
+     "fwi": "5.2-11.2",
+     "n": 364,
+     "event_rate": 0.011
+    },
+    {
+     "fwi": "11.2-21.3",
+     "n": 1031,
+     "event_rate": 0.042
+    },
+    {
+     "fwi": "21.3-38",
+     "n": 3302,
+     "event_rate": 0.198
+    },
+    {
+     "fwi": "38-50",
+     "n": 1073,
+     "event_rate": 0.46
+    },
+    {
+     "fwi": "50-1e+09",
+     "n": 78,
+     "event_rate": 0.564
+    }
+   ],
+   "by_month_tercile": [
+    {
+     "month": 2,
+     "fwi_terciles": [
+      23.6,
+      31.6
+     ],
+     "rate_low": 0.045,
+     "rate_mid": 0.137,
+     "rate_high": 0.405,
+     "n": 1700
+    },
+    {
+     "month": 3,
+     "fwi_terciles": [
+      27.4,
+      36.5
+     ],
+     "rate_low": 0.078,
+     "rate_mid": 0.258,
+     "rate_high": 0.541,
+     "n": 1860
+    },
+    {
+     "month": 4,
+     "fwi_terciles": [
+      17.1,
+      36.0
+     ],
+     "rate_low": 0.007,
+     "rate_mid": 0.092,
+     "rate_high": 0.316,
+     "n": 1800
+    }
+   ]
+  },
+  "1": {
+   "train": {
+    "n": 1595,
+    "events": 982,
+    "chosen_feature": "relative_humidity_2m",
+    "fwi_threshold": 18.0
+   },
+   "sets": {
+    "A later years (2023-25)": {
+     "climatology": {
+      "n": 1595,
+      "events": 1020,
+      "brier": 0.247,
+      "bss_vs_clim": 0.0,
+      "auc": 0.569
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 1020,
+      "brier": 0.1672,
+      "bss_vs_clim": 0.323,
+      "auc": 0.813
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 1020,
+      "brier": 0.1705,
+      "bss_vs_clim": 0.31,
+      "auc": 0.812
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 1020,
+      "brier": 0.1879,
+      "bss_vs_clim": 0.239,
+      "auc": 0.766
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 1020,
+      "brier": 0.156,
+      "bss_vs_clim": 0.368,
+      "auc": 0.847
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 1020,
+      "brier": 0.1477,
+      "bss_vs_clim": 0.402,
+      "auc": 0.859
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 1020,
+      "brier": 0.1643,
+      "bss_vs_clim": 0.335,
+      "auc": 0.827
+     },
+     "fwi_gain_boot": {
+      "diff": -0.01449,
+      "lo95": -0.02132,
+      "hi95": -0.00766
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.05916,
+      "lo95": -0.07101,
+      "hi95": -0.04707
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.794,
+      "p_event_yes": 0.735,
+      "p_event_no": 0.274,
+      "hits": 930,
+      "false_alarms": 336,
+      "misses": 90,
+      "pod": 0.912,
+      "far": 0.265,
+      "csi": 0.686
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.155,
+      "p_event_yes": 0.843,
+      "p_event_no": 0.602,
+      "hits": 209,
+      "false_alarms": 39,
+      "misses": 811,
+      "pod": 0.205,
+      "far": 0.157,
+      "csi": 0.197
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.945,
+      "p_event_yes": 0.67,
+      "p_event_no": 0.125,
+      "hits": 1009,
+      "false_alarms": 498,
+      "misses": 11,
+      "pod": 0.989,
+      "far": 0.33,
+      "csi": 0.665
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.928,
+      "p_event_yes": 0.678,
+      "p_event_no": 0.139,
+      "hits": 1004,
+      "false_alarms": 476,
+      "misses": 16,
+      "pod": 0.984,
+      "far": 0.322,
+      "csi": 0.671
+     },
+     "rule_fwi": {
+      "threshold": 18.0,
+      "share_yes": 0.871,
+      "p_event_yes": 0.707,
+      "p_event_no": 0.18,
+      "hits": 983,
+      "false_alarms": 407,
+      "misses": 37,
+      "pod": 0.964,
+      "far": 0.293,
+      "csi": 0.689
+     },
+     "rule_persistence": {
+      "hits": 832,
+      "false_alarms": 193,
+      "misses": 188,
+      "pod": 0.816,
+      "far": 0.188,
+      "csi": 0.686
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 24,
+       "forecast": 0.034,
+       "observed": 0.042
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 30,
+       "forecast": 0.073,
+       "observed": 0.233
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 65,
+       "forecast": 0.152,
+       "observed": 0.154
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 202,
+       "forecast": 0.296,
+       "observed": 0.307
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 253,
+       "forecast": 0.501,
+       "observed": 0.383
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 1021,
+       "forecast": 0.869,
+       "observed": 0.826
+      }
+     ]
+    },
+    "B disjoint points, later years (2023-25)": {
+     "climatology": {
+      "n": 1595,
+      "events": 1028,
+      "brier": 0.2402,
+      "bss_vs_clim": 0.0,
+      "auc": 0.558
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 1028,
+      "brier": 0.1711,
+      "bss_vs_clim": 0.288,
+      "auc": 0.806
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 1028,
+      "brier": 0.1702,
+      "bss_vs_clim": 0.291,
+      "auc": 0.811
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 1028,
+      "brier": 0.195,
+      "bss_vs_clim": 0.188,
+      "auc": 0.737
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 1028,
+      "brier": 0.1597,
+      "bss_vs_clim": 0.335,
+      "auc": 0.833
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 1028,
+      "brier": 0.1625,
+      "bss_vs_clim": 0.323,
+      "auc": 0.83
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 1028,
+      "brier": 0.1648,
+      "bss_vs_clim": 0.314,
+      "auc": 0.822
+     },
+     "fwi_gain_boot": {
+      "diff": -0.01051,
+      "lo95": -0.0181,
+      "hi95": -0.00303
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.04517,
+      "lo95": -0.0572,
+      "hi95": -0.03245
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.781,
+      "p_event_yes": 0.731,
+      "p_event_no": 0.337,
+      "hits": 910,
+      "false_alarms": 335,
+      "misses": 118,
+      "pod": 0.885,
+      "far": 0.269,
+      "csi": 0.668
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.182,
+      "p_event_yes": 0.928,
+      "p_event_no": 0.582,
+      "hits": 269,
+      "false_alarms": 21,
+      "misses": 759,
+      "pod": 0.262,
+      "far": 0.072,
+      "csi": 0.256
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.943,
+      "p_event_yes": 0.675,
+      "p_event_no": 0.143,
+      "hits": 1015,
+      "false_alarms": 489,
+      "misses": 13,
+      "pod": 0.987,
+      "far": 0.325,
+      "csi": 0.669
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.915,
+      "p_event_yes": 0.686,
+      "p_event_no": 0.199,
+      "hits": 1001,
+      "false_alarms": 458,
+      "misses": 27,
+      "pod": 0.974,
+      "far": 0.314,
+      "csi": 0.674
+     },
+     "rule_fwi": {
+      "threshold": 18.0,
+      "share_yes": 0.868,
+      "p_event_yes": 0.706,
+      "p_event_no": 0.242,
+      "hits": 977,
+      "false_alarms": 407,
+      "misses": 51,
+      "pod": 0.95,
+      "far": 0.294,
+      "csi": 0.681
+     },
+     "rule_persistence": {
+      "hits": 830,
+      "false_alarms": 195,
+      "misses": 198,
+      "pod": 0.807,
+      "far": 0.19,
+      "csi": 0.679
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 14,
+       "forecast": 0.036,
+       "observed": 0.143
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 37,
+       "forecast": 0.076,
+       "observed": 0.081
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 95,
+       "forecast": 0.156,
+       "observed": 0.168
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 207,
+       "forecast": 0.292,
+       "observed": 0.324
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 238,
+       "forecast": 0.508,
+       "observed": 0.517
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 1004,
+       "forecast": 0.861,
+       "observed": 0.814
+      }
+     ]
+    },
+    "B disjoint points, same years (2020-22)": {
+     "climatology": {
+      "n": 1595,
+      "events": 970,
+      "brier": 0.2055,
+      "bss_vs_clim": 0.0,
+      "auc": 0.715
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 970,
+      "brier": 0.172,
+      "bss_vs_clim": 0.163,
+      "auc": 0.809
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 970,
+      "brier": 0.1646,
+      "bss_vs_clim": 0.199,
+      "auc": 0.835
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 970,
+      "brier": 0.1474,
+      "bss_vs_clim": 0.283,
+      "auc": 0.865
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 970,
+      "brier": 0.1376,
+      "bss_vs_clim": 0.33,
+      "auc": 0.883
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 970,
+      "brier": 0.1369,
+      "bss_vs_clim": 0.334,
+      "auc": 0.886
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 970,
+      "brier": 0.1494,
+      "bss_vs_clim": 0.273,
+      "auc": 0.864
+     },
+     "fwi_gain_boot": {
+      "diff": -0.02705,
+      "lo95": -0.03339,
+      "hi95": -0.02083
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.05811,
+      "lo95": -0.07235,
+      "hi95": -0.04344
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.579,
+      "p_event_yes": 0.807,
+      "p_event_no": 0.335,
+      "hits": 745,
+      "false_alarms": 178,
+      "misses": 225,
+      "pod": 0.768,
+      "far": 0.193,
+      "csi": 0.649
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.181,
+      "p_event_yes": 0.945,
+      "p_event_no": 0.534,
+      "hits": 273,
+      "false_alarms": 16,
+      "misses": 697,
+      "pod": 0.281,
+      "far": 0.055,
+      "csi": 0.277
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.853,
+      "p_event_yes": 0.697,
+      "p_event_no": 0.094,
+      "hits": 948,
+      "false_alarms": 413,
+      "misses": 22,
+      "pod": 0.977,
+      "far": 0.303,
+      "csi": 0.685
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.734,
+      "p_event_yes": 0.756,
+      "p_event_no": 0.2,
+      "hits": 885,
+      "false_alarms": 285,
+      "misses": 85,
+      "pod": 0.912,
+      "far": 0.244,
+      "csi": 0.705
+     },
+     "rule_fwi": {
+      "threshold": 18.0,
+      "share_yes": 0.638,
+      "p_event_yes": 0.794,
+      "p_event_no": 0.281,
+      "hits": 808,
+      "false_alarms": 210,
+      "misses": 162,
+      "pod": 0.833,
+      "far": 0.206,
+      "csi": 0.685
+     },
+     "rule_persistence": {
+      "hits": 776,
+      "false_alarms": 199,
+      "misses": 194,
+      "pod": 0.8,
+      "far": 0.204,
+      "csi": 0.664
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 76,
+       "forecast": 0.036,
+       "observed": 0.066
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 144,
+       "forecast": 0.072,
+       "observed": 0.069
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 162,
+       "forecast": 0.146,
+       "observed": 0.198
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 175,
+       "forecast": 0.294,
+       "observed": 0.44
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 197,
+       "forecast": 0.5,
+       "observed": 0.574
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 841,
+       "forecast": 0.882,
+       "observed": 0.872
+      }
+     ]
+    }
+   },
+   "by_fwi_class": [
+    {
+     "fwi": "0-5.2",
+     "n": 532,
+     "event_rate": 0.077
+    },
+    {
+     "fwi": "5.2-11.2",
+     "n": 364,
+     "event_rate": 0.28
+    },
+    {
+     "fwi": "11.2-21.3",
+     "n": 1031,
+     "event_rate": 0.43
+    },
+    {
+     "fwi": "21.3-38",
+     "n": 3302,
+     "event_rate": 0.72
+    },
+    {
+     "fwi": "38-50",
+     "n": 1073,
+     "event_rate": 0.897
+    },
+    {
+     "fwi": "50-1e+09",
+     "n": 78,
+     "event_rate": 0.949
+    }
+   ],
+   "by_month_tercile": [
+    {
+     "month": 2,
+     "fwi_terciles": [
+      23.6,
+      31.6
+     ],
+     "rate_low": 0.39,
+     "rate_mid": 0.678,
+     "rate_high": 0.897,
+     "n": 1700
+    },
+    {
+     "month": 3,
+     "fwi_terciles": [
+      27.4,
+      36.5
+     ],
+     "rate_low": 0.448,
+     "rate_mid": 0.79,
+     "rate_high": 0.922,
+     "n": 1860
+    },
+    {
+     "month": 4,
+     "fwi_terciles": [
+      17.1,
+      36.0
+     ],
+     "rate_low": 0.18,
+     "rate_mid": 0.546,
+     "rate_high": 0.833,
+     "n": 1800
+    }
+   ]
+  },
+  "30": {
+   "train": {
+    "n": 1595,
+    "events": 58,
+    "chosen_feature": "relative_humidity_2m",
+    "fwi_threshold": 37.0
+   },
+   "sets": {
+    "A later years (2023-25)": {
+     "climatology": {
+      "n": 1595,
+      "events": 84,
+      "brier": 0.0502,
+      "bss_vs_clim": 0.0,
+      "auc": 0.664
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 84,
+      "brier": 0.0306,
+      "bss_vs_clim": 0.39,
+      "auc": 0.953
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 84,
+      "brier": 0.0335,
+      "bss_vs_clim": 0.332,
+      "auc": 0.939
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 84,
+      "brier": 0.0459,
+      "bss_vs_clim": 0.084,
+      "auc": 0.769
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 84,
+      "brier": 0.0346,
+      "bss_vs_clim": 0.31,
+      "auc": 0.938
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 84,
+      "brier": 0.0353,
+      "bss_vs_clim": 0.296,
+      "auc": 0.945
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 84,
+      "brier": 0.034,
+      "bss_vs_clim": 0.322,
+      "auc": 0.937
+     },
+     "fwi_gain_boot": {
+      "diff": 0.00108,
+      "lo95": -0.00042,
+      "hi95": 0.00296
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.00424,
+      "lo95": -0.00686,
+      "hi95": -0.00189
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.794,
+      "p_event_yes": 0.066,
+      "p_event_no": 0.003,
+      "hits": 83,
+      "false_alarms": 1183,
+      "misses": 1,
+      "pod": 0.988,
+      "far": 0.934,
+      "csi": 0.066
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.155,
+      "p_event_yes": 0.113,
+      "p_event_no": 0.042,
+      "hits": 28,
+      "false_alarms": 220,
+      "misses": 56,
+      "pod": 0.333,
+      "far": 0.887,
+      "csi": 0.092
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.945,
+      "p_event_yes": 0.056,
+      "p_event_no": 0.0,
+      "hits": 84,
+      "false_alarms": 1423,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.944,
+      "csi": 0.056
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.928,
+      "p_event_yes": 0.057,
+      "p_event_no": 0.0,
+      "hits": 84,
+      "false_alarms": 1396,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.943,
+      "csi": 0.057
+     },
+     "rule_fwi": {
+      "threshold": 37.0,
+      "share_yes": 0.189,
+      "p_event_yes": 0.106,
+      "p_event_no": 0.04,
+      "hits": 32,
+      "false_alarms": 269,
+      "misses": 52,
+      "pod": 0.381,
+      "far": 0.894,
+      "csi": 0.091
+     },
+     "rule_persistence": {
+      "hits": 50,
+      "false_alarms": 34,
+      "misses": 34,
+      "pod": 0.595,
+      "far": 0.405,
+      "csi": 0.424
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 1374,
+       "forecast": 0.005,
+       "observed": 0.012
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 84,
+       "forecast": 0.072,
+       "observed": 0.107
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 61,
+       "forecast": 0.137,
+       "observed": 0.197
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 48,
+       "forecast": 0.29,
+       "observed": 0.562
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 17,
+       "forecast": 0.483,
+       "observed": 0.471
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 11,
+       "forecast": 0.767,
+       "observed": 1.0
+      }
+     ]
+    },
+    "B disjoint points, later years (2023-25)": {
+     "climatology": {
+      "n": 1595,
+      "events": 125,
+      "brier": 0.0662,
+      "bss_vs_clim": 0.0,
+      "auc": 0.822
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 125,
+      "brier": 0.0377,
+      "bss_vs_clim": 0.43,
+      "auc": 0.966
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 125,
+      "brier": 0.0367,
+      "bss_vs_clim": 0.445,
+      "auc": 0.967
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 125,
+      "brier": 0.0621,
+      "bss_vs_clim": 0.062,
+      "auc": 0.886
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 125,
+      "brier": 0.0367,
+      "bss_vs_clim": 0.445,
+      "auc": 0.967
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 125,
+      "brier": 0.0397,
+      "bss_vs_clim": 0.401,
+      "auc": 0.964
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 125,
+      "brier": 0.0368,
+      "bss_vs_clim": 0.444,
+      "auc": 0.967
+     },
+     "fwi_gain_boot": {
+      "diff": 0.0,
+      "lo95": -0.00145,
+      "hi95": 0.00144
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.00414,
+      "lo95": -0.01111,
+      "hi95": 0.00235
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.781,
+      "p_event_yes": 0.1,
+      "p_event_no": 0.0,
+      "hits": 125,
+      "false_alarms": 1120,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.9,
+      "csi": 0.1
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.182,
+      "p_event_yes": 0.262,
+      "p_event_no": 0.038,
+      "hits": 76,
+      "false_alarms": 214,
+      "misses": 49,
+      "pod": 0.608,
+      "far": 0.738,
+      "csi": 0.224
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.943,
+      "p_event_yes": 0.083,
+      "p_event_no": 0.0,
+      "hits": 125,
+      "false_alarms": 1379,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.917,
+      "csi": 0.083
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.915,
+      "p_event_yes": 0.086,
+      "p_event_no": 0.0,
+      "hits": 125,
+      "false_alarms": 1334,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.914,
+      "csi": 0.086
+     },
+     "rule_fwi": {
+      "threshold": 37.0,
+      "share_yes": 0.209,
+      "p_event_yes": 0.261,
+      "p_event_no": 0.03,
+      "hits": 87,
+      "false_alarms": 246,
+      "misses": 38,
+      "pod": 0.696,
+      "far": 0.739,
+      "csi": 0.235
+     },
+     "rule_persistence": {
+      "hits": 85,
+      "false_alarms": 39,
+      "misses": 40,
+      "pod": 0.68,
+      "far": 0.315,
+      "csi": 0.518
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 1318,
+       "forecast": 0.004,
+       "observed": 0.01
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 57,
+       "forecast": 0.072,
+       "observed": 0.07
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 52,
+       "forecast": 0.147,
+       "observed": 0.135
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 53,
+       "forecast": 0.3,
+       "observed": 0.358
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 48,
+       "forecast": 0.493,
+       "observed": 0.646
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 67,
+       "forecast": 0.771,
+       "observed": 0.761
+      }
+     ]
+    },
+    "B disjoint points, same years (2020-22)": {
+     "climatology": {
+      "n": 1595,
+      "events": 83,
+      "brier": 0.0423,
+      "bss_vs_clim": 0.0,
+      "auc": 0.873
+     },
+     "persistence": {
+      "n": 1595,
+      "events": 83,
+      "brier": 0.0271,
+      "bss_vs_clim": 0.358,
+      "auc": 0.969
+     },
+     "clim+persistence": {
+      "n": 1595,
+      "events": 83,
+      "brier": 0.0251,
+      "bss_vs_clim": 0.407,
+      "auc": 0.971
+     },
+     "clim+FWI": {
+      "n": 1595,
+      "events": 83,
+      "brier": 0.0325,
+      "bss_vs_clim": 0.233,
+      "auc": 0.954
+     },
+     "clim+persistence+FWI": {
+      "n": 1595,
+      "events": 83,
+      "brier": 0.0237,
+      "bss_vs_clim": 0.439,
+      "auc": 0.976
+     },
+     "clim+persistence+relative_humidity_2m": {
+      "n": 1595,
+      "events": 83,
+      "brier": 0.0244,
+      "bss_vs_clim": 0.423,
+      "auc": 0.978
+     },
+     "clim+persistence+FWI(yesterday's weather)": {
+      "n": 1595,
+      "events": 83,
+      "brier": 0.0245,
+      "bss_vs_clim": 0.422,
+      "auc": 0.973
+     },
+     "fwi_gain_boot": {
+      "diff": -0.00135,
+      "lo95": -0.00349,
+      "hi95": 0.00078
+     },
+     "fwi_vs_clim_boot": {
+      "diff": -0.00985,
+      "lo95": -0.02039,
+      "hi95": -1e-05
+     },
+     "rule_fwi_21.3": {
+      "share_yes": 0.579,
+      "p_event_yes": 0.09,
+      "p_event_no": 0.0,
+      "hits": 83,
+      "false_alarms": 840,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.91,
+      "csi": 0.09
+     },
+     "rule_fwi_38": {
+      "share_yes": 0.181,
+      "p_event_yes": 0.242,
+      "p_event_no": 0.01,
+      "hits": 70,
+      "false_alarms": 219,
+      "misses": 13,
+      "pod": 0.843,
+      "far": 0.758,
+      "csi": 0.232
+     },
+     "rule_asean_ffmc": {
+      "share_yes": 0.853,
+      "p_event_yes": 0.061,
+      "p_event_no": 0.0,
+      "hits": 83,
+      "false_alarms": 1278,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.939,
+      "csi": 0.061
+     },
+     "rule_asean_fwi": {
+      "share_yes": 0.734,
+      "p_event_yes": 0.071,
+      "p_event_no": 0.0,
+      "hits": 83,
+      "false_alarms": 1087,
+      "misses": 0,
+      "pod": 1.0,
+      "far": 0.929,
+      "csi": 0.071
+     },
+     "rule_fwi": {
+      "threshold": 37.0,
+      "share_yes": 0.205,
+      "p_event_yes": 0.22,
+      "p_event_no": 0.009,
+      "hits": 72,
+      "false_alarms": 255,
+      "misses": 11,
+      "pod": 0.867,
+      "far": 0.78,
+      "csi": 0.213
+     },
+     "rule_persistence": {
+      "hits": 53,
+      "false_alarms": 30,
+      "misses": 30,
+      "pod": 0.639,
+      "far": 0.361,
+      "csi": 0.469
+     },
+     "reliability_cpf": [
+      {
+       "bin": "0.00-0.05",
+       "n": 1354,
+       "forecast": 0.004,
+       "observed": 0.004
+      },
+      {
+       "bin": "0.05-0.10",
+       "n": 45,
+       "forecast": 0.069,
+       "observed": 0.022
+      },
+      {
+       "bin": "0.10-0.20",
+       "n": 54,
+       "forecast": 0.137,
+       "observed": 0.111
+      },
+      {
+       "bin": "0.20-0.40",
+       "n": 48,
+       "forecast": 0.289,
+       "observed": 0.167
+      },
+      {
+       "bin": "0.40-0.60",
+       "n": 33,
+       "forecast": 0.504,
+       "observed": 0.485
+      },
+      {
+       "bin": "0.60-1.00",
+       "n": 61,
+       "forecast": 0.829,
+       "observed": 0.77
+      }
+     ]
+    }
+   },
+   "by_fwi_class": [
+    {
+     "fwi": "0-5.2",
+     "n": 532,
+     "event_rate": 0.0
+    },
+    {
+     "fwi": "5.2-11.2",
+     "n": 364,
+     "event_rate": 0.003
+    },
+    {
+     "fwi": "11.2-21.3",
+     "n": 1031,
+     "event_rate": 0.001
+    },
+    {
+     "fwi": "21.3-38",
+     "n": 3302,
+     "event_rate": 0.045
+    },
+    {
+     "fwi": "38-50",
+     "n": 1073,
+     "event_rate": 0.163
+    },
+    {
+     "fwi": "50-1e+09",
+     "n": 78,
+     "event_rate": 0.321
+    }
+   ],
+   "by_month_tercile": [
+    {
+     "month": 2,
+     "fwi_terciles": [
+      23.6,
+      31.6
+     ],
+     "rate_low": 0.002,
+     "rate_mid": 0.036,
+     "rate_high": 0.094,
+     "n": 1700
+    },
+    {
+     "month": 3,
+     "fwi_terciles": [
+      27.4,
+      36.5
+     ],
+     "rate_low": 0.015,
+     "rate_mid": 0.06,
+     "rate_high": 0.208,
+     "n": 1860
+    },
+    {
+     "month": 4,
+     "fwi_terciles": [
+      17.1,
+      36.0
+     ],
+     "rate_low": 0.0,
+     "rate_mid": 0.02,
+     "rate_high": 0.113,
+     "n": 1800
+    }
+   ]
+  }
+ },
+ "season_spearman_by_point": {
+  "chiang_mai": 0.77,
+  "chiang_rai": 0.66,
+  "hot": 1.0,
+  "lampang": 0.94,
+  "nan": 0.77,
+  "pai": 0.94,
+  "phayao": 0.94,
+  "phrae": 0.77,
+  "tak": 0.43,
+  "uttaradit": 0.6
+ }
+}

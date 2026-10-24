@@ -39,6 +39,7 @@ Things only the owner can decide or do. Each has why, the steps and how to check
 | C4 | **Ask ONWR** whether its flood-warning tiles may be used, and their heat-index unit and colours | ONWR's tiles give the official area flood warning today to +3 days ([research/sources gap 2](research/sources-2026-10-23.md#gap-2-flood-seen-by-satellite-flood-today)) |
 | C5 | **A note to the PCD** about Air4Thai's missing intermediate certificate | it breaks every script and some browsers (Hazard-huntz docs/09 §3) |
 | C6 | **Ask the PCD for its 7-day dust forecast as data** (per province and day, with its category) | today it is six images; as data, a PCD forecast of "เริ่มกระทบสุขภาพ" would lift that day in the 3-day table, as a TMD warning lifts a tile (the agency's word leads; [predict-air §7.2](research/predict-air-2026-10-24.md)) |
+| C7 | **Ask ONWR and the Royal Forest Department** for feeds and reuse terms: ONWR's flood warnings and drought index, RFD's fire-danger rating (TFDRS) | the page quotes agencies before models; both are official and unlicensed or unreachable today ([predict-hazards](research/predict-hazards-2026-10-24.md)) |
 
 ## D. Decisions
 

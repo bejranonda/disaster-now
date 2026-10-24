@@ -1,0 +1,253 @@
+===== hz_fire run 2026-10-24T11:55:50Z
+FIRMS VIIRS S-NPP Thailand 2019-2025: 1052638 rows, 933846 kept (type 0, confidence n/h)
+scored point-days (15 Jan - 30 Apr): 6380; seasons [2020, 2021, 2022, 2023, 2024, 2025]; points A ['chiang_mai', 'lampang', 'phayao', 'tak', 'hot'], B ['chiang_rai', 'nan', 'phrae', 'pai', 'uttaradit']
+
+Hotspots within 25 km per scored day, by season (all 10 points):
+  2020: mean 10.92  days >=1 0.84  >=10 0.329  >=30 0.092  max  169   FWI mean  36.1  FFMC  91.7  DC   661
+  2021: mean  5.36  days >=1 0.58  >=10 0.166  >=30 0.041  max   91   FWI mean  23.2  FFMC  86.3  DC   490
+  2022: mean  1.91  days >=1 0.41  >=10 0.056  >=30 0.000  max   29   FWI mean  14.6  FFMC  84.6  DC   397
+  2023: mean 10.67  days >=1 0.75  >=10 0.286  >=30 0.103  max  131   FWI mean  30.7  FFMC  91.0  DC   633
+  2024: mean  6.86  days >=1 0.67  >=10 0.213  >=30 0.058  max   70   FWI mean  30.1  FFMC  90.6  DC   569
+  2025: mean  4.01  days >=1 0.50  >=10 0.113  >=30 0.036  max   76   FWI mean  24.7  FFMC  88.6  DC   586
+By point (all seasons): mean count, share of days >= 10, mean FWI
+  chiang_mai  A    4.46  0.150  FWI  26.8
+  chiang_rai  B    4.46  0.102  FWI  21.2
+  hot         A   10.16  0.284  FWI  22.7
+  lampang     A    4.18  0.122  FWI  26.9
+  nan         B    6.00  0.168  FWI  28.0
+  pai         B   13.62  0.371  FWI  27.0
+  phayao      A    6.07  0.210  FWI  26.1
+  phrae       B    7.75  0.241  FWI  26.6
+  tak         A    6.18  0.202  FWI  33.0
+  uttaradit   B    3.41  0.089  FWI  27.5
+By month (all): mean count, share >= 10, mean FWI, mean FFMC, mean DC
+  month 1:   4.18  0.114  FWI  21.9  FFMC  87.8  DC   348
+  month 2:   6.23  0.195  FWI  26.4  FFMC  89.4  DC   469
+  month 3:   9.80  0.292  FWI  30.3  FFMC  90.7  DC   622
+  month 4:   5.12  0.138  FWI  25.6  FFMC  86.8  DC   690
+
+================ event: >= 10 hotspots within 25 km ================
+train (A, 2020-22): n 1595, events 292 (0.183)
+  training Brier, climatology + persistence: 0.0859; adding one weather feature: relative_humidity_2m 0.0742, ffmc 0.0782, vapour_pressure_deficit 0.0797, isi 0.0815, rain24 0.0818, fwi 0.0823, dry_days 0.0852, dmc 0.0853, bui 0.0853, dc 0.0856, soil_moisture_0_to_7cm 0.0858
+  chosen on training: relative_humidity_2m (FWI kept as the pre-registered candidate too)
+  fit persistence: coef [1.896] intercept -4.860
+  fit clim+persistence: coef [0.622, 1.711] intercept -3.669
+  fit clim+FWI: coef [1.51, 0.107] intercept -2.726
+  fit clim+persistence+FWI: coef [0.886, 1.491, 0.059] intercept -4.823
+  fit clim+persistence+relative_humidity_2m: coef [1.113, 1.448, -0.13] intercept 2.359
+  fit clim+persistence+FWI(yesterday's weather): coef [0.829, 1.503, 0.044] intercept -4.437
+  FWI yes/no threshold chosen on training (max CSI): 29.0
+
+  -- A later years (2023-25): n 1595, events 326 (0.204)
+     climatology                                  Brier 0.1618  BSS vs clim +0.000  AUC 0.633
+     persistence                                  Brier 0.0881  BSS vs clim +0.455  AUC 0.909
+     clim+persistence                             Brier 0.0894  BSS vs clim +0.447  AUC 0.911
+     clim+FWI                                     Brier 0.1317  BSS vs clim +0.186  AUC 0.792
+     clim+persistence+FWI                         Brier 0.0871  BSS vs clim +0.462  AUC 0.920
+     clim+persistence+relative_humidity_2m        Brier 0.0884  BSS vs clim +0.454  AUC 0.921
+     clim+persistence+FWI(yesterday's weather)    Brier 0.0896  BSS vs clim +0.446  AUC 0.913
+     Brier(clim+pers+FWI) - Brier(clim+pers) = -0.00230  [95% -0.00499, +0.00067] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.03012  [95% -0.03873, -0.02231]
+     rule FWI >= 29: says yes on 0.52 of days; P(event | yes) 0.326, P(event | no) 0.072; POD 0.831 FAR 0.674 CSI 0.306
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.79 of days; P(event | yes) 0.253, P(event | no) 0.018; POD 0.982 FAR 0.747 CSI 0.252
+     rule FWI >= 38 (EFFIS edge): yes on 0.16 of days; P(event | yes) 0.415, P(event | no) 0.166; POD 0.316 FAR 0.585 CSI 0.219
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.94 of days; P(event | yes) 0.216, P(event | no) 0.011; POD 0.997 FAR 0.784
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.93 of days; P(event | yes) 0.220, P(event | no) 0.009; POD 0.997 FAR 0.78
+     persistence yes/no (yesterday >= 10): POD 0.693 FAR 0.305 CSI 0.532
+     reliability (clim+pers+FWI): 0.00-0.05: n 849, fc 0.012, obs 0.019; 0.05-0.10: n 135, fc 0.075, obs 0.111; 0.10-0.20: n 157, fc 0.143, obs 0.191; 0.20-0.40: n 162, fc 0.288, obs 0.327; 0.40-0.60: n 119, fc 0.492, obs 0.513; 0.60-1.00: n 173, fc 0.787, obs 0.873
+
+  -- B disjoint points, later years (2023-25): n 1595, events 325 (0.204)
+     climatology                                  Brier 0.1504  BSS vs clim +0.000  AUC 0.704
+     persistence                                  Brier 0.0785  BSS vs clim +0.478  AUC 0.927
+     clim+persistence                             Brier 0.0790  BSS vs clim +0.475  AUC 0.926
+     clim+FWI                                     Brier 0.1221  BSS vs clim +0.188  AUC 0.820
+     clim+persistence+FWI                         Brier 0.0766  BSS vs clim +0.491  AUC 0.929
+     clim+persistence+relative_humidity_2m        Brier 0.0752  BSS vs clim +0.500  AUC 0.932
+     clim+persistence+FWI(yesterday's weather)    Brier 0.0778  BSS vs clim +0.483  AUC 0.927
+     Brier(clim+pers+FWI) - Brier(clim+pers) = -0.00237  [95% -0.00443, -0.00018] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.02829  [95% -0.03773, -0.01887]
+     rule FWI >= 29: says yes on 0.50 of days; P(event | yes) 0.364, P(event | no) 0.040; POD 0.902 FAR 0.636 CSI 0.35
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.78 of days; P(event | yes) 0.256, P(event | no) 0.017; POD 0.982 FAR 0.744 CSI 0.255
+     rule FWI >= 38 (EFFIS edge): yes on 0.18 of days; P(event | yes) 0.548, P(event | no) 0.127; POD 0.489 FAR 0.452 CSI 0.349
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.94 of days; P(event | yes) 0.216, P(event | no) 0.000; POD 1.0 FAR 0.784
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.91 of days; P(event | yes) 0.223, P(event | no) 0.000; POD 1.0 FAR 0.777
+     persistence yes/no (yesterday >= 10): POD 0.723 FAR 0.272 CSI 0.569
+     reliability (clim+pers+FWI): 0.00-0.05: n 891, fc 0.013, obs 0.022; 0.05-0.10: n 130, fc 0.069, obs 0.1; 0.10-0.20: n 137, fc 0.145, obs 0.168; 0.20-0.40: n 130, fc 0.283, obs 0.3; 0.40-0.60: n 83, fc 0.495, obs 0.458; 0.60-1.00: n 224, fc 0.836, obs 0.857
+
+  -- B disjoint points, same years (2020-22): n 1595, events 295 (0.185)
+     climatology                                  Brier 0.1261  BSS vs clim +0.000  AUC 0.783
+     persistence                                  Brier 0.0792  BSS vs clim +0.372  AUC 0.914
+     clim+persistence                             Brier 0.0775  BSS vs clim +0.386  AUC 0.924
+     clim+FWI                                     Brier 0.0906  BSS vs clim +0.282  AUC 0.898
+     clim+persistence+FWI                         Brier 0.0738  BSS vs clim +0.415  AUC 0.937
+     clim+persistence+relative_humidity_2m        Brier 0.0727  BSS vs clim +0.424  AUC 0.939
+     clim+persistence+FWI(yesterday's weather)    Brier 0.0761  BSS vs clim +0.397  AUC 0.932
+     Brier(clim+pers+FWI) - Brier(clim+pers) = -0.00364  [95% -0.00618, -0.00121] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.03552  [95% -0.04684, -0.02498]
+     rule FWI >= 29: says yes on 0.41 of days; P(event | yes) 0.369, P(event | no) 0.058; POD 0.814 FAR 0.631 CSI 0.34
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.58 of days; P(event | yes) 0.299, P(event | no) 0.028; POD 0.936 FAR 0.701 CSI 0.293
+     rule FWI >= 38 (EFFIS edge): yes on 0.18 of days; P(event | yes) 0.543, P(event | no) 0.106; POD 0.532 FAR 0.457 CSI 0.368
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.85 of days; P(event | yes) 0.217, P(event | no) 0.000; POD 1.0 FAR 0.783
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.73 of days; P(event | yes) 0.250, P(event | no) 0.005; POD 0.993 FAR 0.75
+     persistence yes/no (yesterday >= 10): POD 0.688 FAR 0.312 CSI 0.525
+     reliability (clim+pers+FWI): 0.00-0.05: n 933, fc 0.009, obs 0.015; 0.05-0.10: n 123, fc 0.075, obs 0.081; 0.10-0.20: n 115, fc 0.142, obs 0.174; 0.20-0.40: n 131, fc 0.288, obs 0.298; 0.40-0.60: n 91, fc 0.495, obs 0.495; 0.60-1.00: n 202, fc 0.833, obs 0.827
+  [all days] lead 1 d, A later years (2023-25): n 1595, events 326; BSS clim+count(D-1) +0.447 -> +FWI(D) +0.462; AUC 0.911 -> 0.920; dBrier -0.00230 [-0.00499, +0.00067]
+  [all days] lead 1 d, B disjoint points, later years (2023-25): n 1595, events 325; BSS clim+count(D-1) +0.475 -> +FWI(D) +0.491; AUC 0.926 -> 0.929; dBrier -0.00237 [-0.00443, -0.00018]
+  [all days] lead 2 d, A later years (2023-25): n 1595, events 326; BSS clim+count(D-2) +0.249 -> +FWI(D) +0.300; AUC 0.831 -> 0.863; dBrier -0.00837 [-0.01349, -0.00282]
+  [all days] lead 2 d, B disjoint points, later years (2023-25): n 1595, events 325; BSS clim+count(D-2) +0.345 -> +FWI(D) +0.379; AUC 0.881 -> 0.889; dBrier -0.00506 [-0.00919, -0.00087]
+  [all days] lead 3 d, A later years (2023-25): n 1595, events 326; BSS clim+count(D-3) +0.165 -> +FWI(D) +0.238; AUC 0.780 -> 0.828; dBrier -0.01182 [-0.01877, -0.00425]
+  [all days] lead 3 d, B disjoint points, later years (2023-25): n 1595, events 325; BSS clim+count(D-3) +0.252 -> +FWI(D) +0.285; AUC 0.842 -> 0.853; dBrier -0.00496 [-0.01105, +0.00125]
+  [dry days only (cloud check)] lead 1 d, A later years (2023-25): n 1297, events 312; BSS clim+count(D-1) +0.446 -> +FWI(D) +0.456; AUC 0.900 -> 0.905; dBrier -0.00192 [-0.00404, +0.00032]
+  [dry days only (cloud check)] lead 1 d, B disjoint points, later years (2023-25): n 1274, events 306; BSS clim+count(D-1) +0.479 -> +FWI(D) +0.486; AUC 0.923 -> 0.924; dBrier -0.00126 [-0.00314, +0.00078]
+  [dry days only (cloud check)] lead 2 d, A later years (2023-25): n 1297, events 312; BSS clim+count(D-2) +0.253 -> +FWI(D) +0.281; AUC 0.817 -> 0.836; dBrier -0.00518 [-0.00905, -0.00088]
+  [dry days only (cloud check)] lead 2 d, B disjoint points, later years (2023-25): n 1274, events 306; BSS clim+count(D-2) +0.364 -> +FWI(D) +0.376; AUC 0.884 -> 0.885; dBrier -0.00205 [-0.00521, +0.00126]
+  [dry days only (cloud check)] lead 3 d, A later years (2023-25): n 1297, events 312; BSS clim+count(D-3) +0.179 -> +FWI(D) +0.216; AUC 0.770 -> 0.796; dBrier -0.00674 [-0.01253, -0.00039]
+  [dry days only (cloud check)] lead 3 d, B disjoint points, later years (2023-25): n 1274, events 306; BSS clim+count(D-3) +0.275 -> +FWI(D) +0.280; AUC 0.848 -> 0.848; dBrier -0.00078 [-0.00573, +0.00439]
+  [dry days only (cloud check)] A later years (2023-25): clim+FWI BSS vs clim +0.148 (AUC 0.620 -> 0.747), dBrier -0.02722 [-0.03642, -0.01840]; event rate lowest FWI third 0.086, highest third 0.407 (n 1297)
+  [dry days only (cloud check)] B disjoint points, later years (2023-25): clim+FWI BSS vs clim +0.162 (AUC 0.714 -> 0.802), dBrier -0.02696 [-0.03926, -0.01570]; event rate lowest FWI third 0.036, highest third 0.504 (n 1274)
+  event rate by FWI class (all points and seasons, EFFIS class edges): 0-5.2: n 532, 0.0; 5.2-11.2: n 364, 0.011; 11.2-21.3: n 1031, 0.042; 21.3-38: n 3302, 0.198; 38-50: n 1073, 0.46; 50-1e+09: n 78, 0.564
+  month 2: event rate by FWI tercile (edges [23.6, 31.6]): low 0.045, mid 0.137, high 0.405 (n 1700)
+  month 3: event rate by FWI tercile (edges [27.4, 36.5]): low 0.078, mid 0.258, high 0.541 (n 1860)
+  month 4: event rate by FWI tercile (edges [17.1, 36.0]): low 0.007, mid 0.092, high 0.316 (n 1800)
+
+================ event: >= 1 hotspots within 25 km ================
+train (A, 2020-22): n 1595, events 982 (0.616)
+  training Brier, climatology + persistence: 0.1363; adding one weather feature: relative_humidity_2m 0.1121, fwi 0.1134, isi 0.1146, ffmc 0.1162, vapour_pressure_deficit 0.1173, bui 0.1237, rain24 0.1243, dmc 0.1245, dc 0.1287, dry_days 0.1293, soil_moisture_0_to_7cm 0.1301
+  chosen on training: relative_humidity_2m (FWI kept as the pre-registered candidate too)
+  fit persistence: coef [1.798] intercept -1.053
+  fit clim+persistence: coef [0.6, 1.594] intercept -1.168
+  fit clim+FWI: coef [1.307, 0.116] intercept -3.058
+  fit clim+persistence+FWI: coef [0.874, 1.019, 0.084] intercept -2.871
+  fit clim+persistence+relative_humidity_2m: coef [0.835, 1.215, -0.106] intercept 3.736
+  fit clim+persistence+FWI(yesterday's weather): coef [0.849, 1.044, 0.069] intercept -2.549
+  FWI yes/no threshold chosen on training (max CSI): 18.0
+
+  -- A later years (2023-25): n 1595, events 1020 (0.639)
+     climatology                                  Brier 0.2470  BSS vs clim +0.000  AUC 0.569
+     persistence                                  Brier 0.1672  BSS vs clim +0.323  AUC 0.813
+     clim+persistence                             Brier 0.1705  BSS vs clim +0.310  AUC 0.812
+     clim+FWI                                     Brier 0.1879  BSS vs clim +0.239  AUC 0.766
+     clim+persistence+FWI                         Brier 0.1560  BSS vs clim +0.368  AUC 0.847
+     clim+persistence+relative_humidity_2m        Brier 0.1477  BSS vs clim +0.402  AUC 0.859
+     clim+persistence+FWI(yesterday's weather)    Brier 0.1643  BSS vs clim +0.335  AUC 0.827
+     Brier(clim+pers+FWI) - Brier(clim+pers) = -0.01449  [95% -0.02132, -0.00766] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.05916  [95% -0.07101, -0.04707]
+     rule FWI >= 18: says yes on 0.87 of days; P(event | yes) 0.707, P(event | no) 0.180; POD 0.964 FAR 0.293 CSI 0.689
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.79 of days; P(event | yes) 0.735, P(event | no) 0.274; POD 0.912 FAR 0.265 CSI 0.686
+     rule FWI >= 38 (EFFIS edge): yes on 0.16 of days; P(event | yes) 0.843, P(event | no) 0.602; POD 0.205 FAR 0.157 CSI 0.197
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.94 of days; P(event | yes) 0.670, P(event | no) 0.125; POD 0.989 FAR 0.33
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.93 of days; P(event | yes) 0.678, P(event | no) 0.139; POD 0.984 FAR 0.322
+     persistence yes/no (yesterday >= 1): POD 0.816 FAR 0.188 CSI 0.686
+     reliability (clim+pers+FWI): 0.00-0.05: n 24, fc 0.034, obs 0.042; 0.05-0.10: n 30, fc 0.073, obs 0.233; 0.10-0.20: n 65, fc 0.152, obs 0.154; 0.20-0.40: n 202, fc 0.296, obs 0.307; 0.40-0.60: n 253, fc 0.501, obs 0.383; 0.60-1.00: n 1021, fc 0.869, obs 0.826
+
+  -- B disjoint points, later years (2023-25): n 1595, events 1028 (0.645)
+     climatology                                  Brier 0.2402  BSS vs clim +0.000  AUC 0.558
+     persistence                                  Brier 0.1711  BSS vs clim +0.288  AUC 0.806
+     clim+persistence                             Brier 0.1702  BSS vs clim +0.291  AUC 0.811
+     clim+FWI                                     Brier 0.1950  BSS vs clim +0.188  AUC 0.737
+     clim+persistence+FWI                         Brier 0.1597  BSS vs clim +0.335  AUC 0.833
+     clim+persistence+relative_humidity_2m        Brier 0.1625  BSS vs clim +0.323  AUC 0.830
+     clim+persistence+FWI(yesterday's weather)    Brier 0.1648  BSS vs clim +0.314  AUC 0.822
+     Brier(clim+pers+FWI) - Brier(clim+pers) = -0.01051  [95% -0.01810, -0.00303] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.04517  [95% -0.05720, -0.03245]
+     rule FWI >= 18: says yes on 0.87 of days; P(event | yes) 0.706, P(event | no) 0.242; POD 0.95 FAR 0.294 CSI 0.681
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.78 of days; P(event | yes) 0.731, P(event | no) 0.337; POD 0.885 FAR 0.269 CSI 0.668
+     rule FWI >= 38 (EFFIS edge): yes on 0.18 of days; P(event | yes) 0.928, P(event | no) 0.582; POD 0.262 FAR 0.072 CSI 0.256
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.94 of days; P(event | yes) 0.675, P(event | no) 0.143; POD 0.987 FAR 0.325
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.91 of days; P(event | yes) 0.686, P(event | no) 0.199; POD 0.974 FAR 0.314
+     persistence yes/no (yesterday >= 1): POD 0.807 FAR 0.19 CSI 0.679
+     reliability (clim+pers+FWI): 0.00-0.05: n 14, fc 0.036, obs 0.143; 0.05-0.10: n 37, fc 0.076, obs 0.081; 0.10-0.20: n 95, fc 0.156, obs 0.168; 0.20-0.40: n 207, fc 0.292, obs 0.324; 0.40-0.60: n 238, fc 0.508, obs 0.517; 0.60-1.00: n 1004, fc 0.861, obs 0.814
+
+  -- B disjoint points, same years (2020-22): n 1595, events 970 (0.608)
+     climatology                                  Brier 0.2055  BSS vs clim +0.000  AUC 0.715
+     persistence                                  Brier 0.1720  BSS vs clim +0.163  AUC 0.809
+     clim+persistence                             Brier 0.1646  BSS vs clim +0.199  AUC 0.835
+     clim+FWI                                     Brier 0.1474  BSS vs clim +0.283  AUC 0.865
+     clim+persistence+FWI                         Brier 0.1376  BSS vs clim +0.330  AUC 0.883
+     clim+persistence+relative_humidity_2m        Brier 0.1369  BSS vs clim +0.334  AUC 0.886
+     clim+persistence+FWI(yesterday's weather)    Brier 0.1494  BSS vs clim +0.273  AUC 0.864
+     Brier(clim+pers+FWI) - Brier(clim+pers) = -0.02705  [95% -0.03339, -0.02083] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.05811  [95% -0.07235, -0.04344]
+     rule FWI >= 18: says yes on 0.64 of days; P(event | yes) 0.794, P(event | no) 0.281; POD 0.833 FAR 0.206 CSI 0.685
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.58 of days; P(event | yes) 0.807, P(event | no) 0.335; POD 0.768 FAR 0.193 CSI 0.649
+     rule FWI >= 38 (EFFIS edge): yes on 0.18 of days; P(event | yes) 0.945, P(event | no) 0.534; POD 0.281 FAR 0.055 CSI 0.277
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.85 of days; P(event | yes) 0.697, P(event | no) 0.094; POD 0.977 FAR 0.303
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.73 of days; P(event | yes) 0.756, P(event | no) 0.200; POD 0.912 FAR 0.244
+     persistence yes/no (yesterday >= 1): POD 0.8 FAR 0.204 CSI 0.664
+     reliability (clim+pers+FWI): 0.00-0.05: n 76, fc 0.036, obs 0.066; 0.05-0.10: n 144, fc 0.072, obs 0.069; 0.10-0.20: n 162, fc 0.146, obs 0.198; 0.20-0.40: n 175, fc 0.294, obs 0.44; 0.40-0.60: n 197, fc 0.5, obs 0.574; 0.60-1.00: n 841, fc 0.882, obs 0.872
+  event rate by FWI class (all points and seasons, EFFIS class edges): 0-5.2: n 532, 0.077; 5.2-11.2: n 364, 0.28; 11.2-21.3: n 1031, 0.43; 21.3-38: n 3302, 0.72; 38-50: n 1073, 0.897; 50-1e+09: n 78, 0.949
+  month 2: event rate by FWI tercile (edges [23.6, 31.6]): low 0.390, mid 0.678, high 0.897 (n 1700)
+  month 3: event rate by FWI tercile (edges [27.4, 36.5]): low 0.448, mid 0.790, high 0.922 (n 1860)
+  month 4: event rate by FWI tercile (edges [17.1, 36.0]): low 0.180, mid 0.546, high 0.833 (n 1800)
+
+================ event: >= 30 hotspots within 25 km ================
+train (A, 2020-22): n 1595, events 58 (0.036)
+  training Brier, climatology + persistence: 0.0250; adding one weather feature: relative_humidity_2m 0.0231, ffmc 0.0237, vapour_pressure_deficit 0.0241, isi 0.0245, rain24 0.0246, fwi 0.0248, dry_days 0.0250, dc 0.0250, soil_moisture_0_to_7cm 0.0250, dmc 0.0250, bui 0.0250
+  chosen on training: relative_humidity_2m (FWI kept as the pre-registered candidate too)
+  fit persistence: coef [2.1] intercept -8.154
+  fit clim+persistence: coef [0.742, 1.747] intercept -5.034
+  fit clim+FWI: coef [1.603, 0.112] intercept -2.115
+  fit clim+persistence+FWI: coef [0.991, 1.565, 0.06] intercept -5.969
+  fit clim+persistence+relative_humidity_2m: coef [1.131, 1.404, -0.142] intercept 1.837
+  fit clim+persistence+FWI(yesterday's weather): coef [0.839, 1.654, 0.023] intercept -5.308
+  FWI yes/no threshold chosen on training (max CSI): 37.0
+
+  -- A later years (2023-25): n 1595, events 84 (0.053)
+     climatology                                  Brier 0.0502  BSS vs clim +0.000  AUC 0.664
+     persistence                                  Brier 0.0306  BSS vs clim +0.390  AUC 0.953
+     clim+persistence                             Brier 0.0335  BSS vs clim +0.332  AUC 0.939
+     clim+FWI                                     Brier 0.0459  BSS vs clim +0.084  AUC 0.769
+     clim+persistence+FWI                         Brier 0.0346  BSS vs clim +0.310  AUC 0.938
+     clim+persistence+relative_humidity_2m        Brier 0.0353  BSS vs clim +0.296  AUC 0.945
+     clim+persistence+FWI(yesterday's weather)    Brier 0.0340  BSS vs clim +0.322  AUC 0.937
+     Brier(clim+pers+FWI) - Brier(clim+pers) = +0.00108  [95% -0.00042, +0.00296] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.00424  [95% -0.00686, -0.00189]
+     rule FWI >= 37: says yes on 0.19 of days; P(event | yes) 0.106, P(event | no) 0.040; POD 0.381 FAR 0.894 CSI 0.091
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.79 of days; P(event | yes) 0.066, P(event | no) 0.003; POD 0.988 FAR 0.934 CSI 0.066
+     rule FWI >= 38 (EFFIS edge): yes on 0.16 of days; P(event | yes) 0.113, P(event | no) 0.042; POD 0.333 FAR 0.887 CSI 0.092
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.94 of days; P(event | yes) 0.056, P(event | no) 0.000; POD 1.0 FAR 0.944
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.93 of days; P(event | yes) 0.057, P(event | no) 0.000; POD 1.0 FAR 0.943
+     persistence yes/no (yesterday >= 30): POD 0.595 FAR 0.405 CSI 0.424
+     reliability (clim+pers+FWI): 0.00-0.05: n 1374, fc 0.005, obs 0.012; 0.05-0.10: n 84, fc 0.072, obs 0.107; 0.10-0.20: n 61, fc 0.137, obs 0.197; 0.20-0.40: n 48, fc 0.29, obs 0.562; 0.40-0.60: n 17, fc 0.483, obs 0.471; 0.60-1.00: n 11, fc 0.767, obs 1.0
+
+  -- B disjoint points, later years (2023-25): n 1595, events 125 (0.078)
+     climatology                                  Brier 0.0662  BSS vs clim +0.000  AUC 0.822
+     persistence                                  Brier 0.0377  BSS vs clim +0.430  AUC 0.966
+     clim+persistence                             Brier 0.0367  BSS vs clim +0.445  AUC 0.967
+     clim+FWI                                     Brier 0.0621  BSS vs clim +0.062  AUC 0.886
+     clim+persistence+FWI                         Brier 0.0367  BSS vs clim +0.445  AUC 0.967
+     clim+persistence+relative_humidity_2m        Brier 0.0397  BSS vs clim +0.401  AUC 0.964
+     clim+persistence+FWI(yesterday's weather)    Brier 0.0368  BSS vs clim +0.444  AUC 0.967
+     Brier(clim+pers+FWI) - Brier(clim+pers) = +0.00000  [95% -0.00145, +0.00144] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.00414  [95% -0.01111, +0.00235]
+     rule FWI >= 37: says yes on 0.21 of days; P(event | yes) 0.261, P(event | no) 0.030; POD 0.696 FAR 0.739 CSI 0.235
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.78 of days; P(event | yes) 0.100, P(event | no) 0.000; POD 1.0 FAR 0.9 CSI 0.1
+     rule FWI >= 38 (EFFIS edge): yes on 0.18 of days; P(event | yes) 0.262, P(event | no) 0.038; POD 0.608 FAR 0.738 CSI 0.224
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.94 of days; P(event | yes) 0.083, P(event | no) 0.000; POD 1.0 FAR 0.917
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.91 of days; P(event | yes) 0.086, P(event | no) 0.000; POD 1.0 FAR 0.914
+     persistence yes/no (yesterday >= 30): POD 0.68 FAR 0.315 CSI 0.518
+     reliability (clim+pers+FWI): 0.00-0.05: n 1318, fc 0.004, obs 0.01; 0.05-0.10: n 57, fc 0.072, obs 0.07; 0.10-0.20: n 52, fc 0.147, obs 0.135; 0.20-0.40: n 53, fc 0.3, obs 0.358; 0.40-0.60: n 48, fc 0.493, obs 0.646; 0.60-1.00: n 67, fc 0.771, obs 0.761
+
+  -- B disjoint points, same years (2020-22): n 1595, events 83 (0.052)
+     climatology                                  Brier 0.0423  BSS vs clim +0.000  AUC 0.873
+     persistence                                  Brier 0.0271  BSS vs clim +0.358  AUC 0.969
+     clim+persistence                             Brier 0.0251  BSS vs clim +0.407  AUC 0.971
+     clim+FWI                                     Brier 0.0325  BSS vs clim +0.233  AUC 0.954
+     clim+persistence+FWI                         Brier 0.0237  BSS vs clim +0.439  AUC 0.976
+     clim+persistence+relative_humidity_2m        Brier 0.0244  BSS vs clim +0.423  AUC 0.978
+     clim+persistence+FWI(yesterday's weather)    Brier 0.0245  BSS vs clim +0.422  AUC 0.973
+     Brier(clim+pers+FWI) - Brier(clim+pers) = -0.00135  [95% -0.00349, +0.00078] (negative = FWI helps)
+     Brier(clim+FWI) - Brier(clim) = -0.00985  [95% -0.02039, -0.00001]
+     rule FWI >= 37: says yes on 0.21 of days; P(event | yes) 0.220, P(event | no) 0.009; POD 0.867 FAR 0.78 CSI 0.213
+     rule FWI >= 21.3 (EFFIS edge): yes on 0.58 of days; P(event | yes) 0.090, P(event | no) 0.000; POD 1.0 FAR 0.91 CSI 0.09
+     rule FWI >= 38 (EFFIS edge): yes on 0.18 of days; P(event | yes) 0.242, P(event | no) 0.010; POD 0.843 FAR 0.758 CSI 0.232
+     rule FFMC > 82 (ASEAN FDRS red): yes on 0.85 of days; P(event | yes) 0.061, P(event | no) 0.000; POD 1.0 FAR 0.939
+     rule FWI > 13 (ASEAN FDRS red): yes on 0.73 of days; P(event | yes) 0.071, P(event | no) 0.000; POD 1.0 FAR 0.929
+     persistence yes/no (yesterday >= 30): POD 0.639 FAR 0.361 CSI 0.469
+     reliability (clim+pers+FWI): 0.00-0.05: n 1354, fc 0.004, obs 0.004; 0.05-0.10: n 45, fc 0.069, obs 0.022; 0.10-0.20: n 54, fc 0.137, obs 0.111; 0.20-0.40: n 48, fc 0.289, obs 0.167; 0.40-0.60: n 33, fc 0.504, obs 0.485; 0.60-1.00: n 61, fc 0.829, obs 0.77
+  event rate by FWI class (all points and seasons, EFFIS class edges): 0-5.2: n 532, 0.0; 5.2-11.2: n 364, 0.003; 11.2-21.3: n 1031, 0.001; 21.3-38: n 3302, 0.045; 38-50: n 1073, 0.163; 50-1e+09: n 78, 0.321
+  month 2: event rate by FWI tercile (edges [23.6, 31.6]): low 0.002, mid 0.036, high 0.094 (n 1700)
+  month 3: event rate by FWI tercile (edges [27.4, 36.5]): low 0.015, mid 0.060, high 0.208 (n 1860)
+  month 4: event rate by FWI tercile (edges [17.1, 36.0]): low 0.000, mid 0.020, high 0.113 (n 1800)
+
+Season total hotspots vs season-mean FWI, Spearman per point (6 seasons each): chiang_mai +0.77, chiang_rai +0.66, hot +1.00, lampang +0.94, nan +0.77, pai +0.94, phayao +0.94, phrae +0.77, tak +0.43, uttaradit +0.60; median +0.77

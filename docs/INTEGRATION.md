@@ -51,7 +51,14 @@ The owner has three apps that touch the same people on the same bad day. Built s
 5. **Publish the ThaiWater snapshot FloodWatch already fetches** (every 10 min) as a file this app can read, e.g.
    `/api/stations` with CORS, or a KV key on the same Cloudflare account. On 23 Oct ThaiWater answered HTTP 429 to the
    server both apps shared that night (KI-029). Even on separate servers, one fetch for the family is kinder to HII.
-6. **One AI pattern for the family.** FloodWatch's `ai.run` (budget, breaker, `reasoning_effort: "low"`, content-only
+6. **From the hazards research of 24 Oct 2026** ([predict-hazards](research/predict-hazards-2026-10-24.md)):
+   - **GloFAS is FloodWatch's to test,** at its own gauges, matching river cells by upstream area (the nearest cell was
+     a side channel at 4 of 8 gauges), 3–15 days ahead, against its "no change" baseline; credit Copernicus EMS.
+   - **Publish a daily 07–07 rain total** from the ThaiWater gauges FloodWatch already fetches: the dense network this
+     page would need to verify a "within 25 km" rain chance and Thai antecedent-rain landslide thresholds, without one
+     more ThaiWater call.
+   - **Keep dated archives** of HII's flash-flood list and ONWR's notices, so both can be scored later.
+7. **One AI pattern for the family.** FloodWatch's `ai.run` (budget, breaker, `reasoning_effort: "low"`, content-only
    answers, checks before showing) is the right shape. This app's `tools/glm.mjs` and `tools/translate.mjs` follow it
    in Node. If the two apps grow more AI uses, share the checker ideas (numbers, places, verdict words, region words),
    not the code. FloodWatch's KI-373…375 are the lessons.

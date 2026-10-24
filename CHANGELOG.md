@@ -14,6 +14,9 @@
   over-predicted Bangkok by 2–3 MMI). The place profile shows the province's seismic zone from the 2564 regulation
   (43 provinces read from the Royal Gazette), labelled long-term hazard, not a prediction. The rule change for
   aftershock words and links is the owner's (D11).
+- **Fire, rain, floods, drought** ([predict-hazards](docs/research/predict-hazards-2026-10-24.md)): nothing ships. The
+  rain words hold on 76 stations; a "within 25 km" chance doesn't earn new words; fire weather has signal but must be
+  re-tested on the forecast the page could read (GWIS); GloFAS is FloodWatch's; drought waits for an agency feed.
 - Tests: 88.
 
 ## 0.4.0 (24 Oct 2026, not deployed): ภัยรอบบ้าน · Thai Risk, one grading for every forecast view, the cool-season heat fix
