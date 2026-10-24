@@ -128,7 +128,8 @@ With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the 
 - **TMD's quake list vs EMSC:** the one event in both, Laos 02:31, M4.2 in both, 0 km apart; 9 of TMD's 10 were
   M1.6–2.9 local events EMSC doesn't list.
 - **Air4Thai from FloodWatch's server (Germany):** 173 stations at 21:43 and 22:04 UTC. **ThaiWater:** HTTP 429 to the
-  same server at 22:06 (KI-029).
+  same server at 22:06 (KI-029). Both are **that host's** results, not the app's: measure them again on the risk
+  server (A6, KI-032).
 - **The collector on that server:** 5 of 5 files in 10–13 s (warnings 1, TMD quakes 10, storms 1, hotspots 311–327,
   Air4Thai 173).
 - **GLM (glm-5.3-flash at open.bigmodel.cn, effort low):** warning translation 6 of 6 accepted after the region rule,

@@ -29,14 +29,16 @@ The owner has three apps that touch the same people on the same bad day. Built s
 
 1. **CORS on `/api/point` for this site's origin.** Then the flood tile shows FloodWatch's own answer, which includes BMA's canal gauges (this app sees only ThaiWater's 8 Bangkok gauges; FloodWatch had 33 near the old town). `/api/point` is already a private-query path (not logged). Turn it on in `public/config.json` with `"floodwatchPoint": true` once FloodWatch allows it.
 2. **CORS on `/api/geocode`.** Nominatim's 1-request-a-second limit is for a whole application's users together; FloodWatch already throttles and caches to it and never logs queries (its D-032). Then set `"geocoder": "floodwatch"` in `public/config.json`.
-3. **Run this app's collector on FloodWatch's server** ([SERVER.md](SERVER.md): `docker compose up -d --build`, tested
-   there on 23 Oct 2026: 5 of 5 files, Air4Thai 173 stations). Serve the page from Cloudflare's edge at
-   `risk.autobahn.bot` ([CLOUDFLARE.md](CLOUDFLARE.md)), **not** through FloodWatch's tunnel: no shared failure, no shared token.
+3. **Nothing of this app on FloodWatch's server** (changed 24 Oct 2026, D-040). Its collector was tested there on
+   23 Oct (5 of 5 files, Air4Thai 173 stations), but it shared FloodWatch's IP and quota (KI-029). It now runs on a
+   server of its own ([SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)), and the
+   page comes from Cloudflare's edge at `risk.autobahn.bot` ([CLOUDFLARE.md](CLOUDFLARE.md)), **not** through
+   FloodWatch's tunnel. No shared failure, no shared token, no shared IP.
 4. **A frank one about FloodWatch itself:** its bank rule counts "% of the height from the river bed to the bank". On a deep river that reads "ใกล้ล้นตลิ่ง" while the water is far below the bank: C.12 (Chao Phraya at Samsen) was "warning" at 92 % with **1.31 m** of freeboard on 24 Oct 02:00. FloodWatch marks the rule heuristic (its `classify_status` docstring). A freeboard rule for rivers (e.g. watch under 1.0 m, warning under 0.5 m, as FloodWatch's own `scenarios.py` uses for the impact strip) would read better to citizens. This app copies FloodWatch's rule for consistency; change both together.
 
 5. **Publish the ThaiWater snapshot FloodWatch already fetches** (every 10 min) as a file this app can read, e.g.
    `/api/stations` with CORS, or a KV key on the same Cloudflare account. On 23 Oct ThaiWater answered HTTP 429 to the
-   server both apps share (KI-029). One fetch for the family is kinder to HII and safer for FloodWatch's own quota.
+   server both apps shared that night (KI-029). Even on separate servers, one fetch for the family is kinder to HII.
 6. **One AI pattern for the family.** FloodWatch's `ai.run` (budget, breaker, `reasoning_effort: "low"`, content-only
    answers, checks before showing) is the right shape. This app's `tools/glm.mjs` and `tools/translate.mjs` follow it
    in Node. If the two apps grow more AI uses, share the checker ideas (numbers, places, verdict words, region words),

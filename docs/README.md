@@ -12,7 +12,7 @@
 | [INTEGRATION.md](INTEGRATION.md) | with FloodWatch and บ้านรอดไหม: what was checked, what to change |
 | [CLOUDFLARE.md](CLOUDFLARE.md) | going public at risk.autobahn.bot: Workers static assets + KV, what was tested, the owner's steps |
 | [AI.md](AI.md) | GLM: the research, the warning translation and its check, the copy first-reader, what AI must never do |
-| [SERVER.md](SERVER.md) | running and developing it on a server: Docker, the collector loop, health, what to build there next |
+| [SERVER.md](SERVER.md) | the risk server's runbook (§2: what it needs, the fresh `.env`, install and go live, FloodWatch's server cleaned up), Docker, the collector loop, health, what to build there next |
 | [DEPLOY.md](DEPLOY.md) | static hosting options, and the collector on its own |
 | [OWNER_ACTIONS.md](OWNER_ACTIONS.md) | what needs the owner |
 | [ROADMAP.md](ROADMAP.md) | what comes next |

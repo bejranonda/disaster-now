@@ -155,7 +155,7 @@ Run on the owner's FloodWatch server (Germany), with the owner's `.env` and a ru
 | ID | Decision | Why | Where |
 |---|---|---|---|
 | D-030 | **Public at `risk.autobahn.bot`** (the owner's pick, kept: short, readable; the LINE card carries the Thai name) | the owner: "Our project might be risk.autobahn.bot you can suggest and improve" | OWNER_ACTIONS A1 |
-| D-031 | **Cloudflare Workers static assets + KV, collector on FloodWatch's server; no tunnel** | the edge is near the visitor; the page survives the server; no inbound path; FloodWatch's token stays FloodWatch's | [CLOUDFLARE.md §1](../CLOUDFLARE.md#1-the-recommendation-frankly) |
+| D-031 | **Cloudflare Workers static assets + KV, collector on FloodWatch's server; no tunnel** (the server part superseded by D-040) | the edge is near the visitor; the page survives the server; no inbound path; FloodWatch's token stays FloodWatch's | [CLOUDFLARE.md §1](../CLOUDFLARE.md#1-the-recommendation-frankly) |
 | D-032 | **`.env` holds this project's variables only; each service gets only its own** | the copied file carried FloodWatch's secrets and live tunnel token | `.env.example`, `docker-compose.yml` |
 | D-033 | **GLM translates TMD's warnings for the English page, checked; nothing else on a visitor's path** | TMD's CAP is Thai only, and the warned provinces are full of visitors; the agencies' words stay the product | [AI.md §2.1](../AI.md#21-english-for-tmds-warnings-collector-toolstranslatemjs) |
 | D-034 | **The translation check includes TMD's region words** | "lower South" for ภาคใต้ตอนกลาง passed a numbers-only check | `tools/translate.mjs` `REGIONS` |
@@ -172,3 +172,29 @@ Run on the owner's FloodWatch server (Germany), with the owner's `.env` and a ru
 | `npx wrangler@4.148.0` on the host | needs Node ≥ 22 (the host has 20) → `node:22` in Docker |
 | `wrangler dev` in `node:22-alpine` | workerd `ENOENT` (it needs glibc) → `node:22-bookworm-slim` |
 | A gauge cross-check from this server | ThaiWater HTTP 429 (KI-029); not retried, to spare FloodWatch's quota |
+
+## 7. The move (24 Oct 2026, ≈ 06:30–07:00 UTC)
+
+Run on FloodWatch's server for the last time, at the owner's word:
+- "sorry, I deployed in the wrong server. I will move to new server especially for risk, and change the cloudflare token";
+- then "Make it ready to deploy in new server, at the end merge and push to remote, then clean up the project in this server."
+
+### Timeline
+
+| Step | What happened | Evidence |
+|---|---|---|
+| 1 | The docs named the old host in about 20 places ("the owner's server", "FloodWatch's server", Germany, `127.0.0.1:3000`); each was rewritten to "the risk server" or marked as that host's result | `grep` |
+| 2 | `tools/preflight.mjs` written. On FloodWatch's server: ❌ "FloodWatch runs on this host", exit 1 | its output |
+| 3 | 61 of 61 unit tests (2 new); SERVER.md §2 rewritten as the risk server's runbook | `npm test` |
+| 4 | Leftovers checked before removal: `node:22-alpine` sits only under `disaster-now:local`; no image is built on `node:22-bookworm-slim`; the Chromium in `/root/.cache` dates from May 2026, before the project | `docker image inspect` (RootFS layers), `ls -l` |
+| 5 | Removed this project's volume and images; commit; `main` fast-forwarded to the work branch and both pushed | `git log`, `git ls-remote` |
+| 6 | The checkout `/root/disaster-now` deleted, with `.env` and `.env.floodwatch-original` | `ls /root` |
+
+### Decisions
+
+| ID | Decision | Why | Where |
+|---|---|---|---|
+| D-040 | **A server of its own for risk; nothing of this app on FloodWatch's** (the owner) | shared IP limits (KI-029), shared Docker and disk, a copied `.env`; the page is on the edge anyway, so the server runs only the collector | [SERVER.md §2](../SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server), GUIDELINES §8 |
+| D-041 | **New tokens, issued for this project, never copied; the old one left to FloodWatch until checked** | the old token came from FloodWatch's `.env`, and FloodWatch may deploy with it | OWNER_ACTIONS A9 |
+| D-042 | **A preflight that fails on FloodWatch's host** | a check beats a reminder: the docs already said "FloodWatch's server", and the stack still ran there | `tools/preflight.mjs` |
+| D-043 | **`main` fast-forwarded to the work branch and pushed; the checkout deleted after the push** | the owner: "merge and push to remote, then clean up the project in this server" | OWNER_ACTIONS A8, A13 |

@@ -15,12 +15,13 @@ The audits of 23 Oct 2026 use their own IDs: M1–M5 and H1–H4 from the [outpu
 Checked only in headless Chromium (23 Oct 2026).
 - GPS inside LINE's in-app browser is undocumented by LINE.
 - iPhone Safari is untested.
-- Since 0.3.0 the Docker stack has run on the owner's FloodWatch server (healthy, 5 of 5 collector files, GLM English
-  for the live warning), and the Cloudflare Worker has run under `wrangler dev` with the real files. Neither is public:
-  the Worker isn't deployed, because the token can't write Workers KV ([CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)).
-  The test stack was stopped afterwards.
+- In 0.3.0 the Docker stack ran on FloodWatch's server (healthy, 5 of 5 collector files, GLM English for the live
+  warning), and the Cloudflare Worker ran under `wrangler dev` with the real files. Neither is public: the Worker
+  isn't deployed, because the old token couldn't write Workers KV ([CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)).
+- **Since 24 Oct 2026, nothing of this app runs anywhere.** FloodWatch's server was the wrong one, and it was cleaned
+  up. The stack waits for the risk server and the new tokens (KI-032).
 
-**Next:** [OWNER_ACTIONS A9, A10, A4](OWNER_ACTIONS.md#a-to-go-live).
+**Next:** [OWNER_ACTIONS A12, A9, A10, A4](OWNER_ACTIONS.md#a-to-go-live).
 
 ### KI-002 Air4Thai's server sends a broken certificate chain, and answered 503 (high)
 - **The chain:** Let's Encrypt's YR1 intermediate is missing (Hazard-huntz docs/09 §3). curl, Node and Python refuse it.
@@ -28,11 +29,12 @@ Checked only in headless Chromium (23 Oct 2026).
 - **Browsers:** headless Chromium read the CORS mirror `air4thai.com` on 23 Oct in the builder's walks and the live walk at 21:1x UTC, but refused the same mirror's chain in the visitor audit (V27: `ERR_CERT_AUTHORITY_INVALID`). Phones that don't fetch missing intermediates, possibly LINE's Android WebView **[unverified]**, will fall back to GISTDA's estimate in every province (KI-009).
 - Since 0.2.0 the card says "ดึงข้อมูลสถานีวัดของ คพ. ไม่ได้ตอนนี้" instead of "no station here" (M1).
 
-- **Since 0.3.0:** from the owner's FloodWatch server (Germany), the collector read **173 stations** at 21:43 and 22:04
-  UTC on 23 Oct. That meets A6's "170 or more", so the 503s belonged to the build session's cloud host. With the
-  collector running, the page reads Air4Thai from `data/live/` and doesn't depend on the browser accepting the chain.
+- **Since 0.3.0:** from FloodWatch's server (Germany), the collector read **173 stations** at 21:43 and 22:04 UTC on
+  23 Oct. That meets A6's "170 or more", so the 503s belonged to the build session's cloud host. With the collector
+  running, the page reads Air4Thai from `data/live/` and doesn't depend on the browser accepting the chain.
+- That result is that host's. The collector moves to the risk server, so A6 is open again until it is measured there.
 
-**Next:** run the collector (A10). **The chain's fix belongs to the PCD** (OWNER_ACTIONS C5).
+**Next:** run the collector on the risk server (A12, A6). **The chain's fix belongs to the PCD** (OWNER_ACTIONS C5).
 
 ### KI-003 Without the collector, four feeds are missing (medium)
 TMD's warnings, TMD's quake list, TMD's storm tracks and NASA FIRMS hotspots need the collector. Since 0.2.0, the page without it:
@@ -179,15 +181,18 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
   dust-word cells in the 3-day table break inside a word ("ดี/มาก"). Fixed in 0.3.0: a number and its unit no longer
   wrap apart (°C, µg/m³ joined by a no-break space), and the chips' "Heat:Warning" has its space back.
 
-### KI-029 ThaiWater rate-limits this server's IP, which FloodWatch shares (medium)
-- On 23 Oct 2026 (22:06 UTC) ThaiWater answered **HTTP 429** to the owner's server, after this session's live walks and
-  cross-checks. FloodWatch's collector reads ThaiWater from the same IP every 10 minutes.
+### KI-029 ThaiWater rate-limited FloodWatch's server after this app's tests (medium)
+- On 23 Oct 2026 (22:06 UTC) ThaiWater answered **HTTP 429** to FloodWatch's server, after this app's live walks and
+  cross-checks there. FloodWatch's collector reads ThaiWater from the same IP every 10 minutes.
 - The page in a visitor's browser calls ThaiWater from the phone's own address, so production is unaffected unless a
   carrier puts many phones behind one address (as KI-011).
+- **Since 24 Oct 2026** the stack moves to a server of its own (D-040), so its tests no longer spend FloodWatch's quota.
+  The limit itself stays: the risk server's IP can be limited too.
 
 **Next:**
-- Don't run live walks or cross-checks repeatedly from FloodWatch's server.
+- On the risk server, one live walk and one cross-check per change, not loops (GUIDELINES §8).
 - Have FloodWatch publish the ThaiWater snapshot it already fetches, and let this app read it (INTEGRATION §3.5).
+  One fetch for the family is kinder to HII.
 
 ### KI-030 A rain cell can be yellow while its word says "ต่ำ" (low)
 - The rain tile and the 3-day table take their **level** from the likely amount (GUIDELINES rule 6: "watch" when
@@ -206,6 +211,20 @@ The verdict's 👉 line comes from บ้านรอดไหม's lines for th
 **Mitigation in place:** the label ("Machine translation … The Thai notice is the official one"), the Thai original
 one tap away, the level and times set by rules only. **Next:** a bilingual reader checks the first ten live
 translations (OWNER_ACTIONS A5), and a phrase table for TMD's fixed instructions.
+
+### KI-032 No server of its own yet; the go-live waits for it and for new tokens (medium)
+- 0.3.0's stack was set up on FloodWatch's production server by mistake (23 Oct 2026). The owner is moving it to a
+  dedicated server for risk and replacing the Cloudflare token, which came from FloodWatch's `.env` (24 Oct).
+- **Done before leaving FloodWatch's server:**
+  - everything was pushed to `main` and the work branch;
+  - this app's volume, images, checkout and both `.env` files were removed (SERVER §2.4);
+  - FloodWatch's containers, `.env` and tunnel were left untouched.
+- **Unknown until the risk server exists:** its Node version, its Chromium path, and whether Air4Thai (A6) and
+  ThaiWater answer it.
+- **The guard:** `npm run preflight` fails on a host that runs FloodWatch's containers, and warns on any other app's
+  containers or a `.env` with names this project doesn't read. Tests: `test/cloud.test.mjs` "preflight".
+
+**Next:** [OWNER_ACTIONS A12, A9, A10](OWNER_ACTIONS.md#a-to-go-live), runbook [SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server).
 
 ## Fixed
 

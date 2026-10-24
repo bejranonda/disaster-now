@@ -15,8 +15,9 @@ on it; with `AI_ENABLED=0` the page is identical except that warnings show in Th
 | Data (Z.ai's API terms, as summarised by third parties; the DPA itself not read) | content processed in real time and not stored; not used for training unless agreed; processed "generally" in Singapore; transfers to group companies not excluded | developersdigest, standardcompute, Silicon UK summaries **[unverified against the DPA]** |
 | The family's own measurements (FloodWatch, open.bigmodel.cn key) | glm-5.3-flash: `thinking: disabled` → error 1210; `reasoning_effort: "low"` → ~1–5 s, and the token budget goes to the answer; an empty `content` with only `reasoning_content` is not an answer; glm-4-flash no longer exists (1211); ~570 validation calls median 3.1–4.5 s | FloodWatch docs/SOURCES.md, KNOWN_ISSUES KI-508, `src/floodwatch/ai.py` |
 
-**This repo's key** is FloodWatch's (`GLM_API_KEY` identical, checked by hash) on open.bigmodel.cn. Measured here:
-`node tools/env-check.mjs --probe` → answers in 6.6 s (one Thai word, cold).
+**The key used on 23 Oct** was FloodWatch's (`GLM_API_KEY` identical, checked by hash) on open.bigmodel.cn. Measured
+there: `node tools/env-check.mjs --probe` → answers in 6.6 s (one Thai word, cold). It was deleted with the old
+checkout (24 Oct). On the risk server, use **a key of this project's own** (OWNER_ACTIONS D6): cost and limits per app.
 
 ## 2. What it does here
 

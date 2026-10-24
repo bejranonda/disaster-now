@@ -1,6 +1,6 @@
 # Deploying Disaster Now
 
-> **Going live: use [CLOUDFLARE.md](CLOUDFLARE.md)** (0.3.0). The page goes on Cloudflare's edge at `risk.autobahn.bot` as Workers static assets, and the collector on FloodWatch's server ([SERVER.md](SERVER.md)) uploads its files to Workers KV. This page keeps the other static-host options and the older notes.
+> **Going live: use [CLOUDFLARE.md](CLOUDFLARE.md)** (0.3.0). The page goes on Cloudflare's edge at `risk.autobahn.bot` as Workers static assets, and the collector on a server of its own ([SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server), never FloodWatch's) uploads its files to Workers KV. This page keeps the other static-host options and the older notes.
 
 The page is static files (`public/`). It works on any HTTPS static host without the collector; the collector adds the feeds a browser can't read (TMD's warnings, quakes and storm tracks, NASA FIRMS hotspots, Air4Thai with its certificate fixed). **Nothing is deployed yet** (23 Oct 2026): the agent session that built it had no deploy access (the Cloudflare connector wasn't authorised). The owner's choices are in [OWNER_ACTIONS.md](OWNER_ACTIONS.md).
 

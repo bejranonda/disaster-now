@@ -16,7 +16,7 @@ services:
     image: disaster-now:local
     restart: unless-stopped
     ports:
-      - "127.0.0.1:${WEB_PORT:-8090}:8080"   # local only; FloodWatch already uses 3000 on its server
+      - "127.0.0.1:${WEB_PORT:-8090}:8080"   # local only; on its own server (GUIDELINES §8)
     volumes:
       - live:/app/public/data/live:ro         # the collector's files, read only here
     read_only: true

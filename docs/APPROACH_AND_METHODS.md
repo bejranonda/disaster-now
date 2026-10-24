@@ -85,8 +85,8 @@ The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_hea
 ## 8. Cloudflare, GLM and the live cross-check (0.3.0)
 
 - **Cloudflare** ([CLOUDFLARE.md](CLOUDFLARE.md)): the page as Workers static assets at the edge; one small Worker
-  serves `/data/live/*` from KV; the collector stays on FloodWatch's server and uploads its files in one bulk PUT per
-  run. Chosen over a tunnel (every view would cross to Germany; FloodWatch's token was in the copied `.env`), Pages
+  serves `/data/live/*` from KV; the collector runs on a server and uploads its files in one bulk PUT per run (a
+  server of its own since D-040, §9). Chosen over a tunnel (every view would cross to the server; FloodWatch's token was in the copied `.env`), Pages
   (a second product for the same job) and a Worker cron (10 ms CPU on Free). Verified with a wrangler dry run and
   `wrangler dev` on the real files, plus unit tests that compare the Worker's headers with `_headers`.
 - **GLM** ([AI.md](AI.md)): found by asking where an AI adds value without writing a safety word. The answer was
@@ -101,3 +101,27 @@ The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_hea
 - **Visitor walks** on the running stack (360 × 640 in LINE, 390 × 844 on an iPhone, Thai and English; Bangkok,
   Phuket, Chiang Mai), recording every verdict state over time. That's how the interim heat headline before the
   warnings arrived (KI-F24) and the "mm" label over chance words (KI-F26) were seen.
+
+## 9. Moving to a server of its own (24 Oct 2026)
+
+- **What happened:** 0.3.0's stack was set up on FloodWatch's production server by mistake. The owner is moving it to a
+  dedicated server for risk and replacing the Cloudflare token (D-040, D-041).
+- **Why moving is cheap:** the stack is stateless.
+  - The repository is the source.
+  - `data/live/` refills within 15 minutes, and KV keeps the last upload meanwhile.
+  - The page lives on Cloudflare's edge, not on the server.
+  - So the move is: clone, a fresh `.env`, `npm run cf:setup`, `docker compose up`. Nothing is migrated except code.
+- **Method: re-issue, don't copy.** Secrets aren't carried from the old server.
+  - New tokens are made for this project's jobs.
+  - The old ones are left to their owner (FloodWatch) until it's checked whether they're still used.
+- **Method: a guard instead of a reminder.** `tools/preflight.mjs` turns the lesson into a check that fails on
+  FloodWatch's host.
+  - It separates gathering facts on the host from judging them (`assess(facts)` is pure), so the tests run it on
+    "FloodWatch's server" and "a clean risk server" without either machine.
+  - It also compares the KV id in `wrangler.jsonc` with the one in `.env`. A mismatch would make both sides look
+    healthy while the page served stale files.
+- **Leaving the old host:**
+  - Push first: 0.3.0 existed only in that checkout.
+  - Then remove only what this project created there (checked by image layer, so no FloodWatch image loses its base).
+  - Record the host-specific results as the host's: Air4Thai's 173 stations and ThaiWater's 429 are measured again on
+    the new server.

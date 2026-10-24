@@ -1,5 +1,5 @@
 // Tests for 0.3.0's server pieces: the .env reader, the GLM client and the warning translator (docs/AI.md), the KV
-// upload and the Cloudflare Worker (docs/CLOUDFLARE.md). No network: every call goes to a fake.
+// upload and the Cloudflare Worker (docs/CLOUDFLARE.md), the new server's preflight. No network: every call goes to a fake.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -13,6 +13,7 @@ import { status } from "../tools/env-check.mjs";
 import worker, { LIVE_HEADERS, live } from "../worker/index.mjs";
 import { parseHeaders, headersFor } from "../tools/serve.mjs";
 import { parseCap, ua } from "../tools/collect.mjs";
+import { assess } from "../tools/preflight.mjs";
 
 const fx = (f) => readFileSync(new URL(`./fixtures/${f}`, import.meta.url), "utf8");
 const WARN = parseCap(fx("tmd_cap_item.xml"));
@@ -160,4 +161,35 @@ test("the Worker serves live files from KV with an ETag, 304, 404, 405; everythi
 test("the collector's User-Agent names the site and, when set, a contact", () => {
   assert.equal(ua({ PUBLIC_HOST: "risk.autobahn.bot" }), "disaster-now-collector/0.3 (+https://risk.autobahn.bot)");
   assert.match(ua({ PUBLIC_HOST: "risk.autobahn.bot", CONTACT_EMAIL: "a@b.c" }), /contact: a@b\.c\)$/);
+});
+
+// The risk server's preflight (D-040): FloodWatch's server must fail; a clean, filled-in host must pass.
+const READY = {
+  node: 22, docker: true, compose: true, containers: ["disaster-now-web-1", "disaster-now-collector-1"], envMode: 0o600,
+  template: { CLOUDFLARE_ACCOUNT_ID: "", CLOUDFLARE_API_TOKEN: "", CF_KV_TOKEN: "", CF_KV_NAMESPACE_ID: "" },
+  env: { CLOUDFLARE_ACCOUNT_ID: "a", CLOUDFLARE_API_TOKEN: "t", CF_KV_TOKEN: "k", CF_KV_NAMESPACE_ID: "f".repeat(32) },
+  kvId: "f".repeat(32),
+};
+const levels = (r) => r.map((x) => x.level);
+
+test("preflight: a filled-in host of its own passes; FloodWatch's server fails first", () => {
+  assert.ok(!levels(assess(READY)).includes("fail"));
+  assert.ok(!levels(assess(READY)).includes("warn"));
+  const fw = assess({ ...READY, node: 20, containers: ["floodwatch-app", "floodwatch-vpn", "disaster-now-web-1"] });
+  assert.equal(fw[0].level, "fail");
+  assert.match(fw[0].msg, /FloodWatch's server/);
+  assert.equal(assess({ ...READY, containers: ["someapp"] })[0].level, "warn");
+});
+
+test("preflight: no .env, a readable .env, a copied .env, a placeholder or mismatched KV id", () => {
+  assert.match(assess({ ...READY, env: null }).find((r) => r.level === "fail").msg, /never copy another server's \.env/);
+  assert.ok(assess({ ...READY, envMode: 0o644 }).some((r) => r.level === "warn" && /chmod 600/.test(r.msg)));
+  const copied = assess({ ...READY, env: { ...READY.env, DATABASE_URL: "x", SESSION_SECRET: "y" } });
+  const w = copied.find((r) => /doesn't read/.test(r.msg));
+  assert.equal(w.level, "warn");
+  assert.ok(!JSON.stringify(copied).includes('"x"') && /DATABASE_URL, SESSION_SECRET/.test(w.msg));
+  assert.ok(assess({ ...READY, kvId: "0".repeat(32) }).some((r) => r.level === "warn" && /cf:setup/.test(r.msg)));
+  assert.ok(assess({ ...READY, kvId: "e".repeat(32) }).some((r) => r.level === "fail" && /different KV namespaces/.test(r.msg)));
+  assert.ok(assess({ ...READY, env: { ...READY.env, CLOUDFLARE_API_TOKEN: "" } }).some((r) => r.level === "fail" && /A9/.test(r.msg)));
+  assert.equal(assess({ ...READY, node: 18 }).find((r) => /Node/.test(r.msg)).level, "fail");
 });

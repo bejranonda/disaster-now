@@ -81,14 +81,23 @@ Rules for anyone (person or AI) changing Disaster Now. Most come from the owner'
 - **Keys:** only in `.env` (git-ignored, mode 600), one scoped token per job, passed by docker-compose.yml to the one
   service that needs it, sent in headers, never printed (`tools/env-check.mjs` shows states, not values). **Never copy
   another project's `.env`**, and never run another site's tunnel token here.
-- **FloodWatch shares this server and its IP:** don't run live walks or cross-checks in a loop from it (ThaiWater
-  rate-limits the IP FloodWatch's collector needs, KI-029).
+- **One server per app (D-040):** the stack runs on the risk server, never on FloodWatch's production machine or
+  another app's. Sharing one means sharing an IP's rate limits (KI-029), Docker and disk, and `.env` files drift
+  between projects. Run `npm run preflight` before the first `docker compose up` on any host; it fails where
+  FloodWatch runs.
+- **Re-issue, don't copy (D-041):**
+  - A new server gets a fresh `.env` from `.env.example`, with tokens made for this project.
+  - A changed token goes into `.env` only; nothing in git changes.
+  - An old token that another app may use is revoked only after checking that app.
+- **Live calls:** one live walk and one cross-check per change, never loops (ThaiWater limits per IP, KI-029).
 
 ## 9. Git
 
 - Branch from `main` (or the branch you were given); push only there. Commit messages start with `feat:`, `fix:`, `docs:`, `test:`, `content:` or `chore:` and end with the attribution lines the harness gives.
 - Stage files by name; never commit `public/data/live/` (the collector's output), `.env`, keys or big downloads.
 - Several sessions may work here: `git pull --ff-only` and read `git log` before editing.
+- **Before leaving a server, push.** Commits that exist only in a server's checkout are lost with it: 0.3.0 existed
+  only on FloodWatch's server until the move (24 Oct 2026). Merge into `main` only when the owner asks.
 
 ## 10. AI (GLM)
 

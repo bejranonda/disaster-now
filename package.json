@@ -13,6 +13,7 @@
     "check:advice": "node tools/check-advice.mjs",
     "check:docs": "node tools/check-docs.mjs",
     "env:check": "node tools/env-check.mjs",
+    "preflight": "node tools/preflight.mjs",
     "cf:setup": "node tools/cf-setup.mjs",
     "cf:dev": "npx --yes wrangler@4.148.0 dev --local",
     "cf:deploy": "node tools/cf-deploy.mjs",

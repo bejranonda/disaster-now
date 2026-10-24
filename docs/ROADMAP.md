@@ -8,12 +8,15 @@ Each item has a "done when". **AI-ready** items need nothing from the owner; **o
 - **v0.2.0 (23 Oct 2026):** validated forecasts (the heat correction, the damped PM2.5 ratio, rain words, felt words with the Bangkok term), the output cross-check's and the visitor audit's main findings, and a Docker stack for the server.
 - **v0.3.0 (23 Oct 2026):** Cloudflare prepared (Workers static assets + KV, `risk.autobahn.bot`, tested locally, not deployed); GLM's checked English for TMD's warnings and a copy first-reader; the live cross-check and its fixes (the warning leads the tile, the verdict and the table); the verdict on the first screen at 360 × 640; no interim verdict; the 3-day table moved up; link previews and PNG icons; `.env` for this project only.
 
+- **The move (24 Oct 2026):** `npm run preflight`, the risk server's runbook ([SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)), `main` pushed, FloodWatch's server cleaned of this project.
+
 See [CHANGELOG.md](../CHANGELOG.md).
 
 ## v0.4: live (owner first, then AI-ready)
 
-1. **Go live at risk.autobahn.bot** (A9, A10; [CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)): a KV token, `npm run cf:setup`, the collector on FloodWatch's server, `npm run cf:deploy`. *Done when* the URL answers from the edge, `data/live/index.json` there is under 15 min old, and the warning, fire and storm tiles show data.
-2. ✅ **Air4Thai from the owner's server** (A6): 173 stations on 23 Oct.
+0. **The risk server** (A12, KI-032; [SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)): a dedicated server, a fresh `.env`, new tokens. *Done when* `npm run preflight` shows no ❌ there.
+1. **Go live at risk.autobahn.bot** (A9, A10; [CLOUDFLARE.md §4](CLOUDFLARE.md#4-what-the-owner-does)): new tokens, `npm run cf:setup`, the collector on the risk server, `npm run cf:deploy`. *Done when* the URL answers from the edge, `data/live/index.json` there is under 15 min old, and the warning, fire and storm tiles show data.
+2. **Air4Thai from the risk server** (A6): 173 stations from FloodWatch's server on 23 Oct; measure it again on the new host.
 3. **Real-phone test** inside LINE (A4). *Done when* the 12 tasks of the UX scout's script pass on an Android and an iPhone.
 4. **FloodWatch CORS** for `/api/point` and `/api/geocode` (B1, B2), then flip `public/config.json`. *Done when* the flood tile names FloodWatch as its source for a Bangkok point.
 

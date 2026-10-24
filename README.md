@@ -2,7 +2,7 @@
 
 **One page that shows every hazard at a point in Thailand, now and for the next 3 days.** Tap 📍 (or search a subdistrict, a road, a place) and see, for that point: rain, river level and flash floods, PM2.5 dust and other pollution, heat, UV, wind and storms, landslides, earthquakes and fires, each in the agency's own words with its source and time, one sourced action, and a link to what to do.
 
-> v0.3.0 · 23 Oct 2026 · **built, validated, audited, ready for Cloudflare at `risk.autobahn.bot`; not deployed, not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
+> v0.3.0 · 24 Oct 2026 · **built, validated, audited, ready for Cloudflare at `risk.autobahn.bot`, moving to a server of its own; not deployed, not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
 
 <img src="docs/screens/report-390.png" width="260" alt="The report for Bangkok's old town at 390 px, in Thai"> <img src="docs/screens/report-en-390.png" width="260" alt="Phuket in English under TMD's heavy-rain warning"> <img src="docs/screens/warning-en-390.png" width="260" alt="TMD's warning in GLM's checked English, labelled as a machine translation">
 
@@ -34,10 +34,11 @@ npm run collect                   # the collector once → public/data/live/
 npm run check:advice              # advice lines still equal บ้านรอดไหม's
 ```
 
-**On a server and on Cloudflare** ([docs/SERVER.md](docs/SERVER.md), [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)):
+**On its own server and on Cloudflare** (the runbook: [docs/SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server); [docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)). Never on another app's production server:
 
 ```
-cp .env.example .env              # nothing is required; see the comments for Cloudflare, KV and GLM
+cp .env.example .env && chmod 600 .env   # fresh on every server, with tokens made for this project
+npm run preflight                 # is this host ready? (fails on FloodWatch's server; prints no values)
 node tools/env-check.mjs --probe  # which variables are set (never their values) and whether the keys work
 docker compose up -d --build      # the page on http://127.0.0.1:8090/ + the collector every 15 min
 node tools/health.mjs --web http://127.0.0.1:8090/

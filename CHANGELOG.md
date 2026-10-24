@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+**The move to a server of its own** (24 Oct 2026; D-040 … D-043):
+- 0.3.0's stack had been set up on FloodWatch's production server by mistake. The owner is moving it to a dedicated
+  server for risk and replacing the Cloudflare token.
+- `npm run preflight` (`tools/preflight.mjs`) checks whether a host is ready. It is read-only and prints no values; 2 tests.
+  - It **fails** on a host running FloodWatch's containers, without `.env` or a deploy token, or when `wrangler.jsonc`
+    and `.env` name different KV namespaces.
+  - It **warns** on other apps' containers, a `.env` others can read, names this project doesn't read (a copied
+    file), or the placeholder KV id.
+- [docs/SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server) is the risk server's runbook:
+  - what the server needs;
+  - the fresh `.env`, with where each value comes from;
+  - install and go live, with "done when";
+  - what was removed from FloodWatch's server.
+- **Docs:**
+  - "the risk server" wherever the collector's host was FloodWatch's;
+  - Air4Thai's 173 stations and ThaiWater's 429 marked as that host's results;
+  - OWNER_ACTIONS: A6 open again, A7 decided, A9 new tokens, A11 and A13 done, new A12;
+  - KNOWN_ISSUES: KI-029 updated, new KI-032;
+  - GUIDELINES §8 "one server per app" and "re-issue, don't copy", and §9 "push before leaving a server";
+  - APPROACH §9;
+  - FRANK_FEEDBACK §6;
+  - HISTORY §7.
+- **Comments** in `.env.example` (fresh on every server; a GLM key of its own), `docker-compose.yml` and `tools/cf-deploy.mjs`.
+- **Git and cleanup:**
+  - `main` was fast-forwarded to the work branch, and both were pushed.
+  - Then FloodWatch's server was cleaned of this project: the volume, the images, the checkout and both `.env` files.
+  - FloodWatch was left untouched.
+
 ## 0.3.0 (23 Oct 2026, not deployed): Cloudflare-ready at risk.autobahn.bot, GLM English for TMD's warnings, the live cross-check's fixes
 
 **Cloudflare** ([docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)), prepared and tested locally:

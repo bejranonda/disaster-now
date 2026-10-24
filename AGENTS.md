@@ -4,11 +4,13 @@
 
 **ภัยรอบบ้าน ตอนนี้ (Disaster Now)** is one Thai web page: share GPS or search a place, and see every hazard at that point now and for the next 3 days, with the agency's own words, the source and time of every number, one sourced action and a link to what to do. Heat, PM2.5 and other pollution, UV, rain, wind and storms, river level and flash floods, landslides, earthquakes, fires. Static files (`public/`), no server, no framework, no runtime packages; a collector (`tools/collect.mjs`) for the feeds a phone can't read. It is the third app of the owner (`bejranonda`), beside FloodWatch (`flood2026-research`, water) and บ้านรอดไหม (`Hazard-huntz`, what to do), and must agree with both ([docs/INTEGRATION.md](docs/INTEGRATION.md)).
 
-**State (23 Oct 2026):** v0.3.0.
+**State (24 Oct 2026):** v0.3.0.
 - Built, validated (heat corrected, PM2.5 damped, rain words, felt words; [docs/MODELS.md](docs/MODELS.md)) and audited by three independent agents.
 - Ready for Cloudflare at `risk.autobahn.bot`: Workers static assets + KV, tested locally ([docs/CLOUDFLARE.md](docs/CLOUDFLARE.md)).
 - GLM translates TMD's warnings for the English page, checked ([docs/AI.md](docs/AI.md)).
-- The Docker stack ran on the owner's server, which is **FloodWatch's production server: leave its containers alone**.
+- **Moving to a server of its own** (24 Oct 2026): 0.3.0's stack ran on FloodWatch's production server by mistake.
+  That server was cleaned of this project, the owner is setting up a dedicated one for risk with new Cloudflare tokens,
+  and `npm run preflight` checks the host ([docs/SERVER.md §2](docs/SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)).
 - **Not deployed** and **not tested on real phones**. See [HANDOFF.md](HANDOFF.md).
 
 ## 2. Read in this order
@@ -33,6 +35,7 @@
 | `npm run check:docs` | every relative link and anchor in the Markdown |
 | `docker compose up -d --build` | the page on 127.0.0.1:8090 and the collector every 15 min ([docs/SERVER.md](docs/SERVER.md)) |
 | `node tools/health.mjs --web URL` / `--live DIR` | health of the page / the collector's files (exit 0 or 1) |
+| `npm run preflight` | is this host ready for the stack and the deploy? Fails on FloodWatch's server, without `.env` or a deploy token, or with KV ids that differ; read-only, prints no values |
 | `node tools/env-check.mjs [--probe]` | which `.env` variables are set (never their values); `--probe` tests the Cloudflare token and GLM |
 | `npm run cf:setup` / `npm run cf:deploy [-- --dry-run]` | create the KV namespace and write its id / deploy to Cloudflare with the pinned wrangler (Docker on Node < 22) |
 | `npm run ai:review-copy` | GLM's first reading of the Thai copy → `docs/research/copy-review-glm-<date>.md` (a reviewer's prompt, never applied unread) |
@@ -60,7 +63,7 @@
 - **Honest User-Agent, never faster than a source updates, no evasion of blocks or bot checks.**
 - **No secrets in git;** keys only in `.env` (one scoped token per job), passed only to the service that needs it, in headers, never printed. **Never copy another project's `.env`; never run FloodWatch's tunnel token here.**
 - **AI (GLM) only off the visitor's path:** it translates or reviews public text; rules write every level, number and advice; what the page shows from it is checked and labelled (GUIDELINES §10).
-- **On FloodWatch's server, don't loop live calls:** ThaiWater rate-limits the IP FloodWatch's collector needs (KI-029).
+- **One server per app:** never run this stack on FloodWatch's (or another app's) production server; `npm run preflight` first on any host. **Never loop live calls:** ThaiWater rate-limits per IP (KI-029).
 
 ## 6. How the owner works
 

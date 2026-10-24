@@ -1,20 +1,23 @@
 # Cloudflare: how Disaster Now goes public at risk.autobahn.bot
 
-**State (23 Oct 2026, 0.3.0):** prepared and tested locally; **not deployed**. The Worker, its config and the collector's
-upload exist and pass their tests, a wrangler dry run and a local `wrangler dev` run. Two owner steps remain:
-a token that can write Workers KV, and the deploy command ([§4](#4-what-the-owner-does)).
+**State (24 Oct 2026, 0.3.0):** prepared and tested locally, **not deployed**.
+- The Worker, its config and the collector's upload exist, and pass their tests, a wrangler dry run and a local
+  `wrangler dev` run.
+- **The owner is moving the stack to a dedicated server for risk and replacing the Cloudflare token** (D-040, D-041).
+- What remains: new tokens that can write Workers KV, then the deploy from the risk server ([§4](#4-what-the-owner-does)).
+- `npm run preflight` says when that server is ready.
 
 ## 1. The recommendation, frankly
 
-**Serve the page from Cloudflare's edge (Workers static assets), keep the collector on FloodWatch's server, and let
-the collector upload its five files to Workers KV.** No tunnel, no open port, no new server.
+**Serve the page from Cloudflare's edge (Workers static assets), run the collector on the risk server (a server of
+its own, never FloodWatch's: D-040), and let the collector upload its five files to Workers KV.** No tunnel, no open port.
 
 ```
  visitors in Thailand ──► Cloudflare edge (Bangkok PoPs) ── risk.autobahn.bot
                             ├─ /*            static assets from public/ (+ public/_headers)   free, not a Worker call
                             └─ /data/live/*  Worker (worker/index.mjs) → Workers KV "disaster-now-live"
                                                                               ▲ one bulk PUT per run (≤ 6 keys)
- FloodWatch's server (Germany) ── docker compose: collector every 15 min ─────┘   (web on 127.0.0.1:8090 for checks)
+ the risk server (its own) ─────── docker compose: collector every 15 min ─────┘   (web on 127.0.0.1:8090 for checks)
  the phone ──► Open-Meteo, GISTDA, ThaiWater, EMSC, USGS, GDACS, JMA, DMR      directly, as before
 ```
 
@@ -22,9 +25,9 @@ Why this and not the alternatives:
 
 | Option | For | Against | Verdict |
 |---|---|---|---|
-| **A. Workers static assets + KV (built)** | the page is served from the edge near the visitor, not from Germany; it keeps working when the server is down (the live files just age, and the page shows their age); static requests are free and unmetered; no inbound path to FloodWatch's server; no request logs | the collector needs a KV token; KV's free plan allows 1,000 writes a day (we use ≤ 576) | **recommended** |
+| **A. Workers static assets + KV (built)** | the page is served from the edge near the visitor, not from the server; it keeps working when the server is down (the live files just age, and the page shows their age); static requests are free and unmetered; no inbound path to the server; no request logs | the collector needs a KV token; KV's free plan allows 1,000 writes a day (we use ≤ 576) | **recommended** |
 | B. Cloudflare Pages | the older static product; `public/_headers` already works there | Cloudflare now points new projects to Workers static assets; live files would still need a Worker, R2 or a redeploy every 15 min (Pages Free counts 500 builds a month) | not worth a second product |
-| C. A tunnel to this stack (`docker compose --profile public`) | ready since 0.2.0 | every page view crosses to Germany and back; the server becomes a single point of failure for the page; needs a tunnel of its own — **the `.env` copied from FloodWatch held FloodWatch's own tunnel token** (identical, checked by hash only), which would have added a second connector to FloodWatch's tunnel and split FloodWatch's visitors between the two origins | fallback only, with a new tunnel |
+| C. A tunnel to this stack (`docker compose --profile public`) | ready since 0.2.0 | every page view crosses to the server and back; the server becomes a single point of failure for the page; needs a tunnel of its own — **the `.env` copied from FloodWatch held FloodWatch's own tunnel token** (identical, checked by hash only), which would have added a second connector to FloodWatch's tunnel and split FloodWatch's visitors between the two origins | fallback only, with a new tunnel |
 | D. The collector as a Worker cron | no server at all | the Free plan gives a cron 10 ms of CPU (parsing 130 KB of Air4Thai and TMD's CAP XML won't fit); a Worker can't add Air4Thai's missing intermediate certificate (KI-002) **[unverified whether Cloudflare's fetch tolerates it]**; Paid is US$5 a month | not now |
 
 Cloudflare's limits, as documented (developers.cloudflare.com, read 23 Oct 2026): Workers Free 100,000 requests a day
@@ -46,7 +49,12 @@ applies to asset responses only. KV Free: 100,000 reads and 1,000 writes a day.
 | `tools/env-check.mjs --probe` | says which variables are set and whether the token reaches the zone, Workers and KV, **without printing a value** |
 | `tools/make-images.mjs` | the link-preview image (`og.png`) and PNG icons; the page's Open Graph tags point to `https://risk.autobahn.bot/` |
 
-## 3. Checked in this session (23 Oct 2026)
+## 3. Checked on 23 Oct 2026 (FloodWatch's server, the old token)
+
+These ran with the token copied from FloodWatch's `.env`, on FloodWatch's server, before the move. **With the new
+token on the risk server, run `npm run preflight` and `npm run env:check -- --probe` again.** The results below say
+what to expect, not what the new token can do.
+
 
 - `node tools/env-check.mjs --probe`: the token is **valid**; zone `autobahn.bot` visible; `risk.autobahn.bot` has **no
   DNS record yet** (free); Workers scripts readable (0 on the account); **Workers KV: HTTP 401** (the token lacks KV).
@@ -66,14 +74,17 @@ from Thailand.
 
 ## 4. What the owner does
 
-1. **A token that can write KV.** Either add *Account → Workers KV Storage: Edit* to the existing token, or (better)
-   create a second token with only that permission and put it in `.env` as `CF_KV_TOKEN` (the collector gets only
-   this one; docker-compose.yml passes it and nothing else). The deploy token also needs *Workers Scripts: Edit*,
-   *Workers Routes: Edit* and *DNS: Edit* on `autobahn.bot` for the custom domain.
-2. `node tools/env-check.mjs --probe` → "Workers KV: readable".
+All of it on **the risk server**, in a fresh `.env` ([SERVER.md §2](SERVER.md#2-the-risk-server-install-go-live-and-leave-floodwatchs-server)); never on FloodWatch's.
+
+1. **Two new tokens for this project** (the old one came from FloodWatch's `.env`: check whether FloodWatch's deploys
+   use it before you revoke it):
+   - `CLOUDFLARE_API_TOKEN`, to deploy: Account → *Workers Scripts: Edit*, *Workers KV Storage: Edit*; Zone
+     `autobahn.bot` → *Workers Routes: Edit*, *DNS: Edit* (for the custom domain).
+   - `CF_KV_TOKEN`, for the collector: only *Workers KV Storage: Edit*. docker-compose.yml passes it and nothing else.
+2. `npm run preflight` (no ❌), then `npm run env:check -- --probe` → "Workers KV: readable".
 3. `npm run cf:setup` → creates `disaster-now-live`, writes its id (commit `wrangler.jsonc`; the id is not a secret).
 4. `docker compose up -d --build` → the collector uploads every 15 minutes (`docker compose logs collector` shows `kv: 6 files uploaded`).
-5. `npm run cf:deploy` (on Node 20, as on FloodWatch's server, it runs wrangler in `node:22-bookworm-slim` by itself;
+5. `npm run cf:deploy` (on Node 22 it runs wrangler directly; on Node 20 in `node:22-bookworm-slim` by itself;
    `npm run cf:deploy -- --dry-run` first: on 23 Oct it read 32 files and both bindings).
 6. Check: `node tools/health.mjs --web https://risk.autobahn.bot/`; `curl -sI https://risk.autobahn.bot/ | grep -i permissions-policy`;
    `curl -s https://risk.autobahn.bot/data/live/index.json` (fresh `generated`); open it on a phone inside LINE and paste
@@ -88,4 +99,6 @@ FloodWatch is untouched either way.
 - No request logs (`observability` off, no `console.log` in the Worker), no cookies, no analytics (GUIDELINES §2).
 - Only `/data/live/*` runs code; the page itself stays plain files.
 - Tokens only in `.env` (git-ignored, mode 600), each scoped to its job; never in `wrangler.jsonc`, a URL or a log.
-- Never reuse FloodWatch's tunnel token for this site.
+- Never reuse FloodWatch's tunnel token for this site, and never run this site's collector on FloodWatch's server (D-040).
+- **When a token changes:** put the new one in `.env` on the risk server, run `npm run env:check -- --probe`, and
+  restart the collector (`docker compose up -d`). Nothing in git changes, because no token is ever in git.

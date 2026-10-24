@@ -2,7 +2,7 @@
 // Deploy the Worker and the page to Cloudflare (docs/CLOUDFLARE.md §4) with a pinned wrangler, reading the token and
 // account from .env (wrangler itself doesn't read .env for its login). Refuses while wrangler.jsonc still has the
 // placeholder KV id (run `npm run cf:setup` first). Extra arguments go to wrangler, e.g. `npm run cf:deploy -- --dry-run`.
-// wrangler 4 needs Node ≥ 22: on an older Node (FloodWatch's server has 20) it runs in node:22-bookworm-slim instead
+// wrangler 4 needs Node ≥ 22: on an older Node (e.g. a host with Node 20) it runs in node:22-bookworm-slim instead
 // (Debian: wrangler's workerd needs glibc), passing the two variables by name so they never appear in a command line.
 import { readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
