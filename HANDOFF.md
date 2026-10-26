@@ -98,7 +98,9 @@ real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
 
 - **A change is done when** the tests and the walk pass and the docs change in the same commit (CHANGELOG,
   KNOWN_ISSUES, KNOWLEDGE for any number, this file if the state changed).
-- **A release bumps the version** in `package.json`, `package-lock.json`, `main.js`, `sw.js` (twice) and `index.html`.
+- **A release bumps the version** in `package.json`, `package-lock.json`, `main.js`, `sw.js` (twice) and `index.html` (`test/discover.test.mjs` checks they agree),
+  then gets an annotated tag and a GitHub release with its CHANGELOG section (`git tag -a vX.Y.Z`, `git push origin
+  vX.Y.Z`, `gh release create vX.Y.Z --verify-tag --notes-file …`; since v0.7.1, no tags before it).
 - **The rules that bite** ([docs/GUIDELINES.md](docs/GUIDELINES.md)):
   - evidence for every number;
   - the agency's word leads, in the agency's own colours;
