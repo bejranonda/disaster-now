@@ -21,10 +21,26 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="ภัยรอบบ้าน (Thai Risk): ทุกความเสี่ยงที่จุดเดียว ตอนนี้และ 3 วันข้างหน้า">
 <meta property="og:locale" content="th_TH">
+<meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<!-- search and AI assistants (0.7.1): the two languages, and what the page is in schema.org's words; llms.txt says the rest.
+     No canonical: "/" and "?lang=en" are the same file, and a fixed canonical would call the English page a duplicate -->
+<link rel="alternate" hreflang="th" href="https://risk.autobahn.bot/">
+<link rel="alternate" hreflang="en" href="https://risk.autobahn.bot/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://risk.autobahn.bot/">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"ภัยรอบบ้าน","alternateName":"Thai Risk",
+ "url":"https://risk.autobahn.bot/","inLanguage":["th","en"],"applicationCategory":"UtilitiesApplication",
+ "operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"THB"},
+ "description":"Every natural hazard at one point in Thailand, now and for the next 3 days: flood and river level, rain, PM2.5, heat, UV, wind and storms, landslide, earthquake and fire, in the agencies' own words with sources. Not a warning service.",
+ "keywords":"ภัยพิบัติ, น้ำท่วม, ระดับน้ำ, ฝน, ฝุ่น PM2.5, ความร้อน, ดัชนีความร้อน, UV, พายุ, ดินถล่ม, แผ่นดินไหว, ไฟป่า, Thailand, flood, air quality, heat index, earthquake, landslide, wildfire",
+ "spatialCoverage":{"@type":"Country","name":"Thailand"},"image":"https://risk.autobahn.bot/og.png",
+ "license":"https://opensource.org/licenses/MIT","sameAs":["https://github.com/bejranonda/disaster-now"],
+ "creator":{"@type":"Person","name":"bejranonda","url":"https://github.com/bejranonda"}}
+</script>
 <!-- Anuphan (Cadson Demak, SIL OFL 1.1, fonts/OFL-Anuphan.txt), self-hosted: no font request leaves this site -->
 <link rel="preload" href="fonts/anuphan-thai.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/app.css?v=0.7.0">
+<link rel="stylesheet" href="css/app.css?v=0.7.1">
 <!-- the module graph loaded in 5 serial round trips: on Slow 3G 📍 did nothing until 11.9 s (device study T5) -->
 <link rel="modulepreload" href="js/geo.js">
 <link rel="modulepreload" href="js/heat.js">
@@ -190,6 +206,6 @@
   <p class="muted small"><span data-t="footer">ภัยรอบบ้าน · Thai Risk · โครงการทดลองอิสระ ไม่ใช่เว็บของหน่วยงานรัฐ ข้อมูลอาจผิดหรือล่าช้า ตรวจสอบกับหน่วยงานเสมอ</span> · <span id="ver"></span></p>
 </footer>
 
-<script type="module" src="js/main.js?v=0.7.0"></script>
+<script type="module" src="js/main.js?v=0.7.1"></script>
 </body>
 </html>

@@ -36,5 +36,6 @@ It fetches on a schedule and writes `public/data/live/{warnings,tmd_quakes,storm
 
 - `curl -sI https://<host>/` shows `permissions-policy: geolocation=(self)…` and no `set-cookie`.
 - `curl -s https://<host>/data/live/index.json` shows `generated` within the cron interval.
+- `curl -sI https://<host>/llms.txt` is 200 with `charset=utf-8`; `robots.txt` ends with the `Sitemap:` line.
 - On a phone: GPS (also inside LINE), a search, the EN switch, ก+, save a place and reopen.
 - `npm run check:advice` (the advice lines still equal baanrodmai's).

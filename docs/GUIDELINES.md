@@ -70,6 +70,11 @@ Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai 
 - Emoji in visible text are Unicode 11 or older (Hazard-huntz rule 64): no 🟢🟡🟠 circles.
 - Numbers: one decimal for PM2.5 (PCD's resolution), whole °C, mm and km/h, thousands grouped (2,590 กม.).
 - Bangkok areas are "แขวง/เขต", elsewhere "ต./อ./จ.".
+- **What machines read is copy too** (0.7.1, D-065): `public/llms.txt`, the JSON-LD, the meta description and the
+  `og:` tags follow the same rules as the page: the level words are `levels.js`'s, the hotlines are the ones the page
+  dials, "not a warning service" stays, nothing is promised that the page doesn't do (no public API; `/data/live/` is
+  internal). Change the page's words and these files in the same commit; `test/discover.test.mjs` checks them.
+- **No canonical link** while `/` and `?lang=en` are one file: `hreflang` names both instead.
 
 ## 6. Layout and testing
 
@@ -142,6 +147,9 @@ Rules for anyone (person or AI) changing ภัยรอบบ้าน · Thai 
   - A new server gets a fresh `.env` from `.env.example`, with tokens made for this project.
   - A changed token goes into `.env` only; nothing in git changes.
   - An old token that another app may use is revoked only after checking that app.
+- **The zone's robots.txt is the owner's** (KI-045): Cloudflare puts its managed block (AI training crawlers refused,
+  `Content-Signal: search=yes,ai-train=no,use=reference`) above `public/robots.txt`. Ours only adds `/data/live/` and
+  the sitemap; never try to undo the zone's block from the file.
 - **Live calls:** one live walk and one cross-check per change, never loops (ThaiWater limits per IP, KI-029). Layout
   probes block ThaiWater (`page.route(/thaiwater/, …)`): they don't need it.
 

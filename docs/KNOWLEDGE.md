@@ -225,3 +225,21 @@ With the heat correction, Bangkok's afternoons read about 43 °C on 24 Oct (the 
 - **บ้านรอดไหม's English guides** `/en/hot`, `/en/air`, `/en/mask`, `/en/flood`, `/en/storm`, `/en/landslide`,
   `/en/quake`, `/en/pm25`: all 200 (08:3x UTC); the English page links to them since 0.4.0 (X10).
 
+## 14. 0.7.1: how search engines and AI assistants see the page (26 Oct 2026, ≈ 19:50 UTC)
+
+- **The served files** (after deploy `4317d96d`): `/llms.txt` 200 `text/plain; charset=utf-8` (without the `_headers`
+  rule the edge sent `text/plain` with no charset); `/sitemap.xml` 200 `application/xml`; `/robots.txt` 200; the page
+  carries one JSON-LD block and three `hreflang` links. Right after the first deploy `llms.txt` answered 404 at some
+  edge locations for about a minute, then 200 everywhere.
+- **The zone's robots.txt** (Cloudflare managed content, zone-wide on autobahn.bot): `User-agent: *` with
+  `Content-Signal: search=yes,ai-train=no,use=reference`, then `Disallow: /` for AI training and other crawlers
+  (GPTBot, ClaudeBot, Google-Extended, CCBot, Bytespider, Applebot-Extended, meta-externalagent and others), then this
+  repository's `public/robots.txt`.
+- **At the edge, one request each** (26 Oct 2026, a User-Agent string per crawler, from `autobahn-bot`): GPTBot **403**
+  on the page and `llms.txt`; ChatGPT-User, PerplexityBot and Googlebot 200 on the page. So AI training crawlers are
+  refused, and AI assistants fetching for a person, and search engines, get through.
+- **What is indexable:** only `/` and `/?lang=en`. Places live in the `#fragment` (`#t=`, `#p=`), which crawlers don't
+  send, so no place has a page of its own in search (KI-046).
+- **The GitHub repository** (`bejranonda/disaster-now`, public): MIT (GitHub detects `MIT`, as FloodWatch's; บ้านรอดไหม's
+  file reads MIT but GitHub reports `NOASSERTION`), its description in Thai and English, the homepage
+  https://risk.autobahn.bot, 20 topics (GitHub's maximum), and the social preview image (the owner uploaded it).

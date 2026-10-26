@@ -188,3 +188,17 @@ The same static page, plus a loop. `tools/serve.mjs` serves `public/` with `_hea
   only signal; data words keep their emoji for the LINE share text, and the page draws its icons instead.
 - **Live checks after the build:** one live walk, the live cross-check (gauges 98.8 % with FloodWatch, quakes, GISTDA),
   and one load of the deployed page at Hat Yai under TMD's real Extreme warning that night.
+
+## 13. Found by search and AI assistants (26 Oct 2026, 0.7.1)
+
+- **Match the family first:** the licence is the same MIT text and holder as FloodWatch's, unchanged, because GitHub
+  only recognises the standard text; the exceptions (the OFL font, the sources' data) are in the README instead.
+- **Write for the reader that isn't a person:** `llms.txt` carries the facts an AI assistant gets wrong when it guesses
+  (it is not a warning service, the hotlines, the level words, that a forecast never says "act now", how to link to a
+  place, that there is no API). Each fact was checked against the code before it went in; one wasn't true (GISTDA as a
+  fire source: it is the PM2.5 estimate here) and was fixed before shipping.
+- **Hold machine-read copy to the page with tests** (`test/discover.test.mjs`): the same rule as the advice lines and
+  บ้านรอดไหม (`check:advice`), applied to `llms.txt` and the JSON-LD.
+- **Check what the edge really serves, not what the repository holds:** the deployed `robots.txt` had Cloudflare's
+  block on top, and `llms.txt` lacked a charset. Both were found only by fetching the live files, and the crawler
+  check (one request per User-Agent) showed what the zone lets through.

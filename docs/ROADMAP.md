@@ -26,6 +26,9 @@ See [CHANGELOG.md](../CHANGELOG.md).
 - **v0.7.0 (25 Oct 2026, live):** the redesign (D8 by the owner's brief): one hero, one list sorted by concern with rows
   that open in place, the staff gauge, the site's icons and font; an independent audit's R1 and nine mediums fixed.
 
+- **v0.7.1 (26 Oct 2026, live):** the MIT licence; `llms.txt`, `robots.txt`, a sitemap, `hreflang` and JSON-LD for
+  search and AI assistants, held to the page by `test/discover.test.mjs`; the GitHub "About" box.
+
 ## Next, in order (from 25 Oct 2026)
 
 1. ✅ **The KV token** (A9, 24 Oct 21:12 UTC): the edge serves the live files; `health --need-live` exits 0.
@@ -39,6 +42,7 @@ See [CHANGELOG.md](../CHANGELOG.md).
    FloodWatch's history); lift A to เตรียมตัว elsewhere only with a record like the U-Taphao's.
 7. **FloodWatch's file, leaner:** the lead-time study's additions (`c12`, the bank bands, `rid_age`) and the upstream links
    filtered at the collector; measure page weight first (KI-040).
+8. **Province pages for search** (KI-046), only after the owner's yes (D12) and A4.
 
 ## v0.4: live (owner first, then AI-ready)
 

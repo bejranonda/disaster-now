@@ -1,7 +1,7 @@
 # Handoff
 
-**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.7.0, 25 Oct 2026. Live at https://risk.autobahn.bot**
-(Cloudflare Workers, version `e8ef0130`), with its live files (the collector uploads to KV every 15 min since 24 Oct
+**ภัยรอบบ้าน · Thai Risk (code name `disaster-now`) v0.7.1, 26 Oct 2026. Live at https://risk.autobahn.bot**
+(Cloudflare Workers, version `4317d96d`), MIT-licensed, with its live files (the collector uploads to KV every 15 min since 24 Oct
 21:12 UTC). Redesigned on the owner's brief and audited before shipping. Simulated in LINE and on tablets, not tried on
 real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
 
@@ -9,6 +9,11 @@ real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
 
 - **The page** (`public/`, static): GPS or search → a verdict, ten tiles, pre-warnings, a 3-day table and ten cards,
   in Thai and English, for any of 7,425 subdistricts.
+- **0.7.1, being found** ([CHANGELOG](CHANGELOG.md), D-064, D-065): the MIT licence; `llms.txt` (what the page is and
+  isn't, the level words, how to link to a subdistrict, no public API), `robots.txt`, a sitemap, `hreflang` and JSON-LD,
+  held to the page by `test/discover.test.mjs`; the GitHub "About" box (description, homepage, 20 topics, the social
+  preview the owner uploaded). Cloudflare's zone puts its own robots block first (KI-045); places aren't pages, so
+  search finds only the front page (KI-046, D12).
 - **0.7.0, the redesign** ([CHANGELOG](CHANGELOG.md), D-061–D-063): one hero (the level on the staff gauge, the worst
   hazard, the action, "ข้างหน้า", what is missing), "ส่งใน LINE" in one tap, every hazard in one list **sorted by concern**
   (by the worse of today and its coming days, grouped by the scale's words) whose rows open in place; the 3-day table and
@@ -32,7 +37,11 @@ real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
   [Hat Yai lead time](docs/research/floodwatch-hatyai-leadtime-2026-10-24.md), [D11](docs/research/eq-d11-2026-10-24.md),
   [UX D8/D1/D9/incidents](docs/research/ux-d8-d1-d9-incidents-2026-10-24.md), [devices](docs/research/device-sim-2026-10-24.md);
   frank summary in [FRANK_FEEDBACK §9](docs/FRANK_FEEDBACK.md#9-live-floodwatch-hat-yai-again-24-oct-2026-evening-060).
-- **Checks, 25 Oct 2026 ≈ 05:00 Bangkok (22:00 UTC), on `autobahn-bot`:**
+- **Checks for 0.7.1, 26 Oct 2026 ≈ 19:50 UTC, on `autobahn-bot`:** `npm test` 111 of 111; the fixture walk passes;
+  `check:docs` passes; deployed (`a9938760`, then `4317d96d` for the `llms.txt` charset); `llms.txt`, `robots.txt` and
+  `sitemap.xml` 200 on the edge, `llms.txt` as `charset=utf-8`; the JSON-LD and `hreflang` in the served page;
+  `health --web https://risk.autobahn.bot/ --need-live` ok. No live walk: nothing the page draws or reads changed.
+- **Checks for 0.7.0, 25 Oct 2026 ≈ 05:00 Bangkok (22:00 UTC), on `autobahn-bot`:**
   - `npm test` 105 of 105.
   - The fixture walk passes every check (the list's order, no emoji in the chrome, rows read open and closed with their
     sources, the dashed gauges when every source is down, the hero ends at 491–505 px at 360 × 640 in LINE).
@@ -49,7 +58,8 @@ real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
 2. **A9:** narrow the deploy token (the KV-only token is done and checked).
 3. **A14:** Cloudflare's zone cookie (`cf_clearance`, KI-042): turn JavaScript detections off for `autobahn.bot`, or let
    the page disclose it.
-4. **Decisions:** D11 (the words are ready; your yes ships them), D9 (one palette for the family), D10; keep C6 after
+4. **Decisions:** D11 (the words are ready; your yes ships them), D9 (one palette for the family), D10, D12 (province
+   pages for search, after A4); A16 (rename the default branch to `main`, optional); keep C6 after
    its scoring (end of November); keep D1 after a month of the archive. D8 is done (0.7.0).
 5. **FloodWatch (B6–B8):** a measured-rain endpoint; Hat Yai's RID freshness; KI-545 first, then upstream levels and
    measured rain in its model.
@@ -61,6 +71,7 @@ real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
 - **Daily from the server:** `node research/archive_forecasts.mjs` (cron): C6, the dust chance and D1 counted as issued.
 - **The upstream rule's record outside Hat Yai** (D-056: A lifts to เตรียมตัว only on the U-Taphao until then).
 - **D11 after the owner's yes.**
+- **After a change to the zone's bot settings:** the crawler check in KNOWLEDGE §14 (KI-045).
 
 ## 4. How to work here
 
@@ -110,5 +121,5 @@ real phones (A4). Read this first, then [AGENTS.md](AGENTS.md).
   | Known problems | [KNOWN_ISSUES](docs/KNOWN_ISSUES.md) |
   | The audits and studies | [docs/research/](docs/research/) (index in [docs/README](docs/README.md)) |
   | The server and Cloudflare | [SERVER](docs/SERVER.md), [CLOUDFLARE](docs/CLOUDFLARE.md) |
-  | Decisions D-001 … D-063 | [research/HISTORY](docs/research/HISTORY.md) |
+  | Decisions D-001 … D-065 | [research/HISTORY](docs/research/HISTORY.md) |
   | Frank feedback | [FRANK_FEEDBACK](docs/FRANK_FEEDBACK.md) |

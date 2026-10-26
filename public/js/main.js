@@ -9,7 +9,7 @@ import { makeT } from "./i18n.js";
 import { scale } from "./levels.js";
 import { IPE } from "./ipe.js";
 
-export const VERSION = "0.7.0";
+export const VERSION = "0.7.1";
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const LV = (l) => (l == null || l < 0 ? "none" : scale(l).key);

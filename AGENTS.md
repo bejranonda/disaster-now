@@ -4,7 +4,8 @@
 
 **ภัยรอบบ้าน · Thai Risk** (code name `disaster-now`; ภัยรอบบ้าน ตอนนี้ / Disaster Now until 0.3.0) is one Thai web page: share GPS or search a place, and see every hazard at that point now and for the next 3 days, with the agency's own words, the source and time of every number, one sourced action and a link to what to do. Heat, PM2.5 and other pollution, UV, rain, wind and storms, river level and flash floods, landslides, earthquakes, fires. Static files (`public/`), no server, no framework, no runtime packages; a collector (`tools/collect.mjs`) for the feeds a phone can't read. It is the third app of the owner (`bejranonda`), beside FloodWatch (`flood2026-research`, water) and บ้านรอดไหม (`Hazard-huntz`, what to do), and must agree with both ([docs/INTEGRATION.md](docs/INTEGRATION.md)).
 
-**State (25 Oct 2026):** v0.7.0, **live at https://risk.autobahn.bot** with its live files
+**State (26 Oct 2026):** v0.7.1 (MIT licence; `llms.txt`, `robots.txt`, a sitemap and JSON-LD for search and AI
+assistants, D-064, D-065), **live at https://risk.autobahn.bot** with its live files
 ([FRANK_FEEDBACK §10](docs/FRANK_FEEDBACK.md#10-the-redesign-25-oct-2026-070)): the redesign (one hero, one list sorted by
 concern whose rows open in place, the staff gauge, the site's own icons and font), FloodWatch's gauges through the
 collector, this page's upstream lines and Hat Yai's red-flag rain, heat in the DOH's colours (D1).
@@ -69,6 +70,8 @@ collector, this page's upstream lines and Hat Yai's red-flag rain, heat in the D
 - **The exact GPS fix never leaves the phone** (rounded to ~1 km for providers and links; no coordinates on screen for a GPS place); shared links carry a subdistrict code; no cookies, analytics or accounts; a server publishes files and keeps nothing about a person.
 - **Only validated forecast numbers, in validated words** (MODELS.md): never the raw heat index, never a rain amount as a forecast.
 - **Rivers as FloodWatch reads them; advice as บ้านรอดไหม words it.**
+- **What machines read is copy too:** `llms.txt`, the JSON-LD and the meta tags say only what the page does, never a
+  promise it can't keep (no public API, not a warning service); `test/discover.test.mjs` holds them to the page (D-065).
 - **Honest User-Agent, never faster than a source updates, no evasion of blocks or bot checks; no VPN or rotation** (D-058); what FloodWatch already reads comes through its API (D-054).
 - **No secrets in git;** keys only in `.env` (one scoped token per job), passed only to the service that needs it, in headers, never printed. **Never copy another project's `.env`; never run FloodWatch's tunnel token here.**
 - **AI (GLM) only off the visitor's path:** it translates or reviews public text; rules write every level, number and advice; what the page shows from it is checked and labelled (GUIDELINES §10).

@@ -1,0 +1,6 @@
+# ภัยรอบบ้าน · Thai Risk. Every page is welcome; the live data files are internal and change every 15 min.
+User-agent: *
+Allow: /
+Disallow: /data/live/
+
+Sitemap: https://risk.autobahn.bot/sitemap.xml

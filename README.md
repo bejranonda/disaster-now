@@ -2,7 +2,7 @@
 
 **One page that shows every hazard at a point in Thailand, now and for the next 3 days** (code name `disaster-now`). Tap 📍 (or search a subdistrict, a road, a place) and see, for that point: rain, river level and flash floods, PM2.5 dust and other pollution, heat, UV, wind and storms, landslides, earthquakes and fires, each in the agency's own words with its source and time, one sourced action, and a link to what to do.
 
-> v0.7.0 · 25 Oct 2026 · **live at https://risk.autobahn.bot**, its collector uploading every 15 min; redesigned: one answer first, every hazard sorted by concern, details on demand, the site's own icons, font and level gauge; FloodWatch's gauges and look ahead; the measured 3-day rain; heat in the DOH's colours; simulated in LINE and on tablets, **not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
+> v0.7.1 · 26 Oct 2026 · **live at https://risk.autobahn.bot**, its collector uploading every 15 min; MIT-licensed, with an [`llms.txt`](public/llms.txt) for AI assistants; redesigned (0.7.0): one answer first, every hazard sorted by concern, details on demand, the site's own icons, font and level gauge; FloodWatch's gauges and look ahead; the measured 3-day rain; heat in the DOH's colours; simulated in LINE and on tablets, **not yet tried on real phones** ([HANDOFF.md](HANDOFF.md))
 
 <img src="docs/screens/report-390.png" width="250" alt="Bangkok's old town at 390 px: the hero says เตรียมตัว for heat, on the staff gauge"> <img src="docs/screens/hatyai-warning-390.png" width="250" alt="Hat Yai under TMD's heavy-rain notice: the hero, one tap to LINE, the notice in full"> <img src="docs/screens/warning-en-390.png" width="250" alt="Hat Yai in English, the notice in GLM's checked translation">
 
@@ -66,6 +66,8 @@ ECMWF ensemble and CAMS via Open-Meteo (CC BY 4.0) · Pollution Control Departme
 It is the third app beside **FloodWatch** (https://flood.autobahn.bot, water) and **บ้านรอดไหม** (https://baanrodmai.autobahn.bot, what to do); its own address is **https://risk.autobahn.bot** (live since 24 Oct 2026). It reads FloodWatch's gauges through its collector and backs FloodWatch up when FloodWatch's server is down (ThaiWater from the phone, FloodWatch's rules); its own ThaiWater statuses agree with FloodWatch's on 737 of 742 gauges; its advice lines are บ้านรอดไหม's word for word. [docs/INTEGRATION.md](docs/INTEGRATION.md).
 
 ## Docs
+
+**For AI assistants and search:** [`public/llms.txt`](public/llms.txt) (served at https://risk.autobahn.bot/llms.txt) says what the page is, what it is not, and how to link to a subdistrict (`#t=901101`); the page carries schema.org JSON-LD and `hreflang` for Thai and English. AI coding agents working on this repository: [AGENTS.md](AGENTS.md).
 
 [docs/README.md](docs/README.md) is the index: guidelines, knowledge, known issues, sources, models, methods, integration, Cloudflare, AI (GLM), server, deploy, owner actions, roadmap, and [frank feedback](docs/FRANK_FEEDBACK.md). AI assistants: [AGENTS.md](AGENTS.md).
 

@@ -133,5 +133,10 @@ FloodWatch is untouched either way.
 - Only `/data/live/*` runs code; the page itself stays plain files.
 - Tokens only in `.env` (git-ignored, mode 600), each scoped to its job; never in `wrangler.jsonc`, a URL or a log.
 - Never reuse FloodWatch's tunnel token for this site, and never run this site's collector on FloodWatch's server (D-040).
+- **The zone adds to `robots.txt`** (checked 26 Oct 2026): Cloudflare's managed block comes first, then
+  `public/robots.txt`. The zone also refuses AI training crawlers at the edge (GPTBot 403) while AI answer agents
+  (ChatGPT-User, PerplexityBot) and search crawlers get 200; it is a zone setting for every autobahn.bot site (KI-045).
+- **A new asset can 404 for about a minute after a deploy** at some edge locations (`llms.txt`, 26 Oct 2026): check
+  again before calling a deploy broken.
 - **When a token changes:** put the new one in `.env` on the risk server, run `npm run env:check -- --probe`, and
   restart the collector (`docker compose up -d`). Nothing in git changes, because no token is ever in git.

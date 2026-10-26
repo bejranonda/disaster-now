@@ -10,3 +10,6 @@
   Access-Control-Allow-Origin: *
 /data/tambon.json
   Cache-Control: public, max-age=86400
+# llms.txt is Thai and English: without a charset the edge serves text/plain and a reader may guess the wrong one
+/llms.txt
+  Content-Type: text/plain; charset=utf-8

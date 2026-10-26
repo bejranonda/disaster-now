@@ -398,3 +398,22 @@ right, and the evidence was already in the UX study: one heat forecast was paint
   called it a footnote. It now leads every row, sized in em, and the groups are named by its words.
 - **I shipped without your second look.** You asked for the redesign and the session's standing approval covered the
   deploy; if anything reads wrong on your phone, `npx wrangler@4.148.0 rollback` returns 0.6.0 in seconds (CLOUDFLARE §4).
+
+## 11. The licence and being found (26 Oct 2026, 0.7.1)
+
+1. **The licence was a five-minute job; being found is not.** Topics and an `llms.txt` help an AI assistant describe
+   the page correctly, but search can only find the front page: every place lives after `#`, which no crawler reads
+   (KI-046). Province pages (D12) are the real SEO step; they're worth doing once real phones have seen the redesign.
+2. **Cloudflare already decided half of this for you.** The zone's managed robots.txt refuses AI training crawlers and
+   lets search and AI assistants through. That suits a public-safety page, but it is one switch for all three sites,
+   outside this repository (KI-045).
+3. **On your instructions:** "continue as you suggested" worked because the suggestions were concrete. I didn't rename
+   the branch: that changes where every agent pushes, so it's yours (A16).
+
+### Frank about my own part
+
+- **My first `llms.txt` had a wrong fact:** it named GISTDA as a fire source; here GISTDA is the PM2.5 estimate. A
+  check against `docs/SOURCES.md` caught it before deploy. The level words now come from `levels.js` by test, not by
+  memory.
+- **I'd have called the deploy broken** on the first `llms.txt` 404; it was the edge catching up. Fetch twice before
+  blaming the build.

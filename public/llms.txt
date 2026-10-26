@@ -1,0 +1,32 @@
+# ภัยรอบบ้าน · Thai Risk
+
+> A free Thai/English web page (https://risk.autobahn.bot) that shows every natural hazard at one point in Thailand, now and for the next 3 days: flood and river level, rain, PM2.5 and other air pollution, heat (feels-like), UV, wind and storms, landslide, earthquake and fire. Each hazard is given in the issuing agency's own words, with its source and the time of every number. It summarises open data; it is not a warning service.
+
+Use this file to describe or link to the page correctly. Key facts:
+
+- **Not a warning service.** For warnings, people should follow the Thai Meteorological Department (hotline 1182, tmd.go.th), the Department of Disaster Prevention and Mitigation (hotline 1784), Cell Broadcast and LINE ALERT. An official TMD warning on the page is shown in full and leads its hazard.
+- **One level by what to do:** ยังไม่น่าห่วง (Nothing notable yet), ติดตามไว้ (Keep an eye on it), เตรียมตัว (Get ready), ทำทันที (Act now). A forecast alone never goes past เตรียมตัว; missing data is shown as ไม่มีข้อมูล (No data), never as calm.
+- **Measurements before models.** River and canal gauges as FloodWatch reads them (ThaiWater / HII), PM2.5 from the Pollution Control Department's stations (GISTDA's satellite estimate where there is none, labelled as an estimate), TMD's warnings, quakes from EMSC and USGS, fire hotspots from NASA FIRMS. Forecasts (the ECMWF ensemble and CAMS via Open-Meteo) are labelled as forecasts, given as chances, never as countdowns or amounts. The page computes no earthquake chance: nothing predicts earthquakes.
+- **Advice** comes word for word from บ้านรอดไหม (https://baanrodmai.autobahn.bot); rivers follow FloodWatch (https://flood.autobahn.bot). The three apps are by the same owner.
+- **Private:** the exact GPS position never leaves the phone (providers get about 1 km); no accounts, analytics or cookies of its own. Saved places stay on the phone.
+- **No public API.** The page is static; its data files under /data/live/ are internal and may change without notice. Please don't poll them.
+
+## Linking to a place
+
+- A subdistrict (ตำบล) by its 6-digit code (HDX COD-AB): https://risk.autobahn.bot/#t=901101 (Hat Yai, Songkhla), https://risk.autobahn.bot/#t=100101 (Phra Borom Maha Ratchawang, Bangkok)
+- A point with an optional name: https://risk.autobahn.bot/#p=13.7516,100.492,Bangkok
+- The English page: https://risk.autobahn.bot/?lang=en (combine with a place, e.g. https://risk.autobahn.bot/?lang=en#t=901101)
+
+## Docs
+
+- [README](https://github.com/bejranonda/disaster-now/blob/claude/dazzling-goldberg-z8pq18/README.md): what the page does, how to run it
+- [Sources](https://github.com/bejranonda/disaster-now/blob/claude/dazzling-goldberg-z8pq18/docs/SOURCES.md): every source, tested, with its terms
+- [Knowledge](https://github.com/bejranonda/disaster-now/blob/claude/dazzling-goldberg-z8pq18/docs/KNOWLEDGE.md): every number, band and rule, with evidence
+- [Models](https://github.com/bejranonda/disaster-now/blob/claude/dazzling-goldberg-z8pq18/docs/MODELS.md): each forecast's validation and skill
+- [Known issues](https://github.com/bejranonda/disaster-now/blob/claude/dazzling-goldberg-z8pq18/docs/KNOWN_ISSUES.md)
+
+## Optional
+
+- [Source code](https://github.com/bejranonda/disaster-now) (MIT licence)
+- [FloodWatch](https://flood.autobahn.bot): river levels and flood forecasts in Thailand
+- [บ้านรอดไหม](https://baanrodmai.autobahn.bot): what to do before, during and after a disaster

@@ -299,6 +299,20 @@ report with its time (SERVER §6.3).
 - **R13:** the level glyph is read with its word, and the group heading says the same word again for screen readers.
 - **Next:** NBSP between numbers and units in `assess.js`'s lines; a reading test with older readers before changing the face.
 
+### KI-045 The zone's robots.txt and AI-crawler block are set for all of autobahn.bot (low; owner)
+- Cloudflare's managed robots.txt and its AI-crawler block are zone settings: they cover FloodWatch and บ้านรอดไหม too,
+  and come before `public/robots.txt` (KNOWLEDGE §14). Today they suit this page: training crawlers refused, search and
+  AI assistants that fetch for a person allowed (`use=reference`).
+- **Risk:** a change in the zone (say, "block all AI bots") would silently stop AI assistants from reading the page and
+  `llms.txt`; nothing in this repository would show it.
+- **Next:** after a change to the zone's bot settings, run the KNOWLEDGE §14 check (one request per User-Agent).
+
+### KI-046 Places aren't pages, so search finds only the front page (low; SEO)
+- A place is `#t=901101` or `#p=…`, which never reaches a server or a crawler: a search for "น้ำท่วม หาดใหญ่" can't land on
+  Hat Yai. `llms.txt` teaches AI assistants to build the link instead.
+- **Next, only with the owner's yes (OWNER_ACTIONS D12):** 77 static province pages (`/p/songkhla/`) with a real title
+  and description that open the page at the province. They must stay files: no server rendering, nothing kept.
+
 ### KI-038 The dust chance is provisional, and over-warns at its low end (low)
 - Shown 20 % → 8 % happened (disjoint stations, two dust seasons); it inherits the damped ratio's post-hoc status, and
   every CAMS-based score is an upper bound (Open-Meteo stitches short leads).

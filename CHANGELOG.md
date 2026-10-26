@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+## 0.7.1 (26 Oct 2026): found by search and AI assistants, under the MIT licence
+
+The owner (26 Oct): "Update GitHub about and keywords for SEO and agentic search. Add MIT licence", then "continue as
+you suggested" (D-064, D-065).
+
+- **`public/llms.txt`** (the llmstxt.org shape): what the page is and is not ("not a warning service", the hotlines),
+  the four level words in Thai with the page's English, measurements before models, privacy, how to link to a
+  subdistrict (`#t=901101`), a point or the English page, and "no public API: please don't poll `/data/live/`".
+  Served as `text/plain; charset=utf-8` (`_headers`: the edge's default had no charset).
+- **`robots.txt`** (everything allowed but `/data/live/`, the sitemap named) and **`sitemap.xml`** (the Thai and
+  English page with `hreflang`). Cloudflare's zone puts its own managed block above our lines (KI-045).
+- **The page's head:** `hreflang` links for Thai, English and `x-default`, `og:locale:alternate`, and schema.org
+  `WebApplication` JSON-LD (free, Thai and English, Thailand, MIT, "Not a warning service"). No canonical link: `/` and
+  `?lang=en` are the same file, and a fixed canonical would call the English page a duplicate.
+- **`test/discover.test.mjs`** (6 tests) holds these files to the page: the hotlines are the ones the page dials, the
+  level words are `levels.js`'s, every example `#t=` code opens the subdistrict it names, the JSON-LD parses, and one
+  version runs through `package.json`, the lock, `main.js`, `sw.js` and `index.html`.
+- `tools/serve.mjs` serves `.xml`.
 - **MIT licence** (`LICENSE`, as FloodWatch and บ้านรอดไหม). README says what it covers: the code and docs, not the
   bundled font (OFL) or the sources' data. `package.json` gains `license`, `keywords`, `homepage` and `repository`; the
   GitHub repository gains its description, homepage and topics.
