@@ -69,4 +69,10 @@ It is the third app beside **FloodWatch** (https://flood.autobahn.bot, water) an
 
 [docs/README.md](docs/README.md) is the index: guidelines, knowledge, known issues, sources, models, methods, integration, Cloudflare, AI (GLM), server, deploy, owner actions, roadmap, and [frank feedback](docs/FRANK_FEEDBACK.md). AI assistants: [AGENTS.md](AGENTS.md).
 
+## Licence
+
+The code and docs are under the [MIT License](LICENSE). The bundled font Anuphan is under the SIL Open Font License
+([public/fonts/OFL-Anuphan.txt](public/fonts/OFL-Anuphan.txt)). The data stays under each source's own terms (see
+[Sources](#sources) and [docs/SOURCES.md](docs/SOURCES.md)); the MIT licence does not cover it.
+
 This page summarises open data; it is **not a warning service**. Follow the Thai Meteorological Department (1182), DDPM (1784), Cell Broadcast and LINE ALERT.

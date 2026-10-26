@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **MIT licence** (`LICENSE`, as FloodWatch and บ้านรอดไหม). README says what it covers: the code and docs, not the
+  bundled font (OFL) or the sources' data. `package.json` gains `license`, `keywords`, `homepage` and `repository`; the
+  GitHub repository gains its description, homepage and topics.
+
 ## 0.7.0 (25 Oct 2026): the redesign — calm, sorted by concern, details on demand, the site's own graphics
 
 The owner (25 Oct): the page "looks cluttered, too much everywhere"; progressive disclosure; modern, clean and
